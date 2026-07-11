@@ -1,0 +1,874 @@
+Title: Accelerating Multi-scale Simulations of Nuclear Components via PCYS Interpolation Tables
+
+URL Source: https://arxiv.org/pdf/2607.04556v1
+
+Published Time: Tue, 07 Jul 2026 02:38:46 GMT
+
+Number of Pages: 14
+
+Markdown Content:
+# Accelerating Multi-scale Simulations of Nuclear Components via PCYS Interpolation Tables 
+
+## Fabrizio Aguzzi a, Martín S. Armoa a,b , César I. Pairetti a,b , César M. Venier a,b and Alejandro E. Albanesi c
+
+> a
+
+IFIR, Instituto de Física de Rosario (CONICET-UNR), Ocampo y Esmeralda, Predio CONICET Rosario, Rosario, 2000, Santa Fe, Argentina 
+
+> b
+
+Universidad Nacional de Rosario, Facultad de Ciencias Exactas, Ingeniería y Agrimensura, Av. Pellegrini 250, Rosario, 2000, Santa Fe, Argentina 
+
+> c
+
+CIMEC, Centro de Investigación de Métodos Computacionales (CONICET-UNL), Col. Ruta 168 s/n, Predio CONICET Santa Fe, Santa Fe, 3000, Santa Fe, Argentina 
+
+A R T I C L E I N F O 
+
+Keywords :Zirconium alloys Viscoplastic Self-Consistent (VPSC) Interpolation Tables PCYS interpolation Acceleration Code_Aster 
+
+A B S T R A C T 
+
+Zirconium alloy core components in nuclear reactors, such as spacer grids and fuel cladding, undergo anisotropic dimensional changes driven by coupled irradiation creep and growth. While microme-chanical crystal plasticity frameworks like the Viscoplastic Self-Consistent (VPSC) formulation capture these microstructurally driven phenomena, their integration into macroscopic Finite Element Method (FEM) solvers is computationally prohibitive for engineering-scale components. To bridge this gap, this work presents a multi-scale framework implemented within the open-source FEM solver Code_Aster . The developed interface uses a 5D Interpolation Table (IT) as a static material surrogate to govern instantaneous viscoplastic responses, coupled with a periodic recalibration and first-order Taylor series linearization scheme to track microstructural drift due to radiation damage without on-the-fly database updates. The predictive accuracy, numerical stability, and performance of this Polycrystal Yield Surface (PCYS) interpolation approach are benchmarked against VPSC-FEM simulations under continuous high-dose irradiation scenarios. Material-level assessments demonstrate that the linearization scheme bounds relative errors below 1% for representative deformation paths, maintaining structural compatibility. Furthermore, structural simulations of a spacer grid domain revealed meaningful computational savings, overcoming the multi-scale computational penalty while preserving microstructural fidelity. The proposed framework shows potential for multiphysics struc-tural assessments and safety margin evaluations of core internals over operational lifespans. 
+
+## 1. Introduction 
+
+Zirconium alloys are widely used as structural materials in the core of nuclear power plants, particularly for fuel cladding tubes, spacer grids, and pressure tubes, owing to their low thermal neutron absorption cross-section, adequate mechanical properties, and excellent corrosion resistance under operating conditions (Motta et al., 2015; Griffiths, 2015). However, inside a nuclear reactor, these compo-nents are subjected to a harsh environment characterized by high temperatures, mechanical stresses, and intense neutron fields. This environment induces non-conservative deforma-tion phenomena, primarily irradiation creep and irradiation-induced growth, leading to significant dimensional changes and anisotropic distortion of reactor internals during reactor operation (Fidleris, 1988; Billerey, 2005; Jiang et al., 2016; Adamson et al., 2019). These coupled mechanisms can ulti-mately compromise the structural integrity and dimensional stability of the core assemblies. The macroscopic manifestation of both irradiation growth and creep is highly anisotropic and strongly dictated by the initial and evolving crystallographic texture of the material (Holt, 2008; Gicquel et al., 2023). Consequently, standard isotropic or phenomenological macroscopic constitutive laws often fail to accurately predict long-term reactor com-ponent behavior under complex, multiaxial stress states. In this context, micromechanically based crystal plasticity 
+
+> ORCID
+
+(s): 
+
+frameworks have been developed. Over the past decades, the Viscoplastic Self-Consistent (VPSC) formulation (Molinari et al., 1987; Lebensohn and Tomé, 1993) has emerged as a robust tool to simulate the representative volume element (RVE) of zirconium polycrystals, successfully accounting for grain interactions, slip system activities, and microstruc-tural evolution under irradiation (Christodoulou et al., 1996; Patra et al., 2017b). Despite their physical accuracy, embedding polycrys-tal models directly into full-scale structural analyses via macro-scale Finite Element Method (FEM) implies some implementation challenges. In a direct concurrent multiscale approach, the VPSC algorithm must be solved iteratively at every single integration point and time increment of the FE mesh. For complex three-dimensional components, such as fuel assembly components or cladding tubes under non-uniform fluxes, this scheme renders engineering-scale simulations computationally prohibitive (Galán et al., 2014; Aguzzi et al., 2025, 2026). Indeed, even when operating strictly at the macroscopic engineering scale, performing full 3D FEM structural assessments over long operational times becomes restrictive when evaluating a large number of core components or executing probabilistic safety margin analyses (Pandey et al., 2018; Prabhu et al., 2020). This severe computational cost has driven the nuclear engineering 
+
+First Author et al.: Preprint submitted to Elsevier Page 1 of 14 
+
+> arXiv:2607.04556v1 [physics.comp-ph] 6 Jul 2026 Título corto
+
+community to actively seek alternative accelerated represen-tations and efficient numerical strategies to manage multi-physical or multi-scale interactions in reactor cores (Prabhu et al., 2020). Database-driven and surrogate modeling strategies offer a path to reconcile microstructural fidelity with compu-tational feasibility. At the macroscopic component level, surrogates have been developed to replace demanding 3D FE representations for predicting complex in-reactor di-mensional changes, such as the contact time and gap sag in irradiated fuel channels (Pandey et al., 2018; Prabhu et al., 2020). Conversely, at the material scale, a widely adopted method consists of pre-calculating the Polycrystal Yield Surface (PCYS) to build Interpolation Tables (IT) or databases that map the instantaneous stress-strain rate responses in a reduced deviatoric space (McGinty, 2001; Tomé and Lebensohn, 2023). While these static, material-level interpolation databases accelerate local numerical eval-uations, they implicitly assume a frozen microstructural state—meaning that variations in crystallographic texture or Critical Resolved Shear Stress (CRSS) driven by accumulat-ing radiation damage (dpa) are neglected over time. While some frameworks achieve coupling via complex analytical approximations (Brenner et al., 2002; Gicquel et al., 2023), a flexible, low-cost numerical mechanism capable of rectify-ing the microstructural drift of static databases under long-term irradiation scenarios remains desirable. In this work, we propose a multi-scale framework that bridges this gap by introducing a static interpolation table coupled with a periodic recalibration strategy implemented in the open-source FEM solver Code_Aster (EDF, 1989– 2025). The proposed interface applies a 5D Interpolation Ta-ble to govern the instantaneous viscoplastic response, while concurrently implementing a periodic recalibration and first-order Taylor series linearization scheme. This scheme tracks the drift and updates of the macroscopic compliance ( ̄𝑀 )and irradiation growth ( ̄̇ 𝜀 0) tensors with minimal VPSC solver calls. The main objective of this study is to evaluate the performance, accuracy, and speed-up gains of this IT-linearization methodology against VPSC-FEM concurrent simulations under representative nuclear application scenar-ios. The remainder of this paper is organized as follows. Section 2 outlines the multi-scale computational framework, the material models, and the accelerated IT linearization algorithm. Section 3 presents the numerical benchmarks alongside a comparative analysis of precision and compu-tational cost at both material and component scales. Finally, Section 4 summarizes the main conclusions and future per-spectives of this research. For reference, a comprehensive list of symbols and acronyms is provided in the Nomenclature section at the end of the manuscript. 
+
+## 2. Computational Framework and Multiscale Strategy 
+
+The multi-scale strategy developed in this work bridges the gaps between single-crystal physical mechanisms, meso-scale polycrystal interactions, and macro-scale finite el-ement simulations. This section outlines the overarching boundary value problem governing the continuum com-ponent, details the underlying crystallographic constitutive laws, and presents the formulation of the high-performance surrogate interpolation scheme along with its algorithmic integration into the FE solver. 
+
+2.1. Numerical Formulation of the Macro-Scale Boundary Value Problem 
+
+To resolve the non-linear, quasi-static structural me-chanics problem at the nuclear component level, the finite element solver must integrate a tightly coupled system of governing equations representing conservation laws, local material responses, and history-dependent microstructural updates (Agouzal, 2024). Over the considered continuum domain, this initial-boundary value problem is mathemati-cally formulated as: 
+
+⎧⎪⎨⎪⎩
+
+−𝛁 ⋅ 𝝈 = 𝐟 
+
+𝝈 =  𝜎 (𝜺 FE , 𝜷 ) subject to BCs ̇
+
+𝜷 =  𝛽 (𝝈 , 𝜷 )
+
+(1) where 𝐟 represents the body force vector, 𝝈 denotes the macroscopic Cauchy stress tensor field, and 𝜺 FE is the total strain tensor derived from the symmetric gradient of the displacement field 𝐮 , defined as 𝜺 FE = 𝛁 𝑠 𝐮 = 12 (𝛁𝐮 +
+
+𝛁 𝑇 𝐮 ). The history-dependent state of the material is tracked via the internal variable vector 𝜷 , which encapsulates the microstructural attributes of the polycrystal, including crys-tallographic orientation (texture), grain morphology, and the current hardening state of the active slip systems within individual grains. The system of equations encapsulates three intercon-nected physical and mathematical definitions. The first equa-tion enforces momentum balance and mechanical equilib-rium across the continuum. The second equation introduces the non-linear constitutive operator  𝜎 , mapping the local stress state as a joint function of the mechanical strain and the instantaneous microstructural state. Finally, the third equation governs the kinetic evolution of the internal vari-ables through the differential operator  𝛽 , capturing the microstructural drift induced by irradiation and plastic de-formation over time. Within our multiscale framework, this evolution is efficiently regularized via the PCYS interpola-tion extrapolation strategy detailed in the following sections. 
+
+2.2. Crystallographic and Meso-Scale Constitutive Modeling 
+
+2.2.1. Irradiation-Induced Growth Mechanisms 
+
+Following the reaction-diffusion formulation proposed by Patra et al. (2017b), we describe irradiation growth as   
+
+> First Author et al.: Preprint submitted to Elsevier Page 2 of 14 Título corto
+
+a non-conservative deformation process at the single-crystal (microscopic) level. The growth strain-rate tensor, ̇ 𝜀 (growth ) 
+
+> 𝑘𝑙
+
+,is calculated through a linear superposition of the contri-butions along the principal crystallographic directions 𝑗 ∈{𝐚 1, 𝐚 2, 𝐚 3, 𝐜 } of the hexagonal close-packed (HCP) lattice, where 𝐚 1, 𝐚 2, and 𝐚 3 represent the coplanar axes in the basal plane, and 𝐜 denotes the orthogonal prism axis. This tensor is expressed as: ̇𝜀 (growth ) 
+
+> 𝑘𝑙
+
+= ∑
+
+> 𝑗
+
+̇𝜀 𝑗 
+
+> growth
+
+(𝑏 𝑗 𝑘 𝑏 𝑗 𝑙 ), 𝑘, 𝑙 ∈ { 𝑥, 𝑦, 𝑧 } (2) In this expression, 𝑏 𝑗 𝑘 and 𝑏 𝑗 𝑙 represent the Cartesian compo-nents of the normalized Burgers vector ̂ 𝐛 𝑗 projected onto the macroscopic sample reference frame (i.e., 𝑏 𝑗 𝑘 =̂ 𝐛 𝑗 ⋅𝐞 𝑘 , where 
+
+{𝐞 𝑥 , 𝐞 𝑦 , 𝐞 𝑧 } define the sample axes). The scalar rate ̇ 𝜀 𝑗 
+
+> growth
+
+accounts for the combined effects of point defect absorption: ̇𝜀 𝑗  
+
+> growth
+
+=̇ 𝜀 𝑗  
+
+> climb
+
++̇ 𝜀 𝑗  
+
+> GB
+
+(3) where ̇ 𝜀 𝑗  
+
+> climb
+
+and ̇ 𝜀 𝑗  
+
+> GB
+
+represent the local strain rates associ-ated with dislocation climb and grain boundary absorption, respectively. 
+
+2.2.2. Crystallographic Model for Irradiation Creep 
+
+In addition to growth, irradiation-induced creep is mod-eled as a stress-dependent relaxation mechanism at the single-crystal level. This phenomenon, which is intrinsically linked to growth due to internal stress incompatibilities between neighboring grains, is assumed to be proportional to the radiation dose rate ̇ 𝜙 .The kinematics of single-crystal deformation dictate the evolution of the local microscopic creep strain-rate tensor, ̇𝜀 (creep ) 
+
+> 𝑘𝑙
+
+. This tensor is obtained by summing the shear rates ̇𝛾 𝑗  
+
+> creep
+
+across all active crystallographic slip systems 𝑗 :̇𝜀 (creep ) 
+
+> 𝑘𝑙
+
+= ∑
+
+> 𝑗
+
+𝑚 𝑗 𝑘𝑙 ̇𝛾 𝑗  
+
+> creep
+
+(4) where 𝑚 𝑗 𝑘𝑙 = 12 (𝑛 𝑗 𝑘 𝑏 𝑗 𝑙 + 𝑛 𝑗 𝑙 𝑏 𝑗 𝑘 ) is the symmetric Schmid tensor for system 𝑗 , defined by its slip plane normal 𝐧 𝑗 and slip direction 𝐛 𝑗 . Following Patra et al. (2017b), the shear rate on each system is governed by a linear phenomenological law: ̇𝛾 𝑗  
+
+> creep
+
+= 𝐵 
+
+( 𝜌 𝑗 𝑑 
+
+𝜌 ref 
+
+)
+
+𝜏 𝑗 ̇ 𝜙 (5) Here, 𝐵 denotes the crystallographic irradiation creep com-pliance, 𝜏 𝑗 = 𝑚 𝑗 𝑘𝑙 𝜎 𝑘𝑙 is the resolved shear stress acting on the system, and 𝜌 𝑗 𝑑 ∕𝜌 ref represents the normalized dislocation density on the active slip system. Consequently, by utilizing a proper homogenization scheme over the crystal domains, the macroscopic creep be-havior exhibits a linear relation with the macroscopic stress state. For an isotropic polycrystal, or under a simplified macro-scale approximation, this simplifies to a second-order tensor relationship: ̇̄ 𝜀 creep  
+
+> 𝑖𝑗
+
+= 𝐵 0̄𝜎 𝑖𝑗 ̇ 𝜙 (6) where ̇̄ 𝜀 creep  
+
+> 𝑖𝑗
+
+and ̄𝜎 𝑖𝑗 are the components of the macroscopic strain-rate and stress tensors, respectively, and 𝐵 0 is the macroscopic compliance coefficient. Parameter values and additional details regarding the integration of these single-crystal constitutive laws into the meso-scale framework are detailed in Appendix A. 
+
+2.2.3. Viscoplastic Self-Consistent Model (VPSC) 
+
+The mechanical response of the Zircaloy-2 polycrystal is simulated using the VPSC formulation (Molinari et al., 1987; Tomé et al., 1993; Patra et al., 2017b). In this meso-scale framework, the total microscopic strain rate at the grain level, ̇ 𝜀 𝑖𝑗 , is defined by the purely viscoplastic superposition of irradiation-induced growth and creep: ̇𝜀 𝑖𝑗 =̇ 𝜀 vp  
+
+> 𝑖𝑗
+
+=̇ 𝜀 (growth ) 
+
+> 𝑖𝑗
+
++̇ 𝜀 (creep ) 
+
+> 𝑖𝑗
+
+(7) To determine the response of the effective medium (poly-crystal), a tangent linearization scheme is adopted (Tomé and Lebensohn, 2023), yielding the polycrystal fourth-order constitutive relationship for the Homogeneous Effective Medium (HEM): ̄̇ 𝜀 𝑖𝑗 =̄̇ 𝜀 vp  
+
+> 𝑖𝑗
+
+=̄ 𝑀 𝑖𝑗𝑘𝑙 ̄𝜎 𝑘𝑙 +̄̇ 𝜀 0 
+
+> 𝑖𝑗
+
+(8) where ̄̇ 𝜀 𝑖𝑗 (or ̄̇ 𝜀 vp  
+
+> 𝑖𝑗
+
+) and ̄ 𝜎 𝑘𝑙 represent the volume-averaged polycrystal viscoplastic strain rate and stress tensors, re-spectively, while ̄ 𝑀 𝑖𝑗𝑘𝑙 denotes the fourth-order polycrystal compliance tensor. The term ̄̇ 𝜀 0 
+
+> 𝑖𝑗
+
+represents the polycrystal back-extrapolated growth strain rate. Mathematically, it acts as a pseudo-residual or intercept tensor arising from the first-order Taylor expansion utilized in the tangent linearization of the non-linear polycrystal response. Physically, this tensor accounts for the stress-independent dimensional changes driven by anisotropic irradiation growth, combined with the base-line microstructural offset required to scale the grain-level viscoplastic interactions up to the homogeneous effective medium scale. To fulfill the self-consistent requirement, the frame-work treats each grain orientation as an ellipsoidal inclusion embedded within the HEM. The localized stress 𝜎 𝑐 𝑘𝑙 and strain rate ̇ 𝜀 𝑐 𝑖𝑗 fields of each distinct grain 𝑐 are coupled to the macroscopic fields through an Eshelby-type interaction tensor ̃ 𝑀 𝑖𝑗𝑘𝑙 , such that: 
+
+(̇𝜀 𝑐 𝑖𝑗 −̄̇ 𝜀 𝑖𝑗 ) = − ̃𝑀 𝑖𝑗𝑘𝑙 (𝜎 𝑐 𝑘𝑙 −̄𝜎 𝑘𝑙 ) (9) where ̃ 𝑀 𝑖𝑗𝑘𝑙 depends on the grain morphology and the macroscopic compliance ̄ 𝑀 𝑖𝑗𝑘𝑙 . Rather than detailing the extensive system of iterative equations widely established in literature, the operational logic of the self-consistent loop used to achieve the macroscopic volume averages ( ̄𝜎 𝑘𝑙 =
+
+⟨𝜎 𝑐 𝑘𝑙 ⟩ and ̄̇ 𝜀 𝑖𝑗 = ⟨̇𝜀 𝑐 𝑖𝑗 ⟩) can be consulted via the comprehen-sive algorithmic flowchart detailed in Tomé and Lebensohn (2023).   
+
+> First Author et al.: Preprint submitted to Elsevier Page 3 of 14 Título corto
+
+2.3. Surrogate Model Generation: Interpolation Tables (IT) 
+
+To circumvent the prohibitive computational cost that arises when embedding detailed crystal-plasticity models directly into macroscopic Finite Element Method (FEM) solvers, the non-linear polycrystal response is mapped into a high-performance surrogate database. Although standalone Viscoplastic Self-Consistent (VPSC) formulations efficiently solve a representative volume element, executing it concur-rently at every single integration point and time increment of an FE mesh renders large-scale engineering component simulations computationally restrictive. To reduce this nu-merical cost, the VPSC model is utilized as an offline pre-processor to construct an Interpolation Table (IT) represent-ing the Polycrystal Yield Surface (PCYS). This database provides an efficient mapping within a 5D deviatoric stress space: entering with the current stress state 
+
+𝝈 to instantly retrieve the viscoplastic strain rate ̇ 𝜺 IT , or vice versa, thus bypassing the thousands of internal iterations required by a direct self-consistent solve. The mathematical foundation of the 5D angular discretization, the specialized probing strategy, and the optimization routines required to build this discrete database are comprehensively detailed in Appendix B. Crucially, since the database is constructed offline for a fixed reference state, it implicitly assumes that the un-derlying crystallographic texture and the Critical Resolved Shear Stress (CRSS) of the slip systems remain stationary. To overcome this limitation and account for continuous microstructural evolution during irradiation without requir-ing computationally intensive on-the-fly table updates, a PCYS interpolation approach is introduced. This strategy dynamically adjusts the surrogate outputs by coupling the static IT response with a macro-scale Taylor extrapolation framework, as presented below. 
+
+2.3.1. First-Order Extrapolation Strategy for Microstructural Drift 
+
+To minimize computational cost while capturing history-dependent phenomena, the evolution of the macroscopic vis-coplastic compliance ̄ 𝑀 and the back-extrapolated growth rate ̄̇ 𝜀 0 at each integration point is predicted using a peri-odic recalibration logic. This PCYS interpolation strategy depends on a user-defined refresh interval 𝑁 (typically 
+
+𝑁 ∈ {4 , 6, 8, 10} steps) and operates through three distinct execution phases, conceptually illustrated in Fig. 1: 1. Recalibration and Error Monitoring ( 𝑖 step (mod 𝑁 ) = 0): Every 𝑁 steps, the surrogate database is bypassed and a full VPSC cell computation is executed. This calculates the exact current tensors, directly updating the microstructural state variables. 2. Evolution Rate Estimation ( 𝑖 step (mod 𝑁 ) = 1): 
+
+Immediately following a recalibration step, a single reference VPSC call is executed in the subsequent increment to compute the exact numerical rates of change (slopes): ̇̄ 𝑀 =̄ 𝑀 ref2 −̄ 𝑀 ref1 
+
+Δ𝑡 ,̈̄ 𝜀 0 =̄̇ 𝜀 0 
+
+> ref2
+
+−̄̇ 𝜀 0
+
+> ref1
+
+Δ𝑡 (10) where Δ𝑡 denotes the simulation time increment. These numerical slopes capture the localized evolu-tion of hardening and irradiation growth along the current deformation path. 3. Linear Tangent Approximation (Remaining steps): 
+
+For all intermediate steps between recalibrations, full meso-scale calculations are bypassed. The evolution of the tensors is predicted via a first-order Taylor expansion using the latest available rates: ̄𝑀 tan ≈̄ 𝑀 ref2 +̇̄ 𝑀 Δ𝑡,̄̇ 𝜀 0 
+
+> tan
+
+≈̄̇ 𝜀 0 
+
+> ref2
+
++̈̄ 𝜀 0Δ𝑡 (11) Consequently, the extrapolated macroscopic viscoplas-tic strain rate ̇ 𝜺 vp to be used in the mechanical solver is evaluated as: ̇
+
+𝜺 vp =̄ 𝑀 tan 𝝈 +̄̇ 𝜀 0 
+
+> tan
+
+(12)  
+
+> Fig. 1. Schematic representation of the VPSC non-linear constitu-tive response and its local linearization. The slope of the linearized relation defines the macroscopic viscoplastic compliance ( ̄𝑀 ), while the intercept at zero stress yields the back-extrapolated strain rate ( ̄̇ 𝜀 0).
+
+2.3.2. VPSC-CAFEM Coupling Architecture via Code_Aster 
+
+The multiscale interface integrates the localized, mi-crostructurally driven constitutive response governed by the extrapolation strategy (Sect. 2.3.1) into the implicit con-tinuum FEM solver Code_Aster . At this point, the differ-ent kinematic assumptions of both solvers must be distin-guished. The standalone viscoplastic self-consistent formu-lation (VPSC-SA) operates under a rigid-viscoplastic as-sumption, directly mapping macroscopic deviatoric stresses to viscoplastic strain rates without evaluating elastic com-pliance. To overcome this limitation and support structural   
+
+> First Author et al.: Preprint submitted to Elsevier Page 4 of 14 Título corto
+
+analysis under complex boundary conditions, the coupling framework incorporates macroscopic elasticity at the inte-gration point level. Under a small-strain additive decomposition regime, the total continuum strain increment Δ𝜺 is decoupled into macroscopic elastic ( Δ𝜺 e) and viscoplastic ( Δ𝜺 vp ) contribu-tions: 
+
+Δ𝜺 = Δ 𝜺 e + Δ 𝜺 vp = 𝐂 −1 ∶ Δ 𝝈 + Δ 𝜺 vp (13) where 𝐂 represents the self-consistent elastic stiffness tensor of the polycrystal—evaluated at the beginning of the time increment—and Δ𝝈 denotes the Cauchy stress increment. While Δ𝜺 e depends directly on the current stress increment, the viscoplastic strain increment Δ𝜺 vp is a function of the in-stantaneous stress state and the history-dependent evolution of the internal variable vector 𝜷 .To maintain reference frame consistency with the anisotropic constitutive relations, the global strain increment Δ𝜺 FE and the step time Δ𝑡 provided by Code_Aster are mapped onto the local material coordinate system ( ∗) via the second-order rotation matrix 𝑹 :
+
+Δ𝜺 ∗ = 𝑹 Δ𝜺 FE 𝑹 𝑇 , 𝝈 ∗ = 𝑹 𝝈 𝑹 𝑇 (14) Assuming a quasi-static regime over the interval, the local orientation matrix 𝑹 is assumed to remain stationary within the corotational frame. The local stress state at the end of the step, 𝝈 𝑡 +Δ 𝑡 ∗
+
+, is computed by considering an initial purely elastic trial state subsequently relaxed by viscoplastic flow: 
+
+𝝈 𝑡 +Δ 𝑡 ∗
+
+= 𝝈 𝑡 ∗
+
++ 𝐂 ∶ (Δ𝜺 ∗ − Δ 𝜺 vp ∗) (15) By replacing the increment Δ𝜺 vp ∗ with the instantaneous rate integrated over the time step ( ̇ 𝜺 vp ∗Δ𝑡 ), a local Newton-Raphson (NR) iterative scheme is formulated to find the stress increment Δ𝝈 ∗ that satisfies structural compatibility. The corresponding residual tensor field 𝐗 (Δ 𝝈 ∗) is defined as: 
+
+𝐗 (Δ𝝈 ∗) = 𝐂 −1 ∶ Δ 𝝈 ∗ +̇ 𝜺 vp ∗(𝝈 ∗)Δ 𝑡 − Δ 𝜺 ∗ 
+
+> FE
+
+(16) where the viscoplastic strain rate ̇ 𝜺 vp ∗ is evaluated using the extrapolated constitutive relation defined in Eq. 12. If the residual field violates the convergence tolerance at iteration 
+
+𝑘 , the local stress increment is updated for the subsequent iteration 𝑘 + 1 via: 
+
+(Δ𝝈 ∗) 
+
+> 𝑘 +1
+
+= (Δ𝝈 ∗) 
+
+> 𝑘
+
+−𝐉 ∗−1 
+
+> NR
+
+((Δ 𝝈 ∗)𝑘 
+
+) ∶ 𝐗 ((Δ 𝝈 ∗)𝑘 
+
+) (17) The non-linear search is regularized by the local Jaco-bian matrix 𝐉 ∗
+
+> NR
+
+, which explicitly accounts for both elastic compliance and the extrapolated viscoplastic tangent re-sponse: 
+
+𝐉 ∗ 
+
+> NR
+
+= 𝜕 𝐗 (Δ 𝝈 ∗)
+
+𝜕 (Δ 𝝈 ∗) = 𝐂 −1 +̄ 𝑀 tan Δ𝑡 (18) To prevent convergence distortions in loading paths where certain strain components approach zero, a component-wise error metric 𝜒 is adopted (McGinty, 2001). This metric normalizes local residuals using the maximum component of the input strain increment: 
+
+𝜒 =
+
+√√√√√∑
+
+> 𝑖
+
+∑
+
+> 𝑗
+
+( |Δ𝜀 𝑖𝑗 
+
+> FE
+
+|
+
+max( |Δ𝜀 𝑖𝑗 
+
+> FE
+
+|) 𝐗 𝑖𝑗 
+
+)2
+
+(19) Once convergence ( 𝜒 < TOL local ) is achieved, the up-dated local Cauchy stress 𝝈 𝑡 +Δ 𝑡 ∗
+
+and the consistent tangent operator 𝐂 tg* = 𝐉 ∗−1  
+
+> NR
+
+must be rotated back to the global reference frame to preserve compatibility with the global equilibrium iterations of Code_Aster :
+
+𝝈 𝑡 +Δ 𝑡 = 𝑹 𝑇 𝝈 𝑡 +Δ 𝑡 ∗
+
+𝑹 , 𝐂 tg =  𝐂 tg* 𝑇 (20) where  is the fourth-order rotation operator, which maps the components explicitly according to: 
+
+𝐶 tg  
+
+> 𝑖𝑗𝑘𝑙
+
+= 𝑅 𝑖𝑚 𝑅 𝑗𝑛 𝑅 𝑘𝑜 𝑅 𝑙𝑝 𝐶 tg*  
+
+> 𝑚𝑛𝑜𝑝
+
+(21) 
+
+## 3. Results 
+
+In this section, the performance, accuracy, and compu-tational efficiency of the proposed PCYS interpolation ac-celeration strategy are evaluated through numerical bench-marks. First, a material-level assessment is carried out on a single integration point to investigate the sensitivity of the Taylor-series linearization scheme to the refresh interval 
+
+𝑁 . Second, the framework is validated in a representa-tive structural application using the finite element solver Code_Aster, evaluating the spatial and temporal evolution of macroscopic fields. Finally, a quantitative assessment of the computational speed-up gains is presented. 
+
+3.1. Material-Level Performance and Drift Sensitivity Analysis 
+
+The first-order Taylor linearization strategy described in Section 2 is tested under a continuous irradiation regime up to a high damage dose to evaluate the numerical drift in-duced by bypassing the VPSC solver. The reference solution is obtained by a direct concurrent coupling where the exact macroscopic compliance ( ̄ 𝑀 ) and growth rate ( ̄̇ 𝜀 0) tensors are computed via VPSC at every single time increment ( Δ𝑡 ). The complete set of single-crystal constitutive parameters, elastic constants, and irradiation properties utilized in these simulations are detailed in Appendix A. Crucially, these ma-terial properties and calibration parameters remain identical and are uniformly applied across all numerical benchmarks and component-scale simulations presented throughout this work. Fig. 2 illustrates the comparative evolution of the norm of the compliance tensor ̄ 𝑀 and the macroscopic growth components as a function of the irradiation dose (dpa) for different user-defined refresh intervals ( 𝑁 ∈ {4 , 6, 8, 10} ). In addition to the compliance tensor, the numerical sta-bility of the sub-stepping approach is linked to the calcu-lation of the back-linearization strain rate tensor, ̄̇ 𝜀 0, which   
+
+> First Author et al.: Preprint submitted to Elsevier Page 5 of 14
+
+Título corto 0.0 2.5 5.0 7.5 10.0 12.5 15.0 17.5 20.0               
+
+> Irradiation Dose (dpa)
+> 3.65
+> 3.70
+> 3.75
+> 3.80
+> 3.85
+> 3.90
+> 3.95
+> 4.00
+> Norm of Compliance Tensor ||M||  1e 9
+> (a) Compliance Tensor Evolution
+> Direct VPSC (Ref.)
+> N = 4
+> N = 6
+> N = 8
+> N = 10
+> 0.0 2.5 5.0 7.5 10.0 12.5 15.0 17.5 20.0
+> Irradiation Dose (dpa)
+> 10 5
+> 10 4
+> 10 3
+> 10 2
+> 10 1
+> 10 0
+> 10 1
+> Relative Error
+> (b) Accumulated Relative Error
+> N = 4
+> N = 6
+> N = 8
+> N = 10
+
+Fig. 2: Standalone material-point sensitivity analysis of the microstructural linearization scheme for different refresh intervals 
+
+𝑁 under homogeneous standalone conditions (without FEM coupling): (a) compliance tensor evolution, and (b) accumulated relative error as a function of irradiation dose. 0.0 2.5 5.0 7.5 10.0 12.5 15.0 17.5 20.0                
+
+> Irradiation Dose (dpa)
+> 1.4
+> 1.6
+> 1.8
+> 2.0
+> 2.2
+> 2.4
+> 2.6
+> 2.8
+> Norm of Vector  0 (s  1)
+> 1e 7
+> (a) Back-Extrapolation Norm 0
+> Direct VPSC (Ref.)
+> N = 4
+> N = 6
+> N = 8
+> N = 10
+> 0.0 2.5 5.0 7.5 10.0 12.5 15.0 17.5 20.0
+> Irradiation Dose (dpa)
+> 10 5
+> 10 4
+> 10 3
+> 10 2
+> 10 1
+> 10 0
+> 10 1
+> Relative Error
+> (b) Accumulated Relative Error
+> N = 4
+> N = 6
+> N = 8
+> N = 10
+
+Fig. 3: Standalone material-point sensitivity and numerical drift analysis of the back-linearization strain rate vector ̇̄ 𝜀 0 for different user-defined refresh intervals 𝑁 (no FEM coupling): (a) evolution of the scalar norm ‖̇̄ 𝜀 0‖ as a function of the irradiation dose, and (b) its corresponding accumulated relative error showing the characteristic sawtooth truncation pattern driven by the periodic recalibration routine. 
+
+represents the stress-free growth and shape-change rate in-duced by microstructural evolution under irradiation. Fig. 3 displays the comparative sensitivity analysis for the norm 
+
+‖̄̇ 𝜀 0‖ and its corresponding relative accumulated error. As observed in Fig. 3a, the trajectory of ‖̄̇ 𝜀 0‖ exhibits a non-linear transient behavior during the early stages of irradiation ( ≤ 2.5 dpa), where sharp texture modification and rapid initial hardening occur. For conservative intervals (𝑁 = 4 ), the Taylor-expansion approximation tracks the ref-erence curve, keeping the mathematical drift strictly under 
+
+0.1% .For larger recalibration intervals ( 𝑁 = 10 ), localized spikes in the relative error are observable during the periods of maximum non-linearity, reaching values close to 5% .Nevertheless, as depicted by the distinctive sawtooth pattern in Fig. 3b, the discrete nature of the periodic recalibration routine ( 𝑖 step mod 𝑁 = 0 ) abruptly truncates error propaga-tion at the end of each interval. The algorithm successfully resets ̄̇ 𝜀 0 to its exact VPSC solution, forcing the error down to negligible levels before any numerical divergence can com-promise the global Newton-Raphson material subroutine. Once the microstructure stabilizes at higher doses ( > 5 dpa), the accumulated error for all configurations remains safely bounded well below the 1% threshold. As expected, increasing the linearization interval 𝑁 
+
+directly reduces the number of full VPSC calls, but accu-mulates a numerical drift due to the linear approximation of the microstructural trajectory. To evaluate the polycrystal 
+
+First Author et al.: Preprint submitted to Elsevier Page 6 of 14 Título corto 0 5 10 15 20            
+
+> Irradiation Dose (dpa)
+> 0.008
+> 0.006
+> 0.004
+> 0.002
+> 0.000
+> Strain  11
+> (a) Strain Component 11
+> Direct VPSC (Ref.)
+> N = 4
+> N = 6
+> N = 8
+> N = 10
+> 0510 15 20
+> Irradiation Dose (dpa)
+> 0.000
+> 0.001
+> 0.002
+> 0.003
+> 0.004
+> 0.005
+> 0.006
+> Strain  22
+> (b) Strain Component 22
+> Direct VPSC (Ref.)
+> N = 4
+> N = 6
+> N = 8
+> N = 10
+> 0510 15 20
+> Irradiation Dose (dpa)
+> 0.0000
+> 0.0005
+> 0.0010
+> 0.0015
+> 0.0020
+> 0.0025
+> 0.0030
+> 0.0035
+> Strain  33
+> (c) Strain Component 33
+> Direct VPSC (Ref.)
+> N = 4
+> N = 6
+> N = 8
+> N = 10
+
+Fig. 4: Comparison of polycrystal visco-plastic strain evolution between the full direct-coupling VPSC reference solution and different refresh intervals ( 𝑁 = 4 , 6, 8, 10 ) evaluated at a standalone material point (no FEM coupling). Panels show the independent strain components corresponding to the principal directions of the nuclear spacer grid texture: (a) Normal component (𝜀 11 ), (b) Transverse component ( 𝜀 22 ), and (c) Rolling component ( 𝜀 33 ) as a function of the accumulated irradiation dose. 
+
+kinematic consequence of the sub-stepping scheme, Fig. 4 presents the evolution of the independent strain components as a function of the irradiation dose. For these simulations, the reduced texture of 13 grains discussed in (Aguzzi et al., 2025) was utilized. Given the symmetry and processing history of the component under study, these axes correspond to the Normal ( 𝜀 11 ), Transverse ( 𝜀 22 ), and Rolling ( 𝜀 33 )directions of the zirconium-alloy nuclear fuel spacer grid. Consistent with the compliance tensor trends, the strain paths calculated for low refresh intervals ( 𝑁 = 4 ) display agreement with the direct coupling VPSC reference solution across all three coordinate axes. For larger intervals ( 𝑁 = 6 
+
+and 𝑁 = 8 ), slight deviations accumulate during early ir-radiation stages, where rapid microstructure evolution takes place; however, the drift remains bounded. Even for the 
+
+𝑁 = 10 configuration, the kinematic deviations are con-tained by the periodic recalibration steps. This demonstrates that minor localized drifts in the polycrystal compliance tensor do not trigger severe macroscopic strain deviations, thereby ensuring the numerical stability required for large-scale engineering finite element simulations. To further quantify these discrepancies, the continuous evolution of the macroscopic strain tensor relative error norm is evaluated. To prevent horizontal overflows within the standard double-column layout, this error metric is math-ematically defined using a compact notation as follows: 
+
+∥ 𝐞 ∥2 [%] = 
+
+[∑3
+
+> 𝑖 =1
+
+(𝜀 𝑖𝑖 − 𝜀 𝑖𝑖, ref )2
+
+]1∕2 
+
+[∑3 
+
+> 𝑖 =1
+
+𝜀 2
+
+> 𝑖𝑖, ref
+
+]1∕2 × 100 (22) where 𝜀 𝑖𝑖 and 𝜀 𝑖𝑖, Ref represent the independent strain com-ponents obtained with the accelerated multi-dimensional interpolation table (IT) framework and the standard stan-dalone direct VPSC reference solution, respectively, at each irradiation increment. As plotted in Fig. 5, during the early incubation and tran-sient hardening stage (under 3 dpa), the error norm exhibits a localized peak for all configurations, reaching approximately 
+
+17 .5% for 𝑁 = 10 . This transient drift is driven by the non-linear nature of the initial microstructural evolution, where a first-order Taylor series linearization temporarily under-predicts the rate changes. Crucially, as the microstructural evolution stabilizes at higher irradiation doses ( > 7.5 dpa), the self-correcting mechanism of the periodic VPSC recali-brations induces asymptotic convergence. By the end of the irradiation regime, the cumulative error decays to a relative value below 2.5% even for the most restrictive 𝑁 = 10 case, confirming that the framework does not introduce systemic error propagation over extended exposure periods. From an engineering design perspective, this error pro-file is highly acceptable for in-reactor component sim-ulations. While the transient peak under 3 dpa appears non-negligible, it occurs exclusively during the incubation regime where absolute strain magnitudes remain minimal, thus having a negligible impact on the overall structural as-sessment. Furthermore, the final cumulative discrepancy of less than 2.5% falls well within the conservative safety mar-gins and regulatory uncertainties standard in nuclear core component design. Given that this localized error does not propagate but instead stabilizes asymptotically, the order-of-magnitude reduction in computational time provided by the accelerated IT-framework fully justifies its adoption as a high-fidelity surrogate for long-term operational cycles. 
+
+First Author et al.: Preprint submitted to Elsevier Page 7 of 14 Título corto 0.0 2.5 5.0 7.5 10.0 12.5 15.0 17.5 20.0 
+
+> Irradiation Dose (dpa)
+> 0.00
+> 2.50
+> 5.00
+> 7.50
+> 10.00
+> 12.50
+> 15.00
+> 17.50
+> Tensor Relative Error Norm  e 2 (%)  Macroscopic Strain Tensor Relative Error Evolution
+> N = 4
+> N = 6
+> N = 8
+> N = 10
+
+Fig. 5. Evolution of the macroscopic strain tensor relative error norm as a function of the irradiation dose for different linearization intervals 𝑁 .
+
+Beyond the kinematic and constitutive accuracy, the primary advantage of the proposed sub-stepping formulation lies in its computational efficiency. Fig. 6 summarizes the total elapsed computational time required to complete the simulation for each studied configuration. While the stan-dard direct-coupling scheme (Full VPSC) requires 1.11 s due to the execution of the crystal plasticity solver at every incre-ment, introducing the interpolation table methodology leads to a reduction in CPU cost. For the 𝑁 = 4 configuration, the computation time drops to 0.4209 s, achieving a speedup of approximately 1.8× while maintaining accuracy. As the refresh interval expands to 𝑁 = 6 and 𝑁 = 8 , the CPU times further decrease to 0.3382 s and 0.3084 s, respectively. For the 𝑁 = 10 configuration, the total execution time is brought down to just 0.2497 s, implying an overall reduction of nearly 72% in the material-level computational effort (a 
+
+3.6× speedup). These results suggest the practical utility of the linearization database approach, which balances mi-crostructural tracking precision with the time-savings crucial for full-scale structural analysis. Full VPSC     
+
+> (Reference)
+> N = 4 N = 6 N = 8 N = 10
+> 0.0
+> 0.2
+> 0.4
+> 0.6
+> 0.8
+> 1.0
+> 1.2
+> Computational Time (seconds)  1.11 s
+> 0.4209 s
+> 0.3382 s 0.3084 s
+> 0.2497 s
+> Computational Cost Comparison
+
+Fig. 6. Computational time comparison and overall efficiency gain between the standard concurrent direct-coupling VPSC simulation and the Taylor-expansion multi-scale interpolation scheme for dif-ferent refresh intervals 𝑁 . Labels above each bar denote the exact elapsed CPU time in seconds. 
+
+3.2. Multi-scale Finite Element Application to Nuclear Components 
+
+To assess the capabilities of the VPSC-CAFEM inter-face via interpolation modeling at the component scale, a structural simulation was conducted using a representative nuclear spacer grid geometry in Code_Aster. Specifically, the simulated domain consists of one half of the central hexagon of a structural spacer grid, a critical core component subjected to severe irradiation conditions. The specific ge-ometry and structural configuration of this grid component was previously reported and characterized by Aguzzi et al. (2025). The initial material state was modeled using the re-duced texture reported by Patra and Tomé (2017a). Fig. 7 schematically illustrates the isolated simulated domain of the spacer grid along with the basal pole figure representing its crystallographic orientation distribution function (ODF). In this context, RD, ND, and TD denote the rolling, normal, and transverse directions of the material reference frame, respectively. For physical context, the spatial relation with a adjacent fuel cladding tube is also displayed, although the tube was omitted from the finite element mesh. 
+
+First Author et al.: Preprint submitted to Elsevier Page 8 of 14 Título corto  
+
+> Fig. 7. Schematic of the simulated domain showing one-half of the central spacer grid hexagon adapted from Aguzzi et al. (2025) and its spatial relation with an adjacent fuel cladding tube (omitted from the mesh). The inset displays the basal pole figure adapted from Patra and Tomé (2017a) used as the initial texture for VPSC calculations.
+
+The component was exposed to a constant irradiation damage rate of 3.6 × 10 −4 dpa/h ( 1.0 × 10 −7 dpa/s) over an extended operational cycle. The temporal discretization was defined by 50 fixed time increments of Δ𝑡 = 555 .56 h(with the time increment handled in hours within the solver), spanning a total simulated operational time of 27778 h. Regarding the mechanical boundary conditions, realistic in-reactor constraints were introduced by imposing a fixed normal displacement of 1.0 × 10 −5 mm on the inner surfaces of the grid dimples. Restricting the analysis to the spacer grid deformation allows the authors to evaluate the performance impact of the interpolation strategy without coupling the multi-scale framework with more complex contact non-linearities. Consequently, the localized constraint exerted by the expanding fuel cladding tube is directly emulated while avoiding the numerical cost associated with full mechanical contact algorithms. This approach was selected to isolate and evaluate the computational efficiency of the accelerated framework. By bypassing full contact-pair algorithms, the CPU time reduction achieved by the IT strategy can be accurately quantified. Consequently, the simulated domain is exclusively restricted to the grid piece, subjected solely to this mechanical displacement constraint alongside the uniform neutron flux distribution ̇ 𝜙 that drives the irradiation phenomena. Fig. 8 displays the spatial distribution of the equivalent accumulated viscoplastic strain ( ̄𝜀 vp ), the Von Mises effec-tive stress ( ̄𝜎 ), and their corresponding relative error fields at the end of the simulation. To quantify the discrepancies shown in the third col-umn of Fig. 8, pointwise relative errors at Gauss points are evaluated. The scalar relative error metrics for the Von Mises effective stress ( 𝑒 𝜎 ) and the equivalent accumulated viscoplastic strain ( 𝑒 𝜀 ) are explicitly calculated as follows: 
+
+𝑒 𝜎 = |̄𝜎 IT −̄𝜎 ref ||̄𝜎 ref | (23) 
+
+𝑒 𝜀 = |̄𝜀 vp IT −̄𝜀 vp ref ||̄𝜀 vp ref | (24) where the subscripts Ref and IT denote the local fields computed via the reference fully concurrent Full VPSC solver and the accelerated Interpolation Table sub-stepping framework, respectively. The structural response successfully captures the lo-calized stress relaxation areas driven by irradiation creep, alongside the progressive dimensional changes induced by anisotropic growth directions under the high-flux environ-ment. To evaluate the robustness of the accelerated frame-work under strict conditions, a point-by-point comparison is performed against the scenario corresponding to the largest linearization window ( 𝑁 = 10 ). Even under this config-uration, the accelerated IT framework reveals good spatial agreement with the direct Full VPSC-FEM reference model across both macroscopic fields. To assess the local accuracy in this configuration, the spatial distributions of the relative errors are analyzed in Figs. 8c and 8f. Regarding the effective stress field, the relative error remains low throughout the entire component, with a global maximum that does not exceed 6.0×10 −2 (6% ), and values well below 1% across the majority of the finite element mesh. In the case of the equivalent viscoplastic strain field (Fig. 8c), the relative error is negligible over almost the entire domain. Although localized regions exhibiting apparent rel-ative errors of 20 − 30% are observed (indicated by the reddish elements near the dimple boundaries), a detailed inspection reveals that these hot-spots are localized strictly in zones where the absolute magnitude of the strain is close to zero. Consequently, even minute, nominal deviations in these stagnant regions yield artificially inflated relative val-ues due to the vanishingly small denominator. Far from representing a mismatch in the calculation of the structural response, this behavior confirms that the error introduced by the Interpolation Table framework is negligible across all structurally critical regions of the component, preserving the essential microstructural physics of the polycrystal even when operating under the most unfavorable linearization conditions. 
+
+3.3. Computational Efficiency and Speed-up Quantification 
+
+The primary advantage of the proposed PCYS interpo-lation strategy a significant reduction in computational cost achieved during long-term simulations. The macro-scale im-plicit solver is forced to execute full, iterative VPSC cells at every single Newton-Raphson iteration for every integration point in the mesh. By replacing this computationally inten-sive local loop with a highly efficient 5D linear interpolation   
+
+> First Author et al.: Preprint submitted to Elsevier Page 9 of 14
+
+Título corto             
+
+> (a) Full VPSC: Eq. strain (b) IT ( 𝑁 = 10 ): Eq. strain (c) Strain Relative Error
+> (d) Full VPSC: Von Mises stress (e) IT ( 𝑁 = 10 ): Von Mises stress (f) Stress Relative Error
+
+Fig. 8: Spatial distribution of macroscopic fields and relative errors in the simulated spacer grid component at the end of the irradiation cycle ( 𝑡 = 27778 h). Equivalent viscoplastic strain distribution for: (a) Direct Full VPSC, (b) Accelerated IT framework (𝑁 = 10 ), and (c) associated strain relative error. Von Mises effective stress distribution for: (d) Direct Full VPSC, (e) Accelerated IT framework ( 𝑁 = 10 ), and (f) associated stress relative error. 
+
+Table 1 
+
+Computational performance metrics, net acceleration factors (Speed-up), and macroscopic kinematic error bounds of the accelerated IT-extrapolation framework compared against the fully concurrent direct VPSC-FEM reference scheme. 
+
+Simulation Case Refresh Interval ( 𝑁 )Total VPSC Calls Total CPU Time [s] Net Speed-up Factor Final Integrated 𝜺 irr 
+
+Component Error [%] 
+
+Direct VPSC-FEM Reference 1.45 × 10 7 1137.40 1.00× (Ref.) —IT + Extrapolation 𝑁 = 4 7.25 × 10 6 869.94 1.31× 1.06 IT + Extrapolation 𝑁 = 6 4.83 × 10 6 786.64 1.45× 0.24 IT + Extrapolation 𝑁 = 8 3.62 × 10 6 740.27 1.54× 0.32 IT + Extrapolation 𝑁 = 10 2.90 × 10 6 709.90 𝟏 .𝟔𝟎 × 0.49 
+
+routine over the pre-computed PCYS database, and strictly restricting full micromechanical solver operations to the rate-calculation increments ( 𝑖 step (mod 𝑁 ) ∈ {0 , 1} ), local execution times are minimized. Table 1 summarizes the total micromechanical solver calls, the total continuum CPU time, the net acceleration factors, and the volume-averaged residual errors in the accu-mulated irradiation-induced strain tensor components ( ̄ 𝜺 irr )at the end of the operational transient. The quantitative metrics demonstrate that the PCYS interpolation strategy yields a systematic, linear reduction in total VPSC calls as the refresh interval 𝑁 increases. This performance strictly adheres to the analytical 2∕ 𝑁 opera-tional ratio per sub-stepping block, which arises because the direct VPSC solver is invoked exactly twice every 𝑁 steps: first to establish the reference microstructural state ( 𝑀 ref )and immediately after to evaluate the tangent rate of change (𝑀 check ). For the most accelerated configuration ( 𝑁 = 10 ), 
+
+First Author et al.: Preprint submitted to Elsevier Page 10 of 14 Título corto 
+
+the total number of VPSC calls drops drastically by 80% ,falling from 1.45 × 10 7 down to 2.90 × 10 6.Full VPSC     
+
+> (Reference)
+> N = 4 N = 6 N = 8 N = 10
+> 0
+> 200
+> 400
+> 600
+> 800
+> 1000
+> 1200
+> Computational Time (seconds)  1137.40 s
+> 869.94 s
+> 786.64 s
+> 740.27 s 709.90 s
+> Computational Cost Comparison
+
+Fig. 9. Component-level computational cost comparison between the direct VPSC-FEM concurrent reference scheme and the ac-celerated IT-extrapolation sub-stepping strategy in Code_Aster for different validation blocks 𝑁 . Labels above each bar denote the exact execution time in seconds. 
+
+As illustrated in Fig. 9, this reduction in active microme-chanical solver calls translates into a net component-level speed-up factor of 𝟏 .𝟔𝟎 ×, compressing the total macro-scale CPU time from 1137 .40 s down to 709 .90 s. A continuous tracking of the kinematic discrepancies reveals that the transient numerical drift is strictly bounded and phenomenologically driven. At the early stages of the ir-radiation regime ( 𝑡 = 3333 .4 h), a localized peak error in the instantaneous strain rates is observed, reaching a maximum value of 9.45% under the lowest sampling frequency ( 𝑁 =10 ). Rather than representing an algorithmic instability, this temporary drift is localized exclusively within the high-curvature region of the initial hardening and microstructural incubation curves, where the first-order Taylor expansion temporarily underpredicts the severe deceleration of the local inelastic rates. Crucially, as the underlying crystallographic structure approaches a steady-state regime at later stages ( 𝑡 > 20000 h), the self-correcting nature of the periodic VPSC recalibra-tions induces a remarkable asymptotic convergence. By the final operational increment ( 𝑡 = 27778 h), the cumulative component-specific error decays to negligible engineering values, dropping to 0.24% for 𝑁 = 6 and maintaining a mere 
+
+0.49% for 𝑁 = 10 . This strong long-term accuracy confirms that the PCYS interpolation framework does not accumulate systemic drift over extended exposure periods, successfully preserving the underlying crystal plasticity physics while substantially expanding the numerical feasibility of large-scale structural analysis for core internals. 
+
+## 4. Conclusions 
+
+In this work, a high-performance PCYS interpolation multi-scale framework has been developed and successfully integrated into the open-source FEM solver Code_Aster to accelerate the structural simulation of nuclear components subject to coupled irradiation creep and growth. The pro-posed formulation demonstrates that the continuous mi-crostructural drift, characterized by the viscoplastic com-pliance and back-extrapolated growth rate tensors, can be effectively decoupled from the instantaneous yield surface representation. While the use of an offline-generated, static Interpolation Table inherently assumes a stationary crystal-lographic texture and constant Critical Resolved Shear Stress values, the first-order Taylor extrapolation strategy suc-cessfully bridges this gap, capturing the history-dependent macroscopic response under high radiation flux without requiring computationally prohibitive on-the-fly table regen-erations. Furthermore, the local accuracy of employing microme-chanical linearizations from the standalone viscoplastic self-consistent formulation was rigorously quantified through comparative benchmarks. When integrated into macro-scale finite element cases, this PCYS interpolation strategy demon-strates that a controlled, non-continuous application of the surrogate database introduces minimal numerical drift, keeping the resulting stress and strain fields well within strict engineering tolerances compared to fully concurrent 
+
+𝐹 𝐸 2 simulations. This architecture yields a reduction in computational cost, achieving acceleration factors that make long-term component-scale simulations highly viable by replacing thousands of iterative, nested micromechanical loops at each integration point with direct database queries and local first-order extrapolations. Future work should address, several promising research avenues emerge to enhance the capabilities and robustness of the current multiscale framework. First, implementing more sophisticated multi-dimensional interpolation algo-rithms, such as Kriging or Gaussian Process Regression, could refine the mapping of the 5D Polycrystal Yield Sur-face, particularly in regions with high topological gradi-ents or severe anisotropy. Second, the development of an explicit mathematical renormalization framework could dy-namically correct the integrated historical error and numer-ical drift accumulated during the Taylor expansion blocks, ensuring long-term path-independent consistency. Finally, designing a physics-informed adaptive criteria to govern the refresh interval would allow the scheduling of full meso-scale VPSC calls to be triggered dynamically based on lo-calized macro-scale indicators—such as sudden strain-path changes, stress triaxiality variations, or rapid accumulation of radiation damage—rather than adhering to a fixed step sequence. 
+
+## CRediT authorship contribution statement 
+
+F. E. Aguzzi: Methodology. Software, Formal analysis, Writing. M. S. Armoa: Methodology, Writing. C. I Pairetti: 
+
+First Author et al.: Preprint submitted to Elsevier Page 11 of 14 Título corto 
+
+Supervision, Writing - review & editing. C. M. Venier: Supervision, Writing - review & editing. A. E. Albanesi: Supervision, Writing - review & editing. 
+
+## Nomenclature 
+
+Latin Symbols 
+
+𝑏 𝑗 Normalized Burgers vector for the slip system 𝑗 .
+
+𝐵 Crystallographic irradiation creep compli-ance. 
+
+𝐵 0 Polycrystal compliance coefficient for isotropic approximation. 
+
+𝐶 Fourth-order elastic stiffness tensor of the polycrystal. 
+
+𝐶 tg Consistent tangent operator tensor. 
+
+𝐞 𝑘 Macroscopic sample reference frame axes (𝑘 ∈ { 𝑥, 𝑦, 𝑧 }). 
+
+𝑓 Body force vector. 
+
+𝑖 step Current finite element simulation time step. 
+
+𝐽 NR Local Newton-Raphson Jacobian matrix. 
+
+𝑀 Polycrystal fourth-order viscoplastic com-pliance tensor. 
+
+𝑀 tan Tangent polycrystal compliance tensor. 
+
+𝑀 ref1 Reference polycrystal compliance tensor evaluated at the recalibration step. 
+
+𝑀 ref2 Polycrystal compliance tensor evaluated at the step immediately following recalibra-tion. ̇𝑀 Numerical rate of change (slope) of the polycrystal viscoplastic compliance ten-sor. 
+
+𝑚 𝑗 𝑘𝑙 Symmetric Schmid tensor for the slip sys-tem 𝑗 .
+
+𝑁 User-defined periodic VPSC recalibration interval. 
+
+𝑅 Second-order rotation matrix. 
+
+𝑢 Macroscopic displacement vector. 
+
+𝑋 Non-linear local residual tensor field. 
+
+Greek Symbols 
+
+𝛽 Internal state variable vector. ̇𝛾 𝑗  
+
+> creep
+
+Shear strain rate contributed by creep on system 𝑗 .
+
+Δ𝑡 Simulation time increment. 
+
+𝜀 FE Total macroscopic strain tensor from solver. ̇𝜀 (growth ) 
+
+> 𝑘𝑙
+
+Microscopic irradiation growth strain-rate tensor. ̇𝜀 (creep ) 
+
+> 𝑘𝑙
+
+Microscopic irradiation creep strain-rate tensor. ̇̄ 𝜀 vp Volume-averaged polycrystal viscoplastic strain rate. ̄𝜀 0 Polycrystal back-extrapolated growth strain rate. ̄𝜀 0 
+
+> tan
+
+Tangent polycrystal back-extrapolated growth strain rate. ̄̇ 𝜀 0 
+
+> ref1
+
+Reference polycrystal back-extrapolated growth strain rate evaluated at the recal-ibration step. ̄̇ 𝜀 0 
+
+> ref2
+
+Polycrystal back-extrapolated growth strain rate evaluated at the step immediately following recalibration. ̈̄ 𝜀 0 Numerical rate of change (slope) of the polycrystal back-extrapolated growth strain rate tensor. 
+
+𝜌 𝑗 𝑑 ∕𝜌 ref Normalized dislocation density on system 
+
+𝑗 .
+
+𝜎 Macroscopic Cauchy stress tensor field. ̄𝜎 Polycrystal volume-averaged stress tensor. 
+
+𝜏 𝑗 Resolved shear stress acting on slip system 
+
+𝑗 .
+
+𝜙 Total accumulated radiation dose. ̇𝜙 Radiation dose rate. 
+
+𝜒 Component-wise scalar error metric. 
+
+Subscripts, Superscripts and Operators 
+
+(⋅)𝑐 Attribute corresponding to an individual grain 𝑐 .
+
+(⋅)𝑡 , (⋅)𝑡 +Δ 𝑡 Variables at the beginning and end of the step. 
+
+(⋅)𝑗 Tensor mapped onto local material sys-tem. 
+
+⟨⋅⟩ Volumetric volume-average operator. 
+
+∇𝑠 Symmetric gradient operator.   
+
+> First Author et al.: Preprint submitted to Elsevier Page 12 of 14
+
+Título corto 
+
+Table A.1 
+
+Model parameters for Zircaloy-2, from Patra et al. (2017b) and Patra and Tomé (2017a). 
+
+Parameter Value Meaning 
+
+𝐶 𝑖𝑗 
+
+𝐶 11 , 𝐶 22 , 𝐶 33 = 143 .5, 143 .5, 164 .9
+
+𝐶 12 , 𝐶 13 , 𝐶 23 = 72 .5, 65 .4, 65 .4
+
+𝐶 44 , 𝐶 55 , 𝐶 66 = 32 .1, 32 .1, 35 .5
+
+Elastic constants in GPa for pure Zr, taken from Simmons (1965) and Kocks et al. (2000). 
+
+𝑓 𝑟 , 𝑓 𝑖𝑐 0.97 , 0.13 Fractions of point defect recombination and interstitial clustering. 
+
+𝐵 5.0 × 10 −5 MPa ⋅dpa −1 Crystallographic irradiation creep compliance. 
+
+𝜌 ref 2.26 × 10 14 m−2 Reference line dislocation density for the creep model. 
+
+𝑏 𝑗 (pris.) 3.0 × 10 −10 m Burgers vector magnitude along prismatic directions ( 𝑗 =
+
+𝛼 1, 𝛼 2, 𝛼 3). 
+
+𝑏 𝑗 (basal) 5.0 × 10 −10 m Burgers vector magnitude along the basal direction ( 𝑗 = 𝑐 ). 
+
+Acronyms 
+
+CAFEM Code Aster Finite Element Method. 
+
+CRSS Critical Resolved Shear Stress. 
+
+dpa Displacements per atom. 
+
+FEM Finite Element Method. 
+
+HEM Homogeneous Effective Medium. 
+
+IT Interpolation Table. 
+
+ND Normal Direction. 
+
+ODF Orientation Distribution Function. 
+
+PCYS Polycrystal Yield Surface. 
+
+RD Rolling Direction. 
+
+RVE Representative Volume Element. 
+
+TD Transverse Direction. 
+
+VPSC Viscoplastic Self-Consistent formulation. 
+
+## A. Material parameters 
+
+The material parameters presented in Table A.1 were taken from Patra et al. (2017b) and Patra and Tomé (2017a). 
+
+## B. Generation of the Interpolation Table (IT) 
+
+The Interpolation Table (IT) is constructed by probing the Polycrystal Yield Surface (PCYS) in a 5D deviatoric space. Following the formulation described in Tomé and Lebensohn (2023), any deviatoric state (stress or strain rate) can be represented as a vector in this space, whose orien-tation is defined by four angular coordinates: 𝜃 1, 𝜃 2, 𝜃 3, and 
+
+𝜃 4. The mathematical basis of the 5D angular discretization, probing strategy, and optimization routines used to construct this database are detailed in this section. 
+
+B.1. Angular Discretization and Probing 
+
+The algorithm generates a grid of equispaced unit vec-tors. For each state, the components of the normalized "ac-tion" vector 𝐚 (imposed strain rate in this work) are computed as: 
+
+𝑎 1 = sin 𝜃 1 sin 𝜃 2 sin 𝜃 3 sin 𝜃 4
+
+𝑎 2 = cos 𝜃 1 sin 𝜃 2 sin 𝜃 3 sin 𝜃 4
+
+𝑎 3 = cos 𝜃 2 sin 𝜃 3 sin 𝜃 4
+
+𝑎 4 = cos 𝜃 3 sin 𝜃 4
+
+𝑎 5 = cos 𝜃 4
+
+(B.1) The domain is partitioned using the parameter 𝑁 part .The angular step is defined as Δ𝜃 = 𝜋 ∕(2 𝑁 part ). In this study, 𝑁 part = 4 was adopted, providing a balanced angular resolution of 22 .5◦. For non-centro-symmetric properties, the scan for 𝜃 1 covers the range [− 𝜋, 𝜋 ], while for centro-symmetric cases, the range [0 , 𝜋 ] is sufficient. 
+
+B.2. Optimization, Redundancy Handling, and Local Interpolation 
+
+To minimize the number of calls to the VPSC solver during the table generation, the algorithm identifies geomet-ric singularities in the 5D spherical representation. When a higher-order angle is zero, the probe becomes independent of the lower-order angles. The implemented code detects these redundant states to skip unnecessary calculations: 
+
+• If 𝜃 4 = 0, the vector components are (0 , 0, 0, 0, 1) 
+
+regardless of 𝜃 1, 𝜃 2, 𝜃 3.
+
+• If 𝜃 3 = 0 (and 𝜃 4 ≠ 0), the vector is independent of 
+
+𝜃 1, 𝜃 2.
+
+• If 𝜃 2 = 0 (and 𝜃 3, 𝜃 4 ≠ 0), the vector is independent of 𝜃 1.For each unique probe resulting from this optimized scan, the VPSC model computes the corresponding "reac-tion" vector 𝐫 (macroscopic stress response). The resulting pairs {𝐚 , 𝐫 } are stored in an ordered binary database. 
+
+First Author et al.: Preprint submitted to Elsevier Page 13 of 14 Título corto 
+
+During the macro-scale FEM structural analysis, when Code_Aster requests a material response for an arbitrary input state 𝐱 lying within the 5D deviatoric domain, a local multi-linear interpolation routine is triggered. The algorithm first identifies the 25 = 32 bounding grid vertices (the enclosing hypercube) surrounding 𝐱 . The interpolated re-sponse 𝐲 (𝐱 ) is then evaluated via a weighted combination of the pre-calculated reactions 𝐲 𝑘 at each vertex: 
+
+𝐲 (𝐱 ) = 
+
+> 32
+
+∑
+
+> 𝑘 =1
+
+𝜔 𝑘 𝐲 𝑘 (B.2) where the scalar weighting factors 𝜔 𝑘 are calculated as products of the normalized distances between 𝐱 and the respective hypercube facets: 
+
+𝜔 𝑘 =
+
+> 5
+
+∏
+
+> 𝑑 =1
+
+(
+
+1 − |𝑥 𝑑 − 𝑥 𝑘,𝑑 |
+
+Δ𝜃 𝑑 
+
+)
+
+(B.3) In Eq. B.3, 𝑥 𝑑 represents the coordinate of the evaluation point along the 𝑑 -th dimension, 𝑥 𝑘,𝑑 is the coordinate of vertex 𝑘 , and Δ𝜃 𝑑 denotes the localized grid spacing. This efficient algebraic evaluation allows Code_Aster to bypass the costly iterative polycrystal equations during the local macro-solver steps, securing the computational speed-ups discussed in Section 3. 
+
+## References 
+
+Adamson, R.B., Coleman, C.E., Griffiths, M., 2019. Irradiation creep and growth of zirconium alloys: A critical review. Journal of Nuclear Materials 521, 167–244. Agouzal, E., 2024. Reduced order models in quasi-static nonlinear mechan-ics for state estimation by calibration through data assimilation: applica-tion to containment buildings. Ph.D. thesis. Université de Bordeaux. Aguzzi, F., Armoa, M., Rabazzi, S.M., Pairetti, C., Albanesi, A.E., 2026. Multiphysics finite element modeling of irradiation and thermal behav-ior demonstrated on a fuel-assembly problem. Nuclear Engineering and Design 447, 114648. Aguzzi, F., Rabazzi, S.M., Armoa, M., Pairetti, C., Albanesi, A.E., 2025. An open-source finite element toolbox for anisotropic creep and irradiation growth: Application to cladding tube and spacer grid. Nuclear Engineer-ing and Design (https://doi.org/10.1016/j.nucengdes.2025.114345). Billerey, A., 2005. Evolution of fuel rod support under irradiation–Impact on the mechanical behaviour of fuel assemblies. Structural behaviour of fuel assemblies for water cooled reactors, 101–111. Brenner, R., Masson, R., Castelnau, O., Zaoui, A., 2002. A “quasi-elastic” affine formulation for the homogenised behaviour of nonlinear vis-coelastic polycrystals and composites. European Journal of Mechanics A/Solids 21 (6), 943–960. Christodoulou, N., Causey, A.R., Holt, R.A., Tomé, C.N., Badie, N., Klassen, R.J., Sauvé, R., Woo, C.H., 1996. Modeling in-reactor deforma-tion of Zr-2.5 Nb pressure tubes in CANDU power reactors. Zirconium in the Nuclear Industry: Eleventh International Symposium, ASTM International. EDF, 1989–2025. Electricité de France. Finite element 𝑐𝑜𝑑𝑒 _𝑎𝑠𝑡𝑒𝑟 , Analy-sis of Structures and Thermomechanics for Studies and Research. Open source on www.code-aster.org. Fidleris, V., 1988. The irradiation creep and growth phenomena. Journal of Nuclear Materials 159, 22–42. Galán, J., Verleysen, P., Lebensohn, R.A., 2014. An improved algorithm for the polycrystal viscoplastic self-consistent model and its integration with implicit finite element schemes. Modelling and Simulation in Materials Science and Engineering 22 (5), 055023. Gicquel, C., Onimus, F., Brenner, R., Helfer, T., Masson, R., 2023. Poly-crystalline simulations of in-reactor deformation of zircaloy-4 cladding tubes during nominal operating conditions. Zirconium in the Nuclear Industry: 20th International Symposium, 118–148. Griffiths, M., 2015. A review of microstructure evolution, creep and growth in zirconium alloys under irradiation. Journal of Nuclear Materials 461, 252–284. Holt, R.A., 2008. In-reactor deformation of cold-worked Zr–2.5 Nb pressure tubes. Journal of Nuclear Materials 372 (2-3), 182–214. Jiang, H., Qu, J., Lu, R.Y., Wang, J.J., 2016. Grid-to-rod flow-induced impact study for PWR fuel in reactor. Progress in Nuclear Energy 91, 355–361. Kocks, U.F., Tomé, C.N., & Wenk, H.-R., 2000. Texture and anisotropy: preferred orientations in polycrystals and their effect on materials prop-erties. Cambridge University Press. ISBN 978-0-521-79420-6. Lebensohn, R.A., Tomé, C.N., 1993. A self-consistent anisotropic approach for the simulation of plastic deformation and texture development of polycrystals: application to zirconium alloys. Acta Metallurgica et Materialia 41 (9), 2611–2624. McGinty, R.D., 2001. Multiscale representation of polycrystalline inelas-ticity. Georgia Institute of Technology. Molinari, A., Canova, G.R., Ahzi, S., 1987. A self consistent approach of the large deformation polycrystal viscoplasticity. Acta Metallurgica 35 (12), 2983–2994. Motta, A. T., Capolungo, L., Cinbiz, M. N., Daymond, M. R., Gouanis, M.-R., Hornbach, R., Krajewski, A., Ley, N., Lian, Y., Long, B., 2015. Zirconium alloys for nuclear power technology. Advanced Materials and Processes 173 (9), 20–25. Norgett, M.J., Robinson, M.T., Torrens, I.M., 1975. A proposed method of calculating displacement dose rates. Nuclear Engineering and Design 33 (1), 50–54. Pandey, M.D., Tallavo, F.J., Christodoulou, N.C., Leitch, B., Bickel, G.A., 2018. Understanding the mechanics of creep deformation to develop a surrogate model for contact assessment in CANDU ® fuel channels. Nuclear Engineering and Design 330, 141–156. Patra, A., Tomé, C.N., 2017. Finite element simulation of gap opening between cladding tube and spacer grid in a fuel rod assembly using crystallographic models of irradiation growth and creep. Nuclear Engineering and Design 315, 155–169. Patra, A., Tomé, C.N., Golubov, S.I., 2017. Crystal plasticity modeling of irradiation growth in Zircaloy-2. Philosophical Magazine 97 (23), 2018–2051. Prabhu, S.R., Pandey, M.D., Christodoulou, N., Leitch, B.W., 2020. Asurrogate model for the 3D prediction of in-service deformation in CANDU ® fuel channels. Nuclear Engineering and Design 369, 110871. Segurado, J., Lebensohn, R.A., LLorca, J., Tomé, C.N., 2012. Multi-scale modeling of plasticity based on embedding the viscoplastic self-consistent formulation in implicit finite elements. International Journal of Plasticity 28 (1), 124–140. Simmons, G., 1965. Single crystal elastic constants and calculated aggre-gate properties. Journal of the Graduate Research Center 34 (1), 1. Tomé, C.N., So, C.B., Woo, C.H., 1993. Self-consistent calculation of steady-state creep and growth in textured zirconium. Philosophical Magazine A 67 (4), 917–930. Tomé, C.N., Lebensohn, R.A., 2023. Material modeling with the visco-plastic self-consistent (VPSC) approach: theory and practical applica-tions. Elsevier. 
+
+First Author et al.: Preprint submitted to Elsevier Page 14 of 14

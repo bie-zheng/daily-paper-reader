@@ -1,0 +1,400 @@
+Title: Title of Paper Goes Here:
+
+URL Source: https://arxiv.org/pdf/2606.27723v1
+
+Published Time: Tue, 30 Jun 2026 01:35:56 GMT
+
+Number of Pages: 21
+
+Markdown Content:
+1
+
+## Vacancy-mediated nitrogen diffusion and aggregation via high-fluence electron beam irradiation in HPHT synthesized diamond crystal 
+
+Chikara Shinei 1,2,* , Yuta Masuyama 3 , Jun Chen 1 , Hiroshi. Abe 3 , Masashi Miyakawa 1 ,
+
+Takashi Taniguchi 1 , Takeshi Ohshima 3,4 and Tokuyuki Teraji 1 
+
+> 1
+
+National Institute for Materials Science, Tsukuba, Ibaraki 305 – 0044, Japan  
+
+> 2
+
+University of Tsukuba, Tsukuba, Ibaraki 305 – 0877, Japan  
+
+> 3
+
+National Institutes for Quantum Science and Technology, Takasaki, Gunma, 370 – 1292, Japan  
+
+> 4
+
+Department of Materials Science, Tohoku University Aoba, Sendai, Miyagi 980 – 8579, Japan  
+
+> *
+
+E-mail: shinei.chikara.fb@u.tsukuba.ac.jp 
+
+The negatively charged nitrogen vacancy (NV - ) center in diamonds is promising point defect for highly sensitive quantum sensing. The formation of high-density NV - centers is essential for improving sensitivity. We performed room-temperature electron beam irradiation (EBI) and annealing on nitrogen-doped high-pressure high-temperature diamond crystals to convert substitutional nitrogen into NV centers. In the low-fluence region of EBI, neutral substitutional nitrogen (N s0 ) concentration decreased and NV 0/ − center concentration increased with increasing EBI fluence. The decrease in N s0 concentration was comparable to the increase in total NV center concentration; thus, the conversion from N s0 to NV 0/ − centers is a dominant defect formation process. In a high-fluence region, NV 0/ − center and N s0/+ concentrations decreased with increasing EBI fluence, indicating the formation of unknown nitrogen-related defects such as the H3 center, which is a nitrogen and vacancy aggregation defect. Although H3 centers were observed at high EBI fluence, their forming annealing temperature of 1375 ± 25 ℃ was lower than the typically reported temperatures over 1600 ℃.We attribute this low-temperature formation to vacancy-mediated nitrogen diffusion and aggregation. 
+
+## 1. Introduction 
+
+Negatively charged nitrogen-vacancy (NV −) centers are paramagnetic defects with S = 1 in diamond crystals and have a strong spin-dependent photoluminescence intensity, which is 2
+
+promising for high-sensitivity quantum magnetic sensors. 1) Two factors that determine magnetic sensor sensitivity are the number of sensors, i.e., the NV − center concentration [NV −], and the spin coherence time T2 , which is the memory time of the sensing field strength as a phase of the quantum superposition state. 1) Based on these two factors, the shot-noise sensitivity is proportional to the equation 1) 
+
+𝛿𝛿𝛿𝛿 ∝ � 1[NV −] × 𝑇𝑇 2
+
+. (1) 
+
+Shot-noise sensitivity is the minimum detectable magnetic field excluding various sensing system noises caused by environmental temperature fluctuations, excitation laser power fluctuations, and geomagnetic noise. As shown in Eq. (1), increasing the T2 and NV − center concentrations improve the shot-noise sensitivity. Sekiguchi et al. reported that practical magnetic sensitivity corresponds to shot-noise sensitivity 2) , as shown in Eq. (1) under condition that relative intensity noise of excitation laser for NV - center was reducing. This practical magnetic sensitivity was the best reported magnetic sensitivity in DC frequency range. They found that one of the reasons for this improved sensitivity was the elongation of the spin coherence time caused by the synthesis of high-quality diamond crystals. They also speculated that the best-reported sensitivity was limited by charge conversion from the NV −
+
+center to the neutrally charged NV center (NV 0 ). This charge conversion reduces the concentration of the activated NV − center, which is a quantum sensor, thus deteriorating shot-noise sensitivity. Therefore, in this study, we focus on the formation of high-density NV − centers in diamond crystals. 
+
+It has been experimentally and theoretically reported that NV centers become negatively charged because of the electron supply from neutral substitutional nitrogen (N s0 ) to the NV 0centers in diamond crystals. 3)–6) In our previous study, we reported that the negative charge ratio [NV −]/[NV T ] ([NV T ] = [NV −] + [NV 0 ]) was limited by the electron supply rate 3) In this previous report, the NV centers, including negative and neutral charges, were formed by electron beam irradiation (EBI), subsequent annealing, and electron supply from N s0 to the NV 0 center, as shown in the following two reactions: 
+
+Ns0 + V 0 → NV 0 (2) 
+
+Ns0 + NV 0 ⇄ Ns+ + NV − (3) 
+
+EBI and annealing lead to the formation of neutral monovacancies (V 0 ) and NV 0 centers, as shown in Eq. (2). In diamond crystals used in practical sensing, the reported typical EBI 3
+
+fluence 2),7),8) is up to ~ 1.0 × 10 18 e/cm 2 , and it leads to an NV − center density of a few parts per million. Therefore, a higher-fluence EBI is required to form a higher-density NV − center. However, we previously reported that increasing EBI fluence decreased the frequency of electron supply from N s0 to NV 0 centers because of the high frequency of NV 0 center formation. 3) Although a 100% negative charge ratio for NV centers achieved using extra negative charging methods such as phosphorus doping to create an n-type diamond crystal 9),10) and Fermi level control using diamond electronic devices, 11),12) we aimed to achieve full conversion from N s0 to the NV structure by further increasing in EBI fluence. 
+
+In this study, we investigate the dependence of the NV 0/ − center concentration on EBI fluence under high-fluence EBI conditions of over 1 × 10 18 e/cm 2 and discuss the effect of high-fluence EBI on the charge state of NV centers. Further, we discuss the correlation between T2 and EBI fluence. 
+
+The organization of this article was as follows. In Sec. 3-1, we discuss formed NV center concentration depending on EBI fluence. Subsequently, we discuss formation of other unknown nitrogen-related defects except for N s and NV center (called N other in RESULT AND DISCCUSTION) under condition of high-EBI fluence. The effect of N other on NV center charge state and the origin of N other are discussed in Sec. 3-2 and Sec. 3-3, respectively. Finally, we discuss spin coherence time of NV - center depending on the EBI fluence and the Nother formation. Our findings are summarized in Sec. 4. 
+
+## 2. Methodology 
+
+The diamond crystals examined in this study were grown using a high-pressure high-temperature (HPHT) synthesis method. The nitrogen impurities in the HPHT diamond crystals primarily originated from the carbon source and the metal solvent used in the synthesis. Since natural nitrogen consists predominantly of 14 N (99.6%), this isotope was dominant in the synthesized crystals. After the HPHT crystals were cut parallel to the {111} crystal plane, the top and bottom surfaces were mirror polished. 
+
+The NV centers were formed using the following procedure: The HPHT cutting diamond plate was irradiated using a 2.0 MeV electron beam with a total fluence range of 5 × 10 17 –3.6 × 10 18 e/cm 2 , with subsequent annealing at 1375 ± 25 °C for 2 h in vacuum. Hereafter, we refer to the post process for NV center formation as “the e-beam/anneal process.” The {111} growth sector was isolated by laser cutting to avoid underestimating the defect concentration in the HPHT diamond crystal because of multiple sectors. The dimensions of the {111} growth sector HPHT crystal used in this study were 2.0 × 1.0 × 0.4 mm 3 . [N s0 ] and 4
+
+[NV −] concentrations in the {111} growth sector before and after the e-beam/annealing process were estimated using electron paramagnetic resonance (EPR) measurements. EPR spectra were measured at ~300 K using an X-band EPR spectrometer (FA-100, JEOL). The microwave excitation frequency, microwave power, magnetic field modulation, and modulation amplitude were 9.428 GHz, 0.02 μW, 100 kHz, and 0.02 mT, respectively. The applied magnetic field was set parallel to the [111] direction of the cut diamond crystal. The estimated error in [N s0 ] and [NV −] for the {111} growth sector was ~ ±10%. The concentration of N s0 formed during the HPHT synthesis, [N s0 ]initial , was controlled by tuning the amount of titanium in the metal solvent and estimated as 6.8 ppm. The concentration of the NV centers formed during the HPHT synthesis was used as the detection limit for the EPR measurements in the examined HPHT diamond crystal. 
+
+Photoluminescence (PL) measurements were conducted to evaluate the NV 0 center concentration. A confocal micro-PL mapping system (Nanofinder FLEX; Tokyo Instruments, Inc.) was used to measure the PL intensity from the NV 0 and NV − centers. To estimate [NV 0 ], we multiplied the NV − center concentration obtained by EPR with the PL intensity ratio of the NV 0 center to the NV − center considering the difference in the PL decay rate between them. Our earlier work 3) presented a detailed estimation scheme for the NV 0 center concentration. Ultraviolet PL (UVPL) measurements were conducted using home-built optical equipment that included a He-Cd laser (excitation wavelength = 325 nm) to evaluate the formation of nitrogen-related defects besides the substitutional nitrogen and NV centers. 
+
+Spin coherence time T2 in the {111} growth sector HPHT diamond crystal was measured with columnar excitation fluorescence micoroscope 13)) and used to excite the NV − centers throughout the thickness direction of the diamond crystal (~ 0.4 mm). The 532 nm laser diameter and depth of the excitation region in the employed microscope were designed to be 20 and 0.5 mm. 13),14) The Hahn echo microwave and 532 nm laser protocol 13),14) were implemented for the NV − centers in the excitation region to evaluate T2 . The sequence of the Hahn echo protocol is as follows: (1) A pulsed 532 nm laser with duration time of 180 μswas used to initialize the spin states of NV − centers. (2) Two sets of π/2 and one set of a π
+
+pulsed microwave, as determined by the period of Rabi oscillation for NV − center spins, were irradiated during the free precision time τ. We set the duration time of π/2 to be ~ 50 ns. (3) The examined HPHT diamond crystal was irradiated with a pulsed green laser with 5 
+
+μs duration time to read the NV − centers coherence state phase, and we detected the PL intensity emitted from the NV − centers. The PL intensity typically decays with increasing free-precision time, and the decay time corresponds to the spin coherence time. To measure 5
+
+the PL intensity depending on τ, S( τ), the Hahn echo protocol was conducted for various τ. 
+
+For estimating T2 , we fit the experimentally obtained S( τ) to the expression exp[-( τ/ T2 ) p], where the free parameters in the fit were T2 and the stretched exponential parameter p. Our earlier work 13),14) presented a detailed estimation scheme for the spin coherence time. 
+
+## 3. Results and Discussion 
+
+3.1 Effect of EBI fluence on formed NV center density 
+
+Figure 1(a) shows the dependence of defect concentration on EBI fluence. The defects indicate N s0 , N s+ NV − centers, and NV 0 centers. As shown in Fig. 1(a), in the area where the EBI fluence is below 1.0 × 10 18 e/cm 2 (Area I), [N s0 ] decreased and both [NV 0 ] and [NV −]increased. The rate of increase in [NV −] with EBI fluence up to 1.0 × 10 18 e/cm 2 was ~0.13 ppm / 10 17 e/cm 2 . This value is comparable to the previously reported value of ~ 0.1 ppm/10 17 e/cm 215),16) obtained for nitrogen-doped diamond crystals, wherein the NV 0/ − center creation process shown in Eq. (2) and (3) are dominant. The increase in the total NV center concentration [NV T ] = [NV 0 ] + [NV −] between EBI fluences of 5 × 10 17 and 1 × 10 18 e/cm 2was 1.5 ppm, and the decrease in the N s0 concentration was 1.8 ppm. The increase in [NV T ]and decrease in [N s0 ] were similar in magnitude, and therefore, the nitrogen-related defects present in the nitrogen-doped diamond after the e-beam/annealing process are dominated by Ns0 and NV centers, as shown in Fig. 1(b). As shown in Fig. 1(a), in the area where the EBI fluence is greater than 1.3 × 10 18 e/cm 2 (Area II), the N s0 , NV − center, and NV 0 center concentrations decreased with increasing EBI fluence. The disappearance of both the N s0 and NV centers led to the formation of other unknown nitrogen-related defects, N other , as indicated in the punch image for Area II in Fig. 1(b). 
+
+The objective of this study— full conversion from Ns⁰ to the NV center —was not achieved. The formation of these unknown nitrogen-related defects may introduce acceptor levels into the diamond bandgap, thereby affecting the charge states of Ns and NV centers. Furthermore, 
+
+these defects may generate magnetic noise for NV⁻ centers, leading to degradation of T₂. 
+
+Reducing the density of these defects is likely important for achieving high-sensitivity NV sensing. 
+
+3.2 Effect of N other on the charge state of NV centers 
+
+We previously reported that the NV − center concentration increases with an increase in the electron supply rate from N s0 to the NV 0 center when the e-beam/annealing process is performed 3),17) This electron supply rate corresponds to the equilibrium constant K in Eq. (3) 6
+
+and is defined as 
+
+𝐾𝐾 = [NV −][N s+ ]
+
+�NV 0�[N s0 ] . (4) 
+
+The equilibrium constant K also limits the formation of NV 0 centers in addition to the NV − center and charge state ratio of NV − center to NV 0 center. 3),17) Figure 1(c) shows the electron supply rate from N s0 to the NV 0 center, which is the equilibrium constant K. The applied [N s0 ], [NV −], and [NV T ] concentrations corresponded to the value presented in Fig. 1(a) for each EBI fluence. The black dotted line indicates [NV T ]/[N s0 ] = [NV −]/[N s0 ], which means that the formed NV centers are 100% negatively charged. The red triangle symbols represent the data of {[NV T ]/[N s0 ], [NV −]/[N s0 ]} obtained in this study. The gray square symbols represent the reported values of {[NV T ]/[N s0 ], [NV −]/[N s0 ]}, in which electron exchange between the NV center and N s is dominant. 3) As indicated by the red triangle symbol, [NV −]/[N s0 ] increased with an increase in [NV T ]/[N s0 ] and the deviation between [NV −]/[N s0 ] and the fully negative charged line became large. This implies that the electron donor N s0 decreases and the NV 0 center increases with an increase in [NV T ]. 3) The rate of increase in [NV −]/[N s0 ] relative to [NV T ]/[N s0 ] corresponds to the equilibrium constant K in the equilibrium equation shown in Eq. (3) 3) ; K indicates the rate of electron supply from N s0to the NV 0 center. For the nitrogen-doped HPHT diamond examined in this study, K in Eq. (3) is expected to be smaller than the equilibrium constant for the gray triangle symbol in a previous study because of the acceptor levels associated with the formation of unknown nitrogen-related defects. The following equation for obtaining the negative charge ratio F of NV centers was introduced to estimate the equilibrium constant K. In a previous study, this negative charge ratio equation was obtained from the equation of the equilibrium constant K
+
+shown in Eq. (4). 3),17) 
+
+𝐹𝐹 = [NV −][NV T ] =
+
+−𝐾𝐾 [N s0 ][NV T ] + �(𝐾𝐾 [N s0 ][NV T ])2+ 4 𝐾𝐾 [N s0 ][NV T ]
+
+2 . (5) 
+
+Using this negative charge ratio equation, the vertical value of Fig. 1(c), namely, [NV −]/[N s0 ], can be expressed as a model function for [NV T ]/[N s0 ] as 
+
+[NV −][N s0 ] = [NV T ][N s0 ]
+
+[NV −][NV T ] = [NV T ][N s0 ]
+
+−𝐾𝐾 [N s0 ][NV T ] + �(𝐾𝐾 [N s0 ][NV T ])2+ 4 𝐾𝐾 [N s0 ][NV T ]
+
+2 , (6) 
+
+where the fitting parameter was the equilibrium constant K. The fitting data of {[NV T ]/[N s0 ]7
+
+and [NV −]/[N s0 ]} was collected using Eq. (6) for the red and gray triangle symbol data. The obtained fitting parameter K for the red and gray triangle symbol data were 0.71 ± 0.08 and 0.53 ± 0.03, respectively. The obtained K for the red-triangle data was comparable to that for the gray-triangle symbol data. This result is inconsistent with our expectation of a significant decrease in K with the formation of unknown nitrogen-related defects. This result also shows that the charge states of the NV center and substitutional nitrogen are determined only by the equilibrium equation shown in Eq. (3). Unknown nitrogen-related defects are formed even if the number of NV centers and substitutional nitrogen atoms decreases. 
+
+The concentration of [N s+ ] was estimated using the K obtained by fitting Eq. (5). Based on the definition of equilibrium constant K in Eq. (3), 3),17) [N s+ ] can be expressed as 
+
+[N s+ ] = 𝐾𝐾 �NV 0�[N s0 ][NV −] . (7) 
+
+We estimated [N s+ ] using the [N s0 ], [NV −], and [NV 0 ] values obtained for each EBI fluence, as shown in Fig. 1(a) and Eq. (7). The estimated [N s+ ] values are shown as pink triangles in Fig. 1 (a). [N s+ ] tended to be slightly increased up to EBI fluence of 1.0 × 10 18 e/cm 2 and to decrease over an EBI fluence of 1.0 × 10 18 e/cm 2 . The decrease in the N s+ concentration indicates the conversion of N s+ to unknown nitrogen-related defects. In addition, the N s+concentration was comparable to the NV − concentration at any EBI fluence; this result indicates that strong binding between NV - center and N s+ caused by electron supply, and the electron supply from unknown nitrogen-related defects to the NV 0 center is unlikely to occur. We estimated the unknown nitrogen-related defect concentrations by subtracting [N s0 ], [N s+ ], [NV −], and [NV 0 ] obtained after the e-beam/annealing process from the as-grown nitrogen concentration [N s0 ]initial using 
+
+[N other ] = [N s0 ]initial - ([N s0/+ ]+[NV 0/ −]). (8) 
+
+Figure 1(d) shows the dependence of [N other ] on EBI fluence, as estimated using Eq. (8). As shown in Area I, [N other ] is ~ 0 in the range of the EBI fluence, which indicates that no unknown nitrogen-related defects formed. In Area II, [N other ] increases with an increase in the EBI fluence. At an examined maximum EBI fluence of 3.6 × 10 18 e/cm 2 , [N other ] reached ~ 4.5 ppm. This result confirms that ~70% of the total nitrogen concentration is converted to an unknown nitrogen-related defect. 
+
+3.3 Origin of N other 8
+
+The typical dominated charge state of the NV center and N s in the diamond crystal with the nitrogen concentration ranging from 1 –20 ppm was −/0 3)) and 0/+, 18) , respectively. The Fermi level in the nitrogen doped diamond located at 3.78 eV above the valence band level (E v ) 19) and charge transition level −/0 of the NV center and 0/+ of N s were E v +2.7 eV and Ev +3.6 eV, respectively. Therefore, the increase in the N other concentration shown in Fig. 1(c) and the decrease in the N s0/+ and NV 0/ − concentrations shown in Fig. 1(a) suggest the conversion of defects with a single nitrogen atom to defects composed of multiple nitrogen atoms. Furthermore, identifying the defect structure of N other , which is expected to be composed of multiple nitrogen atoms, is essential to suppress the decrease in the NV 0/ − center concentration. Multiple nitrogen complex defects in diamond crystals such as the H3 center (N-V-N 0 ), H4 center (3N-V-V-N), and N3 center (3N-V) are observed as photoluminescence (PL) signals at 503.5, 496.2, and 415.2 nm, respectively 20) UV excitation PL measurements were performed at an excitation wavelength of 325 nm for the nitrogen-doped diamond crystals examined in this study to observe the PL signals of multiple nitrogen complex defects with low-wavelength ZPL. Figure 2(a) shows the UV-excited PL spectra for an EBI fluence of 7 × 10 17 e/cm 2 , where the formation of NV 0/ − centers was dominant, and for an EBI fluence of 3.6 × 10 18 e/cm 2 , where the formation of N other was dominant. The ZPL of the NV 0 center at 575 nm and corresponding phonon side bands were observed in both EBL fluences, whereas the ZPL of the H3 center (N-V-N 0 ) at 503.5 nm and the corresponding phonon side bands were observed only in the EBL fluence of 3.6 × 10 18 e/cm 2 . Therefore, one of the origins of the unknown nitrogen-related defects is the H3 center. 
+
+The formation of the H3 center is attributed to the diffusion and aggregation of nitrogen atoms and vacancies with annealing at over 1600 ℃.21) In this study, the formation of H3 centers is attributed to annealing at ~1375 °C for 2 h. Under the condition that nitrogen atoms diffused by kicking out carbon atoms in diamond crystal, the diffusion coefficient and diffusion length of nitrogen atoms can be estimated using the equation 22) 
+
+𝐷𝐷 = 0.4 exp � − 6.8 
+
+𝑘𝑘 𝛿𝛿 𝑇𝑇 � 𝑐𝑐𝑐𝑐 2𝑠𝑠 −1 (9) 
+
+𝐿𝐿 = �2𝐷𝐷𝐷𝐷 𝑐𝑐𝑐𝑐 (10) 
+
+where the activation energy for nitrogen diffusion generated by kicking out carbon atoms was 6.8 eV, and kB , T, and t are the Boltzmann constant, absolute temperature (K), and annealing time (s), respectively. The resulting estimated diffusion length of the nitrogen atoms was ~0.03 nm. Subsequently, the average distance between the nitrogen atoms was estimated using 9
+
+𝐿𝐿 = � 34𝜋𝜋𝜋𝜋 
+
+> 3(11)
+
+The nitrogen concentration in the diamond crystals examined in this study was ~6.8 ppm, and as per Eq. (11), the average distance between nitrogen atoms was estimated to be ~6 nm. The estimated nitrogen diffusion length was sufficiently smaller than the average distance between the nitrogen atoms. These estimation results confirm that the diffusion and aggregation process of nitrogen atoms attributed to kicking carbon atoms with the annealing process of ~1375 °C for 2 h can be ignored. 
+
+An EBI fluence over 1 × 10 18 e/cm 2 forms monovacancies with a concentration of over ~10 ppm. 17),23) . By using Eq. (11), the average distance between monovacancies with a concentration greater than 10 ppm was estimated to be smaller than 3 nm, which is shorter than the average distance between nitrogen atoms (6 nm) in the diamond crystal used in this study. Vacancies with closer proximity to the nitrogen atoms may cause significantly larger diffusion coefficient than that in the case of nitrogen atom diffusion mediated by carbon atoms. Jones et al . predicted that vacancy-mediated nitrogen diffusion would increase the diffusion coefficient. 22) 
+
+The decrease in N s0 and NV 0/ − concentrations and the observation of H3 centers with an increase in EBI fluence suggest that the following H3 center creation process 23) occurs for some N s0 and NV 0/ − centers by vacancy-mediated nitrogen diffusion. 
+
+NV 0/ −+N s0 ⇒ NVN 0 (12) 
+
+Ns0 + N s0 +V 0 ⇒ NVN 0 (13) 
+
+Further, the formed H3 center can accept electron from N s0 as shown by 
+
+Ns0 +NVN 0 ⇆ Ns+ +NVN − (14). 
+
+The additional electron supply from N s0 to NVN 0 (H3 center) is expected to decrease the rate of electron supply from N s0 to the NV 0 center according to the equilibrium constant K
+
+defined in Eq. (4). However, as shown in Fig. 1(c), the K value obtained for the diamond crystal with a high-density N other including the H3 center is comparable to K obtained for the diamond crystal in which the N s and NV centers were the dominant defects. We previously reported that the electron supply from N s0 to V 0 occurred preferentially with respect to the electron supply from N s0 to the NV 0 center, and the formation of V caused a decrease in K.17) 
+
+In this previous study, we mentioned that the lower energy level of V than that of the NV center in the diamond bandgap was considered one of the reasons for the decrease in K. The energy levels from the valence band level (E v ) of the NVN, N s, and NV center are 3.3, 24) 3.6, 24) and 2.7 eV 24) as shown in Fig. 2(b). The electron supply from N s0 to NV 0 center was 10 
+
+considered to be more dominant than the electron supply from N s0 to NVN 0 because the energy level of NVN was greater than that of NV center by 0.6 eV, as shown in Fig. 2(b). Under the condition that NVN was the main defect of N other , it was naturally assumed that a decrease in K was unlikely to occur; therefore, the effect of the electron supply from N s0 to NVN 0 on K was believed to be significantly small. The CL signal intensity of NVN 0 (H3 center) was significantly higher than that of NVN − (H2 center), as shown in Fig. SI of the supplemental data. This large difference in the population of the NVN charge state may indicate a small frequency of electron supply from N s0 to NVN 0 , as shown in Eq. (14) from the left to right. The inverse electron supply from NVN − to Ns + in Eq. (14) leading to N s0formation is also unlikely to occur in the examined diamond crystal with N other including the H3 center because of the strong binding between NV - center and N s+ that is [NV −] limiting [N s+ ] as discussed in Sec. 3.1. 
+
+The “vacancy mediated nitrogen diffusion and aggregation” caused a significant reduction of the N s0 (P1 center) concentration and high density NVN 0 (H3 center) formation in the examined HPHT diamond crystal. Umemoto et al. reported that X-ray excited radio-luminescence spectra including ZPL and the phone-sideband of the H3 center can be used as diamond scintillators for α- and β-ray measurements 25) In this report, a significantly low transmittance of less than 10% when using a commercial Ib-diamond crystal was considered a deterioration factor for the number of detected photons induced by α- and β-rays. The reported low transmittance was caused by light absorption originating from high-density nitrogen impurities with concentrations of less than 200 ppm. In addition, a P1 center with a higher concentration caused a larger absorption coefficient in the diamond crystal 26) Therefore, in this study, the HPHT diamond crystal under the conditions of H3 center rich and P1 center poor is expected to contribute to a significant increase in the performance of diamond scintillators. 
+
+3.4 Effect of EBI fluence on the spin coherence time T2 of the NV − center 
+
+A Hahn-echo sequence, which utilizes a refocusing microwave pulse to reverse spin dephasing, was performed to investigate the NV - center spin decoherence caused by paramagnetic noise (the experimental details of Hahn-echo sequence are described in the METHODOLOGY section). Through this sequence, DC noise—specifically the spin decoherence of the NV - center induced by the strain distribution in the diamond crystal—is cancelled. This allows for the selective extraction of AC decoherence driven by paramagnetic noise, such as that from P1 centers 14) . Consequently, this sequence yields the 11 
+
+spin coherence time, T2 , which is highly dependent on the paramagnetic noise density and serves as a critical indicator of NV sensing sensitivity as shown in Eq. (1). In this study, we investigated how the variation in defect concentrations induced by the electron beam irradiation (EBI) fluence affects this vital metric, T2 , thereby evaluating the robustness of the spin coherence. 
+
+Figure 3 shows the dependence of T2 on the EBI fluence. At an EBI fluence of 1.0 × 10 18 e/cm 2 , the experimentally obtained T2exp. (■) was a constant, i.e., it did not depend on EBI 
+
+fluence. As shown in Fig. 1(a), the concentration of the NV 0/ − center, which is the decoherence source for the NV − center spin coherence, increased up to an EBI fluence of 1.0 × 10 18 e/cm 2 and became comparable to the concentration of N s0 , which is also the main decoherence source. In contrast, the decoherence contribution of the NV 0/ − centers to T2 was comparable to that of N s0 .14) 
+
+Therefore, we discuss why T2 remained constant despite the increase in the concentration of NV 0/ − centers. The concentrations of NV 0/ − centers formed by the e-beam and annealing processes and the concentration of N s0 not converted to NV 0/ − centers are denoted as [NV 0 ], [NV −], and [N s0 ], respectively. We showed that, when only the formation process in which Ns0 is converted to NV 0/ − centers occurs, T2 can be estimated using the respective defect concentrations as 14) 
+
+1
+
+𝑇𝑇 2sim  = 𝐷𝐷 Ns0 × �Ns0� + 𝐷𝐷 NV − × [NV −] + 𝐷𝐷 NV 0 × �NV 0�, (15) 
+
+where D x represents the strength of the dipolar–dipolar interaction between the NV − center and paramagnetic defect X (X = N s0 , NV − center, and NV 0 center). 1),14),27) The applied DNs0 ,
+
+DNV − and DNV0 were 1/160 μs−1 ppm −1 ,1),14),27) 1/89 μs−1 ppm −1 ,14) 1/160 μs−1 ppm −1 ,14) . Using Eq. (15) and the EPR-estimated [NV 0 ], [NV −], and [N s0 ] at each EBI fluence, we estimated the T2est. (●) shown in Fig. 4. Up to an EBI fluence of 1.0 × 10 18 e/cm 2 , T2est. (●) did not 
+
+depend on the EBL fluence in the same manner as T2exp. (■). Furthermore, T2est. (●) was in 
+
+agreement with T2exp. (■) within the fitting and estimated errors. This good agreement indicates that the EBI fluence-independent T2 was reproduced by a model in which the N s0and NV 0/ − centers were the dominant decoherence sources (Eq. (15)). Alsid et al. performed NV center formation using the e-beam and anneal process in a nitrogen-doped diamond with an as-grown formed nitrogen concentration of [N s0 ]initial = 118 ppb, which was more than one order of magnitude lower than that in this study, and an observed EBI fluence-independent 
+
+T2 of ~ 420 μs at an EBI fluence below 1.0 ×10 18 e/cm 2 .23) In addition, we previously performed NV center formation using the e-beam and anneal process for CVD nitrogen-12 
+
+doped diamond with an as-grown formed nitrogen concentration: [N s0 ]initial = 5 ppm and an observed EBI fluence-independent T2 = 26 μs at an EBI fluence below 5.0 × 10 17 e/cm 2 .14) From the abovementioned multiple previous studies and the present study, the T2independent of the EBI fluence was expected to be inversely correlated with the as-grown formed nitrogen concentration in a diamond crystal. We found that under conditions in which NV 0/ − center formation was dominant, T2 was approximately determined by [N s0 ]initial as 
+
+1
+
+𝑇𝑇 2est.  ~𝐷𝐷 Ns0 × [N s0 ]initial . (16) 
+
+For details on the derivation of Eq. (16), please refer to the Appendix. Indeed, the EBI fluence-independent value of T2exp. (■) = 30 ± 8 μ s obtained at an EBI fluence below 1.0 × 10 18 e/cm 2 was comparable to the value of T2 = 23 ± 2 μs obtained using Eq. (16) and [N s0 ]initial = 6.8 ppm of the diamond crystal examined in this study. 
+
+Subsequently, we investigated the effect of N other on the T2 of the NV − centers. As shown in Fig. 3, T2exp. (■) showed an increasing trend in an EBI fluence in the range of 1.3–2.6 × 10 18 e/cm 2 . In the same EBI fluence range, the N s0 and NV 0/ − center concentrations decreased with increasing EBI fluence as shown in Fig. 1(a). The main factor for the increase in T2 in the range of the EBI fluence can be attributed to the decrease in the concentration of paramagnetic defects N s0 and NV 0/ − centers, which are decoherence sources. Above an EBI fluence of 2.6 × 10 18 e/cm 2 , T2exp. (■) saturated to be ~ 50 μ s, and T2est. (●) increased monotonically. Furthermore, at an EBI fluence of 3.6 × 10 18 e/cm 2 , T2exp. (■) was 
+
+significantly smaller than T2est. (●) that included the decoherence contribution of N s0 and NV 0/ − centers. The saturation T2exp. (■) and the large discrepancy between T2exp. (■) and T2est. 
+
+(●) at a high fluence of EBI suggested that paramagnetic defects of N other significantly increased above 2.6 × 10 18 e/cm 2 and contributed to the decoherence of T2 in addition to the decoherence contribution of the N s0 and NV 0/ − center. 
+
+## 4. Conclusion 
+
+In this study, we performed EBI at room temperature and annealed nitrogen-doped HPHT diamond single crystals to convert all substitutional nitrogen in the diamond crystal into NV structures. The concentration of as-grown nitrogen in the HPHT diamond single crystal used 
+
+in this study was ~6.8 ppm. In the low EBI fluence region (≤1.0 × 10 18 e/cm 2 ), the N s0concentration decreased and NV 0/ − center concentration increased with increasing EBI fluence. The decrease in the neutral substitutional nitrogen (N s0 ) concentration was comparable to the increase in the total NV center concentration, which indicated that the 13 
+
+conversion from N s0 to NV 0/ − centers was the dominant defect formation process in this region. In the high fluence EBI region (>1.0 × 10 18 e/cm 2 ), both the NV 0/ − center and N s0concentrations decreased with an increase in the EBI fluence. This result indicates the formation of unknown nitrogen-related defects other than N s and NV centers. The defect formation inhibited the conversion of all substitutional nitrogen into NV structures. Despite the formation of these unknown nitrogen-related defects, the charge state of the NV center was determined only by the electron supply rate from the N s0 to the NV 0 center, and some of these unknown nitrogen-related defects were nitrogen and vacancy aggregation defects, which are referred to as H3 centers (NVN 0 ). The H3 centers were observed in the high EBI 
+
+fluence region, whereas the H3 forming annealing temperature of 1375 ± 25 ℃ was significantly lower than the typically reported temperatures over 1600 ℃. We attribute the 
+
+process of H3 center formation by high-fluence EBI and relatively lower annealing temperature to vacancy-mediated nitrogen diffusion and aggregation. 
+
+We also focused on the spin coherence time T2 of the NV − center, which is a factor limiting magnetic sensitivity. When the correlation between EBI fluence and T2 was examined, in the low EBI fluence range ( ≤ 1.0 × 10 18 e/cm 2 ), T2 did not depend on the EBI fluence and remained constant; this value was limited by the as grown formed N s0 concentration. In the high fluence EBI range (> 1.0 × 10 18 e/cm 2 ), T2 showed an increasing trend as the fluence of EBI increased. Especially, over an EBI fluence of 2.6 × 10 18 e/cm 2 , the obtained T2 saturated at ~ 50 μs. At the final EBI fluence of 3.6 × 10 18 e/cm 2 , the saturated T2 was significantly smaller than the estimated T2 including only the decoherence contribution of the N s0 and NV 0/ − centers. This result suggests that the concentration of paramagnetic defects other than Ns0 and NV 0/ − centers significantly increased above 2.6 × 10 18 e/cm 2 and contributed to the decoherence of T2 in addition to the decoherence contribution of the N s0 and NV 0/ − centers. 
+
+## Acknowledgments 
+
+This work was supported by MEXT Q-LEAP (JPMXS0118068379 and JPMXS0118067395) and JST ASPIRE (JPMJAP24C1). T. Teraji acknowledges the support of JST CREST (JPMJCR1773), MIC R&D for the construction of a global quantum cryptography network (JPMI00316), and JSPS KAKENHI (Nos. 25K17636, 24K23011, 20H02187, 20H05661, and 19H02617). T. Teraji acknowledges the support of JST Moonshot R&D (JPMJMS2062). 
+
+## Appendix 14 
+
+Derivation of Eq. (16) 
+
+We studied the change in the spin coherence relaxation rate caused by the increase in the NV 0/ − centers concentration under the condition that the NV 0/ − centers formation was dominant, as shown in the EBI fluence range of Area I in Figs. 1(a) and (d). The reaction equations for the formation of NV 0/ − centers during the e-beam/annealing process are 
+
+Ns0 +V 0→NV 0 (I) 
+
+2 N s0 +V 0→NV − + N s+ (II) 
+
+In Eqs. (I) and (II), three N s0 are used for the formation of one NV 0/ − center, and one N s+ is formed because of the electron supply from N s0 to the NV 0 center. From Eq. (I), the concentration of the formed NV 0 centers, Δ[ NV 0 ], is equal to the concentration of N s0 used for the NV 0 center formation, Δ[ Ns0 ]NV0 .
+
+𝛥𝛥 [N s0 ]NV 0 = 𝛥𝛥 �NV 0� (III) 
+
+From Eq. (II), the concentration of the formed NV − centers ( Δ[ NV −]) is equal to the half concentration of N s0 used for the NV − center formation ( Δ[ Ns0 ]NV −) and concentration of N s+(Δ[ Ns+ ]). 
+
+12 × 𝛥𝛥 [N s0 ] NV − = 𝛥𝛥 [ NV −] = 𝛥𝛥 �Ns+�. (IV) 
+
+We divided the change in the spin coherence relaxation rate caused by the NV 0/ − center into 
+
+Δ1/ T2 {NV 0 formation} and Δ1/ T2 {NV − formation}, and we expressed the spin coherence time T2 after the formation of the NV 0/ − centers as 
+
+1
+
+𝑇𝑇 2
+
+= 𝐷𝐷 Ns0 × �Ns0�initial + Δ 1
+
+𝑇𝑇 2
+
+�NV 0 formation � + Δ 1
+
+𝑇𝑇 2
+
+{ NV − formation }, (V) 
+
+where DNs0 and [N s0 ]initial represent the DDI strengths of N s0 , as-grown N s0 concentration, respectively. DNs0 ×[N s0 ]initial on the right-hand side of Eq. (V) indicates the T2 of the as-grown NV − center. 
+
+Further, we estimated 1/ T2 {NV 0 formation}. As shown in the following equation, the DDI strength of the NV 0 center was nearly equal to that of N s0 because the N s0 and NV 0 centers have the same spin number S = 1/2 and a similar electron gyromagnetic ratio of g ~ 2.003. 14) 
+
+D NV 0 ~D Ns0 . (VI) 
+
+Using Eq. (IV) and (VI), we can describe Δ1/ T2 {NV 0 formation} as 
+
+Δ 1
+
+𝑇𝑇 2
+
+�NV 0 formation � = (D NV 0 × Δ �NV 0� − DNs0 × 𝛥𝛥 �Ns0�NV 0 )~(D Ns0 × 𝛥𝛥 [N s0 ] NV 0 − DNs0 × 𝛥𝛥 �Ns0�NV 0 ) = 0. (VII) 
+
+Equation (VII) shows that the increase in the spin relaxation rate caused by the NV 0 center 15 
+
+formation is nearly equal to the decrease in the spin relaxation rate caused by the disappearance of N s0 .
+
+Further, we estimated 1/ T2 {NV − formation}. We previously reported that the DDI strength of NV − was approximately twice the DDI strength of the N s0 center because of the larger spin number of the NV − center ( S=1) than that of N s0 (S = 1/2). 
+
+DNV − ~2 × D Ns0 . (VIII) 
+
+Using Eqs. (IV) and (VIII), we can describe Δ1/ T2{NV − formation} as 
+
+Δ 1
+
+𝑇𝑇 2
+
+{ NV − formation } = D Ns+ × Δ �Ns+� + (D NV − × Δ[NV −] − DNs0 × 𝛥𝛥 �Ns0�NV − )~D Ns+ × Δ �Ns+� + �2 × D Ns0 × 12 × 𝛥𝛥 �Ns0�NV − − DNs0 × 𝛥𝛥 �Ns0�NV − � = 0, (IX) 
+
+where DNs+ ×Δ[ Ns+ ] on the right-hand side of Eq. (IX) is equal to 0 because N s+ is a diamagnetic defect. 
+
+From the results of Δ1/ T2 {NV 0 formation} and Δ1/ T2 {NV − formation} being 0, we indicated that the as-grown formed N s0 concentration [N s0 ]initial determined T2 approximately as (corresponding to Eq. (16) in RESULT AND DISCCUSSION section) 
+
+1
+
+𝑇𝑇 2
+
+~ 𝐷𝐷 Ns0 × �Ns0�initial . (X) 16 
+
+Fig. 1. (a) Dependence of EBI fluence on defect concentration; [N s0 ], [N s+ ], [NV 0 ], and [NV −]. (b) Dominated defect for two ranges of EBI fluence. Area I and Area II correspond to 5 × 10 17 –1 × 10 18 e/cm 2 and 1 × 10 18 e/cm 2 –3.6×10 18 e/cm 2 , respectively. (c) Reaction rate for the supply of an electron from N s0 to NV 0 center. The red and gray dotted line indicated fitting line using model function of Eq. (5) for this work data (red triangle symbol) and previous data (gray square symbol) 3) of {[NV T ]/[N s0 ], [NV −]/[N s0 ]}. (d) Dependence of EBI fluence on unknown nitrogen-related defects N other concentration. Solid lines as shown in (a) and (d) are eye guides. 17 
+
+Fig. 2. (a) Ultraviolet photoluminescence spectrum for EBI influence of 7.0 × 10 17 e/cm 2(bule color) and 3.6 × 10 18 e/cm 2 (red color). (b) Energy diagram in diamond band gap including N s, NV center and NVN energy level. E c and E v indicate conduction and valence band levels, respectively. 
+
+Fig. 3. Dependence of spin coherence time T2 on EBI fluence. T2est. and T2exp. , respectively show experimental and estimated values using Eq. (15). The vertical error bars of T2exp. were 18 
+
+obtained by the spin Hahn Echo signal S( τ) fitting. The vertical error bars of T2est. were obtained using the estimation error of the defect concentration of N s0 , NV 0 center, and NV −
+
+center. 
+
+## References 
+
+1) J. F. Barry, J. M. Schloss, E. Bauch, M. J. Turner, C. A. Hart, L. M. Pham, and R. L. Walsworth, Rev. Mod. Phys. 92 , (2020). 
+
+2) N. Sekiguchi, M. Fushimi, A. Yoshimura, C. Shinei, M. Miyakawa, T. Taniguchi, T. Teraji, H. Abe, S. Onoda, T. Ohshima, and M. Hatano, Phys. Rev. Appl. 21 , 064010 (2024). 
+
+3) C. Shinei, M. Miyakawa, S. Ishii, S. Saiki, S. Onoda, T. Taniguchi, T. Ohshima, and T. Teraji, Appl. Phys. Lett. 119 , (2021). 
+
+4) R. Löfgren, K. V. Sopiha, S. Öberg, and J. A. Larsson, Comput. Mater. Sci. 250 , 113685 (2025). 
+
+5) N. B. Manson, M. Hedges, M. S. J. Barson, R. Ahlefeldt, M. W. Doherty, H. Abe, T. Ohshima, and M. J. Sellars, New J. Phys. 20 , 113037 (2018). 
+
+6) R. Löfgren, R. Pawar, S. Öberg, and J. A. Larsson, New J. Phys. 20 , 023002 (2018). 
+
+7) J. F. Barry, M. J. Turner, J. M. Schloss, D. R. Glenn, Y. Song, M. D. Lukin, H. Park, and R. L. Walsworth, Proc. Natl. Acad. Sci. U. S. A. 113 , 14133 (2016). 
+
+8) K. Arai, A. Kuwahata, D. Nishitani, I. Fujisaki, R. Matsuki, Y. Nishio, Z. Xin, X. Cao, Y. Hatano, S. Onoda, and C. Shinei, Commun. Phys. 5, 1 (2022). 
+
+9) E.D. Herbschleb, H. Kato, Y. Maruyama, T. Danjo, T. Makino, S. Yamasaki, I. Ohki, K. Hayashi, H. Morishita, M. Fujiwara, and N. Mizuochi, Nat. Commun. 10 , 3766 (2019). 
+
+10) Y. Doi, T. Fukui, H. Kato, T. Makino, S. Yamasaki, T. Tashima, H. Morishita, S. Miwa, F. Jelezko, Y. Suzuki, and N. Mizuochi, Phys. Rev. B Condens. Matter 93 , 081203 (2016). 
+
+11) T. Murai, T. Makino, H. Kato, M. Shimizu, T. Murooka, E.D. Herbschleb, H. Morishita, M. Fujiwara, M. Hatano, S. Yamasaki, and N. Mizuochi, Appl. Phys. Lett. 112 , 111903 (2018). 
+
+12) M. Shimizu, T. Makino, T. Iwasaki, J. Hasegawa, K. Tahara, W. Naruki, H. Kato, S. Yamasaki, and M. Hatano, Diam. Relat. Mater. 63 , 192 (2016). 
+
+13) Y. Masuyama, C. Shinei, S. Ishii, H. Abe, T. Taniguchi, T. Teraji, and T. Ohshima, Sci. Rep. 
+
+14 , 1 (2024). 
+
+14) C. Shinei, Y. Masuyama, M. Miyakawa, H. Abe, S. Ishii, S. Saiki, S. Onoda, T. Taniguchi, T. Ohshima, and T. Teraji, J. Appl. Phys. 132 , (2022). 
+
+15) T. Luo, L. Lindner, J. Langer, V. Cimalla, X. Vidal, F. Hahl, C. Schreyvogel, S. Onoda, S. Ishii, T. Ohshima, and D. Wang, New J. Phys. 24 , 033030 (2022). 19 
+
+16) S. Ishii, S. Saiki, S. Onoda, Y. Masuyama, H. Abe, and T. Ohshima, Quantum Beam Sci., 6(1), 2 (2021). 
+
+17) C. Shinei, H. Abe, T. Ohshima, and T. Teraji, Diam. Relat. Mater. 140 , 110523 (2023). 
+
+18) T. Teraji and C. Shinei, J. Appl. Phys. 133 (16) (2023). 
+
+19) A. T. Collins, J. Phys. Condens. Matter 14 , 3743 (2002). 
+
+20) A. M. Zaitsev, Optical Properties of Diamond: A Data Handbook , 2001st ed. (Springer, Berlin, Germany, 2013). 
+
+21) T. Lühmann, N. Raatz, R. John, M. Lesik, J. Rödiger, M. Portail, D. Wildanger, F. Kleissler, K. Nordlund, A. Zaitsev, and J.F. Roch, J. Phys. D Appl. Phys. 51 , 483002 (2018). 
+
+22) R. Jones, J. P. Goss, H. Pinto, and D. W. Palmer, Diam. Relat. Mater. 53 , 35 (2015). 
+
+23) S. T. Alsid, J. F. Barry, L. M. Pham, J. M. Schloss, M. F. O’Keeffe, P. Cappellaro, and D. A. Braje, Phys. Rev. Appl. 12 , 044003 (2019). 
+
+24) P. Deák, B. Aradi, M. Kaviani, T. Frauenheim, and A. Gali, Phys. Rev. B 89 , (2014). 
+
+25) A. Umemoto, T. Iida, M. Yoshino, A. Yoshikawa, and S. Nomura, Nucl. Instrum. Methods Phys. Res. A 1057 , 168789 (2023). 
+
+26) T. Luo, F.A. Hahl, J. Langer, V. Cimalla, L. Lindner, X. Vidal, M. Haertelt, R. Blinder, S. Onoda, T. Ohshima, and J. Jeske, Philos. Trans. A Math. Phys. Eng. Sci. 382 , 20220314 (2024). 
+
+27) E. Bauch, S. Singh, J. Lee, C.A. Hart, J.M. Schloss, M.J. Turner, J.F. Barry, L.M. Pham, N. Bar-Gill, S.F. Yelin, and R.L. Walsworth, Phys. Rev. B Condens. Matter 102 , 134210 (2020). 20 
+
+Supplemental: CL spectrum of nitrogen-doped HPHT diamond with high EBI fluence 
+
+We present the differences in the population of the NVN charge states. The CL measurements were performed by a HORIBA MP32 CL system attached to a Hitachi SU6600 field-emission scanning electron microscope (FE-SEM). The CL spectra in the UV-visible wavelength range (300~900 nm) were taken with a CCD detector at an accelerating voltage of 10 kV and an probe current of 7.2 nA; the CL spectra in the near-infrared wavelength range (900~1300 nm) were taken with an InGaAs detector at 15 kV and 76 nA. The CL measurements were performed at a cryogenic temperature of 80 K. 
+
+Figure S1 shows the CL spectrum of the examined nitrogen-doped HPHT diamond with an EBI fluence of 3.6 × 10 18 e/cm 2 . In the wavelength range of 300 –900 nm, the band A structure (~ 440 nm), H3 center ZPL (504 nm) with the corresponding phonon sideband, and NV 0 center ZPL (575 nm) with the corresponding phonon sideband were observed. In the wavelength range of 900 –1300 nm, the H2 center ZPL (987 nm) with weak intensity, H3 center second-order ZPL (1008 nm), and the NV 0 center second-order ZPL (1150 nm) were observed. The CL intensity of the H2 center was 
+
+significantly lower than that of the H3 center, as shown in Figure S1. This large difference in the population for the NVN charge state may indicate a small frequency of electron supply from N s0 to NVN 0 in Eq. (14), as indicated in the original manuscript. 
+
+Fig. S1. CL intensity spectrum when using the nitrogen-doped HPHT diamond crystal in the original manuscript. 
+
+The CL intensity of the H2 center is significantly weaker than that of H3 center. This may stem from two primary reasons: First, H2 centers typically form at high temperatures around 1600°C (J. Appl. Phys. 97 (2005) 083517.), whereas the annealing temperature in this study 21 
+
+was below 1400°C, allowing H3 centers to dominate. Another consideration is that during CL observation with high-energy electron beam irradiation, H2 center may be ionized to form H3 center.

@@ -1,0 +1,345 @@
+Title: Precipitation strengthening: a collective multi-dislocation phenomenon
+
+URL Source: https://arxiv.org/pdf/2606.14890v1
+
+Published Time: Tue, 16 Jun 2026 00:09:33 GMT
+
+Number of Pages: 13
+
+Markdown Content:
+# Precipitation strengthening: a collective multi-dislocation phenomenon 
+
+Mahmudul Islam 1,2, Nicolas Bertin 2, Sylvie Aubry 2, Vasily V. Bulatov 2, and Rodrigo Freitas 1∗
+
+> 1
+
+Department of Materials Science and Engineering, Massachusetts Institute of Technology, Cambridge, MA, USA 
+
+> 2
+
+Lawrence Livermore National Laboratory, Livermore, CA, USA 
+
+Dated: June 16, 2026 
+
+Abstract 
+
+Precipitation strengthening is a cornerstone of physical metallurgy, delivering otherwise unattainable combinations of strength and ductility. The approach relies on nanoscale precipitates that impede the motion of dislocations, the primary carriers of plastic deformation. Historically, precipitation strengthening has been rationalized via two idealized, limiting mechanisms: dislocations either cut through or bow around precipitates. However, in situ experiments cannot yet resolve the coupled, real-time evolution of dislocation networks and nanoprecipitates, leaving these atomic-scale dynamics inaccessible to direct observation. Here, using large-scale atomistic simulations ( ∼ 10 8 atoms) that fully capture these dynamics, we demonstrate that the classical cutting-versus-bowing dichotomy is incomplete. Instead, strengthening arises as an emergent collective phenomenon driven by concurrent, multi-dislocation interactions. These interactions simultaneously induce dislocation accumulation at interfaces, storage within precipitates, and precipitate-mediated multiplication inside the matrix. These findings establish a mechanistic framework that transcends traditional models and provides a new foundation for predicting strengthening behavior. 
+
+# Introduction 
+
+Metals are strengthened by precipitating nanoscale secondary-phase particles into a supersaturated matrix, a process known as precipitation strengthening 1–5 . Widely regarded as a central nanoscale design strategy in modern metallurgy, this approach predates nanoscience by many decades, with its empirical discovery 6 in 1906 preceding the experimental tools needed to directly visualize nanoscale precipitates. Precipitates strengthen metals by impeding the motion of dislocations, curvilinear defects that mediate plastic deformation. This basic principle suggests that pre-cipitates that more effectively obstruct dislocation motion should produce greater strengthening. Yet a quantitative connection between atomic-scale dislocation-precipitate in-teractions and macroscopic strength remains unresolved 7.Established theories of precipitation strengthening 8–11 
+
+rest on an idealized premise: an encountering disloca-tion either shears through a precipitate (cutting) or by-passes it (Orowan looping), depending on which path is energetically favored. This binary framework, illus-trated in fig. 1a, has inspired numerous analytical mod-els 7,8,12 . While these formulations capture specific limit-ing regimes 1,10,13–16 , they often deviate substantially from empirical observations. As shown in fig. 1b, comparisons with experimental data across two alloy systems reveal pronounced quantitative discrepancies, particularly near the peak strength. To reconcile such discrepancies, phe-nomenological fitting coefficients are introduced 7,10,14,17 ,rendering such models empirical in practice. Furthermore, while classical theories predict an abrupt transition from shearing to bypassing, experiments consistently reveal a broad, gradual crossover (fig. 1b). Although precipitate size polydispersity is often invoked to reconcile this incon-sistency 14,18–20 , its ability to fully account for the observed behavior remains unproven. Collectively, these discrepan-
+
+> ∗Corresponding author ( rodrigof@mit.edu ).
+
+cies underscore a gap in our mechanistic understanding of precipitation strengthening — a framework that, despite its limitations, continues to direct modern alloy design and processing strategies 21 .Here, we show that precipitation strengthening arises from collective interactions between multiple dislocations and precipitates, a setting not captured by the single-dislocation frameworks. Using ultra-large-scale molecu-lar dynamics (MD) simulations ( ∼ 10 8 atoms) that resolve these processes in atomistic detail, we directly observe how multiple dislocations engage with precipitates during plas-tic deformation. In this regime, strengthening does not emerge from a binary choice between shearing and bypass. Instead, it arises from the coupled development of dislo-cation accumulation at precipitate interfaces, dislocation storage within precipitates, and precipitate-mediated dis-location multiplication in the surrounding matrix. These processes occur concurrently and together control the pre-cipitate contribution to strength, providing a microscopic basis for precipitation hardening that extends beyond the traditional shearing-versus-bypass picture. 
+
+# Results 
+
+Multi-dislocation interaction with precipitates 
+
+As summarized in Supplementary Information Note 1, clas-sical models of precipitation strengthening are formulated in terms of isolated interactions between single dislocations and precipitates. A simple geometric estimate of the num-ber of dislocations ( N ) within a precipitate’s interaction region (see Methods section Estimate of dislocations per precipitate) shows that this regime is not representative of many commercial alloys. When N > 1, individual precip-itates are encountered by multiple dislocations simultane-ously rather than one dislocation at a time. Figure 1c illus-trates this condition for a dislocation density of 10 15 m−2,which can be reached during cold working 29 . This multi-Page 1 of 13                            
+
+> arXiv:2606.14890v1 [cond-mat.mtrl-sci] 12 Jun 2026 Cr atoms (precipitate) Fe atoms (matrix) 10 nm
+> dislocations <111> <100> 12Burgers vector
+> [100] [010] [001]
+> 0246810 12 Precipitate radius (nm) 100 200 300 400 500 Strengthening (MPa)
+> Al 99.7 Sc 0.3 (experiment) Al 99.7 Sc 0.3 (classical)
+> Fe 98.83 Cu 1.17 (experiment) Fe 98.83 Cu 1.17 (classical)
+> 010 20 30 40 50 Precipitate radius (nm) 0246810
+> N René 88DT GRCop-42 A709
+> Bypass mechanism Shearing mechanism
+
+a) top view side view multi-dislocation interaction regime (N>1) 
+
+b) c) d) 
+
+e)       
+
+> V microalloyed steels Inconel 718
+> 1234567Precipitate radius (nm) 400 450 500 550 600 650 Strengthening (MPa)  strengthening equation 2
+
+Figure 1: From the classical single-dislocation picture to multi-dislocation precipitate strengthening. a) Schematic of the classical single-dislocation picture: a dislocation either shears a precipitate or bypasses by bowing around it and leaving behind a closed loop. b) Experimental strengthening data for Al-Sc 14 and Fe-Cu 22 compared with classical predictions (described in Supplementary Information Note 1). The solid line is drawn as a guide to the eye. c) Number of dislocations N within a precipitate interaction region as a function of precipitate radius ( R) for a dislocation density of 10 15 m−2. Over much of the precipitate size range relevant to engineering alloys 23–28 , N > 1, indicating multi-dislocation interaction with precipitates beyond the single-dislocation picture of a) . d) Representative atomistic configuration of Fe containing spherical, monodisperse Cr precipitates ( R = 7 nm, volume fraction vf = 1%) during uniaxial compression at room temperature. e) Precipitation strengthening ∆ σ, as a function of R at vf = 15%, where ∆ σ is the increase in flow stress relative to the matrix reference. Solid line shows the prediction of partitioning-based strengthening relation (eq. 2). Error bars denote correlation-corrected standard errors of the mean steady-state flow stress. 
+
+dislocation regime spans much of the range of precipitate sizes and volume fractions used in practical alloy design and yet it falls outside the single-dislocation picture of fig. 1a. This disconnect motivates our explicit examina-tion of multi-dislocation interactions with precipitates. To directly probe this multi-dislocation regime, we car-ried out large-scale MD simulations of model single crystals of body-centered cubic (BCC) Fe containing coherent Cr precipitates, compressed along the [001] direction. In the series of simulations reported here, both the precipitate radius ( R) and volume fraction ( vf) were varied; however, all precipitates within a given model crystal had the same radius, yielding a monodisperse microstructure. Elemental BCC Cr is elastically stiffer than the BCC Fe matrix, and because Cr atoms are only slightly larger than Fe atoms, this combination provides a well-defined mechanical con-trast for precipitation strengthening while retaining pre-cipitate coherency. All model samples were deformed at room temperature over a range of strain rates. Figure 1d shows a representative snapshot of these simulations. As deformation proceeds, dislocations multiply and or-ganize into a dense network that spans the microstruc-ture 30,31 (see Supplementary Information Movie 1 for the full temporal evolution of dislocation networks). In the representative configuration shown in fig. 1d, multiple dis-locations impinge simultaneously on the same precipitate, forming transient multi-dislocation interaction zones (see Supplementary Information Note 2 for additional repre-sentative configurations). These interactions, which corre-spond to N > 1 in fig. 1c, characterize the deformation un-Page 2 of 13 der these conditions, rather than isolated single-dislocation events. Across all samples, the stress-strain response is quali-tatively similar: an initial linear elastic regime, followed by yielding as dislocations begin to move and multiply, and eventual convergence to steady-state flow at constant stress. Previously reported for pure metals 30,31 and solid solutions 32,33 , this steady-flow regime coincides with satu-ration of the dislocation density, at which point the dislo-cation network attains a statistically stationary configura-tion. Here, we further observe that dislocation-precipitate interactions also become statistically stationary. Represen-tative examples of stress-strain response and evolution of dislocation density are provided in Supplementary Infor-mation Notes 3-4. The strengthening contribution of the precipitates is re-flected in the flow stress. We express this contribution as the precipitation strengthening ∆ σ, defined as the in-crease in flow stress relative to that of the matrix un-der the same deformation conditions. Figure 1e shows ∆σ as a function of precipitate radius R at vf = 15%. Consistent with the experimental trends in fig. 1b, ∆ σ
+
+varies non-monotonically with R: it increases with R,reaches a maximum at R ≈ 2 nm, and then decreases for larger precipitates. Notably, the crossover from increas-ing to decreasing ∆ σ is gradual rather than abrupt, de-spite the monodisperse precipitate microstructure. This behavior contrasts with the sharp shearing-to-bypass tran-sition expected from classical models (fig. 1b) which is often attributed to precipitate-size polydispersity 14,18–20 .Instead, the smooth crossover emerges intrinsically from multi-dislocation interactions with precipitates. The same behavior is observed across all volume fractions investi-gated (see Supplementary Information Figure 4e). 
+
+Dislocation partitioning by precipitates 
+
+Building on the observation that deformation involves con-current interactions between multiple dislocations and a single precipitate, we now examine how dislocations par-tition between the matrix, the precipitates, and their in-terfaces. Figure 2a presents a magnified view of a precip-itate of initial radius R = 7 nm after plastic straining of the sample to ε = 0 .6. During deformation, the precipi-tate does not retain its initial spherical shape; instead, it evolves into an oblate ellipsoid with its minor axis aligned with the loading direction ([001]). This shape change is entirely due to dislocation shearing, as the precipitate re-mains coherent throughout deformation, with no evidence of phase transformation or deformation twinning at any stage (see Supplementary Information Note 5). The ax-ial strain of the precipitate along the loading direction in fig. 2a is ¯ εprec = 0 .5 (see Supplementary Information Note 6), which is notably lower than the applied strain of 
+
+ε = 0 .6. This strain mismatch indicates limited dislocation transmission 34 across the precipitate-matrix interface: al-though dislocations intermittently penetrate and shear the precipitate, a substantial fraction of them are arrested at the interface, while others are redirected through the sur-rounding matrix due to the elastic and lattice mismatch between Fe and Cr 10 .To quantify how the competition between interfacial transmission and arrest redistributes dislocations, we re-solve the dislocation density separately in the matrix, pre-cipitates, and their interfaces (fig. 2b; see Methods section Composition-based dislocation segmentation for details). Figure 2c shows that the interfaces carry the highest dis-location density, indicating dislocation accumulation near the precipitates 35 . By contrast, the precipitates exhibit a substantially lower dislocation density than the matrix, consistent with incomplete dislocation transmission into the precipitate and limited storage within it. More im-portantly, the dislocation density in the matrix itself ex-ceeds that of a precipitate-free matrix deformed under ex-actly the same conditions, indicating precipitate-mediated excess dislocation in the matrix 36,37 . Multi-dislocation in-teractions at the precipitates therefore give rise to three concurrent processes: interfacial dislocation accumulation, dislocation storage within precipitates, and precipitate-assisted dislocation multiplication into the surrounding matrix. These processes can coexist within a single pre-cipitate interaction zone and together constitute the mi-croscopic basis of precipitation strengthening under these conditions. Figure 2d shows the matrix dislocation density ρmat 
+
+varies with precipitate size R. Across the full range of radii, ρmat remains substantially higher than that of the precipitate-free Fe ( ∼ 1.75 × 10 16 m−2). This elevated ma-trix density arises because precipitates impose local con-straints on dislocation motion (observed in Supplementary Information Movie 1), promoting line bowing 10 , line-length increase 12 , junction formation 38 , and the emission of addi-tional dislocation segments in the surrounding matrix 36,37 .These processes increase ρmat relative to the precipitate-free reference, where such obstacles are absent. At a fixed precipitate volume fraction, dislocation density of matrix varies non-monotonically with precipitate size: ρmat in-creases with R, reaches a maximum, and then decreases for larger precipitates. This trend reflects a balance between individual obstacle strength and dislocation-precipitate in-teraction frequency. Large precipitates are stronger ob-stacles, but at the fixed volume fraction of 15% they are fewer in number and more widely spaced, reducing the fre-quency of encounters with moving dislocations. Small pre-cipitates, by contrast, are more numerous but are more readily sheared, making them weaker obstacles. The max-imum in ρmat therefore occurs at R ≈ 2 nm when pre-cipitates are large enough to obstruct dislocation motion but still numerous enough to interact frequently with the evolving dislocation network. Superimposed on this elevated matrix-density back-ground, both ρint and ρprec vary systematically with precip-itate size. For small precipitates, interfacial accumulation remains limited, with ρint ≈ 1.15 ρmat , while transmission into the precipitate is substantial, as reflected by ρprec ≈
+
+0.75 ρmat . As R increases, dislocations accumulate more strongly at the interface, adding to the back-stress associ-Page 3 of 13 1 2 3 4 5 6 7Precipitate radius (nm) 2468Dislocation density (×10  16  m −2  )      
+
+> matrix
+> interface
+> precipitate
+> 1234567Precipitate radius (nm) 0.0 0.2 0.4 0.6 0.8 Volume fraction
+
+b) 
+
+e) d)    
+
+> precipitate dominated interface dominated
+> 5 nm
+> <111> <100> Fe Cr
+
+a) c) cCr < 0.1    
+
+> cCr <0.9 <0.1 cCr >0.9
+> dislocation 1
+> 2
+> matrix interface precipitate 02468
+> ρ (×10  16  m −2  )
+> ρref
+
+Figure 2: Dislocation partitioning between matrix, precipitate, and interface. a) A typical precipitate after uniaxial compression to ε = 0 .6, illustrating precipitate shape change under loading. The dashed outline shows expected precipitate shape if it were to deform affinely with the matrix. b) Composition-based segmentation used to define matrix ( cCr ≤ 0.1), interface (0 .1 < c Cr < 0.9), and the precipitate ( cCr ≥ 0.9). c) Dislocation density ρ in the matrix, the precipitates, and their interfaces for 
+
+R = 7 nm and vf = 15%. ρref is the dislocation density in pure Fe deformed under the same condition. d) Dislocation densities in the matrix, at the interface and within the precipitate as functions of precipitate radius R (for vf = 15%). e) Volume fractions of the matrix, interface and the precipitate as functions of R (for vf = 15%). Error bars (smaller than the marker size and therefore not visible) indicate correlation-corrected standard errors from the mean of steady-state dislocation densities and microstructure fractions. 
+
+ated with the precipitate-matrix stiffness contrast. At the same time, the intrinsic resistance of larger precipitates to dislocation slip reduces transmission into the precipitate. Yet even for the largest precipitates, ρprec ≈ 0.35 ρmat , in-dicating persistent precipitate penetration rather than the vanishing transmission implied by complete obstacle by-pass, e.g. Orowan looping (fig. 1a). These trends show that dislocation transmission and interfacial accumulation remain concurrent across the full range of precipitate sizes and volume fractions studied here, rather than separating into distinct cutting and bypass regimes (see Supplemen-tary Information Figure 9). Their opposite dependence on 
+
+R further points to a possible coupling between these two processes. Precipitate size controls not only how dislocations par-tition between the matrix, interface, and precipitate, but also the volume fractions occupied by these same three components of the material microstructure. Figure 2e shows the steady-state volume fractions of the matrix (fmat ), interface ( fint ), and precipitates ( fprec ) as functions of R. For small precipitates, the interfacial region occu-pies a disproportionately large fraction of the microstruc-ture. This increase arises not only from the geometric in-crease in the surface-to-volume ratio with decreasing R,but also from shear-induced interface broadening and asso-ciated diffusion 39 , which affect smaller and more shearable precipitates more strongly (see Supplementary Information Figures 10e and 10f). As a result, fint can become compa-rable to, or even exceed, fprec , while fmat drops below its initial value. As R increases, however, the interfacial region occupies a progressively smaller fraction of the microstruc-ture. At the largest radii, fint becomes nearly negligible and fmat saturates to its initial value (see Supplementary Information Figure 10 for other volume fractions). Taken together, these observations additionally clarify how precipitate size controls the overall strengthening re-sponse (fig. 1b and fig. 1e). At small R, precipitates of-fer little resistance to gliding dislocations, which readily transmit across the interfaces to shear the precipitates — a behavior reflected in only a modest increase in inter-facial dislocation density. At large R, interfacial dislo-cation accumulation contributes to a growing back-stress, but strengthening is again limited because the interfacial regions occupy only a small fraction of the material vol-ume. In the intermediate range of precipitate sizes, the pre-cipitates become more resistant while their interfaces still occupy appreciable fractions of the microstructure, thus allowing precipitate shear resistance and interfacial back-stress to contribute concurrently. Precipitate-mediated dislocation multiplication in the matrix, which occupies the majority of the microstructure, also peaks in this interme-diate regime. Therefore, the continuous evolution of dislo-Page 4 of 13 0 200 400 600 800 Partitioning-based strengthening (MPa) 0200 400 600 800 1000 Measured strengthening (MPa)                                       
+
+> volume fraction (%)
+> 5 (10 7s−1)
+> 5 (10 8s−1)
+> 5 (10 9s−1)
+> 10 (10 8s−1)
+> 15 (10 7s−1)
+> 15 (10 8s−1)
+> 15 (10 9s−1)
+> 20 (10 8s−1)
+> 15 (10 8s−1; Cr-Fe)
+> 15 (10 8s−1; Cu-Co)
+> 10 710 810 9̇
+> ε(s −1 )0.1 0.3 0.5 0.7
+> σ0 (GPa)
+> σ0 ∝̇  εFe-Cr
+
+Figure 3: A partitioning-based strengthening rela-tion. Strengthening from eq. 2 compared with simulation re-sults across different R, vf, and strain rates. Unless otherwise noted, the data correspond to the Fe-Cr system. There are 78 data points, each of which represents a ∼ 10 8 atoms simulation. The dashed line denotes perfect agreement. The inset shows the fitted intrinsic friction stress σ0 as a function of strain rate for the Fe-Cr system. 
+
+cation partitioning and volume fractions shown in fig. 2d and fig. 2e naturally accounts for a smooth maximum in strengthening as a function of R (fig. 1b and fig. 1e), with-out needing to invoke the polydispersity of the precipitate size distribution. 
+
+A partitioning-based strengthening relation 
+
+Having identified three distinct material-volume regions in-volved in precipitation strengthening, we now relate them quantitatively to the strengthening response. Consistent with the classical Taylor hardening equation 40 , which re-lates flow stress to the square root of stored dislocation den-sity, Supplementary Information Figure 11a shows that the precipitation strengthening in our MD simulations closely co-varies with the net dislocation density extracted from the same simulations. However, this Taylor-like relation becomes increasingly inaccurate as the precipitate volume fraction increases, indicating that net dislocation density alone does not fully capture the strengthening response. We therefore posit that plastic strength depends not only on how many dislocations are stored in the material, but also on where they are stored. Recognizing that matrix, precipitate interiors, and pre-cipitate interfaces contribute differently to deformation re-sistance, we introduce a region-resolved Taylor relation for the stress contribution associated with each region, 
+
+σA = M α AμAbA
+
+√ρA, (1) where index A ∈ { mat , int , prec } denotes the matrix, inter-face, or precipitate, respectively. Here, ρA is the disloca-tion density in region A extracted from the simulations, μA
+
+is the corresponding Voigt-averaged shear modulus, bA is the Burgers vector, αA is the Taylor coefficient associated with that region 38 and M is the standard Taylor factor converting stress resolved on the {112 } glide planes to the applied flow stress; for uniaxial deformation along the [001] axis used in our simulations M = 2 .451. In a heterogeneous microstructure containing a matrix, interfaces, and precipitate interiors, the overall resistance to dislocation motion is determined by the least resis-tive deformation pathway. Three regions are assumed to serve as parallel deformation channels: if one path offers lower resistance and more readily accommodates plastic flow, dislocations will preferentially propagate through it, thereby limiting the net strengthening 41 . This behavior can be expressed by the harmonic mean of the three resis-tances 17,42,43 :
+
+σ = σ0 +
+
+ fmat 
+
+σmat 
+
++ fint 
+
+σint 
+
++ fprec 
+
+σprec 
+
+−1
+
+. (2) Here, fmat , fint , and fprec are the volume fractions of the matrix, interface, and precipitate regions, respectively, as defined in fig. 2e, and σ0 is the friction stress added to account for the lattice (Peierls) resistance to dislocation motion. The strengthening, ∆ σ, is then obtained by sub-tracting the flow stress of the precipitate-free reference ma-terial from the predicted σ obtained from eq. 2. With a single set of three fitted Taylor coefficients αA,equation 2 captures strengthening observed in all 60 Fe-Cr model materials over the entire range of R, vf, and strain rates (fig. 3). The agreement of this “region-resolved” Tay-lor equation with the MD data is considerably closer than that of the conventional Taylor equation relating flow stress to the net dislocation density (see Supplementary Informa-tion Figures 11b and 11c). All three best fit coefficients, 
+
+αmat = 0 .254, αint = 0 .199, and αprec = 0 .302, fall within the range of Taylor coefficients reported for BCC metals. Fitted σ0 exhibits an approximately linear dependence on the strain rate (inset of fig. 3), consistent with behavior previously observed at high rates 44 . The same coefficients and eq. 2 were used to generate the solid curve in fig. 1e comparing the model and the R-dependent strengthening trend observed in MD simulations. Lending additional support to the microstructure parti-tioning expressed in eq. 2, the same equation equally well describes a qualitatively different dependence of strength-ening on R in model alloys with inverted stiffness contrast, i.e., with softer Fe precipitates embedded in a stiffer Cr matrix (see Supplementary Information Note 9). In these alloys, referred to here as Cr-Fe systems, ρprec remains greater than ρmat over the entire range of precipitate radii, and the strengthening response no longer exhibits the max-imum observed in fig. 1e. Furthermore, Figure 3 shows that the dislocation partitioning depicted in fig. 2 and the associated strengthening relation described by eq. 2 apply equally well to the FCC Cu-Co system (see Supplementary Page 5 of 13 −50 −25 0 25 50 75 100 125 Δμ (GPa) 012Strengthening (GPa)   
+
+> Δσmod ∝ |Δ μ|3/2
+> Fe-Cr
+> 123
+> R (nm)
+
+## a) 
+
+## b)                             
+
+> −50 −25 025 50 75 100 125
+> Δμ(GPa)
+> 0
+> 1
+> 2
+> 3
+> ρ (×10  17  m −2  )
+> matrix
+> interface
+> precipitate
+> stiff soft Figure 4: Strengthening maps from alchemical modu-lus mismatch. a) Strengthening as a function of precipitate modulus mismatch ∆ μ=μprec −μmat and radius Rfor coher-ent alchemical precipitates at fixed vf= 10%. The response is asymmetric about ∆ μ= 0, unlike the classical modulus-mismatch expectation, which scales with |∆μ|3/2. Soft and stiff precipitates with comparable |∆μ|therefore do not strengthen equivalently, as highlighted by the dashed boxes. Fe-Cr simula-tions at the same conditions lie on the alchemical strengthening map at comparable modulus mismatch. b) Steady-state dislo-cation densities in the matrix, interface, and precipitate regions as functions of ∆ μ, for representative alchemical systems with
+> R= 2 nm.
+
+Information Note 10). This suggests that the concurrent, multi-dislocation behaviors observed here are common to and define precipitation strengthening across a wide range of crystal structures and phase contrasts. By relating precipitation strengthening to the disloca-tion density distribution, eq. 2 provides a descriptive rather than a predictive model. Indeed, exactly how disloca-tions populate the three regions is ultimately determined by multi-dislocation interactions with the precipitates. To gain deeper insights and move toward a predictive model of precipitation strengthening, we performed additional deformation simulations of model BCC crystals contain-ing perfectly size-matched precipitates with a continuously varying stiffness mismatch (see Methods section Alchemi-cal model element construction). Although not represent-ing any real material, continuous tuning of the elastic con-trast exposes the full strengthening landscape between soft and stiff precipitates and quantifies the resulting strength-ening response. In agreement with existing theoretical models, strength-ening is observed to increase with increasing stiffness mis-match ∆ μ. However, at variance with the same models predicting strengthening to scale as ∆ σmod ∝ |∆μ|3/2,strengthening observed in our MD simulations is not sym-metric with respect to the sign of ∆ μ (fig. 4a). For ex-ample, at |∆μ| ≈ 34 GPa, stiff precipitates (∆ μ > 0) strengthen almost twice as much as soft precipitates (∆ μ < 
+
+0). Furthermore, as seen in the same figure, the shape of strengthening as a function of ∆ μ is clearly different on the opposite sides of the origin ∆ μ = 0. Asymmetry in strengthening caused by stiffness mis-match is reflected in dislocation partitioning. Figure 4b shows that stiffer precipitates induce greater interfacial ac-cumulation and matrix multiplication, whereas softer pre-cipitates store more dislocations inside the precipitates. Thus, increasing stiffness mismatch redirects dislocations to different deformation pathways depending on the sign of ∆μ which cannot be captured by a single obstacle strength assigned to cutting or bypass alone 10,14,17 . Finally, when properly scaled, strengthening predicted in Fe-Cr simula-tions reported above falls close to the strengthening func-tion computed for the alchemical alloys, suggesting that fig. 4a can potentially serve as a practical guide for select-ing optimal stiffness contrast. 
+
+# Discussion and Summary 
+
+The observations presented here pertain most directly to deformation regimes characterized by coherent precipi-tates, high strain rates, and high dislocation densities, where multiple dislocations interact with a single precipi-tate simultaneously ( N > 1 in fig. 1c). While alternative conditions — such as strongly planar slip, semi-coherent or incoherent particles, deformation twinning 45 , deformation-induced structural transformations 46 (see Supplementary Information Note 11), or elevated temperatures — can ac-tivate additional processes like extended pile-ups or climb-assisted relaxation, these mechanisms merely introduce, suppress, or redistribute deformation pathways. Such ef-fects may alter the relative importance of the active plastic-ity channels (Supplementary Information Notes 9-11), but they are unlikely to restore the exclusive cutting-versus-bypass dichotomy that currently prevails in the litera-ture. Instead, our findings demonstrate that this tradi-tional binary picture represents an idealized limiting case of a broader plastic response characterized by concurrent deformation pathways. Similarly, while precipitate-size polydispersity typically broadens experimental strength-ening curves 14,18–20 , it is not a prerequisite for a smooth strengthening peak; this broad crossover arises intrinsically from the co-evolution of interfacial dislocation accumula-tion, precipitate storage, and precipitate-mediated disloca-tion multiplication, even within strictly monodisperse ar-rays (fig. 1e). A key finding of this work is that precipitates actively al-ter the dislocation density within the matrix itself. While dislocation storage within precipitates and accumulation at interfaces have direct analogs in classical shearing and bypassing, precipitate-mediated matrix multiplication has no counterpart in single-dislocation theories. Incorporat-ing this mechanism into mesoscale descriptions 7,47 requires Page 6 of 13 moving beyond simply refining cutting or bypass stresses; models must treat precipitates not merely as obstacles, but as active participants that reshape the dislocation network through coupled shearing, bypassing, and multi-plication. Whereas existing single-dislocation theoretical models are too simple to capture these concurrent mech-anisms, mesoscale approaches like discrete dislocation dy-namics require substantial development to represent them faithfully. Simultaneously, rapid advances in quantum-accurate machine-learning interatomic potentials 48–50 and increasingly powerful high-performance computing capa-bilities enable large-scale MD simulations to serve as con-trolled computational experiments for quantitatively as-sessing strengthening trends. The close agreement between the Fe-Cr and alchemical systems at comparable ∆ μ in fig. 4a demonstrates that simulation-derived strengthening maps can directly guide the design of alloys optimized for precipitation strengthening. Ultimately, advancing simula-tion methodologies will allow researchers to isolate hidden microscopic mechanisms, clarifying the physical origins of strengthening in precipitate-containing alloys and broader classes of heterogeneous microstructures 41 such as poly-crystals, heterostructures, and functionally gradient alloys. Page 7 of 13 Methods 
+
+Estimate of dislocations per precipitate 
+
+To estimate the number of dislocations ( N ) that can inter-act with an individual precipitate (fig. 1c), we start from the bulk dislocation density ρ. For a randomly oriented plane, the corresponding effective areal dislocation density is 51 
+
+ρa = ρ
+
+2 ,
+
+which gives the expected number of dislocation lines inter-secting that plane. We next estimate the interaction area associated with a spherical precipitate. For a precipitate of radius R, the mean intersection radius with a randomly oriented plane is 7
+
+¯R = πR 
+
+4 .
+
+However, dislocations do not need to pass through the strict geometric intersection region to interact with the precipitate. Because the elastic interaction decays ap-proximately as 1 /r 3 with distance r from the precipi-tate center 52 , dislocations outside the geometric intersec-tion can still experience appreciable precipitate-induced forces. At a distance equal to twice the geometric intersec-tion radius, the interaction strength is reduced to roughly (1 /2) 3 = 12 .5% of its interfacial value. While diminished, this interaction remains non-negligible on the scale of dis-location stresses, implying that dislocations far beyond the strict geometric intersection can still experience apprecia-ble precipitate-induced forces. To provide a conservative and geometrically transparent estimate, we define an effec-tive interaction radius ¯Rint = 2 ¯R, 
+
+which captures both the geometric intersection and a phys-ically meaningful elastic interaction range. Under these as-sumptions, the expected number of dislocations interacting with a precipitate is 
+
+N = π3
+
+8 R2ρ. 
+
+In fig. 1c, this expression was evaluated using a repre-sentative dislocation density of ρ = 10 15 m−2. Cold-worked metals are commonly reported 29 to exhibit ex situ disloca-tion densities on the order of 10 14 m−2. Such measure-ments reflect partially relaxed microstructures following deformation, during which processes such as annihilation, junction rearrangement, and recovery reduce the instanta-neous dislocation density. During active plastic deforma-tion, transient dislocation densities can exceed the relaxed value. The choice of ρ = 10 15 m−2 therefore represents a reasonable estimate of the instantaneous dislocation den-sity under sustained deformation. 
+
+Mechanical deformation 
+
+Molecular dynamics simulations of uniaxial compression were performed on BCC Fe containing spherical Cr precip-itates using a timestep of 5 fs. Atomic interactions between elements were described using an embedded-atom method (EAM) potential 53 . Simulation cells had initial dimensions of 288 a0×288 a0×610 a0, oriented along the [100], [010], and [001] crystallographic axes, respectively, where a0 = 2 .86 ˚Ais the Fe lattice parameter. Each sample contained approx-imately 100 million atoms. Periodic boundary conditions were applied in all three dimensions. Spherical regions of radius R were placed at random po-sitions within the simulation cell subject to a non-overlap constraint. The number of spheres was chosen to achieve the target precipitate volume fraction vf. All atoms within each sphere were then replaced by Cr atoms, producing coherent spherical BCC Cr precipitates. After precipi-tate construction, 100 vacancy-type prismatic dislocation loops of hexagonal shape and 10 nm diameter were intro-duced in each sample. The loop orientations were chosen so that all four 12 ⟨111 ⟩ Burgers vector variants were rep-resented in equal proportion. This procedure yielded an initial dislocation density of 2 .55 × 10 15 m−2. Note that the shapes and density of initial sources affect only the transient plastic response whereas steady-state plastic flow does not depend on the exact configuration of initial dislo-cation sources 30,31,54–56 .Following loop creation, samples were equilibrated for 100 ps at 300 K using a Langevin thermostat (damping pa-rameter 10 ps) and maintained at zero pressure using an isoenthalpic-isobaric (NPH) barostat (damping parameter 10 ps; chain length 3), allowing only isotropic cell fluctua-tions. Samples were then deformed in uniaxial compression along [001] at a constant true strain rate 30,31,57 . During de-formation, the stresses in the directions orthogonal to the loading axis ([100] and [010]) were maintained at zero us-ing an NPH barostat acting on those directions (damping parameter 10 ps; chain length 3), while the temperature was held at 300 K using the Langevin thermostat (damp-ing parameter 10 ps). Most simulations were performed at ˙ε = 10 8 s−1 to a total true strain of 0 .6 (simulation time of 6 ns). For ˙ε = 10 9 s−1, deformation to a true strain of 0 .6 required 0.6 ns. For ˙ε = 10 7 s−1, configurations first deformed at ˙ε = 10 8 s−1 to a true strain of 0 .2 were used as initial states; the strain rate was then reduced to 10 7 s−1 and de-formation was continued to a true strain of 0 .6 (simulation time of 40 ns). See Supplementary Information Note 12 for a comparison of strengthening across strain rates. Reported steady-state flow stresses are obtained by aver-aging flow stress over the true-strain interval ε = 0 .4 − 0.6; error bars denote autocorrelation-corrected standard errors of the mean. All simulations were carried out using the Large-scale Atomic/Molecular Massively Parallel Simulator Page 8 of 13 (LAMMPS) 58 and visualizations were done using Open Vi-sualization Tool 59 (OVITO). 
+
+Composition-based dislocation segmentation 
+
+Dislocations were identified using the Dislocation Extrac-tion Algorithm (DXA) 60 . To quantify spatial variations in dislocation density, each snapshot was discretized into cu-bic voxels of size 6 ˚A×6 ˚A×6 ˚A. A voxel size of 6 ˚A exceeds twice the BCC Fe lattice parameter and encompasses in-teractions up to the sixth nearest-neighbor shell, providing adequate atomic sampling ( ≈ 20 atoms) while maintain-ing the spatial resolution required to resolve precipitates as small as R ≈ 7 ˚A. The local Cr atomic fraction cCr 
+
+was computed for each voxel and used to classify voxels as matrix ( cCr ≤ 0.1), interface (0 .1 < c Cr < 0.9), or precipi-tate (0 .9 ≤ cCr ). The microstructure fractions of interface (fint ) and precipitate ( fprec ) were computed as the frac-tion of voxels belonging to each region. Importantly, fprec 
+
+differs from the nominal precipitate volume fraction vf:
+
+fprec quantifies the volume fraction of precipitate regions at steady state as evaluated by our composition-based seg-mentation, whereas vf denotes the initial prescribed pre-cipitate volume fraction based on the ratio of Cr to Fe atoms. For each region, the associated dislocation density was calculated by summing the total dislocation line length contained within voxels of that region 47 and normalizing by the corresponding region volume. Reported steady-state dislocation properties and region fractions are aver-aged over the true-strain interval ε = 0 .4 − 0.6 and error bars denote autocorrelation-corrected standard errors of the mean. 
+
+Precipitate strain evaluation 
+
+The precipitate strain at the end of deformation was com-puted from precipitate shapes obtained by cluster analysis. For each cluster (i.e., precipitate), we calculated its gyra-tion tensor G. The precipitate extent along the loading direction [001] was defined from the projection of G onto the unit vector ˆ e[001] as 61 
+
+ℓ2p = ˆ eT 
+
+> [001]
+
+G ˆe[001] .
+
+The true strain of a precipitate along [001] was then defined as, 
+
+εprec = − ln 
+
+ ℓp
+
+ℓp,0
+
+
+
+,
+
+where ℓp,0 is the corresponding extent measured from the undeformed configuration of the same precipitate. The re-ported precipitate strain ¯ εprec was obtained by averaging 
+
+εprec over all precipitates in the sample. 
+
+Partitioning-based strengthening relation 
+
+The strengthening predicted by the partitioning-based re-lation, shown on the x-axis of fig. 3, was evaluated using eq. 2. The required dislocation densities and volume frac-tions, ρmat , ρint , ρprec , fmat , fint , and fprec , were obtained directly from the MD simulations using the composition-resolved dislocation segmentation procedure described in Composition-based dislocation segmentation. The region-resolved stress contributions, σmat , σint , and 
+
+σprec , were computed using eq. 1. For each material sys-tem, the shear modulus and Burgers vector of the ma-trix and precipitate regions were computed from the cor-responding perfect crystals at 0 K. The interfacial shear modulus and Burgers vector were then taken as the arith-metic averages of the corresponding matrix and precipitate values. For the Cr-Fe system, the matrix and precipitate material parameters were interchanged relative to the Fe-Cr system. For each material system, the region-resolved Taylor co-efficients αmat , αint , and αprec were obtained by calibrating eq. 2 against the flow stresses measured from the corre-sponding MD simulations. Once calibrated, the same set of coefficients was used for all microstructures within a given material system. 
+
+Alchemical model element construction 
+
+To isolate the effect of modulus mismatch on precipita-tion strengthening, we adopted the computational alchemy methodology of ref. 62. The Zhou et al. 63 EAM param-eterization for Ta was used as the reference matrix po-tential. To generate model precipitate elements with con-trolled stiffness, all 11 energy-dimensional parameters of the Ta potential were scaled by a factor k, producing an element with stiffness k times that of Ta. This procedure allowed us to construct alchemical matrix-precipitate alloy models in which the modulus mismatch could be system-atically varied while retaining the same underlying crystal structure and lattice compatibility. Seven values of k from 0 .1 to 3 .0 were considered. All values produced coherent BCC precipitates, except for k =0.1, for which some precipitates became semi-coherent or incoherent during deformation. The modulus mismatch reported in fig. 4 was defined as ∆ μ = μprec − μmat , where 
+
+μprec and μmat are the Voigt-averaged shear moduli of the corresponding model precipitate and Ta matrix elements 64 .Using Ta as the matrix element and model alchemical el-ements as the precipitate elements, we performed MD sim-ulations of mechanical deformation at 300 K and a strain rate of 10 8 s−1. Each system contained approximately 100 million atoms and was constructed with a lattice con-stant of 3 .303 ˚A. The simulations followed the same pro-cedure described in Mechanical deformation. Dislocation partitioning was analyzed using the procedure described in Composition-based dislocation segmentation, except that a voxel size of 7 ˚A × 7 ˚A × 7 ˚A was used. 
+
+Data availability 
+
+The raw simulation data have not been deposited in a pub-lic repository because of their large size, which spans mul-tiple terabytes. Processed data sufficient to reproduce all figures and results in the paper and Supplementary Infor-mation will be made available upon publication in a public repository. Page 9 of 13 Code availability 
+
+LAMMPS software 58 used in all molecular dynamics sim-ulations reported in this work is available at https: //www.lammps.org . Our figure style is implemented in LovelyPlots 65 under the paper style. Code to reproduce all figures in the paper from processed data will be made avail-able upon publication in a public repository. Any custom code that is not currently available can be subsequently added upon reasonable request to the corresponding au-thor. 
+
+Acknowledgments 
+
+This material is based upon work supported by the Air Force Office of Scientific Research (AFOSR) under award number FA9550-25-1-0199, through the Young Investigator Program. This work is also supported by the MathWorks Ignition Fund. M.I. and V.V.B. acknowledge funding sup-port from the Laboratory Directed Research and Develop-ment Program. All authors acknowledge special compu-tational time allocation on Tuolumne supercomputer from the Computational Grand Challenge program at Lawrence Livermore National Laboratory. This work was performed under the auspices of the U.S. Department of Energy by Lawrence Livermore National Laboratory, USA under Contract DE-AC52-07NA27344. 
+
+Author contributions statement 
+
+M.I., V.V.B., and R.F. conceived the project. M.I. per-formed molecular dynamics simulations and analyzed the results. All authors contributed to the interpretation of the results, prepared, reviewed, and edited the manuscript. R.F. and V.V.B. supervised the project. 
+
+Competing interests statement 
+
+The authors declare no competing interests. Page 10 of 13 References 
+
+[1] Suihe Jiang, Hui Wang, Yuan Wu, Xiongjun Liu, Honghong Chen, Mengji Yao, Baptiste Gault, Dirk Ponge, Dierk Raabe, Akihiko Hirata, Mingwei Chen, Yandong Wang, and Zhaoping Lu, “Ultrastrong steel via minimal lattice misfit and high-density nanoprecipitation”, Nature 
+
+(2017), doi : 10.1038/nature22032 .[2] Wenwen Sun, Yuman Zhu, Ross Marceau, Lingyu Wang, Qi Zhang, Xiang Gao, and Christopher Hutchinson, “Pre-cipitation strengthening of aluminum alloys by room-temperature cyclic plasticity”, Science (2019), doi : 10 . 1126/science.aav7086 .[3] Song Tang, Tongzheng Xin, Wanqiang Xu, David Miskovic, Gang Sha, Zakaria Quadir, Simon Ringer, Keita Nomoto, Nick Birbilis, and Michael Ferry, “Precipitation strengthening in an ultralight magnesium alloy”, Nature Communications (1, 2019), doi : 10.1038/s41467- 019-08954-z .[4] Tae Jin Jang, Won Seok Choi, Dae Woong Kim, Gwanghyo Choi, Hosun Jun, Alberto Ferrari, Fritz K¨ ormann, Pyuck-Pa Choi, and Seok Su Sohn, “Shear band-driven precipitate dispersion for ultrastrong duc-tile medium-entropy alloys”, Nature Communications (4, 2021), doi : 10.1038/s41467-021-25031-6 .[5] J. Y. He, H. Wang, H. L. Huang, X. D. Xu, M. W. Chen, Y. Wu, X. J. Liu, T. G. Nieh, K. An, and Z. P. Lu, “A precipitation-hardened high-entropy alloy with out-standing tensile properties”, Acta Materialia (2016), doi :
+
+https://doi.org/10.1016/j.actamat.2015.08.076 .[6] A. Wilm, “Physical metallurgical experiments on alu-minum alloys containing magnesium”, Metallurgie (1911). [7] Aiya Cui, Xiaoming Wang, and Yinan Cui, “Multiscale modelling of precipitation hardening: a review”, Journal of Materials Science: Materials Theory (16, 2024), issn :3004-8966, doi : 10.1186/s41313-024-00066-6 .[8] A. (Anthony) Kelly, Strengthening methods in crystals ,Amsterdam, New York, Elsevier Pub. Co., 1971, isbn : 978-0-444-20105-8. [9] Bernd Reppich, “Some new aspects concerning parti-cle hardening mechanisms in γ′ precipitating Ni-base al-loys—I. Theoretical concept”, Acta Metallurgica (1, 1982), 
+
+issn : 0001-6160, doi : 10.1016/0001-6160(82)90048-7 .[10] A. J. Ardell, “Precipitation hardening”, Metallurgical Transactions A 16 (1, 1985), issn : 2379-0180, doi : 10 . 1007/BF02670416 .[11] Ali Argon, Strengthening Mechanisms in Crystal Plastic-ity , Oxford University Press, 30, 2007, isbn : 978-0-19-851600-2, doi : 10 . 1093 / acprof : oso / 9780198516002 . 001.0001 .[12] E. Nembach, Particle strengthening of metals and alloys ,Wiley, 1997, isbn : 0-471-12072-3. [13] E Orowan, “Symposium on internal stresses in metals and alloys”, Institute of Metals, London 451 (1948). [14] David N. Seidman, Emmanuelle A. Marquis, and David C. Dunand, “Precipitation strengthening at ambient and ele-vated temperatures of heat-treatable Al(Sc) alloys”, Acta Materialia (20, 2002), doi : 10 . 1016 / S1359 - 6454(02 ) 00201-X .[15] Feng Wang, Miao Song, Mohamed N. Elkot, Ning Yao, Binhan Sun, Min Song, Zhangwei Wang, and Dierk Raabe, “Shearing brittle intermetallics enhances cryogenic strength and ductility of steels”, Science (31, 2024), doi :
+
+10.1126/science.ado2919 .[16] Akiyuki Takahashi and Nasr M. Ghoniem, “A compu-tational method for dislocation–precipitate interaction”, 
+
+Journal of the Mechanics and Physics of Solids (1, 2008), 
+
+doi : 10.1016/j.jmps.2007.08.002 .[17] Matthew E. Krug, Zugang Mao, David N. Seidman, and David C. Dunand, “Comparison between disloca-tion dynamics model predictions and experiments in precipitation-strengthened Al–Li–Sc alloys”, Acta Mate-rialia (2014), doi : 10.1016/j.actamat.2014.06.038 .[18] Qihong Fang, Li Li, Jia Li, Hongyu Wu, Zaiwang Huang, Bin Liu, Yong Liu, and Peter K Liaw, “A statistical theory of probability-dependent precipitation strengthening in metals and alloys”, Journal of the Mechanics and Physics of Solids (1, 2019), doi : 10.1016/j.jmps.2018.09.010 .[19] J. Glazer and J. W. Morris, “The effect of the precipitate size distribution on the aging curve of order hardening alloys”, Acta Metallurgica (1, 1988), doi : 10.1016/0001-6160(88)90145-9 .[20] Marsha E. Van Dalen, David C. Dunand, and David N. Seidman, “Microstructural evolution and creep proper-ties of precipitation-strengthened Al–0.06Sc–0.02Gd and Al–0.06Sc–0.02Yb (at.%) alloys”, Acta Materialia (2011), 
+
+doi : 10.1016/j.actamat.2011.04.059 .[21] Wei Xiong and Gregory B. Olson, “Integrated computa-tional materials design for high-performance alloys”, MRS Bulletin (2015), doi : 10.1557/mrs.2015.273 .[22] Kozo Osamura, Hiroshi Okuda, Shojiro Ochiai, Mi-noru Takashima, Kazuo Asano, Michihiro Furusaka, Koji Kishida, and Fumio Kurosawa, “Precipitation Hardening in Fe-Cu Binary and Quaternary Alloys”, ISIJ Interna-tional (1994), doi : 10.2355/isijinternational.34.359 .[23] Ninad Mohale and Ryann Elizabeth Bass, Microstructural Characterization of A709 Commercial Heats with Pre-cipitation Treatment , Idaho National Laboratory (INL), Idaho Falls, ID (United States), 16, 2022. [24] A. H. Seltzman and S. J. Wukitch, “Precipitate Size in GRCop-42 and GRCop-84 Cu-Cr-Nb Alloy Gas Atom-ized Powder and L-PBF Additive Manufactured Mate-rial”, Fusion Science and Technology (2023), doi : 10 . 1080/15361055.2022.2147765 .[25] J. Tiley, G. B. Viswanathan, R. Srinivasan, R. Banerjee, D. M. Dimiduk, and H. L. Fraser, “Coarsening kinetics of 
+
+γ′ precipitates in the commercial nickel base Superalloy Ren´ e 88 DT”, Acta Materialia (1, 2009), doi : 10.1016/ j.actamat.2009.02.010 .[26] T. N. Baker, “Processes, microstructure and properties of vanadium microalloyed steels”, Materials Science and Technology (2009), doi : 10.1179/174328409X453253 .[27] Gang Ho Lee, Minha Park, Byoungkoo Kim, Jong Bae Jeon, Sanghoon Noh, and Byung Jun Kim, “Evaluation of precipitation phase and mechanical properties accord-ing to aging heat treatment temperature of Inconel 718”, 
+
+Journal of Materials Research and Technology (1, 2023), 
+
+doi : 10.1016/j.jmrt.2023.10.196 .
+
+Page 11 of 13 [28] Gang Ho Lee, Byoungkoo Kim, Jong Bae Jeon, Minha Park, Sanghoon Noh, and Byung Jun Kim, “Precipitate phase behavior and mechanical properties of Inconel 718 according to aging heat treatment time”, Materials Sci-ence and Engineering: A (1, 2025), doi : 10.1016/j.msea. 2024.147776 .[29] G. K. Williamson and R. E. Smallman, “III. Disloca-tion densities in some annealed and cold-worked met-als from measurements on the X-ray debye-scherrer spec-trum”, The Philosophical Magazine: A Journal of Theo-retical Experimental and Applied Physics (1, 1956), doi :
+
+10.1080/14786435608238074 .[30] Luis A. Zepeda-Ruiz, Alexander Stukowski, Tomas Op-pelstrup, Nicolas Bertin, Nathan R. Barton, Rodrigo Fre-itas, and Vasily V. Bulatov, “Atomistic insights into metal hardening”, Nature Materials (2021), doi : 10 . 1038 / s41563-020-00815-1 .[31] Luis A. Zepeda-Ruiz, Alexander Stukowski, Tomas Oppel-strup, and Vasily V. Bulatov, “Probing the limits of metal plasticity with molecular dynamics simulations”, Nature 
+
+(2017), doi : 10.1038/nature23472 .[32] Mahmudul Islam, Killian Sheriff, Yifan Cao, and Rodrigo Freitas, “Nonequilibrium chemical short-range order in metallic alloys”, Nature Communications (8, 2025), doi :
+
+10.1038/s41467-025-64733-z .[33] Mahmudul Islam, Killian Sheriff, and Rodrigo Freitas, “Dislocation-mediated short-range order evolution during thermomechanical processing”, Acta Materialia (2025), 
+
+doi : https : / / doi . org / 10 . 1016 / j . actamat . 2025 . 121838 .[34] Shun Kondo, Tasuku Mitsuma, Naoya Shibata, and Yuichi Ikuhara, “Direct observation of individual dislocation in-teraction processes with grain boundaries”, Science Ad-vances (2016), doi : 10.1126/sciadv.1501926 .[35] Hao Zhou, Xiaolei Wu, David Srolovitz, and Yuntian Zhu, “Designing heterostructured materials”, Nature Materials 
+
+(13, 2026), doi : 10.1038/s41563-025-02444-y .[36] Shenyou Peng, Yujie Wei, and Huajian Gao, “Nanoscale precipitates as sustainable dislocation sources for en-hanced ductility and high strength”, Proceedings of the National Academy of Sciences (10, 2020), doi : 10.1073/ pnas.1914615117 .[37] Shenyou Peng, Zhili Wang, Jia Li, Qihong Fang, and Yujie Wei, “Beyond Orowan hardening: Mapping the four dis-tinct mechanisms associated with dislocation-precipitate interaction”, International Journal of Plasticity (2023), 
+
+doi : https://doi.org/10.1016/j.ijplas.2023.103710 .[38] Vasily V. Bulatov, Nicolas Bertin, Sylvie Aubry, Luis A. Zepeda-Ruiz, Xinran Zhou, Aoyan Liang, Tomas Oppel-strup, Babak Sadigh, Athanasios Arsenlis, Ryan Austin, Robert Carson, and Nathan R. Barton, “Network aspects of single crystal plasticity”, Journal of Materials Research and Technology (1, 2025), doi : 10.1016/j.jmrt.2025. 04.014 .[39] L. Kovarik, R. R. Unocic, Ju Li, P. Sarosi, C. Shen, Y. Wang, and M. J. Mills, “Microtwinning and other shear-ing mechanisms at intermediate temperatures in Ni-based superalloys”, Progress in Materials Science (1, 2009), doi :
+
+10.1016/j.pmatsci.2009.03.010 .[40] Geoffrey Ingram Taylor, “The mechanism of plastic defor-mation of crystals. Part I.—Theoretical”, Proceedings of the Royal Society of London. Series A, Containing Papers of a Mathematical and Physical Character (2, 1934), doi :
+
+10.1098/rspa.1934.0106 .[41] Yuntian Zhu and Xiaolei Wu, “Heterostructured materi-als”, Progress in Materials Science (1, 2023), doi : 10 . 1016/j.pmatsci.2022.101019 .[42] R.C. Picu and R. Li, “On the superposition of flow stress contributions at finite temperatures and in the athermal limit”, Acta Materialia (2010), doi : 10.1016/j.actamat. 2010.06.020 .[43] U Lagerpusch, V Mohles, D Baither, B Anczykowski, and E Nembach, “Double strengthening of copper by dissolved gold-atoms and by incoherent SiO2-particles: how do the two strengthening contributions superimpose?”, Acta Ma-terialia (2000), doi : https://doi.org/10.1016/S1359-6454(00)00172-5 .[44] Haidong Fan, Qingyuan Wang, Jaafar A. El-Awady, Dierk Raabe, and Michael Zaiser, “Strain rate dependency of dislocation plasticity”, Nature Communications (23, 2021), doi : 10.1038/s41467-021-21939-1 .[45] Li Zhong, Yin Zhang, Xiang Wang, Ting Zhu, and Scott X. Mao, “Atomic-scale observation of nucleation- and growth-controlled deformation twinning in body-centered cubic nanocrystals”, Nature Communications (16, 2024), 
+
+doi : 10.1038/s41467-024-44837-8 .[46] Laure Bourgeois, Yong Zhang, Zezhong Zhang, Yiqiang Chen, and Nikhil V. Medhekar, “Transforming solid-state precipitates via excess vacancies”, Nature Communica-tions (6, 2020), doi : 10.1038/s41467-020-15087-1 .[47] Nicolas Bertin, “Connecting discrete and continuum dislo-cation mechanics: A non-singular spectral framework”, In-ternational Journal of Plasticity (1, 2019), doi : 10.1016/ j.ijplas.2018.12.006 .[48] Tsz Wai Ko and Shyue Ping Ong, “Recent advances and outstanding challenges for machine learning interatomic potentials”, Nature Computational Science (2023), doi :
+
+10.1038/s43588-023-00561-9 .[49] Yifan Cao, Killian Sheriff, and Rodrigo Freitas, “Cap-turing short-range order in high-entropy alloys with ma-chine learning potentials”, npj Computational Materials 
+
+(21, 2025), doi : 10.1038/s41524-025-01722-2 .[50] Killian Sheriff, Daniel Xiao, Yifan Cao, Lewis R. Owen, and Rodrigo Freitas, Machine learning potentials for mod-eling alloys across compositions , 2025, doi : 10 . 48550 / arXiv.2506.12592 .[51] G. Schoeck, “Correlation between Dislocation Length and Density”, Journal of Applied Physics (1962), doi : 10 . 1063/1.1728821 .[52] John Douglas Eshelby, “The determination of the elas-tic field of an ellipsoidal inclusion, and related problems”, 
+
+Proceedings of the Royal Society of London. A. Mathemat-ical and Physical Sciences (1957), doi : 10 . 1098 / rspa . 1957.0133 .[53] S. M. Eich, D. Beinke, and G. Schmitz, “Embedded-atom potential for an accurate thermodynamic description of the iron–chromium system”, Computational Materials Science (15, 2015), doi : 10.1016/j.commatsci.2015.03. 047 .
+
+Page 12 of 13 [54] Nicolas Bertin, Robert Carson, Vasily V. Bulatov, Jonathan Lind, and Matthew Nelms, “Crystal plasticity model of BCC metals from large-scale MD simulations”, 
+
+Acta Materialia (1, 2023), doi : 10 . 1016 / j . actamat . 2023.119336 .[55] Vasily Bulatov and Wei Cai, Computer Simulations of Dis-locations , OUP Oxford, 2, 2006, isbn : 978-0-19-852614-8. [56] F. C. Frank and W. T. Read, “Multiplication Processes for Slow Moving Dislocations”, Physical Review (15, 1950), 
+
+doi : 10.1103/PhysRev.79.722 .[57] Xinran Zhou, Fei Zhou, Jaime Marian, and Vasily Bulatov, 
+
+Probing multi-dimensional composition spaces in search of strong metallic alloys , 18, 2024, doi : 10.21203/rs.3.rs-5450275/v1 .[58] Aidan P. Thompson, H. Metin Aktulga, Richard Berger, Dan S. Bolintineanu, W. Michael Brown, Paul S. Crozier, Pieter J. in ’t Veld, Axel Kohlmeyer, Stan G. Moore, Trung Dac Nguyen, Ray Shan, Mark J. Stevens, Julien Tranchida, Christian Trott, and Steven J. Plimpton, “LAMMPS - a flexible simulation tool for particle-based materials modeling at the atomic, meso, and continuum scales”, Computer Physics Communications (1, 2022), 
+
+doi : 10.1016/j.cpc.2021.108171 .[59] Alexander Stukowski, “Visualization and analysis of atom-istic simulation data with OVITO–the Open Visualization Tool”, Modelling and Simulation in Materials Science and Engineering (2009), issn : 0965-0393, doi : 10.1088/0965-0393/18/1/015012 .[60] Alexander Stukowski and Karsten Albe, “Extracting dis-locations and non-dislocation crystal defects from atom-istic simulation data”, Modelling and Simulation in Ma-terials Science and Engineering (2010), issn : 0965-0393, 
+
+doi : 10.1088/0965-0393/18/8/085001 .[61] Wayne L. Mattice and U. Suter, Conformational theory of large molecules : the rotational isomeric state model in macromolecular systems , Wiley, 1994. [62] Aoyan Liang, Nicolas Bertin, Xinran Zhou, Sylvie Aubry, and Vasily V. Bulatov, “Computational alchemy clarifies origins of alloy strengthening”, npj Computational Mate-rials (18, 2025), doi : 10.1038/s41524-025-01910-0 .[63] X. W. Zhou, R. A. Johnson, and H. N. G. Wadley, “Misfit-energy-increasing dislocations in vapor-deposited CoFe/NiFe multilayers”, Phys. Rev. B (2004), doi : 10 . 1103/PhysRevB.69.144113 .[64] James G. Berryman, “Bounds and estimates for elastic constants of random polycrystals of laminates”, Inter-national Journal of Solids and Structures (2005), doi :
+
+https://doi.org/10.1016/j.ijsolstr.2004.12.015 .[65] Killian Sheriff, LovelyPlots, a collection of matplotlib stylesheets for scientific figures , 2022, doi : 10 . 5281 / zenodo.6903936 .
+
+Page 13 of 13

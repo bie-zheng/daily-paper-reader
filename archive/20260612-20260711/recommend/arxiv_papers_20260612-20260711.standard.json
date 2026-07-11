@@ -1,0 +1,378 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-11T12:15:40.907394+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 4,
+    "deep_cap": 6,
+    "deep_selected": 4,
+    "quick_candidates": 5,
+    "quick_skim_target": 11,
+    "quick_selected": 5
+  },
+  "deep_dive": [
+    {
+      "id": "2606.26019v1",
+      "source": "arxiv",
+      "title": "Primary damage and mechanical degradation of WTaCrV refractory high-entropy alloy: effects of solid-solution and chemical ordering",
+      "abstract": "As advanced nuclear reactors demand novel irradiation-tolerant materials, this study investigates the radiation damage and mechanical degradation of the promising WTaCrV refractory high-entropy alloy (RHEA). To isolate complex nanoscale chemical effects, we propose an atomistic modeling strategy comparing Average-Atom (AA), random solid-solution (RSS), and local chemical order (LCO) configurations using newly developed interatomic potentials. Collision cascades simulations reveal that the number of Frenkel pairs follow NRSS > NLCO > NAA at the same radiation dose. While the RSS effect accelerates defect generation due to rugged energy landscapes, LCO enhances lattice cohesion to mitigate radiation damage. Despite more primary defects in the RSS and LCO configurations compared with the AA configurations, the RSS and LCO effects can suppress radiation-induced mechanical degradation. Irradiation severely degrade the homogenized AA model but exert a limited impact on the strength and flow stress of the RSS and LCO models. This exceptional resistance is driven by inherent lattice distortion resulting from interactions among different alloy elements, which outweighs point defect induced lattice disruptions. Moreover, the complex interactions between deformation twins and point defects cause confined plastic flow, elevating flow stress in the RSS and LCO models. The findings provide atomistic guidance for performance assessment of next-generation structural materials for extreme nuclear environments.",
+      "authors": [
+        "Yihan Wu",
+        "Pengfei Yu",
+        "Yaohong Suo",
+        "Lei Zhang"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ],
+      "published": "2026-06-24T16:40:29+00:00",
+      "link": "https://arxiv.org/pdf/2606.26019v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "investigates primary radiation damage and mechanical degradation in WTaCrV high-entropy alloy via atomistic simulations",
+      "llm_evidence_cn": "通过原子模拟研究WTaCrV高熵合金的初级辐照损伤和力学退化",
+      "llm_evidence": "通过原子模拟研究WTaCrV高熵合金的初级辐照损伤和力学退化",
+      "canonical_evidence": "通过原子模拟研究WTaCrV高熵合金的初级辐照损伤和力学退化",
+      "llm_tldr_en": "This paper uses atomistic simulations to study primary damage and mechanical degradation in WTaCrV refractory high-entropy alloy, comparing solid-solution and chemical ordering effects under irradiation.",
+      "llm_tldr_cn": "本文针对先进核反应堆对新型耐辐照材料的需求，采用原子模拟方法研究WTaCrV难熔高熵合金的初级辐照损伤和力学退化。通过对比平均原子、随机固溶和局部化学有序三种构型，揭示了固溶效应加速缺陷产生而化学有序增强晶格内聚的机制。研究结果为设计耐辐照高熵合金提供了理论指导。",
+      "llm_tldr": "本文针对先进核反应堆对新型耐辐照材料的需求，采用原子模拟方法研究WTaCrV难熔高熵合金的初级辐照损伤和力学退化。通过对比平均原子、随机固溶和局部化学有序三种构型，揭示了固溶效应加速缺陷产生而化学有序增强晶格内聚的机制。研究结果为设计耐辐照高熵合金提供了理论指导。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation damage mechanisms in structural materials",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.06122v1",
+      "source": "arxiv",
+      "title": "Multiscale modelling of diffusion and retention of hydrogen in multi-occupancy traps in irradiated bcc metals",
+      "abstract": "We use molecular dynamics simulations to directly compute the effective diffusivity of hydrogen gas atoms in homogeneous distributions of monovacancies in tungsten and vanadium, and voids in tungsten. Rather than fitting the results to an Arrhenius law, we compare to an analytic approximation for the effective diffusivity recently derived for multi-occupancy traps [Kaur et al (2025), Phys. Rev. Mater. 9:125404]. We find good agreement between full atomistic simulation and our theory, validating the analytic model for diffusivity for materials containing nanoscale defects characteristic of radiation damage. There are no parameters fitted, only physically motivated quantities that can be computed with static density functional or atomistic potential calculations. In this study we prove rapid convergence of hydrogen trap occupation to the steady state using lattice kinetic Monte Carlo, the spontaneous emergence of voids in tungsten using atomistic simulation with empirical potentials, and molecular hydrogen formation in voids using molecular dynamics. We conclude with a prediction for diffusion and retention of hydrogen in voids in tungsten starting from first principles. This work shows that not only is the analytic form for diffusivity and retention in multi-occupancy traps a practical scheme for making predictive simulations of hydrogen isotope diffusion and retention in irradiated microstructures, derived and parameterized from first principles, it is superior to existing single-occupancy trap formalisms.",
+      "authors": [
+        "Daniel Mason",
+        "Sanjeet Kaur",
+        "Samanyu Tirumala",
+        "Prashanth Srinivasan",
+        "Ville Jantunen",
+        "Max Boleininger"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ],
+      "published": "2026-07-07T10:33:07+00:00",
+      "link": "https://arxiv.org/pdf/2607.06122v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "directly studies point defects and hydrogen diffusion in irradiated bcc metals",
+      "llm_evidence_cn": "直接研究辐照bcc金属中点缺陷与氢扩散",
+      "llm_evidence": "直接研究辐照bcc金属中点缺陷与氢扩散",
+      "canonical_evidence": "直接研究辐照bcc金属中点缺陷与氢扩散",
+      "llm_tldr_en": "Uses molecular dynamics to compute hydrogen diffusivity in irradiated bcc metals with point defects and voids, validating an analytic model for multi-occupancy traps.",
+      "llm_tldr_cn": "该论文针对辐照bcc金属中氢在缺陷处的扩散与滞留问题，利用分子动力学模拟直接计算了存在单空位和空洞时氢的有效扩散系数。通过与多占据陷阱近似分析模型对比，验证了该模型的准确性。研究不需要拟合参数，所有输入均来自静态密度泛函计算，为辐照环境中材料中氢行为提供了可靠预测工具。",
+      "llm_tldr": "该论文针对辐照bcc金属中氢在缺陷处的扩散与滞留问题，利用分子动力学模拟直接计算了存在单空位和空洞时氢的有效扩散系数。通过与多占据陷阱近似分析模型对比，验证了该模型的准确性。研究不需要拟合参数，所有输入均来自静态密度泛函计算，为辐照环境中材料中氢行为提供了可靠预测工具。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation-induced point defects and clusters",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.26834v1",
+      "source": "arxiv",
+      "title": "A Hybrid Quantum Mechanics Machine Learning Forcefield (QM/ML) Framework for Accurate Solute-Dislocation Interaction Simulations",
+      "abstract": "Solute-dislocation interactions play a central role in controlling microstructural evolution and mechanical behaviour of structural materials, yet conventional atomistic modelling approaches struggle to combine the chemical accuracy with computational scalability. In the nuclear industry, these challenges become particularly acute, as experiments reveal strong correlations between solute segregation and irradiation-induced dislocation loops. However, theoretical insight remains limited because density functional theory (DFT) simulations are prohibitively expensive at relevant length scales, while traditional semi-empirical interatomic potentials lack the chemical fidelity required for predictive solute-defect calculations. Here, we introduce a hybrid quantum-mechanics/machine-learning (QM/ML) simulation framework that couples DFT with neural-network machine learning interatomic potentials (MLIPs), enabling accurate atomistic dislocation simulations at reduced computational cost. We demonstrate the QM/ML framework's capability by reproducing the experimentally observed Sn and Fe segregation to dislocation loops in Zr and investigating magnetically complex solute-dislocation interactions in steel. These results establish the approach as a transferable, high-fidelity tool for modelling irradiation-induced defect structures and benchmarking emerging MLIPs.",
+      "authors": [
+        "Junting Zhang",
+        "Colleen Reynolds",
+        "Ryan S. Stroud",
+        "Jana Smutna",
+        "Daniel J. M. King",
+        "Andrew P. Horsfield",
+        "Mark R. Wenman"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ],
+      "published": "2026-06-25T10:20:08+00:00",
+      "link": "https://arxiv.org/pdf/2606.26834v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "develops QM/ML forcefield for solute-dislocation interactions relevant to irradiation-induced loops in nuclear materials",
+      "llm_evidence_cn": "开发了用于核材料中辐照诱导位错环相关溶质-位错相互作用的QM/ML力场",
+      "llm_evidence": "开发了用于核材料中辐照诱导位错环相关溶质-位错相互作用的QM/ML力场",
+      "canonical_evidence": "开发了用于核材料中辐照诱导位错环相关溶质-位错相互作用的QM/ML力场",
+      "llm_tldr_en": "This paper presents a hybrid QM/ML forcefield that enables accurate simulation of solute-dislocation interactions, directly addressing the challenges in modeling irradiation-induced dislocation loops in FeCr alloys.",
+      "llm_tldr_cn": "该论文提出了一种混合量子力学/机器学习力场框架，实现了对溶质-位错相互作用的高精度模拟。传统原子模拟难以兼顾化学精度与计算规模，而该框架有效弥补了DFT与半经验势的不足。该方法直接适用于核工业中辐照诱导位错环与溶质偏析耦合问题的模拟，为理解FeCr合金中位错环形成机制提供了有力工具。",
+      "llm_tldr": "该论文提出了一种混合量子力学/机器学习力场框架，实现了对溶质-位错相互作用的高精度模拟。传统原子模拟难以兼顾化学精度与计算规模，而该框架有效弥补了DFT与半经验势的不足。该方法直接适用于核工业中辐照诱导位错环与溶质偏析耦合问题的模拟，为理解FeCr合金中位错环形成机制提供了有力工具。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "dislocation loop formation in irradiated FeCr",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.04556v1",
+      "source": "arxiv",
+      "title": "Accelerating Multi-scale Simulations of Nuclear Components via PCYS Interpolation Tables",
+      "abstract": "Zirconium alloy core components in nuclear reactors, such as spacer grids and fuel cladding, undergo anisotropic dimensional changes driven by coupled irradiation creep and growth. While micromechanical crystal plasticity frameworks like the Viscoplastic Self-Consistent (VPSC) formulation capture these microstructurally driven phenomena, their integration into macroscopic Finite Element Method (FEM) solvers is computationally prohibitive for engineering-scale components. To bridge this gap, this work presents a multi-scale framework implemented within the open-source FEM solver Code_Aster. The developed interface uses a 5D Interpolation Table (IT) as a static material surrogate to govern instantaneous viscoplastic responses, coupled with a periodic recalibration and first-order Taylor series linearization scheme to track microstructural drift due to radiation damage without on-the-fly database updates. The predictive accuracy, numerical stability, and performance of this Polycrystal Yield Surface (PCYS) interpolation approach are benchmarked against VPSC-FEM simulations under continuous high-dose irradiation scenarios. Material-level assessments demonstrate that the linearization scheme bounds relative errors below 1% for representative deformation paths, maintaining structural compatibility. Furthermore, structural simulations of a spacer grid domain revealed meaningful computational savings, overcoming the multi-scale computational penalty while preserving microstructural fidelity. The proposed framework shows potential for multiphysics structural assessments and safety margin evaluations of core internals over operational lifespans.",
+      "authors": [
+        "Fabrizio Aguzzi",
+        "Martin S. Armoa",
+        "Cesar I. Pairetti",
+        "Cesar M. Venier",
+        "Alejandro E. Albanesi"
+      ],
+      "primary_category": "physics.comp-ph",
+      "categories": [
+        "physics.comp-ph"
+      ],
+      "published": "2026-07-06T00:09:39+00:00",
+      "link": "https://arxiv.org/pdf/2607.04556v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Irradiation creep and growth in nuclear components; multi-scale simulation method",
+      "llm_evidence_cn": "核部件辐照蠕变与生长；多尺度模拟方法",
+      "llm_evidence": "核部件辐照蠕变与生长；多尺度模拟方法",
+      "canonical_evidence": "核部件辐照蠕变与生长；多尺度模拟方法",
+      "llm_tldr_en": "A multi-scale framework using 5D interpolation tables as material surrogate to accelerate FEM simulations of irradiation-induced creep and growth in zirconium alloy nuclear components.",
+      "llm_tldr_cn": "该工作针对核反应堆中锆合金部件因辐照蠕变和生长导致的各向异性尺寸变化问题，提出了一种多尺度模拟框架。通过构建5D插值表作为静态材料代理，将晶体塑性模型高效集成到有限元求解器中，实现了工程尺度组件的快速模拟。方法有效解决了微观模型计算成本过高的问题，为核材料辐照性能预测提供了实用工具。",
+      "llm_tldr": "该工作针对核反应堆中锆合金部件因辐照蠕变和生长导致的各向异性尺寸变化问题，提出了一种多尺度模拟框架。通过构建5D插值表作为静态材料代理，将晶体塑性模型高效集成到有限元求解器中，实现了工程尺度组件的快速模拟。方法有效解决了微观模型计算成本过高的问题，为核材料辐照性能预测提供了实用工具。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation damage mechanisms in structural materials",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2606.14890v1",
+      "source": "arxiv",
+      "title": "Precipitation strengthening: a collective multi-dislocation phenomenon",
+      "abstract": "Precipitation strengthening is a cornerstone of physical metallurgy, delivering otherwise unattainable combinations of strength and ductility. The approach relies on nanoscale precipitates that impede the motion of dislocations, the primary carriers of plastic deformation. Historically, precipitation strengthening has been rationalized via two idealized, limiting mechanisms: dislocations either cut through or bow around precipitates. However, in situ experiments cannot yet resolve the coupled, real-time evolution of dislocation networks and nanoprecipitates, leaving these atomic-scale dynamics inaccessible to direct observation. Here, using large-scale atomistic simulations that fully capture these dynamics, we demonstrate that the classical cutting-versus-bowing dichotomy is incomplete. Instead, strengthening arises as an emergent collective phenomenon driven by concurrent, multi-dislocation interactions. These interactions simultaneously induce dislocation accumulation at interfaces, storage within precipitates, and precipitate-mediated multiplication inside the matrix. These findings establish a mechanistic framework that transcends traditional models and provides a new foundation for predicting strengthening behavior.",
+      "authors": [
+        "Mahmudul Islam",
+        "Nicolas Bertin",
+        "Sylvie Aubry",
+        "Vasily V. Bulatov",
+        "Rodrigo Freitas"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ],
+      "published": "2026-06-12T18:53:53+00:00",
+      "link": "https://arxiv.org/pdf/2606.14890v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "studies precipitation strengthening mechanism using atomistic simulations, relevant to precipitation hardening in FeCr alloys",
+      "llm_evidence_cn": "利用原子模拟研究沉淀强化机制，与FeCr合金沉淀硬化相关",
+      "llm_evidence": "利用原子模拟研究沉淀强化机制，与FeCr合金沉淀硬化相关",
+      "canonical_evidence": "利用原子模拟研究沉淀强化机制，与FeCr合金沉淀硬化相关",
+      "llm_tldr_en": "Large-scale atomistic simulations reveal that precipitation strengthening is a collective multi-dislocation phenomenon, going beyond classical cutting and bowing models.",
+      "llm_tldr_cn": "该论文针对沉淀强化中位错与纳米析出相相互作用的原子尺度机制，采用大规模原子模拟方法，完整捕捉了位错网络与析出相的耦合演化。结果发现实际的强化行为超越经典的切割或绕过机制，表现为多位错集体作用。这一发现为理解辐照FeCr合金中析出相强化提供了重要理论基础。",
+      "llm_tldr": "该论文针对沉淀强化中位错与纳米析出相相互作用的原子尺度机制，采用大规模原子模拟方法，完整捕捉了位错网络与析出相的耦合演化。结果发现实际的强化行为超越经典的切割或绕过机制，表现为多位错集体作用。这一发现为理解辐照FeCr合金中析出相强化提供了重要理论基础。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "precipitation hardening in irradiated FeCr alloys",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2606.22112v1",
+      "source": "arxiv",
+      "title": "Accurate identification and measurement of the precipitate area by two-stage deep neural networks in novel chromium-based alloys",
+      "abstract": "The performance of advanced materials for extreme environments is underpinned by their microstructure, including the size and distribution of reinforcing phases. Chromium-based superalloys are a recently proposed alternative to conventional face-centred-cubic superalloys for high-temperature applications, such as Concentrated Solar Power, and their development requires efficient measurement of precipitate volume fraction and size distribution from electron microscopy images. Traditional fixed-threshold image processing is sensitive to background noise, generalises poorly across materials, and requires substantial manual measurement effort. To address these bottlenecks, this study proposes DT-SegNet, an end-to-end two-stage deep learning scheme based on YOLOv5 and SegFormer for object detection and segmentation in electron microscopy images. The approach combines the training efficiency of convolutional neural networks at the detection stage with the segmentation accuracy of a Vision Transformer. Numerical experiments show that DT-SegNet substantially outperforms state-of-the-art segmentation tools offered by Weka and ilastik across metrics including accuracy, precision, recall, and F1-score. The model provides a useful tool for alloy-development microstructure examinations and helps address the large datasets associated with high-throughput alloy development.",
+      "authors": [
+        "Zeyu Xia",
+        "Kan Ma",
+        "Sibo Cheng",
+        "Thomas Blackburn",
+        "Ziling Peng",
+        "Kewei Zhu",
+        "Weihang Zhang",
+        "Dunhui Xiao",
+        "Alexander J Knowles",
+        "Rossella Arcucci"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cond-mat.mtrl-sci",
+        "cs.LG",
+        "physics.chem-ph"
+      ],
+      "published": "2026-06-20T15:50:58+00:00",
+      "link": "https://arxiv.org/pdf/2606.22112v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "precipitate area measurement using deep learning in Cr-based alloys",
+      "llm_evidence_cn": "利用深度学习测量铬基合金中析出相面积",
+      "llm_evidence": "利用深度学习测量铬基合金中析出相面积",
+      "canonical_evidence": "利用深度学习测量铬基合金中析出相面积",
+      "llm_tldr_en": "Proposes a two-stage deep neural network (DT-Seg) for accurate precipitate measurement in chromium-based superalloys, addressing issues with traditional threshold methods.",
+      "llm_tldr_cn": "该论文提出了一种两阶段深度神经网络DT-Seg，用于从电子显微镜图像中准确识别和测量铬基高温合金中的析出相面积。传统固定阈值图像处理方法易受噪声影响且泛化能力差，而DT-Seg通过分割和细化两阶段处理，显著提高了测量精度和鲁棒性。该方法对于极端环境下使用的先进材料微观结构表征具有重要意义，可推广至其他合金体系。",
+      "llm_tldr": "该论文提出了一种两阶段深度神经网络DT-Seg，用于从电子显微镜图像中准确识别和测量铬基高温合金中的析出相面积。传统固定阈值图像处理方法易受噪声影响且泛化能力差，而DT-Seg通过分割和细化两阶段处理，显著提高了测量精度和鲁棒性。该方法对于极端环境下使用的先进材料微观结构表征具有重要意义，可推广至其他合金体系。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "precipitation hardening in irradiated FeCr alloys",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2606.22852v1",
+      "source": "arxiv",
+      "title": "Thermal Transport in SiC with Intrinsic Defects and Mg Transmutation Products",
+      "abstract": "Silicon carbide is a leading candidate material for advanced nuclear energy systems, but irradiation-induced defects and transmutation products can severely degrade its thermal conductivity. In fusion environments, Mg is predicted to be a major solid transmutant in SiC, yet it is not well understood how different Mg-related defects affect phonon transport. Here, we develop a machine-learning interatomic potential, MLIP4SiC-Mg, for 3C-SiC containing intrinsic point defects, Mg-related defects, and Mg-defect complexes. The potential is trained on a large DFT dataset and reproduces DFT energies, forces, equation-of-state behavior, phonon dispersions, and lattice thermal conductivities with near-DFT accuracy. Combined with Green-Kubo molecular dynamics, force-error correction, and a resistance-based treatment for dilute defective systems, MLIP4SiC-Mg enables quantitative thermal-conductivity calculations in large defective supercells. The corrected thermal conductivity of pristine 3C-SiC is 421 W/(mK) at 300 K, in good agreement with available experimental data. All defects considered strongly reduce thermal conductivity, but their scattering strengths are highly configuration dependent. V_C and Mg_TC act as strong phonon scatterers, whereas isolated Mg_Si is comparatively weak. Residual thermal resistivity analysis shows that defect-induced thermal resistance is not strictly linear with concentration and should be treated as an effective temperature- and concentration-dependent scattering metric. Mg_Si-V_C clustering enhances scattering relative to isolated Mg_Si, but reduces the total excess resistance relative to spatially separated Mg_Si and V_C defects. These results clarify the configuration-dependent role of Mg transmutation in irradiation-degraded SiC and provide an atomistic framework for quantifying defect-controlled heat transport in nuclear ceramics.",
+      "authors": [
+        "Chen Shen",
+        "Yang Su",
+        "Maciej P. Polak",
+        "Rafi Ullah",
+        "Nuohao Liu",
+        "Mary Alice Cusentino",
+        "Dane Morgan",
+        "Izabela Szlufarska"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ],
+      "published": "2026-06-22T04:55:16+00:00",
+      "link": "https://arxiv.org/pdf/2606.22852v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "radiation damage in SiC nuclear structural material",
+      "llm_evidence_cn": "碳化硅核结构材料中的辐照损伤",
+      "llm_evidence": "碳化硅核结构材料中的辐照损伤",
+      "canonical_evidence": "碳化硅核结构材料中的辐照损伤",
+      "llm_tldr_en": "Develops a machine-learning potential for SiC with intrinsic defects and Mg transmutation products, enabling accurate thermal conductivity predictions under irradiation.",
+      "llm_tldr_cn": "碳化硅是先进核能系统的候选结构材料，但辐照缺陷和嬗变产物会严重降低其热导率。本文开发了机器学习势MLIP4SiC-Mg，用于含有点缺陷、Mg相关缺陷及复合缺陷的3C-SiC。该势在DFT数据集上训练，精度接近DFT，可准确预测热导率。结合Green-Kubo分子动力学，揭示了不同缺陷对声子输运的影响。该工作为理解SiC中辐照损伤对热性能的影响提供了方法基础。",
+      "llm_tldr": "碳化硅是先进核能系统的候选结构材料，但辐照缺陷和嬗变产物会严重降低其热导率。本文开发了机器学习势MLIP4SiC-Mg，用于含有点缺陷、Mg相关缺陷及复合缺陷的3C-SiC。该势在DFT数据集上训练，精度接近DFT，可准确预测热导率。结合Green-Kubo分子动力学，揭示了不同缺陷对声子输运的影响。该工作为理解SiC中辐照损伤对热性能的影响提供了方法基础。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation damage mechanisms in structural materials",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2606.27723v1",
+      "source": "arxiv",
+      "title": "Vacancy-mediated nitrogen diffusion and aggregation via high-fluence electron beam irradiation in HPHT synthesized diamond crystal",
+      "abstract": "The negatively charged nitrogen vacancy (NV-) center in diamonds is promising point defect for highly sensitive quantum sensing. The formation of high-density NV- centers is essential for improving sensitivity. We performed room-temperature electron beam irradiation (EBI) and annealing on nitrogen-doped high-pressure high-temperature diamond crystals to convert substitutional nitrogen into NV centers. In the low-fluence region of EBI, neutral substitutional nitrogen (Ns0) concentration decreased and NV0 and NV- center concentration increased with increasing EBI fluence. The decrease in Ns0 concentration was comparable to the increase in total NV center concentration; thus, the conversion from Ns0 to NV0 and NV- centers is a dominant defect formation process. In a high-fluence region, NV0 and NV- center and Ns0 and Ns+ concentrations decreased with increasing EBI fluence, indicating the formation of unknown nitrogen-related defects such as the H3 center, which is a nitrogen and vacancy aggregation defect. Although H3 centers were observed at high EBI fluence, their forming annealing temperature of 1375 +- 25 degrees Celsius was lower than the typically reported temperatures over 1600 degrees Celsius. We attribute this low-temperature formation to vacancy-mediated nitrogen diffusion and aggregation.",
+      "authors": [
+        "Chikara Shinei",
+        "Yuta Masuyama",
+        "Jun Chen",
+        "Hiroshi. Abe",
+        "Masashi Miyakawa",
+        "Takashi Taniguchi",
+        "Takeshi Ohshima",
+        "Tokuyuki Teraji"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ],
+      "published": "2026-06-26T05:11:20+00:00",
+      "link": "https://arxiv.org/pdf/2606.27723v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Radiation-induced point defects (vacancies) and nitrogen-vacancy defect clusters in diamond under electron irradiation",
+      "llm_evidence_cn": "电子辐照下金刚石中辐射诱导点缺陷（空位）及氮空位缺陷簇",
+      "llm_evidence": "电子辐照下金刚石中辐射诱导点缺陷（空位）及氮空位缺陷簇",
+      "canonical_evidence": "电子辐照下金刚石中辐射诱导点缺陷（空位）及氮空位缺陷簇",
+      "llm_tldr_en": "This paper studies vacancy-mediated nitrogen diffusion and aggregation to form NV centers under electron irradiation, relevant to radiation-induced point defects and clusters.",
+      "llm_tldr_cn": "该工作通过高注量电子束辐照和退火处理氮掺杂金刚石，研究空位介导的氮扩散与聚集形成氮空位（NV）中心的过程。结果显示低注量区中性取代氮浓度下降而NV中心浓度增加，证实了辐射诱导点缺陷的演化机制。这项工作为理解辐射条件下点缺陷行为提供了参考。",
+      "llm_tldr": "该工作通过高注量电子束辐照和退火处理氮掺杂金刚石，研究空位介导的氮扩散与聚集形成氮空位（NV）中心的过程。结果显示低注量区中性取代氮浓度下降而NV中心浓度增加，证实了辐射诱导点缺陷的演化机制。这项工作为理解辐射条件下点缺陷行为提供了参考。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation-induced point defects and clusters",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.00717v1",
+      "source": "arxiv",
+      "title": "Atomic Cluster Expansion Potentials for Screw Dislocations in BCC Refractory Metals",
+      "abstract": "Accurate atomistic modeling of screw dislocations in body-centered cubic (bcc) metals remains challenging because their plasticity is governed by a complex dislocation glide behavior due to their compact three-fold symmetric core structure and a strongly temperature-dependent flow stress induced by the large Peierls barrier. In the context of group 6 (V, Nb, Ta) and group 5 (Mo, W) refractory metals (RMs), both classical interatomic potentials and some machine learning potentials consistently fail to reproduce density functional theory (DFT) Peierls barriers and the glide plane. Here, we developed an array of atomic cluster expansion (ACE) potentials for these RMs by extending an existing DFT database. The developed ACE potentials significantly improve the description of screw dislocation properties, achieving near-DFT accuracy for Mo and W and substantial improvement for V, Nb, and Ta. The results show that transferability to screw dislocation behavior depends sensitively on both database composition and element-specific energetics, and that achieving a single-humped Peierls barrier alone is not a sufficient validation metric for accurate prediction of dislocation glide. For Nb, Mo, and W, the developed ACE models also enable reliable calculation of kink-pair activation enthalpies, which are well described by both Kocks' law and a line-tension model.",
+      "authors": [
+        "Lei Zhang",
+        "Francesco Maresca"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ],
+      "published": "2026-07-01T10:03:37+00:00",
+      "link": "https://arxiv.org/pdf/2607.00717v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "ACE potentials for screw dislocations in bcc refractory metals",
+      "llm_evidence_cn": "体心立方难熔金属中螺位错的原子团簇展开势",
+      "llm_evidence": "体心立方难熔金属中螺位错的原子团簇展开势",
+      "canonical_evidence": "体心立方难熔金属中螺位错的原子团簇展开势",
+      "llm_tldr_en": "Develops accurate atomic cluster expansion (ACE) potentials for screw dislocations in bcc refractory metals, reproducing DFT Peierls barriers and glide behavior.",
+      "llm_tldr_cn": "针对体心立方难熔金属中螺位错模拟的挑战，本文发展了原子团簇展开（ACE）势，显著提高了对Peierls势垒和滑移面的预测精度。这些势函数基于扩展的DFT数据库，能够准确描述位错核心结构和温度依赖的流动应力。该工作为位错动力学模拟提供了可靠的原子间势，有望推广至其他bcc合金如FeCr，以研究辐照下位错环的形成与演化。",
+      "llm_tldr": "针对体心立方难熔金属中螺位错模拟的挑战，本文发展了原子团簇展开（ACE）势，显著提高了对Peierls势垒和滑移面的预测精度。这些势函数基于扩展的DFT数据库，能够准确描述位错核心结构和温度依赖的流动应力。该工作为位错动力学模拟提供了可靠的原子间势，有望推广至其他bcc合金如FeCr，以研究辐照下位错环的形成与演化。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "dislocation loop formation in irradiated FeCr",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}
