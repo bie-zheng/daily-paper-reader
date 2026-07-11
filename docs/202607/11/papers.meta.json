@@ -1,0 +1,69 @@
+{
+  "label": "2026-07-11",
+  "date": "2026-07-11",
+  "generated_at": "2026-07-11T20:44:50",
+  "count": 4,
+  "papers": [
+    {
+      "paper_id": "202607/11/2607.06962v1-radiation-damage-cascades-in-fullerite-using-molecular-dynamics",
+      "section": "deep",
+      "title_en": "Radiation Damage Cascades in Fullerite Using Molecular Dynamics",
+      "authors": "Ethan P. Turner, Paolo Raiteri, Nigel A. Marks",
+      "date": "2026-07-08",
+      "pdf": "https://arxiv.org/pdf/2607.06962v1",
+      "score": "9.0",
+      "evidence": "使用分子动力学模拟辐射损伤级联",
+      "tldr": "富勒烯固体在辐射下表现出异常行为。本研究采用分子动力学模拟了0.1-1 keV的初级碰撞原子在C60晶体中的级联过程。由于分子间热传递弱，系统热化阶段持续数百皮秒。辐射损伤导致C60分子相互交联，且交联分子数与新生成的sp3原子数呈线性关系。计算得到的阈值位移能为18 eV，与实验一致。",
+      "tags": "query:rad-damage",
+      "abstract_en": "Molecular dynamics is used to study radiation cascades in solid C60 under ambient conditions. Simulations are performed for Primary Knock-On Atom (PKA) energies from 0.1 to 1 keV, and cascades are sampled over many PKA directions to collect statistics. Energies and forces are described using the Environment Dependent Interaction Potential for carbon paired with the Ziegler-Biersack-Littmark potential for short-range interactions, and cascade behaviour is characterized by tracking kinetic energy, hybridization and bond connectivity as a function of time. Compared to most materials, fullerite exhibits an unusual radiation response due to weak thermal transfer between C60 molecules leading to a thermalization phase lasting hundreds of picoseconds. The cascades damage the C60 molecules and link them together, and a linear relation is found between the number of cross-linked molecules and the number of new sp3 atoms. The threshold displacement energy computed is 18 eV, in agreement with experiments",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202607/11/2607.07092v1-unveiling-nanoscale-surface-damage-dynamics-in-swift-heavy-ion-irradiated-gallium-nitride",
+      "section": "deep",
+      "title_en": "Unveiling Nanoscale Surface Damage Dynamics in Swift Heavy Ion Irradiated Gallium Nitride",
+      "authors": "Jiayu Liang, Shaowei He, Wenlong Liao, Tan Shi, Hang Zang, Yonghong Li, Wenbo Liu, Xiaojun Fu, Chuanjian Yao, Huan He, Jianan Wei, Chaohui He",
+      "date": "2026-07-08",
+      "pdf": "https://arxiv.org/pdf/2607.07092v1",
+      "score": "8.0",
+      "evidence": "快重离子辐照下氮化镓纳米表面损伤动力学的研究",
+      "tldr": "快速重离子辐照氮化镓表面形成两种hillock形态：低能损Kr辐照产生钟形hillock，高能损Ta辐照产生带中心孔的火山口状hillock。富Ga的亚稳态闪锌矿纳米域优先聚集在hillock周边和侧壁，与螺旋位错高度相关。高温（>1200 K）降低液态Ga粘度和表面张力，促进穿透性纳米通道形成，但不改变hillock基本形态。本研究揭示了能损和温度对hillock形成与演化的原子机制，为耐辐照材料设计提供新见解。",
+      "tags": "query:rad-damage",
+      "abstract_en": "This work systematically unveils the nanoscale surface damage dynamics in gallium nitride by investigating the atomistic mechanisms of hillock formation. The results identify two distinct hillock morphologies dependent on electronic energy loss (Se) values. Bell-shaped hillocks form under 18.2 keV/nm Kr irradiation, whereas crater-rim hillocks with central holes emerge under 40.2 keV/nm Ta irradiation. Microstructural analysis reveals that Ga-rich hillocks are accompanied by the generation of metastable zincblende nanodomains. These nanodomains preferentially aggregate around the periphery or sidewalls of the hillocks and exhibit a high spatial correlation with screw dislocations. Further temperature-dependent studies indicate that elevated temperatures significantly enlarge the overall dimensions of the hillock structures without altering their fundamental morphologies. Notably, under Ta irradiation above 1200 K, the high temperatures drastically reduce the viscosity and surface tension of liquid gallium. This enhanced fluidity of the transient molten phase promotes the formation of penetrating nanochannels.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202607/11/2607.03914v1-runaway-electron-induced-explosions-of-graphite-modeling-versus-controlled-diii-d-experiments",
+      "section": "quick",
+      "title_en": "Runaway electron induced explosions of graphite; modeling versus controlled DIII-D experiments",
+      "authors": "T. Rizzi, A. Kavroulakis, S. Ratynskaia, P. Tolias, M. Tatarakis, E. Kaselouris, V. Dimitriou, E. Hollmann, F. Brochard, A. Kulachenko, M. Beidler, C. Lasnier, R. A. Pitts",
+      "date": "2026-07-04",
+      "pdf": "https://arxiv.org/pdf/2607.03914v1",
+      "score": "6.0",
+      "evidence": "逃逸电子撞击石墨的热力学响应建模",
+      "tldr": "针对逃逸电子（RE）冲击石墨的热机械响应，现有模型仅考虑线性热弹性及失效起始。本研究将其扩展至非线性损伤阶段，引入Johnson-Holmquist塑性模型和基于有效塑性应变的失效准则，并耦合有限元分析与光滑粒子流体动力学（SPH），实现了材料碎片化与飞散模拟。该模型成功复现了DIII-D装置上两次RE损伤实验的结果。此工作为最终定量描述钨对RE的响应迈出了关键一步。",
+      "tags": "query:rad-damage",
+      "abstract_en": "The state-of-the-art concerning the modeling of the thermomechanical response of graphite to runaway electron (RE) impact is based on one-way coupled linear thermoelasticity combined with Rankine's strength-based failure criterion and limited to the onset of material failure. Here, the predictive capabilities are extended to the nonlinear damage phase characterized by material fragmentation and debris expulsion. This is achieved by introducing plasticity via the Johnson-Holmquist constitutive model, adopting an effective plastic strain-based failure criterion and coupling finite element analysis with smoothed-particle hydrodynamics. The extended thermomechanical model is successfully benchmarked against the results of two controlled RE-induced damage experiments recently carried out in DIII-D. This constitutes an important step towards the final objective of quantitatively describing the thermomechanical response of tungsten to REs.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202607/11/2607.07456v1-a-multi-scale-machine-learning-framework-for-coupled-chemical-spin-and-structural-disorder-in-alloys",
+      "section": "quick",
+      "title_en": "A Multi-Scale Machine Learning Framework for Coupled Chemical, Spin, and Structural Disorder in Alloys",
+      "authors": "Zhenyao Fang, Qimin Yan",
+      "date": "2026-07-08",
+      "pdf": "https://arxiv.org/pdf/2607.07456v1",
+      "score": "6.0",
+      "evidence": "适用于辐照诱导缺陷演化的合金无序多尺度机器学习框架",
+      "tldr": "无序磁性合金的热力学性质受化学、自旋和结构无序耦合影响，现有框架难以统一处理。本文提出多尺度机器学习框架，集成图神经网络和机器学习原子间势进行能量预测，结合蒙特卡洛与分子动力学采样。应用于Fe-Co-C合金，准确预测了Fe-Co的有序-无序转变温度（1000 K）和熔化温度（1690 K），与实验值（1006 K、约1700 K）高度吻合，并揭示了碳掺杂引起的结构转变。该框架为高熵合金、多铁材料等复杂无序系统提供了可靠研究工具。",
+      "tags": "query:rad-damage",
+      "abstract_en": "Understanding the thermodynamic properties of disordered magnetic alloys requires a unified treatment of configurational (chemical, spin, etc.) and structural degrees of freedom, which has remained beyond the scope of existing computational frameworks. Here we present a general framework that integrates machine learning models (such as graph neural networks and machine learning interatomic potentials) and statistical sampling methods (such as Monte Carlo and molecular dynamics simulations) to study the coupled chemical, spin, and structural disorder in alloys. We demonstrate the framework on body-centered-cubic Fe-Co alloys with interstitial carbon dopants, where the Fe-Co host exhibits intrinsic chemical and spin disorder, and the interstitial carbon introduces additional structural disorder through local lattice distortions, making the system a prototypical multi-disorder magnetic alloy. The framework predicts the order-to-disorder phase transition temperature and the melting temperature of Fe-Co alloy to be 1,000 K and 1,690 K, in excellent agreement with the experimentally measured values of 1,006 K and approximately 1,700 K, respectively. It also predicts the tetragonal-to-nearly-cubic structural transitions in Fe-Co-C alloy as temperature increases. These results establish the framework as a reliable tool for studying multi-disorder alloys, with applications to complex disordered systems such as high-entropy alloys, multiferroics, and spintronic devices.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

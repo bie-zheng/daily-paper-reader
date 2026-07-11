@@ -1,0 +1,184 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-11T20:41:46.343340+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 2,
+    "deep_cap": 6,
+    "deep_selected": 2,
+    "quick_candidates": 2,
+    "quick_skim_target": 11,
+    "quick_selected": 2
+  },
+  "deep_dive": [
+    {
+      "id": "2607.06962v1",
+      "source": "arxiv",
+      "title": "Radiation Damage Cascades in Fullerite Using Molecular Dynamics",
+      "abstract": "Molecular dynamics is used to study radiation cascades in solid C60 under ambient conditions. Simulations are performed for Primary Knock-On Atom (PKA) energies from 0.1 to 1 keV, and cascades are sampled over many PKA directions to collect statistics. Energies and forces are described using the Environment Dependent Interaction Potential for carbon paired with the Ziegler-Biersack-Littmark potential for short-range interactions, and cascade behaviour is characterized by tracking kinetic energy, hybridization and bond connectivity as a function of time. Compared to most materials, fullerite exhibits an unusual radiation response due to weak thermal transfer between C60 molecules leading to a thermalization phase lasting hundreds of picoseconds. The cascades damage the C60 molecules and link them together, and a linear relation is found between the number of cross-linked molecules and the number of new sp3 atoms. The threshold displacement energy computed is 18 eV, in agreement with experiments",
+      "authors": [
+        "Ethan P. Turner",
+        "Paolo Raiteri",
+        "Nigel A. Marks"
+      ],
+      "primary_category": "physics.comp-ph",
+      "categories": [
+        "physics.comp-ph",
+        "cond-mat.mtrl-sci"
+      ],
+      "published": "2026-07-08T03:40:16+00:00",
+      "link": "https://arxiv.org/pdf/2607.06962v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "radiation damage cascades simulation with molecular dynamics",
+      "llm_evidence_cn": "使用分子动力学模拟辐射损伤级联",
+      "llm_evidence": "使用分子动力学模拟辐射损伤级联",
+      "canonical_evidence": "使用分子动力学模拟辐射损伤级联",
+      "llm_tldr_en": "Uses molecular dynamics to study radiation cascades in fullerite, tracking kinetic energy and bond connectivity for various PKA energies, revealing unusual long thermalization phase.",
+      "llm_tldr_cn": "该文采用分子动力学模拟富勒烯（C60固体）中的辐射损伤级联过程。通过追踪动能、杂化和键连性随时间演化，揭示了富勒烯因分子间弱热传导而出现长达数百皮秒的热化相，这是与其他材料不同的辐照响应。研究为理解绝缘性结构材料的辐射损伤机制提供了计算方法和物理图像。",
+      "llm_tldr": "该文采用分子动力学模拟富勒烯（C60固体）中的辐射损伤级联过程。通过追踪动能、杂化和键连性随时间演化，揭示了富勒烯因分子间弱热传导而出现长达数百皮秒的热化相，这是与其他材料不同的辐照响应。研究为理解绝缘性结构材料的辐射损伤机制提供了计算方法和物理图像。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation damage mechanisms in structural materials",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.07092v1",
+      "source": "arxiv",
+      "title": "Unveiling Nanoscale Surface Damage Dynamics in Swift Heavy Ion Irradiated Gallium Nitride",
+      "abstract": "This work systematically unveils the nanoscale surface damage dynamics in gallium nitride by investigating the atomistic mechanisms of hillock formation. The results identify two distinct hillock morphologies dependent on electronic energy loss (Se) values. Bell-shaped hillocks form under 18.2 keV/nm Kr irradiation, whereas crater-rim hillocks with central holes emerge under 40.2 keV/nm Ta irradiation. Microstructural analysis reveals that Ga-rich hillocks are accompanied by the generation of metastable zincblende nanodomains. These nanodomains preferentially aggregate around the periphery or sidewalls of the hillocks and exhibit a high spatial correlation with screw dislocations. Further temperature-dependent studies indicate that elevated temperatures significantly enlarge the overall dimensions of the hillock structures without altering their fundamental morphologies. Notably, under Ta irradiation above 1200 K, the high temperatures drastically reduce the viscosity and surface tension of liquid gallium. This enhanced fluidity of the transient molten phase promotes the formation of penetrating nanochannels.",
+      "authors": [
+        "Jiayu Liang",
+        "Shaowei He",
+        "Wenlong Liao",
+        "Tan Shi",
+        "Hang Zang",
+        "Yonghong Li",
+        "Wenbo Liu",
+        "Xiaojun Fu",
+        "Chuanjian Yao",
+        "Huan He",
+        "Jianan Wei",
+        "Chaohui He"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ],
+      "published": "2026-07-08T07:26:29+00:00",
+      "link": "https://arxiv.org/pdf/2607.07092v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "study of nanoscale surface damage dynamics under swift heavy ion irradiation in GaN",
+      "llm_evidence_cn": "快重离子辐照下氮化镓纳米表面损伤动力学的研究",
+      "llm_evidence": "快重离子辐照下氮化镓纳米表面损伤动力学的研究",
+      "canonical_evidence": "快重离子辐照下氮化镓纳米表面损伤动力学的研究",
+      "llm_tldr_en": "Systematically investigates hillock formation on GaN under swift heavy ion irradiation, revealing two distinct morphologies and related nanodomain structures.",
+      "llm_tldr_cn": "本文系统揭示了快重离子辐照氮化镓表面纳米损伤动力学。研究发现两种不同形貌的丘状结构：Kr辐照形成钟形丘，Ta辐照形成带有中心孔的环形丘。微观分析表明富镓丘伴随亚稳闪锌矿纳米域生成，且与螺位错高度相关。该工作为理解半导体材料辐照损伤机制提供了重要实验依据，可用于评估器件可靠性。",
+      "llm_tldr": "本文系统揭示了快重离子辐照氮化镓表面纳米损伤动力学。研究发现两种不同形貌的丘状结构：Kr辐照形成钟形丘，Ta辐照形成带有中心孔的环形丘。微观分析表明富镓丘伴随亚稳闪锌矿纳米域生成，且与螺位错高度相关。该工作为理解半导体材料辐照损伤机制提供了重要实验依据，可用于评估器件可靠性。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation damage mechanisms in structural materials",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2607.03914v1",
+      "source": "arxiv",
+      "title": "Runaway electron induced explosions of graphite; modeling versus controlled DIII-D experiments",
+      "abstract": "The state-of-the-art concerning the modeling of the thermomechanical response of graphite to runaway electron (RE) impact is based on one-way coupled linear thermoelasticity combined with Rankine's strength-based failure criterion and limited to the onset of material failure. Here, the predictive capabilities are extended to the nonlinear damage phase characterized by material fragmentation and debris expulsion. This is achieved by introducing plasticity via the Johnson-Holmquist constitutive model, adopting an effective plastic strain-based failure criterion and coupling finite element analysis with smoothed-particle hydrodynamics. The extended thermomechanical model is successfully benchmarked against the results of two controlled RE-induced damage experiments recently carried out in DIII-D. This constitutes an important step towards the final objective of quantitatively describing the thermomechanical response of tungsten to REs.",
+      "authors": [
+        "T. Rizzi",
+        "A. Kavroulakis",
+        "S. Ratynskaia",
+        "P. Tolias",
+        "M. Tatarakis",
+        "E. Kaselouris",
+        "V. Dimitriou",
+        "E. Hollmann",
+        "F. Brochard",
+        "A. Kulachenko",
+        "M. Beidler",
+        "C. Lasnier",
+        "R. A. Pitts"
+      ],
+      "primary_category": "physics.plasm-ph",
+      "categories": [
+        "physics.plasm-ph",
+        "cond-mat.mtrl-sci"
+      ],
+      "published": "2026-07-04T15:17:53+00:00",
+      "link": "https://arxiv.org/pdf/2607.03914v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "modeling thermomechanical response of graphite to runaway electron impact",
+      "llm_evidence_cn": "逃逸电子撞击石墨的热力学响应建模",
+      "llm_evidence": "逃逸电子撞击石墨的热力学响应建模",
+      "canonical_evidence": "逃逸电子撞击石墨的热力学响应建模",
+      "llm_tldr_en": "Extends thermomechanical model for graphite under runaway electron impact to nonlinear damage phase using plasticity and coupled FEM-SPH, benchmarked against DIII-D experiments.",
+      "llm_tldr_cn": "该文将石墨受逃逸电子冲击的热力学响应模型从线性弹性扩展到非线性损伤阶段（碎片化、抛射）。引入Johnson-Holmquist塑性模型和有效塑性应变破坏准则，结合有限元和光滑粒子流体动力学进行耦合模拟，并在DIII-D托卡马克实验中得到验证。研究为聚变堆中面向等离子体材料的辐射损伤机制提供了更准确的预测工具。",
+      "llm_tldr": "该文将石墨受逃逸电子冲击的热力学响应模型从线性弹性扩展到非线性损伤阶段（碎片化、抛射）。引入Johnson-Holmquist塑性模型和有效塑性应变破坏准则，结合有限元和光滑粒子流体动力学进行耦合模拟，并在DIII-D托卡马克实验中得到验证。研究为聚变堆中面向等离子体材料的辐射损伤机制提供了更准确的预测工具。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation damage mechanisms in structural materials",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.07456v1",
+      "source": "arxiv",
+      "title": "A Multi-Scale Machine Learning Framework for Coupled Chemical, Spin, and Structural Disorder in Alloys",
+      "abstract": "Understanding the thermodynamic properties of disordered magnetic alloys requires a unified treatment of configurational (chemical, spin, etc.) and structural degrees of freedom, which has remained beyond the scope of existing computational frameworks. Here we present a general framework that integrates machine learning models (such as graph neural networks and machine learning interatomic potentials) and statistical sampling methods (such as Monte Carlo and molecular dynamics simulations) to study the coupled chemical, spin, and structural disorder in alloys. We demonstrate the framework on body-centered-cubic Fe-Co alloys with interstitial carbon dopants, where the Fe-Co host exhibits intrinsic chemical and spin disorder, and the interstitial carbon introduces additional structural disorder through local lattice distortions, making the system a prototypical multi-disorder magnetic alloy. The framework predicts the order-to-disorder phase transition temperature and the melting temperature of Fe-Co alloy to be 1,000 K and 1,690 K, in excellent agreement with the experimentally measured values of 1,006 K and approximately 1,700 K, respectively. It also predicts the tetragonal-to-nearly-cubic structural transitions in Fe-Co-C alloy as temperature increases. These results establish the framework as a reliable tool for studying multi-disorder alloys, with applications to complex disordered systems such as high-entropy alloys, multiferroics, and spintronic devices.",
+      "authors": [
+        "Zhenyao Fang",
+        "Qimin Yan"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ],
+      "published": "2026-07-08T14:25:23+00:00",
+      "link": "https://arxiv.org/pdf/2607.07456v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "multi-scale ML framework for alloy disorder applicable to radiation-induced defect evolution",
+      "llm_evidence_cn": "适用于辐照诱导缺陷演化的合金无序多尺度机器学习框架",
+      "llm_evidence": "适用于辐照诱导缺陷演化的合金无序多尺度机器学习框架",
+      "canonical_evidence": "适用于辐照诱导缺陷演化的合金无序多尺度机器学习框架",
+      "llm_tldr_en": "Presents a multi-scale ML framework integrating GNNs and interatomic potentials to study coupled disorder in alloys, demonstrable on Fe-Co, with potential for modeling radiation damage microstructures.",
+      "llm_tldr_cn": "本文提出了一种多尺度机器学习框架，结合图神经网络和机器学习原子间势，统一处理合金中化学、自旋和结构无序。在Fe-Co合金上验证了该方法。该框架可扩展到辐照条件下合金的缺陷演化和微观结构变化研究，为辐照损伤模拟提供了新工具。",
+      "llm_tldr": "本文提出了一种多尺度机器学习框架，结合图神经网络和机器学习原子间势，统一处理合金中化学、自旋和结构无序。在Fe-Co合金上验证了该方法。该框架可扩展到辐照条件下合金的缺陷演化和微观结构变化研究，为辐照损伤模拟提供了新工具。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation induced defect evolution and microstructure changes",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
