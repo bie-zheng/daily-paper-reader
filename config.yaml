@@ -25,3 +25,65 @@ subscriptions:
     stage: A
     diff_threshold_pct: 15
   keyword_recall_mode: or
+  intent_profiles:
+    - tag: rad-damage
+      description: 辐照损伤FeCr合金B2相增强相关论文检索
+      enabled: true
+      paper_sources:
+        - arxiv
+      keywords:
+        - keyword: radiation damage
+          keyword_cn: 辐照损伤
+          query: radiation damage mechanisms in structural materials
+        - keyword: radiation defects
+          keyword_cn: 辐射缺陷
+          query: radiation-induced point defects and clusters
+        - keyword: B2 phase
+          keyword_cn: B2相
+          query: B2 phase strengthening in irradiated alloys
+        - keyword: precipitation hardening
+          keyword_cn: 沉淀强化
+          query: precipitation hardening in irradiated FeCr alloys
+        - keyword: oxide dispersion strengthened
+          keyword_cn: 氧化物弥散强化
+          query: oxide dispersion strengthened FeCr alloys radiation resistance
+        - keyword: dislocation loops
+          keyword_cn: 位错环
+          query: dislocation loop formation in irradiated FeCr
+      intent_queries:
+        - query: radiation induced defect evolution and microstructure changes
+          query_cn: 辐射诱导缺陷演化与微结构变化
+          enabled: true
+          source: manual
+          note: ''
+        - query: Studies on radiation damage in FeCr alloys with B2 phase strengthening
+          query_cn: B2相强化FeCr合金辐照损伤研究
+          enabled: true
+          source: manual
+          note: ''
+        - query: Microstructure evolution of B2 phase in FeCr alloys under irradiation
+          query_cn: 辐照下FeCr合金中B2相的微观结构演变
+          enabled: true
+          source: manual
+          note: ''
+        - query: Effect of second phase on radiation resistance of FeCr alloys
+          query_cn: 第二相对FeCr合金抗辐照性能的影响
+          enabled: true
+          source: manual
+          note: ''
+      updated_at: '2026-07-11T12:06:22.611Z'
+source_backends:
+  arxiv:
+    papers_table: arxiv_papers
+    use_vector_rpc: true
+    vector_rpc: match_arxiv_papers
+    vector_rpc_exact: match_arxiv_papers_exact
+    use_bm25_rpc: true
+    bm25_rpc: match_arxiv_papers_bm25
+    sync_table: arxiv_sync_status
+    sync_success_value: success
+    schema: public
+    kind: supabase
+    enabled: true
+    url: https://lyucdwgefyfbmaiopjbk.supabase.co
+    anon_key: sb_publishable_lX-oi64Uxyd7SIVv3_w2Uw_MTOojeKq
