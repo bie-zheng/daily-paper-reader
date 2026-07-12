@@ -1,6 +1,9 @@
 * <a class="dpr-sidebar-root-link" href="#/">首页</a>
 * <a class="dpr-sidebar-root-link dpr-sidebar-noactive-link" href="javascript:void(0)" data-dpr-hash="#/tutorial/README">使用教程</a>
 * Daily Papers
+  * 2026-07-12 <!--dpr-date:20260712-->
+    * 速读区
+      * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202607/12/2607.04680v1-a-physics-regulated-neural-framework-for-learning-3d-grain-growth-dynamics" data-sidebar-item="{&quot;title&quot;: &quot;A Physics-Regulated Neural Framework for Learning 3D Grain Growth Dynamics&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2607.04680v1-a-physics-regulated-neural-framework-for-learning-3d-grain-growth-dynamics&quot;, &quot;score&quot;: &quot;6.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;rad-damage&quot;}], &quot;evidence&quot;: &quot;适用于辐照微观结构演化的晶粒生长方法&quot;}">A Physics-Regulated Neural Framework for Learning 3D Grain Growth Dynamics</a>
   * 2026-07-11 <!--dpr-date:20260711-->
     * 精读区
       * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202607/11/2607.06962v1-radiation-damage-cascades-in-fullerite-using-molecular-dynamics" data-sidebar-item="{&quot;title&quot;: &quot;Radiation Damage Cascades in Fullerite Using Molecular Dynamics&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2607.06962v1-radiation-damage-cascades-in-fullerite-using-molecular-dynamics&quot;, &quot;score&quot;: &quot;9.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;rad-damage&quot;}], &quot;evidence&quot;: &quot;使用分子动力学模拟辐射损伤级联&quot;}">Radiation Damage Cascades in Fullerite Using Molecular Dynamics</a>

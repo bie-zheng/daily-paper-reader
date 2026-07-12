@@ -1,0 +1,24 @@
+{
+  "label": "2026-07-12",
+  "date": "2026-07-12",
+  "generated_at": "2026-07-12T20:18:23",
+  "count": 1,
+  "papers": [
+    {
+      "paper_id": "202607/12/2607.04680v1-a-physics-regulated-neural-framework-for-learning-3d-grain-growth-dynamics",
+      "section": "quick",
+      "title_en": "A Physics-Regulated Neural Framework for Learning 3D Grain Growth Dynamics",
+      "authors": "Zhihui Tian, Kang Yang, Michael Tonks, Amanda R. Krause, Joel B. Harley",
+      "date": "2026-07-06",
+      "pdf": "https://arxiv.org/pdf/2607.04680v1",
+      "score": "6.0",
+      "evidence": "适用于辐照微观结构演化的晶粒生长方法",
+      "tldr": "三维晶粒生长受晶界能减少驱动，具有统计标度律。现有数据驱动模型难以保持物理不变性和计算可扩展性。本文提出3D-PRIMME框架，仅用两个连续时间步训练，即可准确再现线性粗化定律和拓扑统计，且无需重新训练即可应用到网格点数量增加3个数量级的更大系统，证明其学习到与尺度无关的局部演化规则，实现高效鲁棒的大规模三维微结构演化预测。",
+      "tags": "query:rad-damage",
+      "abstract_en": "Grain growth is governed by the reduction in grain boundary energy and exhibits well-established statistical scaling laws. Developing data-driven surrogates that preserve these physical invariants while remaining computationally scalable remains challenging, especially in 3D. We present 3D-PRIMME (Physics-Regulated Interpretable Machine Learning for Microstructure Evolution) for learning three-dimensional grain growth dynamics. The model is trained using only two consecutive time steps yet accurately reproduces the linear coarsening law and preserves topological statistics over extended time scales. Despite being trained on a $100^3$ grid points with 512 grains, the learned evolution operator is applied to domains up to $1024^3$ grid points with 550000 grains without retraining, maintaining consistent kinetics and grain topology across orders-of-magnitude increases in system size. These results demonstrate that 3D-PRIMME learns a scale-independent and temporally stable local evolution rule, enabling efficient and robust large-scale surrogate prediction of 3D microstructure evolution.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

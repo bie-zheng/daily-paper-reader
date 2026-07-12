@@ -1,0 +1,57 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-12T20:17:16.808035+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 1,
+    "quick_skim_target": 11,
+    "quick_selected": 1
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2607.04680v1",
+      "source": "arxiv",
+      "title": "A Physics-Regulated Neural Framework for Learning 3D Grain Growth Dynamics",
+      "abstract": "Grain growth is governed by the reduction in grain boundary energy and exhibits well-established statistical scaling laws. Developing data-driven surrogates that preserve these physical invariants while remaining computationally scalable remains challenging, especially in 3D. We present 3D-PRIMME (Physics-Regulated Interpretable Machine Learning for Microstructure Evolution) for learning three-dimensional grain growth dynamics. The model is trained using only two consecutive time steps yet accurately reproduces the linear coarsening law and preserves topological statistics over extended time scales. Despite being trained on a $100^3$ grid points with 512 grains, the learned evolution operator is applied to domains up to $1024^3$ grid points with 550000 grains without retraining, maintaining consistent kinetics and grain topology across orders-of-magnitude increases in system size. These results demonstrate that 3D-PRIMME learns a scale-independent and temporally stable local evolution rule, enabling efficient and robust large-scale surrogate prediction of 3D microstructure evolution.",
+      "authors": [
+        "Zhihui Tian",
+        "Kang Yang",
+        "Michael Tonks",
+        "Amanda R. Krause",
+        "Joel B. Harley"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "physics.comp-ph"
+      ],
+      "published": "2026-07-06T05:08:57+00:00",
+      "link": "https://arxiv.org/pdf/2607.04680v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "methodology for grain growth applicable to irradiated microstructure evolution",
+      "llm_evidence_cn": "适用于辐照微观结构演化的晶粒生长方法",
+      "llm_evidence": "适用于辐照微观结构演化的晶粒生长方法",
+      "canonical_evidence": "适用于辐照微观结构演化的晶粒生长方法",
+      "llm_tldr_en": "A physics-regulated neural framework learns 3D grain growth dynamics from only two time steps, accurately reproducing scaling laws and topological statistics, enabling application to large domains; transferable to irradiated microstructure evolution.",
+      "llm_tldr_cn": "针对数据驱动晶粒生长模型难以保持物理不变性和可扩展性的问题，本文提出3D-PRIMME框架，将物理规律（如晶界能减小）整合到神经网络中，仅用两个连续时间步训练便能准确再现线性粗化定律和拓扑统计量。该模型在100^3网格训练后可直接应用于1024^3网格，展现出良好的外推能力。该框架可迁移至辐照条件下微观结构演化研究，为预测辐照损伤提供高效工具。",
+      "llm_tldr": "针对数据驱动晶粒生长模型难以保持物理不变性和可扩展性的问题，本文提出3D-PRIMME框架，将物理规律（如晶界能减小）整合到神经网络中，仅用两个连续时间步训练便能准确再现线性粗化定律和拓扑统计量。该模型在100^3网格训练后可直接应用于1024^3网格，展现出良好的外推能力。该框架可迁移至辐照条件下微观结构演化研究，为预测辐照损伤提供高效工具。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation induced defect evolution and microstructure changes",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
