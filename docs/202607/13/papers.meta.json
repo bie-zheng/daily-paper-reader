@@ -1,0 +1,24 @@
+{
+  "label": "2026-07-13",
+  "date": "2026-07-13",
+  "generated_at": "2026-07-13T21:19:57",
+  "count": 1,
+  "papers": [
+    {
+      "paper_id": "202607/13/2607.09356v1-scale-bridging-phase-field-modeling-of-microstructure-evolution-by-fe2-computational-homogenization",
+      "section": "quick",
+      "title_en": "Scale-Bridging Phase-Field Modeling of Microstructure Evolution by FE$^2$ Computational Homogenization",
+      "authors": "Geralf Hütter, Fenil Lathiya, Vincent von Oertzen, Bjoern Kiefer",
+      "date": "2026-07-10",
+      "pdf": "https://arxiv.org/pdf/2607.09356v1",
+      "score": "6.0",
+      "evidence": "相场模型模拟微观结构演化，可应用于辐射诱导的变化",
+      "tldr": "相场模型模拟微观结构演化计算量大，工程应用受限。本文提出基于Gurtin微力与Hill-Mandel条件的均质化框架，建立微观RVE边界值问题。采用FE^2计算两尺度实现，验证了Allen-Cahn模型与应力驱动马氏体相变。结果表明该方法能可靠预测宏观平均场的时空演化。",
+      "tags": "query:rad-damage",
+      "abstract_en": "Phase-field models have become a standard tool for simulating complex microstructure evolution in materials, but their application to engineering-scale components is often hindered by prohibitive computational costs arising from the need to resolve fine-scale features. To address this challenge, we propose a consistent homogenization framework for phase-field theory. By enforcing a Hill-Mandel-type condition of micro-homogeneity formulated in terms of Gurtin's microforces, a well-posed boundary value problem is derived for the representative volume element (RVE), establishing rigorous micro-macro relations for both the order parameter and its gradient.   The theory is implemented within a computational two-scale (FE$^2$) scheme and validated against direct numerical simulations. Two distinct examples are investigated: a minimal Allen-Cahn model and a mechanically-coupled model for stress-driven martensitic phase transformation. The results demonstrate that the proposed framework can reliably predict the spatial and temporal evolution of the macroscopically averaged fields with reasonable accuracy.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

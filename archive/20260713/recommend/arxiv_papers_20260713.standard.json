@@ -1,0 +1,55 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-13T21:18:56.097776+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 1,
+    "quick_skim_target": 11,
+    "quick_selected": 1
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2607.09356v1",
+      "source": "arxiv",
+      "title": "Scale-Bridging Phase-Field Modeling of Microstructure Evolution by FE$^2$ Computational Homogenization",
+      "abstract": "Phase-field models have become a standard tool for simulating complex microstructure evolution in materials, but their application to engineering-scale components is often hindered by prohibitive computational costs arising from the need to resolve fine-scale features. To address this challenge, we propose a consistent homogenization framework for phase-field theory. By enforcing a Hill-Mandel-type condition of micro-homogeneity formulated in terms of Gurtin's microforces, a well-posed boundary value problem is derived for the representative volume element (RVE), establishing rigorous micro-macro relations for both the order parameter and its gradient.   The theory is implemented within a computational two-scale (FE$^2$) scheme and validated against direct numerical simulations. Two distinct examples are investigated: a minimal Allen-Cahn model and a mechanically-coupled model for stress-driven martensitic phase transformation. The results demonstrate that the proposed framework can reliably predict the spatial and temporal evolution of the macroscopically averaged fields with reasonable accuracy.",
+      "authors": [
+        "Geralf Hütter",
+        "Fenil Lathiya",
+        "Vincent von Oertzen",
+        "Bjoern Kiefer"
+      ],
+      "primary_category": "physics.comp-ph",
+      "categories": [
+        "physics.comp-ph"
+      ],
+      "published": "2026-07-10T12:34:06+00:00",
+      "link": "https://arxiv.org/pdf/2607.09356v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Phase-field modeling for microstructure evolution, applicable to radiation-induced changes",
+      "llm_evidence_cn": "相场模型模拟微观结构演化，可应用于辐射诱导的变化",
+      "llm_evidence": "相场模型模拟微观结构演化，可应用于辐射诱导的变化",
+      "canonical_evidence": "相场模型模拟微观结构演化，可应用于辐射诱导的变化",
+      "llm_tldr_en": "This work proposes a consistent homogenization framework for phase-field models via FE^2, enabling efficient multiscale simulation of microstructure evolution with rigorous micro-macro coupling. The approach is broadly applicable to materials under irradiation for studying defect and microstructure evolution.",
+      "llm_tldr_cn": "现有相场模型在模拟工程尺度微观结构演化时面临计算成本过高的问题。本文提出一种基于FE^2计算均匀化的尺度桥接相场框架，通过Hill-Mandel型微观均匀条件建立严格的多尺度关系。该理论实现了微-宏观耦合并可在两尺度上求解。该方法为研究辐照诱导的缺陷演化和微观结构变化提供了一种高效的多尺度模拟途径，适用于FeCr合金等结构材料。",
+      "llm_tldr": "现有相场模型在模拟工程尺度微观结构演化时面临计算成本过高的问题。本文提出一种基于FE^2计算均匀化的尺度桥接相场框架，通过Hill-Mandel型微观均匀条件建立严格的多尺度关系。该理论实现了微-宏观耦合并可在两尺度上求解。该方法为研究辐照诱导的缺陷演化和微观结构变化提供了一种高效的多尺度模拟途径，适用于FeCr合金等结构材料。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation induced defect evolution and microstructure changes",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

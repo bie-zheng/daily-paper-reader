@@ -1,6 +1,9 @@
 * <a class="dpr-sidebar-root-link" href="#/">首页</a>
 * <a class="dpr-sidebar-root-link dpr-sidebar-noactive-link" href="javascript:void(0)" data-dpr-hash="#/tutorial/README">使用教程</a>
 * Daily Papers
+  * 2026-07-13 <!--dpr-date:20260713-->
+    * 速读区
+      * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202607/13/2607.09356v1-scale-bridging-phase-field-modeling-of-microstructure-evolution-by-fe2-computational-homogenization" data-sidebar-item="{&quot;title&quot;: &quot;Scale-Bridging Phase-Field Modeling of Microstructure Evolution by FE$^2$ Computational Homogenization&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2607.09356v1-scale-bridging-phase-field-modeling-of-microstructure-evolution-by-fe2-computational-homogenization&quot;, &quot;score&quot;: &quot;6.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;rad-damage&quot;}], &quot;evidence&quot;: &quot;相场模型模拟微观结构演化，可应用于辐射诱导的变化&quot;}">Scale-Bridging Phase-Field Modeling of Microstructure Evolution by FE$^2$ Computational Homogenization</a>
   * 2026-07-12 <!--dpr-date:20260712-->
     * 速读区
       * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202607/12/2607.04680v1-a-physics-regulated-neural-framework-for-learning-3d-grain-growth-dynamics" data-sidebar-item="{&quot;title&quot;: &quot;A Physics-Regulated Neural Framework for Learning 3D Grain Growth Dynamics&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2607.04680v1-a-physics-regulated-neural-framework-for-learning-3d-grain-growth-dynamics&quot;, &quot;score&quot;: &quot;6.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;rad-damage&quot;}], &quot;evidence&quot;: &quot;适用于辐照微观结构演化的晶粒生长方法&quot;}">A Physics-Regulated Neural Framework for Learning 3D Grain Growth Dynamics</a>
