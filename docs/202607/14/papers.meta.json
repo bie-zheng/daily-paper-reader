@@ -1,0 +1,39 @@
+{
+  "label": "2026-07-14",
+  "date": "2026-07-14",
+  "generated_at": "2026-07-14T21:28:23",
+  "count": 2,
+  "papers": [
+    {
+      "paper_id": "202607/14/2607.11253v1-impact-of-electronic-energy-dissipation-on-primary-radiation-damage-formation-in-silicon",
+      "section": "deep",
+      "title_en": "Impact of Electronic Energy Dissipation on Primary Radiation Damage Formation in Silicon",
+      "authors": "Nadezda Korepanova, Rafael Nuñez-Palacio, Andrea E. Sand",
+      "date": "2026-07-13",
+      "pdf": "https://arxiv.org/pdf/2607.11253v1",
+      "score": "9.0",
+      "evidence": "直接研究硅中初级辐射损伤形成，使用分子动力学和双温模型",
+      "tldr": "硅中辐射损伤形成受电子能量耗散影响显著。作者采用双温度模型分子动力学，基于局域电子密度的无阈值方法描述电子阻止和电子-声子耦合，比较两种耦合函数和多组原子间势。结果表明耦合函数形式对缺陷产生效率、团簇与复合起关键作用，且势函数选择影响耦合对复合过程的作用。该工作强调物理合理的电子效应和原子间相互作用描述对可靠预测辐射损伤的必要性。",
+      "tags": "query:rad-damage",
+      "abstract_en": "In this work, we investigate the role of ion-electron coupling in simulations of radiation damage formation in silicon using molecular dynamics simulations within a two-temperature model. We explore predictions of a threshold-free approach to the coupling that accounts for both the electronic stopping and electron-phonon coupling using a local electron density-based formalism. We compare two different coupling functions across a range of primary knock-on atom energies using two interatomic potentials. Our results demonstrate that the functional form of the ion-electron coupling plays a critical role in determining defect production efficiency, clustering, and recombination, and must therefore be carefully considered for accurate modeling of radiation damage formation. Furthermore, we find that the impact of the coupling in particular on the recombination of defects during the cooling phase of the cascade depends on the choice of interatomic potential, emphasizing the importance of physically grounded descriptions for both electronic effects and atom-atom interactions for reliable radiation damage predictions.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202607/14/2607.10429v1-data-efficient-continuous-conditional-denoising-diffusion-model-for-microstructure-generation",
+      "section": "quick",
+      "title_en": "Data-efficient continuous conditional denoising diffusion model for microstructure generation",
+      "authors": "Tarakram Ramgopal, Gowtham Nimmal Haribabu, Hussein Farahani, Cornelis Bos, Siddhant Kumar",
+      "date": "2026-07-11",
+      "pdf": "https://arxiv.org/pdf/2607.10429v1",
+      "score": "7.0",
+      "evidence": "生成式微观结构模型可应用于辐照诱导的微观结构演化研究",
+      "tldr": "传统微观结构模拟方法存在计算瓶颈，生成式扩散模型需大量训练数据。本文提出连续条件去噪扩散模型，采用邻近损失训练策略，仅用紧凑数据集即可高效生成微观结构。以锰含量为条件的低碳钢实验表明，模型能准确匹配相形态、晶粒尺寸分布等关键特征。该方法为材料工艺设计优化开辟了新途径。",
+      "tags": "query:rad-damage",
+      "abstract_en": "Traditional computational models, such as cellular automata and phase-field methods, are effective for simulating microstructural evolution but often face computational bottlenecks, limiting their application in high-throughput and on-demand process optimization. Generative machine learning approaches, such as denoising diffusion models, have emerged as powerful tools for surrogate modeling of process-structure maps, specifically producing representative microstructures conditioned on process parameters. However, they often require large amounts of data for training, particularly when process conditions are continuous rather than discrete categorical variables. To address this, we present a continuous conditional denoising diffusion model for generating microstructures conditioned on processing parameters. Trained on a compact dataset of process-microstructure pairs, this framework first adds noise to microstructure images and then trains a neural network to progressively remove the noise, learning the underlying statistical patterns of the microstructure. To address data inefficiencies associated with continuously valued process conditions, we propose a vicinal-loss training strategy that associates process conditions in data-sparse regions with nearby conditions in the dataset. Combined with classifier-free guidance and denoising diffusion implicit sampling, this approach enables data-efficient continuous conditional generation of microstructures compared to classical denoising diffusion models. The model successfully generates representative microstructures for low-carbon steel conditioned on manganese composition, matching key physical features such as phase and grain morphology, grain size distribution, phase fraction, and interfacial area distribution. More generally, this approach opens avenues for efficient process design and optimization of materials and their microstructures.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

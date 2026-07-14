@@ -1,0 +1,94 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-14T21:26:19.758273+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 1,
+    "deep_cap": 6,
+    "deep_selected": 1,
+    "quick_candidates": 1,
+    "quick_skim_target": 11,
+    "quick_selected": 1
+  },
+  "deep_dive": [
+    {
+      "id": "2607.11253v1",
+      "source": "arxiv",
+      "title": "Impact of Electronic Energy Dissipation on Primary Radiation Damage Formation in Silicon",
+      "abstract": "In this work, we investigate the role of ion-electron coupling in simulations of radiation damage formation in silicon using molecular dynamics simulations within a two-temperature model. We explore predictions of a threshold-free approach to the coupling that accounts for both the electronic stopping and electron-phonon coupling using a local electron density-based formalism. We compare two different coupling functions across a range of primary knock-on atom energies using two interatomic potentials. Our results demonstrate that the functional form of the ion-electron coupling plays a critical role in determining defect production efficiency, clustering, and recombination, and must therefore be carefully considered for accurate modeling of radiation damage formation. Furthermore, we find that the impact of the coupling in particular on the recombination of defects during the cooling phase of the cascade depends on the choice of interatomic potential, emphasizing the importance of physically grounded descriptions for both electronic effects and atom-atom interactions for reliable radiation damage predictions.",
+      "authors": [
+        "Nadezda Korepanova",
+        "Rafael Nuñez-Palacio",
+        "Andrea E. Sand"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ],
+      "published": "2026-07-13T08:35:49+00:00",
+      "link": "https://arxiv.org/pdf/2607.11253v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "directly studies primary radiation damage formation in silicon using molecular dynamics with two-temperature model",
+      "llm_evidence_cn": "直接研究硅中初级辐射损伤形成，使用分子动力学和双温模型",
+      "llm_evidence": "直接研究硅中初级辐射损伤形成，使用分子动力学和双温模型",
+      "canonical_evidence": "直接研究硅中初级辐射损伤形成，使用分子动力学和双温模型",
+      "llm_tldr_en": "Investigates ion-electron coupling effects on primary radiation damage in silicon via MD with two-temperature model, showing coupling form critically affects defect production and clustering.",
+      "llm_tldr_cn": "针对辐射损伤模拟中离子-电子耦合建模的关键问题，本文采用分子动力学结合双温模型，系统比较了不同耦合函数对硅中初级辐射损伤形成的影响，发现耦合形式显著影响缺陷产量、聚集和复合，为准确模拟辐照损伤提供了重要指导。",
+      "llm_tldr": "针对辐射损伤模拟中离子-电子耦合建模的关键问题，本文采用分子动力学结合双温模型，系统比较了不同耦合函数对硅中初级辐射损伤形成的影响，发现耦合形式显著影响缺陷产量、聚集和复合，为准确模拟辐照损伤提供了重要指导。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation damage mechanisms in structural materials",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2607.10429v1",
+      "source": "arxiv",
+      "title": "Data-efficient continuous conditional denoising diffusion model for microstructure generation",
+      "abstract": "Traditional computational models, such as cellular automata and phase-field methods, are effective for simulating microstructural evolution but often face computational bottlenecks, limiting their application in high-throughput and on-demand process optimization. Generative machine learning approaches, such as denoising diffusion models, have emerged as powerful tools for surrogate modeling of process-structure maps, specifically producing representative microstructures conditioned on process parameters. However, they often require large amounts of data for training, particularly when process conditions are continuous rather than discrete categorical variables. To address this, we present a continuous conditional denoising diffusion model for generating microstructures conditioned on processing parameters. Trained on a compact dataset of process-microstructure pairs, this framework first adds noise to microstructure images and then trains a neural network to progressively remove the noise, learning the underlying statistical patterns of the microstructure. To address data inefficiencies associated with continuously valued process conditions, we propose a vicinal-loss training strategy that associates process conditions in data-sparse regions with nearby conditions in the dataset. Combined with classifier-free guidance and denoising diffusion implicit sampling, this approach enables data-efficient continuous conditional generation of microstructures compared to classical denoising diffusion models. The model successfully generates representative microstructures for low-carbon steel conditioned on manganese composition, matching key physical features such as phase and grain morphology, grain size distribution, phase fraction, and interfacial area distribution. More generally, this approach opens avenues for efficient process design and optimization of materials and their microstructures.",
+      "authors": [
+        "Tarakram Ramgopal",
+        "Gowtham Nimmal Haribabu",
+        "Hussein Farahani",
+        "Cornelis Bos",
+        "Siddhant Kumar"
+      ],
+      "primary_category": "cs.CE",
+      "categories": [
+        "cs.CE",
+        "cond-mat.mtrl-sci"
+      ],
+      "published": "2026-07-11T18:23:29+00:00",
+      "link": "https://arxiv.org/pdf/2607.10429v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "generative model for microstructure evolution applicable to irradiation studies",
+      "llm_evidence_cn": "生成式微观结构模型可应用于辐照诱导的微观结构演化研究",
+      "llm_evidence": "生成式微观结构模型可应用于辐照诱导的微观结构演化研究",
+      "canonical_evidence": "生成式微观结构模型可应用于辐照诱导的微观结构演化研究",
+      "llm_tldr_en": "Presents a continuous conditional denoising diffusion model for efficient microstructure generation, enabling surrogate modeling of process-structure maps.",
+      "llm_tldr_cn": "针对传统微观结构演化模型计算瓶颈问题，本文提出一种连续条件去噪扩散模型，能够高效生成与工艺参数相关的代表性微观结构，为辐照等条件下微观结构变化的高通量模拟提供了数据高效的方法替代。",
+      "llm_tldr": "针对传统微观结构演化模型计算瓶颈问题，本文提出一种连续条件去噪扩散模型，能够高效生成与工艺参数相关的代表性微观结构，为辐照等条件下微观结构变化的高通量模拟提供了数据高效的方法替代。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation induced defect evolution and microstructure changes",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}
