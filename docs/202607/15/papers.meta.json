@@ -1,0 +1,54 @@
+{
+  "label": "2026-07-15",
+  "date": "2026-07-15",
+  "generated_at": "2026-07-15T21:18:32",
+  "count": 3,
+  "papers": [
+    {
+      "paper_id": "202607/15/2607.12960v1-decoupling-strain-rate-sensitivity-and-deformation-length-scale-effects-in-neutron-irradiated-tungsten-a-coupled-nano-indentation-hr-ebsd-and-crystal-plasticity-study",
+      "section": "deep",
+      "title_en": "Decoupling Strain-Rate Sensitivity and Deformation Length Scale Effects in Neutron-Irradiated Tungsten: A Coupled Nano-Indentation, HR-EBSD and Crystal Plasticity Study",
+      "authors": "Prashil S. Joshi, Bethany Jim, Chris Hardie, Angus Wilkinson, David EJ Armstrong, Suchandrima Das",
+      "date": "2026-07-14",
+      "pdf": "https://arxiv.org/pdf/2607.12960v1",
+      "score": "8.0",
+      "evidence": "研究中子辐照钨的变形行为，关联辐照缺陷与力学性能",
+      "tldr": "中子辐照单晶钨的塑性变形受本征应变率敏感性和变形长度尺度耦合影响，难以实验分离。本文采用球压痕、AFM、HR-EBSD和晶体塑性有限元模型，通过单一条件标定模型并在其他应变率下验证。结果表明应变率控制热激活流动应力，压痕深度主导塑性区演化与几何必需位错积累。模型可预测多晶压缩响应，为辐照硬化材料瞬态加载提供稳健本构建模基础。",
+      "tags": "query:rad-damage",
+      "abstract_en": "Plastic deformation during strain-rate-controlled spherical nanoindentation is governed by the coupled evolution of constitutive strain-rate sensitivity and deformation length scale, making the intrinsic influence of strain rate difficult to isolate experimentally. This coupling is investigated in unirradiated and neutron-irradiated single-crystal tungsten using spherical nanoindentation, atomic force microscopy, high-resolution electron backscatter diffraction (HR-EBSD), and crystal plasticity finite element (CPFE) modeling. Nanoindentation experiments were performed at strain rates from 3.2e-5 to 3.2e-3 per second. AFM and HR-EBSD quantified surface pile-up, residual lattice strain, and geometrically necessary dislocation (GND) distributions. A strain-gradient CPFE framework incorporating thermally activated slip, GND hardening, irradiation-induced obstacle hardening, and strain-dependent softening was calibrated using a single experimental condition and validated across all remaining strain rates without further parameter adjustment. The validated model was then used to independently vary strain rate and indentation depth. Simulations show that strain rate primarily controls the stress required for thermally activated plastic flow, whereas indentation depth governs plastic-zone evolution, pile-up, and GND accumulation. Irradiation increases obstacle strength and promotes deformation localization while remaining consistent with a common thermally activated mechanism. The framework also predicts the compression response of a polycrystalline cube, demonstrating transferability across loading conditions and length scales, providing a robust basis for constitutive modeling of irradiation-hardened materials under transient loading.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202607/15/2607.05951v1-electron-phonon-dephasing-in-ultrathin-disordered-films-from-power-laws-to-diagnostic-maps",
+      "section": "quick",
+      "title_en": "Electron-Phonon Dephasing in Ultrathin Disordered Films: From Power Laws to Diagnostic Maps",
+      "authors": "Eugeniy Yu. Beliayev",
+      "date": "2026-07-07",
+      "pdf": "https://arxiv.org/pdf/2607.05951v1",
+      "score": "7.0",
+      "evidence": "使用Ar离子辐照Au薄膜作为受控无序，研究电子-声子退相",
+      "tldr": "超薄无序金属膜中电子-声子退相干的幂律指数并非普适常数，而是一个依赖于干净-脏参数、声子约束及无序微观特征的交叉可观测量。通过Ar离子辐照Au薄膜系列实验，发现指数从低无序时的约2增加到高无序时的2.8，且前置因子趋势表明脏极限削弱而非增强。p<4的现象归因于薄膜或衬底声子效应。该工作提供了诊断图框架，为比较不同超薄无序膜中的退相干数据提供了统一工具。",
+      "tags": "query:rad-damage",
+      "abstract_en": "Electron-phonon dephasing in ultrathin disordered metallic films is often summarized by a power law, $τ_{e-ph}^{-1}=AT^p$. However, thin metals, alloys, and superconducting films exhibit effective exponents close to 2, 3, and 4, as well as intermediate nonuniversal values. We argue that in ultrathin supported films, the exponent should be treated not as a universal material constant, but as a crossover observable. Its interpretation requires several coordinates: the clean-to-dirty parameter $q_T l$, phonon confinement and film-substrate acoustic coupling, and the microscopic character of disorder.   The diagnostic picture is illustrated using Ar-ion-irradiated Au films as a controlled-disorder series. In these films, the fitted electron-phonon exponent remains near $p\\simeq 2$ for low values of the pure-dirty crossover temperature $T_{tr}\\simeq \\hbar s/(k_B l)$ and increases toward $p\\simeq 2.8$ as disorder increases. At the same time, the prefactor trend indicates suppression of electron-phonon scattering with decreasing mean free path, consistent with dirty-limit weakening rather than static-disorder enhancement. The persistence of $p<4$ points to the role of thin-film or film-substrate phonon effects. The resulting diagnostic map provides a compact framework for comparing electron-phonon dephasing data in ultrathin disordered films.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202607/15/2607.11176v1-a-generalized-frank-bilby-equation-for-interfaces-in-crystalline-materials",
+      "section": "quick",
+      "title_en": "A Generalized Frank-Bilby Equation for Interfaces in Crystalline Materials",
+      "authors": "Dongsong Tao, Luchan Zhang, David J. Srolovitz, Yang Xiang, Jian Han",
+      "date": "2026-07-13",
+      "pdf": "https://arxiv.org/pdf/2607.11176v1",
+      "score": "6.0",
+      "evidence": "广义Frank-Bilby方程可模拟辐照下的位错网络",
+      "tldr": "经典Frank-Bilby方程无法描述界面中同时具有位错和台阶特征的线缺陷（disconnections），限制了其应用。本文推导了广义Frank-Bilby方程，显式引入位错和台阶两个分量。通过在多个代表性界面系统中的演示，证明了该方程能更全面地预测界面结构。该工作为晶体材料界面的精确建模提供了新工具。",
+      "tags": "query:rad-damage",
+      "abstract_en": "The classical Frank-Bilby equation (FBE) is commonly used to predict the structure of interfaces in crystalline materials in terms of interfacial dislocation networks. However, in general, the line defects in interfaces are disconnections, possessing both dislocation and step character, which are not captured by the classical FBE. As a result, the FBE cannot fully describe the structure of most interfaces of practical interest. To address this issue, we derive a generalized Frank-Bilby equation (GFBE) that explicitly incorporates both dislocation and step components of interfacial defects. We demonstrate its application to several representative interface systems.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

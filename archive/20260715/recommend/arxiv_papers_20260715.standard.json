@@ -1,0 +1,131 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-15T21:16:30.203844+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 1,
+    "deep_cap": 6,
+    "deep_selected": 1,
+    "quick_candidates": 2,
+    "quick_skim_target": 11,
+    "quick_selected": 2
+  },
+  "deep_dive": [
+    {
+      "id": "2607.12960v1",
+      "source": "arxiv",
+      "title": "Decoupling Strain-Rate Sensitivity and Deformation Length Scale Effects in Neutron-Irradiated Tungsten: A Coupled Nano-Indentation, HR-EBSD and Crystal Plasticity Study",
+      "abstract": "Plastic deformation during strain-rate-controlled spherical nanoindentation is governed by the coupled evolution of constitutive strain-rate sensitivity and deformation length scale, making the intrinsic influence of strain rate difficult to isolate experimentally. This coupling is investigated in unirradiated and neutron-irradiated single-crystal tungsten using spherical nanoindentation, atomic force microscopy, high-resolution electron backscatter diffraction (HR-EBSD), and crystal plasticity finite element (CPFE) modeling. Nanoindentation experiments were performed at strain rates from 3.2e-5 to 3.2e-3 per second. AFM and HR-EBSD quantified surface pile-up, residual lattice strain, and geometrically necessary dislocation (GND) distributions. A strain-gradient CPFE framework incorporating thermally activated slip, GND hardening, irradiation-induced obstacle hardening, and strain-dependent softening was calibrated using a single experimental condition and validated across all remaining strain rates without further parameter adjustment. The validated model was then used to independently vary strain rate and indentation depth. Simulations show that strain rate primarily controls the stress required for thermally activated plastic flow, whereas indentation depth governs plastic-zone evolution, pile-up, and GND accumulation. Irradiation increases obstacle strength and promotes deformation localization while remaining consistent with a common thermally activated mechanism. The framework also predicts the compression response of a polycrystalline cube, demonstrating transferability across loading conditions and length scales, providing a robust basis for constitutive modeling of irradiation-hardened materials under transient loading.",
+      "authors": [
+        "Prashil S. Joshi",
+        "Bethany Jim",
+        "Chris Hardie",
+        "Angus Wilkinson",
+        "David EJ Armstrong",
+        "Suchandrima Das"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ],
+      "published": "2026-07-14T16:57:43+00:00",
+      "link": "https://arxiv.org/pdf/2607.12960v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "studies deformation in neutron-irradiated tungsten, linking irradiation-induced defects to mechanical behavior",
+      "llm_evidence_cn": "研究中子辐照钨的变形行为，关联辐照缺陷与力学性能",
+      "llm_evidence": "研究中子辐照钨的变形行为，关联辐照缺陷与力学性能",
+      "canonical_evidence": "研究中子辐照钨的变形行为，关联辐照缺陷与力学性能",
+      "llm_tldr_en": "This paper uses nanoindentation, HR-EBSD, and crystal plasticity to decouple strain-rate sensitivity from length scale effects in neutron-irradiated tungsten. Directly addresses irradiation effects on mechanical properties in structural materials.",
+      "llm_tldr_cn": "该论文通过球形纳米压痕、原子力显微镜、高分辨率电子背散射衍射（HR-EBSD）和晶体塑性有限元模拟，系统研究了中子辐照单晶钨中应变率敏感性和变形长度尺度的耦合作用。实验和模拟相结合，量化了辐照缺陷对塑性变形的影响，揭示了辐照诱导的硬化机制。该工作为理解辐照结构材料的力学性能退化提供了重要实验数据和模型。",
+      "llm_tldr": "该论文通过球形纳米压痕、原子力显微镜、高分辨率电子背散射衍射（HR-EBSD）和晶体塑性有限元模拟，系统研究了中子辐照单晶钨中应变率敏感性和变形长度尺度的耦合作用。实验和模拟相结合，量化了辐照缺陷对塑性变形的影响，揭示了辐照诱导的硬化机制。该工作为理解辐照结构材料的力学性能退化提供了重要实验数据和模型。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation damage mechanisms in structural materials",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2607.05951v1",
+      "source": "arxiv",
+      "title": "Electron-Phonon Dephasing in Ultrathin Disordered Films: From Power Laws to Diagnostic Maps",
+      "abstract": "Electron-phonon dephasing in ultrathin disordered metallic films is often summarized by a power law, $τ_{e-ph}^{-1}=AT^p$. However, thin metals, alloys, and superconducting films exhibit effective exponents close to 2, 3, and 4, as well as intermediate nonuniversal values. We argue that in ultrathin supported films, the exponent should be treated not as a universal material constant, but as a crossover observable. Its interpretation requires several coordinates: the clean-to-dirty parameter $q_T l$, phonon confinement and film-substrate acoustic coupling, and the microscopic character of disorder.   The diagnostic picture is illustrated using Ar-ion-irradiated Au films as a controlled-disorder series. In these films, the fitted electron-phonon exponent remains near $p\\simeq 2$ for low values of the pure-dirty crossover temperature $T_{tr}\\simeq \\hbar s/(k_B l)$ and increases toward $p\\simeq 2.8$ as disorder increases. At the same time, the prefactor trend indicates suppression of electron-phonon scattering with decreasing mean free path, consistent with dirty-limit weakening rather than static-disorder enhancement. The persistence of $p<4$ points to the role of thin-film or film-substrate phonon effects. The resulting diagnostic map provides a compact framework for comparing electron-phonon dephasing data in ultrathin disordered films.",
+      "authors": [
+        "Eugeniy Yu. Beliayev"
+      ],
+      "primary_category": "cond-mat.dis-nn",
+      "categories": [
+        "cond-mat.dis-nn"
+      ],
+      "published": "2026-07-07T07:53:17+00:00",
+      "link": "https://arxiv.org/pdf/2607.05951v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Ar-ion-irradiated Au films as controlled disorder to study electron-phonon dephasing",
+      "llm_evidence_cn": "使用Ar离子辐照Au薄膜作为受控无序，研究电子-声子退相",
+      "llm_evidence": "使用Ar离子辐照Au薄膜作为受控无序，研究电子-声子退相",
+      "canonical_evidence": "使用Ar离子辐照Au薄膜作为受控无序，研究电子-声子退相",
+      "llm_tldr_en": "This paper uses Ar-ion irradiation to create controlled disorder in Au films and studies the electron-phonon dephasing mechanism, showing that the exponent is not universal but depends on disorder, providing diagnostic maps for disordered thin films under irradiation.",
+      "llm_tldr_cn": "该论文以Ar离子辐照的金薄膜为受控无序体系，研究超薄无序薄膜中的电子-声子退相行为。传统认为退相时间幂律指数是材料的普遍常数，但实验显示指数在2-4之间变化。作者提出应将其视为交叉观测量，并构建诊断图谱。该工作揭示了辐照引入的无序对电子输运的影响机制，为理解辐射损伤材料的物理性质提供了诊断工具。",
+      "llm_tldr": "该论文以Ar离子辐照的金薄膜为受控无序体系，研究超薄无序薄膜中的电子-声子退相行为。传统认为退相时间幂律指数是材料的普遍常数，但实验显示指数在2-4之间变化。作者提出应将其视为交叉观测量，并构建诊断图谱。该工作揭示了辐照引入的无序对电子输运的影响机制，为理解辐射损伤材料的物理性质提供了诊断工具。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation damage mechanisms in structural materials",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.11176v1",
+      "source": "arxiv",
+      "title": "A Generalized Frank-Bilby Equation for Interfaces in Crystalline Materials",
+      "abstract": "The classical Frank-Bilby equation (FBE) is commonly used to predict the structure of interfaces in crystalline materials in terms of interfacial dislocation networks. However, in general, the line defects in interfaces are disconnections, possessing both dislocation and step character, which are not captured by the classical FBE. As a result, the FBE cannot fully describe the structure of most interfaces of practical interest. To address this issue, we derive a generalized Frank-Bilby equation (GFBE) that explicitly incorporates both dislocation and step components of interfacial defects. We demonstrate its application to several representative interface systems.",
+      "authors": [
+        "Dongsong Tao",
+        "Luchan Zhang",
+        "David J. Srolovitz",
+        "Yang Xiang",
+        "Jian Han"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ],
+      "published": "2026-07-13T07:18:31+00:00",
+      "link": "https://arxiv.org/pdf/2607.11176v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "generalized Frank-Bilby equation for interfaces can model dislocation networks under irradiation",
+      "llm_evidence_cn": "广义Frank-Bilby方程可模拟辐照下的位错网络",
+      "llm_evidence": "广义Frank-Bilby方程可模拟辐照下的位错网络",
+      "canonical_evidence": "广义Frank-Bilby方程可模拟辐照下的位错网络",
+      "llm_tldr_en": "Derives a generalized Frank-Bilby equation that includes both dislocation and step character of disconnections, applicable to modeling dislocation loop formation and interface structure evolution under radiation.",
+      "llm_tldr_cn": "针对经典Frank-Bilby方程无法描述界面中兼具位错和台阶特征的线缺陷（disconnections）的问题，本文推导了广义Frank-Bilby方程，显式包含位错和台阶分量。该方法可应用于多种代表性界面系统，为理解辐照下FeCr合金中位错环形成和界面演化提供了有力的理论工具。",
+      "llm_tldr": "针对经典Frank-Bilby方程无法描述界面中兼具位错和台阶特征的线缺陷（disconnections）的问题，本文推导了广义Frank-Bilby方程，显式包含位错和台阶分量。该方法可应用于多种代表性界面系统，为理解辐照下FeCr合金中位错环形成和界面演化提供了有力的理论工具。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "dislocation loop formation in irradiated FeCr",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

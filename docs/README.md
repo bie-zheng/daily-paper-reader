@@ -6,26 +6,31 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-07-14
-- 运行时间：2026-07-14 21:28:17 UTC
+- 最新运行日期：2026-07-15
+- 运行时间：2026-07-15 21:18:24 UTC
 - 运行状态：成功
-- 本次总论文数：2
+- 本次总论文数：3
 - 精读区：1
-- 速读区：1
+- 速读区：2
 
 ### 今日简报（AI）
-今日精读探究硅中电子耗散对辐射损伤的影响，速读微结构生成的高效条件扩散模型。重点关注电子能量耗散显著改变硅初级辐射损伤形成机制（评分9.0）。建议将高效微结构生成思路引入辐射损伤模拟，可尝试数据驱动与物理建模结合。
-- 详情：[/202607/14/README](/202607/14/README)
+今日研读3篇材料物理前沿论文，精读聚焦中子辐照钨的力学行为，速读涉及电子-声子退相位与界面方程。  
+最值得关注：中子辐照钨中应变率敏感性与变形长度尺度的解耦机制，以及超薄薄膜电子-声子退相位的诊断映射。  
+建议精读首篇以深入理解辐照材料力学，速读后两篇可分别拓展电子输运与界面理论认知。
+- 详情：[/202607/15/README](/202607/15/README)
 
 ### 精读区论文标签
-1. [Impact of Electronic Energy Dissipation on Primary Radiation Damage Formation in Silicon](/202607/14/2607.11253v1-impact-of-electronic-energy-dissipation-on-primary-radiation-damage-formation-in-silicon)  
-   标签：评分：9.0/10、query:rad-damage
-   evidence：直接研究硅中初级辐射损伤形成，使用分子动力学和双温模型
+1. [Decoupling Strain-Rate Sensitivity and Deformation Length Scale Effects in Neutron-Irradiated Tungsten: A Coupled Nano-Indentation, HR-EBSD and Crystal Plasticity Study](/202607/15/2607.12960v1-decoupling-strain-rate-sensitivity-and-deformation-length-scale-effects-in-neutron-irradiated-tungsten-a-coupled-nano-indentation-hr-ebsd-and-crystal-plasticity-study)  
+   标签：评分：8.0/10、query:rad-damage
+   evidence：研究中子辐照钨的变形行为，关联辐照缺陷与力学性能
 
 ### 速读区论文标签
-1. [Data-efficient continuous conditional denoising diffusion model for microstructure generation](/202607/14/2607.10429v1-data-efficient-continuous-conditional-denoising-diffusion-model-for-microstructure-generation)  
+1. [Electron-Phonon Dephasing in Ultrathin Disordered Films: From Power Laws to Diagnostic Maps](/202607/15/2607.05951v1-electron-phonon-dephasing-in-ultrathin-disordered-films-from-power-laws-to-diagnostic-maps)  
    标签：评分：7.0/10、query:rad-damage
-   evidence：生成式微观结构模型可应用于辐照诱导的微观结构演化研究
+   evidence：使用Ar离子辐照Au薄膜作为受控无序，研究电子-声子退相
+2. [A Generalized Frank-Bilby Equation for Interfaces in Crystalline Materials](/202607/15/2607.11176v1-a-generalized-frank-bilby-equation-for-interfaces-in-crystalline-materials)  
+   标签：评分：6.0/10、query:rad-damage
+   evidence：广义Frank-Bilby方程可模拟辐照下的位错网络
 
 
 <div class="dpr-home-promo-card">
