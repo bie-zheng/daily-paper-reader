@@ -6,31 +6,26 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-07-15
-- 运行时间：2026-07-15 21:18:24 UTC
+- 最新运行日期：2026-07-16
+- 运行时间：2026-07-16 20:42:16 UTC
 - 运行状态：成功
-- 本次总论文数：3
-- 精读区：1
-- 速读区：2
+- 本次总论文数：1
+- 精读区：0
+- 速读区：1
 
 ### 今日简报（AI）
-今日研读3篇材料物理前沿论文，精读聚焦中子辐照钨的力学行为，速读涉及电子-声子退相位与界面方程。  
-最值得关注：中子辐照钨中应变率敏感性与变形长度尺度的解耦机制，以及超薄薄膜电子-声子退相位的诊断映射。  
-建议精读首篇以深入理解辐照材料力学，速读后两篇可分别拓展电子输运与界面理论认知。
-- 详情：[/202607/15/README](/202607/15/README)
+1) 今日精读一篇关于固体阻止本领介电理论的论文，聚焦多体相互作用对经典与量子射弹的影响。  
+2) 值得关注：多体效应在射弹能量损失中不可忽略，理论模型需同时考虑经典与量子机制。  
+3) 建议：可结合实验数据对比验证该理论，或扩展至低能射弹与复杂固体材料。
+- 详情：[/202607/16/README](/202607/16/README)
 
 ### 精读区论文标签
-1. [Decoupling Strain-Rate Sensitivity and Deformation Length Scale Effects in Neutron-Irradiated Tungsten: A Coupled Nano-Indentation, HR-EBSD and Crystal Plasticity Study](/202607/15/2607.12960v1-decoupling-strain-rate-sensitivity-and-deformation-length-scale-effects-in-neutron-irradiated-tungsten-a-coupled-nano-indentation-hr-ebsd-and-crystal-plasticity-study)  
-   标签：评分：8.0/10、query:rad-damage
-   evidence：研究中子辐照钨的变形行为，关联辐照缺陷与力学性能
+- 本次无精读推荐。
 
 ### 速读区论文标签
-1. [Electron-Phonon Dephasing in Ultrathin Disordered Films: From Power Laws to Diagnostic Maps](/202607/15/2607.05951v1-electron-phonon-dephasing-in-ultrathin-disordered-films-from-power-laws-to-diagnostic-maps)  
-   标签：评分：7.0/10、query:rad-damage
-   evidence：使用Ar离子辐照Au薄膜作为受控无序，研究电子-声子退相
-2. [A Generalized Frank-Bilby Equation for Interfaces in Crystalline Materials](/202607/15/2607.11176v1-a-generalized-frank-bilby-equation-for-interfaces-in-crystalline-materials)  
+1. [Many-body interactions in the dielectric theory of stopping power of solids for classical and quantum projectiles](/202607/16/2607.12498v1-many-body-interactions-in-the-dielectric-theory-of-stopping-power-of-solids-for-classical-and-quantum-projectiles)  
    标签：评分：6.0/10、query:rad-damage
-   evidence：广义Frank-Bilby方程可模拟辐照下的位错网络
+   evidence：固体中运动电荷的介电能量损失理论；与辐射损伤能量损失机制相关
 
 
 <div class="dpr-home-promo-card">

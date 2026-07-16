@@ -1,0 +1,1653 @@
+Title: Many-body interactions in the dielectric theory of stopping power of solids for classical and quantum projectiles
+
+URL Source: https://arxiv.org/pdf/2607.12498v1
+
+Published Time: Wed, 15 Jul 2026 11:56:37 GMT
+
+Number of Pages: 13
+
+Markdown Content:
+## Many-body interactions in the dielectric theory of stopping power of solids for classical and quantum projectiles 
+
+Vladimir U. Nazarov 
+
+Fritz Haber Research Center for Molecular Dynamics and Institute of Chemistry, the Hebrew University of Jerusalem, Jerusalem 9190401, Israel ∗
+
+Vyacheslav M. Silkin 
+
+Donostia International Physics Center (DIPC), Paseo de Manuel Lardizabal 4, E-20018 San Sebasti´ an, Spain Departamento de Pol´ ımeros y Materiales Avanzados: F´ ısica, Qu´ ımica y Tecnolog´ ıa, Facultad de Ciencias Qu´ ımicas, Universidad del Pa´ ıs Vasco (UPV-EHU), Apdo. 1072, E-20080 San Sebasti´ an, Spain and IKERBASQUE, Basque Foundation for Science, 48009 Bilbao, Spain 
+
+We take account of the many-body dynamic interactions by including the wave-vector and frequency-dependent exchange and correlations (xc) kernel fxc (q, ω ) in the framework of the di-electric theory of the stopping power of crystals for moving charges. The cases of classical and quantum projectiles are considered. We find that (I) the role of the xc effects in slowing of charges in crystalline solids is more pronounced than it is within the jellium model and (II) For velocities below the stopping maximum, inclusion of xc leads to the improvement of the comparison of the theory with experiment over a range of solid targets. On the other hand, in the high-velocity regime, the role of the dynamic xc proves negligible, which does not contradict experiment, and which we substantiate analytically within the jellium model of the target. The input to our theory is the microscopic dielectric matrix ϵGG ′ (q, ω ) within the random phase approximation (i.e., with neglect of fxc ), the calculation of which matrix is implemented in the existing solid-state codes. 
+
+I. INTRODUCTION 
+
+Interest in slowing of ions travelling through matter dates back to the beginning of the last century [1, 2]. The modern theory of the stopping power (SP) (energy loss by a projectile per unit pass length) had started from the works by Ritchie [3, 4], wherein the target mate-rials were modelled with the homogeneous electron gas (HEG), and the dielectric approach had been employed. With the advent of the density-functional theory (DFT) [5, 6] and the time-dependent DFT (TDDFT) [7, 8], the limitations of the HEG model, as well as those of the first Born approximation, the latter underlying the dielectric approach, have been overstepped [9–11]. The central quantities in the real-time TDDFT and in its linear-response variant are the time-dependent exchange-correlation (xc) potential vxc (r, t ) and the xc kernel fxc (r, r′, t − t′), respectively [7, 8]. These quanti-ties are never known exactly, necessitating construction of approximations. Understandably, the more compli-cated is the system under study, the simpler and less ac-curate approximations are generally used for vxc and fxc .As a result, in the studies of SP of real solids, the adi-abatic local density approximation (ALDA) to TDDFT is used almost exclusively, which choice suffers from the disadvantage of dropping out the effects due to the spa-tial and temporal non-locality of the electronic response of target systems [12, 13]. At the other end of the spectrum is an approach  
+
+> ∗vladimir.nazarov@mail.huji.ac.il
+
+which employs the non-uniform jellium model and linear-response TDDFT, while striving for more accurate xc kernels [11, 14, 15]. This method does preserve the non-locality, but it is applicable in the limit of zero velocity of the projectile only, the quantity sought for being the friction coefficient Q = lim v→0 − 1 
+
+> vdE (v)
+> dx
+
+. [16] In the dielectric theory of SP, which will be further detailed below, the central assumption is the adoption of the perturbative treatment of the projectile-target in-teraction, to the first order in the latter (first Born ap-proximation). In other respects, this theory is well fit to account for the more sophisticated features of the particle-solid interactions: (i) the static and dynamic xc can be naturally included in the dielectric formalism by means of the linear response TDDFT; (ii) the theory is designed for the case of finite velocities of the projectile; (iii) the theory does not rely on the mean-field approx-imation of the Ehrenfest dynamics [17], but it can be formulated totally quantum mechanically, not only with respect to the target system’s electrons, but to the pro-jectile particle as well (see Appendix A); (iv) the theory is conceptually simple, requiring only the evaluation of the dielectric function (DF) of the target system. On the other hand, while possessing an important advantage of the non-linearity, other approaches to the problem of SP usually suffer from the lack of one or more of the features (i)-(iv). The above observations make it essential to establish the bounds on the applicability of the dielectric approach for the SP problem, the ones which do not result from simplifications used in the construction of DF, but are rather inherent to the approach itself. In this article, we undertake to implement the dielectric theory of SP arXiv:2607.12498v1 [cond-mat.mtrl-sci] 14 Jul 2026 2in its unabridged form, verifying results against avail-able experimental data. At the level of the theory based on the accurate evaluation of the dielectric matrix of a periodic solid accompanied by the inclusion of the dy-namic many-body (MB) interactions by means of the non-adiabatic linear-response TDDFT, we generally ob-serve an improved comparison with experiment. Excep-tions are also found and discussed. This work is organized as follows. In Sec. II, for the jellium solid model, we formulate, implement, and dis-cuss the dielectric approach to the SP problem, which includes the quantum mechanical effects on the part of the projectile and the dynamical xc effects on the part of the target. In Sec. III, we perform the generalization of the results of Sec. II to real solids. Our conclusions are collected in Sec. IV. More involved derivations and technical details are collected in Appendices A-C.  
+
+> II. JELLIUM SOLID
+
+Within the dielectric approach, SP for a projectile of the charge Z and infinite mass, moving with the veloc-ity v in a medium characterized by the wave-vector and frequency-dependent DF ε(q, ω ) is given by [3, 18] 
+
+dE dx = − 2Z2
+
+πv 2
+
+> ∞
+
+Z
+
+> 0
+
+dq q
+
+> vq
+
+Z
+
+> 0
+
+ω Im 1
+
+ϵ (q, ω ) dω, (1) wherein we use atomic units ( e2 = ¯ h = me = 1). If the projectile has a finite mass M , then the kinematic constraint modifies Eq. (1) to [19, 20] 
+
+dE dx = − 2Z2
+
+πv 22M v Z
+
+> 0
+
+dq q 
+
+> vq −q22M
+
+Z
+
+> 0
+
+ω Im 1
+
+ϵ (q, ω ) dω. (2) From the outset, it is conceptually important to differ-entiate between the classical and quantum mechanical features in Eqs. (1) and (2). As written in atomic units, Eq. (2) disguises the distinction between the two kinds of effects. This distinction can be revealed by re-introducing the world constants in Eq. (2), while ensuring the proper dimensionalities 
+
+dE dx = − 2Z21 e2
+
+πv 22M v/ ¯hZ
+
+> 0
+
+dq q 
+
+> vq −¯hq 22M
+
+Z
+
+> 0
+
+ω Im 1
+
+ϵ (q, ω ) dω. (3) From Eq. (3), it becomes clear that the differences in the integration limits between Eqs. (1) and (2) are due to quantum effects exclusively, since they disappear in the classical limit ¯ h → 0. In Appendix A we give an independent derivation of the expression (6) for SP of a periodic crystal, of which Eqs. (2) – (3) are a specific case. For the jellium model of a solid, Eqs. (1) and (2) have been extensively used in the literature within the ran-dom phase approximation (RPA) to DF, which amounts to the neglect of xc effects [3, 4, 18, 20]. Our interest lying in the role of the latter effects, we start from con-sidering HEG of interacting electrons (electron liquid), taking into account the xc kernel f hxc (q, ω ), which enters the expression for DF through the relations [8] 1
+
+ϵ(q, ω ) = 1 + 4πq2 χh(q, ω ), (4) 1
+
+χh(q, ω ) = 1
+
+χhs (q, ω ) − 4πq2 − f hxc (q, ω ), (5) where χh(q, ω ) and χhs (q, ω ) are the interacting physi-cal and the auxiliary independent-electron (Kohn–Sham) density response functions, respectively, the latter being known exactly by the Lindhard formula [21]. The prop-erty of viscosity is describable in terms of the frequency-dependent xc kernel f hxc (q, ω ) [13], which is especially important in the context of the transport phenomena [22, 23]. With Eqs. (2), (4)–(5), we have conducted calcula-tions of SP of jellium of various densities for protons and positrons, within RPA ( f hxc = 0) and with xc ef-fects included. For f hxc , we were using the ALDA and the recent constraint-based revised modified Constantin – Pitarke (rMCP07) xc kernel [24], which is currently con-sidered accurate at all densities of the fluid phase of HEG. In Figs. 1 and 2, results for rs = 2, 6 a.u. and rs = 10, 20 a.u., respectively, where rs = [3 /(4 πn )] 1/3 is the density parameter of HEG of the density n, are shown. We ob-serve that, at lower velocities, RPA systematically under-estimates SP, while ALDA overestimates it, as compared with the calculation based on the rMCP07 parametriza-tion. This discrepancy grows with the decrease of the electronic density (increase of rs). We note, and this applies to all the results below, that for proton SP is nu-merically indistinguishable from that for an infinite mass particle. A notable feature in Figs. 1 and 2 is the negligible con-tribution of fxc , both rMCP07 and ALDA ones, in the higher-velocity regime. While this trend in the velocity-dependence of SP is far from obvious a priori , in Ap-pendix C we prove that this holds for an arbitrary causal xc kernel. In Figs. 3–4, we compare the jellium model calcula-tion results with experimental SP data on aluminium and silicon targets for protons. On the left slope of the peaks (lower velocities), we observe an improved agree-ment with experiment due to the account for the xc ef-fects. We note that ALDA performs slightly better than rMCP07, which, however, is an artefact of neglecting the crystallinity effects, as will be seen below. To the right from the maximum (higher velocities) the theory largely underestimates the experimental SP. It is known that, at the growing velocities, SP becomes strongly affected by the excitation of the core electrons 301230 1 2 3 4 5
+
+rs = 2 
+
+p+
+
+e+     
+
+> 01234567012345
+
+rs = 6 
+
+p+
+
+e+
+
+> rMCP07 ALDA RPA Stopping power (10 −1 a.u.)
+> v/v F
+> (10 −2 a.u.)
+> v/v F
+
+Figure 1. Stopping power of jellium of the density parameter 
+
+rs = 2 (left) and 6 a.u. versus the velocity of the projectile in units of the Fermi velocity vF . Results for proton and positron, with the inclusion of the xc effects on the level of rMPC07 and ALDA (solid and dashed lines, respectively) and without xc (RPA, dotted lines) are shown. 012340 1 2 3 4 5
+
+rs = 10 
+
+p+
+
+e+     
+
+> 00.20.40.60.811.21.41.6012345
+
+rs = 20 
+
+p+
+
+e+ 
+
+> rMCP07 ALDA RPA Stopping power (10 −2 a.u.)
+> v/v Fv/v F
+
+Figure 2. Same as Fig. 1, but for rs = 10 (left) and 20 a.u. 
+
+[20, 30], which effect the jellium model cannot, obviously, capture. The role of xc in the SP of HEG for classical pro-jectiles has been earlier addressed in the extensive lit-erature [36–39]. Those studies, accordingly, used ear-lier available parametrizations for the local field correc-tion function (or, equivalently, xc kernel) [40–43], or have used Mermin’s dielectric function, as in Ref. [38]. These have been surpassed in the more recent developments [24, 44]. We also note a promising first-principles (not constraint-based) exchange-only kernel, derived from a time-dependent variational principle [45, 46]. Here we are using the state-of-the-art exchange and correlation parametrization rMCP07 [24]. 00.10.20.30 1 2 3 4
+
+Al 
+
+p+
+
+> theor.: rMCP07 ALDA RPA exp.: Mo2004 Pr2011b Ep1992 MT1996 Stopping power (a.u.) Velocity (a.u.)
+
+Figure 3. Stopping power of jellium of the density parame-ter rs = 2 .07 a.u. for protons calculated within the rMCP07 (solid line), ALDA (dashed line), and RPA (dotted line) ap-proximations. Symbols are experimental data for the alu-minium target: Mo2004 [25], Pr2001b [26], MT1996 [27], and Ep1992 [28], as compiled in Ref. [29]. The datasets’ namings are those from the latter reference. 00.10.20.30 1 2 3 4
+
+Si 
+
+p+
+
+> theory: rMCP07 ALDA RPA exp.: MeV2021 Tra2019 HB2006 Fm2002 Ep1994a Stopping power (a.u.) Velocity (a.u.)
+
+Figure 4. Same as Fig. 3, but for jellium of the density pa-rameter rs = 2 .05 a.u. Symbols are experimental data for the silicon target: MeV2021 [31], Tra2019 [32], HB2006 [33], Fm2002 [34], and Ep1994a [35], as compiled in Ref. [29]. 
+
+III. CRYSTALS 
+
+We refine the theory by including the crystallinity ef-fects in real solids. The generalization of Eq. (2) for a spa-tially periodic system and random SP is (see Appendix 4A) 
+
+dE dx = − Z2
+
+π2v
+
+Z
+
+> q∈ΩB
+
+dq X
+
+> G
+
+v · (q + G) − (q+G)2
+
+> 2M
+
+|q + G|2 ×
+
+Θ
+
+
+
+v·(q+G)− (q+G)2
+
+2M
+
+
+
+Im ϵ−1
+
+> GG
+
+
+
+q, v·(q+G)− (q+G)2
+
+2M
+
+
+
+,
+
+(6) where Θ is the Heaviside step function. In Eq. (6) the summation is over the infinite set of the reciprocal vectors 
+
+G of the lattice, the integration in q is over the first Brillouin zone, and ϵ−1 
+
+> GG ′
+
+(q, ω ) is the inverse microscopic dielectric matrix of the system, of which the diagonal elements only are needed. Equation (6) is the quantum mechanical generalization of the corresponding classical SP formula for periodic solids [30, 47]. Within the linear-response TDDFT of crystals, the matrix version of the relations (4) – (5) reads 
+
+ϵ−1 
+
+> GG ′
+
+(q, ω ) = 1 + 4π
+
+|q + G|| q + G′| χGG ′ (q, ω ), (7) 
+
+χ−1 
+
+> GG ′
+
+(q, ω ) = χ−1 
+
+> s, GG ′
+
+(q, ω )− 4π
+
+|q + G|2 δGG ′ −fxc, GG ′ (q, ω ).
+
+(8) We were calculating χs, GG ′ (q, ω ) with the all-electron full-potential linearised augmented-plane wave code ELK [48]. At larger projectiles’ velocities, the excitation of the core states of the target plays the major role [20, 30], which, in the calculations, necessitates the promotion of the core to valence electrons and, as a consequence, the use of large dielectric matrices. Further particulars of the calculations are collected in Appendix B. The spatial and temporal non-locality of fxc was ac-counted for within the approximation of HEG with the average, over the unit cell, density of valence electrons, i.e., 
+
+fxc, GG ′ (q, ω ) ≈ f hxc (q + G, ω )δGG ′ , (9) where for f hxc the parametrization rMCP07 was used [24]. In Fig. 5, SP of crystalline aluminium, calculated with the use of Eqs. (6)–(9), is plotted against the velocity of protons and compared with experimental data. To the left of the peak, inclusion of the crystallinity together with xc effects makes a considerable difference, moving theoretical results closer to the measured data. To the right from the peak, xc effects play a negligible role, while the real-solid calculation catches partially excita-tions from the deeper electron levels. The waviness of the spectra is due to the comparatively sparse q-points grid used for integration, and it was confirmed to be smoothed out by making the grid denser, however, at the cost of much more expensive computations. To take account of the excitations from the deeper elec-tronic levels, a large number of G-vectors must be used in Eq. (6), owing to the localized character of those lev-els, which requires many terms in their Fourier trans-form. In Appendix B we list the parameters used in the 00.10.20.30 1 2 3 4
+
+Al 
+
+p+  
+
+> theor.: rMCP07 ALDA RPA exp.: Mo2004 Pr2011b Ep1992 MT1996 Stopping power (a.u.) Velocity (a.u.)
+> Figure 5. Stopping power of aluminium crystal for protons with (rMCP07 solid line, ALDA dashed line) and without (RPA, dotted line) inclusion of the xc effects. Symbols are experimental data: Mo2004 [25], Pr2001b [26], MT1996 [27], and Ep1992 [28], as compiled in Ref. [29].
+
+calculations. The further increase of the computational complexity was beyond our technical means, which con-tributes to the remaining discrepancies with experiment at the higher projectiles’ velocities. 00.10.20.30.40.50 1 2 3 4
+
+Diamond 
+
+p+ 
+
+> theor.: rMCP07 ALDA RPA exp. Ka1997 Stopping power (a.u.) Velocity (a.u.)
+> Figure 6. Stopping power of diamond crystal for protons with (solid line) and without (RPA, dashed line) inclusion of the xc effects. Symbols are experimental data [49], as compiled in Ref. [29].
+
+Results for diamond, Figs. (6), silicon, Fig. (7), and beryllium, Fig. (8), are qualitatively similar to those for aluminium, clearly confirming the importance of the combined crystallinity and xc effects at and to the left from the spectra maxima. The older experimental data for Be are, however, in dissonance with our theoretical, as well as with the newer experimental, results. Alkali metals lithium and rubidium, Figs 9 and 10, re-500.10.20.30 1 2 3 4
+
+Si 
+
+p+
+
+> theor.: rMCP07 ALDA RPA exp.: MeV2021 Tra2019 HB2006 Fm2002 Ep1994a Stopping power (a.u.) Velocity (a.u.)
+
+Figure 7. Stopping power of silicon crystal for proton projec-tiles with (rMCP07 solid line, ALDA dashed line) and without (RPA, dotted line) inclusion of the xc effects. Symbols are ex-perimental data: MeV2021 [31], Tra2019 [32], HB2006 [33], Fm2002 [34], and Ep1994a [35], as compiled in Ref. [29]. 00.05 0.10.15 0.20.25 0.30.35 0 1 2 3 4
+
+Be 
+
+p+
+
+> theor. rMCP07 ALDA RPA exp. Bn1980 Mr1968 Ka1953 Wa1949 Stopping power (a.u.) Velocity (a.u.)
+
+Figure 8. Stopping power of beryllium crystal for protons with (rMCP07 solid line, ALDA dashed line) and without (RPA, dotted line) inclusion of the xc effects. Symbols are experimental data: Bn1980 [50], Mr1968 [51], Ka1953 [52], and Wa1949 [53], as compiled in Ref. [29]. 
+
+spectively, present notable exceptions to the agreement between the theory and experiment at and to the left from the main maxima. The dielectric theory of SP, obviously, breaks down for those metals in this veloc-ity range. This can be understood as follows: In the low velocity regime and at the lower densities of HEG, a bound state of the pseudo-atom is formed [9], which, for the proton projectile, happens at rs >
+
+∼ 2 a.u. The first Born approximation for the inelastic scattering cannot, obviously, capture this process, resulting in the failure of the dielectric approach for Li ( rs = 3 .25 a.u.) and Rb (rs = 5 .32 a.u). On the other hand, although for proton in the Al ( rs = 2 .07 a.u.) and Si ( rs = 2 .05 a.u.) hosts the bound state develops as well, it is marginally shallow, practically not affecting the SP. To the right from the peaks the comparison is fairly good. We, further, note that Rb turns out an example of a simple metal for which the jellium model is irrelevant at all to the SP calculation, as seen from Fig. 10. Our choice of alkali targets was determined by the availability of experimental data [29]. 00.02 0.04 0.06 0.08 0.10.12 0.14 0.16 0 1 2 3 4
+
+Li 
+
+p+
+
+> theor. rMCP07 ALDA RPA jellium rMCP07 exp. Ep1995 Bd1956 Stopping power (a.u.) Velocity (a.u.)
+
+Figure 9. Stopping power of lithium crystal for protons with (rMCP07 solid line, ALDA dashed line) and without (RPA, dotted line) inclusion of the xc effects. Symbols are ex-perimental data: Ep1995 [54], Bd1956 [55], as compiled in Ref. [29]. The jellium model results are also shown in order to contrast a difference with the real-solid calculation for this low-conduction-electron density metal. 
+
+In Figs. 11 and 12, the dependence of the stopping power of Al and Si on the velocity is plotted for electron projectiles. The factor 
+
+gx = 1 + |q + G|4
+
+v4 − |q + G|2
+
+v2 , (10) which describes the exchange between the impinging elec-tron and those of the target [57], was included under the sum in Eq. (6). The overall agreement between the the-ory and experiment is fairly good, although xc in the response of the target does not play a major role in the case of the electron projectile. We note that the rapid disappearance of the SP for electron at lower velocities in Figs. 11 and 12 is in accord with the results for the friction coefficient in the zero-velocity limit within the nonlinear theory [58]. 
+
+IV. CONCLUSIONS 
+
+We have enhanced the dielectric theory of the stopping power of solids for moving charges by simultaneously ac-counting for the crystallinity and the many-body interac-tion effects. The many-body effects have been included 600.02 0.04 0.06 0.08 0.10.12 0.14 0 1 2 3 4
+
+Rb 
+
+p+
+
+> theor.: rMCP07 ALDA RPA jellium rMCP07 exp. Ep1994b Stopping power (a.u.) Velocity (a.u.)
+
+Figure 10. Stopping power of rubidium crystal for protons with (rMCP07 solid line, ALDA dashed line) and without (RPA, dotted line) inclusion of the xc effects. Symbols are ex-perimental data: Ep1994b [56], as compiled in Ref. [29]. The calculated curves have been smoothed to eliminate a strong noise. The jellium model results are also shown in order to contrast a drastic difference with the real-solid calculation for this low-conduction-electron density metal. 00.05 0.10.15 0 1 2 3 4
+
+Al e−
+
+> theor. rMCP07 ALDA RPA exp. Stopping power (a.u.) Velocity (a.u.)
+
+Figure 11. Stopping power of aluminium crystal for electron with (rMCP07 solid line, ALDA dashed line) and without (RPA, dotted line) inclusion of the xc effects. Symbols are experimental data from Ref. [59]. 
+
+by means of the linear-response TDDFT via the dynamic exchange and correlation kernel as an ingredient to the dielectric response of a solid. We have found the role of the many-body effects, in combination with the crystallinity ones, quite important. Moreover, the account for those effects brings the theory into an improved comparison with experiment for the ma-jority of considered targets. At the same time, we have observed a discrepancy between the theory and experi-ment for alkali metals (Li and Rb) at lower velocities of 00.05 0.10.15 0 1 2 3 4
+
+Si e−
+
+> theor. rMCP07 ALDA RPA exp. Stopping power (a.u.) Velocity (a.u.)
+
+Figure 12. Stopping power of silicon crystal for electron with (rMCP07 solid line, ALDA dashed line) and without (RPA, dotted line) inclusion of the xc effects. Symbols are experi-mental data from Ref. [59]. 
+
+projectiles, which signifies the breakdown of the dielec-tric theory of the stopping power for those targets in the low velocity regime, prompting for the resolution to be sought beyond the linear theory. 
+
+ACKNOWLEDGMENTS 
+
+V.U.N. acknowledges the hospitality of the Donostia International Physics Center, San Se-basti´ an, Spain. V.M.S. acknowledges financial sup-port by Grant PID2022-139230NB-I00 funded by MCIN/AEI/10.13039/501100011033. 
+
+Data availability – The data that support the findings of this article are openly available [60]. 
+
+[1] W. H. Bragg and R. Kleeman, On the α particles of ra-dium, and their loss of range in passing through vari-ous atoms and molecules, The London, Edinburgh, and Dublin Philosophical Magazine and Journal of Science 
+
+10 , 318 (1905). [2] N. Bohr, On the theory of the decrease of velocity of mov-ing electrified particles on passing through matter, The London, Edinburgh, and Dublin Philosophical Magazine and Journal of Science 25 , 10 (1913). [3] R. H. Ritchie, Plasma losses by fast electrons in thin films, Phys. Rev. 106 , 874 (1957). [4] R. H. Ritchie, Interaction of charged particles with a de-generate fermi-dirac electron gas, Phys. Rev. 114 , 644 (1959). 7
+
+[5] P. Hohenberg and W. Kohn, Inhomogeneous electron gas, Phys. Rev. 136 , B864 (1964). [6] W. Kohn and L. J. Sham, Self-consistent equations in-cluding exchange and correlation effects, Phys. Rev. 140 ,A1133 (1965). [7] E. Runge and E. K. U. Gross, Density-functional the-ory for time-dependent systems, Phys. Rev. Lett. 52 , 997 (1984). [8] E. K. U. Gross and W. Kohn, Local density-functional theory of frequency-dependent linear response, Phys. Rev. Lett. 55 , 2850 (1985). [9] P. M. Echenique, R. M. Nieminen, J. C. Ashley, and R. H. Ritchie, Nonlinear stopping power of an electron gas for slow ions, Phys. Rev. A 33 , 897 (1986). [10] J. M. Pruneda, D. S´ anchez-Portal, A. Arnau, J. I. Juar-isti, and E. Artacho, Electronic stopping power in LiF from first principles, Phys. Rev. Lett. 99 , 235501 (2007). [11] V. U. Nazarov, J. M. Pitarke, C. S. Kim, and Y. Takada, Time-dependent density-functional theory for the stop-ping power of an interacting electron gas for slow ions, Phys. Rev. B 71 , 121106(R) (2005). [12] E. K. U. Gross and W. Kohn, Density func-tional theory of many-fermion systems, in Advances in Quantum Chemistry, Vol. 21, edited by S. B. Trickey (Academic, San Diego, 1990). [13] G. F. Giuliani and G. Vignale, Quantum Theory of the Electron Liquid (Cambridge University Press, Cambridge, 2005). [14] V. U. Nazarov, J. M. Pitarke, Y. Takada, G. Vignale, and Y.-C. Chang, Including nonlocality in the exchange-correlation kernel from time-dependent current density functional theory: Application to the stopping power of electron liquids, Phys. Rev. B 76 , 205103 (2007). [15] V. U. Nazarov, J. M. Pitarke, Y. Takada, G. Vignale, and Y.-C. Chang, Time-dependent current-density functional theory for the friction of ions in an interacting electron gas, Int. J. Mod. Phys. B 22 , 3813 (2008). [16] D. Roth, C. Celedon, D. Goebl, E. Sanchez, B. Bruckner, R. Steinberger, J. Guimpel, N. Arista, and P. Bauer, Sys-tematic analysis of different experimental approaches to measure electronic stopping of very slow hydrogen ions, Nuclear Instruments and Methods in Physics Research Section B: Beam Interactions with Materials and Atoms 
+
+437 , 1 (2018). [17] P. Ehrenfest, Bemerkung ¨ uber die angen¨ aherte g¨ ultigkeit der klassischen mechanik innerhalb der quanten-mechanik, Z. Physik 45 , 455–457 (1927). [18] J. Lindhard and A. Winther, Stopping power of electron gas and equipartition rule, K. Dan. Vidensk. Selsk. Mat.-Fys. Medd. 34 , 1 (1964). [19] C. D. Archubi and N. R. Arista, General formulation of interactions and energy loss of particles in plasmas: Quantum-wave-packet model versus a semiclassical ap-proach, Phys. Rev. A 105 , 032806 (2022). [20] C. D. Archubi, C. C. Montanari, and N. R. Arista, Di-electric approaches for interactions of protons, positrons, and electrons in cold matter and plasmas, Phys. Rev. A 
+
+108 , 012822 (2023). [21] J. Lindhard, On the properties of a gas of charged par-ticles, K. Dan. Vidensk. Selsk. Mat.-Fys. Medd. 28 , 1 (1954). [22] V. U. Nazarov, T. N. Todorov, and E. K. U. Gross, Vis-cous current-induced forces, Phys. Rev. Lett. 133 , 026301 (2024). [23] V. U. Nazarov, T. N. Todorov, and E. K. U. Gross, Nanomotors driven by viscous ac currents, Phys. Rev. Lett. 136 , 117002 (2026). [24] A. D. Kaplan, N. K. Nepal, A. Ruzsinszky, P. Bal-lone, and J. P. Perdew, First-principles wave-vector- and frequency-dependent exchange-correlation kernel for jel-lium at all densities, Phys. Rev. B 105 , 035123 (2022). [25] S. P. Møller, A. Csete, T. Ichioka, H. Knudsen, U. I. Uggerhøj, and H. H. Andersen, Stopping power in insu-lators and metals without charge exchange, Phys. Rev. Lett. 93 , 042502 (2004). [26] D. Primetzhofer, S. Rund, D. Roth, D. Goebl, and P. Bauer, Electronic excitations of slow ions in a free electron gas metal: Evidence for charge exchange effects, Phys. Rev. Lett. 107 , 163201 (2011). [27] G. Mart´ ınez-Tamayo, J. C. Eckardt, G. H. Lantschner, and N. R. Arista, Energy loss of H + and He + in Al, Zn, and Au in the very low- to intermediate-energy range, Phys. Rev. A 54 , 3131 (1996). [28] C. Eppacher and D. Semrad, Dependence of proton and helium energy loss in solids upon plasma properties, Nu-clear Instruments and Methods in Physics Research Sec-tion B: Beam Interactions with Materials and Atoms 69 ,33 (1992). [29] Stopping Power of Matter for Ions, Graphs, Data, Comments and Programs, https://www-nds.iaea.org/ stopping/ ; C. Montanari and P. Dimitriou, The IAEA stopping power database, following the trends in stop-ping power of ions in matter, Nuclear Instruments and Methods in Physics Research Section B: Beam Interac-tions with Materials and Atoms 408 , 50 (2017). [30] A. A. Shukri, F. Bruneval, and L. Reining, Ab initio elec-tronic stopping power of protons in bulk materials, Phys. Rev. B 93 , 035128 (2016). [31] M. Mery, J. D. Uribe, M. Flores, N. R. Arista, V. A. Esaulov, and J. E. Vald´ es, Electronic energy loss and straggling in low energy H + and H +2 interaction with sil-icon films, Radiation Effects and Defects in Solids 176 ,73 (2021). [32] T. T. Tran, L. Jablonka, B. Bruckner, S. Rund, D. Roth, M. A. Sortica, P. Bauer, Z. Zhang, and D. Primetzhofer, Electronic interaction of slow hydrogen and helium ions with nickel-silicon systems, Phys. Rev. A 100 , 032705 (2019). [33] G. Hobler, K. Bourdelle, and T. Akatsu, Random and channeling stopping power of H in Si below 100keV, Nuclear Instruments and Methods in Physics Research Section B: Beam Interactions with Materials and Atoms 
+
+242 , 617 (2006). [34] M. Fam´ a, G. Lantschner, J. Eckardt, N. Arista, J. Gay-one, E. Sanchez, and F. Lovey, Energy loss and angular dispersion of 2–200 keV protons in amorphous silicon, Nuclear Instruments and Methods in Physics Research Section B: Beam Interactions with Materials and Atoms 
+
+193 , 91 (2002). [35] C. Eppacher, Ph.D. thesis, Schriften der Johannes-Kepler- Universit¨ at Linz, Universit¨ atsverlag Rudolf Trauner (1995). [36] S. Tanaka and S. Ichimaru, Stopping power of degener-ate electron liquid at metallic densities, Journal of the Physical Society of Japan 54 , 2537 (1985). [37] N.-P. Wang and I. Nagy, Electronic energy loss of helium ions in aluminum, Phys. Rev. A 55 , 2083 (1997). 8
+
+[38] M. D. Barriga-Carrasco, Mermin dielectric function ver-sus local field corrections on proton stopping in degen-erate plasmas, Laser and Particle Beams 26 , 389–395 (2008). [39] M. D. Barriga-Carrasco, Dynamical local field corrections on energy loss in plasmas of all degeneracies, Phys. Rev. E 79 , 027401 (2009). [40] S. Ichimaru and K. Utsumi, Analytic expression for the dielectric screening function of strongly coupled electron liquids at metallic and lower densities, Phys. Rev. B 24 ,7385 (1981). [41] K. Utsumi and S. Ichimaru, Dielectric formulation of strongly coupled electron liquids at metallic densities. VI. Analytic expression for the local-field correction, Phys. Rev. A 26 , 603 (1982). [42] S. Ichimaru, S. Mitake, S. Tanaka, and X.-Z. Yan, Theory of interparticle correlations in dense, high-temperature plasmas. I. general formalism, Phys. Rev. A 32 , 1768 (1985). [43] B. Dabrowski, Dynamical local-field factor in the re-sponse function of an electron gas, Phys. Rev. B 34 , 4989 (1986). [44] A. Ruzsinszky, N. K. Nepal, J. M. Pitarke, and J. P. Perdew, Constraint-based wave vector and frequency de-pendent exchange-correlation kernel of the uniform elec-tron gas, Phys. Rev. B 101 , 245135 (2020). [45] V. U. Nazarov, Time-dependent effective potential and exchange kernel of homogeneous electron gas, Phys. Rev. B 87 , 165125 (2013). [46] V. U. Nazarov and V. M. Silkin, Exchange kernel f hx (q, ω )of electron liquid from the variational principle of mclach-lan, Phys. Rev. B 110 , 104310 (2024). [47] I. Campillo, J. M. Pitarke, and A. G. Eguiluz, Electronic stopping power of aluminum crystal, Phys. Rev. B 58 ,10307 (1998). [48] http://elk.sourceforge.net .[49] W. K¨ aferb¨ ock, W. R¨ ossler, V. Necas, P. Bauer, M. Pe˜ nalba, E. Zarate, and A. Arnau, Comparative study of the stopping power of graphite and diamond, Phys. Rev. B 55 , 13275 (1997). [50] K. Brunner, W. Hink, and M. Roth, Stopping power for H+ in Be (20–120 keV), Nuclear Instruments and Meth-ods 173 , 357 (1980). [51] K. Morita, H. Akimune, and T. Suita, Energy loss of low energy protons and deuterons in evaporated metallic films, Journal of the Physical Society of Japan 25 , 1525 (1968). [52] D. Kahn, The energy loss of protons in metallic foils and mica, Phys. Rev. 90 , 503 (1953). [53] S. D. Warshaw, The stopping power for protons in several metals, Phys. Rev. 76 , 1759 (1949). [54] C. Eppacher, R. D´ ıez Mui˜ no, D. Semrad, and A. Arnau, Stopping power of lithium for hydrogen projectiles, Nu-clear Instruments and Methods in Physics Research Sec-tion B: Beam Interactions with Materials and Atoms 96 ,639 (1995), the Interaction of Swift Particles and Elec-tromagnetic Fields with Matter. [55] M. Bader, R. E. Pixley, F. S. Mozer, and W. Whaling, Stopping cross section of solids for protons, 50-600 keV, Phys. Rev. 103 , 32 (1956). [56] C. Eppacher, G. Zemsauer, and D. Semrad, How good are interpolations in stopping power tabulations? The case of Rb and of Sr, Nuclear Instruments and Methods in Physics Research Section B: Beam Interactions with Materials and Atoms 90 , 92 (1994). [57] V. I. Ochkur, Soviet Phys. J. E. T. P. 47 , 1766 (1964). [58] V. U. Nazarov and E. K. U. Gross, Stop-ping power of electron liquid for slow quan-tum projectiles, Contributions to Plasma Physics https://onlinelibrary.wiley.com/doi/pdf/10.1002/ctpp.70132. [59] D. C. Joy, S. Luo, R. Gauvin, P. Hovington, and N. Evans, Experimental measurements of electron stop-ping power at low energies, Scanning Microsc. 10 , 4 (1996). [60] V. U. Nazarov and V. M. Silkin, Many-body in-teractions in the dielectric theory of stopping power of solids for classical and quantum projectiles, DOI: 10.6084/m9.figshare.32089053. [61] F. Tran and P. Blaha, Accurate band gaps of semiconduc-tors and insulators with a semilocal exchange-correlation potential, Phys. Rev. Lett. 102 , 226401 (2009). 
+
+Appendix A: Quantum mechanical derivation of the formula for the stopping power within the dielectric formalism 
+
+We consider a target system of Ne electrons and Nn
+
+nuclei. A projectile charge Z is travelling through this system. We consider electrons of the target and the pro-jectile as quantum particles, while nuclei of the target are point charges pinned at their equilibrium positions. The time-dependent Schr¨ odinger equation for the wave-function Π( r=, R, t ) of the whole system, where r= stands for the set of the electronic coordinates ri, reads 
+
+i∂Π( r=, R, t )
+
+∂t = ˆHΠ( r=, R, t ), (A1) where ˆH = ˆH0 + ˆP 2
+
+2M + ˆH1, (A2) ˆH0 is the Hamiltonian of the target, ˆP = −i∇R is the momentum operator of the projectile, M being its mass, ˆH1 =
+
+> Ne
+
+X
+
+> i=1
+
+− Z
+
+|ri − R| +
+
+> Nn
+
+X
+
+> j=1
+
+Zj Z
+
+|Rj − R| , (A3) where Rj and Zj are the coordinates and charges of nu-clei, respectively, and R is the coordinate of the projec-tile. Let, at t → −∞ , the target and the projectile wave-functions be well separated, and the target to be in its ground-state Ψ 0(r=). Then we can write to the first Born approximation in ˆH19˜Π( r=, R, t → +∞) = Ψ 0(r=) ˜Φ( R, t → −∞ ) + 1
+
+i
+
+Z ∞−∞ 
+
+dte i ˆH0teit ˆP 2/2M ˆH1e−i ˆH0te−it ˆP 2/2M Ψ0(r=) ˜Φ( R, t → −∞ ), (A4) where the overhead tilde denotes the corresponding wave-function in the interaction picture. Furthermore, 
+
+
+
+Ψn̸=0 (r=) ˜Π( r=, R, t → +∞)
+
+
+
+> r=
+
+= 1
+
+i
+
+Z ∞−∞ 
+
+dt e i(En−E0)teit ˆP 2/2M ⟨Ψn(r=)| ˆH1|Ψ0(r=)⟩r=e−it ˆP 2/2M ˜Φ( R, t → −∞ ), (A5) where Ψ n and En are the complete set of the eigenfunctions of the target and its corresponding eigenenergies, respec-tively, and ⟨. . . ⟩r= denotes integration over electronic coordinates. Substituting Eq. (A3) into Eq. (A5), introducing the electron density operator ˆn(r) = 
+
+> Ne
+
+X
+
+> i=1
+
+δ(ri − r), (A6) and noting that the second term in Eq. (A3) does not contribute to the matrix element, we can rewrite Eq. (A5) as 
+
+
+
+Ψn̸=0 (r=) ˜Π( r=, R, t → +∞)
+
+
+
+> r=
+
+= Zi
+
+Z  
+
+Ψn(r=) |ˆn(r)| Ψ0(r=)
+
+
+
+> r=
+
+ei(En−E0)teit ˆP 2/2M 1
+
+|r − R| e−it ˆP 2/2M ˜Φ( R, t → −∞ )drdt, 
+
+(A7) or, after the Fourier transform ˜Φ( P , t ) = (2 π)−3/2
+
+Z
+
+˜Φ( R, t )e−iP ·RdR, (A8) 
+
+
+
+Ψn̸=0 (r=) ˜Π( r=, R, t → +∞)
+
+
+
+> r=
+
+= Ziπ (2 π)5/2
+
+Z 
+
+Ψn(r=) |ˆn(r)| Ψ0(r=)
+
+
+
+> r=
+
+ei(En−E0)teit (P −q)2/2M
+
+× eiq·r e−it P 2/2M dq
+
+q2 ˜Φ( P , t → −∞ )ei(P −q)·RdP drdt. 
+
+(A9) Integrating in Eq. (A9) over time explicitly, we can write 
+
+
+
+Ψn̸=0 (r=) ˜Π( r=, R, t → +∞)
+
+
+
+> r=
+
+= Ziπ (2 π)3/2
+
+Z 
+
+Ψn(r=) |ˆn(r)| Ψ0(r=)
+
+
+
+> r=
+
+δ
+
+
+
+En − E0 + (P − q)2
+
+2M − P 2
+
+2M
+
+
+
+× eiq·r dq
+
+q2 ˜Φ( P , t → −∞ )ei(P −q)·RdP dr,
+
+(A10) and 
+
+Z 
+
+Ψn̸=0 (r=) ˜Π( r=, R, t → +∞)
+
+
+
+> r=
+> 2
+
+dR = Z2
+
+8π5
+
+Z
+
+δ
+
+
+
+En − E0 + (P − q)2
+
+2M − P 2
+
+2M
+
+
+
+× eiq·r ei(P −q)·R
+
+
+
+Ψn(r=) |ˆn(r)| Ψ0(r=)
+
+
+
+> r=
+
+
+
+Ψn(r=) |ˆn(r′)| Ψ0(r=)
+
+∗
+
+> r=
+
+δ
+
+"
+
+En − E0 + (P ′ − q′)2
+
+2M − P ′2
+
+2M
+
+#
+
+× e−iq′·r′
+
+e−i(P ′−q′)·R ˜Φ( P , t → −∞ ) ˜Φ∗(P ′, t → −∞ ) dqdq′
+
+q2q′2 dP drdP ′dr′dR,
+
+(A11) 10 or, integrating further over R and P ′,
+
+Z 
+
+Ψn̸=0 (r=) ˜Π( r=, R, t → +∞)
+
+
+
+> r=
+> 2
+
+dR = Z2
+
+π2
+
+Z
+
+δ
+
+
+
+En − E0 + (P − q)2
+
+2M − P 2
+
+2M
+
+
+
+×
+
+
+
+Ψn(r=) |ˆn(r)| Ψ0(r=)
+
+
+
+> r=
+
+
+
+Ψn(r=) |ˆn(r′)| Ψ0(r=)
+
+∗
+
+> r=
+
+δ
+
+ P 2
+
+2M − (P − q + q′)2
+
+2M
+
+
+
+× eiq·r−iq′·r′ ˜Φ( P , t → −∞ ) ˜Φ∗(P − q + q′, t → −∞ ) dqdq′
+
+q2q′2 dP drdr′.
+
+(A12) For the energy gain by the target after the interaction we can write ∆E = X
+
+> n̸=0
+
+(En − E0)
+
+Z
+
+⟨Ψn(r=)| ˜Π( r=, R, t → +∞)⟩r=
+
+> 2
+
+dR, (A13) which, with the use of Eq. (A12), yields ∆E = Z2
+
+π2
+
+Z X
+
+> n̸=0
+
+ P 2
+
+2M − (P − q)2
+
+2M
+
+
+
+δ
+
+ P 2
+
+2M − (P − q + q′)2
+
+2M
+
+
+
+δ
+
+
+
+En − E0 + (P − q)2
+
+2M − P 2
+
+2M
+
+
+
+×
+
+
+
+Ψn(r=) |ˆn(r)| Ψ0(r=)
+
+
+
+> r=
+
+
+
+Ψ0(r=) |ˆn(r′)| Ψn(r=)
+
+
+
+> r=
+
+eiq·r−iq′·r′ ˜Φ( P , t → −∞ ) ˜Φ∗(P − q + q′, t → −∞ ) dqdq′
+
+q2q′2 dP drdr′.
+
+(A14) On the other hand, for the density response function χ(r, r′, ω ) of the same target one can write [13] 
+
+χ(r, r′, ω ) = X
+
+> n̸=0
+
+
+
+⟨Ψn(r=)|ˆn(r)|Ψ0(r=)⟩r=⟨Ψ0(r=)|ˆn(r′)|Ψn(r=)⟩r=
+
+E0 − En + ω + iη +
+
+⟨Ψn(r=)|ˆn(r′)|Ψ0(r=)⟩r=⟨Ψ0(r=)|ˆn(r)|Ψn(r=)⟩r=
+
+E0 − En − ω − iη 
+
+ ,
+
+(A15) and, therefore, Θ( ω)Im χ(r, r′, ω ) = −π X
+
+> n̸=0
+
+⟨Ψn(r=)|ˆn(r)|Ψ0(r=)⟩r=⟨Ψ0(r=)|ˆn(r′)|Ψn(r=)⟩r=δ(En − E0 − ω), (A16) where Θ( ω) is the Heaviside step-function. Combining Eqs. (A14) and (A16), we have ∆E = − Z2
+
+π3
+
+Z  P 2
+
+2M − (P − q)2
+
+2M
+
+
+
+Θ
+
+ P 2
+
+2M − (P − q)2
+
+2M
+
+
+
+δ
+
+ P 2
+
+2M − (P − q + q′)2
+
+2M
+
+
+
+Im χ
+
+
+
+r, r′, P 2
+
+2M − (P − q)2
+
+2M
+
+
+
+× eiq·r−iq′·r′ ˜Φ( P , t → −∞ ) ˜Φ∗(P − q + q′, t → −∞ ) dqdq′
+
+q2q′2 dP drdr′.
+
+(A17) In the case of a crystal the density response function χ(r, r′, ω ) can be written in terms of the matrix χGG ′ (q, ω )indexed with the reciprocal vectors of the crystal lattice 
+
+χ(r, r′, ω ) = 1(2 π)3
+
+Z
+
+> q∈ΩB
+
+dq X
+
+> G,G′
+
+χGG ′ (q, ω )eiq·(r−r′)eiG·r−iG′·r′
+
+, (A18) where Ω B is the first Brillouin zone. Therefore, ∆E = − Z2
+
+π3(2 π)3
+
+Z
+
+> q′′ ∈ΩB
+
+dq′′ X
+
+> G,G′
+
+Z  P 2
+
+2M − (P − q)2
+
+2M
+
+
+
+Θ
+
+ P 2
+
+2M − (P − q)2
+
+2M
+
+
+
+δ
+
+ P 2
+
+2M − (P − q + q′)2
+
+2M
+
+
+
+eiq·r−iq′·r′
+
+× ˜Φ( P , t → −∞ ) ˜Φ∗(P − q + q′, t → −∞ ) dqdq′
+
+q2q′2 dP drdr′Im χGG ′
+
+
+
+q′′ , P 2
+
+2M − (P − q)2
+
+2M
+
+
+
+eiq′′ ·(r−r′)eiG·r−iG′·r′
+
+.
+
+(A19) 11 In Eq. (A19) we first integrate in r′ over the whole space ∆E = − Z2
+
+π3
+
+Z
+
+> q′′ ∈ΩB
+
+dq′′ X
+
+> G,G′
+
+Z  P 2
+
+2M − (P − q)2
+
+2M
+
+
+
+Θ
+
+ P 2
+
+2M − (P − q)2
+
+2M
+
+
+
+δ
+
+ P 2
+
+2M − (P − q − q′′ − G′)2
+
+2M
+
+
+
+ei(q+q′′ +G)·r
+
+× ˜Φ( P , t → −∞ ) ˜Φ∗(P − q − q′′ − G′, t → −∞ ) dqdP
+
+q2|q′′ + G′|2 dr Im χGG ′
+
+
+
+q′′ , P 2
+
+2M − (P − q)2
+
+2M
+
+
+
+.
+
+(A20) From this point, we consider a film of the crystal, infinite in the xy plane and confined to the interval [ −L/ 2, L/ 2] in the z-coordinate. Integrating in r over the film, we have ∆E = − 8Z2
+
+π
+
+Z
+
+> q′′ ∈ΩB
+
+dq′′ X
+
+> G,G′
+
+Z "
+
+P 2
+
+2M − (Px + q′′  
+
+> x
+
++ Gx)2
+
+2M − (Py + q′′  
+
+> y
+
++ Gy )2
+
+2M − (Pz − qz )2
+
+2M
+
+#
+
+× Θ
+
+"
+
+P 2
+
+2M − (Px + q′′  
+
+> x
+
++ Gx)2
+
+2M − (Py + q′′  
+
+> y
+
++ Gy )2
+
+2M − (Pz − qz )2
+
+2M
+
+#
+
+× δ
+
+"
+
+P 2
+
+2M − (Px + Gx − G′
+
+> x
+
+)2
+
+2M − (Py + Gy − G′ 
+
+> y
+
+)2
+
+2M − (Pz − qz − q′′  
+
+> z
+
+− G′ 
+
+> z
+
+)2
+
+2M
+
+#
+
+sin[( qz + q′′  
+
+> z
+
++ Gz )L/ 2] 
+
+qz + q′′  
+
+> z
+
++ Gz
+
+× ˜Φ( P , t → −∞ ) ˜Φ∗(Px + Gx − G′
+
+> x
+
+, P y + Gy − G′ 
+
+> y
+
+, P z − qz − q′′  
+
+> z
+
+− G′ 
+
+> z
+
+, t → −∞ )
+
+× dq z dP
+
+[( q′′  
+
+> x
+
++ Gx)2 + ( q′′  
+
+> y
+
++ Gy )2 + q2 
+
+> z
+
+]|q′′ + G′|2 Im χGG ′
+
+"
+
+q′′ , P 2
+
+2M − (Px + q′′  
+
+> x
+
++ Gx)2
+
+2M − (Py + q′′  
+
+> y
+
++ Gy )2
+
+2M − (Pz − qz )2
+
+2M
+
+#
+
+.
+
+(A21) Let the projectile wave-packet be Gaussian ˜Φ( P ) = 
+
+ 2
+
+π
+
+3/4
+
+σ3/2e−σ2(P −P 0)2
+
+, (A22) where σ is large. In the limit σ → ∞ Eq. (A22) ensures that | ˜Φ( P )|2 → δ(P − P 0). Then, due to ˜Φ∗ in Eq. (A21), only G′ 
+
+> x
+
+= Gx and G′ 
+
+> y
+
+= Gy contribute, which allows to rewrite Eq. (A21) as ∆E = − 8Z2
+
+π
+
+Z
+
+> q′′ ∈ΩB
+
+dq′′ X
+
+> G,G′
+
+Z "
+
+P 2
+
+2M − (Px + q′′  
+
+> x
+
++ Gx)2
+
+2M − (Py + q′′  
+
+> y
+
++ Gy )2
+
+2M − (Pz − qz )2
+
+2M
+
+#
+
+× Θ
+
+"
+
+P 2
+
+2M − (Px + q′′  
+
+> x
+
++ Gx)2
+
+2M − (Py + q′′  
+
+> y
+
++ Gy )2
+
+2M − (Pz − qz )2
+
+2M
+
+#
+
+× δ
+
+ P 2
+
+> z
+
+2M − (Pz − qz − q′′  
+
+> z
+
+− G′ 
+
+> z
+
+)2
+
+2M
+
+ sin[( qz + q′′  
+
+> z
+
++ Gz )L/ 2] 
+
+qz + q′′  
+
+> z
+
++ Gz
+
+× ˜Φ( P , t → −∞ ) ˜Φ∗(Px, P y , P z − qz − q′′  
+
+> z
+
+− G′ 
+
+> z
+
+, t → −∞ )
+
+× dq z dz 
+
+[( q′′  
+
+> x
+
++ Gx)2 + ( q′′  
+
+> y
+
++ Gy )2 + q2 
+
+> z
+
+][( q′′  
+
+> x
+
++ Gx)2 + ( q′′  
+
+> y
+
++ Gy )2 + ( q′′  
+
+> z
+
++ G′ 
+
+> z
+
+)2] dP
+
+× Im χGG ′
+
+"
+
+q′′ , P 2
+
+2M − (Px + q′′  
+
+> x
+
++ Gx)2
+
+2M − (Py + q′′  
+
+> y
+
++ Gy )2
+
+2M − (Pz − qz )2
+
+2M
+
+#
+
+.
+
+(A23) Integrating in Eq. (A23) over qz , we have due to the δ-function 12 ∆E = − 8M Z 2
+
+π
+
+Z
+
+> q′′ ∈ΩB
+
+dq′′ X
+
+> G,G′
+
+Z 1
+
+Pz
+
+"
+
+P 2
+
+2M − (Px + q′′  
+
+> x
+
++ Gx)2
+
+2M − (Py + q′′  
+
+> y
+
++ Gy )2
+
+2M − (Pz + q′′  
+
+> z
+
++ G′ 
+
+> z
+
+)2
+
+2M
+
+#
+
+× Θ
+
+"
+
+P 2
+
+2M − (Px + q′′  
+
+> x
+
++ Gx)2
+
+2M − (Py + q′′  
+
+> y
+
++ Gy )2
+
+2M − (Pz + q′′  
+
+> z
+
++ G′ 
+
+> z
+
+)2
+
+2M
+
+#
+
+× sin[( Gz − G′ 
+
+> z
+
+)L/ 2] 
+
+Gz − G′
+
+> z
+
+| ˜Φ( P , t → −∞ )|2 dP
+
+[( q′′  
+
+> x
+
++ Gx)2 + ( q′′  
+
+> y
+
++ Gy )2 + q2 
+
+> z
+
+][( q′′  
+
+> x
+
++ Gx)2 + ( q′′  
+
+> y
+
++ Gy )2 + ( q′′  
+
+> z
+
++ G′ 
+
+> z
+
+)2]
+
+× Im χGG ′
+
+"
+
+q′′ , P 2
+
+2M − (Px + q′′  
+
+> x
+
++ Gx)2
+
+2M − (Py + q′′  
+
+> y
+
++ Gy )2
+
+2M − (Pz + q′′  
+
+> z
+
++ G′ 
+
+> z
+
+)2
+
+2M
+
+#
+
+.
+
+(A24) The leading term in Eq. (A24), proportional to L, is at G′ 
+
+> z
+
+= Gz , all other terms vanishing after the division by L.Then, after the integration over P , we have lim 
+
+> L→∞
+
+∆EL = − 4M Z 2
+
+πP 0z
+
+Z
+
+> q′′ ∈ΩB
+
+dq′′ X
+
+> G
+
+Z  P 20
+
+2M − (P 0 + q′′ + G)2
+
+2M
+
+
+
+× Θ
+
+ P 20
+
+2M − (P 0 + q′′ + G)2
+
+2M
+
+ 1
+
+|q′′ + G|4 Im χGG 
+
+
+
+q′′ , P 20
+
+2M − (P 0 + q′′ + G)2
+
+2M
+
+
+
+.
+
+(A25) Finally, taking account of the relation between the density-response matrix and the dielectric matrix 
+
+ϵ−1 
+
+> GG ′
+
+(q, ω ) = δGG ′ + 4π
+
+|q + G|| q + G′| χGG ′ (q, ω ), (A26) we have lim 
+
+> L→∞
+
+∆EL = − M Z 2
+
+π2P0z
+
+Z
+
+> q′′ ∈ΩB
+
+dq′′ X
+
+> G
+
+Z  P 20
+
+2M − (P 0 + q′′ + G)2
+
+2M
+
+
+
+× Θ
+
+ P 20
+
+2M − (P 0 + q′′ + G)2
+
+2M
+
+ 1
+
+|q′′ + G|2 Im ϵ−1
+
+> GG
+
+
+
+q′′ , P 20
+
+2M − (P 0 + q′′ + G)2
+
+2M
+
+
+
+.
+
+(A27) Using the symmetry property of the dielectric matrix 
+
+ϵ−1
+
+> −G′,−G
+
+(−q, ω ) = ϵ−1 
+
+> G,G′
+
+(q, ω ), we see that Eq. (A27) proves Eq. (6). In the specific case of the HEG dielectric function ϵ(q, ω ), by integrating separately over the radial and angular parts of q, Eq. (6) is reduced to Eq. (2). 
+
+Appendix B: Details of calculations for crystals 
+
+We were carrying out calculations for real-solids with the all-electron full-potential linearised augmented-plane wave code ELK [48]. For the realistic band-structures of semiconductors, the Tran-Blaha xc potential TB09 [61] was used, and, for the uniformity, it was also used in the case of metals. To evaluate χs, GG ′ (q, ω ), we were first calculating 
+
+ϵ−1 
+
+> s, GG ′
+
+(q, ω ) (task 180 of the ELK code), inverting the latter matrix, then taking use of the relation 
+
+ϵs, GG ′ (q, ω ) = δGG ′ − 4π
+
+|q + G|| q + G′| χs, GG ′ (q, ω ).
+
+Finally, Eqs. (6)–(9) were applied. To account for the core-states’ excitation, the promo-tion of the core to valence states was done. Ideally, all electrons should be considered valence, which, however, was not always feasible due to the computational limita-tions. The division of electrons into the two categories used is shown in Table I. The large number of empty bands is needed at larger velocities of the projectiles as well. In general, all the parameters of the calculations were chosen such as to aim at the convergence at larger velocities, which, however, was not always possible. At lower velocities of the projectile results are well converged with respect to the parameters of the calculations. All possible symmetries have been used to reduce the calculation time to acceptable values. 13 
+
+Crystal k- and q-points Empty bands Core electrons Valence electrons Dielectric matrix Al 16 × 16 × 16 512 2 11 941 × 941 Si 12 × 12 × 12 256 2 12 1471 × 1471 Diamond 16 × 16 × 16 356 0 6 645 × 645 Be 16 × 16 × 16 512 0 4 761 × 761 Li 16 × 16 × 16 612 0 3 887 × 887 Rb 8 × 8 × 8 512 12 25 2731 × 2731 Table I. Parameters of the ground-state and the dielectric matrix calculations used in producing results in Figs. 5–12. 
+
+Appendix C: High velocity 
+
+Here we prove that any causal fxc does not affect the high-velocity asymptotics of the stopping power of HEG. We write down the difference between SP with inclusion of some fxc and the RPA one. According to Eq. (2), (4), and (5) 
+
+dE dx −
+
+ dE dx 
+
+
+
+> RP A
+
+= − 8Z2
+
+v2 ×
+
+> 2M v
+
+Z
+
+> 0
+
+dq q3 
+
+> vq −q22M
+
+Z
+
+> 0
+
+ωIm 
+
+(
+
+χs(q, ω )1−χs(q, ω )[ 4πq2 +fxc (q, ω )] − χs(q, ω )1−χs(q, ω ) 4πq2
+
+)
+
+dω, 
+
+or 
+
+dE dx −
+
+ dE dx 
+
+
+
+> RP A
+
+= 8Z2
+
+v2 ×
+
+> 2M v
+
+Z
+
+> 0
+
+dq q3 
+
+> vq −q22M
+
+Z
+
+> 0
+
+ωIm χ2
+
+> s
+
+(q, ω )fxc (q, ω )
+
+{1 − χs(q, ω )[ 4πq2 + fxc (q, ω )] }[1 − χs(q, ω ) 4πq2 ] dω, 
+
+Taking v → ∞ in the upper limit of the inner integral and considering that the integrand is an even function of 
+
+ω, we can write asymptotically 
+
+dE dx −
+
+ dE dx 
+
+
+
+> RP A
+
+−→ 
+
+> v→∞
+
+4Z2
+
+v2 ×
+
+Im 
+
+> 2M v
+
+Z
+
+> 0
+
+dq q3
+
+> ∞
+
+Z
+
+> −∞
+
+ωχ 2
+
+> s
+
+(q, ω )fxc (q, ω )
+
+{1 − χs(q, ω )[ 4πq2 + fxc (q, ω )] }[1 − χs(q, ω ) 4πq2 ] dω. 
+
+(C1) Furthermore, since, due to causality, the integrand in (C1) is an analytical function of ω in the upper complex half-plane, since χs(q, ω ) ∼ 
+
+> |ω|→∞
+> 1
+> |ω|2
+
+, and since |fxc (q, ω )|
+
+is bounded in this half-plane [13], by Cauchy integral theorem we conclude that the inner integral in (C1) eval-uates to zero. This proves that SP with inclusion of a 
+
+fxc has the same high-velocity asymptotic behavior as the RPA one.

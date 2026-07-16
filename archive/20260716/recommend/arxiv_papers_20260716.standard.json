@@ -1,0 +1,53 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-16T20:41:33.895283+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 1,
+    "quick_skim_target": 11,
+    "quick_selected": 1
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2607.12498v1",
+      "source": "arxiv",
+      "title": "Many-body interactions in the dielectric theory of stopping power of solids for classical and quantum projectiles",
+      "abstract": "We take account of the many-body dynamic interactions by including the wave-vector and frequency-dependent exchange and correlations (xc) kernel $f_{xc}(\\qv,ω)$ in the framework of the dielectric theory of the stopping power of crystals for moving charges. The cases of classical and quantum projectiles are considered. We find that (I) the role of the xc effects in slowing of charges in crystalline solids is more pronounced than it is within the jellium model and (II) For velocities below the stopping maximum, inclusion of xc leads to the improvement of the comparison of the theory with experiment over a range of solid targets. On the other hand, in the high-velocity regime, the role of the dynamic xc proves negligible, which does not contradict experiment, and which we substantiate analytically within the jellium model of the target. The input to our theory is the microscopic dielectric matrix $ε_{\\Gv \\Gv'}(\\qv,ω)$ within the random phase approximation (i.e., with neglect of $f_{xc}$), the calculation of which matrix is implemented in the existing solid-state codes.",
+      "authors": [
+        "Vladimir U. Nazarov",
+        "Vyacheslav M. Silkin"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ],
+      "published": "2026-07-14T08:30:46+00:00",
+      "link": "https://arxiv.org/pdf/2607.12498v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "dielectric theory of stopping power for moving charges in solids; relevant to radiation damage energy loss mechanisms",
+      "llm_evidence_cn": "固体中运动电荷的介电能量损失理论；与辐射损伤能量损失机制相关",
+      "llm_evidence": "固体中运动电荷的介电能量损失理论；与辐射损伤能量损失机制相关",
+      "canonical_evidence": "固体中运动电荷的介电能量损失理论；与辐射损伤能量损失机制相关",
+      "llm_tldr_en": "Extends dielectric theory with many-body exchange-correlation kernel to compute stopping power of solids for classical and quantum projectiles, improving agreement with experiment at low velocities.",
+      "llm_tldr_cn": "该论文在介电理论框架中引入多体交换关联核，计算固体对经典和量子入射粒子的阻止本领。研究发现交换关联效应在低速区对能量损失有显著影响，改进了理论与实验的吻合度。这一工作为深入理解辐射损伤中的能量损失机制提供了理论基础，但未涉及具体材料或缺陷类型的微观演化。",
+      "llm_tldr": "该论文在介电理论框架中引入多体交换关联核，计算固体对经典和量子入射粒子的阻止本领。研究发现交换关联效应在低速区对能量损失有显著影响，改进了理论与实验的吻合度。这一工作为深入理解辐射损伤中的能量损失机制提供了理论基础，但未涉及具体材料或缺陷类型的微观演化。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation damage mechanisms in structural materials",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

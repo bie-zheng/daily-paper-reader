@@ -1,0 +1,24 @@
+{
+  "label": "2026-07-16",
+  "date": "2026-07-16",
+  "generated_at": "2026-07-16T20:42:22",
+  "count": 1,
+  "papers": [
+    {
+      "paper_id": "202607/16/2607.12498v1-many-body-interactions-in-the-dielectric-theory-of-stopping-power-of-solids-for-classical-and-quantum-projectiles",
+      "section": "quick",
+      "title_en": "Many-body interactions in the dielectric theory of stopping power of solids for classical and quantum projectiles",
+      "authors": "Vladimir U. Nazarov, Vyacheslav M. Silkin",
+      "date": "2026-07-14",
+      "pdf": "https://arxiv.org/pdf/2607.12498v1",
+      "score": "6.0",
+      "evidence": "固体中运动电荷的介电能量损失理论；与辐射损伤能量损失机制相关",
+      "tldr": "固体阻止本领的介电理论中，通过引入波矢和频率依赖的交换关联核(f_xc)考虑多体动态相互作用。研究发现，在晶体中交换关联效应比均匀电子气模型更显著，且在低于阻止最大值的速度范围内，包含交换关联能改善理论与实验的吻合；高速度下动态交换关联可忽略。理论输入为随机相位近似下的介电矩阵。",
+      "tags": "query:rad-damage",
+      "abstract_en": "We take account of the many-body dynamic interactions by including the wave-vector and frequency-dependent exchange and correlations (xc) kernel $f_{xc}(\\qv,ω)$ in the framework of the dielectric theory of the stopping power of crystals for moving charges. The cases of classical and quantum projectiles are considered. We find that (I) the role of the xc effects in slowing of charges in crystalline solids is more pronounced than it is within the jellium model and (II) For velocities below the stopping maximum, inclusion of xc leads to the improvement of the comparison of the theory with experiment over a range of solid targets. On the other hand, in the high-velocity regime, the role of the dynamic xc proves negligible, which does not contradict experiment, and which we substantiate analytically within the jellium model of the target. The input to our theory is the microscopic dielectric matrix $ε_{\\Gv \\Gv'}(\\qv,ω)$ within the random phase approximation (i.e., with neglect of $f_{xc}$), the calculation of which matrix is implemented in the existing solid-state codes.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
