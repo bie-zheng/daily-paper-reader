@@ -6,26 +6,22 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-07-16
-- 运行时间：2026-07-16 20:42:16 UTC
+- 最新运行日期：2026-07-17
+- 运行时间：2026-07-17 21:12:27 UTC
 - 运行状态：成功
-- 本次总论文数：1
+- 本次总论文数：0
 - 精读区：0
-- 速读区：1
+- 速读区：0
 
 ### 今日简报（AI）
-1) 今日精读一篇关于固体阻止本领介电理论的论文，聚焦多体相互作用对经典与量子射弹的影响。  
-2) 值得关注：多体效应在射弹能量损失中不可忽略，理论模型需同时考虑经典与量子机制。  
-3) 建议：可结合实验数据对比验证该理论，或扩展至低能射弹与复杂固体材料。
-- 详情：[/202607/16/README](/202607/16/README)
+> 今日无新推荐，系统未产出可展示论文。
+- 详情：[/202607/17/README](/202607/17/README)
 
 ### 精读区论文标签
 - 本次无精读推荐。
 
 ### 速读区论文标签
-1. [Many-body interactions in the dielectric theory of stopping power of solids for classical and quantum projectiles](/202607/16/2607.12498v1-many-body-interactions-in-the-dielectric-theory-of-stopping-power-of-solids-for-classical-and-quantum-projectiles)  
-   标签：评分：6.0/10、query:rad-damage
-   evidence：固体中运动电荷的介电能量损失理论；与辐射损伤能量损失机制相关
+- 本次无速读推荐。
 
 
 <div class="dpr-home-promo-card">
