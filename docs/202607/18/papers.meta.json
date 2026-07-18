@@ -1,0 +1,24 @@
+{
+  "label": "2026-07-18",
+  "date": "2026-07-18",
+  "generated_at": "2026-07-18T20:22:07",
+  "count": 1,
+  "papers": [
+    {
+      "paper_id": "202607/18/2607.14951v1-self-organized-defect-clustering-and-concentration-dependent-vacancy-diffusion-in-mos2",
+      "section": "quick",
+      "title_en": "Self-organized defect clustering and concentration-dependent vacancy diffusion in MoS$_2$",
+      "authors": "Aaron Flötotto, Benjamin Spetzler, Martin Ziegler, Erich Runge, Christian Dreßler",
+      "date": "2026-07-16",
+      "pdf": "https://arxiv.org/pdf/2607.14951v1",
+      "score": "6.0",
+      "evidence": "MoS2中缺陷团簇和空位扩散，方法可迁移至辐照合金",
+      "tldr": "MoS2中硫空位迁移对忆阻器件性能至关重要。本文通过机器学习势分子动力学与动力学蒙特卡洛模拟，揭示空位团簇集体行为。发现低浓度空位被束缚，中间浓度形成动态连接网络，高浓度呈现经典扩散，且扩散系数强依赖于浓度。这为理解忆阻行为提供了微观机制。",
+      "tags": "query:rad-damage",
+      "abstract_en": "Sulfur vacancy migration has a crucial impact on electronic transport and the functional behavior of MoS$_2$-based devices such as memristors and memtransistors. According to recent atomistic simulations, vacancy migration proceeds via cooperative, vacancy-assisted sulfur jumps, implying strongly correlated defect dynamics. Here, we investigate the collective behavior of sulfur-vacancy clusters in MoS$_2$ using kinetic Monte-Carlo simulations with transition rates derived from machine learning interatomic potential molecular dynamics simulations. We identify three transport regimes: At low concentrations, vacancies are immobile or confined within small clusters, whereas at high concentrations, classical diffusive transport with a constant diffusion coefficient is observed, and vacancies aggregate into anisotropically extended clusters. A well defined intermediate regime is characterized by clusters merging into a connected, fluctuating network with a concentration-dependent diffusion coefficient. This regime is characterized by a broad distribution of cluster sizes. The strong dependence of the vacancy diffusion coefficient on the average defect concentration provides new insights into the origin of memristive behavior observed in MoS$_2$.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

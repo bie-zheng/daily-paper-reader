@@ -1,0 +1,57 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-18T20:21:14.154940+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 1,
+    "quick_skim_target": 11,
+    "quick_selected": 1
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2607.14951v1",
+      "source": "arxiv",
+      "title": "Self-organized defect clustering and concentration-dependent vacancy diffusion in MoS$_2$",
+      "abstract": "Sulfur vacancy migration has a crucial impact on electronic transport and the functional behavior of MoS$_2$-based devices such as memristors and memtransistors. According to recent atomistic simulations, vacancy migration proceeds via cooperative, vacancy-assisted sulfur jumps, implying strongly correlated defect dynamics. Here, we investigate the collective behavior of sulfur-vacancy clusters in MoS$_2$ using kinetic Monte-Carlo simulations with transition rates derived from machine learning interatomic potential molecular dynamics simulations. We identify three transport regimes: At low concentrations, vacancies are immobile or confined within small clusters, whereas at high concentrations, classical diffusive transport with a constant diffusion coefficient is observed, and vacancies aggregate into anisotropically extended clusters. A well defined intermediate regime is characterized by clusters merging into a connected, fluctuating network with a concentration-dependent diffusion coefficient. This regime is characterized by a broad distribution of cluster sizes. The strong dependence of the vacancy diffusion coefficient on the average defect concentration provides new insights into the origin of memristive behavior observed in MoS$_2$.",
+      "authors": [
+        "Aaron Flötotto",
+        "Benjamin Spetzler",
+        "Martin Ziegler",
+        "Erich Runge",
+        "Christian Dreßler"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci",
+        "physics.comp-ph"
+      ],
+      "published": "2026-07-16T12:59:35+00:00",
+      "link": "https://arxiv.org/pdf/2607.14951v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Defect clustering and vacancy diffusion in MoS2, method transferable to irradiated alloys",
+      "llm_evidence_cn": "MoS2中缺陷团簇和空位扩散，方法可迁移至辐照合金",
+      "llm_evidence": "MoS2中缺陷团簇和空位扩散，方法可迁移至辐照合金",
+      "canonical_evidence": "MoS2中缺陷团簇和空位扩散，方法可迁移至辐照合金",
+      "llm_tldr_en": "Studies sulfur vacancy clustering and diffusion in MoS2 using kinetic Monte Carlo with ML interatomic potentials, identifying distinct transport regimes.",
+      "llm_tldr_cn": "该论文利用机器学习力场分子动力学推导的跃迁速率，通过动力学蒙特卡洛模拟研究了MoS2中硫空位团簇的集体行为。研究发现三个输运区域：低浓度时空位几乎不动或局限于小团簇内，高浓度时呈现经典扩散。这些结果有助于理解MoS2基器件中的缺陷动力学，其方法可推广至辐照环境下FeCr合金等结构材料的缺陷演化研究。",
+      "llm_tldr": "该论文利用机器学习力场分子动力学推导的跃迁速率，通过动力学蒙特卡洛模拟研究了MoS2中硫空位团簇的集体行为。研究发现三个输运区域：低浓度时空位几乎不动或局限于小团簇内，高浓度时呈现经典扩散。这些结果有助于理解MoS2基器件中的缺陷动力学，其方法可推广至辐照环境下FeCr合金等结构材料的缺陷演化研究。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation-induced point defects and clusters",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

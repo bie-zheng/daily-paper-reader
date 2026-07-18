@@ -1,6 +1,9 @@
 * <a class="dpr-sidebar-root-link" href="#/">首页</a>
 * <a class="dpr-sidebar-root-link dpr-sidebar-noactive-link" href="javascript:void(0)" data-dpr-hash="#/tutorial/README">使用教程</a>
 * Daily Papers
+  * 2026-07-18 <!--dpr-date:20260718-->
+    * 速读区
+      * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202607/18/2607.14951v1-self-organized-defect-clustering-and-concentration-dependent-vacancy-diffusion-in-mos2" data-sidebar-item="{&quot;title&quot;: &quot;Self-organized defect clustering and concentration-dependent vacancy diffusion in MoS$_2$&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2607.14951v1-self-organized-defect-clustering-and-concentration-dependent-vacancy-diffusion-in-mos2&quot;, &quot;score&quot;: &quot;6.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;rad-damage&quot;}], &quot;evidence&quot;: &quot;MoS2中缺陷团簇和空位扩散，方法可迁移至辐照合金&quot;}">Self-organized defect clustering and concentration-dependent vacancy diffusion in MoS$_2$</a>
   * 2026-07-16 <!--dpr-date:20260716-->
     * 速读区
       * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202607/16/2607.12498v1-many-body-interactions-in-the-dielectric-theory-of-stopping-power-of-solids-for-classical-and-quantum-projectiles" data-sidebar-item="{&quot;title&quot;: &quot;Many-body interactions in the dielectric theory of stopping power of solids for classical and quantum projectiles&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2607.12498v1-many-body-interactions-in-the-dielectric-theory-of-stopping-power-of-solids-for-classical-and-quantum-projectiles&quot;, &quot;score&quot;: &quot;6.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;rad-damage&quot;}], &quot;evidence&quot;: &quot;固体中运动电荷的介电能量损失理论；与辐射损伤能量损失机制相关&quot;}">Many-body interactions in the dielectric theory of stopping power of solids for classical and quantum projectiles</a>
