@@ -1,0 +1,24 @@
+{
+  "label": "2026-07-19",
+  "date": "2026-07-19",
+  "generated_at": "2026-07-19T19:53:32",
+  "count": 1,
+  "papers": [
+    {
+      "paper_id": "202607/19/2607.10440v1-connecting-diffuse-scattering-to-atomic-site-resolved-occupancy-and-displacement-fields-through-fourier-filtering",
+      "section": "quick",
+      "title_en": "Connecting Diffuse Scattering to Atomic-Site-Resolved Occupancy and Displacement Fields through Fourier Filtering",
+      "authors": "Maksim Eremenko, Victor Krayzman, Matthew G. Tucker, Igor Levin",
+      "date": "2026-07-11",
+      "pdf": "https://arxiv.org/pdf/2607.10440v1",
+      "score": "6.0",
+      "evidence": "从漫散射映射原子位移和占据的方法",
+      "tldr": "漫散射编码了局部结构相关性，但识别产生特定漫散射特征的原子基序具有挑战性。MOSAIC框架通过傅里叶滤波处理相位承载散射振幅，反演出原子位移和占据图，从而揭示这些特征对应的原子相关性。该方法能有效探测大尺度结构模型中的原子间相互作用，适用于反向蒙特卡洛、分子动力学或原子分辨率电镜图像等数据。",
+      "tags": "query:rad-damage",
+      "abstract_en": "Local structural correlations are encoded in diffuse scattering, but identifying atomic motifs that produce specific diffuse features can be challenging. We introduce MOSAIC, a computational framework for this task when an atomistic configuration is available and a phase-bearing scattering amplitude can be calculated. Our approach relies on applying the Fourier filter to this amplitude over the reciprocal-space regions encompassing the scattering features of interest to obtain maps of atomic displacements and site occupancies responsible for those features. The method is effective in interrogating the nature and spatial distributions of interatomic correlations in large-scale structural models, such as obtained using Reverse Monte Carlo refinements from experimental data, molecular dynamics, or Monte Carlo simulations, or 2D structural projections derived from atomic-resolution electron microscopy images.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

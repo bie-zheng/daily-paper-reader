@@ -1,0 +1,55 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-19T19:52:32.117170+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 1,
+    "quick_skim_target": 11,
+    "quick_selected": 1
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2607.10440v1",
+      "source": "arxiv",
+      "title": "Connecting Diffuse Scattering to Atomic-Site-Resolved Occupancy and Displacement Fields through Fourier Filtering",
+      "abstract": "Local structural correlations are encoded in diffuse scattering, but identifying atomic motifs that produce specific diffuse features can be challenging. We introduce MOSAIC, a computational framework for this task when an atomistic configuration is available and a phase-bearing scattering amplitude can be calculated. Our approach relies on applying the Fourier filter to this amplitude over the reciprocal-space regions encompassing the scattering features of interest to obtain maps of atomic displacements and site occupancies responsible for those features. The method is effective in interrogating the nature and spatial distributions of interatomic correlations in large-scale structural models, such as obtained using Reverse Monte Carlo refinements from experimental data, molecular dynamics, or Monte Carlo simulations, or 2D structural projections derived from atomic-resolution electron microscopy images.",
+      "authors": [
+        "Maksim Eremenko",
+        "Victor Krayzman",
+        "Matthew G. Tucker",
+        "Igor Levin"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ],
+      "published": "2026-07-11T18:57:52+00:00",
+      "link": "https://arxiv.org/pdf/2607.10440v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "method to map atomic displacements and occupancies from diffuse scattering",
+      "llm_evidence_cn": "从漫散射映射原子位移和占据的方法",
+      "llm_evidence": "从漫散射映射原子位移和占据的方法",
+      "canonical_evidence": "从漫散射映射原子位移和占据的方法",
+      "llm_tldr_en": "Introduces MOSAIC framework to Fourier filter scattering amplitudes and obtain atomic-scale displacement and occupancy maps, applicable to defect characterization.",
+      "llm_tldr_cn": "本文提出MOSAIC计算框架，通过傅里叶滤波从漫散射数据中提取原子尺度的位移和占据场，可用于分析材料中的局域结构关联。该方法适用于辐照诱导缺陷的微观结构表征，有助于理解缺陷演化和微观结构变化。",
+      "llm_tldr": "本文提出MOSAIC计算框架，通过傅里叶滤波从漫散射数据中提取原子尺度的位移和占据场，可用于分析材料中的局域结构关联。该方法适用于辐照诱导缺陷的微观结构表征，有助于理解缺陷演化和微观结构变化。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation induced defect evolution and microstructure changes",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
