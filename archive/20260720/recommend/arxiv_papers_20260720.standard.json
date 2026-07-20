@@ -1,0 +1,69 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-20T20:53:24.665435+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 1,
+    "quick_skim_target": 11,
+    "quick_selected": 1
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2607.11663v1",
+      "source": "arxiv",
+      "title": "Effects of irradiation by protons, neutrons, and gamma particles on electrical properties of 4H-SiC diodes and LGAD sensors",
+      "abstract": "4H-SiC is a wide-bandgap semiconductor with high displacement threshold energy, large critical electric field, and low intrinsic carrier concentration, making it attractive for radiation-hard detector applications. In this work, we investigate the electrical characteristics of 4H-SiC P$^{+}$-in-N (PN) diodes and Low-Gain Avalanche Detectors (LGADs) fabricated by onsemi before and after irradiation by 24 GeV/c protons, reactor neutrons, and $^{60}$Co gamma rays. Current-voltage (IV) and capacitance-voltage (CV) measurements were performed at room temperature for proton fluences up to $1\\times10^{16}\\;\\mathrm{protons/cm^2}$, neutron fluences up to $1\\times10^{18}\\;\\mathrm{1\\;MeV\\;n_{eq}/cm^2}$, and total ionizing doses up to 300 kGy.   Hadron irradiation induces pronounced changes in both leakage current and bulk capacitance, consistent with radiation-induced formation of deep acceptor-like defects and strong compensation of the originally N-type material. For high proton fluences, the leakage current decreases and the bulk capacitance becomes bias-independent, indicating effective compensation of the epitaxial layer. Extreme neutron fluences lead to a substantial expansion of the depleted region into the originally highly doped substrate, as inferred from the measured capacitance values. Gamma irradiation up to 300 kGy results in significantly modified capacitance behavior, suggesting reduction of the effective doping concentration in the epitaxial and multiplication layers.   The results demonstrate that radiation-induced compensation strongly modifies the effective space charge in 4H-SiC devices at high hadron fluences, while the leakage current is influenced by the enlarged depletion volume together with field-enhanced and surface-related generation mechanisms. In contrast, ionizing damage primarily affects the effective doping and electric-field distribution.",
+      "authors": [
+        "Jiří Kroll",
+        "Pavla Federičová",
+        "Jan Chochol",
+        "Adam Klimsza",
+        "Jana Kozáková",
+        "Adam Kozelský",
+        "Vojtěch Kráčmar",
+        "Jiří Kvasnička",
+        "Roman Malousek",
+        "Mária Marčišovská",
+        "Michal Marčišovský",
+        "Marcela Mikeštíková",
+        "David Novák",
+        "Radek Novotný",
+        "Peter Slovák",
+        "Radim Špetík",
+        "Peter Švihra",
+        "Pavel Tůma"
+      ],
+      "primary_category": "physics.ins-det",
+      "categories": [
+        "physics.ins-det"
+      ],
+      "published": "2026-07-13T15:08:19+00:00",
+      "link": "https://arxiv.org/pdf/2607.11663v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "studies irradiation effects on 4H-SiC electrical properties, relevant to radiation damage mechanisms in structural materials",
+      "llm_evidence_cn": "研究辐照对4H-SiC电学性能的影响，与结构材料辐照损伤机制相关",
+      "llm_evidence": "研究辐照对4H-SiC电学性能的影响，与结构材料辐照损伤机制相关",
+      "canonical_evidence": "研究辐照对4H-SiC电学性能的影响，与结构材料辐照损伤机制相关",
+      "llm_tldr_en": "This work investigates the electrical characteristics of 4H-SiC diodes and LGADs after proton, neutron, and gamma irradiation, providing data on radiation damage in a wide-bandgap semiconductor.",
+      "llm_tldr_cn": "该论文针对4H-SiC二极管和低增益雪崩探测器在质子、中子和伽马辐照后的电学特性变化进行系统研究。通过电流-电压和电容-电压测量，揭示了不同辐照粒子种类和通量对器件性能的影响。这些结果有助于理解宽禁带半导体中的辐射损伤机制，对核环境用结构材料的辐照效应研究具有参考价值。",
+      "llm_tldr": "该论文针对4H-SiC二极管和低增益雪崩探测器在质子、中子和伽马辐照后的电学特性变化进行系统研究。通过电流-电压和电容-电压测量，揭示了不同辐照粒子种类和通量对器件性能的影响。这些结果有助于理解宽禁带半导体中的辐射损伤机制，对核环境用结构材料的辐照效应研究具有参考价值。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation damage mechanisms in structural materials",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

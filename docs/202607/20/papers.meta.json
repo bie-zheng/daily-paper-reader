@@ -1,0 +1,24 @@
+{
+  "label": "2026-07-20",
+  "date": "2026-07-20",
+  "generated_at": "2026-07-20T20:54:40",
+  "count": 1,
+  "papers": [
+    {
+      "paper_id": "202607/20/2607.11663v1-effects-of-irradiation-by-protons-neutrons-and-gamma-particles-on-electrical-properties-of-4h-sic-diodes-and-lgad-sensors",
+      "section": "quick",
+      "title_en": "Effects of irradiation by protons, neutrons, and gamma particles on electrical properties of 4H-SiC diodes and LGAD sensors",
+      "authors": "Jiří Kroll, Pavla Federičová, Jan Chochol, Adam Klimsza, Jana Kozáková, Adam Kozelský, Vojtěch Kráčmar, Jiří Kvasnička, Roman Malousek, Mária Marčišovská, Michal Marčišovský, Marcela Mikeštíková, David Novák, Radek Novotný, Peter Slovák, Radim Špetík, Peter Švihra, Pavel Tůma",
+      "date": "2026-07-13",
+      "pdf": "https://arxiv.org/pdf/2607.11663v1",
+      "score": "6.0",
+      "evidence": "研究辐照对4H-SiC电学性能的影响，与结构材料辐照损伤机制相关",
+      "tldr": "4H-SiC因其高位移阈值和抗辐射特性，被用于制作辐射探测器二极管和低增益雪崩探测器（LGAD）。本研究测量了质子、中子和伽马射线辐照前后器件的电流-电压和电容-电压特性。强子辐照导致漏电流和电容显著变化，源于深能级缺陷和N型材料补偿；高注量下耗尽区扩展至衬底。伽马辐照主要降低有效掺杂浓度。结果表明辐射补偿和电离损伤分别主导空间电荷和电场分布。",
+      "tags": "query:rad-damage",
+      "abstract_en": "4H-SiC is a wide-bandgap semiconductor with high displacement threshold energy, large critical electric field, and low intrinsic carrier concentration, making it attractive for radiation-hard detector applications. In this work, we investigate the electrical characteristics of 4H-SiC P$^{+}$-in-N (PN) diodes and Low-Gain Avalanche Detectors (LGADs) fabricated by onsemi before and after irradiation by 24 GeV/c protons, reactor neutrons, and $^{60}$Co gamma rays. Current-voltage (IV) and capacitance-voltage (CV) measurements were performed at room temperature for proton fluences up to $1\\times10^{16}\\;\\mathrm{protons/cm^2}$, neutron fluences up to $1\\times10^{18}\\;\\mathrm{1\\;MeV\\;n_{eq}/cm^2}$, and total ionizing doses up to 300 kGy.   Hadron irradiation induces pronounced changes in both leakage current and bulk capacitance, consistent with radiation-induced formation of deep acceptor-like defects and strong compensation of the originally N-type material. For high proton fluences, the leakage current decreases and the bulk capacitance becomes bias-independent, indicating effective compensation of the epitaxial layer. Extreme neutron fluences lead to a substantial expansion of the depleted region into the originally highly doped substrate, as inferred from the measured capacitance values. Gamma irradiation up to 300 kGy results in significantly modified capacitance behavior, suggesting reduction of the effective doping concentration in the epitaxial and multiplication layers.   The results demonstrate that radiation-induced compensation strongly modifies the effective space charge in 4H-SiC devices at high hadron fluences, while the leakage current is influenced by the enlarged depletion volume together with field-enhanced and surface-related generation mechanisms. In contrast, ionizing damage primarily affects the effective doping and electric-field distribution.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
