@@ -1,0 +1,64 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-21T21:07:43.545602+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 1,
+    "deep_cap": 6,
+    "deep_selected": 1,
+    "quick_candidates": 0,
+    "quick_skim_target": 11,
+    "quick_selected": 0
+  },
+  "deep_dive": [
+    {
+      "id": "2607.17594v1",
+      "source": "arxiv",
+      "title": "CuCrZr heat-sink irradiation performance reveals new challenges for thermonuclear fusion reactors",
+      "abstract": "Commercial fusion energy requires materials that survive intense neutron bombardment whilst extracting extreme heat loads for conversion to electricity. The CuCrZr alloy, the leading heat-sink material for fusion reactors, derives its strength from a fine dispersion of nano-precipitates formed during prime-ageing heat-treatment. Whether this precipitation-hardening strategy can withstand fusion-relevant irradiation remains untested. Here we show, combining in situ transmission electron microscopy under heavy-ion irradiation and He implantation with thermodynamic and transmutation modelling, that the hardening precipitates dissolve under two opposing kinetic regimes: ballistic dissolution dominates at low temperatures, whilst dissolution and re-precipitation dominate at high temperatures. Although the accelerated dose rates inherent to ion irradiation shift the balance between ballistic mixing and thermal back-diffusion relative to reactor conditions, precipitate degradation at both kinetic extremes indicates that the prime-aged microstructure is unlikely to remain unaltered under prolonged neutron exposure. He bubbles and Kr-rich voids nucleate once vacancies become mobile, and transmutation over five service years irreversibly redirects the alloy chemistry towards Ni-Zr intermetallics. These three independent mechanisms converge to challenge the strategy on which CuCrZr performance depends, suggesting that the long-term performance of age-hardenable Cu-based heat-sink alloys in fusion reactors warrants further assessment. Our findings reveal a new materials challenge for fusion reactor design and commercialisation: the need for new Cu-based heat-sink alloys able to retain engineered strength whilst their chemistry is irreversibly rewritten - thermodynamically and ballistically - by the fusion neutron spectrum.",
+      "authors": [
+        "Thomas Barzic",
+        "Anna-Carina Seitlinger",
+        "Christoph Frühwirth",
+        "Edward McDonald",
+        "Jing Tang",
+        "Jonathan A. Hinks",
+        "Alexandr Zinovev",
+        "Dmitry Terentyev",
+        "Stefan Luidold",
+        "Cláudio G. Schön",
+        "Enrique Jimenez-Melero",
+        "Stefan Pogatscher",
+        "Matheus A. Tunes"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci",
+        "physics.plasm-ph"
+      ],
+      "published": "2026-07-20T06:24:42+00:00",
+      "link": "https://arxiv.org/pdf/2607.17594v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "irradiation of precipitation-hardened alloy heat sink",
+      "llm_evidence_cn": "析出强化合金热沉材料的辐照性能",
+      "llm_evidence": "析出强化合金热沉材料的辐照性能",
+      "canonical_evidence": "析出强化合金热沉材料的辐照性能",
+      "llm_tldr_en": "Combining in situ TEM, He implantation, and modeling, this paper shows that CuCrZr hardening precipitates dissolve under irradiation via ballistic and thermal mechanisms, posing challenges for fusion heat-sink materials.",
+      "llm_tldr_cn": "该研究针对聚变反应堆热沉材料CuCrZr合金在辐照下的性能，采用原位透射电镜重离子辐照与氦注入结合热力学与嬗变模型，发现强化析出相在辐照下发生溶解。低温度区以弹道溶解为主，高温区受另一机制控制，揭示了沉淀强化策略在聚变辐照环境中的局限性，对商业聚变堆材料设计具有重要警示意义。",
+      "llm_tldr": "该研究针对聚变反应堆热沉材料CuCrZr合金在辐照下的性能，采用原位透射电镜重离子辐照与氦注入结合热力学与嬗变模型，发现强化析出相在辐照下发生溶解。低温度区以弹道溶解为主，高温区受另一机制控制，揭示了沉淀强化策略在聚变辐照环境中的局限性，对商业聚变堆材料设计具有重要警示意义。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation damage mechanisms in structural materials",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": []
+}

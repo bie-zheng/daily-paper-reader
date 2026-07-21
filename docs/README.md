@@ -6,26 +6,24 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-07-20
-- 运行时间：2026-07-20 20:54:31 UTC
+- 最新运行日期：2026-07-21
+- 运行时间：2026-07-21 21:09:33 UTC
 - 运行状态：成功
 - 本次总论文数：1
-- 精读区：0
-- 速读区：1
+- 精读区：1
+- 速读区：0
 
 ### 今日简报（AI）
-今日速读1篇论文，聚焦4H-SiC二极管与LGAD传感器在质子、中子和伽马辐照下的电性能变化。  
-值得关注的是，不同辐射粒子对器件性能的影响存在显著差异，其中中子辐照导致的损伤最为严重。  
-建议普通读者关注该领域对高能粒子探测器的抗辐射设计进展，尤其是在高辐射环境（如太空、高能物理实验）中的应用潜力。
-- 详情：[/202607/20/README](/202607/20/README)
+今日精读了一篇关于核聚变反应堆CuCrZr散热材料辐照性能的论文。核心结论：CuCrZr在中子辐照下热导率和力学性能退化超出预期，为聚变堆设计带来新挑战。下一步可重点关注新型抗辐照散热材料的研发进展。
+- 详情：[/202607/21/README](/202607/21/README)
 
 ### 精读区论文标签
-- 本次无精读推荐。
+1. [CuCrZr heat-sink irradiation performance reveals new challenges for thermonuclear fusion reactors](/202607/21/2607.17594v1-cucrzr-heat-sink-irradiation-performance-reveals-new-challenges-for-thermonuclear-fusion-reactors)  
+   标签：评分：8.0/10、query:rad-damage
+   evidence：析出强化合金热沉材料的辐照性能
 
 ### 速读区论文标签
-1. [Effects of irradiation by protons, neutrons, and gamma particles on electrical properties of 4H-SiC diodes and LGAD sensors](/202607/20/2607.11663v1-effects-of-irradiation-by-protons-neutrons-and-gamma-particles-on-electrical-properties-of-4h-sic-diodes-and-lgad-sensors)  
-   标签：评分：6.0/10、query:rad-damage
-   evidence：研究辐照对4H-SiC电学性能的影响，与结构材料辐照损伤机制相关
+- 本次无速读推荐。
 
 
 <div class="dpr-home-promo-card">
