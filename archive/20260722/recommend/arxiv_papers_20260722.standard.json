@@ -1,0 +1,52 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-22T21:08:36.851342+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 1,
+    "deep_cap": 6,
+    "deep_selected": 1,
+    "quick_candidates": 0,
+    "quick_skim_target": 11,
+    "quick_selected": 0
+  },
+  "deep_dive": [
+    {
+      "id": "2607.18472v1",
+      "source": "arxiv",
+      "title": "Vacancy Diffusion Across FeCrAl Alloy Composition Space for Accident-Tolerant Fuel Cladding",
+      "abstract": "Iron-chromium-aluminium (FeCrAl) alloys are leading candidates for accident-tolerant fuel cladding in light-water reactors, where their superior high-temperature oxidation resistance promises to extend coping times during loss-of-coolant accidents. The in-reactor lifetime of cladding is ultimately governed by radiation-induced microstructural evolution of which point defect transport is the dominant mechanism, however, this remains poorly understood. Here, we use a species-resolved kinetic Monte Carlo (KMC) model for vacancy diffusion in FeCrAl, parameterised by linear surrogate models trained on a database of migration barriers generated through the Hop-Decorate workflow. By sampling compositions spanning the Fe-rich to Cr-rich range of the Fe-Cr-Al system, we map how the local chemical environment controls vacancy hopping and hence macroscopic diffusivity. We find that increasing the Cr content in the alloy progressively decreases global diffusivity of vacancies even though activation energies stay relatively constant. This implies that the higher the Fe content in the alloy, the faster vacancies diffuse, thereby increasing annihilation events with fast-moving interstitials, potentially reducing irradiation induced defects and increasing radiation tolerance. Conversely, we find that Cr-rich alloy compositions stand out with a markedly elevated activation energy and significantly slower diffusion, orders of magnitude lower at accident-relevant temperatures. This indicates suppressed vacancy mobility in Cr-rich $α'$ phases which are known to form under irradiation.",
+      "authors": [
+        "Mihai Pitigoi",
+        "Peter Hatton"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ],
+      "published": "2026-07-20T19:41:08+00:00",
+      "link": "https://arxiv.org/pdf/2607.18472v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "vacancy diffusion in FeCrAl alloy for radiation-induced microstructural evolution",
+      "llm_evidence_cn": "FeCrAl合金中空位扩散对辐照诱导微结构演化的影响",
+      "llm_evidence": "FeCrAl合金中空位扩散对辐照诱导微结构演化的影响",
+      "canonical_evidence": "FeCrAl合金中空位扩散对辐照诱导微结构演化的影响",
+      "llm_tldr_en": "This work uses a species-resolved kinetic Monte Carlo model with surrogate models trained on migration barriers to study vacancy diffusion across FeCrAl composition space, providing critical point defect transport parameters for understanding radiation damage in accident-tolerant fuel cladding.",
+      "llm_tldr_cn": "铁铬铝合金（FeCrAl）是轻水堆事故容错燃料包壳候选材料，其堆内寿命受辐照诱导微结构演化控制，其中点缺陷传输是关键机制。本文采用物种分辨的动力学蒙特卡罗模型，结合基于迁移势垒数据库训练的线性代理模型，系统研究了FeCrAl成分空间中空位扩散行为。通过采样从富铁到富铬的成分范围，揭示了空位扩散系数随成分变化的规律，为理解FeCrAl合金辐照损伤机制提供了关键的原子尺度输运参数。",
+      "llm_tldr": "铁铬铝合金（FeCrAl）是轻水堆事故容错燃料包壳候选材料，其堆内寿命受辐照诱导微结构演化控制，其中点缺陷传输是关键机制。本文采用物种分辨的动力学蒙特卡罗模型，结合基于迁移势垒数据库训练的线性代理模型，系统研究了FeCrAl成分空间中空位扩散行为。通过采样从富铁到富铬的成分范围，揭示了空位扩散系数随成分变化的规律，为理解FeCrAl合金辐照损伤机制提供了关键的原子尺度输运参数。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation-induced point defects and clusters",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": []
+}

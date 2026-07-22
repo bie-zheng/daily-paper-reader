@@ -6,21 +6,23 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-07-21
-- 运行时间：2026-07-21 21:09:33 UTC
+- 最新运行日期：2026-07-22
+- 运行时间：2026-07-22 21:09:50 UTC
 - 运行状态：成功
 - 本次总论文数：1
 - 精读区：1
 - 速读区：0
 
 ### 今日简报（AI）
-今日精读了一篇关于核聚变反应堆CuCrZr散热材料辐照性能的论文。核心结论：CuCrZr在中子辐照下热导率和力学性能退化超出预期，为聚变堆设计带来新挑战。下一步可重点关注新型抗辐照散热材料的研发进展。
-- 详情：[/202607/21/README](/202607/21/README)
+今日精读一篇关于FeCrAl合金空位扩散的高分论文（9/10），专攻事故容错燃料包壳材料性能。  
+关键发现：合金成分变化显著影响空位扩散行为，为提升包壳抗辐照性能提供了理论依据。  
+建议材料领域读者重点关注文中的扩散模型，后续可用于指导耐事故燃料包壳的成分优化设计。
+- 详情：[/202607/22/README](/202607/22/README)
 
 ### 精读区论文标签
-1. [CuCrZr heat-sink irradiation performance reveals new challenges for thermonuclear fusion reactors](/202607/21/2607.17594v1-cucrzr-heat-sink-irradiation-performance-reveals-new-challenges-for-thermonuclear-fusion-reactors)  
-   标签：评分：8.0/10、query:rad-damage
-   evidence：析出强化合金热沉材料的辐照性能
+1. [Vacancy Diffusion Across FeCrAl Alloy Composition Space for Accident-Tolerant Fuel Cladding](/202607/22/2607.18472v1-vacancy-diffusion-across-fecral-alloy-composition-space-for-accident-tolerant-fuel-cladding)  
+   标签：评分：9.0/10、query:rad-damage
+   evidence：FeCrAl合金中空位扩散对辐照诱导微结构演化的影响
 
 ### 速读区论文标签
 - 本次无速读推荐。

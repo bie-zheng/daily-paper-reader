@@ -1,0 +1,24 @@
+{
+  "label": "2026-07-22",
+  "date": "2026-07-22",
+  "generated_at": "2026-07-22T21:09:57",
+  "count": 1,
+  "papers": [
+    {
+      "paper_id": "202607/22/2607.18472v1-vacancy-diffusion-across-fecral-alloy-composition-space-for-accident-tolerant-fuel-cladding",
+      "section": "deep",
+      "title_en": "Vacancy Diffusion Across FeCrAl Alloy Composition Space for Accident-Tolerant Fuel Cladding",
+      "authors": "Mihai Pitigoi, Peter Hatton",
+      "date": "2026-07-20",
+      "pdf": "https://arxiv.org/pdf/2607.18472v1",
+      "score": "9.0",
+      "evidence": "FeCrAl合金中空位扩散对辐照诱导微结构演化的影响",
+      "tldr": "FeCrAl合金是轻水堆事故容错燃料包壳的候选材料，其辐照性能受空位扩散主导。本文采用物种分辨动力学蒙特卡洛模型，结合基于Hop-Decorate迁移势垒数据库训练的线性代理模型，系统研究了Fe-Cr-Al成分空间中空位扩散行为。发现增加Cr含量会降低空位宏观扩散率，而活化能基本不变；富Crα'相中扩散速率极低（低数个量级），表明空位迁移被抑制。该结果揭示了成分调控空位扩散的机制，为优化合金抗辐照性能提供了关键指导。",
+      "tags": "query:rad-damage",
+      "abstract_en": "Iron-chromium-aluminium (FeCrAl) alloys are leading candidates for accident-tolerant fuel cladding in light-water reactors, where their superior high-temperature oxidation resistance promises to extend coping times during loss-of-coolant accidents. The in-reactor lifetime of cladding is ultimately governed by radiation-induced microstructural evolution of which point defect transport is the dominant mechanism, however, this remains poorly understood. Here, we use a species-resolved kinetic Monte Carlo (KMC) model for vacancy diffusion in FeCrAl, parameterised by linear surrogate models trained on a database of migration barriers generated through the Hop-Decorate workflow. By sampling compositions spanning the Fe-rich to Cr-rich range of the Fe-Cr-Al system, we map how the local chemical environment controls vacancy hopping and hence macroscopic diffusivity. We find that increasing the Cr content in the alloy progressively decreases global diffusivity of vacancies even though activation energies stay relatively constant. This implies that the higher the Fe content in the alloy, the faster vacancies diffuse, thereby increasing annihilation events with fast-moving interstitials, potentially reducing irradiation induced defects and increasing radiation tolerance. Conversely, we find that Cr-rich alloy compositions stand out with a markedly elevated activation energy and significantly slower diffusion, orders of magnitude lower at accident-relevant temperatures. This indicates suppressed vacancy mobility in Cr-rich $α'$ phases which are known to form under irradiation.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

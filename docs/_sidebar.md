@@ -1,6 +1,9 @@
 * <a class="dpr-sidebar-root-link" href="#/">首页</a>
 * <a class="dpr-sidebar-root-link dpr-sidebar-noactive-link" href="javascript:void(0)" data-dpr-hash="#/tutorial/README">使用教程</a>
 * Daily Papers
+  * 2026-07-22 <!--dpr-date:20260722-->
+    * 精读区
+      * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202607/22/2607.18472v1-vacancy-diffusion-across-fecral-alloy-composition-space-for-accident-tolerant-fuel-cladding" data-sidebar-item="{&quot;title&quot;: &quot;Vacancy Diffusion Across FeCrAl Alloy Composition Space for Accident-Tolerant Fuel Cladding&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2607.18472v1-vacancy-diffusion-across-fecral-alloy-composition-space-for-accident-tolerant-fuel-cladding&quot;, &quot;score&quot;: &quot;9.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;rad-damage&quot;}], &quot;evidence&quot;: &quot;FeCrAl合金中空位扩散对辐照诱导微结构演化的影响&quot;}">Vacancy Diffusion Across FeCrAl Alloy Composition Space for Accident-Tolerant Fuel Cladding</a>
   * 2026-07-21 <!--dpr-date:20260721-->
     * 精读区
       * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202607/21/2607.17594v1-cucrzr-heat-sink-irradiation-performance-reveals-new-challenges-for-thermonuclear-fusion-reactors" data-sidebar-item="{&quot;title&quot;: &quot;CuCrZr heat-sink irradiation performance reveals new challenges for thermonuclear fusion reactors&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2607.17594v1-cucrzr-heat-sink-irradiation-performance-reveals-new-challenges-for-thermonuclear-fusion-reactors&quot;, &quot;score&quot;: &quot;8.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;rad-damage&quot;}], &quot;evidence&quot;: &quot;析出强化合金热沉材料的辐照性能&quot;}">CuCrZr heat-sink irradiation performance reveals new challenges for thermonuclear fusion reactors</a>
