@@ -1,0 +1,56 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-27T20:43:36.363582+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 1,
+    "deep_cap": 6,
+    "deep_selected": 1,
+    "quick_candidates": 0,
+    "quick_skim_target": 11,
+    "quick_selected": 0
+  },
+  "deep_dive": [
+    {
+      "id": "2607.22364v1",
+      "source": "arxiv",
+      "title": "Mechanisms of Microstructural Evolution and Degradation in Aluminum under High-Damage Irradiation",
+      "abstract": "Aluminum alloys are widely used in research reactor systems, yet the mechanisms governing irradiation-induced degradation remain poorly understood. Here we combine conventional cascade-overlap molecular dynamics simulations with an accelerated Iterative Kinetic Approach (IKA) to investigate defect evolution in single-crystal Al subjected to 50 keV He irradiation. Benchmarking shows that IKA reproduces the essential defect kinetics of cascade simulations while enabling access to substantially higher accumulated damage. By extending the IKA to higher damage levels, we identified three distinct regimes governing radiation-induced degradation in Al: recombination-driven annihilation, defect accumulation, and sink-controlled absorption. At higher damage, Frank loops dissociate into Shockley partials and stair-rod loops, ultimately driving the nucleation and growth of stacking-fault tetrahedra (SFTs). These transformations progressively convert mobile defects into SFTs. Ultimately, the synergistic effect of interstitial and vacancy loops and SFTs increases irradiation hardening in Al at 300 K. This work provides insight into irradiation-induced degradation in aluminum reactor materials.",
+      "authors": [
+        "Alhassan S. Issaka",
+        "Sadie Wicks",
+        "Vishal Yadav",
+        "Assel Aitkaliyeva",
+        "Michael R. Tonks",
+        "Simon R. Phillpot"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ],
+      "published": "2026-07-24T14:47:51+00:00",
+      "link": "https://arxiv.org/pdf/2607.22364v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "studies radiation damage mechanisms in Al under He irradiation",
+      "llm_evidence_cn": "研究铝在氦辐照下的辐射损伤机制",
+      "llm_evidence": "研究铝在氦辐照下的辐射损伤机制",
+      "canonical_evidence": "研究铝在氦辐照下的辐射损伤机制",
+      "llm_tldr_en": "This paper combines cascade-overlap MD simulations with an accelerated Iterative Kinetic Approach (IKA) to investigate defect evolution in Al under He irradiation, identifying three regimes of radiation-induced degradation: recombination-driven annihilation, defect accumulation, and sink-controlled absorption.",
+      "llm_tldr_cn": "本文针对铝在辐照下退化机制理解不足的问题，将级联重叠分子动力学模拟与加速迭代动力学方法(IKA)相结合，研究50 keV He辐照下单晶铝的缺陷演化。IKA方法在重现级联模拟缺陷动力学的同时，显著提高了累积损伤的模拟能力。通过扩展IKA至高损伤水平，识别出辐射诱导退化的三个不同阶段：复合驱动的湮灭、缺陷积累和阱控制吸收。该工作建立了理解辐照下结构材料退化机制的新框架。",
+      "llm_tldr": "本文针对铝在辐照下退化机制理解不足的问题，将级联重叠分子动力学模拟与加速迭代动力学方法(IKA)相结合，研究50 keV He辐照下单晶铝的缺陷演化。IKA方法在重现级联模拟缺陷动力学的同时，显著提高了累积损伤的模拟能力。通过扩展IKA至高损伤水平，识别出辐射诱导退化的三个不同阶段：复合驱动的湮灭、缺陷积累和阱控制吸收。该工作建立了理解辐照下结构材料退化机制的新框架。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation damage mechanisms in structural materials",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": []
+}

@@ -1,6 +1,9 @@
 * <a class="dpr-sidebar-root-link" href="#/">首页</a>
 * <a class="dpr-sidebar-root-link dpr-sidebar-noactive-link" href="javascript:void(0)" data-dpr-hash="#/tutorial/README">使用教程</a>
 * Daily Papers
+  * 2026-07-27 <!--dpr-date:20260727-->
+    * 精读区
+      * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202607/27/2607.22364v1-mechanisms-of-microstructural-evolution-and-degradation-in-aluminum-under-high-damage-irradiation" data-sidebar-item="{&quot;title&quot;: &quot;Mechanisms of Microstructural Evolution and Degradation in Aluminum under High-Damage Irradiation&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2607.22364v1-mechanisms-of-microstructural-evolution-and-degradation-in-aluminum-under-high-damage-irradiation&quot;, &quot;score&quot;: &quot;9.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;rad-damage&quot;}], &quot;evidence&quot;: &quot;研究铝在氦辐照下的辐射损伤机制&quot;}">Mechanisms of Microstructural Evolution and Degradation in Aluminum under High-Damage Irradiation</a>
   * 2026-07-22 <!--dpr-date:20260722-->
     * 精读区
       * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202607/22/2607.18472v1-vacancy-diffusion-across-fecral-alloy-composition-space-for-accident-tolerant-fuel-cladding" data-sidebar-item="{&quot;title&quot;: &quot;Vacancy Diffusion Across FeCrAl Alloy Composition Space for Accident-Tolerant Fuel Cladding&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2607.18472v1-vacancy-diffusion-across-fecral-alloy-composition-space-for-accident-tolerant-fuel-cladding&quot;, &quot;score&quot;: &quot;9.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;rad-damage&quot;}], &quot;evidence&quot;: &quot;FeCrAl合金中空位扩散对辐照诱导微结构演化的影响&quot;}">Vacancy Diffusion Across FeCrAl Alloy Composition Space for Accident-Tolerant Fuel Cladding</a>

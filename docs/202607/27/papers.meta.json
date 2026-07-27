@@ -1,0 +1,24 @@
+{
+  "label": "2026-07-27",
+  "date": "2026-07-27",
+  "generated_at": "2026-07-27T20:46:23",
+  "count": 1,
+  "papers": [
+    {
+      "paper_id": "202607/27/2607.22364v1-mechanisms-of-microstructural-evolution-and-degradation-in-aluminum-under-high-damage-irradiation",
+      "section": "deep",
+      "title_en": "Mechanisms of Microstructural Evolution and Degradation in Aluminum under High-Damage Irradiation",
+      "authors": "Alhassan S. Issaka, Sadie Wicks, Vishal Yadav, Assel Aitkaliyeva, Michael R. Tonks, Simon R. Phillpot",
+      "date": "2026-07-24",
+      "pdf": "https://arxiv.org/pdf/2607.22364v1",
+      "score": "9.0",
+      "evidence": "研究铝在氦辐照下的辐射损伤机制",
+      "tldr": "铝在反应堆中广泛使用，但其辐照退化机制尚不明确。本研究将传统级联重叠分子动力学与加速迭代动力学方法（IKA）结合，模拟50 keV He辐照下的缺陷演化。通过IKA扩展至更高损伤，识别了复合驱动湮灭、缺陷累积和阱控制吸收三个阶段。高损伤下弗兰克环分解为肖克利不全位错和压杆位错，驱动堆垛层错四面体（SFT）成核生长，最终协同增加辐照硬化。该工作揭示了铝辐照退化的微观机制。",
+      "tags": "query:rad-damage",
+      "abstract_en": "Aluminum alloys are widely used in research reactor systems, yet the mechanisms governing irradiation-induced degradation remain poorly understood. Here we combine conventional cascade-overlap molecular dynamics simulations with an accelerated Iterative Kinetic Approach (IKA) to investigate defect evolution in single-crystal Al subjected to 50 keV He irradiation. Benchmarking shows that IKA reproduces the essential defect kinetics of cascade simulations while enabling access to substantially higher accumulated damage. By extending the IKA to higher damage levels, we identified three distinct regimes governing radiation-induced degradation in Al: recombination-driven annihilation, defect accumulation, and sink-controlled absorption. At higher damage, Frank loops dissociate into Shockley partials and stair-rod loops, ultimately driving the nucleation and growth of stacking-fault tetrahedra (SFTs). These transformations progressively convert mobile defects into SFTs. Ultimately, the synergistic effect of interstitial and vacancy loops and SFTs increases irradiation hardening in Al at 300 K. This work provides insight into irradiation-induced degradation in aluminum reactor materials.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
