@@ -1,0 +1,89 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-28T20:56:15.475640+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 2,
+    "quick_skim_target": 11,
+    "quick_selected": 2
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2607.23995v1",
+      "source": "arxiv",
+      "title": "Nature of Cr Segregation in FCC to BCC quenched Fe-12Cr Alloy, with Post-Quenching Heat Treatment: A Positron Annihilation Study",
+      "abstract": "The Fe-Cr binary alloy is a model system for ferrtitic/martensitic steels. Cr clustering instigated loss of ductility, is one of the influential factors to deteriorate the alloys, and its severity depends on Cr concentration. This study aims at understanding (i) the nature of Cr precipitation in Fe-12Cr alloy using positron lifetime spectroscopy, transmission electron microscopy and Mössbauer spectroscopy studies and (ii) comparing the precipitation concentration and size with respect to Fe-9Cr alloy. The quenched alloys (from the high temperature FCC phase) are found to contain a high density of dislocations along with the sub-grain structure which lead to Cr rich σ-phase precipitation during post-quenching heat treatment at 748 K, while the alloy prepared with no dislocations and the sub-grain structure shows no precipitation, except at grain boundaries, consistent with observations in Fe-9Cr alloys. Selected area diffraction confirmed that the precipitates are tetragonal intermetallic σ-phase, contradicting the majority of the literature on Fe-Cr ferritic alloys which reported it as Cr rich BCC α'-phase. Mossbauer spectroscopy studies showed signatures of Cr depletion from the rest of the matrix, indicating that the precipitates are Cr rich compared to the alloy composition. The kinetics of Cr precipitation is found to be higher in the Fe-12Cr alloy compared to the Fe-9Cr alloy. The average precipitate size is observed to be higher and the number density is lower in the Fe-12Cr alloy compared to the Fe-9Cr alloy. In addition, the experimental positron lifetime in defect-free lattice of Fe-(9, 12)Cr alloys is reported for the first time with substantial evidence.",
+      "authors": [
+        "S. Hari Babu",
+        "V. R. Reddy"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ],
+      "published": "2026-07-27T04:43:03+00:00",
+      "link": "https://arxiv.org/pdf/2607.23995v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Cr segregation in Fe-12Cr alloy studied with positron annihilation; relevant to precipitation hardening",
+      "llm_evidence_cn": "利用正电子湮没研究Fe-12Cr合金中Cr偏析，与辐照条件下的沉淀强化相关",
+      "llm_evidence": "利用正电子湮没研究Fe-12Cr合金中Cr偏析，与辐照条件下的沉淀强化相关",
+      "canonical_evidence": "利用正电子湮没研究Fe-12Cr合金中Cr偏析，与辐照条件下的沉淀强化相关",
+      "llm_tldr_en": "This study investigates Cr segregation in quenched Fe-12Cr alloy using positron lifetime, TEM, and Mossbauer spectroscopy, revealing high-density dislocations and sigma-phase precipitation; relevant to understanding microstructure evolution in FeCr alloys.",
+      "llm_tldr_cn": "该论文针对Fe-12Cr合金在FCC到BCC淬火后Cr偏析的本质进行了研究，采用正电子寿命谱、透射电镜和穆斯堡尔谱等方法，发现淬火态合金中存在高密度位错和亚晶结构，导致在后续热处理中形成富Cr的sigma相析出。该工作为理解FeCr合金中Cr的沉淀行为提供了重要依据，对辐照条件下的沉淀强化研究具有参考价值。",
+      "llm_tldr": "该论文针对Fe-12Cr合金在FCC到BCC淬火后Cr偏析的本质进行了研究，采用正电子寿命谱、透射电镜和穆斯堡尔谱等方法，发现淬火态合金中存在高密度位错和亚晶结构，导致在后续热处理中形成富Cr的sigma相析出。该工作为理解FeCr合金中Cr的沉淀行为提供了重要依据，对辐照条件下的沉淀强化研究具有参考价值。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "precipitation hardening in irradiated FeCr alloys",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.24107v1",
+      "source": "arxiv",
+      "title": "Atomic-scale phase-field modeling with dopants: Stochastic self-consistent harmonic approximation with fractional site occupancy",
+      "abstract": "Phase-field modeling has achieved great success in predicting pattern formation in materials, such as the formation of ferroelectric domains. However, because it is typically based on continuum mechanics, conventional phase-field modeling cannot be straightforwardly applied to atomic-scale pattern formation, such as dopant segregation and vacancy ordering, which are driven by chemical potentials. Here, we extend the phase-field concept to the atomic scale by formulating the free energy of atomic systems within stochastic self-consistent harmonic approximation (SSCHA) theory to allow fractional site occupations. Our methodology enables us to directly calculate the derivative of the free energy with respect to site occupation and thereby obtain the chemical potential, successfully reproducing Ag distributions in bulk Cu as well as the resulting lattice expansion. Furthermore, we applied our methodology to investigate dopant segregation around a Σ5(310)[001] Cu grain boundary doped with Ag atoms. We found that Ag atoms preferentially segregate at the vertices of the triangular motif of a grain boundary. As the number of dopants increases, excess Ag atoms segregate near the vertices and then at the bottom sites of the triangular motif. This study extends the phase-field concept to discrete atomic systems, enabling the identification of preferential dopant-segregation sites and thereby visualizing atomic-scale pattern formation.",
+      "authors": [
+        "Kairi Masuda",
+        "Yu Kumagai"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ],
+      "published": "2026-07-27T07:46:13+00:00",
+      "link": "https://arxiv.org/pdf/2607.24107v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "atomic-scale phase-field modeling with dopants and vacancies",
+      "llm_evidence_cn": "原子尺度相场建模涉及掺杂和空位有序化",
+      "llm_evidence": "原子尺度相场建模涉及掺杂和空位有序化",
+      "canonical_evidence": "原子尺度相场建模涉及掺杂和空位有序化",
+      "llm_tldr_en": "This paper extends phase-field modeling to atomic scale using SSCHA with fractional site occupancy, enabling study of dopant segregation and vacancy ordering. While not on irradiation, the method is transferable to defect evolution under irradiation.",
+      "llm_tldr_cn": "该论文通过随机自洽谐波近似（SSCHA）结合分数占据将相场模型拓展至原子尺度，可直接计算自由能导数，用于研究掺杂偏析和空位有序化。虽然不直接涉及辐照，但其方法可迁移到辐照缺陷演化研究。",
+      "llm_tldr": "该论文通过随机自洽谐波近似（SSCHA）结合分数占据将相场模型拓展至原子尺度，可直接计算自由能导数，用于研究掺杂偏析和空位有序化。虽然不直接涉及辐照，但其方法可迁移到辐照缺陷演化研究。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation induced defect evolution and microstructure changes",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

@@ -1,0 +1,642 @@
+Title: Atomic-scale phase-field modeling with dopants: Stochastic self-consistent harmonic approximation with fractional site occupancy
+
+URL Source: https://arxiv.org/pdf/2607.24107v1
+
+Published Time: Tue, 28 Jul 2026 02:04:23 GMT
+
+Number of Pages: 31
+
+Markdown Content:
+# Atomic-scale phase-field modeling with dopants: Stochastic self-consistent harmonic approximation with fractional site occupancy 
+
+## Kairi Masuda ∗ and Yu Kumagai 
+
+Institute for Materials Research, Tohoku University, 2-1-1 Katahira, Aoba-ku, Sendai, 980-8577, Japan 
+
+E-mail: kairi.masuda.c5@tohoku.ac.jp 
+
+Abstract 
+
+Phase-field modeling has achieved great success in predicting pattern formation in materials, such as the formation of ferroelectric domains. However, because it is typically based on continuum mechanics, conventional phase-field modeling cannot be straightforwardly applied to atomic-scale pattern formation, such as dopant segrega-tion and vacancy ordering, which are driven by chemical potentials. Here, we extend the phase-field concept to the atomic scale by formulating the free energy of atomic systems within stochastic self-consistent harmonic approximation (SSCHA) theory to allow fractional site occupations. Our methodology enables us to directly calculate the derivative of the free energy with respect to site occupation and thereby obtain the chemical potential, successfully reproducing Ag distributions in bulk Cu as well as the resulting lattice expansion. Furthermore, we applied our methodology to investigate dopant segregation around a Σ5(310)[001] Cu grain boundary doped with Ag atoms. 
+
+1arXiv:2607.24107v1 [cond-mat.mtrl-sci] 27 Jul 2026 We found that Ag atoms preferentially segregate at the vertices of the triangular motif of a grain boundary. As the number of dopants increases, excess Ag atoms segregate near the vertices and then at the bottom sites of the triangular motif. This study extends the phase-field concept to discrete atomic systems, enabling the identification of preferential dopant-segregation sites and thereby visualizing atomic-scale pattern formation. 
+
+2Introduction 
+
+In phase-field modeling 1–4 , phenomena of interest are described in terms of one or more field variables. The associated free energy is expressed as a spatially dependent functional of these fields 5,6 . This local thermodynamic description has achieved great success in reproducing a wide variety of pattern-formation phenomena in materials science, such as polar vortices and skyrmions in nanoscale ferroelectric systems 7–12 . In addition to describing such spatially nonuniform patterns, phase-field simulations can also provide position-resolved thermody-namic quantities, including local free-energy and entropy distributions 13–18 . In this sense, phase-field modeling functions as a computational microscope that visualizes pattern for-mation and the underlying local thermodynamic states. Meanwhile, recent advances in materials science have increasingly highlighted phenomena at much smaller length scales, where structural and thermodynamic heterogeneity can extend down to the scale of individ-ual atoms 19–26 . However, because conventional phase-field and phase-field-crystal models are generally formulated at continuum or crystalline length scales 27–31 , they cannot be straight-forwardly applied to systems in which the relevant heterogeneity is intrinsically atomistic. These developments therefore point to the need for a local thermodynamic framework capa-ble of resolving thermodynamic states at the single-atom level. A further enhancement of thermodynamic resolution can be achieved by regarding the probability distribution of atomic vibrations itself as a field variable. In this formulation, a variational free-energy functional is constructed from this atomic field and an interatomic potential 32–36 , and the distribution widths or underlying force constants are optimized to minimize the free energy. This self-consistent harmonic approximation (SCHA)-type the-ory has been further extended to the stochastic self-consistent harmonic approximation (SSCHA) 37–41 , in which variational free energies are stochastically evaluated using forces and energies obtained from first-principles calculations or many-body machine-learning in-teratomic potentials for complex materials. Recently, (S)SCHA-type theories have been applied not only to calculate free energies as global quantities but also to evaluate local 3free-energy distributions and related quantities, such as stress and entropy. Thus, (S)SCHA theory has the potential to be used for studying pattern formation and visualizing local thermodynamic states with atomic resolution, namely, atomic-scale phase-field modeling. One of the next steps in developing atomistic phase-field modeling is to calculate local chemical potentials and use them to describe related atomic-scale pattern-formation phe-nomena, such as dopant segregation, vacancy ordering, and inhomogeneous elemental distri-butions in high-entropy materials, all of which can drastically alter material properties 42–44 .In conventional molecular simulations, however, calculating chemical potentials from the free energy is difficult because site occupancies are discrete variables and are therefore not differ-entiable. Li et al. proposed incorporating fractional site occupancy into an SCHA-type free energy 34 , which makes the free energy differentiable with respect to site occupancy and thus enables the evaluation of chemical potentials. They showed that this approach can be used to calculate vacancy diffusion, thereby demonstrating its applicability to diffusive molecular dynamics simulations. However, the formalism of Li et al. is limited to pair potentials and isotropic Gaussians, which restricts its applicability and accuracy. Therefore, a free-energy functional that incorporates both fractional site occupancy and many-body interactions is needed to further explore pattern formation at the atomic scale. In this work, we develop an atomic-scale phase-field modeling framework for dopant-containing systems by combining SSCHA theory with fractional site occupancy. This frame-work enables the calculation of site-resolved dopant-segregation patterns at the atomic scale. The remainder of this paper is organized as follows. First, we describe the theoretical for-mulation for incorporating fractional site occupancy into the SSCHA free-energy framework. Second, we apply the developed methodology to Ag-doped bulk Cu and calculate the Ag dis-tribution and the associated lattice expansion to validate the proposed framework. We then apply the methodology to Cu grain boundaries and visualize dopant-segregation patterns. Finally, we summarize our findings and discuss future directions for this modeling approach. 4Methods 
+
+## Theory 
+
+Free energy of an Einstein solid 
+
+An Einstein solid is described by the following harmonic potential: 
+
+U(x) = 1
+
+2 kij xixj , (1) where kij is the force-constant matrix and x is the displacement from the mean position. The thermal vibration of an atom around its mean position appears as a probability-density cloud over a longer time scale; that is, ρ ∝ exp( −U/k B T ), where kB is the Boltzmann constant and 
+
+T is the temperature. These probability-density clouds for Einstein solids follow Gaussian distributions 32–35 , whose general form can be described as follows: 
+
+ρ(r|X, Σ) = 1
+
+(2 π)3/2√det Σ (2) 
+
+× exp 
+
+{
+
+− 1
+
+2 (r − X)T Σ−1(r − X)
+
+}
+
+.
+
+Here, x = r − X, where r is the position of the oscillator and X is its mean position. det Σ
+
+is the determinant of the covariance matrix, and Σ−1 is its inverse. The covariance matrix is represented as follows: 
+
+Σ = R
+
+
+
+σ2 
+
+> x′
+
+0 00 σ2 
+
+> y′
+
+00 0 σ2
+
+> z′
+
+ RT , (3) 5where R is a three-dimensional rotation matrix, which can be decomposed into rotation matrices about each axis as follows: 
+
+R = Rz (θz )Ry(θy )Rx(θx). (4) Therefore, the Gaussian distribution is specified by six variables, namely, σx′ , σy′ , σz′ , θx,
+
+θy , and θz , where σx′ , σy′ , and σz′ are the standard deviations along the principal axes, and 
+
+θx, θy , and θz are the rotation angles around each axis. When X and Σ are given, the probability density at position r is determined. Using these Gaussian shape parameters, the free energy of the Einstein oscillator is represented as follows: 
+
+FEinstein = 1
+
+2kB T ln 
+
+(
+
+Λ6
+
+8π3σ2 
+
+> x′
+
+σ2 
+
+> y′
+
+σ2
+
+> z′
+
+)
+
+, (5) where Λ = ℏ√2π/ (mk B T ) is the thermal de Broglie wavelength, ℏ is the reduced Planck constant, and m is the mass of the atom. 
+
+Variational free energy with site-occupancy probabilities 
+
+The Gibbs–Bogoliubov inequality provides an upper bound on the true free energy, Ftrue , as follows: 
+
+Ftrue ≤ F0 + 〈φ − V 〉0 ≡ F, (6) where Ftrue is the true free energy associated with the interatomic potential φ, while F0 is the free energy of the reference system associated with the reference potential energy V .The notation 〈·〉 0 denotes the expectation value with respect to the reference probability distribution governed by V . LeSar et al. employed an Einstein solid as the reference state, i.e., F0 = FEinstein and V = ∑ U, and derived an analytical form of F using mutually independent isotropic Gaussians 32–34 for Cu described by a Morse potential. Here, we extend 6their theory to general Gaussian distributions 35 and further generalize it to many-body interactions as follows: 
+
+F = 1
+
+2 kB T
+
+> N
+
+∑
+
+> i=1
+
+{
+
+ln 
+
+(
+
+Λ6
+
+> i
+
+8π3σ2 
+
+> i,x ′
+
+σ2 
+
+> i,y ′
+
+σ2
+
+> i,z ′
+
+)
+
+− 3
+
+}
+
+(7) 
+
++
+
+∫ ∫
+
+· · · 
+
+∫
+
+ρ1(r1)ρ2(r2) · · · ρN (rN )φ(r1, r2, . . . , rN )dr1dr2 · · · drN ,
+
+where N is the number of atoms. The first term is the free-energy contribution from atomic vibrations, which corresponds to F0 −〈 V 〉0 in Eq. (6). Note that 〈∑ U〉0 = 3 
+
+> 2
+
+Nk B T according to the equipartition theorem. The second term is the expectation value of the many-body potential energy φ, i.e., an effective potential among the Gaussian clouds, and corresponds to 〈φ〉0. For given mean positions Xi, the estimation of Ftrue is obtained by optimizing the Gaussian shapes Σi so as to minimize the upper-bound free energy F .To extend the above many-body free energy to a semi-grand-canonical formulation, we introduce a continuous occupation probability ci, where ci = 0 indicates that site i is occupied by a host atom, whereas ci = 1 indicates that the site is occupied by a dopant atom. The free energy is then written as follows (the derivation is given in Supplemental Information S1): 
+
+F = 1
+
+2 kB T
+
+> N
+
+∑
+
+> i=1
+
+[
+
+(1 − ci)
+
+{
+
+ln 
+
+( Λ6
+
+> i, host
+
+8π3σ2 
+
+> i,x ′
+
+σ2 
+
+> i,y ′
+
+σ2
+
+> i,z ′
+
+)
+
+− 3
+
+}
+
+(8) 
+
++ ci
+
+{
+
+ln 
+
+( Λ6
+
+> i, dopant
+
+8π3σ2 
+
+> i,x ′
+
+σ2 
+
+> i,y ′
+
+σ2
+
+> i,z ′
+
+)
+
+− 3
+
+} ] 
+
++ ∑
+
+> n∈{ 0,1}N
+
+cn1 
+
+> 1
+
+(1 − c1)1−n1 cn2 
+
+> 2
+
+(1 − c2)1−n2 · · · cnN 
+
+> N
+
+(1 − cN )1−nN
+
+×
+
+∫ ∫
+
+· · · 
+
+∫
+
+ρ1(r1)ρ2(r2) · · · ρN (rN )φ(n1, n 2, . . . , n N , r1, r2, . . . , rN )dr1dr2 · · · drN
+
++ kB T
+
+> N
+
+∑
+
+> i=1
+
+[(1 − ci) ln(1 − ci) + ci ln ci],
+
+7where Λi, host and Λi, dopant are the thermal de Broglie wavelengths of the host and dopant atoms at site i, respectively, and ni is a binary indicator variable defined as follows: 
+
+ni =
+
+
+
+1 if site i is occupied by a dopant atom, 
+
+0 if site i is occupied by a host atom. (9) 
+
+Governing equations 
+
+For the given positions Xi and the optimal parameters Σi calculated above, the atomic probability densities should evolve in time so as to reduce the free energy while conserving the normalization condition, i.e., ∫ ρi dr = 1 . This implies that the probability densities should evolve according to the following conservative phase-field equation: 
+
+∂ρ i(r, t )
+
+∂t = ∇ · 
+
+(
+
+Di(r)∇ δF 
+
+δρ i
+
+)
+
+(10) 
+
+= ∇ · (κiρi(r)∇Φi(r)) ,
+
+where t denotes time and Di(r) is a position-dependent kinetic coefficient. Here, we set 
+
+Di(r) = κiρi(r), where κi is a kinetic coefficient, so that the flux is proportional to the probability density and the normalization of ρi is conserved. The gradient of the functional derivative, ∇(δF/δρ i) = ∇Φi(r), acts as the thermodynamic driving force. By solving the above governing equation, the time evolution of the probability densities can be calculated. Simultaneously, the occupation probabilities evolve according to the following equation: 
+
+dc i
+
+dt = ∑ 
+
+> j∈N(i)
+
+Mij (μj − μi) , (11) where N(i) denotes the set of neighboring sites around site i, Mij is a kinetic coefficient for occupation exchange between sites i and j, and μi is the site-resolved chemical potential. 8Simulation detail 
+
+Simulation targets 
+
+To validate the proposed theory, we selected bulk Cu doped with Ag atoms and evaluated its pressure evolution in the canonical (NVT) ensemble. A 2 × 2 × 2 supercell was constructed based on the conventional unit cell of Cu, which has a lattice constant of 3.61 Å and contains four atoms. The resulting supercell has lattice constants of 7.22 Å × 7.22 Å × 7.22 Å and contains N = 32 atoms. 
+
+Implementation details of the free-energy calculation 
+
+Figure 1 presents a schematic overview of the computational workflow. The second term in the free-energy functional in Eq. (8) is a high-dimensional integral that can be efficiently evaluated by Monte Carlo techniques as follows: 
+
+∑
+
+> n∈{ 0,1}N
+
+cn1 
+
+> 1
+
+(1 − c1)1−n1 · · · cnN 
+
+> N
+
+(1 − cN )1−nN (12) 
+
+×
+
+∫
+
+· · · 
+
+∫
+
+ρ1(r1) · · · ρN (rN )φ(n1, . . . , n N , r1, . . . , rN )dr1 · · · drN
+
+= Euk ∼U (0 ,1) , ηk ∼N (0,I)
+
+[
+
+φ(1{u1≤c1}, . . . , 1{uN ≤cN }, X1 + L1η1, . . . , XN + LN ηN
+
+)]
+
+,
+
+where U(0 , 1) denotes the uniform distribution on [0 , 1] , N(0, I) denotes the standard three-dimensional normal distribution. Euk ,ηk denotes the expectation over uk ∼ U(0 , 1) and 
+
+ηk ∼ N (0, I) for k = 1 , . . . , N . Note that ri = Xi + Liηi, where Li = Ridiag (σi,x ′ , σ i,y ′ , σ i,z ′ )
+
+and displacements xi = Liηi. 1{ui≤ci} is an indicator function defined as follows: 
+
+1{ui≤ci} =
+
+
+
+1 (site i is occupied by Ag ) if ui ≤ ci,
+
+0 (site i is occupied by Cu ) if ui > c i.(13) 9To reduce the statistical error of the Monte Carlo estimate, we employ Sobol low-discrepancy sequences 45 for both uk and ηk, and map the sequence for ηk to the Gaussian ensemble through the inverse cumulative distribution function, resulting in a total sample size of 
+
+Nsample = 1000 . The interatomic potential φ is provided by the Multi-Atomic Cluster Ex-pansion (MACE) model 46 , which encodes each atomic configuration as a graph and is trained on r2SCAN data. Because MACE can evaluate multiple atomic graphs concurrently, the in-tegrand is computed in parallel on a GPU via PyTorch 47 , allowing the high-dimensional integral to be evaluated with minimal wall-time overhead. The gradient of the free energy with respect to the Gaussian width σi,j ′ is evaluated as follows (For simplicity, the x′-direction case is shown): 
+
+∂F 
+
+∂σ i,x ′
+
+= −kB T
+
+σi,x ′
+
+(14) 
+
++ Euk ,ηk
+
+[
+
+∇ri φ(1{u1≤c1}, . . . , 1{uN ≤cN }, X1 + L1η1, . . . , XN + LN ηN
+
+) · Riex′ ηi,x ′
+
+]
+
+,
+
+where ex′ = (1 , 0, 0) T is the unit vector in the principal-axis basis, and ∇ri φ denotes the gradient of the potential energy with respect to the position of atom i. In the same manner, the gradients with respect to the rotation angles are expressed as follows: 
+
+∂F 
+
+∂θ i,x 
+
+= Euk ,ηk
+
+[
+
+∇ri φ(1{u1≤c1}, . . . , 1{uN ≤cN }, X1 + L1η1, . . . , XN + LN ηN
+
+) (15) 
+
+×
+
+(
+
+∂Ri
+
+∂θ i,x 
+
+diag( σi,x ′ , σ i,y ′ , σ i,z ′ )ηi
+
+)] 
+
+.
+
+The subsequent minimization of the free-energy functional is carried out using the Limited-Broyden–Fletcher–Goldfarb–Shanno (L-BFGS) algorithm implemented in SciPy 48,49 , with a relative convergence tolerance of 1.0 × 10 −6.10 Implementation details of the governing equations 
+
+The phase-field equation, Eq. (10), has the same form as a drift-type Fokker–Planck equa-tion, written as follows: 
+
+∂ρ i(r, t )
+
+∂t = ∇ · (ai(r)ρi(r, t )) , (16) where ai(r) is the drift velocity. In the present case, the drift velocity corresponds to ai(r) = 
+
+κi∇Φi(r). To simplify this equation, we assume that each Gaussian distribution moves without deformation during an infinitesimal motion, and the Gaussian shape is updated subsequently. Under this assumption, the equation can be converted into the following deterministic Langevin-type equation 35,50 :
+
+dXi
+
+dt = −κi∇Xi F. (17) We calculate the motion of the probability densities by solving this equation using the Verlet algorithm with a time step of ∆t = 50 fs. The gradient of the free energy, ∇Xi F , can be represented as follows, with the derivation given in Supplemental Material S2: 
+
+−∇ Xi F = − ∂F 
+
+∂Xi
+
+(18) 
+
+= −Euk ,ηk
+
+[
+
+∇ri φ(1{u1≤c1}, . . . , 1{uN ≤cN }, X1 + L1η1, . . . , XN + LN ηN
+
+)]
+
+.
+
+Thus, the negative gradient of the free energy, i.e., the mean force, is given by the expectation value of the force derived from the interatomic potential. For the mobility, we employed 
+
+κ = 5 .56 × 10 −8 m2/(V · s), which is the mobility of Cu 2+ in water at 298 K 51,52 .To solve the time evolution of occupation probabilities, we calculated the site-resolved 11 chemical potential at atomic site i as follows (Supplemental Material S2): 
+
+μi = ∂F 
+
+∂c i
+
+(19) 
+
+= 1
+
+2 kB T ln 
+
+( Λ6
+
+> i, Ag
+
+Λ6
+
+> i, Cu
+
+)
+
++ Euk6 =i∼U (0 ,1) , ηk∼N (0,I)
+
+[
+
+φ(1{u1≤c1}, . . . , 1, . . . , 1{uN ≤cN }, X1 + L1η1, . . . , XN + LN ηN
+
+)]
+
+− Euk6 =i∼U (0 ,1) , ηk∼N (0,I)
+
+[
+
+φ(1{u1≤c1}, . . . , 0, . . . , 1{uN ≤cN }, X1 + L1η1, . . . , XN + LN ηN
+
+)]
+
++ kB T [ln ci − ln(1 − ci)] .
+
+The second and third terms correspond to the many-body potential energies when site i is occupied by Ag and Cu, respectively, while the occupations of the other sites are sampled according to their occupation probabilities using a sample size of 100. Using the calculated chemical potentials, we updated ci at each site using an implicit method, as described in Supplemental Information S3. We set Mij = 0.1 eV −1 · s−1 because the mobility associated with occupation exchange is unknown, and neighboring sites were defined using a cutoff distance of 6 Å. 12 Xi + Δ Xi
+
+3.Optimal Σn and F for given positions Xn
+
+ 
+
+2.Updata Σn to minimize free energy F
+
+Free energy by vibrations 
+
++
+
+Covergence Free energy by interactions on GPU (Average of N samples) 
+
+1.Free energy calculation Random displacements to atoms according to shape parameters Σi
+
+Random replacement of species according to site occupancy ci
+
+Cu Ag 
+
+ci + Δc i
+
++
+
++
+
+Free energy by configurations 
+
+Figure 1: A schematic illustration of the computational workflow for phase-field modeling with dopants, including many-body interactions and fractional site occupancy. 13 Results 
+
+## Evolution of occupation probability 
+
+Figure 2 shows the evolution of the occupation probability density for NAg = 8 in the 32-atom system, corresponding to Cu:Ag = 24:8. That is, Ag atoms are initially homogeneously distributed, and each atomic site has an Ag occupation probability of 8/32=0.25. We found that the Ag occupation probability begins to concentrate on specific sublattice positions of the face-centered cubic (fcc) structure, and an ordered-like alloy state is then formed. This behavior is reminiscent of the ordering tendency expected from cluster expansion and observed in Cu–Au systems 53–55 . Note that, in real bulk systems, Cu and Ag are thermo-dynamically prone to phase separation 56,57 ; therefore, the ordered-like state obtained here should be interpreted as a finite-size-stabilized occupancy pattern in the small cell. Never-theless, the result demonstrates that the present modeling framework can explore possible low-energy occupancy patterns. 14 (a) Step = 0 Front view 
+
+> (c) Step = 100
+> (b) Step = 20
+
+Figure 2: Structure evolution of the site occupation probability ci for NAg = 8 in a 32-atom bulk Cu–Ag system (Cu:Ag = 24:8) at (a) 0, (b) 20, and (c) 100 minimization steps. Blue atoms indicate Cu-rich sites, while red atoms indicate sites with high Ag occupation probability. 15 Temperature dependence of lattice constants 
+
+To examine the temperature dependence of the lattice constants, we calculate the pressure as follows (the derivation is given in Supplemental Material S2): 
+
+P = −
+
+( ∂F 
+
+∂V 
+
+)
+
+> T,N
+
+(20) 
+
+= Euk ∼U (0 ,1) , ηk ∼N (0,I)
+
+[ ∂φ 
+
+∂V 
+
+(1{u1≤c1}, . . . , 1{uN ≤cN }, X1 + L1η1, . . . , XN + LN ηN
+
+)]
+
+.
+
+Using this pressure, we change the cell volume according to the following equation: 
+
+dV 
+
+dt = M(P − P0), (21) where P0 is the applied external pressure and M is the volume mobility. In other words, we scale the atomic positions and the volume at each time step as follows: 
+
+Xi → μXi,V → μ3V, (22) where μ is the scale factor given by 
+
+μ = {1 + M′∆t(P − P0)} 1 
+
+> 3
+
+, (23) and M′ = M/V is the mobility per unit volume. In this study, we set M′ = 10 .0 Pa −1·s−1.Using the above pressure and volume control scheme, we calculated the equilibrium lattice constants by phase-field simulations. Figure 3 shows the temperature dependence of the lattice constant for different numbers of dopant atoms. As the initial condition for the phase-field simulations, Ag atoms are homogeneously distributed in the same manner as in Fig. 2. For comparison, we calculated the variation of the lattice constant using MD simulations, in which Ag atoms are arranged 16 in the ordered L1 2 structure as shown schematically. We found that the lattice constants calculated by the phase-field simulations are in good agreement with those obtained from the MD simulations. These results support the validity of the free-energy functional constructed in this study for describing how the lattice constant depends on temperature and dopant concentration, as well as for identifying low-energy configurations. 17 Ag 
+
+> Cu
+
+Figure 3: Temperature dependence of the lattice constants of 32-atom Cu–Ag systems ob-tained from phase-field and MD simulations with different numbers of Ag dopant atoms. The initial Ag distribution is homogeneous in the phase-field simulations, whereas the or-dered L1 2 structure is used as the initial configuration in the MD simulations, as shown schematically. 18 Spatial pattern of dopant segregation at a grain boundary 
+
+Next, we apply the developed methodology to predict the segregation pattern around a grain boundary. Figure 4 shows the time evolution of the Ag occupation probability around the Σ5(310)[001] Cu grain boundary doped with NAg = 4 in a 76-atom system under the NPT ensemble at T = 1200 K and P0 = 0 GPa. The initial Ag occupation probability is homogeneously distributed over all atomic sites (Fig. 4(a)). As the minimization proceeds, it becomes concentrated at the grain-boundary vertex sites (Figs. 4(b) and 4(c)). This tendency is consistent with previous experimental observations and simulations 58,59 , which have shown that atoms larger than Cu tend to segregate to the vertex regions of grain boundaries because these regions provide larger free volume. This demonstrates the ability of our modeling framework to explore low-energy segregation patterns around Cu grain boundaries. 19 Vertex 
+
+> (a) Step = 0
+> (b) Step = 1
+> (c) Step = 10
+> Simulation cell
+
+Figure 4: Evolution of the Ag occupation probability around a Σ5(310)[001] Cu grain bound-ary doped with NAg = 4 in a 76-atom system under the NPT ensemble at T = 1200 K and 
+
+P0 = 0 GPa, as calculated using phase-field simulations. Probability distributions are shown at (a) 0, (b) 10, and (c) 100 minimization steps. The color scale is the same as in Fig. 2. 20 We then investigate the variation of the segregation pattern with the number of dopants at room temperature. Figure 5 shows the Ag occupation probability for various numbers of Ag atoms, NAg = 4 , 8, and 16, under the NPT ensemble at T = 300 K and P0 = 0 GPa. The probability distributions obtained at 1200 K for each number of dopants were used as the initial conditions, assuming that segregation patterns formed at high temperature can be frozen in during cooling. We found that Ag atoms preferentially segregate at the vertices of the triangular motif, indicating that these vertices are the primary segregation sites (Fig. 5(a)). As the number of dopants increases, additional Ag atoms segregate to sites adjacent to the vertices (Fig. 5(b)). Further excess Ag atoms, which cannot be accommodated at these secondary preferred sites, then segregate at the bottom sites of the triangular motif. These results clearly demonstrate that our modeling framework enables the identification of primary, secondary, and tertiary preferred sites for dopant segregation, thereby visualizing atomic-scale pattern formation. 21 (a) NAg = 4 (b) NAg = 8 (c) NAg = 16 Vertex  
+
+> Near the vertex Bottom Vertex
+
+Figure 5: Segregation patterns around a Σ5(310)[001] Cu grain boundary with various num-bers of Ag dopant atoms in a 76-atom system under the NPT ensemble at T = 300 K and 
+
+P0 = 0 GPa, as calculated using phase-field simulations. The probability distributions are shown for (a) NAg = 4 , (b) NAg = 8 , and (c) NAg = 16 . The color scale is the same as in Fig. 2. 22 Thus, our modeling successfully explores segregation patterns around grain boundaries driven by chemical potential. We also note several limitations of the present study. (1) We do not consider complexion transitions, which may involve variations in the number of atomic sites. (2) We do not consider correlations between atomic vibrations. This approximation may be reasonable for heavy-atom systems such as metals; however, correlations will become important in systems such as oxides. (3) The calculation of the chemical potential, Eq. (18), requires evaluating the difference in potential energy for each site, which will increase the computational cost for larger systems and multicomponent systems. 23 Conclusion 
+
+In summary, we have developed an atomic-scale phase-field modeling framework that incor-porates fractional site occupancy and many-body interactions. Our modeling successfully reproduces the temperature dependence of the lattice constant of Ag-doped bulk Cu. Fur-thermore, we applied the developed methodology to predict Ag segregation patterns around a Cu grain boundary. We found that Ag atoms first segregate at the vertices of the triangu-lar motif. With increasing dopant concentration, excess Ag atoms occupy sites adjacent to the vertices and subsequently segregate to the bottom sites of the triangular motif. These results demonstrate that our modeling framework extends the phase-field concept to dis-crete atomic systems and enables the identification of preferential dopant-segregation sites, thereby visualizing atomic-scale pattern formation. 
+
+# Acknowledgement 
+
+This work was supported by JSPS KAKENHI grant numbers 25K23433. 
+
+# Supporting Information Available 
+
+The Supporting Information is available free of charge at • PDF: Variational free energy with fractional site occupancy, Derivatives of free energy, and Implicit method for site-occupancy dynamics. 
+
+# References 
+
+(1) Chen, L. Q. Phase-Field Models for Microstructure Evolution. Annu. Rev. Mater. Res. 
+
+2002 , 32 , 113–140. 24 (2) Boettinger, W. J.; Warren, J. A.; Beckermann, C.; Karma, A. Phase-Field Simulation of Solidification. Annu. Rev. Mater. Res. 2002 , 32 , 163–194. (3) Ambati, M.; Gerasimov, T.; De Lorenzis, L. A Review on Phase-Field Models of Brittle Fracture and a New Fast Hybrid Formulation. Comput. Mech. 2015 , 55 , 383–405. (4) Beyerlein, I. J.; Hunter, A. Understanding dislocation mechanics at the mesoscale using phase field dislocation dynamics. Phil. Trans. R. Soc. A 2016 , 374 , 20150166. (5) Devonshire, A. F. XCVI. Theory of Barium Titanate. Phil. Mag. 1949 , 40 , 1040–1063. (6) Devonshire, A. CIX. Theory of barium titanate-Part II. Phil. Mag. 1951 , 42 , 1065– 1079. (7) Chen, L. Q. Phase-Field Method of Phase Transitions/Domain Structures in Ferroelec-tric Thin Films: A Review. J. Am. Ceram. Soc. 2008 , 91 , 1835–1844. (8) Yadav, A. K. et al. Observation of Polar Vortices in Oxide Superlattices. Nature 2016 ,
+
+530 , 198–201. (9) Das, S. et al. Observation of room-temperature polar skyrmions. Nature 2019 , 568 ,368–372. (10) Wang, Y. J.; Feng, Y. P.; Zhu, Y. L.; Tang, Y. L.; Yang, L. X.; Zou, M. J.; Geng, W. R.; Han, M. J.; Guo, X. W.; Wu, B.; Ma, X. L. Polar meron lattice in strained oxide ferroelectrics. Nat. Mater. 2020 , 19 , 881–886. (11) Shao, Y.-T.; Das, S.; Hong, Z.; Xu, R.; Chandrika, S.; Gómez-Ortiz, F.; García-Fernández, P.; Chen, L.-Q.; Hwang, H. Y.; Junquera, J.; Martin, L. W.; Ramesh, R.; Muller, D. A. Emergent chirality in a polar meron to skyrmion phase transition. Nat. Commun. 2023 , 14 , 1355. (12) Tang, Y. L.; Zhu, Y. L.; Ma, X. L.; Borisevich, A. Y.; Morozovska, A. N.; Eliseev, E. A.; Wang, W. Y.; Wang, Y. J.; Xu, Y. B.; Zhang, Z. D.; Pennycook, S. J. Observation of 25 a Periodic Array of Flux-Closure Quadrants in Strained Ferroelectric PbTiO 3 films. 
+
+Science 2015 , 348 , 547–551. (13) Choudhury, S.; Li, Y.; Krill, C.; Chen, L.-Q. Phase-field simulation of polarization switching and domain evolution in ferroelectric polycrystals. Acta Mater. 2005 , 53 ,5313–5321. (14) Gao, P.; Britson, J.; Jokisaari, J. R.; Nelson, C. T.; Baek, S.-H.; Wang, Y.; Eom, C.-B.; Chen, L.-Q.; Pan, X. Atomic-scale mechanisms of ferroelastic domain-wall-mediated ferroelectric switching. Nat. Commun. 2013 , 4, 2791. (15) Park, S. M.; Wang, B.; Das, S.; Chae, S. C.; Chung, J.-S.; Yoon, J.-G.; Chen, L.-Q.; Yang, S. M.; Noh, T. W. Selective control of multiple ferroelectric switching pathways using a trailing flexoelectric field. Nat. Nanotechnol. 2018 , 13 , 366–370. (16) Wang, Y.; Shimada, T.; Wang, J.; Kitamura, T.; Hirakata, H. The rectilinear motion of the individual asymmetrical skyrmion driven by temperature gradients. Acta Mater. 
+
+2021 , 221 , 117383. (17) Yang, B.; Liu, Y.; Jiang, R.-J.; Lan, S.; Liu, S.-Z.; Zhou, Z.; Dou, L.; Zhang, M.; Huang, H.; Chen, L.-Q.; Zhu, Y.-L.; Zhang, S.; Ma, X.-L.; Nan, C.-W.; Lin, Y.-H. Enhanced energy storage in antiferroelectrics via antipolar frustration. Nature 2025 ,
+
+637 , 1104–1110. (18) Liu, H. et al. Giant piezoelectricity in oxide thin films with nanopillar structure. Science 
+
+2020 , 369 , 292–297. (19) Devulapalli, V.; Chen, E.; Brink, T.; Frolov, T.; Liebscher, C. H. Topological grain boundary segregation transitions. Science 2024 , 386 , 420–424. (20) Meiners, T.; Frolov, T.; Rudd, R. E.; Dehm, G.; Liebscher, C. H. Observations of grain-boundary phase transformations in an elemental metal. Nature 2020 , 579 , 375–378. 26 (21) Gao, P.; Yang, S.; Ishikawa, R.; Li, N.; Feng, B.; Kumamoto, A.; Shibata, N.; Yu, P.; Ikuhara, Y. Atomic-scale measurement of flexoelectric polarization at SrTiO 3 disloca-tions. Phys. Rev. Lett. 2018 , 120 , 267601. (22) Calderon, S.; Hayden, J.; Baksa, S. M.; Tzou, W.; Trolier-McKinstry, S.; Dabo, I.; Maria, J.-P.; Dickey, E. C. Atomic-scale polarization switching in wurtzite ferroelectrics. 
+
+Science 2023 , 380 , 1034–1038. (23) Horiuchi, S.; Tokura, Y. Organic Ferroelectrics. Nat. Mater. 2008 , 7, 357–366. (24) Liu, Y.; Cai, H. L.; Zelisko, M.; Wang, Y.; Sun, J.; Yan, F.; Ma, F.; Wang, P.; Chen, Q. N.; Zheng, H.; Meng, X.; Sharma, P.; Zhang, Y.; Li, J. Ferroelectric Switching of Elastin. Proc. Natl. Acad. Sci. U.S.A. 2014 , 111 , E2780–E2786. (25) Furukawa, S.; Wu, J.; Koyama, M.; Hayashi, K.; Hoshino, N.; Takeda, T.; Suzuki, Y.; Kawamata, J.; Saito, M.; Akutagawa, T. Ferroelectric columnar assemblies from the bowl-to-bowl inversion of aromatic cores. Nat. Commun. 2021 , 12 , 768. (26) Bune, A. V.; Fridkin, V. M.; Ducharme, S.; Blinov, L. M.; Palto, S. P.; Sorokin, A. V.; Yudin, S. G.; Zlatkin, A. Two-dimensional ferroelectric films. Nature 1998 , 391 , 874– 877. (27) Elder, K. R.; Grant, M. Modeling elastic and plastic deformations in nonequilibrium processing using phase field crystals. Phys. Rev. E 2004 , 70 , 051605. (28) Chan, P. Y.; Goldenfeld, N.; Dantzig, J. Molecular dynamics on diffusive time scales from the phase-field-crystal equation. Phys. Rev. E 2009 , 79 , 035701. (29) Berry, J.; Grant, M.; Elder, K. R. Diffusive atomistic dynamics of edge dislocations in two dimensions. Phys. Rev. E 2006 , 73 , 031609. (30) Provatas, N.; Dantzig, J. A.; Athreya, B.; Chan, P.; Stefanovic, P.; Goldenfeld, N.; 27 Elder, K. R. Using the phase-field crystal method in the multi-scale modeling of mi-crostructure evolution. JOM 2007 , 59 , 83–90. (31) Alster, E.; Elder, K. R.; Voorhees, P. W. Displacive phase-field crystal model. Phys. Rev. Mater. 2020 , 4, 013802. (32) LeSar, R.; Najafabadi, R.; Srolovitz, D. J. Finite-Temperature Defect Properties from Free-Energy Minimization. Phys. Rev. Lett. 1989 , 63 , 624–627. (33) LeSar, R.; Najafabadi, R.; Srolovitz, D. J. Thermodynamics of Solid and Liquid Embedded-Atom-Method Metals: A Variational Study. J. Chem. Phys. 1991 , 94 , 5090– 5097. (34) Li, J.; Sarkar, S.; Cox, W. T.; Lenosky, T. J.; Bitzek, E.; Wang, Y. Diffusive Molecular Dynamics and Its Application to Nanoindentation and Sintering. Phys. Rev. B 2011 ,
+
+84 , 054103. (35) Masuda, K.; Rappe, A. M. Phase field modeling for atoms. Phys. Rev. B 2024 , 110 ,104107. (36) Masuda, K.; Rappe, A. M. Atomic-scale phase-field modeling for ferroelectrics. Phys. Rev. B 2025 , 112 , 054107. (37) Errea, I.; Calandra, M.; Mauri, F. Anharmonic free energies and phonon dispersions from the stochastic self-consistent harmonic approximation: Application to platinum and palladium hydrides. Phys. Rev. B 2014 , 89 , 064302. (38) Monacelli, L.; Errea, I.; Calandra, M.; Mauri, F. Pressure and stress tensor of com-plex anharmonic crystals within the stochastic self-consistent harmonic approximation. 
+
+Phys. Rev. B 2018 , 98 , 024106. (39) Errea, I.; Belli, F.; Monacelli, L.; Sanna, A.; Koretsune, T.; Tadano, T.; Bianco, R.; 28 Calandra, M.; Arita, R.; Mauri, F.; Flores-Livas, J. A. Quantum crystal structure in the 250-kelvin superconducting lanthanum hydride. Nature 2020 , 578 , 66–69. (40) Monacelli, L.; Bianco, R.; Cherubini, M.; Calandra, M.; Errea, I.; Mauri, F. The stochastic self-consistent harmonic approximation: calculating vibrational properties of materials with full quantum and anharmonic effects. J. Phys. Condens. Matter. 
+
+2021 , 33 , 363001. (41) Siciliano, A.; Monacelli, L.; Mauri, F. Beyond Gaussian fluctuations of quantum an-harmonic nuclei: The case of rotational degrees of freedom. Phys. Rev. B 2024 , 110 ,144101. (42) Feng, B.; Yokoi, T.; Kumamoto, A.; Yoshiya, M.; Ikuhara, Y.; Shibata, N. Atomically ordered solute segregation behaviour in an oxide grain boundary. Nat. Commun. 2016 ,
+
+7, 11079. (43) Hunnestad, K. A.; Das, H.; Hatzoglou, C.; Holtz, M.; Brooks, C. M.; van Helvoort, A. T. J.; Muller, D. A.; Schlom, D. G.; Mundy, J. A.; Meier, D. 3D oxygen vacancy distribution and defect-property relations in an oxide heterostructure. Nat. Commun. 
+
+2024 , 15 , 5400. (44) Su, L.; Huyan, H.; Sarkar, A.; Gao, W.; Yan, X.; Addiego, C.; Kruk, R.; Hahn, H.; Pan, X. Direct observation of elemental fluctuation and oxygen octahedral distortion-dependent charge distribution in high entropy oxides. Nat. Commun. 2022 , 13 , 2358. (45) Sobol’, I. On the distribution of points in a cube and the approximate evaluation of integrals. USSR Comput. Math. Math. Phys. 1967 , 7, 86–112. (46) Batatia, I.; Batzner, S.; Kovács, D. P.; Musaelian, A.; Simm, G. N. C.; Drautz, R.; Ortner, C.; Kozinsky, B.; Csányi, G. The design space of E(3)-equivariant atom-centred interatomic potentials. Nat. Mach. Intell. 2025 , 7, 56–67. 29 (47) Paszke, A.; Gross, S.; Chintala, S.; Chanan, G.; Yang, E.; DeVito, Z.; Lin, Z.; Desmai-son, A.; Antiga, L.; Lerer, A. Automatic differentiation in PyTorch. NIPS-W. 2017. (48) Nocedal, J. Updating Quasi-Newton Matrices with Limited Storage. Math. Comput. 
+
+1980 , 35 , 773–782. (49) Virtanen, P. et al. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nat. Methods 2020 , 17 , 261–272. (50) Uhlenbeck, G. E.; Ornstein, L. S. On the Theory of the Brownian Motion. Phys. Rev. 
+
+1930 , 36 , 823–841. (51) Harris, D. C. Quantitative Chemical Analysis , 8th ed.; W. H. Freeman and Company: New York, United States, 2010; p 314. (52) Chen, F. F. Quantitative Chemical Analysis , 3rd ed.; Springer: New York, United States, 2016; p 148. (53) Owen, L.; Playford, H.; Stone, H.; Tucker, M. Analysis of short-range order in Cu 3Au using X-ray pair distribution functions. Acta Mater. 2017 , 125 , 15–26. (54) Sanati, M.; Zunger, A. Evolution of L 12 ordered domains in fcc Cu 3Au alloy. J. Phys. Condens. Matter. 2007 , 19 , 086201. (55) Okamoto, H.; Chakrabarti, D. J.; Laughlin, D. E.; Massalski, T. B. The Au-Cu (Gold-Copper) system. J. Phase Equilib. 1987 , 8, 454–474. (56) Ozolin , š, V.; Wolverton, C.; Zunger, A. Cu-Au, Ag-Au, Cu-Ag, and Ni-Au inter-metallics: First-principles study of temperature-composition phase diagrams and struc-tures. Phys. Rev. B 1998 , 57 , 6427–6443. (57) Subramanian, P. R.; Perepezko, J. H. The Ag-Cu (Silver-Copper) system. J. Phase Equilib. 1993 , 14 , 62–75. 30 (58) Frolov, T.; Divinski, S. V.; Asta, M.; Mishin, Y. Effect of interface phase transfor-mations on diffusion and segregation in high-angle grain boundaries. Phys. Rev. Lett. 
+
+2013 , 110 , 255502. (59) Duscher, G.; Chisholm, M. F.; Alber, U.; Rühle, M. Bismuth-induced embrittlement of copper grain boundaries. Nat. Mater. 2004 , 3, 621–626. 31

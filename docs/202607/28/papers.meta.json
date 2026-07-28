@@ -1,0 +1,39 @@
+{
+  "label": "2026-07-28",
+  "date": "2026-07-28",
+  "generated_at": "2026-07-28T20:57:46",
+  "count": 2,
+  "papers": [
+    {
+      "paper_id": "202607/28/2607.23995v1-nature-of-cr-segregation-in-fcc-to-bcc-quenched-fe-12cr-alloy-with-post-quenching-heat-treatment-a-positron-annihilation-study",
+      "section": "quick",
+      "title_en": "Nature of Cr Segregation in FCC to BCC quenched Fe-12Cr Alloy, with Post-Quenching Heat Treatment: A Positron Annihilation Study",
+      "authors": "S. Hari Babu, V. R. Reddy",
+      "date": "2026-07-27",
+      "pdf": "https://arxiv.org/pdf/2607.23995v1",
+      "score": "6.0",
+      "evidence": "利用正电子湮没研究Fe-12Cr合金中Cr偏析，与辐照条件下的沉淀强化相关",
+      "tldr": "Fe-Cr合金中Cr偏析的研究对理解铁素体/马氏体钢的脆化至关重要。本研究采用正电子湮没寿命谱、透射电镜和穆斯堡尔谱，对比了Fe-12Cr和Fe-9Cr合金中Cr沉淀的性质。发现淬火后高密度位错和亚晶界导致在748K回火时析出四方σ相，而非通常认为的α'相，且Fe-12Cr中析出动力学更快，析出物尺寸更大而数密度更低。首次报告了无缺陷Fe-(9,12)Cr晶格的正电子寿命。",
+      "tags": "query:rad-damage",
+      "abstract_en": "The Fe-Cr binary alloy is a model system for ferrtitic/martensitic steels. Cr clustering instigated loss of ductility, is one of the influential factors to deteriorate the alloys, and its severity depends on Cr concentration. This study aims at understanding (i) the nature of Cr precipitation in Fe-12Cr alloy using positron lifetime spectroscopy, transmission electron microscopy and Mössbauer spectroscopy studies and (ii) comparing the precipitation concentration and size with respect to Fe-9Cr alloy. The quenched alloys (from the high temperature FCC phase) are found to contain a high density of dislocations along with the sub-grain structure which lead to Cr rich σ-phase precipitation during post-quenching heat treatment at 748 K, while the alloy prepared with no dislocations and the sub-grain structure shows no precipitation, except at grain boundaries, consistent with observations in Fe-9Cr alloys. Selected area diffraction confirmed that the precipitates are tetragonal intermetallic σ-phase, contradicting the majority of the literature on Fe-Cr ferritic alloys which reported it as Cr rich BCC α'-phase. Mossbauer spectroscopy studies showed signatures of Cr depletion from the rest of the matrix, indicating that the precipitates are Cr rich compared to the alloy composition. The kinetics of Cr precipitation is found to be higher in the Fe-12Cr alloy compared to the Fe-9Cr alloy. The average precipitate size is observed to be higher and the number density is lower in the Fe-12Cr alloy compared to the Fe-9Cr alloy. In addition, the experimental positron lifetime in defect-free lattice of Fe-(9, 12)Cr alloys is reported for the first time with substantial evidence.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202607/28/2607.24107v1-atomic-scale-phase-field-modeling-with-dopants-stochastic-self-consistent-harmonic-approximation-with-fractional-site-occupancy",
+      "section": "quick",
+      "title_en": "Atomic-scale phase-field modeling with dopants: Stochastic self-consistent harmonic approximation with fractional site occupancy",
+      "authors": "Kairi Masuda, Yu Kumagai",
+      "date": "2026-07-27",
+      "pdf": "https://arxiv.org/pdf/2607.24107v1",
+      "score": "6.0",
+      "evidence": "原子尺度相场建模涉及掺杂和空位有序化",
+      "tldr": "传统相场建模基于连续介质力学，难以直接模拟原子尺度的掺杂偏析和空位有序化。本文通过随机自洽谐波近似（SSCHA）引入分数位点占据，将相场概念扩展到离散原子系统，直接计算自由能对位点占据的导数得到化学势。该方法成功重现了Cu中Ag原子的体分布及晶格膨胀，并揭示了Ag在Σ5(310)[001] Cu晶界三角形顶点优先偏析，随掺杂增加偏析位点向近顶点和底部扩展。本研究为识别原子尺度掺杂偏析位点、可视化微观图案形成提供了新途径。",
+      "tags": "query:rad-damage",
+      "abstract_en": "Phase-field modeling has achieved great success in predicting pattern formation in materials, such as the formation of ferroelectric domains. However, because it is typically based on continuum mechanics, conventional phase-field modeling cannot be straightforwardly applied to atomic-scale pattern formation, such as dopant segregation and vacancy ordering, which are driven by chemical potentials. Here, we extend the phase-field concept to the atomic scale by formulating the free energy of atomic systems within stochastic self-consistent harmonic approximation (SSCHA) theory to allow fractional site occupations. Our methodology enables us to directly calculate the derivative of the free energy with respect to site occupation and thereby obtain the chemical potential, successfully reproducing Ag distributions in bulk Cu as well as the resulting lattice expansion. Furthermore, we applied our methodology to investigate dopant segregation around a Σ5(310)[001] Cu grain boundary doped with Ag atoms. We found that Ag atoms preferentially segregate at the vertices of the triangular motif of a grain boundary. As the number of dopants increases, excess Ag atoms segregate near the vertices and then at the bottom sites of the triangular motif. This study extends the phase-field concept to discrete atomic systems, enabling the identification of preferential dopant-segregation sites and thereby visualizing atomic-scale pattern formation.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
