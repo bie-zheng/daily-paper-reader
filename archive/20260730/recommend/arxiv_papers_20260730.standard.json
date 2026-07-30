@@ -1,0 +1,59 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-30T20:38:19.737452+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 1,
+    "deep_cap": 6,
+    "deep_selected": 1,
+    "quick_candidates": 0,
+    "quick_skim_target": 11,
+    "quick_selected": 0
+  },
+  "deep_dive": [
+    {
+      "id": "2607.24085v1",
+      "source": "arxiv",
+      "title": "Recrystallisation phenomena in an ultrafine-grained Al-Mg-Si alloy revealed by correlative in situ EBSD and TEM heating",
+      "abstract": "Ultrafine-grained (UFG) aluminium alloys are promising lightweight structural materials for space applications, where a high grain-boundary density can act as sinks for irradiation-induced defects. Their deployment, however, is contingent on thermal stability: aluminium components in low-Earth orbit can reach $\\sim$200 $^\\circ$C under solar irradiation, close to where severely deformed aluminium alloys recrystallise. Accurate, bulk-representative determination of recrystallisation onset is therefore essential, yet conventional in situ transmission electron microscopy (TEM) heating is compromised by thin-film effects, ambiguous grain-boundary contrast, and small sampling volumes. Here, a UFG AA6061 (Al-Mg-Si) alloy produced by high-pressure torsion was studied by a direct comparison of in situ TEM heating and in situ electron backscatter diffraction (EBSD) heating, complemented by differential scanning calorimetry (DSC), analytical scanning transmission electron microscopy (STEM-EDX) and microhardness. In situ EBSD sampled $\\sim 10^{3}$ grains from bulk material and resolved the microstructural evolution into sequential recovery, recrystallisation and grain-growth regimes, placing the onset of instability at $\\sim$198 $^\\circ$C. Calorimetry, microhardness and nanoscale elemental mapping showed that grain refinement suppresses GP-zones formation and shifts precipitation to lower temperatures, with precipitation neither retarding recrystallisation nor restoring strength once the UFG structure is consumed. Revisiting the Brailsford-Bullough-Hayns sink-strength theory with a KAM-informed, temperature-dependent internal sink strength, we show that the grain-boundary sink strength collapses as recovery and recrystallisation proceed. We establish in situ EBSD heating as an in operando method for bulk-representative determination of microstructural instabilities in advanced metallic systems.",
+      "authors": [
+        "Moritz Theissing",
+        "Sandra Gonzaga",
+        "Patrick Willenshofer",
+        "Thomas M. Kremmer",
+        "Stefan Pogatscher",
+        "Stefan Mitsche",
+        "Frank F. Sene",
+        "Matheus A. Tunes"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci",
+        "physics.space-ph"
+      ],
+      "published": "2026-07-27T07:26:25+00:00",
+      "link": "https://arxiv.org/pdf/2607.24085v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "grain boundaries as sinks for irradiation-induced defects in UFG Al alloy",
+      "llm_evidence_cn": "超细晶铝合金中晶界作为辐照诱导缺陷的汇",
+      "llm_evidence": "超细晶铝合金中晶界作为辐照诱导缺陷的汇",
+      "canonical_evidence": "超细晶铝合金中晶界作为辐照诱导缺陷的汇",
+      "llm_tldr_en": "Correlative in situ EBSD and TEM heating reveals recrystallisation onset in UFG AA6061, with grain boundaries acting as sinks for irradiation defects, relevant to structural materials for space applications.",
+      "llm_tldr_cn": "超细晶铝合金因高密度晶界可成为辐照缺陷的汇，有望用于太空结构材料。然而热稳定性是关键问题。该工作通过关联原位EBSD和TEM加热方法，准确测定了AA6061合金的再结晶起始温度，克服了传统TEM加热的薄膜效应。结果表明该方法可提供体代表性的再结晶数据，为评估辐照条件下材料的微观结构稳定性提供了可靠工具。",
+      "llm_tldr": "超细晶铝合金因高密度晶界可成为辐照缺陷的汇，有望用于太空结构材料。然而热稳定性是关键问题。该工作通过关联原位EBSD和TEM加热方法，准确测定了AA6061合金的再结晶起始温度，克服了传统TEM加热的薄膜效应。结果表明该方法可提供体代表性的再结晶数据，为评估辐照条件下材料的微观结构稳定性提供了可靠工具。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation damage mechanisms in structural materials",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": []
+}

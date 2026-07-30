@@ -1,0 +1,24 @@
+{
+  "label": "2026-07-30",
+  "date": "2026-07-30",
+  "generated_at": "2026-07-30T20:40:13",
+  "count": 1,
+  "papers": [
+    {
+      "paper_id": "202607/30/2607.24085v1-recrystallisation-phenomena-in-an-ultrafine-grained-al-mg-si-alloy-revealed-by-correlative-in-situ-ebsd-and-tem-heating",
+      "section": "deep",
+      "title_en": "Recrystallisation phenomena in an ultrafine-grained Al-Mg-Si alloy revealed by correlative in situ EBSD and TEM heating",
+      "authors": "Moritz Theissing, Sandra Gonzaga, Patrick Willenshofer, Thomas M. Kremmer, Stefan Pogatscher, Stefan Mitsche, Frank F. Sene, Matheus A. Tunes",
+      "date": "2026-07-27",
+      "pdf": "https://arxiv.org/pdf/2607.24085v1",
+      "score": "8.0",
+      "evidence": "超细晶铝合金中晶界作为辐照诱导缺陷的汇",
+      "tldr": "超细晶铝合金用于太空需热稳定性，但传统原位TEM加热存在薄膜效应和取样局限。本研究采用原位EBSD加热联合TEM、DSC等方法，对高压扭转AA6061合金进行系统分析。发现再结晶起始约198°C，晶粒细化抑制GP区形成并降低析出温度，但不阻碍再结晶。建立了原位EBSD加热作为批量代表性微结构不稳定性测定方法。",
+      "tags": "query:rad-damage",
+      "abstract_en": "Ultrafine-grained (UFG) aluminium alloys are promising lightweight structural materials for space applications, where a high grain-boundary density can act as sinks for irradiation-induced defects. Their deployment, however, is contingent on thermal stability: aluminium components in low-Earth orbit can reach $\\sim$200 $^\\circ$C under solar irradiation, close to where severely deformed aluminium alloys recrystallise. Accurate, bulk-representative determination of recrystallisation onset is therefore essential, yet conventional in situ transmission electron microscopy (TEM) heating is compromised by thin-film effects, ambiguous grain-boundary contrast, and small sampling volumes. Here, a UFG AA6061 (Al-Mg-Si) alloy produced by high-pressure torsion was studied by a direct comparison of in situ TEM heating and in situ electron backscatter diffraction (EBSD) heating, complemented by differential scanning calorimetry (DSC), analytical scanning transmission electron microscopy (STEM-EDX) and microhardness. In situ EBSD sampled $\\sim 10^{3}$ grains from bulk material and resolved the microstructural evolution into sequential recovery, recrystallisation and grain-growth regimes, placing the onset of instability at $\\sim$198 $^\\circ$C. Calorimetry, microhardness and nanoscale elemental mapping showed that grain refinement suppresses GP-zones formation and shifts precipitation to lower temperatures, with precipitation neither retarding recrystallisation nor restoring strength once the UFG structure is consumed. Revisiting the Brailsford-Bullough-Hayns sink-strength theory with a KAM-informed, temperature-dependent internal sink strength, we show that the grain-boundary sink strength collapses as recovery and recrystallisation proceed. We establish in situ EBSD heating as an in operando method for bulk-representative determination of microstructural instabilities in advanced metallic systems.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
