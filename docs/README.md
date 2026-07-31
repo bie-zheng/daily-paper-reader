@@ -6,24 +6,29 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-07-30
-- 运行时间：2026-07-30 20:40:05 UTC
+- 最新运行日期：2026-07-31
+- 运行时间：2026-07-31 21:37:26 UTC
 - 运行状态：成功
-- 本次总论文数：1
+- 本次总论文数：3
 - 精读区：1
-- 速读区：0
+- 速读区：2
 
 ### 今日简报（AI）
-今天精读了一篇关于超细晶Al-Mg-Si合金再结晶现象的论文，使用关联原位EBSD和TEM加热技术揭示其机制（8.0/10）。值得关注的是，该研究直接观察了再结晶过程中的微观结构演变，对理解高性能铝合金的热稳定性有重要启示。建议关注这类关联原位表征方法，以深入探索材料在加热下的组织演化规律。
-- 详情：[/202607/30/README](/202607/30/README)
+今日精读1篇、速读2篇，聚焦材料辐照缺陷与合金/氮化物性能研究。最值得关注的是钨中位错环与空位缺陷相互作用的9分高价值论文，揭示缺陷景观演化机制；另两篇则分别涉及Ni3Al析出建模与θ-TaN各向异性拉伸行为。建议普通读者优先精读钨缺陷研究，后续可延伸关注机器学习势能方法在材料力学模拟中的应用。
+- 详情：[/202607/31/README](/202607/31/README)
 
 ### 精读区论文标签
-1. [Recrystallisation phenomena in an ultrafine-grained Al-Mg-Si alloy revealed by correlative in situ EBSD and TEM heating](/202607/30/2607.24085v1-recrystallisation-phenomena-in-an-ultrafine-grained-al-mg-si-alloy-revealed-by-correlative-in-situ-ebsd-and-tem-heating)  
-   标签：评分：8.0/10、query:rad-damage
-   evidence：超细晶铝合金中晶界作为辐照诱导缺陷的汇
+1. [Evolution of the Irradiation Induced Defect Landscape through Dislocation Vacancy Loop Interactions in Tungsten](/202607/31/2607.27375v1-evolution-of-the-irradiation-induced-defect-landscape-through-dislocation-vacancy-loop-interactions-in-tungsten)  
+   标签：评分：9.0/10、query:rad-damage
+   evidence：钨中辐照空位环与位错相互作用驱动缺陷形貌演化和辐照硬化
 
 ### 速读区论文标签
-- 本次无速读推荐。
+1. [Formation of $\mathrm{L}1_2$-ordered $γ'$-$\mathrm{Ni}_3\mathrm{Al}$ precipitates in ternary Cu-Ni-Al alloys modelled using an ab initio concentration wave theory and atomistic simulations](/202607/31/2607.27108v1-formation-of-mathrml12-ordered--mathrmni3mathrmal-precipitates-in-ternary-cu-ni-al-alloys-modelled-using-an-ab-initio-concentration-wave-theory-and-atomistic-simulations)  
+   标签：评分：6.0/10、query:rad-damage
+   evidence：从头算与原子模拟方法可用于辐照FeCr合金析出强化研究
+2. [Anisotropic Tensile Strength and Fracture Mechanism of $θ$-TaN: A Machine-Learning Potential Molecular Dynamics Study](/202607/31/2607.27608v1-anisotropic-tensile-strength-and-fracture-mechanism-of--tan-a-machine-learning-potential-molecular-dynamics-study)  
+   标签：评分：6.0/10、query:rad-damage
+   evidence：采用机器学习势分子动力学研究结构陶瓷的断裂机理，该方法可迁移至结构材料辐照损伤机理的原子尺度模拟
 
 
 <div class="dpr-home-promo-card">

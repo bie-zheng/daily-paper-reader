@@ -1,0 +1,2063 @@
+Title: Formation of L1_2-ordered γ'-Ni_3Al precipitates in ternary Cu-Ni-Al alloys modelled using an ab initio concentration wave theory and atomistic simulations
+
+URL Source: https://arxiv.org/pdf/2607.27108v1
+
+Published Time: Thu, 30 Jul 2026 01:16:15 GMT
+
+Number of Pages: 26
+
+Markdown Content:
+## Formation of L1 2-ordered γ′-Ni 3Al precipitates in ternary Cu–Ni–Al alloys modelled using an ab initio concentration wave theory and atomistic simulations 
+
+Christopher D. Woodgate, 1, 2, ∗ Hubert J. Naguszewski, 2 Samuel L. Deacon, 2, †
+
+Mathys P. Potel, 2, † J´ an Min´ ar, 3 David Quigley, 2 and Julie B. Staunton 2, ‡
+
+> 1
+
+H.H. Wills Physics Laboratory, University of Bristol, Royal Fort, Bristol, BS8 1TL, United Kingdom 
+
+> 2
+
+Department of Physics, University of Warwick, Coventry, CV4 7AL, United Kingdom 
+
+> 3
+
+New Technologies Research Center, University of West Bohemia in Pilsen, Pilsen, Czech Republic 
+
+(Dated: July 29, 2026) Precipitation-strengthened Cu–Ni–Al alloys are of interest for technological applications because coherent, L1 2-ordered γ′-Ni 3Al precipitates can confer high mechanical strength while allowing the material to retain many of the good transport properties characteristic of elemental Cu. In this work, we study the thermodynamics and phase stability of the pseudobinary Cu x(Ni 3/4Al 1/4)1−x
+
+system, 0 ≤ x ≤ 1. We use a computational modelling framework combining first-principles elec-tronic structure calculations with a concentration wave analysis from which atom-atom effective pair interactions are extracted for use in atomistic Monte Carlo simulations. Our modelling reveals three distinct, composition-dependent regimes of phase behaviour, in qualitative agreement with the ex-perimentally determined phase diagram. At low Cu content, Cu is soluble in the L1 2-ordered Ni 3Al phase, with a single identifiable phase transition corresponding to chemical ordering between Ni and Al. At intermediate compositions, this high-temperature ordering is followed at lower temperatures by phase separation of Cu and L1 2-ordered Ni 3Al. Finally, at high Cu content, L1 2-ordered Ni 3Al precipitates directly from the solid solution, with no clearly identifiable secondary transition. We re-late these phase transformations to features of the underlying electronic structures of the considered alloys. Overall, this work demonstrates a computationally efficient workflow capturing both chem-ical ordering and coherent precipitation in multicomponent substitutional alloys, with relevance to the study of phenomena such as precipitation strengthening. 
+
+I. INTRODUCTION 
+
+The alloying of metallic elements facilitates control of materials’ structure at the atomic scale, leading to fine-tuning of a range of desirable properties for specific ap-plications [1, 2]. Often it is of particular importance to understand how atoms in a given alloy arrange them-selves when in thermal equilibrium at ambient pressure, 
+
+i.e. to determine the alloy’s phase diagram. Depending on the chemical composition and the targeted applica-tion, advantageous properties may be conferred when the elements in an alloy mix freely (as in a solid solution), when the elements form some chemically ordered struc-ture (as in an intermetallic compound), or when one or more elements in the composition cluster together (phase separation) and the alloy develops a chemically inhomo-geneous microstructure at the nanoscale. A well-studied system in which both chemical or-dering and phase separation occur is provided by ternary Cu–Ni–Al alloys [3–16] and—in particular—the Cu x(Ni 3/4Al 1/4)1−x pseudobinary system [17]. Here, ‘pseudobinary’ refers to a single-parameter path in com-position space along which the Ni:Al ratio is held fixed at 3:1, while the fraction of Cu is controlled via the parameter x. Elemental Cu has exceptional electrical and thermal conductivity but is mechanically soft, with    
+
+> ∗Christopher.Woodgate@bristol.ac.uk
+> †These authors contributed equally to this work.
+> ‡J.B.Staunton@warwick.ac.uk
+
+a low yield strength that limits its use in load-bearing applications. The binary Ni 3Al system, by contrast, forms an L1 2-ordered intermetallic compound, illustrated in Fig. 1, which possesses excellent high-temperature strength. This phase is referred to as the γ′ phase in the context of Ni-based superalloys [18, 19]. When Cu and Ni 3Al are alloyed to form a ternary system, exper-imental observations confirm that, for Cu-rich compo-sitions (large x), L1 2-ordered Ni 3Al precipitates out of the disordered ternary solid solution. These precipitates harden the alloy, while leaving behind an almost pure Cu matrix that retains many of the excellent transport properties of elemental Cu [8, 11]. Cu–Ni–Al alloys thus provide an attractive route to combining high strength with high electrical and thermal conductivity, addressing a longstanding challenge in alloy design [20–22]. More-over, from the perspective of development of simulation methods for studying alloy phase transformations and phase equilibria, Cu–Ni–Al serves as an important test case because a single model must capture both order-ing and separation tendencies to reproduce the observed experimental behaviour. Computational modelling approaches for studying solid-solid phase transformations in alloys—providing atomic-scale insight into such phenomena—can be grouped into three broad categories. The first is semi-empirical thermodynamic modelling using methods such as CALPHAD [24–29], which parametrise an approxi-mate form of the alloy free energy as a function of phase, composition, and temperature from experimental data and/or first-principles density functional theory (DFT) arXiv:2607.27108v1 [cond-mat.mtrl-sci] 29 Jul 2026 2     
+
+> FIG. 1. Conceptual illustration of (a) a disordered fcc (A1) Cu–Ni–Al alloy decomposing into (b) a mixture of fcc (A1) Cu (left) and L1 2-ordered Ni 3Al (right). This metallurgical reaction is the focus of the present study. Partially-coloured spheres indicate lattice sites where elements mix freely. Im-ages generated using VESTA [23].
+
+calculations. The second category is that of atomistic simulation: using appropriate sampling algorithms to determine alloy phase equilibria and infer phase tran-sitions, where the internal energy of the alloy is typi-cally described using either DFT calculations [30], some form of interatomic potential (either semi-empirical [31] or machine-learned [32]), or a lattice-based model such as a cluster expansion [33–35]. The third, which we adopt in this work, is based on effective medium theories such as the coherent potential approximation (CPA) [36– 38], which aim to describe the average electronic struc-ture and consequent internal energy of the disordered alloy [39–42]. Within such CPA-based methodologies, chemical ordering tendencies and, thus, phase transfor-mations are typically described via some form of con-centration wave analysis [43, 44], where it is considered how the internal energy of an alloy responds to spatially inhomogeneous atomic-scale chemical fluctuations. In this study, to give atomic-scale insight into the aforementioned experimentally observed phenomena, we investigate the phase stability of the technologically rel-evant Cu–Ni–Al ternary alloy in detail using a combi-nation of ab initio electronic structure calculations, a concentration wave analysis, and atomistic Monte Carlo simulations. Our computational workflow successfully re-produces a variety of experimentally observed behaviours at modest computational cost. Specifically, we are able to construct a pseudobinary phase diagram for the Cu x(Ni 3/4Al 1/4)1−x system, identifying distinct regions where (i) the system forms a fully disordered solid solu-tion, (ii) Cu is soluble in L1 2-ordered Ni 3Al, and (iii) L1 2
+
+Ni 3Al and Cu separate away from one another. More-over, as the workflow is based on first-principles DFT calculations, we are also able to shed light on the elec-tronic mechanisms driving this behaviour, connecting de-tails of the alloy’s electronic structure with a propen-sity for precipitation, thus providing physical insight into the origin of the observed phase separation into an or-dered intermetallic compound and an elemental metal. The present study, therefore, uses the Cu–Ni–Al system to demonstrate a workflow—free from empirically deter-mined parameters—for studying the phenomenon of co-herent precipitation in multicomponent solid solutions, with particular relevance to related phenomena such as precipitation strengthening. The remainder of this work is structured as follows. First, in Sec. II, we discuss the computational methods used in this work to model the electronic structure and phase behaviour of the considered alloys. Subsequently, in Sec. III, we present our results, demonstrating that our simulation workflow successfully captures the experimen-tally observed behaviour of these materials. Additionally, we shed light on the origins of the observed precipitation by considering the electronic structure of selected disor-dered and ordered phases across a variety of alloy com-positions. Finally, in Sec. IV, we summarise our findings, venture an outlook on their implications, and suggest po-tential future avenues of study.  
+
+> II. METHODS
+
+Our workflow for studying competing chemical order-ing and separation tendencies in substitutional alloys (and, thus, the phenomenon of coherent precipitation in the Cu–Ni–Al system) has four key stages: 1. A self-consistent electronic structure calculation is performed with the alloy modelled as a disordered solid solution, as a starting point for the subsequent concentration wave analysis. 2. A concentration wave analysis applied to the disor-dered solid solution recovers concentration deriva-tives of the internal energy, describing atom-atom correlations. A Landau-type mean-field theory then enables direct inference of phase transitions. 3. From the concentration wave analysis, atom-atom effective pair interactions (EPIs) are recovered for use in subsequent atomistic simulations. 4. Fixed-lattice Monte Carlo simulations are per-formed to appropriately sample the configuration space of the alloy, describing phase transformations and phase equilibria in detail. Many aspects of the approach have been extensively dis-cussed previously [45–48], so we present only a concise overview here. A schematic of the workflow is shown 3Atomistic Monte Carlo       
+
+> simulations:
+> ,, ...
+> (Wang-Landau Sampling)
+> Self-consistent DFT
+> calculation on alloy in
+> disordered state
+> Perturbative concentration
+> wave analysis:
+> Recovery of real-space
+> effective pair interactions:
+> Direct inference of chemical
+> orderings—Landau theory:
+> ,,, ...
+> 1. 2. 3. 4.
+
+FIG. 2. An overview of the computational workflow used in this work for studying the phase behaviour of Cu–Ni–Al alloys. 
+
+in Fig. 2, while discussion of the details of each step is provided below. Full computational details of our calcu-lations are provided in Appendix A. 
+
+A. Electronic structure and internal energy of the disordered solid solution 
+
+A substitutional alloy is a material in which there is a fixed underlying crystalline lattice, but in which the arrangements of atoms on said lattice are determined by the laws of statistical physics, i.e. by thermodynamic con-siderations. An arrangement of atoms on this underlying lattice can be specified by the set of so-called site occu-pation numbers, {ξiα }, where ξiα = 1 if site i is occupied by an atom of chemical species α, and ξiα = 0 otherwise. Each lattice site is constrained to be occupied by one (and only one) atom, which is equivalent to the state-ment that P 
+
+> α
+
+ξiα = 1 for all lattice sites i. Proceeding, the average value of these site occupancies taken across an ensemble defines the site-wise concentrations, 
+
+ciα := ⟨ξiα ⟩, (1) where ⟨·⟩ indicates an average taken over the relevant thermodynamic ensemble. Note that, by construction, we have that 0 ≤ ciα ≤ 1 for all lattice sites i. In the high-temperature limit of this fixed-lattice model, en-tropy dominates and these site-wise concentrations be-come spatially homogeneous, i.e. 
+
+lim   
+
+> T→∞
+
+ciα = cα, (2) where cα is simply the average concentration of chemical species α. When the site-wise concentrations, ciα , are spatially homogeneous, the disordered alloy is commonly referred to as a ‘solid solution’. The electronic structure and consequent internal en-ergy [49, 50] of such a solid solution can be described 
+
+ab initio via application of the coherent potential ap-proximation (CPA) [36–38] within the Korringa–Kohn– Rostoker (KKR) formulation [51–53] of DFT [54–56]. The KKR method uses multiple scattering theory to ob-tain the single-particle Green’s function for a given solid-state system, while the CPA seeks to construct a self-consistent effective medium of electronic scatterers whose scattering properties represent those of the disordered al-loy on average [57]. We note that—by its construction— the KKR-CPA typically works with small real-space unit cells (usually the primitive unit cell of the underlying crystal lattice of the alloy), which results in a low com-putational cost of calculations compared with supercell-based approaches. 
+
+B. Describing the energetic cost of atomic-scale chemical fluctuations: Concentration wave analysis 
+
+To study diffusional solid-solid transformations in sub-stitutional alloys—such as the precipitation of L1 2-ordered Ni 3Al in Cu–Ni–Al alloys considered in this work—it is necessary to inspect how atomic-scale chemi-cal fluctuations alter the free energy of the alloy. Starting from a disordered solid solution, such chemical fluctua-tions can be viewed as inhomogeneous perturbations to the homogeneous (disordered) alloy, and we write 
+
+ciα = cα + ∆ ciα , (3) where ∆ ciα describes some inhomogeneous atomic-scale chemical fluctuation about the homogeneous reference state. These fluctuations can also be expressed in reciprocal space using the language of concentration waves [43, 44], conceptually illustrated in 1D in Fig. 3. In this manner, Eq. (3) is rewritten as 
+
+ciα = cα + X
+
+> k
+
+eik·Ri ∆cα(k), (4) where Ri is the position of lattice site i, ∆ cα(k) repre-sents some static concentration wave modulating the site-wise concentrations, and the summation typically runs over a handful of high-symmetry k-points. 4                          
+
+> FIG. 3. Illustration of a concentration wave modulating par-tial lattice site occupancies in a 1D ‘alloy’. Such concentra-tion waves can be generalised to three dimensions to describe atomic-scale chemical fluctuations in real alloys. Panel (a) shows the homogeneous alloy with cα= ( 12,12), while panel (b) shows those partial occupancies being modulated by a concentration wave with wavevector kord =π/a and (nor-malised) chemical polarisation ∆ cα=1√2(1 ,−1). The mag-nitude of the imposed wave can be scaled arbitrarily so long as 0 ≤ciα ≤1 for all lattice sites iand chemical species α.
+
+The change in free energy induced by an arbitrary con-centration wave modulating the homogeneous site-wise concentrations is unknown a priori , and can be evalu-ated using two distinct types of approach. The most obvious option is to construct (partially) ordered alloy supercell(s) consistent with a given concentration wave, and evaluate their (free) energy directly. However, for a multicomponent alloy this is laborious due to the large set of possible structures that must be enumerated and, fur-ther, incommensurate ordering vectors cannot be treated. An alternative approach, used in this work, is to consider the response of the CPA medium to an infinitesimal con-centration fluctuation, and thus to evaluate the concen-tration derivatives of the alloy internal energy directly. From these concentration derivatives, we construct an ex-pression for the approximate change in free energy (grand potential), ∆Ω, resulting from deviations from the ideal solid solution, which takes the form ∆Ω = 12
+
+X
+
+> k
+
+X
+
+> α,α ′
+
+∆cα(k)[ β−1C−1 
+
+> αα ′
+
+− S(2)  
+
+> αα ′
+
+(k)]∆ cα′ (k),
+
+(5) where β = ( kBT )−1 is the usual inverse temperature, 
+
+C−1 
+
+> αα ′
+
+= δαα ′ /c α, and S(2)  
+
+> αα ′
+
+(k) represents the Fourier transform of the second concentration derivative of the alloy internal energy as described within the KKR-CPA, defined formally in Ref. 45. The term appearing in square brackets in Eq. (5), [β−1C−1 
+
+> αα ′
+
+− S(2)  
+
+> αα ′
+
+(k)], we refer to as the chemical stability matrix . It can be related to an estimate of the atomic short-range order [45]. In the limit of high temperature (small β), all its eigenvalues are strictly positive for all wavevectors k. With decreasing temperature, however, it is found that for some temperature Tus and some (gen-erally high-symmetry) wavevector kus an eigenvalue of this matrix will pass through zero. At this temperature, the free energetic cost of imposing a concentration wave with wavevector kus vanishes, the solid solution is ren-dered unstable (hence the subscript ‘us’) to such a chem-ical fluctuation, and a phase transition is inferred. The wavevector associated with this instability describes the structural nature of the transition, while the (normalised) eigenvector, ∆ cα, associated with the eigenvalue passing through zero describes the chemical polarisation of the concentration wave, and thus how the different chemi-cal species partition themselves onto different sublattices. Typically, it is found that the minimum eigenvalue occurs at a high-symmetry point in the Brillouin zone, i.e. at a special point [43]. For example, in three dimensions, an instability at the X point, i.e. with kus = 2πa (0 , 0, 1) (and its symmetry-equivalent wavevectors) typically describes chemical ordering into either an L1 0 or L1 2 (sometimes D0 22 ) structure [43, 58], with the final result determined by the system’s stoichiometry and free energetic consid-erations. Phase separation, meanwhile, is described by an instability at the Γ point, i.e. with kus = 0 [43, 59]. This analysis represents a Landau-type mean-field theory for inferring phase transitions in an alloy. It should be emphasised that the alloy S(2) theory used here [45–48] is a rigorous multicomponent generalisation of an earlier theory restricted to binary alloys [60–62]. It fully includes the rearrangement of electronic charge due to an inhomogeneous chemical fluctuation, which is crucial for accurately modelling alloys in which there are appreciable charge transfers between constituent ele-ments [46, 47]. In previous studies on Al-containing mul-ticomponent alloys [58, 63, 64], we have found that the alloy S(2) theory successfully captures the strong atomic ordering tendencies that emerge when Al is alloyed with 3d transition metals, and we therefore believe that this methodology is well-suited to the study of the Cu–Ni–Al alloys considered in the present work.  
+
+> C. Recovery of a real-space pair interaction model
+
+In addition to the Landau-type mean-field theory out-lined above, used to infer phase transitions directly, it is also possible to map the obtained concentration deriva-tives of the KKR-CPA internal energy to a real-space 5atomistic model. The quantity S(2)  
+
+> iα ;jα ′
+
+, which is defined as the lattice Fourier transform of S(2)  
+
+> αα ′
+
+(k), can be related to a set of atom-atom EPIs describing the internal energy of the alloy [45]. This pairwise model, which we refer to as the Bragg–Williams model [65, 66], has a generalised Lenz–Ising Hamiltonian, which takes the form 
+
+H({ξiα }) = 12
+
+X
+
+> iα ;jα ′
+
+Viα ;jα ′ ξiα ξjα ′ , (6) where Viα ;jα ′ = −S(2)  
+
+> iα ;jα ′
+
+is the EPI between an atom of chemical species α at lattice site i and chemical species 
+
+α′ at lattice site j. These EPIs are assumed to be spa-tially homogeneous (translationally invariant), isotropic (rotationally invariant), and of finite range, which sim-plifies evaluation of Eq. (6) in practical simulations. We then write V (n) 
+
+> αα ′
+
+to denote the EPI between an atom of chemical species α and an atom of chemical species α′ at 
+
+nth-nearest neighbour distance, i.e. on coordination shell 
+
+n. The gauge degree of freedom for the {Viα ;jα ′ } is fixed according to the protocol outlined in Ref. 45.  
+
+> D. Atomistic Monte Carlo simulations
+
+Using the atom-atom EPIs and the Hamiltonian of Eq. (6), we can subsequently employ lattice-based Monte Carlo simulations for in-depth study of an alloy’s phase behaviour. In this work, two algorithms are used: the Metropolis algorithm [67, 68] and the Wang–Landau sampling algorithm [68–70]. Here, both of these algo-rithms make use of Kawasaki-type trial Monte Carlo moves [71], i.e. utilising swaps of pairs of atoms in the simulation cell to conserve the overall concentration of each chemical species during the simulation. The Metropolis algorithm [67, 68] functions by accept-ing Monte Carlo moves from an initial state, labelled n,to a proposed state, labelled m, with probability 
+
+Pn→m =
+
+(
+
+exp ( −∆E/k BT ) , ∆E > 01, ∆E ≤ 0, (7) where ∆ E = Em − En is the energy difference between the initial and proposed states, kB is the usual Boltz-mann constant, and T denotes the simulation tempera-ture. In practice, for the alloys examined in this study, the Metropolis algorithm is used only to obtain equili-brated atomic configurations at a range of temperatures for visualisation purposes. Initially, we prepare a ran-domly generated supercell containing the specified con-centrations of each element and then proceed with the Monte Carlo simulation at a specified temperature. Once a defined number of Monte Carlo steps has been com-pleted, an equilibrated (or near-equilibrated) atomic con-figuration is obtained and subsequently used for visuali-sation and potential further study. In contrast to the Metropolis algorithm, the Wang– Landau (WL) sampling algorithm [69, 70] is a flat-histogram method that can be used to obtain the (con-figurational) density of states for a given model system, provided it has an associated Hamiltonian that defines the energy as a function of the model’s configuration. This (configurational) density of states can then be used to calculate thermodynamic quantities at arbitrary tem-perature. The WL algorithm works by approximating the partition function, Z, as a sum over discretised en-ergy macrostates, i.e. 
+
+Z ≈ X
+
+> j
+
+g(Ej ) exp( −Ej /k BT ), (8) where g(E) is the (discretised, configurational) density of states, and Ej is the energy of the centre of the energy macrostate j. An initial guess of the density of states is made ( e.g. g(E) ≡ 1) and subsequently refined and con-verged over the course of the simulation. Further details and discussion of this procedure can be found in Refs. 63, 72, and 73. Once the density of states is known, the corre-sponding energy probability distribution at temperature 
+
+T is then defined via 
+
+P (Ej , T ) = g(Ej ) e−Ej /k BT
+
+Z . (9) This probability distribution can be used to evaluate a range of thermodynamic quantities. Among these is the configurational specific heat, CV , obtained via [68] 
+
+CV (T ) = ⟨E2⟩ − ⟨ E⟩2
+
+kBT 2 , (10) where E denotes the system energy, T the temperature, and the ensemble averages, ⟨·⟩ , are computed using the probability distribution of Eq. (9). In addition to the temperature-dependent specific heat, which facilitates identification of the tempera-tures at which phase transitions occur, we also calcu-late chemical order parameters to describe the evolu-tion of atomic environments in the simulation as a func-tion of temperature. For this purpose, we employ the Warren–Cowley atomic short-range order (ASRO) pa-rameters [74] adapted to the multicomponent setting, de-fined as 
+
+αpq n = 1 − P pq n
+
+cq
+
+, (11) where n labels the coordination shell under considera-tion, P pq n denotes the probability that a site adjacent to an atom of type p on shell n is occupied by species q, and 
+
+cq is the concentration of species q. Values of αpq n > 0indicate that p-q pairings occur less frequently than in a random alloy, whereas αpq n < 0 reflects an enhanced like-lihood of such pairings; the case αpq n = 0 corresponds to a random distribution of species q on shell n around species 
+
+p. These short-range order parameters are computed across the energy range sampled in the WL simulation and then recast into their temperature-dependent form using the probability distribution defined in Eq. (9) [63]. 6
+
+III. RESULTS AND DISCUSSION A. DFT-calculated lattice parameters and structural properties 
+
+As outlined above, our workflow begins with self-consistent electronic structure calculations within the KKR formulation [51–53] of DFT [54–56], using the CPA [36–38] to average over compositional disorder whenever alloying is considered. Rather than rely on lat-tice parameters based on experimental determinations, in this work we obtain optimised lattice parameters for the considered systems ab initio . In the top panel of Fig. 4, we plot the DFT-optimised lattice parameter cal-culated for the studied fcc Cu x(Ni 3/4Al 1/4)1−x solid so-lutions as a function of x. We also include, for com-parison, the optimised lattice parameter for L1 2-ordered Ni 3Al obtained with the same DFT settings. For elemen-tal Cu, our optimised lattice parameter is a = 3 .631 ˚ A, in good agreement with the experimental determination of a = 3 .615 ˚ A [75]. Similarly, for L1 2-ordered Ni 3Al, our optimised lattice parameter of a = 3 .571 ˚ A compares well 3.56 
+
+> 3.58
+> 3.60
+> 3.62
+> 3.64
+> 3.66 Lattice parameter,  a (˚ A)
+
+Cu x(Ni 3/4Al 1/4)1−x         
+
+> 0.00.20.40.60.81.0Cu concentration, x
+> 140
+> 150
+> 160
+> 170
+> 180 Bulk modulus,  B (GPa)
+> A1 Cu x(Ni 3/4Al 1/4)1−x(this work) L1 2Ni 3Al (this work) A1 Cu (experiment) L1 2Ni 3Al (experiment)
+
+FIG. 4. DFT-calculated optimised lattice parameters (top) and bulk moduli (bottom) for an fcc Cu x(Ni 3/4Al 1/4)1−x solid solution as a function of Cu concentration, x. The DFT-optimised lattice parameter increases linearly with x, while the bulk modulus decreases. Overall there is good agree-ment with the highlighted experimental determinations for L1 2-ordered Ni 3Al and A1 Cu. It should be noted that the ordered L1 2 phase of Ni 3Al has a reduced lattice parameter and increased bulk modulus compared with the disordered fcc (A1) phase. 
+
+with the experimental determination of a ≈ 3.572 ˚ A [76]. The agreement is reassuring, but we note here that the PBE exchange-correlation functional [77] can marginally under-bind metals such as Al, Ni and Cu, and their as-sociated alloys [78–80]. It can be seen that there is a modest, linear increase in the DFT-optimised lattice pa-rameter for the system with increasing x, in accordance with bulk Cu having a marginally larger lattice parame-ter than the disordered Ni 3Al composition endpoint. Ad-ditionally, that L1 2 Ni 3Al has a smaller lattice constant than fcc Cu aligns with the observation that L1 2 Ni 3Al precipitates can strengthen the alloy, because the mis-match of lattice constants in an otherwise coherent lat-tice will naturally introduce elastic strain fields in the crystal. The bottom panel of Fig. 4 then shows the DFT-calculated bulk modulus, B, as a function of x for the examined Cu–Ni–Al solid solutions. Considering the end points first, we note that the calculated bulk modulus of elemental Cu is B = 141 .7 GPa, in fair agreement with the experimental determination of B =137 .6 ± 0.2 GPa [81]. For the L1 2-ordered phase of Ni 3Al, we calculate a bulk modulus of B = 180 .9 GPa, again in fair agreement with the experimental value of 
+
+B ≈ 174 GPa [82, 83]. Proceeding, inspecting the trends observed across the Cu x(Ni 3/4Al 1/4)1−x pseudobinary system, it can be seen that the addition of Cu to the solid solution reduces the calculated bulk modulus of the alloy, which decreases linearly with increasing x. The calculated bulk modulus of L1 2 Ni 3Al is substantially higher than that of elemental Cu, confirming that the ordered Ni 3Al precipitates constitute a markedly stiffer phase than the Cu-rich matrix. Taking B as a proxy for the overall elastic stiffness of a material, this also sup-ports the claim that these precipitates can induce mod-ulus mismatch strengthening in the alloy. 
+
+B. Concentration wave analysis 
+
+To assess the (free) energetic cost of atomic-scale chem-ical fluctuations in the solid solution, we then use the self-consistent one-electron potentials and associated elec-tron density as a starting point for a concentration wave analysis, as outlined in Sec. II. For the compositions 
+
+x = 0 and x = 0 .5, in Fig. 5 we present plots of the quantity S(2)  
+
+> αα ′
+
+(k) along high-symmetry lines of the irre-ducible Brillouin zone of the fcc lattice, together with eigenvalues of the chemical stability matrix along those same high-symmetry lines. That there are one (two) eigenvalues of the chemical stability matrix at each k-point for a two-component (three-component) alloy fol-lows from the restriction that any given chemical fluc-tuation must preserve the overall concentration of each chemical species [45]. We consider first the raw S(2)  
+
+> αα ′
+
+(k) data, which can be thought of as the lattice Fourier transform of the real-space atom-atom EPIs. For the case x = 0, i.e. the 7              
+
+> FIG. 5. Data associated with the ab initio concentration wave analysis performed on the considered Cu x(Ni 3/4Al 1/4)1−x
+> pseudobinary system. Panels (a) and (b) show, respectively, raw S(2)
+> αα ′(k) data and eigenvalues of the chemical stability matrix for the case x= 0, i.e. the binary Ni 0.75 Al 0.25 . Panels (c) and (d) then show the same data for the case x= 0 .5. Finally, panel (e) shows L1 2ordering temperatures as a function of xpredicted by the mean-field Landau-type theory outlined in Sec. II.
+
+composition Ni 0.75 Al 0.25 for which the relevant data are shown in panels (a) and (b) of Fig. 5, we see that the largest in magnitude, most strongly varying values of 
+
+S(2)  
+
+> αα ′
+
+(k) are those corresponding to Al-Al and Ni-Al in-teractions, while those associated with Ni-Ni pairs are the smallest in magnitude and more weakly varying. The minimum eigenvalue of the chemical stability ma-trix lies at the X point, i.e. k = 2πa (0 , 0, 1), and has associated (normalised) eigenvector ∆ cα = 1√2 (1 , −1). (Note that, for a two-component alloy, the eigenvector has two components, while for a three-component alloy, the eigenvector has three components.) This combina-tion is typically indicative of an L1 2-like ordering for a system with the stoichiometry A0.75 B0.25 [43, 48], though we re-emphasise that distinguishing between L1 2-like and D0 22 -like order is a subtle point [58, 61]; this is settled by the Monte Carlo simulations presented below. For the case x = 0.5, i.e. the composition Cu 0.5Ni 0.375 Al 0.125 for which the relevant data are shown in panels (c) and (d) of Fig. 5, the S(2)  
+
+> αα ′
+
+(k) data re-veal a similar picture for Al-Al, Ni-Al, and Ni-Ni pairs. The data associated with Cu, i.e. for Al-Cu, Ni-Cu, and Cu-Cu pairs, are much smaller in magnitude than for other pairs, which we associate with comparatively weak interactions between Cu and the other two ele-ments (Ni, Al) in this system. As for x = 0, the min-imum eigenvalue of the chemical stability matrix lies at the X point, again indicative of L1 2-like ordering, though this time the associated (normalised) eigenvec-tor is ∆ cα = (0 .7134 , −0.7006 , −0.0128). (Throughout, when chemical polarisations are given, components of the vector associated with different elements are consistently ordered from smallest to largest atomic number: α = 1 corresponds to Al, α = 2 corresponds to Ni, and α = 3 corresponds to Cu [84].) Combined with the fact that the minimum eigenvalue is at the X point, this eigenvector is best interpreted in terms of strong ordering between Ni and Al atoms, with little or no redistribution of Cu atoms. We note also that there is no clear competing minimum eigenvalue at Γ indicating phase separation. This suggests that the separation of Cu from L1 2 Ni 3Al is a secondary instability. Again, though, this aspect is captured in the Monte Carlo simulations which follow. Overall, then, the picture that emerges is one where the dominant atom-atom interactions in the system involve Ni and Al atoms, while Cu atoms appear largely inert at this level and play a diluting role. The electronic origins of this behaviour will be discussed further in Sec. III E. Continuing, as outlined in Sec. II, a mean-field esti-mate of an alloy’s chemical ordering temperature can be obtained by seeking the temperature at which the lowest-lying eigenvalue of the chemical stability matrix passes through zero, indicating the instability of the solid solution to an applied chemical perturbation rep-resented by the eigenvector associated with that eigen-value. The temperature at which this instability oc-curs for the considered alloys is plotted as a function of x in panel (e) of Fig. 5. Across all considered com-positions, we find that the minimum eigenvalue con-sistently occurs at the X point, k = 2πa (0 , 0, 1), in-dicative of an L1 2-like chemical ordering, while the as-sociated eigenvector (defining the chemical polarisation of the associated concentration wave) remains broadly consistent and typically indicates Al and Ni moving to separate sublattices, with Cu remaining disordered. For example, for x = 0 .25 the eigenvector is ∆ cα =(0 .7197 , −0.6938 , −0.0259), while for x = 0 .75 the eigen-vector is ∆cα = (0 .6611 , −0.7455 , 0.0844). We re-emphasise, though, that this Landau-type theory only 8                    
+
+> FIG. 6. Selected calculated atom-atom effective pair interactions for the Cu x(Ni 3/4Al 1/4)1−xpseudobinary system. Panels (a) and (b) show V(n)
+> αα ′as a function of coordination shell, n, for x= 0 and x= 0 .5, respectively. Panel (c) then shows V(1)
+> αα ′(x),
+> i.e. just the nearest-neighbour effective pair interactions as a function of Cu concentration, x. Interactions are dominated by nearest-neighbour pairs, and they vary smoothly as a function of Cu concentration, x.Of course, in panel (c), interactions involving Cu are not defined for x= 0, while no interactions are formally defined in the case of pure Cu, x= 1.
+
+infers the dominant chemical ordering and that, in a sys-tem such as Cu–Ni–Al where both chemical ordering and phase separation are known to occur, it will be necessary to go further than this mean-field analysis to accurately describe the phase diagram, as discussed below. In terms of comparison with previous studies, the case 
+
+x = 0, i.e. the Ni 0.75 Al 0.25 binary, presents the most ob-vious test case. Here our mean-field Landau-type theory provides an estimate of the (virtual) ordering tempera-ture [85] of Tord ≈ 3100 K, much higher than the (virtual) experimental value [86] of Tord = 1720 ± 10 K. This over-estimate is, however, expected. First, we emphasise that the chemically ordered L1 2 phase is stable up to the melt-ing point experimentally [87, 88], and we believe that our lattice-based model predicting an ordering temperature higher than the alloy’s melting temperature is consistent with these experimental data. Moreover, as mentioned above, we have not included the effects of vibrational en-tropy in this analysis [89]. Inclusion of such effects would be anticipated to reduce the predicted chemical ordering temperature, because this is typically found to be the case when an ordered phase is elastically stiffer than its precursor disordered phase, as has previously been found to be the case in Ni 3Al [90, 91]. In particular, we note that Ref. 91 reports a 30% reduction in estimated order-ing temperature for this system following the inclusion of such effects. Finally, we stress that a mean-field analysis, such as the Landau-type theory utilised here, is likely to overestimate true ordering temperatures.  
+
+> C. Atom-atom effective pair interactions
+
+From the reciprocal-space S(2)  
+
+> αα ′
+
+(k) data—representing the second variation of the energy of the KKR-CPA ref-erence medium with respect to inhomogeneous, atomic-scale chemical fluctuations—we subsequently recover real-space atom-atom EPIs, which enable us to assess the strength and range of interactions between all pairs of chemical species. As illustrative examples, in panels (a) and (b) of Fig. 6, we plot the recovered atom-atom EPIs, V (n) 
+
+> αα ′
+
+, as a function of coordination shell number, 
+
+n, for the cases x = 0 and x = 0 .5. It can be seen that the EPIs are relatively short-ranged, being dominated by contributions at nearest-neighbour distance, n = 1. (That being said, non-negligible interactions persist be-yond nearest-neighbour distance, which is most clearly seen for x = 0, panel (a) of Fig. 6.) The strongest inter-actions are between Al-Al pairs, which are heavily dis-favoured on the first coordination shell (positive value of V (1)  
+
+> αα ′
+
+). The second strongest interactions are then be-tween Ni and Al pairs, which are favoured on the first coordination shell (negative value of V (1)  
+
+> αα ′
+
+). We note that these nearest-neighbour interactions are consistent with the pair preferences observed in the L1 2 crystal struc-ture. By comparison with the Al-Al and Ni-Al interac-tions, Ni-Ni pairs and—where relevant—Al-Cu, Ni-Cu, and Cu-Cu pairs are all found to interact comparatively weakly. Given the absence of long-ranged interactions, we choose to truncate our fits, discussed in Appendix A, to the first six coordination shells of the fcc lattice for use in the fixed-lattice Monte Carlo simulations that follow. We note that this truncation corresponds, for example, to a real-space ‘cut-off’ of rcut = 6 .2 ˚ A for x = 0, compa-rable with typical real-space cut-offs used in other sim-ulation approaches, e.g. for machine-learned interatomic potentials [92]. The smooth and systematic variation of the recovered atom-atom EPIs as a function of varying Cu concentra-tion, x, is evidenced in panel (c) of Fig. 6, where we plot 
+
+V (1)  
+
+> αα ′
+
+(x), i.e. the nearest-neighbour interactions for all el-emental pairings as a function of x. In alignment with the above observations for x = 0 and x = 0 .5, across the en-tire considered composition space, it is consistently found that Al-Al nearest-neighbour interactions are strongest, Ni-Al next-strongest, and other pair interactions compar-atively weak. That the EPIs vary smoothly as a function 9 
+
+> FIG. 7. Overview of the inferred pseudobinary phase diagram (a), with phase boundaries recovered from the raw specific heat data obtained from fixed-lattice Monte Carlo simulations using the Wang–Landau sampling algorithm (b). Boundaries on the phase diagram are positioned according to the location of local peaks in the specific heat data. We emphasise that this is a fixed-lattice configurational diagram neglecting melting and vibrational free energy contributions.
+
+of composition suggests that it may be possible in fu-ture to sample a limited number of points in composi-tion space and subsequently fit a smooth function and interpolate between them to recover EPIs for arbitrary compositions. This smoothness, therefore, is an encour-aging observation in the context of potential future ex-plorations of high-dimensional compositional spaces.  
+
+> D. Monte Carlo simulations
+
+Using the recovered real-space atom-atom EPIs, a sub-set of which were visualised in Fig. 6, we subsequently perform fixed-lattice Monte Carlo simulations using both the Wang–Landau sampling and Metropolis algorithms to analyse the phase stability of the system in detail. Panel (a) of Fig. 7 shows a pseudobinary phase diagram for the Cu x(Ni 3/4Al 1/4)1−x system in the ( x, T ) plane. This phase diagram is inferred from the raw specific heat data obtained from the WL simulations shown in panel (b) of Fig. 7, and from the temperature-dependent Warren–Cowley ASRO parameters plotted in the Sup-plemental Material [94]. In support of these data, and for ease of interpretation of our results, in Fig. 8 we also show indicative equilibrium atomic configurations at selected temperatures and values of x obtained us-ing the Metropolis algorithm. These Monte Carlo sim-ulation data present a more nuanced picture than the results obtained using the mean-field theory in Sec. III B above. There are three distinct identifiable regimes, and we discuss each in turn. We re-emphasise here that our modelling neglects the effects of differences in vibrational entropy between phases [89–91] and so ordering temper-atures will likely be overestimated. Nonetheless, we be-lieve the relevant experimental trends are qualitatively well captured and that the modelling give insights into the physical mechanisms at play. First, at low Cu concentrations ( x ≲ 0.1), there is a single identifiable (virtual) phase transition, taking place above the alloy’s melting temperature. In the case x = 0 this is simply the transition from the disordered γ phase (A1) to the ordered γ′ phase (L1 2). In the case x = 0 .05, the lack of a second identifiable peak in the specific heat data suggests a single phase transition from the γ to γ′
+
+phase of Ni 3Al, with Cu soluble in both phases. We note that the question of L1 2-like versus D0 22 -like ordering is fully resolved by these simulations; from our visualised configurations and from the Warren–Cowley ASRO pa-rameters depicted in the Supplemental Material [94], it is clear that our modelling predicts L1 2-like order. Second, at intermediate Cu concentrations (0 .1 ≲ x ≲
+
+0.5), there are two identifiable phase transitions, with two associated peaks in the specific heat data. When the spe-cific heat data are combined with the calculated Warren– Cowley ASRO parameters visualised in the Supplemen-tal Material [94], we are able to infer that the sharp, high-temperature peak is associated with the formation of L1 2-ordered Ni 3Al while Cu remains soluble. The sec-ond, smaller, broader peak in the specific heat data we then associate with phase separation, where elemental Cu clusters away from L1 2-ordered Ni 3Al at lower tempera-tures. This assessment is also supported by the visualised indicative equilibrium atomic configurations for the case 
+
+x = 0 .25 shown in Fig. 8. Here it can be seen that at 
+
+T = 1500 K Cu mixes with L1 2-ordered Ni 3Al, while at 
+
+T = 500 K the two phases have separated. Third, at higher Cu concentrations (0 .5 ≲ x ≲ 1), there is only one identifiable phase transition with de-10          
+
+> FIG. 8. Indicative equilibrium atomic arrangements for the Cu x(Ni 3/4Al 1/4)1−xpseudobinary system as a function of Cu concentration, x, and temperature, Tas generated using fixed-lattice Monte Carlo simulations. Though T= 4500 K is above the melting temperature of the alloy, we visualise these configurations here to confirm that our simulations recover a fully disordered alloy in the limit of high temperature. Structural images generated using Ovito [93].
+
+creasing temperature. Here, supported by the indicative atomic configurations shown in Fig. 8, we infer that L1 2-ordered Ni 3Al (the γ′ phase) precipitates directly out of the solid solution. It should be emphasised here that this direct precipitation is advantageous from a materi-als properties perspective, because the case in which Cu is soluble in L1 2 Ni 3Al (occurring at small values of x in our modelling) results in a material with residual disorder and consequently poor transport properties. By contrast, when Ni 3Al precipitates directly out of the solid solution leaving near-pure Cu behind (as is the case for higher Cu concentrations in our modelling), this near-pure Cu matrix will retain many of the good transport properties associated with elemental Cu [11, 12, 15]. Qualitatively, these results are broadly in agreement with the experimentally reported pseudobinary phase di-agram of Semboshi et al. [17]. These authors find that Cu is soluble in L1 2 Ni 3Al (in their considered temper-ature range) up to a maximum of around 10% Cu, i.e. 
+
+x = 0 .1, in alignment with our own findings. It should be stressed, though, that their boundary between the two-phase region (miscibility gap) and the region in which Cu is soluble in L1 2 Ni 3Al is shifted relative to ours in the (x, T ) plane, appearing at higher temperatures and not extending to as large values of x at a given temperature as ours does. At larger values of x, these authors also report a direct transition from the fcc solid solution to the two-phase region, albeit at lower temperatures than ours. For example, at x = 0 .8, these authors report a transition at a temperature of approximately 750 ◦C (approximately 1020 K) while we find a transition at around 1250 K, i.e. 
+
+approximately 980 ◦C.  
+
+> E. Electronic origins of ordering and separation
+
+We now examine details of the electronic structures of the constituent elements, disordered alloys, and (par-tially) ordered intermetallic compounds, to elucidate the underlying electronic origins of the strong chemical order-ing tendencies in the Cu x(Ni 3/4Al 1/4)1−x pseudobinary system. We carry out calculations of the Bloch spectral function (BSF), AB(k, E ) for this purpose. Formally the BSF is given in terms of the single-particle Green’s func-11 tion which sits at the heart of the KKR method [53]. For an ordered system at T = 0 K the BSF effectively reduces to the usual band structure 
+
+AB(k, E ) = X
+
+> n
+
+δ(E − En(k)) , (12) 
+
+i.e. a set of Dirac delta functions which map out the electronic bands, E = En(k). For disordered systems, however, ensemble averages of the Green’s function are taken so that the Bloch spectral function typically re-sembles a set of Lorentzian type-functions, where the loci of the peak positions describe bands, while the E
+
+and k dependent broadening captures the effects of dis-order. In the figures following presenting results for the     
+
+> FIG. 9. Bloch spectral function (band structure) and elec-tronic density of states for elemental fcc (A1) Al (a), Ni (b), and Cu (c). The parabolic, nearly-free-electron-like bands of Al should be contrasted with the narrower 3 dbands of the transition metals Ni and Cu. Structural images (insets) gen-erated using VESTA [23].
+
+Cu x(Ni 3/4Al 1/4)1−x pseudobinary alloys, the BSF data therefore resemble smeared band structures. In these terms we describe the electronic structure of both the disordered (A1) solid solution phase, which has an un-derlying fcc lattice, as well as the (partially) L1 2-ordered Ni 3Al-based systems. We present all calculations using the simple-cubic representation of the fcc lattice, with an associated 4-atom basis. In this representation, all four sub-lattices are equivalent for the fcc solid solution (A1 phase), whereas the systems with L1 2-type order have two distinct sublattices, with Wyckoff labels 1a (corners) and 3c (face centres). In Fig. 9, for reference, we show the electronic struc-tures of the elemental fcc (A1) metals, Al, Ni, and Cu in panels (a), (b), and (c), respectively. (Here we note that elemental Cu represents the x = 1 limit of the Cu x(Ni 3/4Al 1/4)1−x system.) Fig. 10 then shows how the electronic structures of the disordered alloys evolve dur-ing (partial) chemical ordering. Panels (a) and (b) show results for solid solution A1 and L1 2-ordered Ni 3Al, re-spectively, i.e. the case x = 0. Panels (c) and (d) show results for the case x = 0 .25. Panel (c) shows this system modelled as disordered fcc (A1), while panel (d) shows this system once some ordering has taken place, so that Al has moved to the 1a site, Ni to the 3c sites, and Cu is uniformly dissolved in L1 2-ordered Ni 3Al. Throughout, the BSF is evaluated along high-symmetry lines of the simple-cubic Brillouin zone. In the case of an fcc sys-tem, this means that electronic bands are shown folded back into the simple-cubic Brillouin zone. Note that, for these systems with multiple elements in the composition, we plot both the element-resolved DOS and the ‘average’ DOS per atom, denoted ‘Avg.’, which is simply the total DOS for the 4-atom simulation cell divided by four. We start our analysis with reference to Fig. 9 which shows results for the elemental metals. Elemental Al, as a ‘simple’ metal with no associated d electrons, has nearly free electron-like, broadly parabolic sp -bands and a DOS which is approximately proportional to the square root of energy measured from the band minimum. These features are consistent with Al’s good electrical transport properties. Elemental Ni has a more complex band struc-ture, with a collection of flat, weakly dispersive 3 d-bands located around and below the Fermi level, EF as well as more dispersive sp -bands. The large value of the DOS at EF for Ni when modelled as non-magnetic, as in this work, ensures that elemental Ni fulfils the Stoner crite-rion for ferromagnetism [95]. Since our calculations for the pseudobinary systems are chosen to be non-magnetic because we are focussed explicitly on modelling these al-loys’ phase stability at temperatures above TC we use non-magnetic elemental Ni’s electronic structure as a useful reference. (As discussed in Appendix A 1 b, self-consistent DLM calculations for both A1 and L1 2-ordered Ni 3Al found that Ni atoms did not support local mag-netic moments in the paramagnetic regime.) Finally, ele-mental Cu has a similar 3 d complex to Ni, but one shifted to lower energies on account of the 3 d states being com-12           
+
+> FIG. 10. Details of the evolving electronic structure of the Cu x(Ni 3/4Al 1/4)1−xpseudobinary system as a result of L1 2chemical ordering. Panels (a) and (b) show the BSF (band structure) and electronic DOS for Ni 3Al in disordered fcc (A1) and L1 2-ordered states. Panel (c) then shows the case x= 0 .25 modelled in a disordered fcc (A1) state. Finally, panel (d) shows the case x= 0 .25 in which L1 2order has become established between Ni and Al, but where Cu remains homogeneously spread (dissolved) across the system. Structural images (insets) generated using VESTA [23].
+
+pletely filled in this metal. Around EF, the bands are more dispersive and sp -like in character. As it is the availability and nature of states around EF that dominate electrical transport properties, these dispersive bands are consistent with the excellent electrical transport proper-ties of elemental Cu. Continuing, we examine the electronic structure of the two selected disordered (A1) solid solutions, panels (a) and (c) of Fig. 10, which correspond to x = 0 and x =0.25 Cu x(Ni 3/4Al 1/4)1−x systems respectively. For the case x = 0, the disordered (A1) alloy, i.e. Ni 0.75 Al 0.25 ,we note three key features. First, the band structure is heavily smeared across the entire Brillouin zone on ac-count of the compositional disorder of the solid solution and the differing electronic scattering properties of Al and Ni. Second, though the BSF is smeared and there are fewer sharp features in the DOS compared to ele-mental Ni, the narrow 3 d bands are still clearly identifi-able. Third, a low-lying, nearly-free-electron-like band is pulled down in energy relative to elemental Ni, signalling the onset of Al( p)–Ni( d) bonding states. This is the dis-ordered alloy precursor to the strong p–d hybridisation we identify below for ordered Ni 3Al. When the case x = 0 .25 is considered, many of the observations for the case x = 0 carry over. The principal difference, however, is that the Ni and Cu 3 d complexes lie at markedly different energies relative to EF. The consequence is a lack of d-d bonding states formed by the two late transition metals which hampers the process of mixing the two metals together. This is similar to the species-resolved DOS of Cu–Ni alloys [38, 96, 97] in which pronounced short-range clustering of the Ni atoms is found [98, 99]. The strong disorder from this sizeable energy separation between the Ni and Cu 3 d states leads to a combined 3 d spectral weight which is smeared more heavily than in A1 Ni 0.75 Al 0.25 .We now examine how the electronic structures of these alloys change upon chemical ordering, considering first panel (b) of Fig. 10, which shows results for the per-fectly ordered L1 2 Ni 3Al intermetallic. Its band structure is sharply defined and the two non-equivalent lattice 3c and 1a sites in the unit cell lead to some bands that (al-though smeared out) were present in the disordered A1 phase having their degeneracy lifted. A key feature here is how the element-resolved DOS for Al differs in this or-dered intermetallic phase compared to that for elemental Al. Whereas in elemental Al the DOS was smooth and broadly ∝ √E for some shifted energy scale, here there are now many sharp features in the element-resolved DOS for Al. These peaks and troughs coincide with the peaks and troughs for the element-resolved DOS for Ni, and confirm strong p–d hybridisation in this material. These 13 
+
+p–d Al-Ni bonding states shift to lower energies in the or-dered L1 2 phase compared to the A1 phase. These elec-tronic features explain why our DFT-calculated energy (enthalpy) calculations find that L1 2-ordered Ni 3Al’s en-ergy is 315 meV/atom lower than that of the same com-position modelled as disordered fcc (A1). We emphasise here that this is a zero-temperature enthalpy difference evaluated within the KKR-CPA, which neglects the lo-cal lattice relaxations in the disordered phase that would act to reduce this difference. Nonetheless, the size of this enthalpy difference, together with the strong p–d hybridi-sation that produces it, is fully consistent with the exper-imentally established stability of the ordered phase up to the melting point [86–88]. Panel (d) of Fig. 10 shows the result of a calculation performed for the case x = 0 .25 in which it is assumed that L1 2 order has become fully established between Ni and Al, but where Cu remains evenly dispersed through-out the system. This is consistent both with the ini-tial transition predicted by our concentration wave anal-ysis, and with the intermediate-temperature region of the phase diagram predicted at small x values by the Monte Carlo simulations. Here the element-resolved DOS is pro-vided separately for Cu atoms sitting on the Al (1a) sites and Ni (3c) sites; the two environments are dif-ferent and so too is the site-resolved DOS. When the BSF data is considered, it can be seen that, at some por-tions of the Brillouin zone, there is significantly reduced smearing on account of the order established between Ni and Al atoms, while at others the remaining disor-der coming from the Ni and Cu atoms still smears out fine details of the band structure, particularly at ener-gies where the 3 d bands make sizeable contributions to the DOS. Additionally, while the DOS contribution from Cu on the 3c site is largely unaltered by the ordering, the 3 d-derived DOS contribution from Cu on the 1a site is pushed up towards EF coinciding with a Ni 3c DOS contribution. This Ni-Cu bonding feature increases the contribution to the total energy made by Cu atoms as compared to a situation in which they are able to sepa-rate out of the L1 2-ordered phase. Hence, while there is a reduction in energy-per-atom going from the fully dis-ordered phase, described in panel (c), to the partially ordered phase described in panel (d) which is caused primarily by the Al-Ni p–d bonding and calculated as 183 meV/atom, the energy reduction going from the dis-ordered phase, described in panel (c), to two separate phases of elemental Cu and L1 2-ordered Ni 3Al is larger still at 259 meV/atom. That the reduction in energy from a fully disordered phase to an L1 2-ordered Ni 3Al phase with Cu dissolved (183 meV/atom) is larger than the further reduction in energy caused by Cu separat-ing out (259 − 183 = 76 meV/atom) we interpret as corroborating our earlier finding that the L1 2 ordering is the initial, high-temperature transition in the small-x
+
+regime, with eventual separation into near-pure Cu and L1 2-ordered Ni 3Al being a secondary transition occurring at lower temperatures.  
+
+> IV. SUMMARY AND CONCLUSIONS
+
+In summary, an analysis of the phase stability and elec-tronic structure of ternary Cu–Ni–Al alloys, specifically the Cu x(Ni 3/4Al 1/4)1−x pseudobinary system, has been presented. The modelling approach employed a com-bination of first-principles electronic structure calcula-tions, a perturbative concentration wave analysis (from which atom-atom effective pair interactions were recov-ered), and fixed-lattice atomistic Monte Carlo simula-tions using both the Metropolis and Wang–Landau sam-pling algorithms. It was shown that—in the considered fcc solid solutions—Al and Ni atoms interact strongly with one another, while Cu interacts more weakly and plays a di-luting role. Three distinct regimes of phase behaviour were revealed: At small values of x, Cu was found to be soluble in L1 2-ordered Ni 3Al, with the single identi-fiable phase transition being the high-temperature (vir-tual) ordering between Ni and Al. At intermediate values of x, two separate phase transitions were identified: the first being an ordering into an L1 2 structure with Cu dis-solved, and the second being phase separation between L1 2-ordered Ni 3Al and an fcc Cu-rich phase. Finally, at larger values of x, the single identifiable phase transition was the precipitation of L1 2-ordered Ni 3Al directly from the ternary solid solution, i.e. the ordering and phase sep-aration occur concurrently. These results were found to compare qualitatively favourably with the available ex-perimental data, albeit with the fixed-lattice modelling understood to result in overestimation of ordering tem-peratures. Further, analysis of the electronic structure of several of the considered solid solutions gave insight into the underlying electronic origins of these ordering and separation tendencies. Specifically, strong p-d hybridisa-tion tendencies between Al and Ni were confirmed to be the driver for chemical ordering between these species. Cu, with its lower-lying 3 d bands compared with Ni, is then expelled from the ordered phase of Ni 3Al at lower temperatures and higher Cu concentrations. Overall, this work serves as a demonstration of a com-putationally efficient method, free of empirically deter-mined parameters, for studying composition-dependent phase behaviour in multicomponent alloys in which there is a coherent underlying lattice. In particular, these re-sults demonstrate that the methodology is applicable to the study of the phenomenon of coherent precipitation in multicomponent systems, where a unified modelling framework must be capable of describing both chemical ordering and phase separation tendencies simultaneously. The approach is therefore relevant to the study of related phenomena such as precipitation strengthening. More-over, because our method is based on first-principles elec-tronic structure calculations, it remains possible to inter-pret ordering and separation tendencies in terms of an al-loy’s evolving electronic structure. Potential extensions of this work in the context of this class of alloy include developing means by which to rigorously include the ef-14 fects of vibrational entropy differences between phases throughout the simulation methodology, as well as ex-tending the predicted phase diagram towards the full Cu– Ni–Al ternary. More generally, future studies could seek to use this approach to screen for new alloy compositions with desirable physical properties for particular applica-tions. 
+
+> ACKNOWLEDGMENTS
+
+C.D.W. acknowledges support from an UK Engineer-ing and Physical Sciences Research Council (EPSRC) Doctoral Prize Fellowship at the University of Bristol, Grant EP/W524414/1. H.J.N. acknowledges a funded PhD studentship within the EPSRC Centre for Doctoral Training in Modelling of Heterogeneous Systems, Grant EP/S022848/1. J.M. thanks the project QM4ST, funded as project No. CZ.02.01.01/00/22 008/0004572 by Pro-gramme Johannes Amos Commenius, call Excellent Re-search. J.B.S. acknowledges support from EPSRC Grant EP/W021331/1. Compute resources were provided by the Advanced Computing Research Centre at the Uni-versity of Bristol and by the Scientific Computing Re-search Technology Platform of the University of Warwick. J.M. also acknowledges VSB – Technical University of Ostrava, IT4Innovations National Supercomputing Cen-ter, Czech Republic, for awarding this project access to the LUMI supercomputer, owned by the EuroHPC Joint Undertaking, hosted by CSC (Finland) and the LUMI consortium through the Ministry of Education, Youth and Sports of the Czech Republic through the e-INFRA CZ (grant ID: 90254). C.D.W. and J.B.S. conceived of the approach, with in-put from all authors. C.D.W. performed self-consistent electronic structure calculations, the concentration wave analysis, and fitting of the atom-atom effective pair in-teractions, with support from J.M. and J.B.S. H.J.N. im-plemented the Wang–Landau sampling algorithm in the 
+
+Brawl package and performed Monte Carlo sampling simulations using both the Metropolis algorithm and Wang–Landau sampling under the supervision of D.Q., with support from C.D.W. S.L.D. and M.P.P. worked jointly on electronic structure calculations of the rele-vant disordered and ordered alloys during their final-year undergraduate project at the University of Warwick. C.D.W. prepared the first draft of the manuscript with support from H.J.N. Subsequently, all authors revised the manuscript and approved its final version. 
+
+> Appendix A: Computational details
+
+Full details of our calculations—including all relevant simulation input and output files—can be found in the dataset associated with this work [100], but for conve-nience here we summarise the key computational details. Throughout, we sample a total of 21 evenly spaced values of x, i.e. adjusting the Cu concentration by 5% between each value of x, to describe the Cu x(Ni 3/4Al 1/4)1−x pseu-dobinary system.   
+
+> 1. Electronic structure calculations
+> a. DFT parameters
+
+For an accurate description of the structural proper-ties of these alloys, we perform scalar-relativistic full-potential ( i.e. without shape restriction on the atom-centred potentials) calculations using the all-electron 
+
+SPR-KKR package [53, 101], which implements the KKR formulation [51, 52, 57] of DFT. Chemical dis-order is described via application of the CPA [36–38]. The generalised gradient approximation (GGA) to the DFT exchange-correlation functional is used, specifically the parametrisation of Perdew, Burke, and Ernzerhof (PBE) [77]. Integrations over valence energies are per-formed using a 32-point semi-circular contour in the complex plane, and an angular momentum cut-off of 
+
+lmax = 4 is employed. For Brillouin zone integrations, we use the parameter NKTAB=1000 , which results in a dense 36 × 36 × 36 k-point mesh over the first Brillouin zone of the fcc lattice. These calculations are not spin-polarised; justification of this choice is given below, in Sec. A 1 b. Optimised lattice parameters are obtained by performing self-consistent calculations at a series of lattice parame-ters to obtain the energy as a function of cell volume for a given composition. Subsequently, these data are fitted using a stabilised jellium equation of state (SJEOS) [102] as implemented in the Atomic Simulation Environment (ASE) [103], from which an optimised lattice parameter and the bulk modulus can be recovered. Following the optimisation of lattice parameters at a given composition, we freeze the lattice parameter at this value and perform all remaining calculations within the atomic sphere approximation (ASA) [104] using the lo-cal density approximation (LDA) to the DFT exchange-correlation functional as parametrised by Vosko, Wilk, and Nusair (VWN) [105], with an angular momen-tum cut-off of lmax = 3. All other calculation pa-rameters are unchanged from the calculations outlined above. These approximations—LDA, ASA—are neces-sitated, at present, by the complexity of the concentra-tion wave analysis outlined above, in Sec. II B. We em-phasise that we have previously found that the results of the concentration wave analysis are not strongly af-fected by small variations of lattice parameter because the analysis depends on relative energies and band-filling trends [48, 106].  
+
+> b. Treatment of magnetism
+
+In an alloy containing a magnetic element such as Ni, due care must be taken with regard to an appropriate 15 description of an alloy’s magnetic state when simulating its phase behaviour [107, 108]. Though elemental Ni— the magnetic ground state of which is ferromagnetic— has a comparatively high Curie temperature of TC ∼
+
+630 K [109], once alloyed with non-magnetic elements— such as Cu or Al—this value falls rapidly. For example, binary Cu y Ni 1−y alloys have a Curie temperature that decreases approximately linearly with increasing y, and are found to be non-magnetic for y > 0.524 [110]. Simi-larly, when Ni is alloyed with Al, L1 2-ordered Ni 3Al has a measured Curie temperature (at ambient pressure) of ap-proximately 41 K, though this value depends strongly on the precise stoichiometry [111, 112]. These data establish that the relevant magnetic state to consider when simu-lating phase equilibria in the Cu x(Ni 3/4Al 1/4)1−x pseu-dobinary system is paramagnetic, leaving open whether that paramagnet is best described by persistent, atomi-cally localised moments or by itinerant electrons with no stable local moment. To distinguish between these two pictures, we attempted a self-consistent, spin-polarised disordered-local-moment (DLM) calculation [113] for the disordered (fcc) and ordered (L1 2) phases of the compo-sition with the highest Ni concentration ( x = 0), at the obtained DFT-optimised lattice parameters. The local moments collapsed during self-consistency, indicating a paramagnetic phase largely itinerant in character, con-sistent with the weakly localised moments of elemental Ni [114]. Throughout this work, therefore, the studied alloys are treated as non-magnetic. 
+
+2. Concentration wave analysis 
+
+An in-house implementation of the S(2) theory for mul-ticomponent alloys is used to perform the concentration wave analysis. This code makes use of an adaptive mesh-ing scheme for Brillouin zone integrations [115]. The quantity S(2)  
+
+> αα ′
+
+(k), which varies smoothly as a function of k, is evaluated for each composition at a total of 56 points of the irreducible Brillouin zone of the fcc lattice, including high-symmetry points. Practically, the real-space effective pair interactions of Eq. (6) are recovered via a least-squares fitting procedure to the reciprocal-space data. (Further discussion of this fitting procedure can be found in Sec. II.B of Ref. 47.) 
+
+3. Monte Carlo simulations 
+
+The Monte Carlo simulations within this study were performed using the Brawl package [72]; the parallelisa-tion strategies employed for the WL sampling algorithm are discussed in Ref. 73. Within our WL simulations, the density of states histograms for Cu x(Ni 3/4Al 1/4)1−x were obtained using a system of 8 × 8 × 8 fcc cubic unit cells consisting of a total of 2048 atoms in an initially random configuration with periodic boundary conditions. The applied WL log( f ) tolerance [69, 70] was 1 · 10 −10 with a desired flatness of 85%. All simulations utilised 1024 uni-form energy bins across the corresponding energy range for the composition. 
+
+[1] F. Campbell, ed., Elements of Metallurgy and Engineer-ing Alloys (ASM International, 2008). [2] W. D. Callister and D. G. Rethwisch, Materials sci-ence and engineering: an introduction , 10th ed. (Wiley, Hoboken, 2020). [3] H. Tsuda, T. Ito, and Y. Nakayama, The improvement of microstructures and mechanical properties in Cu-Ni-Al alloys by two-step ageing, Scr. Metall. 20 , 1555 (1986). [4] Y.-R. Cho, Y.-H. Kim, and T. Dong Lee, Precipitation hardening and recrystallization in Cu-4% to 7% Ni-3% Al alloys, J. Mater. Sci. 26 , 2879 (1991). [5] R. Grylls, C. Tuck, and M. Loretto, Strengthening of a cupronickel alloy by an ordered L1 2 phase, Inter-metallics 4, 567 (1996). [6] Z. Sierpi´ nski and J. Gryziecki, Phase transformations and strengthening during ageing of CuNi 10 Al 3 alloy, Mater. Sci. Eng. A 264 , 279 (1999). [7] C.-H. Wang, S.-W. Chen, C.-H. Chang, and J.-C. Wu, Phase equilibria of the ternary Al-Cu-Ni system and interfacial reactions of related systems at 800 °C, Metall. Mater. Trans. A 34 , 199 (2003). [8] K. A. Christofidou, K. J. Robinson, P. M. Mignanelli, E. J. Pickering, N. G. Jones, and H. J. Stone, The effect of heat treatment on precipitation in the Cu-Ni-Al alloy Hiduron ® 130, Mater. Sci. Eng. A 692 , 192 (2017). [9] Z. Li, X. Li, C. Wang, Y. Zheng, Q. Yu, X. Cheng, N. Li, L. Bi, Q. Wang, and C. Dong, Comparative studies on microstructures and properties of Cu–Ni–M alloys con-trolled by strong interaction between elements, J. Alloys Compd. 805 , 404 (2019). [10] C. G. Ferguson, K. A. Christofidou, E. M. Hildyard, A. S. Wilson, N. G. Jones, and H. J. Stone, On the continuous and discontinuous precipitation of the L1 2
+
+phase in Cu-Ni-Al alloys, Materialia 13 , 100855 (2020). [11] Z. Li, X. Li, Y. Hu, Y. Zheng, M. Yang, N. Li, L. Bi, R. Liu, Q. Wang, C. Dong, Y. Jiang, and X. Zhang, Cuboidal γ′ phase coherent precipitation-strengthened Cu–Ni–Al alloys with high softening temperature, Acta Mater. 203 , 116458 (2021). [12] Z. Li, X. Li, J. Yuan, Y. Hu, Y. Zheng, Z. Cheng, R. Liu, C. Bao, and C. Dong, Strong elemental interaction en-hances the thermal stability of coherent precipitation strengthened Cu–Ni–Al alloys, Mater. Sci. Eng. A 827 ,141955 (2021). [13] S. Semboshi, R. Hariki, T. Shuto, H. Hyodo, Y. Ka-neno, and N. Masahashi, Age-Induced Precipitating and Strengthening Behaviors in a Cu–Ni–Al Alloy, Metall. Mater. Trans. A 52 , 4934 (2021). [14] S. Zhang, L. Wu, T. Gu, Y. Shi, X. Tian, H. Li, H. Hou, and Y. Zhao, Effect of microstructure on the mechani-cal properties of ultrafine-grained Cu-Al-Ni alloys pro-16 
+
+cessed by deformation and annealing, J. Alloys Compd. 
+
+923 , 166413 (2022). [15] S. Li, C. Song, Y. Li, J. Ge, Z. Li, Y. Zheng, L. Li, and J. Li, Resistivity-temperature behavior of Cu-Ni-Al alloys strengthened by coherent precipitation within a wide composition range, Vacuum 240 , 114578 (2025). [16] X. Cheng, M. Zhao, Y. Zhao, and C. Dong, Composition Formulas of Cu-Ni-Al Cupronickel Alloys Derived by the Cluster Plus Glue Atoms Model, Materials 18 , 4288 (2025). [17] S. Semboshi, T. Anno, and Y. Kaneno, Phase diagram of the Cu–Ni 3Al pseudo-binary system, J. Alloys Compd. 
+
+921 , 166124 (2022). [18] A. Royer, P. Bastie, and M. Veron, In situ determination of γ′ phase volume fraction and of relations between lattice parameters and precipitate morphology in Ni-based single crystal superalloy, Acta Mater. 46 , 5357 (1998). [19] T. Murakumo, T. Kobayashi, Y. Koizumi, and H. Harada, Creep behaviour of Ni-base single-crystal su-peralloys with various γ′ volume fraction, Acta Mater. 
+
+52 , 3737 (2004). [20] R. Li, H. Kang, Z. Chen, G. Fan, C. Zou, W. Wang, S. Zhang, Y. Lu, J. Jie, Z. Cao, T. Li, and T. Wang, A promising structure for fabricating high strength and high electrical conductivity copper alloys, Sci. Rep. 6,20799 (2016). [21] S. Zhang, R. Li, H. Kang, Z. Chen, W. Wang, C. Zou, T. Li, and T. Wang, A high strength and high electrical conductivity Cu-Cr-Zr alloy fabricated by cryorolling and intermediate aging treatment, Mater. Sci. Eng. A 
+
+680 , 108 (2017). [22] Y. Fu, Q. Pan, Z. Cao, S. Li, and Y. Huo, Strength and electrical conductivity behavior of nanoparticles re-action on new alumina dispersion-strengthened copper alloy, J. Alloys Compd. 798 , 616 (2019). [23] K. Momma and F. Izumi, VESTA 3 for three-dimensional visualization of crystal, volumetric and morphology data, J. Appl. Crystallogr. 44 , 1272 (2011). [24] J. Miettinen, Thermodynamic description of the Cu–Al–Ni system at the Cu–Ni side, Calphad 29 , 40 (2005). [25] M. A. Turchanin, P. G. Agraval, and A. R. Abdulov, Phase equilibria and thermodynamics of binary copper systems with 3 d-metals. VI. Copper-nickel system, Pow-der Metall. Met. Ceram. 46 , 467 (2007). [26] W. Wang, H.-L. Chen, H. Larsson, and H. Mao, Ther-modynamic constitution of the Al–Cu–Ni system mod-eled by CALPHAD and ab initio methodology for de-signing high entropy alloys, Calphad 65 , 346 (2019). [27] T. Davey, N.-D. Tran, A. Saengdeejing, and Y. Chen, First-principles-only CALPHAD phase diagram of the solid aluminium-nickel (Al-Ni) system, Calphad 71 ,102008 (2020). [28] B. Dong, J. Jie, S. Wang, Z. Dong, T. Wang, and T. Li, Novel insight into precipitation behavior of γ′ phase par-ticles in Cu–15Ni-xAl alloys through Calphad method, Intermetallics 120 , 106749 (2020). [29] B. Dong, G. Peng, Z. Wu, X. Shan, C. Guo, J. Miao, J. Qu, W. Luo, J. Jie, and T. Li, A CALPHAD-MD cou-pled method to reveal the strengthening mechanism in precipitation-strengthening Cu-Ni-Al alloy with evolv-ing microstructures, Int. J. Plast. 162 , 103540 (2023). [30] M. Eisenbach, Z. Pei, and X. Liu, First-principles study of order-disorder transitions in multicomponent solid-solution alloys, J. Phys.: Condens. Matter 31 , 273002 (2019). [31] Y. Mishin, Atomistic modeling of the γ and γ′ phases of the Ni–Al system, Acta Mater. 52 , 1451 (2004). [32] C. W. Rosenbrock, K. Gubaev, A. V. Shapeev, L. B. P´ artay, N. Bernstein, G. Cs´ anyi, and G. L. W. Hart, Machine-learned interatomic potentials for alloys and alloy phase diagrams, npj Comput. Mater. 7, 24 (2021). [33] C. Woodward, A. Van De Walle, M. Asta, and D. Trin-kle, First-principles study of interfacial boundaries in Ni-Ni 3Al, Acta Mater. 75 , 60 (2014). [34] W. Shao, J. M. Guevara-Vela, A. Fern´ andez-Caballero, S. Liu, and J. LLorca, Accurate prediction of the solid-state region of the Ni-Al phase diagram including config-urational and vibrational entropy and magnetic effects, Acta Mater. 253 , 118962 (2023). [35] P. Ekborg-Tanner, P. Rosander, E. Fransson, and P. Er-hart, Construction and Sampling of Alloy Cluster Ex-pansions—A Tutorial, PRX Energy 3, 042001 (2024). [36] P. Soven, Coherent-Potential Model of Substitutional Disordered Alloys, Phys. Rev. 156 , 809 (1967). [37] B. L. Gy˝ orffy, Coherent-Potential Approximation for a Nonoverlapping-Muffin-Tin-Potential Model of Random Substitutional Alloys, Phys. Rev. B 5, 2382 (1972). [38] G. M. Stocks, W. M. Temmerman, and B. L. Gy˝ orffy, Complete Solution of the Korringa-Kohn-Rostoker Coherent-Potential-Approximation Equations: Cu-Ni Alloys, Phys. Rev. Lett. 41 , 339 (1978). [39] P. E. A. Turchi, G. M. Stocks, W. H. Butler, D. M. Nicholson, and A. Gonis, First-principles study of or-dering properties of substitutional alloys using the gen-eralized perturbation method, Phys. Rev. B 37 , 5982 (1988). [40] J. D. Althoff, D. D. Johnson, F. J. Pinski, and J. B. Staunton, Electronic origins of ordering in multicompo-nent metallic alloys: Application to the Cu-Ni-Zn sys-tem, Phys. Rev. B 53 , 10610 (1996). [41] A. V. Ruban, S. Shallcross, S. I. Simak, and H. L. Skriver, Atomic and magnetic configurational energet-ics by the generalized perturbation method, Phys. Rev. B 70 , 125115 (2004). [42] P. Singh, A. V. Smirnov, and D. D. Johnson, Atomic short-range order and incipient long-range order in high-entropy alloys, Phys. Rev. B 91 , 224204 (2015). [43] A. G. Khachaturyan, Ordering in substitutional and in-terstitial solid solutions, Prog. Mater. Sci. 22 , 1 (1978). [44] B. L. Gy˝ orffy and G. M. Stocks, Concentration Waves and Fermi Surfaces in Random Metallic Alloys, Phys. Rev. Lett. 50 , 374 (1983). [45] S. N. Khan, J. B. Staunton, and G. M. Stocks, Statisti-cal physics of multicomponent alloys using KKR-CPA, Phys. Rev. B 93 , 054206 (2016). [46] C. D. Woodgate and J. B. Staunton, Compositional phase stability in medium-entropy and high-entropy Cantor-Wu alloys from an ab initio all-electron Landau-type theory and atomistic modeling, Phys. Rev. B 105 ,115124 (2022). [47] C. D. Woodgate and J. B. Staunton, Short-range or-der and compositional phase stability in refractory high-entropy alloys via first-principles theory and atomistic modeling: NbMoTa, NbMoTaW, and VNbMoTaW, Phys. Rev. Mater. 7, 013801 (2023). 17 
+
+[48] C. D. Woodgate, Modelling Atomic Arrangements in Multicomponent Alloys: A Perturbative, First-Principles-Based Approach , Springer Series in Materials Science, Vol. 346 (Springer Nature Switzerland, Cham, 2024). [49] D. D. Johnson, D. M. Nicholson, F. J. Pinski, B. L. Gy˝ orffy, and G. M. Stocks, Density-Functional Theory for Random Alloys: Total Energy within the Coherent-Potential Approximation, Phys. Rev. Lett. 56 , 2088 (1986). [50] D. D. Johnson, D. M. Nicholson, F. J. Pinski, B. L. Gy˝ orffy, and G. M. Stocks, Total-energy and pres-sure calculations for random substitutional alloys, Phys. Rev. B 41 , 9701 (1990). [51] J. Korringa, On the calculation of the energy of a Bloch wave in a metal, Physica 13 , 392 (1947). [52] W. Kohn and N. Rostoker, Solution of the Schr¨ odinger Equation in Periodic Lattices with an Application to Metallic Lithium, Phys. Rev. 94 , 1111 (1954). [53] H. Ebert, D. K¨ odderitzsch, and J. Min´ ar, Calculating condensed matter properties using the KKR-Green’s function method—recent developments and applica-tions, Rep. Prog. Phys. 74 , 096501 (2011). [54] P. Hohenberg and W. Kohn, Inhomogeneous Electron Gas, Phys. Rev. 136 , B864 (1964). [55] W. Kohn and L. J. Sham, Self-Consistent Equations Including Exchange and Correlation Effects, Phys. Rev. 
+
+140 , A1133 (1965). [56] R. O. Jones, Density functional theory: Its origins, rise to prominence, and future, Rev. Mod. Phys. 87 , 897 (2015). [57] J. S. Faulkner, G. M. Stocks, and Y. Wang, Multiple Scattering Theory: Electronic Structure of Solids , 1st ed. (IOP Publishing, Bristol, UK, 2018). [58] C. D. Woodgate, G. A. Marchant, L. B. P´ artay, and J. B. Staunton, Structure, short-range order, and phase stability of the Al xCrFeCoNi high-entropy alloy: in-sights from a perturbative, DFT-based analysis, npj Comput. Mater. 10 , 271 (2024). [59] X. Zhang, C. D. Woodgate, G. Hadjipanayis, J. B. Staunton, and L. H. Lewis, Tailoring microstructures with mild magnetic-field processing: A case study of CuNiFe alloys, Acta Mater. 307 , 121965 (2026). [60] J. B. Staunton, D. D. Johnson, and F. J. Pinski, Com-positional short-range ordering in metallic alloys: Band-filling, charge-transfer, and size effects from a first-principles all-electron Landau-type theory, Phys. Rev. B 50 , 1450 (1994). [61] D. D. Johnson, J. B. Staunton, and F. J. Pinski, First-principles all-electron theory of atomic short-range or-dering in metallic alloys: D0 22 - versus L1 2-like correla-tions, Phys. Rev. B 50 , 1473 (1994). [62] J. F. Clark, F. J. Pinski, D. D. Johnson, P. A. Sterne, J. B. Staunton, and B. Ginatempo, van Hove Singularity Induced L1 1 Ordering in CuPt, Phys. Rev. Lett. 74 ,3225 (1995). [63] C. D. Woodgate, H. J. Naguszewski, D. Redka, J. Min´ ar, D. Quigley, and J. B. Staunton, Emergent B2 chemical orderings in the AlTiVNb and AlTiCrMo refractory high-entropy superalloys studied via first-principles theory and atomistic modelling, J. Phys.: Mater. 8, 045002 (2025). [64] C. D. Woodgate, H. J. Naguszewski, N. F. Piwek, and D. Redka, Electronic structure, phase stability, and transport properties of the AlTiVCr lightweight high-entropy alloy: A computational study, arXiv:2601.16528 (2026). [65] W. L. Bragg and E. J. Williams, The effect of thermal agitation on atomic arrangement in alloys, Proc. R. Soc. A 145 , 699 (1934). [66] W. L. Bragg and E. J. Williams, The effect of thermal agitaion on atomic arrangement in alloys-II, Proc. R. Soc. A 151 , 540 (1935). [67] N. Metropolis, A. W. Rosenbluth, M. N. Rosenbluth, A. H. Teller, and E. Teller, Equation of State Calcula-tions by Fast Computing Machines, J. Chem. Phys. 21 ,1087 (1953). [68] D. P. Landau and K. Binder, A Guide to Monte Carlo Simulations in Statistical Physics , 4th ed. (Cambridge University Press, Cambridge, UK, 2014). [69] F. Wang and D. P. Landau, Efficient, Multiple-Range Random Walk Algorithm to Calculate the Density of States, Phys. Rev. Lett. 86 , 2050 (2001). [70] F. Wang and D. P. Landau, Determining the density of states for classical statistical models: A random walk algorithm to produce a flat histogram, Phys. Rev. E 64 ,056101 (2001). [71] K. Kawasaki, Diffusion Constants near the Critical Point for Time-Dependent Ising Models. I, Phys. Rev. 
+
+145 , 224 (1966). [72] H. J. Naguszewski, L. B. P´ artay, D. Quigley, and C. D. Woodgate, BraWl: Simulating the thermodynamics and phase stability of multicomponent alloys using con-ventional and enhanced sampling techniques, J. Open Source Softw. 10 , 8346 (2025). [73] H. J. Naguszewski, C. D. Woodgate, and D. Quigley, Optimal parallelisation strategies for flat histogram Monte Carlo sampling, Comput. Phys. Commun. 324 ,110125 (2026). [74] J. M. Cowley, Short- and Long-Range Order Parame-ters in Disordered Solid Solutions, Phys. Rev. 120 , 1648 (1960). [75] M. E. Straumanis and L. S. Yu, Lattice parameters, den-sities, expansion coefficients and perfection of structure of Cu and of Cu–In α phase, Acta Crystallogr. A 25 ,676 (1969). [76] Y. Mishima, S. Ochiai, and T. Suzuki, Lattice parame-ters of Ni ( γ), Ni 3Al ( γ′) and Ni 3Ga ( γ′) solid solutions with additions of transition and B-subgroup elements, Acta Metall. 33 , 1161 (1985). [77] J. P. Perdew, K. Burke, and M. Ernzerhof, Generalized Gradient Approximation Made Simple, Phys. Rev. Lett. 
+
+77 , 3865 (1996). [78] B. Grabowski, T. Hickel, and J. Neugebauer, Ab initio 
+
+study of the thermodynamic properties of nonmagnetic elementary fcc metals: Exchange-correlation-related er-ror bars and chemical trends, Phys. Rev. B 76 , 024309 (2007). [79] P. Haas, F. Tran, and P. Blaha, Calculation of the lattice constant of solids with semilocal functionals, Phys. Rev. B 79 , 085104 (2009). [80] G. I. Csonka, J. P. Perdew, A. Ruzsinszky, P. H. T. Philipsen, S. Leb` egue, J. Paier, O. A. Vydrov, and J. G. ´Angy´ an, Assessing the performance of recent density functionals for bulk solids, Phys. Rev. B 79 , 155107 (2009). [81] H. M. Ledbetter and E. R. Naimon, Elastic Properties of Metals and Alloys. II. Copper, J. Phys. Chem. Ref. 18 
+
+Data 3, 897 (1974). [82] F. X. Kayser and C. Stassis, The elastic constants of Ni 3Al at 0 and 23.5 ◦C, Phys. Status Solidi A 64 , 335 (1981). [83] S. V. Prikhodko, H. Yang, A. J. Ardell, J. D. Carnes, and D. G. Isaak, Temperature and composition depen-dence of the elastic constants of Ni 3Al, Metall. Mater. Trans. A 30 , 2403 (1999). [84] Note also that, wherever eigenvectors of the chemical stability matrix are quoted in the text, we provide their numerical value at the temperature at which their asso-ciated eigenvalue passes through zero. With increasing temperature there may be some modest rotation of these vectors in concentration space. [85] In this context, a ‘virtual’ ordering refers to a hypotheti-cal chemical ordering that takes place above the melting temperature of the material. [86] R. W. Cahn, P. A. Siemers, J. E. Geiger, and P. Bard-han, The order-disorder transformation in Ni 3Al and Ni 3AlFe alloys—I. Determination of the transition tem-peratures and their relation to ductility, Acta Metall. 
+
+35 , 2737 (1987). [87] F. J. Bremer, M. Beyss, E. Karthaus, A. Hellwig, T. Schober, J.-M. Welter, and H. Wenzl, The or-der–disorder transition of the intermetallic phase Ni 3Al, Phys. Status Solidi A 110 , 77 (1988). [88] H. Okamoto, Al-Ni (aluminum-nickel), J. Phase Equi-libria Diffus. 25 , 394 (2004). [89] A. van de Walle and G. Ceder, The effect of lattice vi-brations on substitutional alloy thermodynamics, Rev. Mod. Phys. 74 , 11 (2002). [90] R. Ravelo, J. Aguilar, M. Baskes, J. E. Angelo, B. Fultz, and B. L. Holian, Free energy and vibrational entropy difference between ordered and disordered Ni 3Al, Phys. Rev. B 57 , 862 (1998). [91] M. F. Michelon and A. Antonelli, Computational study of configurational and vibrational contributions to the thermodynamics of substitutional alloys: The case of Ni 3Al, Phys. Rev. B 81 , 094204 (2010). [92] Y.-W. Zhang, V. Sorkin, Z. H. Aitken, A. Politano, J. Behler, A. P Thompson, T. W. Ko, S. P. Ong, O. Cha-lykh, D. Korogod, E. Podryabinkin, A. Shapeev, J. Li, Y. Mishin, Z. Pei, X. Liu, J. Kim, Y. Park, S. Hwang, S. Han, K. Sheriff, Y. Cao, and R. Freitas, Roadmap for the development of machine learning-based interatomic potentials, Model. Simul. Mater. Sci. Eng. 33 , 023301 (2025). [93] A. Stukowski, Visualization and analysis of atomistic simulation data with OVITO–the Open Visualization Tool, Model. Simul. Mater. Sci. Eng. 18 , 015012 (2010). [94] See Supplemental Material at URL will be inserted by publisher for plots of the temperature-dependent Warren-Cowley ASRO parameters obtained from our Monte Carlo simulations for all considered values of x.[95] E. C. Stoner, Collective electron ferronmagnetism, Proc. R. Soc. Lond. A 165 , 372 (1938). [96] D. H. Seib and W. E. Spicer, Photoemission and Optical Studies of Cu-Ni Alloys. I. Cu-Rich Alloys, Phys. Rev. B 2, 1676 (1970). [97] D. H. Seib and W. E. Spicer, Photoemission and Op-tical Studies of Cu-Ni Alloys. II. Ni-Rich and Nearly Equiatomic Alloys, Phys. Rev. B 2, 1694 (1970). [98] B. Mozer, D. T. Keating, and S. C. Moss, Neutron Mea-surement of Clustering in the Alloy CuNi, Phys. Rev. 
+
+175 , 868 (1968). [99] J. Vrijen and S. Radelaar, Clustering in Cu-Ni alloys: A diffuse neutron-scattering study, Phys. Rev. B 17 , 409 (1978). [100] The data supporting the findings of this study are avail-able at https://doi.org/10.5281/zenodo.18270973. [101] The SPR-KKR package, https://www.sprkkr.org .[102] A. B. Alchagirov, J. P. Perdew, J. C. Boettger, R. C. Albers, and C. Fiolhais, Energy and pressure versus vol-ume: Equations of state motivated by the stabilized jel-lium model, Phys. Rev. B 63 , 224115 (2001). [103] A. Hjorth Larsen, J. Jørgen Mortensen, J. Blomqvist, I. E. Castelli, R. Christensen, M. Dulak, J. Friis, M. N. Groves, B. Hammer, C. Hargus, E. D. Hermes, P. C. Jennings, P. Bjerre Jensen, J. Kermode, J. R. Kitchin, E. Leonhard Kolsbjerg, J. Kubal, K. Kaasb-jerg, S. Lysgaard, J. Bergmann Maronsson, T. Max-son, T. Olsen, L. Pastewka, A. Peterson, C. Rost-gaard, J. Schiøtz, O. Sch¨ utt, M. Strange, K. S. Thyge-sen, T. Vegge, L. Vilhelmsen, M. Walter, Z. Zeng, and K. W. Jacobsen, The atomic simulation environment—a Python library for working with atoms, J. Phys.: Con-dens. Matter 29 , 273002 (2017). [104] O. K. Andersen, Linear methods in band theory, Phys. Rev. B 12 , 3060 (1975). [105] S. H. Vosko, L. Wilk, and M. Nusair, Accurate spin-dependent electron liquid correlation energies for local spin density calculations: a critical analysis, Can. J. Phys. 58 , 1200 (1980). [106] C. D. Woodgate and J. B. Staunton, Competition be-tween phase ordering and phase segregation in the Ti xNbMoTaW and Ti xVNbMoTaW refractory high-entropy alloys, J. Appl. Phys. 135 , 135106 (2024). [107] C. D. Woodgate, D. Hedlund, L. H. Lewis, and J. B. Staunton, Interplay between magnetism and short-range order in medium- and high-entropy alloys: Cr-CoNi, CrFeCoNi, and CrMnFeCoNi, Phys. Rev. Mater. 
+
+7, 053801 (2023). [108] S. Ghosh, K. Ueltzen, J. George, J. Neugebauer, and F. K¨ ormann, Chemical ordering and magnetism in face-centered cubic CrCoNi alloy, npj Comput. Mater. 10 ,284 (2024). [109] J. S. Kouvel and M. E. Fisher, Detailed Magnetic Be-havior of Nickel Near its Curie Point, Phys. Rev. 136 ,A1626 (1964). [110] J. C. Ododo and B. R. Coles, The critical concentration for the onset of ferromagnetism in CuNi alloys, J. Phys. F: Met. Phys. 7, 2393 (1977). [111] F. R. De Boer, C. J. Schinkel, J. Biesterbos, and S. Proost, Exchange-Enhanced Paramagnetism and Weak Ferromagnetism in the Ni 3Al and Ni 3Ga Phases; Giant Moment Inducement in Fe-Doped Ni3Ga, J. Appl. Phys. 40 , 1049 (1969). [112] A. S. Hamid, A. Uedono, Z. Major, T. D. Haynes, J. Laverock, M. A. Alam, S. B. Dugdale, and D. Fort, Electronic structure and Fermi surface of the weak fer-romagnet Ni 3Al, Phys. Rev. B 84 , 235107 (2011). [113] J. Staunton, B. Gy˝ orffy, A. Pindor, G. Stocks, and H. Winter, The “disordered local moment” picture of itinerant magnetism at finite temperatures, J. Magn. Magn. Mater. 45 , 15 (1984). [114] J. B. Staunton, A. Marmodoro, and A. Ernst, Using density functional theory to describe slowly varying fluc-tuations at finite temperatures: local magnetic moments 19 
+
+in Gd and the ‘not so local’ moments of Ni, J. Phys.: Condens. Matter 26 , 274210 (2014). [115] E. Bruno and B. Ginatempo, Algorithms for Korringa-Kohn-Rostoker electronic structure calculations in any Bravais lattice, Phys. Rev. B 55 , 12946 (1997). Formation of L1 2-ordered γ′-Ni 3Al precipitates in ternary Cu–Ni–Al alloys modelled using an ab initio concentration wave theory and atomistic simulations Supplemental Material 
+
+Christopher D. Woodgate, 1, 2, ∗ Hubert J. Naguszewski, 2 Samuel L. Deacon, 2, †
+
+Mathys P. Potel, 2, † J´ an Min´ ar, 3 David Quigley, 2 and Julie B. Staunton 2, ‡
+
+> 1
+
+H.H. Wills Physics Laboratory, University of Bristol, Royal Fort, Bristol, BS8 1TL, United Kingdom 
+
+> 2
+
+Department of Physics, University of Warwick, Coventry, CV4 7AL, United Kingdom 
+
+> 3
+
+New Technologies Research Center, University of West Bohemia, Pilsen, Czech Republic 
+
+This is the Supplemental Material accompanying the main text. Here, we present combined plots of the recovered specific heat, CV , and Warren-Cowley atomic short-range order (ASRO) parameters, αpq n , as a function of temperature, 
+
+T , for each alloy composition. These data serve as evidence justifying the pseudobinary phase diagram presented in the main text. 
+
+S1. MONTE CARLO SIMULATION RESULTS 
+
+Figs. S1 through S20 present combined plots of the temperature dependent specific heat and Warren–Cowley ASRO parameters for Cu x(Ni 3/4Al 1/4)1−x for x = 0 through to x = 0 .95. All results presented here are obtained using the Wang–Landau sampling algorithm [S1, S2] as implemented in the Brawl package [S3], with full computational details outlined in the main text and in the open-access dataset associated with this work [S4]. 
+
+[S1] F. Wang and D. P. Landau, Efficient, Multiple-Range Random Walk Algorithm to Calculate the Density of States, Phys. Rev. Lett. 86 , 2050 (2001). [S2] F. Wang and D. P. Landau, Determining the density of states for classical statistical models: A random walk algorithm to produce a flat histogram, Phys. Rev. E 64 , 056101 (2001). [S3] H. J. Naguszewski, L. B. P´ artay, D. Quigley, and C. D. Woodgate, BraWl: Simulating the thermodynamics and phase stability of multicomponent alloys using conventional and enhanced sampling techniques, J. Open Source Softw. 10 , 8346 (2025). [S4] The data supporting the findings of this study are available at https://doi.org/10.5281/zenodo.18270973.    
+
+> ∗Corresponding author; Christopher.Woodgate@bristol.ac.uk
+> †These authors contributed equally to this work.
+> ‡J.B.Staunton@warwick.ac.uk
+
+2−600 −500 −400 −300 −200 −100 0
+
+Internal energy, E (meV/atom) 
+
+0.00 0.01 0.02 0.03 0.04 0.05 
+
+> Probability density,  P (E) (meV −1)
+
+T =0 K 
+
+T =50 K 
+
+T =100 K 
+
+T =200 K 
+
+T =400 K 
+
+T =1000 K 
+
+T =2000 K 
+
+T =3000 K 
+
+T =4000 K 
+
+T =5000 K 
+
+T =6000 K 
+
+T =7000 K 
+
+T =8000 K 
+
+0 1000 2000 3000 4000 5000 6000 7000 8000 
+
+Temperature, T (K) 
+
+0510 15 20 25 30 35 
+
+> Specific heat,  CV (kB/atom)
+
+0 1000 2000 3000 4000 5000 6000 7000 8000 
+
+Temperature, T (K) 
+
+0510 15 20 25 30 35 
+
+> Specific heat,  CV (kB/atom)
+
+CV
+
+−2.5
+
+−2.0
+
+−1.5
+
+−1.0
+
+−0.50.00.5
+
+> αpq
+> 1
+
+−2.5
+
+−2.0
+
+−1.5
+
+−1.0
+
+−0.50.00.5
+
+> αpq
+> 2
+
+Al-Al Al-Ni Ni-Ni 
+
+FIG. S1. Obtained specific heat ( CV ) and Warren-Cowley ASRO parameters ( αnpq ) as a function of temperature for Ni 0.75 Al 0.25 ,
+
+i.e. Cu x(Ni 3/4Al 1/4)1−x for x = 0 −600 −500 −400 −300 −200 −100 0
+
+Internal energy, E (meV/atom) 
+
+0.00 0.02 0.04 0.06 0.08 0.10 0.12 0.14 
+
+> Probability density,  P (E) (meV −1)
+
+T =0 K 
+
+T =50 K 
+
+T =100 K 
+
+T =200 K 
+
+T =400 K 
+
+T =1000 K 
+
+T =2000 K 
+
+T =3000 K 
+
+T =4000 K 
+
+T =5000 K 
+
+T =6000 K 
+
+T =7000 K 
+
+T =8000 K 
+
+0 1000 2000 3000 4000 5000 6000 7000 8000 
+
+Temperature, T (K) 
+
+0510 15 20 25 30 35 
+
+> Specific heat,  CV (kB/atom)
+
+0 1000 2000 3000 4000 5000 6000 7000 8000 
+
+Temperature, T (K) 
+
+0510 15 20 25 30 35 
+
+> Specific heat,  CV (kB/atom)
+
+CV
+
+−3.0
+
+−2.5
+
+−2.0
+
+−1.5
+
+−1.0
+
+−0.50.00.51.0
+
+> αpq
+> 1
+
+−3.0
+
+−2.5
+
+−2.0
+
+−1.5
+
+−1.0
+
+−0.50.00.51.0
+
+> αpq
+> 2
+
+Al-Al Al-Ni Al-Cu Ni-Ni Ni-Cu Cu-Cu 
+
+FIG. S2. Obtained specific heat ( CV ) and Warren-Cowley ASRO parameters ( αnpq ) as a function of temperature for Cu 0.05 Ni 0.7125 Al 0.2375 , i.e. Cu x(Ni 3/4Al 1/4)1−x for x = 0 .05 −600 −500 −400 −300 −200 −100 0
+
+Internal energy, E (meV/atom) 
+
+0.000 0.025 0.050 0.075 0.100 0.125 0.150 0.175 
+
+> Probability density,  P (E) (meV −1)
+
+T =0 K 
+
+T =50 K 
+
+T =100 K 
+
+T =200 K 
+
+T =400 K 
+
+T =1000 K 
+
+T =2000 K 
+
+T =3000 K 
+
+T =4000 K 
+
+T =5000 K 
+
+T =6000 K 
+
+T =7000 K 
+
+T =8000 K 
+
+0 1000 2000 3000 4000 5000 6000 7000 8000 
+
+Temperature, T (K) 
+
+0510 15 20 25 
+
+> Specific heat,  CV (kB/atom)
+
+0 1000 2000 3000 4000 5000 6000 7000 8000 
+
+Temperature, T (K) 
+
+0510 15 20 25 
+
+> Specific heat,  CV (kB/atom)
+
+CV
+
+−3.0
+
+−2.5
+
+−2.0
+
+−1.5
+
+−1.0
+
+−0.50.00.51.0
+
+> αpq
+> 1
+
+−3.0
+
+−2.5
+
+−2.0
+
+−1.5
+
+−1.0
+
+−0.50.00.51.0
+
+> αpq
+> 2
+
+Al-Al Al-Ni Al-Cu Ni-Ni Ni-Cu Cu-Cu 
+
+FIG. S3. Obtained specific heat ( CV ) and Warren-Cowley ASRO parameters ( αnpq ) as a function of temperature for Cu 0.1Ni 0.675 Al 0.225 , i.e. Cu x(Ni 3/4Al 1/4)1−x for x = 0 .13−500 −400 −300 −200 −100 0
+
+Internal energy, E (meV/atom) 
+
+0.00 0.02 0.04 0.06 0.08 0.10 
+
+> Probability density,  P (E) (meV −1)
+
+T =0 K 
+
+T =50 K 
+
+T =100 K 
+
+T =200 K 
+
+T =400 K 
+
+T =1000 K 
+
+T =2000 K 
+
+T =3000 K 
+
+T =4000 K 
+
+T =5000 K 
+
+T =6000 K 
+
+T =7000 K 
+
+T =8000 K 
+
+0 1000 2000 3000 4000 5000 6000 7000 8000 
+
+Temperature, T (K) 
+
+0.02.55.07.510 .012 .515 .017 .5
+
+> Specific heat,  CV (kB/atom)
+
+0 1000 2000 3000 4000 5000 6000 7000 8000 
+
+Temperature, T (K) 
+
+0.02.55.07.510 .012 .515 .017 .5
+
+> Specific heat,  CV (kB/atom)
+
+CV
+
+−3
+
+−2
+
+−101
+
+> αpq
+> 1
+
+−3
+
+−2
+
+−101
+
+> αpq
+> 2
+
+Al-Al Al-Ni Al-Cu Ni-Ni Ni-Cu Cu-Cu 
+
+FIG. S4. Obtained specific heat ( CV ) and Warren-Cowley ASRO parameters ( αnpq ) as a function of temperature for Cu 0.15 Ni 0.6375 Al 0.2125 , i.e. Cu x(Ni 3/4Al 1/4)1−x for x = 0 .15 −500 −400 −300 −200 −100 0
+
+Internal energy, E (meV/atom) 
+
+0.00 0.02 0.04 0.06 0.08 0.10 
+
+> Probability density,  P (E) (meV −1)
+
+T =0 K 
+
+T =50 K 
+
+T =100 K 
+
+T =200 K 
+
+T =400 K 
+
+T =1000 K 
+
+T =2000 K 
+
+T =3000 K 
+
+T =4000 K 
+
+T =5000 K 
+
+T =6000 K 
+
+T =7000 K 
+
+T =8000 K 
+
+0 1000 2000 3000 4000 5000 6000 7000 8000 
+
+Temperature, T (K) 
+
+0246810 12 
+
+> Specific heat,  CV (kB/atom)
+
+0 1000 2000 3000 4000 5000 6000 7000 8000 
+
+Temperature, T (K) 
+
+0246810 12 
+
+> Specific heat,  CV (kB/atom)
+
+CV
+
+−3
+
+−2
+
+−101
+
+> αpq
+> 1
+
+−3
+
+−2
+
+−101
+
+> αpq
+> 2
+
+Al-Al Al-Ni Al-Cu Ni-Ni Ni-Cu Cu-Cu 
+
+FIG. S5. Obtained specific heat ( CV ) and Warren-Cowley ASRO parameters ( αnpq ) as a function of temperature for Cu 0.2Ni 0.6Al 0.2, i.e. Cu x(Ni 3/4Al 1/4)1−x for x = 0 .2−500 −400 −300 −200 −100 0
+
+Internal energy, E (meV/atom) 
+
+0.00 0.02 0.04 0.06 0.08 
+
+> Probability density,  P (E) (meV −1)
+
+T =0 K 
+
+T =50 K 
+
+T =100 K 
+
+T =200 K 
+
+T =400 K 
+
+T =1000 K 
+
+T =2000 K 
+
+T =3000 K 
+
+T =4000 K 
+
+T =5000 K 
+
+T =6000 K 
+
+T =7000 K 
+
+T =8000 K 
+
+0 1000 2000 3000 4000 5000 6000 7000 8000 
+
+Temperature, T (K) 
+
+0246810 
+
+> Specific heat,  CV (kB/atom)
+
+0 1000 2000 3000 4000 5000 6000 7000 8000 
+
+Temperature, T (K) 
+
+0246810 
+
+> Specific heat,  CV (kB/atom)
+
+CV
+
+−4
+
+−3
+
+−2
+
+−101
+
+> αpq
+> 1
+
+−4
+
+−3
+
+−2
+
+−101
+
+> αpq
+> 2
+
+Al-Al Al-Ni Al-Cu Ni-Ni Ni-Cu Cu-Cu 
+
+FIG. S6. Obtained specific heat ( CV ) and Warren-Cowley ASRO parameters ( αnpq ) as a function of temperature for Cu 0.25 Ni 0.5625 Al 0.1875 , i.e. Cu x(Ni 3/4Al 1/4)1−x for x = 0 .25 −500 −400 −300 −200 −100 0
+
+Internal energy, E (meV/atom) 
+
+0.00 0.02 0.04 0.06 0.08 
+
+> Probability density,  P (E) (meV −1)
+
+T =0 K 
+
+T =50 K 
+
+T =100 K 
+
+T =200 K 
+
+T =400 K 
+
+T =1000 K 
+
+T =2000 K 
+
+T =3000 K 
+
+T =4000 K 
+
+T =5000 K 
+
+T =6000 K 
+
+T =7000 K 
+
+T =8000 K 
+
+0 1000 2000 3000 4000 5000 6000 7000 8000 
+
+Temperature, T (K) 
+
+01234567
+
+> Specific heat,  CV (kB/atom)
+
+0 1000 2000 3000 4000 5000 6000 7000 8000 
+
+Temperature, T (K) 
+
+01234567
+
+> Specific heat,  CV (kB/atom)
+
+CV
+
+−4
+
+−3
+
+−2
+
+−101
+
+> αpq
+> 1
+
+−4
+
+−3
+
+−2
+
+−101
+
+> αpq
+> 2
+
+Al-Al Al-Ni Al-Cu Ni-Ni Ni-Cu Cu-Cu 
+
+FIG. S7. Obtained specific heat ( CV ) and Warren-Cowley ASRO parameters ( αnpq ) as a function of temperature for Cu 0.3Ni 0.525 Al 0.175 , i.e. Cu x(Ni 3/4Al 1/4)1−x for x = 0 .34−500 −400 −300 −200 −100 0
+
+Internal energy, E (meV/atom) 
+
+0.000 0.005 0.010 0.015 0.020 0.025 0.030 0.035 0.040 
+
+> Probability density,  P (E) (meV −1)
+
+T =0 K 
+
+T =50 K 
+
+T =100 K 
+
+T =200 K 
+
+T =400 K 
+
+T =1000 K 
+
+T =2000 K 
+
+T =3000 K 
+
+T =4000 K 
+
+T =5000 K 
+
+T =6000 K 
+
+T =7000 K 
+
+T =8000 K 
+
+0 1000 2000 3000 4000 5000 6000 7000 8000 
+
+Temperature, T (K) 
+
+0123456
+
+> Specific heat,  CV (kB/atom)
+
+0 1000 2000 3000 4000 5000 6000 7000 8000 
+
+Temperature, T (K) 
+
+0123456
+
+> Specific heat,  CV (kB/atom)
+
+CV
+
+−4
+
+−3
+
+−2
+
+−101
+
+> αpq
+> 1
+
+−4
+
+−3
+
+−2
+
+−101
+
+> αpq
+> 2
+
+Al-Al Al-Ni Al-Cu Ni-Ni Ni-Cu Cu-Cu 
+
+FIG. S8. Obtained specific heat ( CV ) and Warren-Cowley ASRO parameters ( αnpq ) as a function of temperature for Cu 0.35 Ni 0.4875 Al 0.1625 , i.e. Cu x(Ni 3/4Al 1/4)1−x for x = 0 .35 −400 −300 −200 −100 0
+
+Internal energy, E (meV/atom) 
+
+0.00 0.01 0.02 0.03 0.04 0.05 0.06 0.07 0.08 
+
+> Probability density,  P (E) (meV −1)
+
+T =0 K 
+
+T =50 K 
+
+T =100 K 
+
+T =200 K 
+
+T =400 K 
+
+T =1000 K 
+
+T =2000 K 
+
+T =3000 K 
+
+T =4000 K 
+
+T =5000 K 
+
+T =6000 K 
+
+T =7000 K 
+
+T =8000 K 
+
+0 1000 2000 3000 4000 5000 6000 7000 8000 
+
+Temperature, T (K) 
+
+012345
+
+> Specific heat,  CV (kB/atom)
+
+0 1000 2000 3000 4000 5000 6000 7000 8000 
+
+Temperature, T (K) 
+
+012345
+
+> Specific heat,  CV (kB/atom)
+
+CV
+
+−5
+
+−4
+
+−3
+
+−2
+
+−101
+
+> αpq
+> 1
+
+−5
+
+−4
+
+−3
+
+−2
+
+−101
+
+> αpq
+> 2
+
+Al-Al Al-Ni Al-Cu Ni-Ni Ni-Cu Cu-Cu 
+
+FIG. S9. Obtained specific heat ( CV ) and Warren-Cowley ASRO parameters ( αnpq ) as a function of temperature for Cu 0.4Ni 0.45 Al 0.15 , i.e. Cu x(Ni 3/4Al 1/4)1−x for x = 0 .4−450 −400 −350 −300 −250 −200 −150 −100 −50 0 50 
+
+Internal energy, E (meV/atom) 
+
+0.00 0.01 0.02 0.03 0.04 0.05 0.06 0.07 
+
+> Probability density,  P (E) (meV −1)
+
+T =0 K 
+
+T =50 K 
+
+T =100 K 
+
+T =200 K 
+
+T =400 K 
+
+T =1000 K 
+
+T =2000 K 
+
+T =3000 K 
+
+T =4000 K 
+
+T =5000 K 
+
+T =6000 K 
+
+T =7000 K 
+
+T =8000 K 
+
+0 1000 2000 3000 4000 5000 6000 7000 8000 
+
+Temperature, T (K) 
+
+01234
+
+> Specific heat,  CV (kB/atom)
+
+0 1000 2000 3000 4000 5000 6000 7000 8000 
+
+Temperature, T (K) 
+
+01234
+
+> Specific heat,  CV (kB/atom)
+
+CV
+
+−5
+
+−4
+
+−3
+
+−2
+
+−101
+
+> αpq
+> 1
+
+−5
+
+−4
+
+−3
+
+−2
+
+−101
+
+> αpq
+> 2
+
+Al-Al Al-Ni Al-Cu Ni-Ni Ni-Cu Cu-Cu 
+
+FIG. S10. Obtained specific heat ( CV ) and Warren-Cowley ASRO parameters ( αnpq ) as a function of temperature for Cu 0.45 Ni 0.4125 Al 0.1375 , i.e. Cu x(Ni 3/4Al 1/4)1−x for x = 0 .45 −400 −350 −300 −250 −200 −150 −100 −50 0 50 
+
+Internal energy, E (meV/atom) 
+
+0.00 0.01 0.02 0.03 0.04 0.05 0.06 
+
+> Probability density,  P (E) (meV −1)
+
+T =0 K 
+
+T =50 K 
+
+T =100 K 
+
+T =200 K 
+
+T =400 K 
+
+T =1000 K 
+
+T =2000 K 
+
+T =3000 K 
+
+T =4000 K 
+
+T =5000 K 
+
+T =6000 K 
+
+T =7000 K 
+
+T =8000 K 
+
+0 1000 2000 3000 4000 5000 6000 7000 8000 
+
+Temperature, T (K) 
+
+01234
+
+> Specific heat,  CV (kB/atom)
+
+0 1000 2000 3000 4000 5000 6000 7000 8000 
+
+Temperature, T (K) 
+
+01234
+
+> Specific heat,  CV (kB/atom)
+
+CV
+
+−6
+
+−5
+
+−4
+
+−3
+
+−2
+
+−101
+
+> αpq
+> 1
+
+−6
+
+−5
+
+−4
+
+−3
+
+−2
+
+−101
+
+> αpq
+> 2
+
+Al-Al Al-Ni Al-Cu Ni-Ni Ni-Cu Cu-Cu 
+
+FIG. S11. Obtained specific heat ( CV ) and Warren-Cowley ASRO parameters ( αnpq ) as a function of temperature for Cu 0.5Ni 0.375 Al 0.125 , i.e. Cu x(Ni 3/4Al 1/4)1−x for x = 0 .55−400 −350 −300 −250 −200 −150 −100 −50 0 50 
+
+Internal energy, E (meV/atom) 
+
+0.00 0.01 0.02 0.03 0.04 0.05 0.06 
+
+> Probability density,  P (E) (meV −1)
+
+T =0 K 
+
+T =50 K 
+
+T =100 K 
+
+T =200 K 
+
+T =400 K 
+
+T =1000 K 
+
+T =2000 K 
+
+T =3000 K 
+
+T =4000 K 
+
+T =5000 K 
+
+T =6000 K 
+
+T =7000 K 
+
+T =8000 K 
+
+0 1000 2000 3000 4000 5000 6000 7000 8000 
+
+Temperature, T (K) 
+
+01234
+
+> Specific heat,  CV (kB/atom)
+
+0 1000 2000 3000 4000 5000 6000 7000 8000 
+
+Temperature, T (K) 
+
+01234
+
+> Specific heat,  CV (kB/atom)
+
+CV
+
+−6
+
+−5
+
+−4
+
+−3
+
+−2
+
+−101
+
+> αpq
+> 1
+
+−6
+
+−5
+
+−4
+
+−3
+
+−2
+
+−101
+
+> αpq
+> 2
+
+Al-Al Al-Ni Al-Cu Ni-Ni Ni-Cu Cu-Cu 
+
+FIG. S12. Obtained specific heat ( CV ) and Warren-Cowley ASRO parameters ( αnpq ) as a function of temperature for Cu 0.55 Ni 0.3375 Al 0.1125 , i.e. Cu x(Ni 3/4Al 1/4)1−x for x = 0 .55 −350 −300 −250 −200 −150 −100 −50 0
+
+Internal energy, E (meV/atom) 
+
+0.00 0.01 0.02 0.03 0.04 0.05 0.06 
+
+> Probability density,  P (E) (meV −1)
+
+T =0 K 
+
+T =50 K 
+
+T =100 K 
+
+T =200 K 
+
+T =400 K 
+
+T =1000 K 
+
+T =2000 K 
+
+T =3000 K 
+
+T =4000 K 
+
+T =5000 K 
+
+T =6000 K 
+
+T =7000 K 
+
+T =8000 K 
+
+0 1000 2000 3000 4000 5000 6000 7000 8000 
+
+Temperature, T (K) 
+
+012345
+
+> Specific heat,  CV (kB/atom)
+
+0 1000 2000 3000 4000 5000 6000 7000 8000 
+
+Temperature, T (K) 
+
+012345
+
+> Specific heat,  CV (kB/atom)
+
+CV
+
+−7
+
+−6
+
+−5
+
+−4
+
+−3
+
+−2
+
+−101
+
+> αpq
+> 1
+
+−7
+
+−6
+
+−5
+
+−4
+
+−3
+
+−2
+
+−101
+
+> αpq
+> 2
+
+Al-Al Al-Ni Al-Cu Ni-Ni Ni-Cu Cu-Cu 
+
+FIG. S13. Obtained specific heat ( CV ) and Warren-Cowley ASRO parameters ( αnpq ) as a function of temperature for Cu 0.6Ni 0.3Al 0.1, i.e. Cu x(Ni 3/4Al 1/4)1−x for x = 0 .6−300 −250 −200 −150 −100 −50 0
+
+Internal energy, E (meV/atom) 
+
+0.00 0.01 0.02 0.03 0.04 0.05 
+
+> Probability density,  P (E) (meV −1)
+
+T =0 K 
+
+T =50 K 
+
+T =100 K 
+
+T =200 K 
+
+T =400 K 
+
+T =1000 K 
+
+T =2000 K 
+
+T =3000 K 
+
+T =4000 K 
+
+T =5000 K 
+
+T =6000 K 
+
+T =7000 K 
+
+T =8000 K 
+
+0 1000 2000 3000 4000 5000 6000 7000 8000 
+
+Temperature, T (K) 
+
+0123456
+
+> Specific heat,  CV (kB/atom)
+
+0 1000 2000 3000 4000 5000 6000 7000 8000 
+
+Temperature, T (K) 
+
+0123456
+
+> Specific heat,  CV (kB/atom)
+
+CV
+
+−8
+
+−6
+
+−4
+
+−20
+
+> αpq
+> 1
+
+−8
+
+−6
+
+−4
+
+−20
+
+> αpq
+> 2
+
+Al-Al Al-Ni Al-Cu Ni-Ni Ni-Cu Cu-Cu 
+
+FIG. S14. Obtained specific heat ( CV ) and Warren-Cowley ASRO parameters ( αnpq ) as a function of temperature for Cu 0.65 Ni 0.2625 Al 0.0875 , i.e. Cu x(Ni 3/4Al 1/4)1−x for x = 0 .65 −250 −200 −150 −100 −50 0
+
+Internal energy, E (meV/atom) 
+
+0.00 0.01 0.02 0.03 0.04 0.05 
+
+> Probability density,  P (E) (meV −1)
+
+T =0 K 
+
+T =50 K 
+
+T =100 K 
+
+T =200 K 
+
+T =400 K 
+
+T =1000 K 
+
+T =2000 K 
+
+T =3000 K 
+
+T =4000 K 
+
+T =5000 K 
+
+T =6000 K 
+
+T =7000 K 
+
+T =8000 K 
+
+0 1000 2000 3000 4000 5000 6000 7000 8000 
+
+Temperature, T (K) 
+
+0123456
+
+> Specific heat,  CV (kB/atom)
+
+0 1000 2000 3000 4000 5000 6000 7000 8000 
+
+Temperature, T (K) 
+
+0123456
+
+> Specific heat,  CV (kB/atom)
+
+CV
+
+−8
+
+−6
+
+−4
+
+−20
+
+> αpq
+> 1
+
+−8
+
+−6
+
+−4
+
+−20
+
+> αpq
+> 2
+
+Al-Al Al-Ni Al-Cu Ni-Ni Ni-Cu Cu-Cu 
+
+FIG. S15. Obtained specific heat ( CV ) and Warren-Cowley ASRO parameters ( αnpq ) as a function of temperature for Cu 0.7Ni 0.225 Al 0.075 , i.e. Cu x(Ni 3/4Al 1/4)1−x for x = 0 .76−250 −200 −150 −100 −50 0
+
+Internal energy, E (meV/atom) 
+
+0.00 0.01 0.02 0.03 0.04 0.05 
+
+> Probability density,  P (E) (meV −1)
+
+T =0 K 
+
+T =50 K 
+
+T =100 K 
+
+T =200 K 
+
+T =400 K 
+
+T =1000 K 
+
+T =2000 K 
+
+T =3000 K 
+
+T =4000 K 
+
+T =5000 K 
+
+T =6000 K 
+
+T =7000 K 
+
+T =8000 K 
+
+0 1000 2000 3000 4000 5000 6000 7000 8000 
+
+Temperature, T (K) 
+
+01234567
+
+> Specific heat,  CV (kB/atom)
+
+0 1000 2000 3000 4000 5000 6000 7000 8000 
+
+Temperature, T (K) 
+
+01234567
+
+> Specific heat,  CV (kB/atom)
+
+CV
+
+−10 
+
+−8
+
+−6
+
+−4
+
+−20
+
+> αpq
+> 1
+
+−10 
+
+−8
+
+−6
+
+−4
+
+−20
+
+> αpq
+> 2
+
+Al-Al Al-Ni Al-Cu Ni-Ni Ni-Cu Cu-Cu 
+
+FIG. S16. Obtained specific heat ( CV ) and Warren-Cowley ASRO parameters ( αnpq ) as a function of temperature for Cu 0.75 Ni 0.1875 Al 0.0625 , i.e. Cu x(Ni 3/4Al 1/4)1−x for x = 0 .75 −180 −160 −140 −120 −100 −80 −60 −40 −20 0 20 
+
+Internal energy, E (meV/atom) 
+
+0.00 0.01 0.02 0.03 0.04 0.05 
+
+> Probability density,  P (E) (meV −1)
+
+T =0 K 
+
+T =50 K 
+
+T =100 K 
+
+T =200 K 
+
+T =400 K 
+
+T =1000 K 
+
+T =2000 K 
+
+T =3000 K 
+
+T =4000 K 
+
+T =5000 K 
+
+T =6000 K 
+
+T =7000 K 
+
+T =8000 K 
+
+0 1000 2000 3000 4000 5000 6000 7000 8000 
+
+Temperature, T (K) 
+
+01234567
+
+> Specific heat,  CV (kB/atom)
+
+0 1000 2000 3000 4000 5000 6000 7000 8000 
+
+Temperature, T (K) 
+
+01234567
+
+> Specific heat,  CV (kB/atom)
+
+CV
+
+−12 
+
+−10 
+
+−8
+
+−6
+
+−4
+
+−20
+
+> αpq
+> 1
+
+−12 
+
+−10 
+
+−8
+
+−6
+
+−4
+
+−20
+
+> αpq
+> 2
+
+Al-Al Al-Ni Al-Cu Ni-Ni Ni-Cu Cu-Cu 
+
+FIG. S17. Obtained specific heat ( CV ) and Warren-Cowley ASRO parameters ( αnpq ) as a function of temperature for Cu 0.8Ni 0.15 Al 0.05 , i.e. Cu x(Ni 3/4Al 1/4)1−x for x = 0 .8−140 −120 −100 −80 −60 −40 −20 0 20 
+
+Internal energy, E (meV/atom) 
+
+0.00 0.01 0.02 0.03 0.04 0.05 
+
+> Probability density,  P (E) (meV −1)
+
+T =0 K 
+
+T =50 K 
+
+T =100 K 
+
+T =200 K 
+
+T =400 K 
+
+T =1000 K 
+
+T =2000 K 
+
+T =3000 K 
+
+T =4000 K 
+
+T =5000 K 
+
+T =6000 K 
+
+T =7000 K 
+
+T =8000 K 
+
+0 1000 2000 3000 4000 5000 6000 7000 8000 
+
+Temperature, T (K) 
+
+01234567
+
+> Specific heat,  CV (kB/atom)
+
+0 1000 2000 3000 4000 5000 6000 7000 8000 
+
+Temperature, T (K) 
+
+01234567
+
+> Specific heat,  CV (kB/atom)
+
+CV
+
+−17 .5
+
+−15 .0
+
+−12 .5
+
+−10 .0
+
+−7.5
+
+−5.0
+
+−2.50.0
+
+> αpq
+> 1
+
+−17 .5
+
+−15 .0
+
+−12 .5
+
+−10 .0
+
+−7.5
+
+−5.0
+
+−2.50.0
+
+> αpq
+> 2
+
+Al-Al Al-Ni Al-Cu Ni-Ni Ni-Cu Cu-Cu 
+
+FIG. S18. Obtained specific heat ( CV ) and Warren-Cowley ASRO parameters ( αnpq ) as a function of temperature for Cu 0.85 Ni 0.1125 Al 0.0375 , i.e. Cu x(Ni 3/4Al 1/4)1−x for x = 0 .85 −100 −80 −60 −40 −20 0
+
+Internal energy, E (meV/atom) 
+
+0.00 0.01 0.02 0.03 0.04 0.05 
+
+> Probability density,  P (E) (meV −1)
+
+T =0 K 
+
+T =50 K 
+
+T =100 K 
+
+T =200 K 
+
+T =400 K 
+
+T =1000 K 
+
+T =2000 K 
+
+T =3000 K 
+
+T =4000 K 
+
+T =5000 K 
+
+T =6000 K 
+
+T =7000 K 
+
+T =8000 K 
+
+0 1000 2000 3000 4000 5000 6000 7000 8000 
+
+Temperature, T (K) 
+
+012345
+
+> Specific heat,  CV (kB/atom)
+
+0 1000 2000 3000 4000 5000 6000 7000 8000 
+
+Temperature, T (K) 
+
+012345
+
+> Specific heat,  CV (kB/atom)
+
+CV
+
+−25 
+
+−20 
+
+−15 
+
+−10 
+
+−50
+
+> αpq
+> 1
+
+−25 
+
+−20 
+
+−15 
+
+−10 
+
+−50
+
+> αpq
+> 2
+
+Al-Al Al-Ni Al-Cu Ni-Ni Ni-Cu Cu-Cu 
+
+FIG. S19. Obtained specific heat ( CV ) and Warren-Cowley ASRO parameters ( αnpq ) as a function of temperature for Cu 0.9Ni 0.075 Al 0.025 , i.e. Cu x(Ni 3/4Al 1/4)1−x for x = 0 .97−40 −30 −20 −10 0
+
+Internal energy, E (meV/atom) 
+
+0.00 0.01 0.02 0.03 0.04 0.05 0.06 
+
+> Probability density,  P (E) (meV −1)
+
+T =0 K 
+
+T =50 K 
+
+T =100 K 
+
+T =200 K 
+
+T =400 K 
+
+T =1000 K 
+
+T =2000 K 
+
+T =3000 K 
+
+T =4000 K 
+
+T =5000 K 
+
+T =6000 K 
+
+T =7000 K 
+
+T =8000 K 
+
+0 1000 2000 3000 4000 5000 6000 7000 8000 
+
+Temperature, T (K) 
+
+0.00.51.01.52.02.53.03.54.0
+
+> Specific heat,  CV (kB/atom)
+
+0 1000 2000 3000 4000 5000 6000 7000 8000 
+
+Temperature, T (K) 
+
+0.00.51.01.52.02.53.03.54.0
+
+> Specific heat,  CV (kB/atom)
+
+CV
+
+−40 
+
+−30 
+
+−20 
+
+−10 0
+
+> αpq
+> 1
+
+−40 
+
+−30 
+
+−20 
+
+−10 0
+
+> αpq
+> 2
+
+Al-Al Al-Ni Al-Cu Ni-Ni Ni-Cu Cu-Cu 
+
+FIG. S20. Obtained specific heat ( CV ) and Warren-Cowley ASRO parameters ( αnpq ) as a function of temperature for Cu 0.95 Ni 0.0375 Al 0.0125 , i.e. Cu x(Ni 3/4Al 1/4)1−x for x = 0 .95

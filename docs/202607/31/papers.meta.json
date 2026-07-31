@@ -1,0 +1,54 @@
+{
+  "label": "2026-07-31",
+  "date": "2026-07-31",
+  "generated_at": "2026-07-31T21:37:32",
+  "count": 3,
+  "papers": [
+    {
+      "paper_id": "202607/31/2607.27375v1-evolution-of-the-irradiation-induced-defect-landscape-through-dislocation-vacancy-loop-interactions-in-tungsten",
+      "section": "deep",
+      "title_en": "Evolution of the Irradiation Induced Defect Landscape through Dislocation Vacancy Loop Interactions in Tungsten",
+      "authors": "Soumya Mishra, Suchandrima Das",
+      "date": "2026-07-29",
+      "pdf": "https://arxiv.org/pdf/2607.27375v1",
+      "score": "9.0",
+      "evidence": "钨中辐照空位环与位错相互作用驱动缺陷形貌演化和辐照硬化",
+      "tldr": "聚变堆用钨在中子辐照下产生空位环等缺陷，其与位错相互作用机制尚不明确。本文采用分子动力学模拟系统研究刃位错与不同尺寸、取向及相交几何的空位环相互作用，发现平行环会发生完全湮灭、弱化或输运等几何依赖行为，而倾斜环通过Burgers矢量反应形成<100>不可动段，产生更强的钉扎。进一步建立了将原子级障碍强度映射到介观本构参数（如辐照硬化）的框架，为发展考虑缺陷演化的介观本构模型奠定物理基础。",
+      "tags": "query:rad-damage",
+      "abstract_en": "Structural materials for fusion reactors undergo neutron irradiation, generating defect populations that govern their mechanical response through irradiation hardening. Physically based mesoscale constitutive models require accurate descriptions of dislocation defect interactions and, critically, how both defect morphology and obstacle strength evolve during plastic deformation as the irradiation-induced defect landscape changes. Vacancy loops provide an ideal prototype for addressing this problem because they are among the most prevalent irradiation-induced defects in tungsten, yet their interaction mechanisms with dislocations and subsequent evolution remain poorly understood. Molecular dynamics simulations are used to systematically investigate interactions between edge dislocations and vacancy loops in tungsten by varying loop size, crystallographic orientation, and dislocation loop intersection geometry. Parallel loops exhibit strong geometry dependent behaviour, undergoing complete annihilation, transformation into weaker remnant defects, or defect transport depending on the interaction geometry. In contrast, inclined loops interact through Burgers vector reactions that form sessile <100> dislocation segments, producing substantially higher pinning strengths with little sensitivity to the intersection position. Finally, a framework is demonstrated for translating atomistically determined obstacle strengths into constitutive parameters, such as irradiation hardening, for mesoscale models. The mechanistic understanding developed here provides the physical basis for future mesoscale constitutive laws that explicitly account for the evolution of irradiation-induced defect populations and the resulting changes in dislocation-defect interaction mechanisms and obstacle strength, thereby improving predictive capability beyond calibrated conditions.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202607/31/2607.27108v1-formation-of-mathrml12-ordered--mathrmni3mathrmal-precipitates-in-ternary-cu-ni-al-alloys-modelled-using-an-ab-initio-concentration-wave-theory-and-atomistic-simulations",
+      "section": "quick",
+      "title_en": "Formation of $\\mathrm{L}1_2$-ordered $γ'$-$\\mathrm{Ni}_3\\mathrm{Al}$ precipitates in ternary Cu-Ni-Al alloys modelled using an ab initio concentration wave theory and atomistic simulations",
+      "authors": "Christopher D. Woodgate, Hubert J. Naguszewski, Samuel L. Deacon, Mathys P. Potel, Ján Minár, David Quigley, Julie B. Staunton",
+      "date": "2026-07-29",
+      "pdf": "https://arxiv.org/pdf/2607.27108v1",
+      "score": "6.0",
+      "evidence": "从头算与原子模拟方法可用于辐照FeCr合金析出强化研究",
+      "tldr": "沉淀强化Cu-Ni-Al合金因L1₂有序γ'-Ni₃Al析出相兼具强度与铜的输运性能而受关注。本文以第一性原理结合浓度波理论提取原子对相互作用，并用于蒙特卡洛模拟，研究Cuₓ(Ni₃/₄Al₁/₄)₁₋ₓ体系。模拟揭示三种成分依赖的相行为：低Cu固溶、中Cu先有序后分相、高Cu直接析出，与实验相图定性一致。该工作为多组分合金中化学有序与共格析出提供了高效计算框架。",
+      "tags": "query:rad-damage",
+      "abstract_en": "Precipitation-strengthened Cu-Ni-Al alloys are of interest for technological applications because coherent, $\\mathrm{L}1_2$-ordered $γ'$-$\\mathrm{Ni}_3\\mathrm{Al}$ precipitates can confer high mechanical strength while allowing the material to retain many of the good transport properties characteristic of elemental Cu. In this work, we study the thermodynamics and phase stability of the pseudobinary $\\textrm{Cu}_x (\\textrm{Ni}_{3/4} \\textrm{Al}_{1/4})_{1-x}$ system, $0 \\leq x \\leq 1$. We use a computational modelling framework combining first-principles electronic structure calculations with a concentration wave analysis from which atom-atom effective pair interactions are extracted for use in atomistic Monte Carlo simulations. Our modelling reveals three distinct, composition-dependent regimes of phase behaviour, in qualitative agreement with the experimentally determined phase diagram. At low Cu content, Cu is soluble in the $\\mathrm{L}1_2$-ordered $\\mathrm{Ni}_3\\mathrm{Al}$ phase, with a single identifiable phase transition corresponding to chemical ordering between Ni and Al. At intermediate compositions, this high-temperature ordering is followed at lower temperatures by phase separation of Cu and $\\mathrm{L}1_2$-ordered $\\mathrm{Ni}_3\\mathrm{Al}$. Finally, at high Cu content, $\\mathrm{L}1_2$-ordered $\\mathrm{Ni}_3\\mathrm{Al}$ precipitates directly from the solid solution, with no clearly identifiable secondary transition. We relate these phase transformations to features of the underlying electronic structures of the considered alloys. Overall, this work demonstrates a computationally efficient workflow capturing both chemical ordering and coherent precipitation in multicomponent substitutional alloys, with relevance to the study of phenomena such as precipitation strengthening.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202607/31/2607.27608v1-anisotropic-tensile-strength-and-fracture-mechanism-of--tan-a-machine-learning-potential-molecular-dynamics-study",
+      "section": "quick",
+      "title_en": "Anisotropic Tensile Strength and Fracture Mechanism of $θ$-TaN: A Machine-Learning Potential Molecular Dynamics Study",
+      "authors": "Chenyang Cao, Hongfei Li, Shuo Cao",
+      "date": "2026-07-30",
+      "pdf": "https://arxiv.org/pdf/2607.27608v1",
+      "score": "6.0",
+      "evidence": "采用机器学习势分子动力学研究结构陶瓷的断裂机理，该方法可迁移至结构材料辐照损伤机理的原子尺度模拟",
+      "tldr": "θ-TaN因高热导率可用于器件热管理，但其拉伸性能未知。采用神经进化势分子动力学模拟研究其各向异性拉伸行为，发现c轴强度80.10GPa、模量748.63GPa，a轴强度56.87GPa、模量570.74GPa，断裂应变分别为15.02%和17.71%。断裂由解理面选择控制，无位错活动，为脆性断裂。温度升高至900K仍保留73%强度，为热管理应用可靠性提供原子尺度力学数据。",
+      "tags": "query:rad-damage",
+      "abstract_en": "theta-phase tantalum nitride (theta-TaN) combines metallic conductivity with exceptionally high thermal conductivity, making it a potential material for device thermal management and interconnect applications. However, its tensile strength and fracture behavior remain unclear. Here, we investigate the anisotropic tensile response and fracture mechanism of theta-TaN using neuroevolution-potential molecular dynamics simulations. Size-convergence tests show that a 20 nm long model is sufficient for reliable prediction, and the mechanical parameters vary by less than 3.5% over the strain-rate range of 10^7 to 10^9 s^-1. The results reveal strong tensile anisotropy. The c-axis direction ([0001]) shows a higher strength of 80.10 GPa and modulus of 748.63 GPa, but a lower fracture strain of 15.02%. In contrast, the a-axis direction ([2-1-10]) shows a lower strength of 56.87 GPa and modulus of 570.74 GPa, but a higher fracture strain of 17.71%. From 300 to 900 K, the mechanical properties decrease nearly linearly, while more than 73% of the 300 K strength is retained at 900 K. Fracture occurs without observable dislocation activity and is governed by cleavage-plane selection: {10-10} prismatic planes under a-axis tension and the (0001) basal plane under c-axis tension. Atomic displacement analysis shows that local separation and microvoid formation precede macroscopic crack growth, indicating a brittle fracture process driven by local bond-network instability. These results provide atomic-scale mechanical data for assessing the reliability of theta-TaN in thermal management applications.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

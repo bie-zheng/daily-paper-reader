@@ -1,0 +1,132 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-31T21:34:03.322529+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 1,
+    "deep_cap": 6,
+    "deep_selected": 1,
+    "quick_candidates": 2,
+    "quick_skim_target": 11,
+    "quick_selected": 2
+  },
+  "deep_dive": [
+    {
+      "id": "2607.27375v1",
+      "source": "arxiv",
+      "title": "Evolution of the Irradiation Induced Defect Landscape through Dislocation Vacancy Loop Interactions in Tungsten",
+      "abstract": "Structural materials for fusion reactors undergo neutron irradiation, generating defect populations that govern their mechanical response through irradiation hardening. Physically based mesoscale constitutive models require accurate descriptions of dislocation defect interactions and, critically, how both defect morphology and obstacle strength evolve during plastic deformation as the irradiation-induced defect landscape changes. Vacancy loops provide an ideal prototype for addressing this problem because they are among the most prevalent irradiation-induced defects in tungsten, yet their interaction mechanisms with dislocations and subsequent evolution remain poorly understood. Molecular dynamics simulations are used to systematically investigate interactions between edge dislocations and vacancy loops in tungsten by varying loop size, crystallographic orientation, and dislocation loop intersection geometry. Parallel loops exhibit strong geometry dependent behaviour, undergoing complete annihilation, transformation into weaker remnant defects, or defect transport depending on the interaction geometry. In contrast, inclined loops interact through Burgers vector reactions that form sessile <100> dislocation segments, producing substantially higher pinning strengths with little sensitivity to the intersection position. Finally, a framework is demonstrated for translating atomistically determined obstacle strengths into constitutive parameters, such as irradiation hardening, for mesoscale models. The mechanistic understanding developed here provides the physical basis for future mesoscale constitutive laws that explicitly account for the evolution of irradiation-induced defect populations and the resulting changes in dislocation-defect interaction mechanisms and obstacle strength, thereby improving predictive capability beyond calibrated conditions.",
+      "authors": [
+        "Soumya Mishra",
+        "Suchandrima Das"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ],
+      "published": "2026-07-29T18:31:28+00:00",
+      "link": "https://arxiv.org/pdf/2607.27375v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "irradiation-induced vacancy loop and dislocation interactions controlling defect landscape and hardening in tungsten",
+      "llm_evidence_cn": "钨中辐照空位环与位错相互作用驱动缺陷形貌演化和辐照硬化",
+      "llm_evidence": "钨中辐照空位环与位错相互作用驱动缺陷形貌演化和辐照硬化",
+      "canonical_evidence": "钨中辐照空位环与位错相互作用驱动缺陷形貌演化和辐照硬化",
+      "llm_tldr_en": "Molecular dynamics simulations reveal how dislocation-vacancy-loop interactions in tungsten reshape irradiation-induced defect morphology and obstacle strength during plastic deformation, informing physics-based mesoscale constitutive models for fusion structural materials.",
+      "llm_tldr_cn": "核聚变堆结构材料在中子辐照下会产生大量缺陷并引发辐照硬化，其中空位环是最主要的缺陷之一，但其与位错的相互作用及演化机制尚不清楚。本文采用分子动力学模拟，系统考察钨中位错与空位环相互作用以及塑性变形过程中缺陷形貌与障碍强度的演变。研究揭示了位错-空位环相互作用对缺陷演化的重要影响，为物理基细观本构模型提供了关键定量描述，对预测聚变堆结构材料的辐照损伤行为具有重要意义。",
+      "llm_tldr": "核聚变堆结构材料在中子辐照下会产生大量缺陷并引发辐照硬化，其中空位环是最主要的缺陷之一，但其与位错的相互作用及演化机制尚不清楚。本文采用分子动力学模拟，系统考察钨中位错与空位环相互作用以及塑性变形过程中缺陷形貌与障碍强度的演变。研究揭示了位错-空位环相互作用对缺陷演化的重要影响，为物理基细观本构模型提供了关键定量描述，对预测聚变堆结构材料的辐照损伤行为具有重要意义。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation damage mechanisms in structural materials",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2607.27108v1",
+      "source": "arxiv",
+      "title": "Formation of $\\mathrm{L}1_2$-ordered $γ'$-$\\mathrm{Ni}_3\\mathrm{Al}$ precipitates in ternary Cu-Ni-Al alloys modelled using an ab initio concentration wave theory and atomistic simulations",
+      "abstract": "Precipitation-strengthened Cu-Ni-Al alloys are of interest for technological applications because coherent, $\\mathrm{L}1_2$-ordered $γ'$-$\\mathrm{Ni}_3\\mathrm{Al}$ precipitates can confer high mechanical strength while allowing the material to retain many of the good transport properties characteristic of elemental Cu. In this work, we study the thermodynamics and phase stability of the pseudobinary $\\textrm{Cu}_x (\\textrm{Ni}_{3/4} \\textrm{Al}_{1/4})_{1-x}$ system, $0 \\leq x \\leq 1$. We use a computational modelling framework combining first-principles electronic structure calculations with a concentration wave analysis from which atom-atom effective pair interactions are extracted for use in atomistic Monte Carlo simulations. Our modelling reveals three distinct, composition-dependent regimes of phase behaviour, in qualitative agreement with the experimentally determined phase diagram. At low Cu content, Cu is soluble in the $\\mathrm{L}1_2$-ordered $\\mathrm{Ni}_3\\mathrm{Al}$ phase, with a single identifiable phase transition corresponding to chemical ordering between Ni and Al. At intermediate compositions, this high-temperature ordering is followed at lower temperatures by phase separation of Cu and $\\mathrm{L}1_2$-ordered $\\mathrm{Ni}_3\\mathrm{Al}$. Finally, at high Cu content, $\\mathrm{L}1_2$-ordered $\\mathrm{Ni}_3\\mathrm{Al}$ precipitates directly from the solid solution, with no clearly identifiable secondary transition. We relate these phase transformations to features of the underlying electronic structures of the considered alloys. Overall, this work demonstrates a computationally efficient workflow capturing both chemical ordering and coherent precipitation in multicomponent substitutional alloys, with relevance to the study of phenomena such as precipitation strengthening.",
+      "authors": [
+        "Christopher D. Woodgate",
+        "Hubert J. Naguszewski",
+        "Samuel L. Deacon",
+        "Mathys P. Potel",
+        "Ján Minár",
+        "David Quigley",
+        "Julie B. Staunton"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci",
+        "physics.comp-ph"
+      ],
+      "published": "2026-07-29T16:38:01+00:00",
+      "link": "https://arxiv.org/pdf/2607.27108v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Ab initio and atomistic modelling of ordered precipitates provides transferable methods for precipitation hardening studies",
+      "llm_evidence_cn": "从头算与原子模拟方法可用于辐照FeCr合金析出强化研究",
+      "llm_evidence": "从头算与原子模拟方法可用于辐照FeCr合金析出强化研究",
+      "canonical_evidence": "从头算与原子模拟方法可用于辐照FeCr合金析出强化研究",
+      "llm_tldr_en": "This study models the formation of L1_2-ordered gamma'-Ni3Al precipitates in Cu-Ni-Al alloys using ab initio concentration wave theory and atomistic simulations, offering transferable computational techniques for precipitation-strengthened alloy design.",
+      "llm_tldr_cn": "该工作针对Cu-Ni-Al三元合金中L1_2有序γ'-Ni3Al析出相的形成，结合第一性原理电子结构计算和浓度波理论，系统研究了伪二元体系的热力学与相稳定性。研究建立了从电子尺度到原子尺度的建模框架，为析出强化合金的设计提供了可迁移的计算方法。尽管体系与FeCr不同，其方法对研究辐照条件下有序相析出与强化效应具有借鉴意义。",
+      "llm_tldr": "该工作针对Cu-Ni-Al三元合金中L1_2有序γ'-Ni3Al析出相的形成，结合第一性原理电子结构计算和浓度波理论，系统研究了伪二元体系的热力学与相稳定性。研究建立了从电子尺度到原子尺度的建模框架，为析出强化合金的设计提供了可迁移的计算方法。尽管体系与FeCr不同，其方法对研究辐照条件下有序相析出与强化效应具有借鉴意义。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "precipitation hardening in irradiated FeCr alloys",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.27608v1",
+      "source": "arxiv",
+      "title": "Anisotropic Tensile Strength and Fracture Mechanism of $θ$-TaN: A Machine-Learning Potential Molecular Dynamics Study",
+      "abstract": "theta-phase tantalum nitride (theta-TaN) combines metallic conductivity with exceptionally high thermal conductivity, making it a potential material for device thermal management and interconnect applications. However, its tensile strength and fracture behavior remain unclear. Here, we investigate the anisotropic tensile response and fracture mechanism of theta-TaN using neuroevolution-potential molecular dynamics simulations. Size-convergence tests show that a 20 nm long model is sufficient for reliable prediction, and the mechanical parameters vary by less than 3.5% over the strain-rate range of 10^7 to 10^9 s^-1. The results reveal strong tensile anisotropy. The c-axis direction ([0001]) shows a higher strength of 80.10 GPa and modulus of 748.63 GPa, but a lower fracture strain of 15.02%. In contrast, the a-axis direction ([2-1-10]) shows a lower strength of 56.87 GPa and modulus of 570.74 GPa, but a higher fracture strain of 17.71%. From 300 to 900 K, the mechanical properties decrease nearly linearly, while more than 73% of the 300 K strength is retained at 900 K. Fracture occurs without observable dislocation activity and is governed by cleavage-plane selection: {10-10} prismatic planes under a-axis tension and the (0001) basal plane under c-axis tension. Atomic displacement analysis shows that local separation and microvoid formation precede macroscopic crack growth, indicating a brittle fracture process driven by local bond-network instability. These results provide atomic-scale mechanical data for assessing the reliability of theta-TaN in thermal management applications.",
+      "authors": [
+        "Chenyang Cao",
+        "Hongfei Li",
+        "Shuo Cao"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ],
+      "published": "2026-07-30T02:52:42+00:00",
+      "link": "https://arxiv.org/pdf/2607.27608v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Machine-learning-potential molecular dynamics for fracture mechanisms in a structural ceramic; the approach is transferable to atomistic studies of radiation damage mechanisms in structural materials",
+      "llm_evidence_cn": "采用机器学习势分子动力学研究结构陶瓷的断裂机理，该方法可迁移至结构材料辐照损伤机理的原子尺度模拟",
+      "llm_evidence": "采用机器学习势分子动力学研究结构陶瓷的断裂机理，该方法可迁移至结构材料辐照损伤机理的原子尺度模拟",
+      "canonical_evidence": "采用机器学习势分子动力学研究结构陶瓷的断裂机理，该方法可迁移至结构材料辐照损伤机理的原子尺度模拟",
+      "llm_tldr_en": "Machine-learning-potential molecular dynamics reveals anisotropic tensile strength and fracture mechanisms in θ-TaN; the neuroevolution potential approach is transferable to atomistic simulation of mechanical and radiation damage in structural materials.",
+      "llm_tldr_cn": "针对θ-TaN拉伸强度与断裂行为不清的问题，本文利用神经进化势分子动力学模拟其各向异性拉伸响应。结果表明c轴方向强度更高，断裂机制具有明显取向依赖性。所发展的机器学习势建模流程可迁移至辐照损伤等极端条件下原子尺度模拟，为结构材料服役性能预测提供了通用方法。",
+      "llm_tldr": "针对θ-TaN拉伸强度与断裂行为不清的问题，本文利用神经进化势分子动力学模拟其各向异性拉伸响应。结果表明c轴方向强度更高，断裂机制具有明显取向依赖性。所发展的机器学习势建模流程可迁移至辐照损伤等极端条件下原子尺度模拟，为结构材料服役性能预测提供了通用方法。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation damage mechanisms in structural materials",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
