@@ -1,0 +1,54 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-08-01T20:31:57.323820+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 1,
+    "quick_skim_target": 11,
+    "quick_selected": 1
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2607.25768v1",
+      "source": "arxiv",
+      "title": "Synergistic Role of Electron and Photon Dose in Stepwise Laser-Induced Complete Deoxygenation of Graphene Oxide Revealed by In-situ TEM",
+      "abstract": "Laser-induced reduction of graphene oxide (GO) represents a highly promising route to graphene synthesis, offering spatially localized processing, elimination of hazardous chemical reagents, and compatibility with ambient conditions. Here, we introduce a stepwise laser reduction strategy employing a 532 nm pulsed laser, monitored in real-time by in situ dynamic transmission electron microscopy (DTEM). By systematically varying the pulse sequence and the cumulative photon and electron dose, complete deoxygenation of GO is achieved while preserving film integrity. Core-loss EELS confirms full removal of oxygen functional groups and restoration of the sp$^2$ graphitic network, evidenced by a $π^*-σ^*$ energy separation of 7.0 eV, in close agreement with graphite (7.1 eV). Crucially, the cumulative electron dose is identified as an active parameter governing the reduction mechanism: electron beam exposure accounts for approximately 5 at. % of the initial oxygen removal and synergistically lowers the energy barrier for subsequent laser-driven deoxygenation, while excessive electron exposure compromises film integrity through crack formation. The optimal configuration achieves complete deoxygenation at a cumulative photon dose of 2.5 x 10$^3$ mJ/cm$^2$ with superior in-plane crystallographic order and minimal beam-induced thinning. This work establishes a versatile multi-parameter strategy for controlled scalable graphene synthesis via combined electron beam and laser irradiation.",
+      "authors": [
+        "Israt Ali",
+        "Kenneth R. Beyerlein"
+      ],
+      "primary_category": "physics.app-ph",
+      "categories": [
+        "physics.app-ph",
+        "physics.chem-ph"
+      ],
+      "published": "2026-07-28T14:22:50+00:00",
+      "link": "https://arxiv.org/pdf/2607.25768v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "In-situ TEM with varied electron/photon dose reveals dose-dependent microstructural changes; method directly applicable to radiation damage studies",
+      "llm_evidence_cn": "原位TEM结合电子/光子剂量调控揭示剂量依赖的微观结构变化，方法可直接用于辐照损伤研究",
+      "llm_evidence": "原位TEM结合电子/光子剂量调控揭示剂量依赖的微观结构变化，方法可直接用于辐照损伤研究",
+      "canonical_evidence": "原位TEM结合电子/光子剂量调控揭示剂量依赖的微观结构变化，方法可直接用于辐照损伤研究",
+      "llm_tldr_en": "Using in-situ TEM with stepwise 532 nm laser pulses and controlled electron/photon dose, complete deoxygenation of graphene oxide is achieved while preserving film integrity, showing dose-driven defect evolution.",
+      "llm_tldr_cn": "该论文揭示了电子与光子剂量在激光逐步还原氧化石墨烯中的协同作用。通过原位动态透射电子显微镜实时监测532 nm脉冲激光处理过程，系统改变脉冲序列和累积光子/电子剂量，实现了氧化石墨烯的完全脱氧同时保持膜完整性。核心损失EELS证实含氧官能团完全去除并恢复sp2石墨网络。这项工作中建立的剂量-结构演变原位表征方法，可推广用于辐照诱导缺陷演化与微观结构变化的实时观测。",
+      "llm_tldr": "该论文揭示了电子与光子剂量在激光逐步还原氧化石墨烯中的协同作用。通过原位动态透射电子显微镜实时监测532 nm脉冲激光处理过程，系统改变脉冲序列和累积光子/电子剂量，实现了氧化石墨烯的完全脱氧同时保持膜完整性。核心损失EELS证实含氧官能团完全去除并恢复sp2石墨网络。这项工作中建立的剂量-结构演变原位表征方法，可推广用于辐照诱导缺陷演化与微观结构变化的实时观测。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation induced defect evolution and microstructure changes",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

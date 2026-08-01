@@ -1,0 +1,24 @@
+{
+  "label": "2026-08-01",
+  "date": "2026-08-01",
+  "generated_at": "2026-08-01T20:34:16",
+  "count": 1,
+  "papers": [
+    {
+      "paper_id": "202608/01/2607.25768v1-synergistic-role-of-electron-and-photon-dose-in-stepwise-laser-induced-complete-deoxygenation-of-graphene-oxide-revealed-by-in-situ-tem",
+      "section": "quick",
+      "title_en": "Synergistic Role of Electron and Photon Dose in Stepwise Laser-Induced Complete Deoxygenation of Graphene Oxide Revealed by In-situ TEM",
+      "authors": "Israt Ali, Kenneth R. Beyerlein",
+      "date": "2026-07-28",
+      "pdf": "https://arxiv.org/pdf/2607.25768v1",
+      "score": "6.0",
+      "evidence": "原位TEM结合电子/光子剂量调控揭示剂量依赖的微观结构变化，方法可直接用于辐照损伤研究",
+      "tldr": "激光还原氧化石墨烯（GO）是可行的合成石墨烯路线，但完全脱氧并保持薄膜完整性仍是挑战。本文采用532 nm脉冲激光和原位动态透射电镜，提出逐步激光还原策略，系统调控光子与电子累积剂量。实验发现，电子束暴露协同激光降低脱氧能垒，并贡献约5 at.%的初始氧去除；最佳剂量下实现完全脱氧，π*和σ*能隙达7.0 eV，接近石墨的7.1 eV。该多参数策略为石墨烯的可控规模化合成提供了新途径。",
+      "tags": "query:rad-damage",
+      "abstract_en": "Laser-induced reduction of graphene oxide (GO) represents a highly promising route to graphene synthesis, offering spatially localized processing, elimination of hazardous chemical reagents, and compatibility with ambient conditions. Here, we introduce a stepwise laser reduction strategy employing a 532 nm pulsed laser, monitored in real-time by in situ dynamic transmission electron microscopy (DTEM). By systematically varying the pulse sequence and the cumulative photon and electron dose, complete deoxygenation of GO is achieved while preserving film integrity. Core-loss EELS confirms full removal of oxygen functional groups and restoration of the sp$^2$ graphitic network, evidenced by a $π^*-σ^*$ energy separation of 7.0 eV, in close agreement with graphite (7.1 eV). Crucially, the cumulative electron dose is identified as an active parameter governing the reduction mechanism: electron beam exposure accounts for approximately 5 at. % of the initial oxygen removal and synergistically lowers the energy barrier for subsequent laser-driven deoxygenation, while excessive electron exposure compromises film integrity through crack formation. The optimal configuration achieves complete deoxygenation at a cumulative photon dose of 2.5 x 10$^3$ mJ/cm$^2$ with superior in-plane crystallographic order and minimal beam-induced thinning. This work establishes a versatile multi-parameter strategy for controlled scalable graphene synthesis via combined electron beam and laser irradiation.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
