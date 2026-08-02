@@ -1,0 +1,92 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-08-02T21:09:57.465541+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 2,
+    "quick_skim_target": 11,
+    "quick_selected": 2
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2607.27493v1",
+      "source": "arxiv",
+      "title": "Topology of Shape and Data in Material Microstructures",
+      "abstract": "One of the challenges in microstructure analysis is the rigorous quantification of the shape, size, and spatial arrangement of the microstructure beyond comparison of average values. We expound on formal principles combining Topological Data Analysis (TDA) and non-Euclidean distances between curves to motivate novel perspectives on the form and nature of pattern and shape in images. Specifically, TDA descriptors extracting persistent topological structures are combined with product submanifold learning of separable shape tensors (SST) to offer unique insights about electron backscatter diffraction (EBSD) images of material microstructures through the lens of a dual-parameter filtration. Beyond standard approaches, our methodology highlights how different choices or permutations of shape distances can lead to distinct notions of topological persistence, thereby broadening the interpretive scope of TDA. The resulting visualizations of feature extraction are designed to be both principled and explanatory, offering novel tools for modern imaging science with applications to material metrology. More broadly, this framework has strong potential to impact domains where precise quantification of topology and shape is critical for uncovering fundamental image patterns and features, and enables additional data-driven tools for microstructure analysis.",
+      "authors": [
+        "Jeanie Schreiber",
+        "Zachary Grey",
+        "Adam Creuziger"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci",
+        "cs.CE"
+      ],
+      "published": "2026-07-29T22:20:28+00:00",
+      "link": "https://arxiv.org/pdf/2607.27493v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "topological data analysis for material microstructures enabling quantitative defect evolution analysis",
+      "llm_evidence_cn": "面向材料微观结构的拓扑数据分析方法，可用于辐照缺陷与析出相演化的定量表征",
+      "llm_evidence": "面向材料微观结构的拓扑数据分析方法，可用于辐照缺陷与析出相演化的定量表征",
+      "canonical_evidence": "面向材料微观结构的拓扑数据分析方法，可用于辐照缺陷与析出相演化的定量表征",
+      "llm_tldr_en": "A TDA and separable shape tensor framework quantifies shape, size, and spatial arrangement in EBSD microstructures, enabling detailed characterization that could support defect evolution analysis in irradiated alloys.",
+      "llm_tldr_cn": "针对材料微观结构分析中形状、尺寸和空间排布的严格量化难题，传统方法往往只能比较平均值，本文则结合拓扑数据分析与非欧几里得曲线距离，并引入可分离形状张量学习，对电子背散射衍射图像开展双参数过滤，提取持久拓扑特征，从而揭示微观组织的形态与分布细节。该方法超越常规统计描述，能够为辐照条件下缺陷演化与微观结构变化的定量表征提供可迁移的新工具。",
+      "llm_tldr": "针对材料微观结构分析中形状、尺寸和空间排布的严格量化难题，传统方法往往只能比较平均值，本文则结合拓扑数据分析与非欧几里得曲线距离，并引入可分离形状张量学习，对电子背散射衍射图像开展双参数过滤，提取持久拓扑特征，从而揭示微观组织的形态与分布细节。该方法超越常规统计描述，能够为辐照条件下缺陷演化与微观结构变化的定量表征提供可迁移的新工具。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation induced defect evolution and microstructure changes",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.24871v1",
+      "source": "arxiv",
+      "title": "A flexible kinetic Monte Carlo framework for GaN molecular beam epitaxy with adaptive on-the-fly barrier evaluation",
+      "abstract": "We present a lattice-based kinetic Monte Carlo (KMC) framework for simulating GaN(0001) growth by molecular beam epitaxy. The framework captures the key microscopic processes governing epitaxial growth, including temperature-dependent surface diffusion, flux-driven deposition, Ehrlich--Schwoebel (ES) step-edge barriers, Ostwald ripening, and species-specific desorption, within a scalable architecture that enables systematic exploration of experimentally relevant growth conditions. In addition to predefined activation-energy catalogs, the framework supports adaptive on-the-fly barrier evaluation using machine-learned interatomic potentials. When previously unencountered local atomic configurations arise, activation barriers are computed via nudged elastic band, potential energy scans, or Brønsted--Evans--Polanyi methods, and cached for reuse. Predefined-barrier simulations reproduce compact triangular island formation, and further capture Ostwald ripening during growth interruptions and ES barrier-induced multilayer nucleation. At elevated temperatures, desorption drives an island ``walking'' regime, in which N--Ga exchange generates weakly bound Ga adatoms (AdGa) at trailing edges; preferential desorption of AdGa leads to asymmetric edge retreat and net island translation. Our KMC framework provides a flexible platform for predictive simulations of GaN epitaxy at the atomic scale and, more broadly, non-equilibrium growth of compound semiconductors.",
+      "authors": [
+        "Sajid Ali",
+        "Norbert Krause",
+        "Carla Verdi"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ],
+      "published": "2026-07-27T00:02:25+00:00",
+      "link": "https://arxiv.org/pdf/2607.24871v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "lattice KMC with adaptive barrier evaluation models defect and microstructure evolution, directly transferable to irradiation-induced defect cluster simulation",
+      "llm_evidence_cn": "基于格点的动力学蒙特卡洛框架结合自适应势垒评估，适用于缺陷与微观组织演化模拟，可迁移至辐照诱导缺陷簇研究",
+      "llm_evidence": "基于格点的动力学蒙特卡洛框架结合自适应势垒评估，适用于缺陷与微观组织演化模拟，可迁移至辐照诱导缺陷簇研究",
+      "canonical_evidence": "基于格点的动力学蒙特卡洛框架结合自适应势垒评估，适用于缺陷与微观组织演化模拟，可迁移至辐照诱导缺陷簇研究",
+      "llm_tldr_en": "A flexible lattice-based KMC framework for GaN MBE simulates surface diffusion, deposition, ES barriers, ripening, and desorption, with adaptive on-the-fly barriers using ML potentials, enabling systematic exploration of growth conditions and scalable microstructure evolution.",
+      "llm_tldr_cn": "针对辐照与生长中微观组织演化模拟需要灵活势垒处理的问题，本文提出一个基于格点的动力学蒙特卡洛框架，用于GaN分子束外延模拟。框架涵盖温度相关表面扩散、沉积、ES台阶边势垒、Ostwald熟化和脱附，并支持利用机器学习原子间势对未知构型进行自适应在线势垒评估。这不仅能系统探索外延生长条件，也为可扩展的微观结构演化模拟提供了基础，对辐照缺陷动力学研究具有方法学借鉴价值。",
+      "llm_tldr": "针对辐照与生长中微观组织演化模拟需要灵活势垒处理的问题，本文提出一个基于格点的动力学蒙特卡洛框架，用于GaN分子束外延模拟。框架涵盖温度相关表面扩散、沉积、ES台阶边势垒、Ostwald熟化和脱附，并支持利用机器学习原子间势对未知构型进行自适应在线势垒评估。这不仅能系统探索外延生长条件，也为可扩展的微观结构演化模拟提供了基础，对辐照缺陷动力学研究具有方法学借鉴价值。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation induced defect evolution and microstructure changes",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

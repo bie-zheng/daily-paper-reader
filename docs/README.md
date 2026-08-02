@@ -6,24 +6,31 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-08-01
-- 运行时间：2026-08-01 20:34:11 UTC
+- 最新运行日期：2026-08-02
+- 运行时间：2026-08-02 21:11:20 UTC
 - 运行状态：成功
-- 本次总论文数：1
+- 本次总论文数：2
 - 精读区：0
-- 速读区：1
+- 速读区：2
 
 ### 今日简报（AI）
-今日速读1篇论文，聚焦原位TEM揭示激光诱导氧化石墨烯逐步脱氧过程。核心看点：电子与光子剂量协同调控脱氧路径，为二维材料精准改性提供新视角。建议关注原位表征方法在材料动态研究中的应用潜力。
-- 详情：[/202608/01/README](/202608/01/README)
+今日速读2篇论文，聚焦材料微结构与GaN分子束外延模拟。
+
+最值得关注的是《Topology of Shape and Data in Material Microstructures》（7.0分），用拓扑方法分析材料微结构形状与数据。
+
+建议优先阅读该文，可快速了解拓扑学在材料数据中的应用思路。
+- 详情：[/202608/02/README](/202608/02/README)
 
 ### 精读区论文标签
 - 本次无精读推荐。
 
 ### 速读区论文标签
-1. [Synergistic Role of Electron and Photon Dose in Stepwise Laser-Induced Complete Deoxygenation of Graphene Oxide Revealed by In-situ TEM](/202608/01/2607.25768v1-synergistic-role-of-electron-and-photon-dose-in-stepwise-laser-induced-complete-deoxygenation-of-graphene-oxide-revealed-by-in-situ-tem)  
+1. [Topology of Shape and Data in Material Microstructures](/202608/02/2607.27493v1-topology-of-shape-and-data-in-material-microstructures)  
+   标签：评分：7.0/10、query:rad-damage
+   evidence：面向材料微观结构的拓扑数据分析方法，可用于辐照缺陷与析出相演化的定量表征
+2. [A flexible kinetic Monte Carlo framework for GaN molecular beam epitaxy with adaptive on-the-fly barrier evaluation](/202608/02/2607.24871v1-a-flexible-kinetic-monte-carlo-framework-for-gan-molecular-beam-epitaxy-with-adaptive-on-the-fly-barrier-evaluation)  
    标签：评分：6.0/10、query:rad-damage
-   evidence：原位TEM结合电子/光子剂量调控揭示剂量依赖的微观结构变化，方法可直接用于辐照损伤研究
+   evidence：基于格点的动力学蒙特卡洛框架结合自适应势垒评估，适用于缺陷与微观组织演化模拟，可迁移至辐照诱导缺陷簇研究
 
 
 <div class="dpr-home-promo-card">
