@@ -1,0 +1,98 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-08-03T21:27:18.621249+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 1,
+    "deep_cap": 6,
+    "deep_selected": 1,
+    "quick_candidates": 1,
+    "quick_skim_target": 11,
+    "quick_selected": 1
+  },
+  "deep_dive": [
+    {
+      "id": "2607.29328v1",
+      "source": "arxiv",
+      "title": "Savi-Bhransha: Graph-Theoretic Dislocation-Loop Characterization in Crystals",
+      "abstract": "Dislocation loops govern the properties of crystalline materials, but extracting their detailed characteristics from atomistic simulations is difficult when loops are fragmented or embedded in compact defect debris. We present Savi-Bhransha, a graph-theoretic method that reconstructs interstitial and vacancy loops directly from local defect-displacement motifs, without constructing a global interface mesh. The method identifies Burgers-vector family, habit plane, loop size, segment-wise edge/screw character, and boundary and bulk defect populations for BCC, FCC, and HCP crystals. We apply it to single-cascade simulations over a range of energies in BCC W and HCP Zr, and to successive collision cascades in BCC W and FCC FeNiCr. We benchmark the method against the Dislocation Extraction Algorithm (DXA). Total dislocation lengths remain strongly correlated between the two methods, while Savi-Bhransha returns more stable loop-level objects in complex environments where DXA returns fragmented, overlapping open segments. Savi-Bhransha also better resolves mixed-morphology defects and dislocations near other defects, including vacancy clusters. Median runtime speedups are 6.34x for BCC W and 8.86x for HCP Zr, with peak-memory reductions up to 7.77x. In successive W cascades, the resolved boundary-defect concentration brackets transient-grating-spectroscopy measurements and the predicted Burgers-vector fraction agrees with room-temperature TEM. In FCC FeNiCr, the method resolves Heidenreich-Shockley dissociation, with a Shockley-pair signature in about 91% of surviving <110>-family interstitial clusters. Savi-Bhransha therefore enables efficient, topology-resolved analysis of large radiation-damage simulations and direct comparison with experimentally accessible observables.",
+      "authors": [
+        "Utkarsh Bhardwaj"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci",
+        "physics.comp-ph"
+      ],
+      "published": "2026-07-31T12:00:21+00:00",
+      "link": "https://arxiv.org/pdf/2607.29328v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Graph-theoretic dislocation-loop characterization method directly applicable to irradiated crystals including FeNiCr, supporting analysis of loop formation in FeCr alloys.",
+      "llm_evidence_cn": "提出图论方法用于从原子级级联模拟中重建和表征位错环，适用于辐照FeCr合金中的位错环形成研究。",
+      "llm_evidence": "提出图论方法用于从原子级级联模拟中重建和表征位错环，适用于辐照FeCr合金中的位错环形成研究。",
+      "canonical_evidence": "提出图论方法用于从原子级级联模拟中重建和表征位错环，适用于辐照FeCr合金中的位错环形成研究。",
+      "llm_tldr_en": "Presents Savi-Bhransha, a graph-theoretic method that reconstructs interstitial and vacancy loops from defect-displacement motifs in BCC/FCC/HCP crystals, applied to single and collision cascades in W, Zr, and FeNiCr, enabling detailed loop characterization.",
+      "llm_tldr_cn": "针对原子级模拟中位错环碎片化、与缺陷碎片混合导致表征困难的问题，提出一种基于图论的新方法Savi-Bhransha，直接从局部缺陷位移基序重建间隙型和空位型位错环，无需构建全局界面网格。该方法能识别Burgers矢量族、惯习面、环尺寸、位错段刃/螺特征，并适用于BCC、FCC和HCP晶体。作者将其应用于W、Zr及FeNiCr的级联碰撞模拟，验证了其鲁棒性和准确性。该方法为辐照材料中位错环形成和演化研究提供了有力工具。",
+      "llm_tldr": "针对原子级模拟中位错环碎片化、与缺陷碎片混合导致表征困难的问题，提出一种基于图论的新方法Savi-Bhransha，直接从局部缺陷位移基序重建间隙型和空位型位错环，无需构建全局界面网格。该方法能识别Burgers矢量族、惯习面、环尺寸、位错段刃/螺特征，并适用于BCC、FCC和HCP晶体。作者将其应用于W、Zr及FeNiCr的级联碰撞模拟，验证了其鲁棒性和准确性。该方法为辐照材料中位错环形成和演化研究提供了有力工具。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "dislocation loop formation in irradiated FeCr",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2607.28859v1",
+      "source": "arxiv",
+      "title": "Automating the analysis of micron-scale synchrotron diffraction data on inhomogeneous polycrystalline samples: a solid oxide electrolysis cell case study",
+      "abstract": "A novel approach to post mortem characterisation of electrochemical and photovoltaic devices is spatially-resolved diffraction using a hyper-focused, micron-width x-ray beam to examine the distribution of degradation products and strain, a technique called $μ$-XRD. Aside from the experimental difficulties associated with beam focusing and sample preparation, which are themselves non-trivial, the analysis of resulting data is complex and challenging, with full Rietveld analysis rarely attempted in literature. The difficulty lies in the size of the data, which may consist of hundreds or even thousands of diffraction patterns with very different crystallographic phase compositions depending on position within the device, and the difficulty in fitting the data due to the presence of many phases at the same position, including possible degradation products which may be difficult to index and assign to known phases. In this paper, we present a fully-automated open access Python routine for performing phase identification and Rietveld analysis on 2D datasets of diffraction pattern taken at micron-scale positions, measured over the cross-section of a chemically inhomogeneous device with polycrystalline phases. Solid oxide electrolyser cells are a promising technology for green hydrogen production which can utilise waste heat to split water at higher efficiencies than low-temperature electrolysis techniques such as polymer electrolyte membranes, but exhibit many degradation modes due to the high operating temperatures. We present a case study using our analysis protocol on an SOEC fragment encompassing the air electrode, cation diffusion barrier, electrolyte, and fuel electrode. With modification, this protocol could be applied to other devices such as all-solid-state batteries, wet-electrolyte battery electrodes, solid oxide fuel cells, photovoltaic devices, and metal-oxide pseudocapacitors.",
+      "authors": [
+        "Liam A. V. Nagle-Cocco",
+        "Christopher A. Crain",
+        "Michael J. Dzara",
+        "Mathias A. Kiefer",
+        "Madeline G. Port",
+        "Tolga Han Ulucan",
+        "Madeline Van Winkle",
+        "Oscar Hathaway",
+        "Nicholas A. Strange"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci",
+        "cond-mat.other",
+        "physics.acc-ph"
+      ],
+      "published": "2026-07-30T21:56:22+00:00",
+      "link": "https://arxiv.org/pdf/2607.28859v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Automated micro-XRD analysis for phase and strain mapping in inhomogeneous polycrystalline materials, transferable to microstructure evolution studies in irradiated alloys.",
+      "llm_evidence_cn": "微米束X射线衍射自动化物相与应变分析，可迁移用于辐照合金的显微组织演化研究。",
+      "llm_evidence": "微米束X射线衍射自动化物相与应变分析，可迁移用于辐照合金的显微组织演化研究。",
+      "canonical_evidence": "微米束X射线衍射自动化物相与应变分析，可迁移用于辐照合金的显微组织演化研究。",
+      "llm_tldr_en": "An automated Rietveld pipeline for micron-scale synchrotron XRD maps phase and strain in inhomogeneous polycrystalline samples, validated on a solid oxide cell, and transferable to irradiated-alloy microstructure studies.",
+      "llm_tldr_cn": "微米束同步辐射衍射数据通常量大且物相复杂，完整Rietveld分析难以普及。该文提出自动化分析流程，批量处理上千幅衍射谱，实现物相与应变的空间分布定量表征，并以固体氧化物电解池降解产物分析为案例验证。该工具可迁移至辐照FeCr合金等材料的显微组织演化研究，为辐照损伤表征提供高效手段。",
+      "llm_tldr": "微米束同步辐射衍射数据通常量大且物相复杂，完整Rietveld分析难以普及。该文提出自动化分析流程，批量处理上千幅衍射谱，实现物相与应变的空间分布定量表征，并以固体氧化物电解池降解产物分析为案例验证。该工具可迁移至辐照FeCr合金等材料的显微组织演化研究，为辐照损伤表征提供高效手段。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation induced defect evolution and microstructure changes",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

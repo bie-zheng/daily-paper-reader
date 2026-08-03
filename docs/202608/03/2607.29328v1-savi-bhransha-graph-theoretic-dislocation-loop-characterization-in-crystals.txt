@@ -1,0 +1,544 @@
+Title: Savi-Bhransha: Graph-Theoretic Dislocation-Loop Characterization in Crystals
+
+URL Source: https://arxiv.org/pdf/2607.29328v1
+
+Published Time: Mon, 03 Aug 2026 00:59:16 GMT
+
+Number of Pages: 24
+
+Markdown Content:
+# Savi-Bhransha: Graph-Theoretic Dislocation-Loop Characterization in Crystals 
+
+# Utkarsh Bhardwaj ∗1,2 1Computational Analysis Division, Bhabha Atomic Research Centre, Visakhapatnam, Andhra Pradesh, India 530012 
+
+> 2
+
+# Homi Bhabha National Institute, Anushaktinagar, Mumbai, Maharashtra, India 400094 
+
+Abstract 
+
+Dislocation loops govern the properties of crystalline materials, but extracting their detailed character-istics from atomistic simulations is difficult when loops are fragmented or embedded in compact defect debris. We present Savi-Bhransha, a graph-theoretic method that reconstructs interstitial and vacancy loops directly from local defect-displacement motifs, without constructing a global interface mesh. The method identifies Burgers-vector family, habit plane, loop size, segment-wise edge/screw character, and boundary and bulk defect populations for BCC, FCC, and HCP crystals. We apply it to single-cascade simulations over a range of energies in BCC W and HCP Zr, and to successive collision cascades in BCC W and FCC FeNiCr. We benchmark the method against the Dislocation Extraction Algorithm (DXA). Total dislocation lengths remain strongly correlated between the two methods, while Savi-Bhransha returns more stable loop-level objects in complex environments where DXA returns fragmented, overlapping open segments. Savi-Bhransha also better resolves mixed-morphology defects and dislocations near other defects, including vacancy clusters. Median runtime speedups are 6 .34 × for BCC W and 8 .86 × for HCP Zr, with peak-memory reductions up to 7 .77 ×. In successive W cascades, the resolved boundary-defect concentration brackets transient-grating-spectroscopy measurements and the predicted Burgers-vector fraction agrees with room-temperature TEM. In FCC FeNiCr, the method resolves Heidenreich–Shockley dissociation, with a Shockley-pair signature in about 91% of surviving ⟨110 ⟩-family interstitial clusters. Savi-Bhransha therefore enables efficient, topology-resolved analysis of large radiation-damage simulations and direct comparison with experimentally accessible observables. 
+
+PACS: 61.72.Bb, 61.80.Az, 61.72.Lk, 02.10.Ox 
+
+# 1 Introduction 
+
+Defects and more specifically dislocation loops govern the mechanical, thermal, and transport response of crystalline materials. In metals, their size, Burgers-vector population, vacancy-versus-interstitial char-acter, and spatial arrangement control swelling, hardening, defect mobility, and transport degrada-tion [1, 2]. Non-dislocation defect structures such as point defects and their aggregates, compact three-dimensional clusters, and C15-like motifs can pin or immobilize otherwise mobile loops and alter subse-quent microstructural evolution [3, 4]. Atomistic sim-ulations must therefore be reduced not only to defect densities but to object-level morphology—including internal loop structure, the surrounding defect envi-ronment, and segment-wise dislocation character—to enable meaningful comparison with mesoscale models and experimental observables. Molecular dynamics (MD) simulations resolve de-fect production, migration, and interactions, and carry rich information on the underlying mecha-nisms required for multi-scale modelling of prop-erty changes under extreme conditions such as the high-dose irradiation environments of interest in fu-sion, aerospace, and related fields. In practice, how-ever, the raw atomic trajectories are uninformative on their own: extracting that information requires analysis algorithms capable of reducing millions of atomic coordinates to discrete defect objects with well-defined topology and morphology. Continuum descriptors such as the Nye tensor capture local defect-density fields but do not directly identify dis-crete loop objects. The Dislocation Extraction Al-gorithm (DXA) [5, 6] has become a standard tool for 1arXiv:2607.29328v1 [cond-mat.mtrl-sci] 31 Jul 2026 recovering continuous dislocation lines from atomistic configurations by constructing Burgers circuits on an interface mesh [7, 8]. The algorithm scales with the total number of atoms, which becomes costly for large cascade simulation boxes with sparse defect popula-tions. Moreover, cascade debris is not always a clean dislocation-network environment: loops may be em-bedded in compact clusters, vacancy-rich zones, or C15-like structures. In such mixed-cluster contexts the defect morphology of composite clusters is harder to recover, neighbouring defects in the vicinity can cause DXA to return a single physical loop as sev-eral open segments, and smaller constituents of the cluster—both small dislocation and non-dislocation components that may be pinning the loop—are not always reflected in its native output. These limitations matter because the missing infor-mation is often the physically relevant information. A loop entangled with compact debris may have differ-ent mobility from an isolated loop, even if its Burgers vector is the same; small vacancy loops can be im-portant even when they are difficult to recover from a dislocation-line mesh [7]; and local dumbbell ar-rangements near loop interfaces affect loop stability and evolution [9]. The distinction between defects at a loop perimeter and defects in the loop interior is also essential for thermal-transport comparisons: transient grating spectroscopy (TGS) measurements of thermal diffusivity are sensitive primarily to the boundary defect population that scatters phonons, and prior cascade studies report improved agreement with experiment once boundary and bulk populations are separated [10–13]. To resolve defect morphology in finer detail, we pre-viously developed SAVi (Samuh AnuVikar), a graph-theoretic scheme in which dumbbell and crowdion configurations form the nodes and crystallographic relationships between them form the edges [14]. Building on that foundation, the present work intro-duces Savi-Bhransha ( Bhransha : Sanskrit for “dis-location”), which extends SAVi to recover full loop topology, Burgers vector, and habit plane directly from the defect displacement field and the crystallo-graphic relationships between its components. En-coding these constraints locally in the adjacency graph removes the need for a global interface mesh, yielding a complete dislocation analysis at higher computational efficiency. Savi-Bhransha operates in the inverse direction to conventional dislocation construction [15–18], recov-ering the loop topology from the high-displacement core configuration. The atomic configuration al-ready contains the displacement field produced by the interatomic potential; the algorithm identifies lo-cal dumbbell, displaced atom–vacancy, and vacancy-centered motifs, assigns them to crystallographic di-rection families, and merges them into extended line primitives. A sparse adjacency graph over these primitives—built without any global atomic mesh and applicable uniformly to BCC, FCC, and HCP lattices—then groups primitives that share simi-lar distance and angle relationships, and identifies the interstitial and vacancy dislocation loops whose displacement-field signatures match those of a dislo-cation. The same construction also resolves C15-like structures and mixed morphologies within a single pipeline. Geometric coarse-graining of each compo-nent yields quantitative loop descriptors: Burgers-vector family, habit plane with confidence metrics, loop perimeter and equivalent diameter, segment-wise edge/screw character, and an explicit boundary-versus-bulk defect separation. We demonstrate Savi-Bhransha on radiation-damage cascade microstructures, a setting that com-bines dislocation loops with compact debris, vacancy-rich zones, and C15-like motifs and is representa-tive of dislocation analysis in complex defect en-vironments more generally. The method is ap-plied to single-PKA BCC W and HCP Zr low to high energy sweeps, successive 50 keV cascades in BCC W up to 0.2 dpa, and a 20 keV successive-cascade FCC FeNiCr trajectory. In BCC W at 0.1 dpa, the resolved boundary-defect concentration (1 .8–2 .7 × 10 −3 across two interatomic potentials) brackets the TGS-measured value of 2 .25 ×10 −3, sup-porting a boundary-driven interpretation of the mea-sured thermal-diffusivity drop, and the SNAP 12 ⟨111 ⟩
+
+fraction at 0.20 dpa matches the room-temperature TEM value of Yi et al. within experimental uncer-tainty. In FCC FeNiCr, the line-primitive graph re-solves Heidenreich–Shockley dissociation of 12 ⟨110 ⟩
+
+loops into 16 ⟨112 ⟩ Shockley-partial pairs on {111 } at the population level. Benchmarked against DXA on the BCC W and HCP Zr datasets, the two meth-ods agree closely on total dislocation length and on loop populations in the majority of cases; systematic differences emerge in complex defect environments, where DXA can fragment a single physical loop into multiple segments—an effect that requires post-processing to recover loop-level statistics such as loop number density—and where the explicit boundary– bulk separation and the defect-environment detail ac-cessible to Savi-Bhransha are not part of the DXA na-tive output. Across the benchmark, Savi-Bhransha reduces runtime and peak memory by factors ap-proaching an order of magnitude. The remainder of the paper develops the algorithm (Section 2) and presents the DXA benchmark and application studies 2in turn. 
+
+# 2 Methodology 
+
+Forward dislocation construction in continuum elas-ticity expresses the displacement field of a loop as a Mura–Willis surface integral, evaluated for closed polygonal loops via Barnett’s straight-segment de-composition with the Burgers vector and habit plane as inputs [15, 16]; non-singular continuum theories regularise the resulting core singularity by spread-ing the Burgers vector over a finite radius [17], and the same forward construction underlies mod-ern dislocation-generation tools [18]. DXA, by con-trast, recovers an existing dislocation network from an atomistic configuration by constructing Burgers circuits on an interface mesh between defective and crystalline regions [5, 6]; its theoretical concept is the Burgers-circuit definition of the topological charge rather than the displacement-field construction. Savi-Bhransha addresses the inverse of the forward-construction problem: given an atomistic configu-ration whose displacement field has already been produced by the interatomic potential, it recovers the underlying loop topology, Burgers vector, and habit plane directly from the high-displacement core motifs—dumbbells, displaced atom–vacancy pairs, and vacancy-centred triads. The construction is purely geometric and crystallographic, so it requires neither elastic constants nor a Green’s function, and the dependence on lattice properties enters only through the symmetry families that constrain the adjacency graph. Figure 1 summarises the pipeline schematically; the following subsections develop each stage in order. 
+
+# 2.1 Defect Identification and Line Primitives 
+
+Given the atomic coordinates of a simulation snap-shot, the first step is to identify the defect content and assign each atom to its nearest ideal lattice site. Each atom is mapped to its nearest ideal lattice site via modular arithmetic: given axis periods p (lattice parameters) and fractional origin o which is similar to the offset or shift used in building the simulation box, ˜ri = ( ri − oipi) mod pi, k∗ = arg min 
+
+> k
+
+dPBC (˜ r, sk)(1) where {sk} are the M sub-lattice offsets within one unit cell ( M =2 BCC, M =4 FCC/HCP) and dPBC is the minimum-image distance. The fractional anchor is ai = ⌊(ri − oipi)/p i⌋ + sk∗,i /p i + oi. The resulting fractional anchors are PBC-folded into [ o, o + Ncell )and sorted lexicographically. Lattice-site occupancy is then recovered by co-traversing the sorted anchor list against an on-the-fly enumeration of the ideal sites in the same order, so the full reference lattice is never held in mem-ory. A site absent from the atom list is a vacancy; a site claimed by more than one atom is an inter-stitial. This recovers the same lattice-site occupancy as the Wigner-Seitz construction [19] without an ex-plicit reference frame or spatial index; total cost is 
+
+O(N log N ) [20]. For each over-occupied site we iden-tify the triad: the vacancy at the lattice position and two displaced atoms forming the dumbbell. The axis d connecting the two interstitial atoms defines a line primitive L(d) = {rvac + λd | λ ∈ R}. In addition, atoms whose displacement from their near-est lattice site exceeds a threshold (typically 0 .3– 0.4× the nearest-neighbor spacing [21]) are paired with that lattice site and treated as displaced-atom– vacancy lines. These threshold-based pairs carry zero net defect content, but they capture the diffuse dis-placement field around extended defects and help in identifying morphological details in later steps. They typically appear in one of three configurations: coin-cident with a triad-bearing dumbbell line forming a crowdion, coincident with a true vacancy line in va-cancy loops, or as non-aligned interface disturbances surrounding a well-defined dislocation or other defect structure. 
+
+# 2.2 Crystallographic Orientation As-signment 
+
+Each dumbbell axis d is assigned to a low-index crys-tallographic direction family. This orientation gov-erns both graph construction (Section 2.3) and, once loops are identified, determines the Burgers vector. The identification rests on the Mura–Willis represen-tation of a closed loop of Burgers vector b bounding a habit surface S,
+
+u(r) = − b Ω( r)4π + uLI (r), (2) with Ω( r) the solid angle subtended by S at r and 
+
+uLI (r) the smooth line-integral remainder governed by the elastic Green’s tensor [15, 16]. The first term is everywhere parallel to b and carries the entire b-jump across S; uLI contributes the smaller Poisson-type bulging. The inserted material at the core there-fore aligns with b and is observed atomistically as a dumbbell or crowdion triad parallel to b, so the per-primitive family assignment reads the local Burgers 3Mark lines with low neighbors x100 x111 x100 x111 x100 x111 x100 x111 Fit Habit Plane & loop along boundary points Find loop length, edge/screw character... <111>  <100> 
+
+De fi ning Lines Merging Lines Finding Components a b c de f gx100 x111 x100 hxyzFigure 1: Schematic overview of the Savi-Bhransha pipeline. Top row : graph construction over line primi-tives within a single defect cluster. (a) Defect motifs identified from lattice-site occupancy—isolated dumb-bell triads, displaced-atom/vacancy pairs, and crowdions—each contributing a line primitive (Section 2.1). (b) Line primitives are created by joining the triads and pairs. (c) Collinear lines are joined to form uni-fied line primitives representing extended crowdions (Section 2.3.1). (d) Connected-component analysis on the type-stratified adjacency graph: sufficiently large parallel components (green shading) correspond to dis-placement fields associated with dislocation loops, and ring components (red shading) correspond to C15-like structures (Section 2.3.2). Bottom row : per-loop dislocation characterisation, illustrated on two example loops in BCC—an ⟨100 ⟩ loop (top, blue) and a ⟨111 ⟩ loop (bottom, green). (e) Parallel components are ini-tialised with their constituent merged line primitives. (f) Each line’s neighbour count classifies it as boundary or bulk (darker shading: boundary; Section 2.6); the boundary-defect count is retained for subsequent anal-ysis and comparison with experiment. (g) A weighted principal-component fit to the line centroids gives the habit normal, and the boundary primitives define the loop contour (Section 2.4). (h) Further properties—the Burgers vector (Section 2.5), loop perimeter, equivalent diameter, and segment-wise and total edge/screw character (Section 2.7)—are then calculated. direction directly. The relevant crystallographic direction families de-pend on crystal structure: 
+
+BCC: ⟨111 ⟩ (close-packed, produces highly mobile loops when clustered), ⟨100 ⟩ (non-close-packed, ses-sile loops), and ⟨110 ⟩ (appears at interfaces between domains or in C15 ring structures); the higher-index 
+
+⟨112 ⟩ and ⟨221 ⟩ families are also optionally retained in the candidate set so that the less common dumb-bell orientations encountered in dense cascade debris can still be assigned rather than being forced into a nearby low-index family. 
+
+FCC: ⟨110 ⟩, ⟨112 ⟩, ⟨221 ⟩, ⟨100 ⟩, and ⟨111 ⟩ families, enabling separation of perfect and partial/faulted loop populations within the same crystallographic framework. 
+
+HCP: Three families expressed in Miller-Bravais notation [ U V T W ]: 
+
+• ⟨a⟩-type: a 
+
+> 3
+
+[11¯ 20] and symmetry-equivalent di-rections; 
+
+• ⟨c⟩-type: [0001] along the c-axis; 
+
+• ⟨c+a⟩-type: 13 [11¯ 23] (Type II) and 13 [10¯ 11] (Type I). Each dumbbell is assigned to a family using angular 4matching against pre-computed standard directions, with an integer family code enabling efficient com-putation in vectorized operations. The families can be added to or removed from the candidate set as needed. 
+
+# 2.3 Loop Identification: Line Merging and Graph Analysis 
+
+With orientation families assigned, loop identifica-tion proceeds in two stages: collinear defect lines are first merged into extended line primitives, and a graph over these primitives then resolves loops and other morphological units. Both stages operate within a single defect cluster at a time; clusters are obtained beforehand by grouping point defects whose pairwise separation lies within the second-nearest-neighbor (2NN) distance, which keeps every subse-quent pairwise computation local. The two stages share a common pair geometry, pa-rameterized by an inter-line distance and an inter-axis angle. The natural distance measure depends on the relative orientation of the two lines. When axes 
+
+di, dj are nominally parallel (the merging step and the parallel-edge criterion below), we use the perpen-dicular distance between the axes treated as infinite lines, 
+
+d⊥,ij = |(rj − ri) · (di × dj )||di × dj | , (3) which reduces to the standard point-to-line distance in the strictly parallel limit. To suppress thermal scatter and local deviations from the ideal orienta-tion, both axes are first projected onto the assigned family direction ˆd before d⊥,ij is evaluated. For non-parallel pairs (the C15 ring criterion), the perpendic-ular distance between infinite axes is poorly condi-tioned, and we instead use the underlying point dis-tance between the two primitives—lattice-site centers for SIA-bearing dumbbell lines, vacancy positions for vacancy-centered lines—denoted ∥ri − rj ∥. The rela-tive orientation in both cases is the unsigned angular difference θij = arccos( |ˆdi · ˆdj |). 
+
+2.3.1 Collinear Merging into Line Primitives 
+
+Individual dumbbells and threshold-based displaced atom–vacancy pairs that share a common axis are merged into unified line segments. Two lines i and j
+
+belonging to the same orientation family are merged when 
+
+d⊥,ij < δ merge , θij < θ col , (4) where δmerge is a tight collinearity threshold— deliberately smaller than the inter-line spacing δ⊥
+
+used later for graph edges—and θcol enforces near-parallel alignment. Because of the discrete lattice and thermal vibrations, perfect collinearity for ac-tual line segments is rare but it is possible if the line segments are first assigned a crystallographic family direction and projected onto that. The use of pro-jected line equations and use of tolerances for real line segments ensure that physically collinear defects are represented as single entities. Merging confers several advantages. First, it ab-sorbs collinear threshold-based lines into the dumb-bell triads they accompany—in effect reconstructing crowdion segments—and reduces the primitive count, improving efficiency in subsequent graph analysis. Second, the merged segments yield physically mean-ingful morphological parameters: segment length varies systematically with position in the loop— shorter at the boundary, longer in the core, reflect-ing the decay of the displacement field [8]—while the number of constituent defects per line constrains the Burgers-vector magnitude. Third, the line centroids, being averages over constituent atoms, provide robust coordinates for habit-plane fitting (Section 2.4). Fi-nally, the merged lines expose internal morphology: deviations of the fitted axis from the assigned crys-tallographic direction, offsets between the lattice-site line and the SIA line, and atomic scatter about the axis all serve as signatures of split configurations and local displacement-field structure. 
+
+2.3.2 Graph Construction and Component Analysis 
+
+On the merged line primitives we construct a graph 
+
+G = ( V, E ) in which vertices V are the primitives and edges E are typed by the geometric relationship be-tween their endpoints. Each edge type encodes a dif-ferent physical relationship between two primitives, and the framework leaves room for additional types as the family of motifs of interest grows; we currently instantiate two. An edge of parallel type, appropriate for the loop-forming case where neighbouring lines share a crystallographic direction, is created when 
+
+d⊥,ij < δ ⊥, θij < θ par , family i = family j , (5) with δ⊥ scaling with the nearest-neighbor distance (typically 1 .5–2 .0× NN spacing) and θpar can be very small as we use crystallographically aligned and pro-jected line equations. An edge of ring type, charac-teristic of C15 configurations whose constituent lines meet at large mutual angles, is created when the un-derlying point distance between the two primitives is small and the axes are far from parallel: 
+
+∥ri − rj ∥ < a √2, θij > 60 ◦. (6) 5Connected-component analysis is then applied per edge type: nodes joined by parallel edges form a par-allel component, and nodes joined by ring edges form a ring component. A node that participates in edges of more than one type sits at the interface between morphological units, and the set of such interface nodes identifies composite or pinned arrangements— a loop entangled with a C15 cluster, for instance, or two loops of different direction families sharing a junction. Parallel components are identified with dislocation loops, and ring components with C15-like structures or their bases. The identification of a parallel compo-nent with a dislocation loop rests on the same Mura– Willis decomposition introduced in Section 2.2: along the perimeter of a closed loop of Burgers vector b,the topological displacement contribution is a uni-form jump of b across the habit plane, and the in-serted material that realises this jump appears at the atomistic level as a chain of dumbbell or crow-dion triads all aligned with b. A connected compo-nent of mutually parallel line primitives in the graph is therefore the atomistic image of such a perimeter contour, and its Burgers-vector family is set by the common direction-family of its constituents—taken as the majority-vote consensus of their per-primitive labels (Section 2.2), which absorbs the few peripheral primitives whose family code has been shifted by the Poisson-bulging contribution of the line-integral dis-placement near the loop perimeter. A parallel cluster of ⟨111 ⟩-oriented lines in BCC, for example, thus con-stitutes a a 
+
+> 2
+
+⟨111 ⟩ dislocation loop. 
+
+# 2.4 Habit Plane Determination 
+
+The habit plane of a dislocation loop is obtained by a weighted principal-component fit to its con-stituent line centroids {ri}, with weights wi propor-tional to the constituent-defect count of each line. The weighted covariance 
+
+C =
+
+P 
+
+> i
+
+wi(ri − ¯r)( ri − ¯r)⊤
+
+P 
+
+> i
+
+wi
+
+(7) is diagonalized to give eigenvalues λ1 ≥ λ2 ≥ λ3 and corresponding eigenvectors eα; the habit normal n =
+
+e3 minimizes the weighted sum of squared point-to-plane distances. Two scalar diagnostics accompany the fit: the in-plane scatter 
+
+σRMS =
+
+s P 
+
+> i
+
+wi[( ri − ¯r) · n]2
+
+P 
+
+> i
+
+wi
+
+, (8) and the planarity ratio Rplanar = 1 − λ3/λ 1, which approaches unity for a well-defined planar loop and falls toward zero for three-dimensional or disordered components. The fitted normal is then matched to a low-index plane family. For each candidate ( hkl ) the Cartesian normal nhkl = B(h, k, l )⊤ is computed from the re-ciprocal basis and the deviation θdev = arccos( |n ·
+
+nhkl |) is taken as the match metric. Candidate fam-ilies are {110 }, {111 }, {100 } for BCC and FCC, and (0001) basal, {10¯ 10 } prismatic, {10¯ 11 } pyramidal-I, and {11¯ 22 } pyramidal-II for HCP. Each assignment carries a confidence label derived from the deviation: high ( < 5◦), medium (5 ◦–15 ◦), low (15 ◦–25 ◦), very low ( > 25 ◦). 
+
+# 2.5 Burgers Type and Magnitude In-ference 
+
+With the Burgers family of each loop component already fixed by the connected-component analysis (Section 2.3.2), we now refine to a specific Burgers state from the admissible crystallographic set of the parent lattice and report the corresponding magni-tude |b|. Material dependence enters only through lattice geometry and the allowed Burgers set: for BCC and HCP we use the conventional canonical set for the structure, while for FCC the admissible set additionally includes fault-related partial dislocation loops and stacking faults [22, 23]. Within a single direction family the specific Burg-ers state is disambiguated using the resolved habit plane, the discrete defect content carried by the merged line primitives, and, where the local signal is sufficiently clear, the displaced-atom geometry as-sociated with the component. In FCC, for example, both 12 ⟨110 ⟩ and 16 ⟨110 ⟩ states belong to the ⟨110 ⟩
+
+family; their crystallographic distinction is reflected in the resolved loop habit, with perfect loops asso-ciated with glide on {111 } and stair-rod character associated with {100 } junction geometry. When the extra atom count per constituent line ex-ceeds unity, it signifies a translation step of more than shortest lattice translation in that direction. The Burgers magnitude follows from the assigned crys-tallographic type as 
+
+|b| = f a 0 ∥d∥, (9) where f is the fractional coefficient and d is the prim-itive direction vector of the corresponding family. 
+
+# 2.6 Boundary-Bulk Discrimination 
+
+Separating defects at the loop perimeter from those in the interior is essential for comparison with thermal-transport measurements, where phonon scattering 6depends predominantly on the boundary popula-tion [11, 13]. For each line i in a parallel compo-nent we count its same-family neighbors within the graph-edge distance, 
+
+ni = X 
+
+> j̸=i
+
+⊮[d⊥,ij < δ ⊥] ⊮[family i = family j ], (10) where ⊮[·] is the indicator function (unity when its condition holds, zero otherwise), so ni counts the line primitives that are both within the graph-edge dis-tance δ⊥ of line i and share its direction family. We then classify i as boundary when ni < n surf . The threshold reflects the in-plane coordination of a fully embedded line on the relevant habit: 
+
+nsurf =
+
+(
+
+5 BCC/FCC ⟨111 ⟩, HCP ⟨c⟩/⟨c+a⟩,
+
+4 BCC/FCC ⟨100 ⟩, HCP ⟨a⟩,
+
+(11) so that close-packed and basal-⟨a⟩ loops carry their respective characteristic interior coordinations. The resulting boundary count Nboundary and bulk count 
+
+Nbulk = Ntotal −Nboundary are object-level descriptors that can be compared directly with the boundary-sensitive observables of TGS and related experiments. 
+
+# 2.7 Dislocation Character Analysis 
+
+With the Burgers vector b and habit normal n in hand, the edge/screw character is resolved along the loop perimeter. The boundary defect coordinates are first projected onto the habit plane, 
+
+r′ 
+
+> i
+
+= ri − [( ri − ¯r) · n]n, (12) and expressed in an in-plane orthonormal basis (u1, u2) as ( xi, y i) = ( r′ 
+
+> i
+
+· u1, r′ 
+
+> i
+
+· u2). An α-shape (concave hull) is then fitted to these 2D points, with 
+
+α chosen tight enough to track the interatomic spac-ing of cascade defects, yielding an ordered perimeter sequence {r′
+
+> k
+
+}. The perimeter and enclosed area fol-low as 
+
+P = X
+
+> k
+
+|r′
+
+> k+1
+
+−r′
+
+> k
+
+|, A = 12
+
+X
+
+> k
+
+(xkyk+1 − xk+1 yk) ,
+
+(13) and the equivalent circular diameter dcirc = 2 pA/π 
+
+summarizes the loop size. For each perimeter segment, the local tangent ξk =(r′
+
+> k+1
+
+−r′
+
+> k
+
+)/|r′
+
+> k+1
+
+−r′
+
+> k
+
+| defines the unsigned angle ϕk ∈
+
+[0 , 90 ◦] with the Burgers vector via cos ϕk = |ξk · ˆb|
+
+(the absolute value renders the decomposition invari-ant to traversal direction). The classical dislocation character decomposition then gives 
+
+fscrew ,k = cos 2 ϕk, fedge ,k = sin 2 ϕk, (14) with fscrew + fedge = 1. Segments are labeled screw (fscrew > 0.8), edge ( fedge > 0.8), or mixed, and a length-weighted mean ¯fedge =
+
+P 
+
+> k
+
+Lkfedge ,k 
+
+P 
+
+> k
+
+Lk
+
+, Lk = |r′ 
+
+> k+1
+
+− r′
+
+> k
+
+|, (15) characterizes the overall loop. 
+
+# 2.8 Partial dislocations in FCC 
+
+In FCC metals with low stacking-fault energy, a per-fect 12 ⟨110 ⟩{ 111 } dislocation spontaneously dissoci-ates into two Shockley partials of Burgers vector  
+
+> 16
+
+⟨112 ⟩ bounded by a ribbon of intrinsic stacking fault [24]. The object-level loop descriptors do not by themselves separate the dissociated state from the undissociated one: both carry the same net 12 ⟨110 ⟩
+
+Burgers sum, and the dominant line-direction family inferred from the triad primitives can remain ⟨110 ⟩
+
+when the two partials sit close together. An optional analysis stage resolves the partial structure where it is present. The two partial-dislocation cores that bound the stacking fault sit on two distinct {111 } layers, popu-lated by dumbbell or crowdion triads with surviving displaced atoms; the stacking-fault ribbon between them carries no inserted material and is signalled in-stead by non-surviving displaced-atom and vacancy pairs. Operationally, the dumbbells of each ⟨110 ⟩-family SIA cluster are partitioned into bands across the candidate {111 } habit normal, and the partial structure is read from the populations of those bands: a single populated band keeps the perfect 12 ⟨110 ⟩ la-bel; two well-populated outer bands (with an op-tional sparse middle band from transient SF-region atoms) are reported as a Shockley pair emitting two  
+
+> 16
+
+⟨112 ⟩ partials on {111 }; and three distinct {111 }
+
+planes with largely disjoint band populations iden-tify a stair-rod junction emitting two Shockley pairs together with a 16 ⟨110 ⟩ stair-rod along the intersec-tion line. A residual subset of clusters has all vacancy lattice sites coplanar on the primary {111 } but is nonethe-less dissociated: the two SIA atoms of each dumb-bell straddle their vacancy by ± 12 L ˆb along the modal 
+
+⟨110 ⟩, so the parallel half-vectors (vacancy → SIA) sit on one {111 } layer and the anti-parallel half-vectors on an adjacent layer even when the vacan-cies themselves are coplanar. A secondary partition that projects the SIA atom positions onto the pri-mary {111 } normal and bins them into adjacent in-teger layer indices recovers these Shockley dissocia-tions whose two partial cores have glided onto ad-jacent {111 } layers while the dumbbell–vacancy line 7remains in the original plane. 
+
+# 2.9 Algorithm Summary 
+
+Algorithm 1 Savi-Bhransha 
+
+Require: Atomic coordinates, lattice parameters, crystal structure 
+
+Ensure: Loop topology, Burgers vector, habit plane, character, boundary/bulk separation  
+
+> 1:
+
+Identify dumbbell, displaced atom–vacancy, and vacancy-centred motifs from lattice-site occu-pancy  
+
+> 2:
+
+Assign each line primitive to a crystallographic direction family  
+
+> 3:
+
+Group point defects into clusters; merge collinear lines within each cluster  
+
+> 4:
+
+for each cluster do  
+
+> 5:
+
+Build adjacency graph with parallel and ring edges  
+
+> 6:
+
+Find connected components; classify morpho-logical units  
+
+> 7:
+
+end for  
+
+> 8:
+
+for each parallel (loop) component do  
+
+> 9:
+
+Fit habit plane via weighted PCA on line cen-troids; match to low-index family  
+
+> 10:
+
+Assign Burgers family by consensus over con-stituent line primitives; disambiguate state using habit and defect content  
+
+> 11:
+
+Count same-family neighbors; classify bound-ary vs bulk lines  
+
+> 12:
+
+Construct α-shape loop perimeter; compute segment-wise edge/screw character  
+
+> 13:
+
+if FCC and ⟨110 ⟩ family then  
+
+> 14:
+
+Partition dumbbells across the {111 } habit normal; report perfect 12 ⟨110 ⟩ or dissociated  
+
+> 16
+
+⟨112 ⟩ partial pair as appropriate  
+
+> 15:
+
+end if  
+
+> 16:
+
+end for  
+
+> 17:
+
+return Loop morphology and quantitative de-scriptors 
+
+# 2.10 Computational Considerations 
+
+The cost of the Savi-Bhransha pipeline decouples from the simulation-cell size after the initial defect-identification step. Defect identification itself is the only stage that touches every atom; line merging, graph construction, component classification, and morphological characterisation all operate solely on the Ndefect line primitives within an individual clus-ter. Because cascade simulation boxes are typi-cally chosen large enough to suppress finite-size arte-facts, the clusters they contain remain modest: a100 ×100 ×100 unit-cell box with ∼2 M atoms pro-duces clusters of at most 10–10 2 line primitives even at high PKA energies, so per-cluster analysis is essentially free relative to the defect-identification pass. Material dependence enters only through lat-tice geometry—nearest-neighbour distances and sym-metry families—and every threshold in the pipeline is scaled from these lattice quantities rather than cho-sen as a bare cut-off. The dominant cost within each cluster is pairwise line-distance evaluation. We expose a single compu-tational kernel with three back-ends that share the same vectorized formulation: a CPU back-end using array broadcasting for the pairwise computation, a parallel-CPU back-end that distributes the per-line neighbor search across cores via just-in-time compila-tion, and a CUDA back-end that runs the same kernel on the GPU for the largest clusters. The resulting ad-jacency graph is sparse—each line has at most four to eight parallel neighbors set by the lattice—so it con-tains O(Ndefect ) edges rather than O(N 2defect ). Orien-tation families are carried as integer codes through-out, which keeps every inner loop free of string com-parisons and amenable to vectorization. Memory follows the same decoupling: only the per-cluster O(Ndefect ) line primitives and their sparse ad-jacency are held, in contrast to the O(Natoms ) connec-tivity data that mesh-based extraction must maintain over the entire cell. At the largest HCP system tested (172,M atoms), Savi-Bhransha completes the analysis in approximately 5,min using 24,GB, compared with 185,GB for DXA; the full benchmark is reported in Section 3. 
+
+# 2.11 MD Cascade Datasets 
+
+The cascade trajectories analysed in Section 3 were generated with LAMMPS [25, 26] for two distinct loading regimes: single-PKA cascades for surveying primary damage as a function of energy and crys-tal structure, and successive collision cascades (SCC) for tracking microstructural evolution under accumu-lated dose. Both regimes share the same per-cascade procedure—NPT equilibration at 300 K and zero pressure, an NVE cascade phase with an adaptive timestep that keeps the fastest atom’s displacement below 0 .1 ˚ A per step, and Lindhard–Scharff electronic stopping treated as a frictional drag [27]—and use ZBL-stiffened pair interactions at short range [28]. Material dependence enters through the choice of in-teratomic potential and threshold displacement en-ergy Ed.8Single-PKA cascades. A PKA is launched from the centre of a cubic, periodic supercell in a randomly chosen direction; many independent directions per energy are sampled to obtain stable averages, follow-ing the protocol of Warrier et al. [29, 30]. The cascade is integrated for 6–10 ps in the NVE ensemble, after which the surviving Frenkel content is read off the relaxed configuration. We use this protocol for the BCC W energy sweep (10–150 keV, DnD-BN [31] and SNAP [32] potentials, Ed = 70 eV) and the HCP Zr energy sweep (10–125 keV, Starikov–Smirnova ADP potential [33], Ed = 40 eV). 
+
+Successive collision cascades. Long-time dam-age accumulation is generated by chaining individual cascades: after each NVE cascade, the system is re-laxed in NPT at 300 K and zero pressure for ∼10 ps, then a fresh PKA is selected from a randomly drawn lattice atom and launched along a fresh random di-rection; the cycle repeats until the desired dose is reached [13]. The simulation cell remains periodic and unconstrained (no fixed boundary), so the lat-tice can shift collectively as material is displaced— a feature accommodated by the defect-identification step of Section 2.1. Dose is reported in displacements per atom (dpa) using the standard NRT formula [34]. Five independent trajectories per condition are inte-grated to expose stochastic spread. We apply this protocol to BCC W at 50 keV (DnD-BN [31] and SNAP [32], up to 0.2 dpa) and to FCC FeNiCr at 20 keV with the EAM potential of Bonny et al. [35] (Ed = 40 eV), accumulated to 7 .205 × 10 −3 dpa over the 250-cascade trajectory. For the FCC series, the dose uses the standard NRT displacement count 
+
+νNRT = 0 .8E/ (2 Ed). 
+
+# 3 Results 
+
+We evaluate Savi-Bhransha on three cascade datasets spanning the BCC, HCP, and FCC lattices: single-PKA damage in BCC W and HCP Zr, and suc-cessive cascades up to 0.2 dpa in BCC W and FCC FeNiCr. Together these cover sparse iso-lated defects, dense mixed defect populations, com-pact debris, vacancy-rich regions, and stacking-fault-related FCC morphologies. The section first re-ports material-specific loop morphology—Burgers-vector and habit-plane populations, loop size, va-cancy/interstitial sign, boundary–bulk separation, and behavior in complex cascade debris—then com-pares Savi-Bhransha with DXA on loop count and total length, and finally summarizes timing and mem-ory. 
+
+# 3.1 Irradiation in BCC W 
+
+For BCC W we use two complementary cascade datasets: (i) a 100-cascade single-PKA energy sweep (10–150 keV, two potentials, 10 replicas per energy– potential combination) that fixes the morphology of primary damage as a function of PKA energy, and (ii) a successive-cascade trajectory at 50 keV up to 0.2 dpa that follows the same morphology under ac-cumulated dose. We discuss the two in turn. 
+
+Single-PKA energy sweep 
+
+We analyze 100 single collision-cascade simulations in BCC tungsten at 10–150 keV PKA energies using the DnD embedded-atom potential and the SNAP machine-learning potential, with 10 cascades per energy–potential combination. The loop count rises from near zero at 10 keV to ∼3–4 significant loops per cascade at 150 keV; DnD consistently produces more loops than SNAP at equivalent energies, reflecting potential-level differences in cascade morphology [30]. Figure 2 summarizes the aggregated loop morphology across all energies. 
+
+Burgers vector. 12 ⟨111 ⟩ loops dominate (panel a), comprising ∼85% of DnD loops and ∼68% of SNAP loops across all energies. ⟨100 ⟩ loops make up the remainder and appear predominantly at ≥100 keV, consistent with the established trend that their for-mation requires sufficient cascade energy [4, 36]; SNAP produces a larger ⟨100 ⟩ fraction than DnD, in line with prior multi-potential comparisons [9, 30]. 
+
+Habit planes. {112 } and {110 } planes dominate (panel b), with {110 } preferentially associated with  
+
+> 12
+
+⟨111 ⟩ loops and {100 } with ⟨100 ⟩ loops, as expected from crystallographic considerations. 
+
+Vacancy vs interstitial loops. The vast major-ity of loops are interstitial (panel c); vacancy loops appear only with the SNAP potential, and only at PKA energies of 100 keV and above. 
+
+Edge/screw character. Loops are predominantly edge in character (panel d). The broader distribution for 12 ⟨111 ⟩ loops under SNAP reflects greater morpho-logical diversity in this population. 
+
+Loop size. Diameters are predominantly sub-nanometer, with mean circular diameter ∼1 nm at 100–150 keV; most loops fall below the typical TEM visibility threshold of ∼2 nm. 9Figure 2: Aggregated loop morphology in BCC W from 10–150 keV PKA simulations (DnD and SNAP potentials, 10 replicas per energy–potential combination, 100 cascades total). (a) Burgers vector population fractions; solid bars: DnD, hatched bars: SNAP. (b) Habit plane family distribution per Burgers vector type. (c) Interstitial vs vacancy loop type fractions. (d) Edge character fraction per Burgers vector type and potential; box plots show median, interquartile range, and outliers; dashed line marks the edge/screw boundary at fedge = 0 .5. 
+
+Successive-cascade dose evolution 
+
+Figure 3 presents the evolution of defect and loop metrics under successive 50 keV cascades for the DnD and SNAP potentials, accumulated up to 0.2 dpa across five independent trial trajectories. 
+
+Defect accumulation. Defect concentration rises steeply through 0.05 dpa for both potentials (panel a), with DnD reaching 4 .7 × 10 −3 at 0.1 dpa and 7 .3×10 −3 at 0.2 dpa; SNAP accumulates slightly more slowly (3 .6 × 10 −3 and 5 .7 × 10 −3 at the same doses). The growth slows after 0.1 dpa, consistent both with the PAS defect-density saturation that Hollingsworth et al. [37] report over the 0.085– 0.425 dpa window in self-ion irradiated W and with the ∼55% thermal-diffusivity drop measured by TGS at that dose [11]. The boundary-defect populations 1.8 × 10 −3 (DnD) and 2 .7 × 10 −3 (SNAP) at 0.1 dpa bracket the TGS measurement of 2 .25 × 10 −3 [11], reinforcing the interpretation that TGS is sensitive primarily to the boundary population rather than to the total defect content. Beyond 0.1 dpa the gap between total and boundary populations widens as loops overlap and grow by absorption—reflected in the falling loop number density and rising mean diameter (panels b, c). The total defect concentra-tion continues to climb while the boundary fraction saturates, consistent with the corresponding plateau in the TGS signal. 
+
+Loop areal density. Loop areal density Σ =
+
+N≥2 nm /A proj × fvis (panel b), where Aproj = LxLy
+
+and fvis = 2 /3 accounts for diffraction-invisible loops under the two standard g-vectors in BCC W, peaks near 2 × 10 16 m−2 for DnD around 0.05–0.10 dpa before relaxing toward ∼1.4 × 10 16 m−2 at 0.2 dpa; SNAP rises more slowly to ∼8 × 10 15 m−2 at 0.10– 0.20 dpa. At very low dose (0.01 dpa) both po-tentials match the Yi et al. TEM measurement closely : 1.6 × 10 15 (DnD) and 1 .3 × 10 15 (SNAP) versus ∼1 × 10 15 m−2 [38]. By 0.1–0.2 dpa the MD values run 2–4 × above the same TEM band, sug-gesting a large sub-threshold loop population that is captured by Savi-Bhransha but partially missed by conventional microscopy as the population coarsens. 
+
+Loop size and hardening implications. Mean loop diameters grow from ∼0.9 nm at 0.01 dpa to 2.4 ± 0.3 nm (DnD) and 3 .0 ± 0.4 nm (SNAP) at 0.2 dpa (panel c). The broad size distributions at high dose (panel e) reflect a few large merged clus-ters coexisting with a majority of sub-threshold loops. By 0.1 dpa the median DnD loop has approached the 2 nm TEM visibility threshold, placing it in the partial-absorption regime identified by Lin et al. [40]; SNAP loops follow a similar trajectory but with a broader spread. 
+
+Burgers vector evolution. The two potentials show contrasting dose dependence (panel d). DnD starts 12 ⟨111 ⟩-dominated (85 ± 2% at 0.01 dpa), and the ⟨100 ⟩ fraction grows from 15% to ∼30% by 10 Table 1: Comparison of MD-derived observables with experimental literature at comparable doses. MD values are from the DnD and SNAP successive-cascade trajectories at 50 keV (mean over five independent trials), reported as DnD / SNAP. Σ: areal density, Method B, fvis = 2 /3, ≥2.0 nm. All experimental data are for W self-ion irradiation at room temperature. Bold entries highlight near-quantitative agreement: the boundary-defect concentration brackets the TGS measurement, Σ at 0.01 dpa matches the Yi et al. TEM value, and the SNAP 12 ⟨111 ⟩ fraction at 0.20 dpa matches the Yi et al. room-temperature value. The PAS comparison is qualitative: Hollingsworth et al. report saturation of the irradiation-defect density over the 0.085–0.425 dpa window rather than an absolute concentration.                                                        
+
+> Observable MD (this work) Experiment Reference Defect conc. at 0.20 dpa 7.3/5.7×10 −3saturates 0.085–0.425 dpa Hollingsworth et al. (PAS) [37] Defect conc. at 0.1 dpa (total) 4.7/3.6×10 −32.25 ×10 −3TGS, Reza et al. (2020) [11] Defect conc. at 0.1 dpa (boundary) 1.8/2.7×10 −32.25 ×10 −3TGS, Reza et al. (2020) [11] Σ at 0.01 dpa 1.6/1.3×10 15 m−2∼1×10 15 m−2Yi et al. (2016) [38] Σ at 0.2 dpa 14 /7.9×10 15 m−2∼4×10 15 m−2Yi et al. (2016) [38] Mean dat 0.05 dpa 1.56 /1.28 nm 7.3±2.5 nm at 0.04 dpa Wielu´ nska et al. (2022) [39]
+> 12⟨111 ⟩frac. at 0.20 dpa 68 /77 %∼75 % at RT Yi et al. (2016) [38]
+
+0.05 dpa where it stabilises (29 ± 7% at 0.20 dpa). SNAP begins with a much lower 12 ⟨111 ⟩ fraction (57 ± 11% at 0.01 dpa) and a correspondingly large 
+
+⟨100 ⟩ population (41 ± 10%); the 12 ⟨111 ⟩ share rises monotonically to 77 ± 8% at 0.20 dpa as ⟨100 ⟩ loops are preferentially absorbed or converted, suggesting potential-dependent cross-slip and annihilation path-ways [30]. The SNAP value at 0.20 dpa lies within the experimental uncertainty of the 
+
+∼75% room-temperature 12 ⟨111 ⟩ fraction re-ported by Yi et al. [38] , while DnD remains slightly lower at the same dose. 
+
+Loop mobility. Panel (f) decomposes 12 ⟨111 ⟩ loops by mobility class—glissile ( ∥, isolated parallel com-ponent), obstructed ( ∥@, parallel component entan-gled with a ring), and pinned ( ∥//, parallel compo-nent in a multi-component complex). At 0.01 dpa DnD loops are overwhelmingly glissile (82%, with the remainder pinned), whereas SNAP already shows a sizeable obstructed population (30%) on top of 48% glissile and 15% pinned. As dose accumulates the two potentials diverge: DnD shifts toward a 
+
+pinned -dominated state (55% pinned, 29% glissile, 16% obstructed at 0.20 dpa), while SNAP becomes 
+
+obstructed -dominated (48% obstructed, 25% pinned, 24% glissile at the same dose). The persistent ob-structed fraction in SNAP directly reflects the higher prevalence of C15-like ring structures in SNAP cas-cades acting as entanglement centres for otherwise mobile 12 ⟨111 ⟩ loops—a mechanism with direct im-plications for cascade-overlap hardening models. 
+
+# 3.2 Collision Cascades in HCP Zr 
+
+We apply Savi-Bhransha to 25 single-cascade simu-lations in hexagonal close-packed (HCP) zirconium spanning 10–125 keV using the Starikov–Smirnova ADP interatomic potential [33], with five replicas per energy. Figure 4 summarizes the extracted loop mor-phology. 
+
+Defect yield and loop formation. Surviving de-fect counts scale from ∼36 Frenkel pairs at 10 keV to ∼634 at 125 keV, consistent with the NRT model modified by a cascade efficiency of 0.4–0.6 [2]. The mean loop count per cascade grows correspondingly from 1.2 at 10 keV to 14.4 at 125 keV. 
+
+Burgers vector distribution. ⟨a⟩-type loops ( 13 ⟨11¯ 20 ⟩) dominate at 10–100 keV (54–68%), while at 125 keV ⟨c+a⟩-type loops ( 13 ⟨11¯ 23 ⟩) take over the majority ( ∼65%; panel a); ⟨c⟩-type loops remain neg-ligible ( <1%) at all energies. The ⟨a⟩-dominance at moderate energies matches prior MD studies of HCP Zr cascade damage [41, 42], while the high-energy crossover plausibly reflects sub-cascade branching that generates localised displacement spikes aligned with pyramidal planes and activates ⟨c+a⟩ slip sys-tems [41, 43]. The accumulated-dose TEM mi-crostructure, in contrast, is overwhelmingly domi-nated by ⟨a⟩ loops on prismatic planes [44]; the differ-ence reflects long-range SIA migration and the prefer-ential growth of glissile ⟨a⟩ loops between cascades— processes absent from the single-PKA picture and which we return to under vacancy versus interstitial bias below. 11 Figure 3: Evolution of defect and loop metrics under successive 50 keV W cascades (DnD and SNAP poten-tials, five trials per potential). Error bars indicate ±1σ inter-trial spread. (a) Defect concentration; Amin et al. PAS saturation band and TGS data from Reza et al. (2020) shown for reference. The MD boundary-defect populations (dotted lines) bracket the TGS curve, supporting a boundary-driven interpretation of the TGS signal. (b) TEM-visible loop areal density (Σ = N≥2 nm /A proj × fvis , fvis = 2 /3); × TEM data from Yi et al. (2016). MD and TEM agree closely at 0.01 dpa and diverge at higher dose. (c) Loop circular diameter at DPA milestones; dashed line marks the 2 nm TEM visibility threshold. (d) 12 ⟨111 ⟩ Burgers vector fraction vs dose; SNAP at 0.20 dpa matches the ∼75% room-temperature value of Yi et al. [38]. (e) Normalised loop size KDE at 0.01 and 0.2 dpa for each potential. (f) 12 ⟨111 ⟩ loop mobility fractions: glissile ( ∥), obstructed (∥@), and pinned ( ∥//). 
+
+Habit planes. Aggregated over all energies, pris-matic {10¯ 10 } planes are the most common habit (38%), followed by first-order pyramidal (35%) and basal {0001 } (26%; panel b). Prismatic and pyra-midal habits correlate with ⟨a⟩ and ⟨c + a⟩ Burg-ers vectors respectively, in agreement with the glide-plane assignments from diffraction-contrast TEM of in-reactor Zr [44]. 
+
+Vacancy vs interstitial loops. Vacancy loops constitute 67% of all loops (panel c), indicating a pro-nounced vacancy-loop bias in this single-cascade en-semble [2, 43]. The bias is the expected single-cascade signature: vacancies aggregate in the dense cascade core while SIAs are ejected to the cooler periphery as smaller, more diffuse clusters [42, 45]. As noted un-der the Burgers vector discussion, this single-cascade picture inverts under accumulated dose, where inter-stitial loops grow preferentially under sustained flux through SIA mobility and the one-dimensional bias of glissile ⟨a⟩ loops [44, 45]. 
+
+Loop size and TEM visibility. Mean circular di-ameters lie between 0.62 nm (10 keV) and 0.86 nm (50 keV) with no systematic growth at higher ener-gies (panel d): higher PKA energies generate more loops (1.2 to 14.4 per cascade, as above) rather than larger ones. Between 95% and 100% of loops at every energy fall below the 2 nm TEM visibility threshold, so conventional in-situ TEM captures only the tail of the true single-cascade size distribution [2, 42]. 12 Figure 4: Single-cascade loop morphology in HCP Zr from 10–125 keV PKA simulations (ADP potential, 5 replicas each). (a) Burgers vector fractions ( ⟨a⟩: green; ⟨c+a⟩: orange) per PKA energy; ⟨a⟩ dominates at 10–100 keV, ⟨c + a⟩ at 125 keV. (b) Habit-plane family fractions aggregated over all energies, coloured by Burgers vector type. (c) Loop type (SIA / vacancy) fractions aggregated over all energies, coloured by Burgers vector type. (d) Loop circular diameter per energy; dashed line marks the 2 nm TEM visibility threshold. (e) Edge character fraction by Burgers vector type (all energies pooled). 
+
+Edge/screw character. Both ⟨a⟩ and ⟨c+a⟩ loops are overwhelmingly edge in character (mean edge fraction 0.89 ± 0.19; panel e), consistent with the prismatic and pyramidal glide geometries of HCP Zr in which the Burgers vector lies nearly perpendicular to the loop normal [44]. The broader distribution for 
+
+⟨c+a⟩ loops reflects the greater geometric diversity of pyramidal slip systems relative to the single prismatic family. 
+
+# 3.3 Successive Cascades in FCC FeNiCr 
+
+The FCC FeNiCr alloy has a low stacking-fault en-ergy, favouring Shockley-partial pairs that bound an intrinsic stacking fault [24]. Using Savi-Bhransha we report each surviving SIA cluster in two comple-mentary views: a perfect-Burgers view and a partial-resolved view that decomposes ⟨110 ⟩-family clusters into Heidenreich–Shockley partials wherever the lo-cal dumbbell geometry supports it (Section 2.8). The dataset is 250 successive 20 keV cascades in a 120 3-unit-cell supercell ( Ed = 40 eV), accumulated to 7.205 × 10 −3 dpa under the standard NRT expres-sion νNRT = 0 .8E/ (2 Ed); vacancy loops and non-
+
+⟨110 ⟩ clusters pass through both views unchanged. Figure 5 summarises the loop morphology. 
+
+Topological loop population. Across the 250-cascade trajectory Savi-Bhransha identifies 20,693 significant loops (91% SIA, 9% vacancy). At the terminal analysed snapshot (7 .205 × 10 −3 dpa; PKA index 249) 189 loops survive, with the ⟨110 ⟩ fam-ily carrying ∼80% of the population in the perfect-Burgers view (Fig. 5a, dashed trace), a⟨100 ⟩ account-ing for ∼14%, and a few vacancy-labelled 16 ⟨112 ⟩
+
+residuals. The ⟨110 ⟩ dominance is consistent with the 85–90% reported by Osetsky et al. [46] for con-centrated Ni alloys, and the contrast between glissile interstitial and faulted vacancy populations matches low-dose austenitic-steel data [22, 23]. Edge charac-ter is high throughout (0 .82 ± 0.15), agreeing with the ≥0.85 reported for interstitial loops in austenitic steels [43, 47]. 
+
+Heidenreich–Shockley dissociation. The partial-resolved view recovers the dissociated state 13 Figure 5: Loop morphology in FCC FeNiCr (120 3 supercell, 250 successive 20 keV cascades, 7 .205 ×10 −3 dpa by standard NRT). (a) Areal loop density versus dose: total perfect-Burgers loops (dashed black) and to-tal partial-resolved sub-loops (solid black), with coloured traces giving the partial-resolved Burgers classes. (b) Sub-loop diameter at the terminal dose (7 .205 × 10 −3 dpa) for each partial-resolved Burgers class; dashed line marks the 2 nm TEM visibility threshold (stair-rods omitted—they are line-segment junctions with no closed-loop diameter). (c) Burgers transformation under partial resolution at the terminal dose: each column is a perfect-Burgers origin, stacked into the partial-resolved sub-loop classes it produces. (d) Dumbbell orien-tation fractions (solid = isolated, hatched = clustered) at representative doses; ⟨110 ⟩ dominates throughout. at the population level. Of the 17,380 SIA clus-ters analysed across the trajectory, 91% carry aShockley-pair signature via either the vacancy-lattice-site partition (64.7%: 48.7% two-band narrow-SF plus 16.0% three-band resolved-SF) or the SIA-atom secondary partition (26.4%; clusters whose vacancy lattice sites are coplanar but whose SIA atoms straddle two adjacent {111 } layers, Section 2.8). Only 7.7% remain genuinely compact at the perfect 12 ⟨110 ⟩ label. The resulting sub-loop spectrum is overwhelmingly 16 ⟨112 ⟩ Shockley partials (93%; Fig. 5a, green), with the a⟨100 ⟩ channel at 5% and residual undissociated 12 ⟨110 ⟩ cores at 2%; gen-uine multi-plane 16 ⟨110 ⟩ stair-rod junctions account for only ∼0.3%, giving a stair-rod-to-Shockley ratio well below 1:200. This near-complete dissociation of the ⟨110 ⟩-family SIA population is the qualitative outcome expected for the low stacking-fault-energy FeNiCr system [24, 48, 49] and is consistent with the broader MD picture of faulted interstitial clusters in concentrated Ni-based alloys [50]. The rarity of true stair-rods at this dose is also expected on the-oretical grounds, since a sub-nm loop cannot easily span two {111 } glide planes [24, 46, 51]; partial-resolved sub-loops collapse onto {111 } as required by Heidenreich–Shockley crystallography [52]. 
+
+Sub-nm regime. All loops, in either view, remain below the 2 nm TEM visibility threshold (Fig. 5b): the largest single loop reaches 1.86 nm and Shock-ley partials average ∼0.5–0.7 nm, placing the popu-lation in the sub-nm “black-spot” damage regime [47, 52]. The dominant single-dumbbell orientation is 
+
+⟨110 ⟩ throughout (Fig. 5d), matching the predicted ground-state SIA configuration in Ni, Cu, γ-Fe, and FeNiCr [2, 50]. The persistence of dense sub-nm clus-ters at this dose—few loops above the TEM thresh-old, no surviving Frank loops, a high SIA-to-vacancy ratio—is consistent with delayed loop coarsening and high defect-cluster density reported under irradiation 14 in concentrated Fe–Ni–Cr-family alloys [23, 53]. 
+
+# 3.4 Comparison with DXA 
+
+In this section we present qualitative and quantitative comparisons between Savi-Bhransha and the widely used Dislocation Extraction Algorithm (DXA) [5] as implemented in OVITO [54], drawing on the single-cascade BCC W and HCP Zr datasets and on a repre-sentative full-cell snapshot from the FCC FeNiCr tra-jectory. DXA, which has become the de-facto stan-dard for recovering dislocation networks from atom-istic configurations, is taken as the reference; the dis-cussion focuses on where the two views agree, where they differ, and what the differences imply for the choice of observables in cascade-microstructure anal-ysis. Both algorithms operate directly on molecular-dynamics snapshots in which the atoms vibrate continuously about their nominal positions, so the comparison is inherently sensitive to snapshot-to-snapshot fluctuations and to the parameter choices of either method—a point we return to repeatedly below. 
+
+3.4.1 Qualitative comparison 
+
+Across the three datasets, the loop populations re-solved by Savi-Bhransha and DXA are in broad over-all agreement: the major Burgers-vector families are recovered consistently by both methods, and the two reconstructions overlay closely in position and extent. The qualitative comparison below therefore concen-trates on the minority of cases in which the two views diverge and on the systematic origin of those diver-gences. The DXA outputs shown were produced with the same default parameters across all snapshots; with different parameter choices, or even on adjacent frames of the same trajectory, individual loops can be returned as closed or as segmented, and occasional loops can appear or disappear as small atomic rear-rangements move the configuration across the under-lying mesh-construction threshold. The figures below are therefore not an exhaustive survey but a represen-tative collection of edge cases that illustrate how each algorithm handles defect contexts which fall outside the simple isolated-loop picture. A recurrent source of disagreement is the splitting of a single physical loop into multiple DXA segments when the loop sits in a non-trivial defect environ-ment. Figure 6 collects representative cases from the BCC W dataset in which Savi-Bhransha and DXA agree on the positions, Burgers vectors, and habit-plane orientations of the loops but differ on the loop count or on the loop-versus-segment topology of indi-vidual objects. In some panels DXA splits a loop into two or more open segments in the presence of prox-imate vacancies, adjacent C15-like clusters, or iso-lated point defects on the loop perimeter; in others it misses one or more of the constituent components en-tirely. A precise mechanistic origin for the fragmenta-tion is difficult to assign, and the behaviour appears to be a consequence of the local mesh construction and of the resulting Burgers-circuit analysis rather than of any specific morphological feature. The ⟨100 ⟩
+
+loops in W are known to carry a variable number of dumbbells on their perimeter [9], and in panels (a), (c), (d), and (f) this variability appears to be one im-mediate reason that several ⟨100 ⟩ loops are returned as segments rather than as closed objects. In (a) the loop breaks on one side, while on the other side the 
+
+⟨111 ⟩ dumbbells are returned as a separate tiny ⟨111 ⟩
+
+sub-loop. In (b) the proximity of a C15-like cluster makes the ⟨111 ⟩ loop break at one end and twist at the other. In (c) a nearby vacancy and a connected 
+
+⟨100 ⟩ loop together fragment the ⟨111 ⟩ loop into three open segments. In (d) a C15-like cluster fragments the loop on one side while the opposite side remains intact. In panels (e) and (f) we retain the mesh defect blobs produced by DXA in the OVITO visualisation: in (e) some C15-like defects are recovered as blobs while others are missed entirely, and the loops at-tached to those clusters are returned as pure ⟨111 ⟩
+
+loops with no associated adjunct—here the presence of mesh blobs does not by itself fragment the loop. In (f), by contrast, the lower-left loop is split into seg-ments by small nearby ⟨111 ⟩ clusters that appear as mesh blobs, the other two clusters carry blobs that originate from neighbouring point defects, and the 
+
+⟨100 ⟩ loop is again segmented. Mesh blobs do not by construction identify the defect content they en-close, whereas Savi-Bhransha returns the underlying line primitives directly and provides the additional in-formation needed to interpret loop–cluster transition and interaction mechanisms [9, 55]. Non-dislocation defects more generally appear as mesh blobs in some configurations and are dropped from the analysis in others. Panels (g)–(j) illustrate the complementary failure mode in which DXA either does not report a loop that Savi-Bhransha recovers on the same configura-tion, or returns only a partial trace of it. In (g) the lower-left component of a composite BCC W clus-ter is absent from the DXA analysis while the up-per loop is returned as a single open curved segment. Panel (h) shows the heavy segmentation typical of many HCP Zr cascades: a small loop population is reported as a much larger number of overlapping seg-ments, several of which carry an “unknown” Burgers-15 (i) (j) (g) (h) <111> <100> Loop Burgers vector direction other <a> <c+a> For HCP: For HCP: For BCC: vacancy SIA dumbbell orientations: <111> <110> <100>    
+
+> (a) (b) (c) (d) (f) (e)
+
+Figure 6: Representative qualitative comparisons between Savi-Bhransha and DXA on the same atomistic configurations. In each panel the main image shows the Savi-Bhransha reconstruction with the constituent line primitives visible and the inset shows the DXA output (loops and segments coloured by Burgers vector; legend on the right). Panels (a)–(f) are BCC W snapshots that illustrate loop fragmentation in the presence of proximate vacancies, point defects, ⟨100 ⟩-perimeter variability, or adjacent C15-like clusters; in (e) and (f) the DXA surface-mesh blobs are retained in the visualisation. Panels (g)–(j) illustrate the missing-loop failure mode: (g) and (i) are BCC W snapshots and (h) and (j) are HCP Zr snapshots in which one or more loops resolved by Savi-Bhransha are absent from the DXA output or are returned only as a partial trace; (h) additionally shows the heavy overlapping segmentation typical of many HCP Zr cascades, with several segments carrying an “unknown” Burgers-vector label (red) that Savi-Bhransha identifies as ⟨c+a⟩.16 vector label (red); the corresponding objects are iden-tified as ⟨c +a⟩ by Savi-Bhransha. The segment-to-loop ratio in such cascades can exceed the loop count by an order of magnitude or more, which is the imme-diate origin of the count-statistics behaviour quanti-fied in the next subsection. In (i) only one of two comparably sized loops is recovered by DXA, and in (j) a composite loop arrangement at the top of the snapshot is missed while smaller and comparably sized loops elsewhere in the cell are recovered. Composite and pinned multi-component complexes are particularly prone to partial reporting in DXA: when one or more constituents of a multi-component arrangement are not recognised, the remaining glis-sile component is returned as if it were an isolated, unobstructed loop and the pinned context is masked. Because Savi-Bhransha treats each line primitive as an explicit graph node, the lower-level defect con-tent and internal morphology are preserved and the multi-component context is retained alongside the loop label; the user can then choose, for instance, to flag an entangled loop as obstructed or segmented at the analysis stage rather than recovering that in-formation through additional post-processing. The same loop can appear or disappear between adjacent MD frames as small atomic rearrangements move the configuration across the mesh-construction threshold, and this—together with the strong dependence of DXA on its mesh tolerances—limits the mechanis-tic significance that can be assigned to DXA segment counts themselves and skews loop-density and related statistics relative to a topology-stable reference. The HCP Zr dataset combines both failure modes. In a non-trivial fraction of cascades, DXA returns the dislocation content as many short pieces rather than as a small number of complete loops, with a sizeable share of the segment population carrying an “unknown” Burgers-vector label and several of the larger loops not recovered at all. In some cascades the segment count reaches the low hundreds while the closed-loop count returned alongside it is zero. If each segment is treated as a distinct loop downstream, density-type observables such as loop number density and the TEM-comparable areal loop density—which weight each physical loop once—will be inflated rel-ative to the underlying population; HCP Zr cascade dislocation analysis from MD is a notably challenging setting in this respect. The Savi-Bhransha output on the same configurations is comparatively cleaner: the loops are assembled into closed objects with stable Burgers-vector labels through the same defect envi-ronments. Total line length, by contrast, is far less sensitive to this fragmentation, and the two meth-ods remain in good correspondence on that observ-able across the HCP set (Section 3.4.2); we there-fore treat total length as the more defensible cross-method scalar for HCP and rely on the loop-level Savi-Bhransha output for count- and morphology-based statistics. 
+
+Full-cell view in FCC FeNiCr. Figure 7 extends the comparison to a complete simulation box from the FCC FeNiCr trajectory, in both the perfect-Burgers and partial-resolved views. At the cell scale the two methods recover the same overall loop distribution. In the perfect-Burgers view (panel a), Savi-Bhransha additionally returns a small number of loops not present in the corresponding DXA picture, consistent with the segmentation behaviour discussed above. In the partial-resolved view (panel b), DXA reports a substantially larger population of very small partial-dislocation fragments—including objects supported by only two or three dumbbells—while the Savi-Bhransha view retains only those clusters that exceed the size threshold imposed by the partial-dislocation analysis. The Savi-Bhransha threshold is a determin-istic, user-tunable choice (clusters of six dumbbells or fewer are excluded from the partial analysis used here) rather than an algorithmic limit, and is set so that the reported partial-dislocation population is re-stricted to objects whose Burgers, habit, and dissoci-ation geometry can be assigned with confidence. Taken together, these qualitative comparisons indi-cate that the two methods, while broadly consistent on isolated well-formed loops, differ predominantly in how they handle loops embedded in non-trivial cas-cade debris, and that the resulting differences are sys-tematic enough to be characterised rather than aver-aged out. They motivate the quantitative count- and length-based assessment that follows. 
+
+3.4.2 Quantitative loop length and loop count comparison 
+
+Savi-Bhransha and DXA agree on total line length and loop count for the majority of cascades, with strong correlations in every subset (Fig. 8). For BCC W (panel a), the Savi-Bhransha total loop length is slightly higher than the DXA value with 
+
+r = 0 .903; the excess is consistent with the non-deterministic loss of loops by DXA illustrated in Figs. 6(i) and (j). For HCP Zr (panel b) the cor-relation remains strong ( r = 0 .915), but the OLS slope deviates further from the 1:1 line. Two regimes are visible. At low PKA energies, where Zr cascades produce fewer and smaller loops, the Savi-Bhransha total is higher than DXA for the same reasons as in BCC. At high PKA energies, where defect den-17 (a) Perfect dislocation view 
+
+(b) Partial dislocation view Figure 7: Full-cell comparison on a representative FCC FeNiCr snapshot from the successive-cascade trajec-tory. (a) Perfect-Burgers view: Savi-Bhransha (left) and DXA (right) recover the same overall loop distribu-tion, with Savi-Bhransha additionally returning a small number of loops not present in the DXA output. (b) Partial-resolved view: DXA reports many sub-resolution partial-dislocation fragments—including objects supported by only two or three dumbbells—whereas the Savi-Bhransha view applies a deterministic size cut-off (clusters of six dumbbells or fewer excluded) and retains the remaining well-resolved partial pairs. sity, size, and complexity grow rapidly, DXA re-turns highly fragmented overlapping segments—some carrying an “unknown” Burgers label—as shown in Fig. 6(h); summing these segments inflates the DXA total length, while the Savi-Bhransha total tracks the underlying mostly-intact loop population. The me-dian Savi-Bhransha/DXA length ratios are 1 .21 × (W DnD), 1 .10 × (W SNAP), and 1 .09 × (Zr HCP), so the cross-method length difference is modest for normal cases with a small number of outliers in each subset (panel c). The loop-count comparison is shown in two com-18 (a) (b) (c) (e) (d) Figure 8: Quantitative comparison between Savi-Bhransha and DXA across the filtered benchmark set of 64 cascades (W BCC DnD, W BCC SNAP, HCP Zr). (a) Parity plot of total dislocation length for BCC W (DnD circles, SNAP squares); fitted line with Pearson r = 0 .903. (b) Parity plot of total dislocation length for HCP Zr; r = 0 .915. (c) Box plots of the Savi-Bhransha/DXA total-length ratio by dataset, with median values labelled. (d) Loop count parity in which DXA closed loops and open segments are summed; r = 0 .903. (e) Loop count parity using DXA closed loops only; the correlation collapses ( r = −0.080), with the majority of cascades sitting at or near DXA closed-loop count zero as many of the loops are identified as segments due to nearby defects. plementary forms in panels (d) and (e). When DXA closed loops and open segments are summed (panel d), the correlation with the Savi-Bhransha loop count is strong, though the DXA values are systematically higher in the BCC subsets because each fragmented physical loop contributes several segments. When DXA closed loops alone are used (panel e), the correlation collapses ( r = −0.080); the effect is most severe for the high-energy HCP Zr cas-cades, where the DXA closed-loop count is small or zero even when Savi-Bhransha resolves several dis-tinct loops. The high-energy HCP Zr cascades con-tain overlapping loops, complex vacancy loops, and other debris. DXA often returns segments that can-not be assembled into a complete loop and terminate where the local dumbbell orientations no longer sup-port a consensus; Savi-Bhransha therefore does not classify those segments as dislocation loops. A post-processing pass that re-stitches DXA seg-ments before counting can recover loop counts that are visually closer to the Savi-Bhransha values, and averaging over several consecutive snapshots, or analysing a locally minimised configuration rather than a dynamic one, can further reduce the frame-to-frame variability discussed above. 
+
+3.4.3 Benchmark Timing and Memory 
+
+Figure 9 and Table 2 summarise wall-time and peak-memory benchmarks across 50 BCC W cascades 19 Table 2: Median benchmark metrics. Speedup = 
+
+tDXA /t SB , where SB denotes the Savi-Bhransha work-flow; mem ratio = DXA peak / AnuVikar peak RSS. BCC: 50 cascades (20–200 keV); HCP: 26 cascades (10–125 keV).                           
+
+> System tSB (s) tDXA (s) Speedup med Speedup max W BCC 14.24 94.02 6.34 ×9.87 ×
+> Zr HCP 62.66 385.32 8.86 ×10 .07 ×
+> System Avi (MB) DXA (MB) Ratio med Ratio max W BCC 1629 9456 5.81 ×7.77 ×
+> Zr HCP 4321 32873 7.61 ×7.77 ×
+
+(20–200 keV PKA energy, 1.2–31 M atoms) and 26 HCP Zr cascades (10–125 keV, 4–172 M atoms). All timing and memory series are measured directly. 
+
+Timing. The median total wall time of the Savi-Bhransha pipeline is 14.24 s for BCC and 62.66 s for HCP, compared with 94.0 s and 385.3 s for DXA, cor-responding to median speedups of 6 .34 × and 8 .86 ×,respectively. Speedups increase with system size: at the largest BCC system (31 M atoms, 200 keV) the median speedup reaches 9 .87 ×, and at the largest HCP system (172 M atoms, 125 keV) it is 7 .37 ×; the single-run maximum across the full dataset is 10 .07 ×.The Savi-Bhransha graph-analysis component ac-counts for a small fraction of total pipeline time—a median of 0.06 s at BCC 50 keV, growing to 5.25 s at 200 keV and 58 s at HCP 125 keV—confirming that the bottleneck is the defect-identification step (Anu-Vikar / Avi), not the loop characterization. 
+
+Memory. The memory advantage is equally pro-nounced and grows with system size. The median DXA/AnuVikar peak-RSS ratio is 5 .81 × for BCC and 7 .61 × for HCP. At the largest tested system (172 M-atom HCP, 125 keV), DXA requires 185 GB of peak RSS against 24 GB for AnuVikar, a factor of 7 .77 ×. By contrast, the Savi-Bhransha graph-analysis step itself adds only ≈307 MB (median across HCP), confirming that memory scales with defect count rather than simulation-cell size. These ratios mean DXA is impractical on standard workstation hardware at the largest cascade sizes, whereas the Savi-Bhransha workflow remains feasible. 
+
+# 4 Conclusions 
+
+Savi-Bhransha provides loop-level characterisation directly from defect-core geometry and extends nat-urally to both interstitial and vacancy populations. Across the three datasets studied here—single-PKA BCC W, single-PKA HCP Zr, and successive-cascade FCC FeNiCr—it returns habit plane, Burgers vector, dumbbell orientation, mixed-defect morphology over a wide size range, and segment-wise edge/screw char-acter within a single occupancy-based pipeline, and reproduces or quantitatively brackets several exper-imentally accessible observables. The native separa-tion of boundary and bulk defect populations, in par-ticular, recovers the TGS-measured boundary-defect concentration in tungsten and supports a boundary-driven interpretation of the thermal-diffusivity signal. Methodologically, Savi-Bhransha realises the in-verse of the classical forward dislocation construc-tion [15–17]—recovering loop topology from the displacement-field core rather than imposing it on the lattice—and is therefore on a distinct theoreti-cal lineage from interface-mesh Burgers-circuit meth-ods. Against DXA, the method reproduces the physi-cally meaningful total-length trends while providing a substantially more stable loop-count observable when loops are fragmented or embedded in interacting de-fect environments: closed-loop counts alone do not correlate with Savi-Bhransha across the 64-cascade filtered benchmark, whereas the loops-plus-segments observable restores strong agreement. The qualita-tive comparison further indicates that the divergences between the two methods are systematic enough to be characterised rather than averaged out, and that count-, density-, and sign-based observables are best derived from the loop-level Savi-Bhransha output. The timing and peak-memory advantages over DXA grow with system size and approach an order of mag-nitude across the tested cascade boxes, making the workflow practical on standard workstations at scales where DXA becomes infeasible. The present implementation also exposes the next development priorities clearly: more rigorous fresh-process memory benchmarking for exact cross-tool comparison, explicit treatment of stacking-fault-rich loops, and continued extension of vacancy-loop han-dling in mixed defect populations. These are natu-ral extensions of the same defect-core graph formal-ism rather than separate methodological branches. We anticipate that the framework will be applied to a wider range of materials and defect environments in future work, and that the line-primitive view it provides will support more mechanistically informed analysis of cascade microstructures than is accessible from a global mesh alone. 20 Figure 9: Benchmark comparison of the Savi-Bhransha workflow (AnuVikar preprocessing plus graph analy-sis) and DXA across W BCC (circles, solid) and Zr HCP (triangles, dashed) cascades as a function of system size. Error bars show the interquartile range over cascade replicas at each energy level. Top left : total wall time. Top right : peak RSS memory, with the Savi-Bhransha graph-analysis component (graph-analysis step only) shown separately to demonstrate its negligible contribution. Bottom left : total-time speedup (DXA/Savi-Bhransha), reaching up to 10 .07 ×. Bottom right : DXA/AnuVikar peak-memory ratio, reaching 7.77 × at the largest HCP system sizes. 
+
+# Acknowledgments 
+
+The author thanks Dr. Manoj Warrier, Shri Aditya Majalee, and Shrimati Poonam Pahari for providing the molecular-dynamics cascade simulation data used in this work, and acknowledges the computational re-sources provided by the BARC Computer Centre. 
+
+# References 
+
+[1] D. J. Bacon, F. Gao, and Yu. N. Osetsky. The primary damage state in fcc, bcc and hcp metals as seen in molecular dynamics simulations. Jour-nal of Nuclear Materials , 276(1–3):1–12, 2000. doi: 10.1016/S0022-3115(99)00165-8. [2] K. Nordlund, S. J. Zinkle, A. E. Sand, F. Granberg, R. S. Averback, R. E. Stoller, T. Suzudo, L. Malerba, F. Banhart, W. J. We-ber, F. Willaime, S. L. Dudarev, and D. Sime-one. Primary radiation damage: A review of current understanding and models. Journal of Nuclear Materials , 512:450–479, 2018. doi: 10.1016/j.jnucmat.2018.10.027. [3] A. E. Sand, S. L. Dudarev, and K. Nordlund. High-energy collision cascades in tungsten: Dis-location loop structure and clustering scaling laws. EPL (Europhysics Letters) , 103(4):46003, 2013. doi: 10.1209/0295-5075/103/46003. [4] Wahyu Setyawan, Giridhar Nandipati, Ken-neth J. Roche, Howard L. Heinisch, Brian D. Wirth, and Richard J. Kurtz. Displacement cas-21 cades and defects annealing in tungsten, part i: Defect database from molecular dynamics simu-lations. Journal of Nuclear Materials , 462:329– 337, 2015. doi: 10.1016/j.jnucmat.2014.12.056. [5] Alexander Stukowski and Karsten Albe. Ex-tracting dislocations and non-dislocation crystal defects from atomistic simulation data. Mod-elling and Simulation in Materials Science and Engineering , 18(8):085001, 2010. doi: 10.1088/ 0965-0393/18/8/085001. [6] Alexander Stukowski, Vasily V. Bulatov, and Athanasios Arsenlis. Automated identification and indexing of dislocations in crystal inter-faces. Modelling and Simulation in Materials Science and Engineering , 20(8):085007, 2012. doi: 10.1088/0965-0393/20/8/085007. [7] Jan Fikar, Robin Sch¨ aublin, Daniel R. Mason, and Duc Nguyen-Manh. Nano-sized prismatic vacancy dislocation loops and vacancy clusters in tungsten. Nuclear Materials and Energy , 16: 60–65, 2018. doi: 10.1016/j.nme.2018.06.011. [8] P. M. Derlet and S. L. Dudarev. Microscopic structure of a heavily irradiated material. Phys-ical Review Materials , 4(2):023605, 2020. doi: 10.1103/PhysRevMaterials.4.023605. [9] Utkarsh Bhardwaj, Andrea E. Sand, and Manoj Warrier. Stability of ⟨100 ⟩ dislocation loops formed in displacement cascades in tungsten. 
+
+Journal of Nuclear Materials , 569:153938, 2022. doi: 10.1016/j.jnucmat.2022.153938. [10] Cody A. Dennett and Michael P. Short. Time-resolved, dual heterodyne phase collection tran-sient grating spectroscopy. Applied Physics Let-ters , 110(21):211106, 2017. doi: 10.1063/1. 4983716. [11] Abdallah Reza, Hongbing Yu, Kenichiro Mizo-hata, and Felix Hofmann. Thermal diffusivity degradation and point defect density in self-ion implanted tungsten. Acta Materialia , 193:270– 279, 2020. doi: 10.1016/j.actamat.2020.03.034. [12] Daniel R. Mason, Abdallah Reza, Fredric Granberg, and Felix Hofmann. Estimate for thermal diffusivity in highly irradiated tungsten using molecular dynamics simulation. Physi-cal Review Materials , 5(12):125407, 2021. doi: 10.1103/PhysRevMaterials.5.125407. [13] Utkarsh Bhardwaj and Manoj Warrier. Molec-ular dynamics simulations of the defect evolu-tion in tungsten on successive collision cascades, 2024. [14] Utkarsh Bhardwaj, Andrea E. Sand, and Manoj Warrier. Graph theory based approach to char-acterize self interstitial defect morphology. Com-putational Materials Science , 195:110474, 2021. doi: 10.1016/j.commatsci.2021.110474. [15] T. Mura. Micromechanics of Defects in Solids .Martinus Nijhoff Publishers, Dordrecht, 2 edi-tion, 1987. [16] D. M. Barnett. The displacement field of a triangular dislocation loop. Philosophical Mag-azine A , 51(3):383–387, 1985. doi: 10.1080/ 01418618508237562. [17] Wei Cai, Athanasios Arsenlis, Christopher R. Weinberger, and Vasily V. Bulatov. A non-singular continuum theory of dislocations. Jour-nal of the Mechanics and Physics of Solids , 54 (3):561–587, 2006. doi: 10.1016/j.jmps.2005.09. 005. [18] Pierre Hirel. Atomsk: A tool for manipulat-ing and converting atomic data files. Computer Physics Communications , 197:212–219, 2015. doi: 10.1016/j.cpc.2015.07.012. [19] K. Nordlund, M. Ghaly, R. S. Averback, M. Caturla, T. Diaz de la Rubia, and J. Tarus. Defect production in collision cascades in ele-mental semiconductors and fcc metals. Phys-ical Review B, 57(13):7556–7570, 1998. doi: 10.1103/PhysRevB.57.7556. [20] Utkarsh Bhardwaj, Andrea E. Sand, and Manoj Warrier. Classification of clusters in collision cas-cades. Computational Materials Science , 172: 109364, 2020. doi: 10.1016/j.commatsci.2019. 109364. [21] S. Bukkuru, U. Bhardwaj, M. Warrier, A. D. P. Rao, and M. C. Valsakumar. Identifying self-interstitials of bcc and fcc crystals in molecular dynamics. Journal of Nuclear Materials , 484: 258–269, 2017. doi: 10.1016/j.jnucmat.2016.12. 010. [22] S. Jublot-Leclerc, X. Li, L. Legras, M.-L. Lescoat, F. Fortuna, and A. Gentils. Mi-crostructure of au-ion irradiated 316l and fenicr austenitic stainless steels. Journal of Nuclear Materials , 480:436–446, 2016. doi: 10.1016/j. jnucmat.2016.08.006. 22 [23] Chenyang Lu, Taini Yang, Ke Jin, Ning Gao, Pengyuan Xiu, Yanwen Zhang, Fei Gao, Hong-bin Bei, William J. Weber, Kai Sun, Yan Dong, and Lumin Wang. Radiation-induced segrega-tion on defect clusters in single-phase concen-trated solid-solution alloys. Acta Materialia ,127:98–107, 2017. doi: 10.1016/j.actamat.2017. 01.019. [24] J. P. Hirth and J. Lothe. Theory of Dislocations .Wiley, New York, 2 edition, 1982. [25] Steve Plimpton. Fast parallel algorithms for short-range molecular dynamics. Journal of Computational Physics , 117(1):1–19, 1995. doi: 10.1006/jcph.1995.1039. [26] Aidan P. Thompson, H. Metin Aktulga, Richard Berger, Dan S. Bolintineanu, W. Michael Brown, Paul S. Crozier, Pieter J. in ’t Veld, Axel Kohlmeyer, Stan G. Moore, Trung Dac Nguyen, Ray Shan, Mark J. Stevens, Julien Tranchida, Christian Trott, and Steven J. Plimpton. LAMMPS—a flexible simulation tool for particle-based materials modeling at the atomic, meso, and continuum scales. Computer Physics Communications , 271:108171, 2022. doi: 10.1016/j.cpc.2021.108171. [27] J. Lindhard and M. Scharff. Energy dissipation by ions in the kev region. Physical Review , 124 (1):128–130, 1961. doi: 10.1103/PhysRev.124. 128. [28] J. F. Ziegler, J. P. Biersack, and U. Littmark. 
+
+The Stopping and Range of Ions in Solids . Perg-amon Press, New York, 1985. [29] M. Warrier, U. Bhardwaj, H. Hemani, R. Schnei-der, A. Mutzke, and M. C. Valsakumar. Statisti-cal study of defects caused by primary knock-on atoms in fcc cu and bcc w using molecular dy-namics. Journal of Nuclear Materials , 467(1): 457–464, 2015. doi: 10.1016/j.jnucmat.2015.09. 025. [30] Manoj Warrier and Utkarsh Bhardwaj. Statis-tical study of the defect cluster morphology in the primary damage of tungsten from collision cascades from five inter-atomic potentials, 2024. [31] M.-C. Marinica, Lisa Ventelon, M. R. Gilbert, L. Proville, S. L. Dudarev, J. Marian, G. Benc-teux, and F. Willaime. Interatomic potentials for modelling radiation defects and dislocations in tungsten. Journal of Physics: Condensed Matter , 25(39):395502, 2013. doi: 10.1088/ 0953-8984/25/39/395502. [32] Mitchell A. Wood and Aidan P. Thompson. Quantum-accurate molecular dynamics poten-tial for tungsten, 2017. [33] S. Starikov and D. Smirnova. Optimized inter-atomic potential for atomistic simulation of Zr-Nb alloy. Computational Materials Science , 197: 110581, 2021. doi: 10.1016/j.commatsci.2021. 110581. [34] M. J. Norgett, M. T. Robinson, and I. M. Torrens. A proposed method of calculating displacement dose rates. Nuclear Engineering and Design , 33(1):50–54, 1975. doi: 10.1016/ 0029-5493(75)90035-7. [35] G. Bonny, N. Castin, and D. Terentyev. Inter-atomic potential for studying ageing under irra-diation in stainless steels: the FeNiCr model al-loy. Modelling and Simulation in Materials Sci-ence and Engineering , 21(8):085004, 2013. doi: 10.1088/0965-0393/21/8/085004. [36] Wahyu Setyawan, Giridhar Nandipati, Ken-neth J. Roche, Howard L. Heinisch, Brian D. Wirth, and Richard J. Kurtz. Displacement cas-cades and defects annealing in tungsten, part i: Defect database from molecular dynamics simu-lations. Journal of Nuclear Materials , 462:329– 337, 2015. doi: 10.1016/j.jnucmat.2014.12.056. [37] A. Hollingsworth, M.-F. Barthe, M. Yu. Lavren-tiev, P. M. Derlet, S. L. Dudarev, D. R. Ma-son, Z. Hu, P. Desgardin, J. Hess, S. Davies, B. Thomas, H. Salter, E. F. J. Shelton, K. Heinola, K. Mizohata, A. De Backer, A. Baron-Wiechec, I. Jepu, Y. Zayachuk, A. Widdowson, E. Meslin, and A. Morellec. Comparative study of deuterium retention and vacancy content of self-ion irradiated tungsten. 
+
+Journal of Nuclear Materials , 558:153373, 2022. doi: 10.1016/j.jnucmat.2021.153373. [38] Xiaoou Yi, Michael L. Jenkins, Marquis A. Kirk, Zhongfu Zhou, and Steve G. Roberts. In-situ TEM studies of 150 kev W + ion irradiated tung-sten and tungsten alloys: Damage production and microstructural evolution. Acta Materialia ,112:105–120, 2016. doi: 10.1016/j.actamat.2016. 03.051. [39] B. Wielunska, T. Ploci´ nski, T. Schwarz-Selinger, M. Mayer, W. Jacob, and L. Ciupi´ nski. Disloca-tion structure of tungsten irradiated by medium to high-mass ions. Nuclear Fusion , 62(9):096003, 2022. doi: 10.1088/1741-4326/ac75ff. 23 [40] Pan-dong Lin, Jun-feng Nie, Yu-peng Lu, Chang-xin Shi, Shu-gang Cui, Wen-dong Cui, and Lei He. Atomic irradiation defects induced hardening model in irradiated tungsten based on molecular dynamics and CPFEM. Interna-tional Journal of Plasticity , 174:103895, 2024. doi: 10.1016/j.ijplas.2024.103895. [41] S. J. Wooding and D. J. Bacon. A molec-ular dynamics study of displacement cas-cades in α-zirconium. Philosophical Maga-zine A , 76(5):1033–1051, 1997. doi: 10.1080/ 01418619708200013. [42] C. H. Woo and B. N. Singh. Produc-tion bias due to clustering of point defects in irradiation-induced cascades. Philosophical Magazine A , 65(4):889–912, 1992. doi: 10.1080/ 01418619208205596. [43] R. E. Stoller. The role of cascade energy and temperature in primary defect formation in iron. 
+
+Journal of Nuclear Materials , 276(1–3):22–32, 2000. doi: 10.1016/S0022-3115(99)00204-4. [44] M. Griffiths. A review of microstructure evolu-tion in zirconium alloys during irradiation. Jour-nal of Nuclear Materials , 159:190–218, 1988. doi: 10.1016/0022-3115(88)90093-1. [45] B. Christiaen, C. Domain, L. Thuinet, A. Am-bard, and A. Legris. A new scenario for ⟨c⟩
+
+vacancy loop formation in zirconium based on atomic-scale modeling. Acta Materialia , 179:93– 106, 2019. doi: 10.1016/j.actamat.2019.07.030. [46] Yuri N. Osetsky, Laurent K. B´ eland, Alexan-der V. Barashev, and Yanwen Zhang. On the ex-istence and origin of sluggish diffusion in chem-ically disordered concentrated alloys. Current Opinion in Solid State and Materials Science ,22(3):65–74, 2018. doi: 10.1016/j.cossms.2018. 05.003. [47] D. J. Edwards, E. P. Simonen, and S. M. Bruem-mer. Evolution of fine-scale defects in stain-less steels neutron-irradiated at 275 ◦c. Journal of Nuclear Materials , 317(1):13–31, 2003. doi: 10.1016/S0022-3115(03)00002-3. [48] Shijun Zhao, G. Malcolm Stocks, and Yanwen Zhang. Stacking fault energies of face-centered cubic concentrated solid solution alloys. Acta Materialia , 134:334–345, 2017. doi: 10.1016/j. actamat.2017.05.001. [49] Shijun Zhao, Yuri Osetsky, G. Malcolm Stocks, and Yanwen Zhang. Local-environment depen-dence of stacking fault energies in concentrated solid-solution alloys. npj Computational Materi-als , 5:13, 2019. doi: 10.1038/s41524-019-0150-y. [50] Laurent Karim B´ eland, Chenyang Lu, Yuri N. Osetskiy, German D. Samolyuk, Alfredo Caro, Lumin Wang, and Roger E. Stoller. Features of primary damage by high energy displacement cascades in concentrated Ni-based alloys. Jour-nal of Applied Physics , 119(8):085901, 2016. doi: 10.1063/1.4942533. [51] Kan Ma, Long Guo, Antoine Dartois, Estelle Meslin, Colin Ophus, Brigitte D´ ecamps, Anna Fraczkiewicz, Alexander J. Knowles, Lumin Wang, Olivier Tissot, Fr´ ed´ eric Prima, Fei Gao, Huiqiu Deng, and Marie Loyer-Prost. Decod-ing the interstitial/vacancy nature of disloca-tion loops with their morphological fingerprints in face-centered cubic structure. Science Ad-vances , 11(15):eadq4070, 2025. doi: 10.1126/ sciadv.adq4070. [52] Pengyuan Xiu, Hongbin Bei, Yanwen Zhang, Lu-min Wang, and Kevin G. Field. STEM char-acterization of dislocation loops in irradiated FCC concentrated solid-solution alloys. Jour-nal of Nuclear Materials , 544:152658, 2021. doi: 10.1016/j.jnucmat.2020.152658. [53] Yan Zhao, Yaojun Li, Fan Yang, Zhen Xie, Xiaoyong Wu, and Yuexia Wang. Irradiation performance of concentrated solid-solution al-loys: Insight into defect behaviors. Journal of Nuclear Materials , 583:154510, 2023. doi: 10.1016/j.jnucmat.2023.154510. [54] Alexander Stukowski. Visualization and analy-sis of atomistic simulation data with OVITO–the open visualization tool. Modelling and Simula-tion in Materials Science and Engineering , 18 (1):015012, 2010. doi: 10.1088/0965-0393/18/ 1/015012. [55] D. Charitha Durga, P. V. Lakshmi Narayana, Utkarsh Bhardwaj, and Manoj Warrier. Transi-tion energy analysis of C15-like defect clusters in tungsten using molecular dynamics simulations. 
+
+Computational Materials Science , 268:114658, 2026. doi: 10.1016/j.commatsci.2026.114658. 24

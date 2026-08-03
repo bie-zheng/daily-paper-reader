@@ -6,31 +6,28 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-08-02
-- 运行时间：2026-08-02 21:11:20 UTC
+- 最新运行日期：2026-08-03
+- 运行时间：2026-08-03 21:32:25 UTC
 - 运行状态：成功
 - 本次总论文数：2
-- 精读区：0
-- 速读区：2
+- 精读区：1
+- 速读区：1
 
 ### 今日简报（AI）
-今日速读2篇论文，聚焦材料微结构与GaN分子束外延模拟。
-
-最值得关注的是《Topology of Shape and Data in Material Microstructures》（7.0分），用拓扑方法分析材料微结构形状与数据。
-
-建议优先阅读该文，可快速了解拓扑学在材料数据中的应用思路。
-- 详情：[/202608/02/README](/202608/02/README)
+今日精读1篇、速读1篇，共2篇论文，聚焦晶体缺陷与同步辐射数据分析。  
+最值得关注的是精读论文《Savi-Bhransha: Graph-Theoretic Dislocation-Loop Characterization in Crystals》（8.0/10），其图论方法为位错环表征提供了新视角。  
+建议普通读者优先理解该方法的“图论表征”思路，可作为后续阅读晶体材料模拟方向文献的切入点。
+- 详情：[/202608/03/README](/202608/03/README)
 
 ### 精读区论文标签
-- 本次无精读推荐。
+1. [Savi-Bhransha: Graph-Theoretic Dislocation-Loop Characterization in Crystals](/202608/03/2607.29328v1-savi-bhransha-graph-theoretic-dislocation-loop-characterization-in-crystals)  
+   标签：评分：8.0/10、query:rad-damage
+   evidence：提出图论方法用于从原子级级联模拟中重建和表征位错环，适用于辐照FeCr合金中的位错环形成研究。
 
 ### 速读区论文标签
-1. [Topology of Shape and Data in Material Microstructures](/202608/02/2607.27493v1-topology-of-shape-and-data-in-material-microstructures)  
-   标签：评分：7.0/10、query:rad-damage
-   evidence：面向材料微观结构的拓扑数据分析方法，可用于辐照缺陷与析出相演化的定量表征
-2. [A flexible kinetic Monte Carlo framework for GaN molecular beam epitaxy with adaptive on-the-fly barrier evaluation](/202608/02/2607.24871v1-a-flexible-kinetic-monte-carlo-framework-for-gan-molecular-beam-epitaxy-with-adaptive-on-the-fly-barrier-evaluation)  
+1. [Automating the analysis of micron-scale synchrotron diffraction data on inhomogeneous polycrystalline samples: a solid oxide electrolysis cell case study](/202608/03/2607.28859v1-automating-the-analysis-of-micron-scale-synchrotron-diffraction-data-on-inhomogeneous-polycrystalline-samples-a-solid-oxide-electrolysis-cell-case-study)  
    标签：评分：6.0/10、query:rad-damage
-   evidence：基于格点的动力学蒙特卡洛框架结合自适应势垒评估，适用于缺陷与微观组织演化模拟，可迁移至辐照诱导缺陷簇研究
+   evidence：微米束X射线衍射自动化物相与应变分析，可迁移用于辐照合金的显微组织演化研究。
 
 
 <div class="dpr-home-promo-card">

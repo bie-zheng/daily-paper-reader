@@ -1,0 +1,313 @@
+Title: Automating the analysis of micron-scale synchrotron diffraction data on inhomogeneous polycrystalline samples: a solid oxide electrolysis cell case study
+
+URL Source: https://arxiv.org/pdf/2607.28859v1
+
+Published Time: Mon, 03 Aug 2026 00:13:55 GMT
+
+Number of Pages: 32
+
+Markdown Content:
+# Automating the analysis of micron-scale synchrotron diffraction data on inhomogeneous polycrystalline samples: a solid oxide electrolysis cell case study 
+
+Liam A. V. Nagle-Cocco ∗ a, Christopher A. Crain a, Michael J. Dzara b, Mathias A. Kiefer a, Madeline G. Port a,c , Tolga Han Ulucan a, Madeline Van Winkle b, Oscar Hathaway b, and Nicholas A. Strange † aaStanford Synchrotron Radiation Lightsource, SLAC National Accelerator Laboratory, Menlo Park, 94025, United States of America 
+
+> b
+
+Materials, Chemical, and Computational Sciences Directorate, National Laboratory of the Rockies, Golden, 80401, United States of America 
+
+> c
+
+Department of Materials Science and Engineering & Department of Chemistry, University of Pennsylvania, Philadelphia, Pennsylvania 19104, United States of America 
+
+Synopsis 
+
+An automated approach is presented for the analysis of micron-focused, spatially-resolved synchrotron diffraction data on the cross-section of chemically inhomogeneous polycrystalline samples such as batteries, solid oxide fuel/electrolysis cells, and photo-voltaic devices. A case study is shown, applying the approach to solid oxide electrolyser cells for a post mortem characterisation. 
+
+Abstract 
+
+A novel approach to post mortem characterisation of electrochemical and photovoltaic devices is spatially-resolved diffraction using a hyper-focused, micron-width x-ray beam to examine the distribution of degradation products and strain, a technique called 
+
+μ-XRD. Aside from the experimental difficulties associated with beam focusing and sample preparation, which are themselves non-trivial, the analysis of resulting data is complex and challenging, with full Rietveld analysis rarely attempted in literature. The difficulty lies in the size of the data, which may consist of hundreds or even thousands of diffraction patterns with very different crystallographic phase compositions depending on position within the device, and the difficulty in fitting the data due to the presence of many phases at the same position, including possible degradation products which 
+
+> ∗
+
+Email: lnc@slac.stanford.edu 
+
+> †
+
+Email: nstrange@slac.stanford.edu 
+
+1arXiv:2607.28859v1 [cond-mat.mtrl-sci] 30 Jul 2026 may be difficult to index and assign to known phases. In this paper, we present a fully-automated open access Python routine for performing phase identification and Rietveld analysis on 2D datasets of diffraction pattern taken at micron-scale positions, measured over the cross-section of a chemically inhomogeneous device with polycrystalline phases. Solid oxide electrolyser cells (SOECs) are a promising technology for green hydrogen production which can utilise waste heat to split water at higher efficiencies than low-temperature electrolysis techniques such as polymer electrolyte membranes (PEM), but exhibit many degradation modes due to the high operating temperatures. We present a case study using our analysis protocol on an SOEC fragment encompassing the air electrode, cation diffusion barrier, electrolyte, and fuel electrode. With modification, this protocol could be applied to other devices such as all-solid-state batteries, wet-electrolyte battery electrodes, solid oxide fuel cells, photovoltaic devices, and metal-oxide pseudocapacitors.  
+
+> Keywords: μ-XRD, solid oxide electrolyser cells, automation
+
+21 Introduction ba
+
+Figure 1: (a) Schematic illustrating the composition and design of the SOECs in this study. (b) Schematic showing the construction of the coin cells used in this study, reproduced from Zhu et al. 
+
+(2025). Many functional energy materials and devices are intrinsically chemically inhomogeneous, com-prising multiple, spatially distinct regions with different compositions, crystal structures, and mi-crostructures. In layered electrochemical and energy-conversion devices such as solid oxide cells, batteries, photovoltaic devices, and metal–oxide pseudocapacitors, there are different components (for example, electrodes, electrolytes, current collectors, and interlayers) which may contain largely mutually exclusive phase assemblages, while interfaces can host additional reaction products or structurally modified material. Superimposed on this architectural inhomogeneity are operating gradients in temperature, chemical potential, and electrochemical potential, which further drive spa-tially varying defect chemistry, strain, and secondary phase formation. Meaningful characterisation of such systems therefore requires techniques capable of resolving crystallographic information as a function of position, bridging the gap between bulk diffraction methods and highly local probes such as electron microscopy. Powder X-ray diffraction (XRD) is generally considered a bulk technique, insensitive to local struc-tural information. However, when an incident X-ray beam is focused, the illuminated volume is reduced and observed diffraction can be associated with a subsection of a sample. This capability is critical for SOECs where component layer thicknesses are on the order of micrometers. When X-rays are focused to the micron scale, there are typically efficiency losses on the order of 5%–20% depending on beamline optics (Kim et al. , 2018; Tang et al. , 2019; Yumoto et al. , 2025). These losses can be compensated for by using a high flux undulator insertion device at a synchrotron X-ray facility, such as beamline 17-2 (Hong et al. , 2025) at the Stanford Synchrotron Radiation Lightsource (SSRL), a technique called μXRD. Given these capabilities, rapid data acquisition is possible with a micro-focused beam, enabling two-dimensional mapping of XRD across materials at the micron-scale. 3A limiting factor in the ability to perform these experiments and maximise the information gain from measured data is in the automation of analysis. A measurement using a 1 μm2 beamsize, measuring at all positions in a 100 μm×100 μm grid, will contain 10 4 diffraction patterns. Tradi-tionally, diffraction data is analysed by Rietveld refinement (Rietveld, 1969) which requires prior knowledge regarding the phases that are present; such refinements may be performed sequentially but this cannot account for chemical variations over the grid as the phases present will vary. Acomprehensive treatment of a large dataset, including identification of the presence and extent of impurity phases, will require an unfeasible level of effort to manually analyse over all positions. Current approaches to this problem include the software package XRDUA (De Nolf et al. , 2014), which includes the option for Rietveld analysis, and more recently a deep learning algorithm with a multitask learning (MTL) architecture (Li et al. , 2024). In this work, we present a different approach to fully automating the analysis of spatially re-solved μXRD datasets measured over chemically inhomogeneous samples, using the well-established 
+
+Topas software (Coelho, 2018) implemented via Python scripts (Van Rossum & Drake Jr, 1995). The protocol combines adaptive phase-identification strategies with automated Rietveld and Paw-ley refinement, enabling comprehensive analysis of large two-dimensional diffraction datasets based on user-determined candidate phase lists, without prior knowledge of local architecture. Solid oxide electrolyser cells (SOECs) provide a relevant case study for demonstrating this approach. Among green hydrogen production technologies, high-temperature electrolysis offers reduced elec-trical energy input relative to low-temperature electrolysis methods such as polymer electrolyte membranes (Hauch et al. , 2020), but remains limited by material durability. Oxygen-conducting SOECs are composed of layered metal-oxide components that must withstand high temperatures, applied potentials, and large oxygen chemical potential gradients; a typical SOEC is indicated in Figure 1. These conditions give rise to a range of degradation mechanisms, including cation mi-gration and secondary phase formation in air electrodes (Lu et al. , 2017; Rowberg et al. , 2024), oxidation of Ni in fuel electrodes (Neidhardt & Bessler, 2019), and contamination from ancillary cell components (Perz et al. , 2016; Wei et al. , 2015; Liu & Yildiz, 2024). 
+
+μXRD has been performed before (Nozaki et al. , 2020) on similar solid oxide cells, reporting subtle spatial variations in lattice parameters of both LSCF-6428 air electrode and GDC from Rietveld refinement, owing to the diffusion of atoms and changes in vacancy concentrations in the cell. However, this study involved Rietveld refinement only of several points along a linescan, missing out on the opportunity to gain information on variations within layers. To our knowledge, there have been no studies on SOECs which make use of spatially-resolved, micron-scale XRD in more than one dimension, or with comprehensive multi-phase Rietveld refinement over all positions. Here, we apply the automated analysis protocol presented in this paper to μXRD datasets mea-sured across the cross-sections of operated and baseline oxygen-conducting SOEC fragments. While SOECs serve as a demanding validation case, with modification the protocol could be applied to a wide range of electrochemical and energy-conversion devices exhibiting a distribution of poly-4Action: run           
+
+> refinement with
+> and without
+> Rietveld model
+> of phase
+> Action: run
+> refinement with
+> and without
+> Pawley model of
+> phase
+> For {phase} in
+> {possible_phases }
+> •Phase 1
+> •Phase 2
+> •….
+> •Phase nCheck: peaks
+> occur at
+> expected
+> positions for
+> {phase}
+> False Phase excluded
+> Check :
+> {phase} is
+> polycrystalline
+> Check: goodness -
+> of -fit
+> improvement
+> larger than
+> defined threshold True
+> False
+> Check: scale
+> factor exceeds
+> defined
+> threshold
+> Check: peak
+> integrated
+> intensities
+> exceeds defined
+> threshold
+> True
+> False
+> Phase included True
+
+Figure 2: Schematic explaining, in partial pseudo-code, the approximate phase identification algorithm used in the protocol for each diffraction pattern in a 2-dimensional grid measured over the cross-section of an SOEC. crystalline phases, and likely also in other fields from mineral studies (Flemming, 2007) to cultural heritage (Gonzalez et al. , 2020). By removing a major barrier to comprehensive analysis of μXRD data, this work aims to facilitate broader adoption of spatially resolved diffraction as a routine tool for the study of chemically inhomogeneous energy conversion devices. 
+
+# 2 Analysis protocol 
+
+Analysis of spatially-resolved three-dimensional ( x, y, and 2 θ) diffraction data is fully automated using a sophisticated Python 3 (Van Rossum & Drake Jr, 1995) script calling Topas 7 at the com-mand line (Coelho, 2018), where Topas 7 is utilised to model the experimental data using Rietveld refinement (Rietveld, 1969; Rietveld, 2014) or, for some phases, Pawley refinement (Pawley, 1981). This works by taking a template Topas input file with a set of pre-defined phases, and running the input file multiple times with automated edits made to the file to include or exclude differ-ent phases. In our fomulation, the code also begins by performing a Rietveld refinement against a LaB 6 standard in order to constrain wavelength and instrumental Thompson-Cox-Hastings pseudo-Voigt (Thompson et al. , 1987) peakshape parameters but the code could easily by modified to take a different approach. The script does not require user-input information, such as whether the diffraction pattern in ques-tion is measured on the air or fuel electrode. For each diffraction pattern, the script determines which phases, amongst a series of candidate phases, are present approximately following the pro-cedure outlined in Figure 2, with some deviation for certain phases. This involves one or more of the following steps: 1. Check whether there are peaks matching certain characteristic peaks of a phase in the exper-imental diffraction pattern. 2. Perform a Rietveld refinement with the phase in question both present and absent (but all other assigned phases present before and after refinement) and check that the improvement 5in goodness-of-fit (defined as the ratio of Rwp and Rexp ) exceeds a certain threshold value. 3. Perform a Rietveld refinement with the phase in question present and check that the refined scale factor of the candidate phase exceeds a certain threshold value. 4. Perform a Pawley refinement with the candidate phase and check that the refined peak intensities all exceed a certain threshold value. For different phases, the precise assignment routine depends on morphology, x-ray scattering factor, abundance, and relationship to other phases. For most phases, the assignment algorithm consists of (1), followed by (2) and (3) if algorithm (1) affirms the possible presence of the spinel phases. For silver used in the current collector, the criterion for Rietveld refinement is not met because not all orientations are equally sampled, due to the large size of silver metal particles, and so for phase identification of silver, the assignment algorithm (1) and (4) is used. The precise details of the phase assignment routine will depend on the chemistry of the SOEC and the morphology of the different phases used in the cell. A future experiment utilising the Python code used in this study will likely need to make some modifications to the assignment algorithm due to differences in chemistry and morphology; such modifications would include changing the available phases for the algorithm to identify, and modifying the scale factor/peak intensity thresholds for phase identification. 
+
+2.1 Model refinement details 
+
+Table 1: Summary of structural models used for phase analysis. 
+
+Material Space group LPs (˚ A) Ref 
+
+LSCF-6428 P m ¯3m a ≈ 3.89 Kaufman et al. (2026) Co-rich spinel F d ¯3m a ≈ 8.09 Smith & Hobson (1973) Mixed Fe/Co spinel F d ¯3m a ≈ 8.25 Bhowmik et al. (2020) Fe-rich spinel F d ¯3m a ≈ 8.40 Fleet (1981) (Fe,Co)O F m ¯3m a ≈ 4.25–4 .35 Fjellv˚ ag et al. (1996) 8YSZ F m ¯3m a ≈ 5.146 Batista & Muccillo (2011) Ni F m ¯3m a ≈ 3.53 Hull (1921) NiO F m ¯3m a ≈ 4.196 Barrett & Evans (1964) Gd 0.1Ce 0.9O3−δ (δ ≈ 0.05) F m ¯3m a ≈ 5.44 Bandyopadhyay et al. (2021) SrO F m ¯3m a ≈ 5.142 Primak et al. (1948) Peakshapes were modelled using Thomson-Cox-Hastings pseudo-Voigt (Thompson et al. , 1987). Background was fit using an order-16 Chebyshev polynomial. Initial applications of the protocol involved free refinement of the zero error term, however this led to unreliable trends in lattice parameters which correlated with this zero error parameter [Figure S5]; consequently zero error was fixed to 0.01 ◦ for all analysis presented here. Table 1 lists the phases listed as possible phases in the model with associated symmetry and lattice parameters. 6LSCF-6428, which composes the air electrode, is typically reported to be rhombohedral (Nozaki 
+
+et al. , 2020). However, in the data collected in this study, the rhombohedral peak splitting from the cubic aristotype could not be resolved. Consequently use of the rhombohedral cell resulted in unstable anti-correlations between peak-width parameters and the magnitude of the rhombohedral distortion ( √6ar/c r)−1 (which would be zero for a cubic cell). The LSCF-6428 phase was therefore modelled using a cubic P m ¯3m unit cell ( a ≈ 3.89 ˚ A). Due to the large variation in (Co,Fe) 3O4 spinel lattice parameters with composition, Fe-rich, Co-rich, and intermediate spinel was included as 3 separate possible phases. However, for the corre-sponding rocksalt (Fe,Co)O solid solution it was not necessary to use multiple phases as variation in stoichiometry has a far smaller effect on lattice parameters for (Fe,Co)O compared with the spinels [Figure S6]. Y-stabilised zirconia (YSZ) occurs in two structures: 3YSZ (3mol% yttria) occurs in monoclinic 
+
+P 42/nmc symmetry (Goulas et al. , 2025) and 8YSZ (8mol% yttria) occurs in cubic F m ¯3m sym-metry ( a ≈ 5.146 ˚ A) (Batista & Muccillo, 2011). Although 3YSZ is used in the support layer [Figure 1], we only observe 8YSZ in the spatial range in which measurements were made in this study, and so only 8YSZ is included as a candidate phase. To prevent unnecessary computation, SrO, Fe/Co rocksalt, and Fe/Co spinel are only checked for at positions where LSCF-6428 is present, and Ni and NiO are only checked for if 8YSZ is present. This also avoids assignment of 8YSZ to SrO and vice versa, as these structures have very similar lattice parameters, x-ray scattering amplitude, and identical symmetry. 
+
+# 3 Case study 
+
+SOEC button cells were cut into fragments with two different morphologies. One was a wide, constant-thickness shape we term a “tombstone”, the morphology of which is shown in Figure 3 with an approximate thickness of ∼100 μm. The other is a cylindrical shape, shown in Figure S2, around 100–200 μm in diameter. These SOECs fragments were then studied at beamline 17-2 (Hong et al. ,2025) using an anisotropic micron-focused x-ray beam. For the measurement on the tombstone fragments, the beam-size was 2.0 μm in width and 1.5 μm in height, where height is defined along the inter-electrode direction. This beam size is tunable and can be made narrower or broader in either spatial dimension depending on experimental necessity. We found during the measurements that the cylindrical morphology was not conducive to obtaining useful data, likely due to the high thickness of highly absorbing material which prevented obser-vation of the beam from reaching the far side. We also consider that, even if the measurement had worked, the data would have been difficult to automate the analysis of, due to variable sample length resulting in very different background in resulting diffraction measurements. We therefore present only data from the measurements on the tombstone-shaped SOEC fragment. 7a b
+
+# c
+
+# Ni/3YSZ SL 
+
+# Ni/8YSZ FL 
+
+# Electrolyte 
+
+# Air electrode 
+
+# Region of measurement Figure 3: (a) and (b) SEM images of a tombstone SOEC fragment from the same cell as the fragment studied in this paper. Note that this is not the same actual fragment. (c) Optical image of the tombstone SOEC fragment in the beamline, with the square indicating the region of measurement. FL and SL stand for functional layer and support layer respectively. From the optical image shown in Figure 3(c), we can see a region to the right of the SOEC fragment where it appears there is little sample. Diffraction data in this region does show Bragg peaks associated with expected phases (i.e. LSCF-6428), however these peaks are very small relative to background [SI figure S10]. To quantitatively investigate the extent to which data here is dominated by background, we calculated the fraction of the integrated diffraction data at each position which was not attributable to scattering by the sample (by integrating the Chebyshev polynomial used to model background, and integrating the total diffraction pattern). This is shown in Figure S11. We see in excess of 80% of the data dominated by background in this vicinity. This indicates that this region of the SOEC fragment may have been damaged before measurement, leaving very little of the cell in position in this region. Typically, such issues should be avoided by careful experimental preparation, but in this case we will proceed with this dataset to show how useful information can 8a
+
+# b
+
+# cFigure 4: Heatmap visualising the lattice parameters of (a) GDC, (b) LSCF-6428, and (c) 8YSZ as obtained by automated Rietveld refinement of diffraction data on the SOEC. All three phases are modelled with cubic lattice parameters in this study. White space within the heatmaps indi-cates pixels where the relevant phase is undetected by the algorithm, and is consistent with fuel electrode/air electrode relative positioning. still be obtained from partially compromised data. We have run the automated diffraction analysis over the tombstone SOEC fragment. Example refinements are shown in SI Figures S10, S9, and S8. Figure 4 shows the spatial distribution of lattice parameters obtained by Rietveld refinement for three phases: GDC, LSCF-6428, and YSZ. GDC and LSCF exhibit slight decreases in lattice parameter (and hence unit cell volume) near the electrode surface. Unit cell volume is larger in the presence of oxygen vacancies (Tyunina 
+
+et al. , 2021; Kaufman et al. , 2026), and so a reduced unit cell volume at the surface may indicate that there are fewer oxygen vacancies where the electrode makes contact with air. This is an intuitive result, and consistent with previous μ-XRD studies on SOECs (Nozaki et al. , 2020). Figure 5(a) shows fit quality quantified by goodness-of-fit (the ratio of Rwp to Rexp ) as a function of position. We see that fit quality is poorest in some regions of the fuel electrode. It is easy to perform a diagnostic on this issue using the data obtained by this automated Rietveld analysis. Figure 5(b) shows correlation plots of goodness-of-fit compared with 8YSZ and LSCF scale factor. This clearly shows that fit quality is inversely correlated with 8YSZ content, with a much stronger dependence than for LSCF, indicating that Bragg peaks associated with the 8YSZ phase are poorly modelled by the algorithm. While this may generally indicate an issue with the crystallographic model, in this instance we can see from Figure 5(c) that this fit issue is due to the irregular, jagged peakshapes associated with the 8YSZ phase, peakshapes which cannot easily be modelled. This in 9a
+
+# b cFigure 5: (a) Heatmap showing the goodness-of-fit of fits across the SOEC. (b) Correlation plots of scale factor against goodness-of-fit for LSCF and 8YSZ. (c) Peakshape of 8YSZ ([111] on left, [311] on right), showing the anomalous peakshape and consequent inability of standard Rietveld refinement using a Thompson-Cox-Hastings pseudo-Voigt peakshape to convincingly fit the data. turn stems from a microstructure consisting of a small number of large strained grains. This has been seen previously in the literature, both in electron microscopy studies (Sharif et al. , 1998; Matsui 
+
+et al. , 2008; Huang et al. , 2021) and in diffraction (Quach & Castro, 2012), and stems from the high grain growth rate of 8YSZ at high temperatures. We have tested this in a powder-diffraction experiment detailed in SI, and observed that high-quality 8YSZ powder will coarsen with even relatively brief thermal cycling to elevated temperatures [Figure S14]. The high goodness-of-fit in the fuel electrode is therefore not a failure of the analysis protocol, but is useful information for understanding the microstructural changes occurring in an SOEC on exposure to operating temperatures. Additional phase-distribution heatmaps from the automated refinement are generated in Fig-ures S13 and S12. For the air electrode [Figure S13], the Ag contact paste/current collector is 10 intermittently detected along the top surface. SrO is also identified in the air-electrode region, both near the outer surface facing the current collector and deeper within the electrode toward the electrolyte. While we believe the surface SrO assignments are likely accurate, some assignments closer to the fuel electrode may in practice reflect cubic 8YSZ which is near-identical to SrO by diffraction. For the fuel electrode [Figure S12], Ni and NiO are detected throughout much of the electrode. While the presence of NiO might suggest that the reduction step was incomplete, prior operando 
+
+diffraction (Crain et al. , 2026) and X-ray absorption spectroscopy (Zhu et al. , 2026) results suggest this is unlikely. The relative amounts of Ni and NiO are not spatially uniform: instead, the maps show distinct clusters enriched in each phase, indicating substantial local heterogeneity in the redox state of nickel across the fuel electrode. This observation that such reoxidised regions compose microscale agglomerates suggests they formed during lasering to prepare the fragment for 
+
+μ-XRD, rather than during SOEC operation, because a laser would likely induce very high local temperatures and potentially localised melting. To avoid this in future experiments, such lasering should be performed in inert atmosphere rather than in air, or damaged reasons should be removed by focused ion beam (FIB) . 
+
+# 4 Conclusion 
+
+In this work, we have presented a fully automated analysis protocol for micron-scale, spatially resolved synchrotron X-ray diffraction data over a chemically-inhomogeneous grid. By combin-ing high-flux μXRD measurements with an adaptive phase-identification strategy and automated Rietveld refinement, the protocol overcomes a major bottleneck in the analysis of large, multidi-mensional diffraction datasets. Crucially, the approach does not require prior knowledge of local device architecture or manual intervention during analysis, enabling robust and scalable treatment of thousands of diffraction patterns acquired across complex material cross-sections. Application of the protocol to operated solid oxide electrolyser cells demonstrates its ability to ro-bustly analyse spatially heterogeneous diffraction data and to extract physically meaningful trends across multiple functional layers. With no user input regarding the relative positions of the air elec-trode and fuel electrode, the protocol successfully identifies their positions and hence the relevant phases. The automated workflow captures systematic variations in crystallographic parameters, in particular the tendency for decreased unit cell volume (and hence decreased O vacancy content) in proximity to air, consistent with previous results from Nozaki et al. (2020). These results validate the protocol as a practical and informative tool for post mortem analysis of complex, multi-phase electrochemical devices. More broadly, the analysis framework presented here is readily extensible to other electrochemical and energy-conversion devices, including solid oxide fuel cells, all-solid-state batteries, and photo-voltaic materials, where spatially heterogeneous phase evolution is common. While the protocol 11 represents a significant step toward fully autonomous analysis of spatially resolved diffraction data, there remains scope for further development, for example through the incorporation of machine learning or artificial intelligence approaches for phase recognition, anomaly detection, or adaptive model selection, building directly on the structured and physically grounded outputs of the present method. With modest modification of candidate phase lists and assignment criteria, the protocol can be adapted to different chemistries and morphologies. By reducing the barrier to comprehen-sive, spatially resolved diffraction analysis, this work is expected to facilitate wider adoption of 
+
+μXRD as a routine diagnostic tool and to accelerate the development and durability optimization of these devices. Finally, we believe that while the approach detailed here is an important stepping stone, there remains significant scope to improve upon our approach. A bottleneck with our approach is the need to arbitrarily define threshold scale factors and goodness-of-fit improvements for phase assignments, and further to define the phases that might possibly occur in a dataset before beginning the analysis. With the advent of machine learning and large language models, such user-defined steps may in future be eliminated, further streamlining the process of analysis of complex multi-dimensional diffraction datasets. 
+
+# 5 Experimental 
+
+5.1 Cell fabrication and testing 
+
+Details of SOEC button cell fabrication and operation have been reported previously (Zhu et al. ,2025; Slomski et al. , 2026; Zhu et al. , 2026). Briefly, the cell architecture consists of a 500 μmthick Ni-YSZ support layer, a 20 μm thick fine Ni-YSZ active fuel electrode layer, an ∼7 μm dense YSZ electrolyte, a 5 μm Gd 0.1Ce 0.9O1.95 (GDC) barrier layer, a 20 μm porous 50/50 GDC/LSCF (La 0.6Sr 0.4Co 0.2Fe 0.8O3−δ) air electrode and a porous LSCF contact of varying thickness. Layers are screen printed and fired in successive steps to make the cell, then contacted and reduced on the testing rig. It was cooled and removed after reduction and prior to any long-term testing to serve as a beginning-of-life baseline. 
+
+5.2 Specimen Preparation and Imaging 
+
+Specimens were isolated from the SOECs using an Oxford Lasers A Series micromachining tool (532 nm Laser 10 – 500 ns pulses, max average power 1.5 W). First, a 1 mm diameter disk was removed from the cell by scribing a circle into the Ni-YSZ support layer at 0.375 W over 500 passes at 2 mm/s until the disk was cut loose from the sample bulk. The ∼1 mm disk was then adhered to a 1 mm diameter stainless steel dowel using UV-cure resin. Initial thinning of the specimen was performed operating the laser as a lathe at 0.75 W to reduce the diameter to ∼0.5 mm over a length of ∼0.35 mm to encompass a portion of each electrode and the internal layers. Rectangular specimens were then shaped to final dimensions by scoring two 0.2 mm lines spaced 12 ∼0.2 mm apart along the axial dimension (perpendicular to the electrolyte/electrode interfaces). Then, lines were scored perpendicular to the initial cut from the edge of the sample to the initial axial cut to remove excess specimen. This process was repeated after rotating the sample 90 ◦, with the only difference that the initial scoring lines were placed ∼0.1 mm apart, yielding the rectangular prism specimen with dimensions of ∼ 0.2 mm ×0.1 mm ×0.2 mm. SEM images of the rectangular specimen were acquired using a Nova Nano 630 SEM (Thermo Fisher Scientific, Waltham MA, USA) operated at 5 kV with a 1.8 nA beam current. Secondary electron (SE) imaging mode was used with an Everhart-Thornley detector (ETD). Columnar specimens were shaped to near-final dimensions by performing a second thinning process targeting a final diameter of ∼0.3 mm using a lathing process at 0.25 W. Due to the presence of a laser damaged surface region following laser lathing, a final thinning step was performed on a Thermo Fisher Scientific Helios 5 Laser Hydra Plasma-FIB-SEM using a Xe ion beam operated at 30 kV with 1 μA beam current. SEM images of the polished columns were acquired on the same instrument operated at 5 kV with 1.6 nA beam current. Full-specimen images were acquired in secondary electron (SE) mode with the ETD detector and higher magnification images of the cell layers were acquired in SE mode with the TLD through-lens detector. 
+
+5.3 Synchrotron x-ray diffraction 
+
+SSRL beamline 17-2 is a high brightness in-vacuum undulator insertion device, featuring a multi-layer monochromator for enhanced flux. In the μXRD configuration, mirrors with acceptance of 9 milliradians in the vertical plane and 4.5 milliradians in the horizontal plane are used to focus the beam to a spot size on the order of 100s of microns in vertical and horizontal dimensions upstream of the sample. The beam then diverges and is refocused by secondary Kirkpatrick-Baez mirrors to a small beam size. This step size for the spatially-resolved measurements were 2 .0 × 1.0 μm for the measurements on the tombstone-shaped SOEC fragments, and 2 .4 × 3.4 μm for the measurements with the cylindrical SOEC fragments; these step sizes were roughly informed by the beam profile [Figure S4] to minimize pixel overlap while avoiding undersampling. An optical camera is focused to the X-ray focal point with a tolerance of approximately ±5 μm. The leading surface of the SOEC cylindrical posts was initially aligned to the optical axis parallel to the X-ray beam, followed by mapping the horizontal and vertical bounds of the sample using translations of the sample in the direct beam. Mapping arrays were achieved by scanning the sample horizontally across the width of the sample with step sizes equal to the beam width. Following the completion of a line scan, a vertical translation equal to the vertical beam profile was performed and the horizontal line scan repeated. Mapping was performed until a translation of at least 80 μmrelative to the air-LSCF interface. Two-dimensional X-ray diffraction images were measured with an Eiger 4M hybrid photon count-ing detector positioned ∼235 mm from the sample position, as calibrated by a NIST 660c LaB 6
+
+standard. 2D images were normalized by incident beam intensity and sample transmission as de-13 termined by a photodiode beam stop positioned behind the sample and subsequently integrated into 1D patterns using the Nika macro (Ilavsky, 2012) within Igor Pro. 
+
+# Acknowledgements 
+
+L. A. V. N-C thanks John S. O. Evans (Durham University) for useful discussions. All graphs prepared using MatPlotLib (Hunter, 2007) implemented in Python (Van Rossum & Drake Jr, 1995). 
+
+# Funding 
+
+This work was authored in part by the National Laboratory of the Rockies for the U.S. Department of Energy (DOE) under Contract No. DE-AC36-08GO28308. Use of the Stanford Synchrotron Radiation Lightsource, SLAC National Accelerator Laboratory, is supported by the U.S. DOE, Office of Science, Office of Basic Energy Sciences under Contract No. DE-AC02-76SF00515. The views expressed in the article do not necessarily represent the views of the DOE or the U.S. Government. M.G.P.’s work is supported in part by the U.S. Department of Energy, Office of Science, Office of Workforce Development for Teachers and Scientists (WDTS) under the Science Undergraduate Laboratory Internships (SULI) Program.     
+
+> Conflicts of interest: None to declare.
+> Data availability: The code prepared for this project, and data used in this analysis, are available for use in a public repository on GitHub at https://github.com/lnaglecocco/muXRD-2026 (Nagle-Cocco, 2026). Reuse of the code, with or without modification, is welcomed, with credit given by citing this paper.
+
+# References 
+
+Bandyopadhyay, A., Sarkar, B. J., Sutradhar, S., Mandal, J. & Chakrabarti, P. K. (2021). Journal of Alloys and Compounds , 865 , 158838. Barrett, C. & Evans, E. (1964). Journal of the American Ceramic Society , 47 (10), 533–533. Batista, R. M. & Muccillo, E. N. S. (2011). Ceramics International , 37 (6), 1929–1934. Bhowmik, R. N., Babu, P. D., Sinha, A. K. & Bhisikar, A. (2020). Inorganic Chemistry , 59 (10), 6763–6773. Coelho, A. A. (2018). Journal of Applied Crystallography , 51 (1), 210–218. https://journals.iucr.org/paper?jo5037 https://journals.iucr.org/j/issues/2018/01/00/jo5037/ Crain, C. A., Kane, N., Hartvigsen, J. L., Casteel, M., Arthur, R. J., Reynolds, K., Tucker, M. C., Shulda, S., Ginley, D. S. & Strange, N. A. (2026). Chemistry of Materials , 38 (9), 4402–4412. De Nolf, W., Vanmeert, F. & Janssens, K. (2014). Applied Crystallography , 47 (3), 1107–1117. Fjellv˚ ag, H., Grønvold, F., Stølen, S. & Hauback, B. (1996). Journal of Solid State Chemistry ,
+
+124 (1), 52–57. Fleet, M. E. (1981). Structural Science , 37 (4), 917–920. Flemming, R. L. (2007). Canadian Journal of Earth Sciences , 44 (9), 1333–1346. Gonzalez, V., Cotte, M., Vanmeert, F., de Nolf, W. & Janssens, K. (2020). Chemistry–A European Journal , 26 (8), 1703–1719. Goulas, A., Ozkan, B., Saremi-Yarahmadi, S. & Vaidhyanathan, B. (2025). Open Ceramics , p. 100785. 14 Hauch, A., K¨ ungas, R., Blennow, P., Hansen, A. B., Hansen, J. B., Mathiesen, B. V. & Mogensen, M. B. (2020). Science , 370 (6513), eaba6118. Hoffman, A. S., Singh, J. A., Bent, S. F. & Bare, S. R. (2018). Synchrotron Radiation , 25 (6), 1673–1682. Hong, Y., Balcazar, M. D., Robles, R., Arthur, R., Takacs, C., Sato, T., Zhu, D. & Halavanau, A. (2025). In Proceedings of the North American Particle Accelerator Conference (NAPAC2025) ,pp. 1000–1002. Sacramento, CA, USA: JACoW Publishing. THP027, MC2 - Photon Sources and Electron Accelerators, Thursday Poster Session. https://doi.org/10.18429/JACoW-NAPAC2025-THP027 Huang, Y., Shen, Y., Zeng, Y., Song, X., Lin, C., Zhang, J. & Guo, X. (2021). Ceramics Interna-tional , 47 (4), 5559–5569. Hull, A. W. (1921). Physical Review , 17 (5), 571. Hunter, J. D. (2007). Computing in Science & Engineering , 9(3), 90–95. Ilavsky, J. (2012). Applied Crystallography , 45 (2), 324–328. Kaufman, J. L., Lei, Y., Nagle-Cocco, L. A. V., Kane, N. J., Rowberg, A. J. E., Hartvigsen, J. L., Strange, N. A., Abernathy, H., Wood, B. C. & Kweon, K. E. (2026). In preparation .Kim, J., Kim, H.-Y., Park, J., Kim, S., Rah, S., Lim, J. & Nam, K. H. (2018). Synchrotron Radiation , 25 (1), 289–292. Li, Y., Liu, J., Zhao, X., Liu, W., Geng, T., Li, A. & Zhang, X. (2024). arXiv preprint arXiv:2403.10042 .Liu, M. B. & Yildiz, B. (2024). Chemistry of Materials , 36 (21), 10571–10582. Lu, Z., Darvish, S., Hardy, J., Templeton, J., Stevenson, J. & Zhong, Y. (2017). Journal of The Electrochemical Society , 164 (10), F3097. Matsui, K., Yoshida, H. & Ikuhara, Y. (2008). Acta materialia , 56 (6), 1315–1325. Nagle-Cocco, L. A. V., (2026). muXRD-2026: Automated phase identification and rietveld/pawley refinement of spatially-resolved, micron-focused synchrotron x-ray diffraction data. https: //github.com/lnaglecocco/muXRD-2026 . GitHub repository. Neidhardt, J. P. & Bessler, W. G. (2019). Chemie Ingenieur Technik , 91 (6), 843–855. Nozaki, H., Matsuo, H., Hayashi, Y., Kadoura, H. & Fujita, S. (2020). Materials Letters , 277 ,128383. Pawley, G. (1981). Applied Crystallography , 14 (6), 357–361. Perz, M., Bucher, E., Gspan, C., Waldh¨ ausl, J., Hofer, F. & Sitte, W. (2016). Solid State Ionics ,
+
+288 , 22–27. Primak, W., Kaufman, H. & Ward, R. (1948). Journal of the American Chemical Society , 70 (6), 2043–2046. Quach, D. V. & Castro, R. H. R. (2012). Journal of Applied Physics , 112 (8). Rietveld, H. M. (1969). Applied Crystallography , 2(2), 65–71. Rietveld, H. M. (2014). Physica Scripta , 89 (9), 098002. Rowberg, A. J. E., Slomski, H. S., Kim, N., Strange, N. A., Gorman, B. P., Shulda, S., Ginley, D. S., Kweon, K. E. & Wood, B. C. (2024). Chemistry of Materials , 36 (13), 6464–6474. Sharif, A. A., Imamura, P. H., Mitchell, T. E. & Mecartney, M. L. (1998). Acta Materialia , 46 (11), 3863–3872. Slomski, H. S., Rowberg, A. J., Van Winkle, M., Nagle-Cocco, L. A. V., Strange, N. A., Kane, N., Hartvigsen, J. L., Casteel, M. J., Ginley, D. S., Wood, B. C. et al. (2026). Journal of Power Sources , 669 , 239398. Smith, W. L. & Hobson, A. D. (1973). Structural Science , 29 (2), 362–363. Stone, K. H., Cosby, M. R., Strange, N. A., Thampy, V., Walroth, R. C. & Troxel Jr, C. (2023). 
+
+Journal of Applied Crystallography , 56 (5). Tang, K., Zheng, L., Zhao, Y. D., Liu, S. H., Ma, C. Y. & Dong, Y. (2019). Synchrotron Radiation ,
+
+26 (5), 1835–1842. Thompson, P., Cox, D. E. & Hastings, J. B. (1987). Journal of Applied Crystallography , 20 (2), 79–83. Tyunina, M., Pacherova, O., Kocourek, T. & Dejneka, A. (2021). Scientific Reports , 11 (1), 15247. Van Rossum, G. & Drake Jr, F. L. (1995). Python reference manual . Centrum voor Wiskunde en Informatica Amsterdam. Virtanen, P., Gommers, R., Oliphant, T. E., Haberland, M., Reddy, T., Cournapeau, D., Burovski, E., Peterson, P., Weckesser, W., Bright, J., van der Walt, S. J., Brett, M., Wilson, J., Millman, 15 K. J., Mayorov, N., Nelson, A. R. J., Jones, E., Kern, R., Larson, E., Carey, C. J., Polat, ˙I., Feng, Y., Moore, E. W., VanderPlas, J., Laxalde, D., Perktold, J., Cimrman, R., Henriksen, I., Quintero, E. A., Harris, C. R., Archibald, A. M., Ribeiro, A. H., Pedregosa, F., van Mulbregt, P. & SciPy 1.0 Contributors (2020). Nature Methods , 17 , 261–272. Wei, B., Chen, K., Zhao, L., L¨ u, Z. & Jiang, S. P. (2015). Physical Chemistry Chemical Physics ,
+
+17 (3), 1601–1609. Yumoto, H., Koyama, T., Yamazaki, H., Senba, Y., Hayashi, Y., Osaka, T., Inoue, I., Tamasaku, K., Goto, S., Yabashi, M. & Ohashi, H. (2025). Synchrotron Radiation , 32 (5). Zhu, Z., Dzara, M. J., Slomski, H., Van Winkle, M., Hathaway, O., Nagle-Cocco, L. A. V., Strange, N. A., Gorman, B. P., Shulda, S. & Tucker, M. C. (2026). Journal of Power Sources , 674 ,239770. Zhu, Z., Slomski, H. S., Dzara, M. J., Crain, C. A., Strange, N. A., Ginley, D. S., Gorman, B. P., Shulda, S. & Tucker, M. C. (2025). Journal of Power Sources , 642 , 236958. 16 Supplementary Information 1 Electron microscopy 
+
+In this section we present electron microscopy images of the solid oxide electrolyser cell fragments studied in this work. Figure S2 shows the cylindrical SOEC fragments we measured, which did not yield useful diffraction due to the high absorption and inconsistent path length. Figure S1 shows SOEC fragments with the “tombstone” morphology studied in this work. 
+
+Figure S1: Image of tombstone-shaped SOEC fragments. Top: an SOEC fragment from the cell investigated in this study. Bottom: an SOEC fragment from a voltage-cycled cell which may be the subject of a future work. 17 Figure S2: Image of cylinder-like SOEC fragments which proved unsuitable for spatially-resolved cross-sectional μ-XRD due to the large resulting path length through highly-absorbing material, and the variable sample width. 18 2 Optical images of SOEC fragments 
+
+In this section, we present in Figure S3 the optical images of the tombstone SOEC fragments studied in this work. a b
+
+Figure S3: Optical images of two example SOEC fragments in tombstone configuration, as observed within beamline 17-2. (a) is the sample studied in this work, and (b) is a different SOEC fragment. 19 3 Beam profile 
+
+The focused beam profile was characterised by scanning a sharp edge through the beam and fitting the derivative of the resulting photodiode signal with a pseudo-Voigt function using SciPy (Virtanen 
+
+et al. , 2020). The resulting fits are shown in Figure S4. For the tombstone SOEC fragments, the horizontal beam width was 2 .83 ± 0.11 μm (Figure S4a) and the vertical beam height was 1.468 ± 0.027 μm (Figure S4c). For the cylindrical fragments, the corresponding dimensions were 3.360 ± 0.044 μm horizontally (Figure S4b) and 2 .312 ± 0.020 μm vertically (Figure S4d). The slightly increased beam dimensions for the cylindrical specimens reflect differences in optical con-figuration and focusing conditions between measurement sessions, a consequence of the difficulty in achieving such high focus. These experimentally determined beam sizes were used to roughly inform the step size in spatial mapping, ensuring minimal undersampling while avoiding excessive oversampling of the illuminated volume. a b
+
+# c d
+
+Figure S4: The focused beam width, as determined by fitting a pseudo-Voigt peakshape, for the (a,b) horizontal and (b,d) vertical beam directions, for the (a,b) tombstone SOEC fragments and (c,d) cylindrical SOEC fragments. 20 4 Results of refining zero error 
+
+In the results presented in this work, we keep zero error fixed across all positions. While this may represent an issue if surface texture results in variation in the beam path length to the sample as a function of position, we ultimately found that refining zero error resulted in problematic correlations between lattice parameters and zero error, as shown in Figure S5. 21 a
+
+# b
+
+# c
+
+# dFigure S5: A figure showing the correlation between lattice parameters and zero error, if zero error is allowed to refine. To avoid this outcome, zero error should not be allowed to refine freely during analysis. Note that the rest of the analysis in this manuscript uses fixed zero error. (a) A heatmap over the SOEC showing the variation in zero error. (b) A heatmap over the SOEC showing variation in YSZ cubic lattice parameter, which clearly correlates with refined zero error. (c) A heatmap over the SOEC showing variation in LSCF-6428 cubic lattice parameter, which clearly correlates with refined zero error. (d) A histogram of refined zero errors over all pixels in this analysis. 22 5 Dependence of lattice parameter on Fe:Co content for metal oxides 
+
+As discussed in the main text, spinels M3O4 and rocksalts M O (where M is a combination of Fe and Co) exhibit different dependence of lattice parameter on stoichiometry. Figure S6 shows the dependence for rocksalt and Figure S7 shows the dependence for spinels, using various data from the Inorganic Crystal Structure Database. 0.0 0.2 0.4 0.6 0.8 1.0 
+
+x in Fe xCo 1 xO
+
+4.25 
+
+4.26 
+
+4.27 
+
+4.28 
+
+4.29 
+
+4.30 
+
+4.31 
+
+4.32 
+
+> Lattice parameter (Å)
+
+CoO data 
+
+FeO data 
+
+Vegard s law (mean trend) 
+
+Figure S6: Dependence of lattice parameter on composition for the FeO-CoO rocksalt solid solution assuming Vegard’s law behaviour, using various end-member lattice parameters reported on the Inorganic Crystal Structure Database (collection codes: CoO 128532, 9865, 53058, 191776, 245319, 245320, 245321, 245322, 245323, 245324; FeO 82233, 633038). 23 0.0 0.5 1.0 1.5 2.0 2.5 3.0 3.5 
+
+8.10 
+
+8.15 
+
+8.20 
+
+8.25 
+
+8.30 
+
+8.35 
+
+8.40 
+
+8.45 
+
+> Lattice Parameter
+
+# Co fraction           
+
+> Equation y = Intercept + B1*x^1 +
+> B2*x^2 + B3*x^3
+> Plot Lattice Parameter
+> Weight No Weighting
+> Intercept 8.37231 ± 0.00714
+> B1 0.05144 ± 0.02974
+> B2 -0.03334 ± 0.02753
+> B3 -0.00515 ± 0.00647
+> Residual Sum of Squ 0.03333
+> R-Square (COD) 0.94933
+> Adj. R-Square 0.94679
+
+# Fe 3O4
+
+# Co 3O4
+
+# Normal spinel 
+
+# Inverse spinel Figure S7: Dependence of lattice parameter on composition for the Fe 3O4-Co 3O4 spinel solid solu-tion, using various sets of lattice parameters reported on the Inorganic Crystal Structure Database. In the table shows the results of a fit using an order-3 polynomial, demonstrating that Vegard’s law is not followed here. 24 6 Example diffraction analysis 
+
+In this section, we show some example final refinements performed by the protocol described in this work. Figures S8–S10 present representative diffraction patterns and associated refinements from different regions of the SOEC fragment. The first example, Figure S8, from the fuel electrode, shows a Rietveld fit in which Ni and NiO coexist with 8YSZ, with the 8YSZ phase producing char-acteristic spikes in the difference curve due to its morphology. The second and third examples are taken from the air electrode and illustrate combined Rietveld and Pawley fits using the protocol-identified phases. While the second air-electrode region exhibits a well-resolved pattern, the third [Figure S10] corresponds to a partially crumbled region of the fragment, leading to strong back-ground contributions that dominate the diffraction signal, consistent with the optical observations and the background fraction heatmap, Figure S11, discussed elsewhere. 
+
+Figure S8: An example diffraction pattern at the fuel electrode of the SOEC fragment, in the 10th row and 75th column of the measurement grid, with associated Rietveld fit using the phases identified by the protocol. Ni and NiO coexist with 8YSZ, with 8YSZ giving rise to spikes in the difference pattern due to the phase morphology as discussed in the main text of the manuscript. 25 Figure S9: An example diffraction pattern at the air electrode of the SOEC fragment, in the 2nd row and 5th column of the measurement grid, with associated Rietveld and Pawley fit using the phases identified by the protocol. 26 Figure S10: An example diffraction pattern at the air electrode of the SOEC fragment, in the 1st row and 71st column of the measurement grid, with associated Rietveld and Pawley fit using the phases identified by the protocol. This occurs in a region where we believe the SOEC fragment partially crumbled, as suggested by the optical image in Figure S3, which is why the data is dominated by background effects. This background domination is reflected by Figure S11 which is a heatmap showing the fraction of diffraction data which is background. 27 7 Heatmaps of SOEC from refinement algorithm 
+
+In this section, we show some additional outputs of our automated analysis protocol. Figure S11 shows the fraction of data which is due to background; a high ratio indicates poor data quality. This figure is consistent with the optical image shown earlier [Figure S3] which indicates that part of the SOEC fragment may have crumbled. Figure S12 shows the distributions of scale factor for the phases that occur at the fuel electrode. Figure S13 shows the distributions of scale factor or (for silver, which is treated by Pawley approach) integrated peak intensity for the phases that occur at the air electrode. a
+
+# b
+
+Figure S11: The ratio between the integrated background (which is modelled in the Rietveld algorithm as a Chebyshev polynomial) and the total integrated data for (a) the SOEC fragment studied in this work and (b) another SOEC fragment measured in the same experiment. Regions where the ratio is very high indicate low data quality, likely due to low sample quality. 28 a
+
+# b
+
+# cFigure S12: The Rietveld scale factors obtained for the fuel electrode phases (a) 8YSZ, (b) NiO, and (c) Ni metal, according to the automated protocol in this work, for a tombstone SOEC fragment in which air electrode is at the top and fuel electrode is at the bottom. 29 a
+
+# b
+
+# c
+
+# dFigure S13: The Rietveld scale factors obtained for the air electrode phases (a) SrO, (b) Co xFe 1−xOrocksalt, and (c) LSCF-6428. (d) shows the intensity of the first Bragg peak associated with the Ag contact paste, visible for some part of the surface of the sample, as determined by Pawley refinement for that phase. These results determined by the automated protocol in this work, for a tombstone SOEC fragment in which air electrode is at the top and fuel electrode is at the bottom. 30 8 Powder diffraction experiment on 8YSZ 
+
+To understand the grain coarsening observed in 8YSZ observed in the micron-focused spatially-resolved diffraction experiment in this work, we performed an in situ heating experiment on beam-line 2-1 at SSRL. 
+
+8.1 Methods for powder diffraction experiment 
+
+Cerium (IV) oxide with 20mol% Gd dopant (GDC) was purchased from Sigma Aldrich, with ad-vertised particle size < 100 nm. ZrO 2 stabilised with 8mol% Y 2O3 (YSZ), with proclaimed particle size D 50 in the range 3–5 μm, was purchased from Fuel Cell Materials. These two materials were mixed in a 50:50 ratio by mass. An aliquot of this GDC-YSZ mixture was placed in a 1.0 mm outer diameter, 0.58 mm inner di-ameter quartz capillary and measured on BL2-1 (Stone et al. , 2023) at SSRL using an x-ray beam of energy 17 keV. Heating was supplied using resistive coils mounted to a sample cell described elsewhere (Hoffman et al. , 2018), with temperature recorded using a K-type thermocouple. The sample was heated to 750 ◦C, held for 2 hrs, and cooled to room-temperature, measured continuously throughout this process. 
+
+8.2 Results 
+
+The 8YSZ [220] peak at room temperature is shown in Figure S14 before and after a thermal cycle to 750 ◦C. There is clear evidence of inhomogeneous grain growth, both in terms of narrowing of the peak, and reduction in peakshape quality due to inhomogeneous grain size. This explains the failure of the analysis protocol to accurately model the 8YSZ peakshape, as shown in Figure 5. 31 Figure S14: 8YSZ [220] peak at 25 ◦C before and after the heating/cooling cycle, in a powder diffraction experiment at beamline 2-1 where GDC and 8YSZ were mixed in a 50:50 mass ratio. 32
