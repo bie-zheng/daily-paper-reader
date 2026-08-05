@@ -1,0 +1,103 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-08-05T21:52:33.104553+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 1,
+    "deep_cap": 6,
+    "deep_selected": 1,
+    "quick_candidates": 1,
+    "quick_skim_target": 11,
+    "quick_selected": 1
+  },
+  "deep_dive": [
+    {
+      "id": "2608.03798v1",
+      "source": "arxiv",
+      "title": "From phase transformation to amorphization: damage accumulation in Yb-implanted \\b{eta}-Ga2O3",
+      "abstract": "This study provides a comprehensive analysis of the radiation response and structural evolution of differently oriented $β$-Ga$_{2}$O$_{3}$ single crystals subjected to Yb ion implantation over a wide fluence range from $5 \\times 10^{12}$ to $1 \\times 10^{16}$~cm$^{-2}$ ($0.04$--$74$~dpa). A multi-technique approach (RBS/c, PAS, HRTEM, and HRXRD) was employed to investigate the mechanisms of damage accumulation. The results reveal a multi-stage process of defect evolution. At a critical threshold of around $0.4$~dpa, the accumulation of lattice strain triggers a phase transformation from monoclinic $β$-Ga$_{2}$O$_{3}$ to a defective spinel structure of $γ$-Ga$_{2}$O$_{3}$. Notably, the formation of this new phase is accompanied by strain relaxation. With further irradiation, defects develop within the crystal structure of $γ$-Ga$_{2}$O$_{3}$. The associated atomic reorganization at this stage is reflected by a distinct dip in the damage accumulation curve and the appearance of stacking faults in the subsurface region of the implanted layer. In contrast to previous reports suggesting high radiation stability of this phase, the present study clearly demonstrates that continuous defect accumulation results in a significant increase in both displaced atoms and vacancy-type defects, with a strong depth dependence in their type and density. Ultimately, at an irradiation level of approximately $7$~dpa, the surface layer amorphizes. With further irradiation, the amorphous layer expands, gradually replacing the transient $γ$-Ga$_{2}$O$_{3}$ phase. These findings reveal that the radiation tolerance of gallium oxide is highly sensitive to ion-specific interactions and strain-induced instabilities, thereby challenging the previously assumed robustness of this material under high-fluence ion irradiation.",
+      "authors": [
+        "Joanna Matulewicz",
+        "Renata Ratajczak",
+        "Ewa Grzanka",
+        "Maciej Oskar Liedke",
+        "Damian Kalita",
+        "Eric Hirschmann",
+        "Andreas Wagner",
+        "Mikolaj Grabowski",
+        "Michal A. Stróżyk",
+        "Cyprian Mieszczyński",
+        "Przemyslaw Jóźwik",
+        "Ulrich Kentsch",
+        "Rene Heller",
+        "Frederico Garrido"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ],
+      "published": "2026-08-04T15:12:32+00:00",
+      "link": "https://arxiv.org/pdf/2608.03798v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "directly investigates radiation-induced defect evolution and microstructure changes via multi-technique characterization of implanted crystals",
+      "llm_evidence_cn": "直接研究离子辐照诱导的缺陷演化与微观结构变化，采用多技术表征",
+      "llm_evidence": "直接研究离子辐照诱导的缺陷演化与微观结构变化，采用多技术表征",
+      "canonical_evidence": "直接研究离子辐照诱导的缺陷演化与微观结构变化，采用多技术表征",
+      "llm_tldr_en": "This study directly addresses radiation-induced defect evolution and microstructure changes in Yb-implanted beta-Ga2O3 (0.04-74 dpa), using RBS/c, PAS, HRTEM and HRXRD to reveal multi-stage damage accumulation and a strain-triggered monoclinic-to-spinel phase transformation before amorphization.",
+      "llm_tldr_cn": "针对离子辐照下β-Ga2O3的辐射响应问题，本文对Yb离子注入的单晶样品在0.04–74 dpa范围内进行了系统研究，综合运用RBS/c、正电子湮没谱、高分辨透射电镜和X射线衍射等多种表征手段。结果表明损伤累积呈现多阶段演化特征，在约0.4 dpa时晶格应变诱发单斜β相向缺陷尖晶石γ相转变，并最终导致非晶化。该工作为理解辐照诱导缺陷演化与微观结构变化提供了重要的实验依据。",
+      "llm_tldr": "针对离子辐照下β-Ga2O3的辐射响应问题，本文对Yb离子注入的单晶样品在0.04–74 dpa范围内进行了系统研究，综合运用RBS/c、正电子湮没谱、高分辨透射电镜和X射线衍射等多种表征手段。结果表明损伤累积呈现多阶段演化特征，在约0.4 dpa时晶格应变诱发单斜β相向缺陷尖晶石γ相转变，并最终导致非晶化。该工作为理解辐照诱导缺陷演化与微观结构变化提供了重要的实验依据。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation induced defect evolution and microstructure changes",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2607.27820v1",
+      "source": "arxiv",
+      "title": "Deep Learning for Accelerated Long-Horizon Forecasting of Multicomponent Multiphase Microstructure Evolution in High-Entropy Alloys",
+      "abstract": "Phase-field modeling provides a powerful approach for predicting microstructure evolution but becomes computationally prohibitive for multicomponent and multiphase systems over large spatial and temporal scales. This work presents an AE-GCN-LSTM surrogate framework for long-horizon forecasting of microstructure evolution in the multicomponent AlCrFeNi high-entropy alloy system containing coexisting BCC and FCC phases. A multi-head autoencoder compresses the four elemental concentration fields and phase-field order parameter into latent representations, which are formulated as graphs for learning their spatial and temporal evolution. The framework accurately forecasts microstructure evolution over horizons extending to 3,000,000 simulation timesteps. Its robustness is systematically evaluated under previously unseen conditions without retraining, fine-tuning, or parameter adaptation. These evaluations include variations in FCC precipitate size and initial position, microstructures containing one, two, and five FCC precipitates, and complex phase interactions involving precipitate merging and splitting. Although trained only on 100 x 100 computational domains containing a single nominal alloy composition, the framework is successfully transferred to larger 256 x 256 and 512 x 512 systems and to previously unseen AlCrFeNi compositions. Across the evaluated configurations, the model preserves the dominant phase morphology and compositional evolution while providing computational speedups ranging from approximately 7200 to 62300 relative to conventional phase-field simulations. These results demonstrate that latent graph-based AE-GCN-LSTM forecasting provides a scalable and computationally efficient surrogate for long-horizon simulation of multicomponent, multiphase microstructures and offers a promising foundation for high-throughput alloy design.",
+      "authors": [
+        "Hamidreza Razavi",
+        "Nele Moelans"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci",
+        "cs.AI",
+        "cs.CE"
+      ],
+      "published": "2026-07-30T08:00:39+00:00",
+      "link": "https://arxiv.org/pdf/2607.27820v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "surrogate modeling of long-horizon microstructure evolution in multicomponent alloys; transferable to irradiated FeCr microstructure simulation",
+      "llm_evidence_cn": "多组元合金微观组织演化的深度学习代理模型，可迁移用于辐照FeCr组织模拟",
+      "llm_evidence": "多组元合金微观组织演化的深度学习代理模型，可迁移用于辐照FeCr组织模拟",
+      "canonical_evidence": "多组元合金微观组织演化的深度学习代理模型，可迁移用于辐照FeCr组织模拟",
+      "llm_tldr_en": "This work presents an AE-GCN-LSTM surrogate that accelerates long-horizon forecasting of multicomponent multiphase microstructure evolution in AlCrFeNi alloys, providing a transferable computational tool for modeling radiation-induced microstructure changes in FeCr alloys.",
+      "llm_tldr_cn": "针对多组元多相体系相场模拟计算量大的问题，本文提出AE-GCN-LSTM代理模型，对AlCrFeNi高熵合金中BCC/FCC共存的浓度场与相场进行长期演化预测。该方法以多注意力自编码器压缩场变量并构造图结构学习时空演化，大幅提升预报速度。实验显示其能准确预测长时间尺度组织演变，可为FeCr合金辐照条件下缺陷和析出相演化研究提供高效的迁移计算工具。",
+      "llm_tldr": "针对多组元多相体系相场模拟计算量大的问题，本文提出AE-GCN-LSTM代理模型，对AlCrFeNi高熵合金中BCC/FCC共存的浓度场与相场进行长期演化预测。该方法以多注意力自编码器压缩场变量并构造图结构学习时空演化，大幅提升预报速度。实验显示其能准确预测长时间尺度组织演变，可为FeCr合金辐照条件下缺陷和析出相演化研究提供高效的迁移计算工具。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation induced defect evolution and microstructure changes",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

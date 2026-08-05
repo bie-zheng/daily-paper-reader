@@ -1,0 +1,39 @@
+{
+  "label": "2026-08-05",
+  "date": "2026-08-05",
+  "generated_at": "2026-08-05T21:55:16",
+  "count": 2,
+  "papers": [
+    {
+      "paper_id": "202608/05/2608.03798v1-from-phase-transformation-to-amorphization-damage-accumulation-in-yb-implanted-beta-ga2o3",
+      "section": "deep",
+      "title_en": "From phase transformation to amorphization: damage accumulation in Yb-implanted \\b{eta}-Ga2O3",
+      "authors": "Joanna Matulewicz, Renata Ratajczak, Ewa Grzanka, Maciej Oskar Liedke, Damian Kalita, Eric Hirschmann, Andreas Wagner, Mikolaj Grabowski, Michal A. Stróżyk, Cyprian Mieszczyński, Przemyslaw Jóźwik, Ulrich Kentsch, Rene Heller, Frederico Garrido",
+      "date": "2026-08-04",
+      "pdf": "https://arxiv.org/pdf/2608.03798v1",
+      "score": "9.0",
+      "evidence": "直接研究离子辐照诱导的缺陷演化与微观结构变化，采用多技术表征",
+      "tldr": "针对β-Ga2O3单晶的Yb离子辐照损伤问题，系统研究了不同晶向样品在宽通量范围（0.04–74 dpa）下的结构演化。结合RBS/c、PAS、HRTEM和HRXRD多种技术，揭示了多阶段缺陷积累过程：在约0.4 dpa时晶格应变积累触发单斜β相向缺陷尖晶石γ相转变，并伴随应变弛豫；继续辐照导致γ相内缺陷积累，损伤曲线出现下降、亚表面产生层错；至约7 dpa表层非晶化，随后非晶层扩展并逐渐取代瞬态γ相。结果表明，Ga2O3的耐辐照性对离子种类和应变诱导不稳定性高度敏感，挑战了其高辐照稳定性假设。",
+      "tags": "query:rad-damage",
+      "abstract_en": "This study provides a comprehensive analysis of the radiation response and structural evolution of differently oriented $β$-Ga$_{2}$O$_{3}$ single crystals subjected to Yb ion implantation over a wide fluence range from $5 \\times 10^{12}$ to $1 \\times 10^{16}$~cm$^{-2}$ ($0.04$--$74$~dpa). A multi-technique approach (RBS/c, PAS, HRTEM, and HRXRD) was employed to investigate the mechanisms of damage accumulation. The results reveal a multi-stage process of defect evolution. At a critical threshold of around $0.4$~dpa, the accumulation of lattice strain triggers a phase transformation from monoclinic $β$-Ga$_{2}$O$_{3}$ to a defective spinel structure of $γ$-Ga$_{2}$O$_{3}$. Notably, the formation of this new phase is accompanied by strain relaxation. With further irradiation, defects develop within the crystal structure of $γ$-Ga$_{2}$O$_{3}$. The associated atomic reorganization at this stage is reflected by a distinct dip in the damage accumulation curve and the appearance of stacking faults in the subsurface region of the implanted layer. In contrast to previous reports suggesting high radiation stability of this phase, the present study clearly demonstrates that continuous defect accumulation results in a significant increase in both displaced atoms and vacancy-type defects, with a strong depth dependence in their type and density. Ultimately, at an irradiation level of approximately $7$~dpa, the surface layer amorphizes. With further irradiation, the amorphous layer expands, gradually replacing the transient $γ$-Ga$_{2}$O$_{3}$ phase. These findings reveal that the radiation tolerance of gallium oxide is highly sensitive to ion-specific interactions and strain-induced instabilities, thereby challenging the previously assumed robustness of this material under high-fluence ion irradiation.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202608/05/2607.27820v1-deep-learning-for-accelerated-long-horizon-forecasting-of-multicomponent-multiphase-microstructure-evolution-in-high-entropy-alloys",
+      "section": "quick",
+      "title_en": "Deep Learning for Accelerated Long-Horizon Forecasting of Multicomponent Multiphase Microstructure Evolution in High-Entropy Alloys",
+      "authors": "Hamidreza Razavi, Nele Moelans",
+      "date": "2026-07-30",
+      "pdf": "https://arxiv.org/pdf/2607.27820v1",
+      "score": "6.0",
+      "evidence": "多组元合金微观组织演化的深度学习代理模型，可迁移用于辐照FeCr组织模拟",
+      "tldr": "针对多组分多相高熵合金微观组织演化相场模拟计算成本高的问题，提出AE-GCN-LSTM代理框架。利用多头自编码器将组分场和序参量压缩为图结构潜在表示，学习时空演化，可预测长达300万步的微观组织演化。在未见条件、更大尺寸和不同成分下均保持鲁棒性，速度提升约7200-62300倍，为高通量合金设计提供高效工具。",
+      "tags": "query:rad-damage",
+      "abstract_en": "Phase-field modeling provides a powerful approach for predicting microstructure evolution but becomes computationally prohibitive for multicomponent and multiphase systems over large spatial and temporal scales. This work presents an AE-GCN-LSTM surrogate framework for long-horizon forecasting of microstructure evolution in the multicomponent AlCrFeNi high-entropy alloy system containing coexisting BCC and FCC phases. A multi-head autoencoder compresses the four elemental concentration fields and phase-field order parameter into latent representations, which are formulated as graphs for learning their spatial and temporal evolution. The framework accurately forecasts microstructure evolution over horizons extending to 3,000,000 simulation timesteps. Its robustness is systematically evaluated under previously unseen conditions without retraining, fine-tuning, or parameter adaptation. These evaluations include variations in FCC precipitate size and initial position, microstructures containing one, two, and five FCC precipitates, and complex phase interactions involving precipitate merging and splitting. Although trained only on 100 x 100 computational domains containing a single nominal alloy composition, the framework is successfully transferred to larger 256 x 256 and 512 x 512 systems and to previously unseen AlCrFeNi compositions. Across the evaluated configurations, the model preserves the dominant phase morphology and compositional evolution while providing computational speedups ranging from approximately 7200 to 62300 relative to conventional phase-field simulations. These results demonstrate that latent graph-based AE-GCN-LSTM forecasting provides a scalable and computationally efficient surrogate for long-horizon simulation of multicomponent, multiphase microstructures and offers a promising foundation for high-throughput alloy design.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
