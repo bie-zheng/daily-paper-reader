@@ -1,96 +1,16 @@
 {
   "mode": "standard",
-  "generated_at": "2026-08-07T01:26:38.935961+00:00",
+  "generated_at": "2026-08-07T20:56:20.042258+00:00",
   "stats": {
     "mode": "standard",
     "tag_count": 1,
     "deep_divecandidates": 0,
     "deep_cap": 6,
     "deep_selected": 0,
-    "quick_candidates": 2,
+    "quick_candidates": 0,
     "quick_skim_target": 11,
-    "quick_selected": 2
+    "quick_selected": 0
   },
   "deep_dive": [],
-  "quick_skim": [
-    {
-      "id": "2608.01601v1",
-      "source": "arxiv",
-      "title": "Physics-Informed Neural Networks for Sparse Strain-Field Reconstruction in 4D-STEM",
-      "abstract": "Quantitative strain mapping using four-dimensional scanning transmission electron microscopy (4D-STEM) typically requires densely sampled scans that can damage beam-sensitive specimens. We develop a physics-informed neural network (PINN) for sparse 4D-STEM strain reconstruction that embeds elastic equilibrium and Saint-Venant compatibility in the training loss through automatic differentiation. The architecture combines a coordinate-based implicit representation, sine activations with stable second derivatives, frozen residual-scale normalization, an exponential physics-weight ramp, and residual-based adaptive collocation. We apply a sine-activated residual network to an experimental $180\\times400$-pixel strain map of domain-structured PbGeSnSe$_{1.5}$Te$_{1.5}$. Across $1$-$75%$ sampling ($720$-$54{,}000$ probe positions), $R^2$ for $\\varepsilon_{xx}$ reaches $0.80$ at $10%$ sampling and saturates near $0.86$ by $25%$; the chevron strain-band morphology is recovered from $10%$ of probe positions. At $10%$ sampling, the PINN reduces mean absolute error by approximately $26%$ relative to compressed sensing and $22%$ relative to Gaussian-process regression. An ablation against an equal-capacity data-only SIREN shows that the PDE prior improves accuracy at extreme sparsity and consistently improves physical self-consistency, but biases the reconstruction when data are abundant. Monte Carlo dropout and mean-field variational inference provide per-pixel epistemic uncertainty maps correlated with reconstruction error. With an appropriate constitutive model, the framework is adaptable to strain mapping across diverse material systems.",
-      "authors": [
-        "Roberto dos Reis",
-        "Gabriel T. dos Santos",
-        "Yukun Liu",
-        "Xiaobing Hu",
-        "Vinayak P. Dravid"
-      ],
-      "primary_category": "cond-mat.mtrl-sci",
-      "categories": [
-        "cond-mat.mtrl-sci",
-        "physics.ins-det"
-      ],
-      "published": "2026-08-03T02:13:31+00:00",
-      "link": "https://arxiv.org/pdf/2608.01601v1",
-      "tags": [
-        "keyword:rad-damage",
-        "query:rad-damage"
-      ],
-      "llm_score": 6.0,
-      "llm_evidence_en": "Physics-informed neural network for sparse 4D-STEM strain mapping, applicable to radiation-induced microstructure strain changes.",
-      "llm_evidence_cn": "面向稀疏4D-STEM应变重建的物理信息神经网络，可应用于辐照引起的微结构应变变化研究。",
-      "llm_evidence": "面向稀疏4D-STEM应变重建的物理信息神经网络，可应用于辐照引起的微结构应变变化研究。",
-      "canonical_evidence": "面向稀疏4D-STEM应变重建的物理信息神经网络，可应用于辐照引起的微结构应变变化研究。",
-      "llm_tldr_en": "Physics-informed neural network reconstructs strain fields from sparse 4D-STEM data, embedding elastic equilibrium and compatibility to enable high-resolution strain mapping with reduced beam damage.",
-      "llm_tldr_cn": "针对4D-STEM定量应变映射需密集扫描且易对束敏样品造成损伤的问题，本文提出物理信息神经网络，通过自动微分将弹性平衡方程和圣维南相容性嵌入训练损失，并采用正弦激活、残差归一化和自适应配点等设计，实现从稀疏采样中高精度重建应变场。该方法在180×400像素的实验应变图上得到验证，为辐照损伤材料等束敏样品的微观应变与结构演化研究提供了可行途径。",
-      "llm_tldr": "针对4D-STEM定量应变映射需密集扫描且易对束敏样品造成损伤的问题，本文提出物理信息神经网络，通过自动微分将弹性平衡方程和圣维南相容性嵌入训练损失，并采用正弦激活、残差归一化和自适应配点等设计，实现从稀疏采样中高精度重建应变场。该方法在180×400像素的实验应变图上得到验证，为辐照损伤材料等束敏样品的微观应变与结构演化研究提供了可行途径。",
-      "llm_tags": [
-        "query:rad-damage"
-      ],
-      "matched_query_tag": "query:rad-damage",
-      "matched_query_text": "radiation induced defect evolution and microstructure changes",
-      "matched_requirement_id": "req-6",
-      "selection_source": "fresh_fetch",
-      "quick_tier": "6"
-    },
-    {
-      "id": "2608.04216v1",
-      "source": "arxiv",
-      "title": "Computational Microstructure Analysis of Sintered Ceramics",
-      "abstract": "Characterizing materials through manual extraction of physical properties from microstructure images is a laborious process. This work presents a workflow to extract porosity, solid fraction, grain size distribution, and pore size distribution from scanning electron microscopy (SEM) images of sintered ceramic samples using an automated pipeline. The primary challenge for extracting physical properties from SEM images is the presence of unimodal histograms in SEM images as a result of the overlapping intensity ranges for the grain and pore phases. We evaluated several different methods for noise reduction and local thresholding of SEM images. We find that topological filtering in combination with Sauvola thresholding enables segmentation and extraction of physical property data from SEM images. We validated the automated pipeline by comparing our results with the results of manual analyses performed for samples sintered at 1200$^o$C and 1400$^o$C and achieved an Intersection over Union (IoU) score of 95.14% and 99.85%, respectively. The workflow provides an efficient means to automatically extract microstructure properties from SEM images as a crucial step in generating materials datasets for machine learning.",
-      "authors": [
-        "Nikhil Dhanankam",
-        "Deeksha Kodangal",
-        "Rajendra K. Bordia",
-        "Ulf D. Schiller"
-      ],
-      "primary_category": "cond-mat.mtrl-sci",
-      "categories": [
-        "cond-mat.mtrl-sci",
-        "cs.CE"
-      ],
-      "published": "2026-08-04T20:35:11+00:00",
-      "link": "https://arxiv.org/pdf/2608.04216v1",
-      "tags": [
-        "keyword:rad-damage",
-        "query:rad-damage"
-      ],
-      "llm_score": 6.0,
-      "llm_evidence_en": "automated SEM microstructure quantification method transferable to radiation-induced microstructure analysis",
-      "llm_evidence_cn": "可迁移至辐照微观结构分析的自动化SEM微观结构量化方法",
-      "llm_evidence": "可迁移至辐照微观结构分析的自动化SEM微观结构量化方法",
-      "canonical_evidence": "可迁移至辐照微观结构分析的自动化SEM微观结构量化方法",
-      "llm_tldr_en": "Automated SEM image analysis extracts porosity, grain size, and pore distributions from ceramics via topological filtering and Sauvola thresholding. This transferable segmentation method can support quantitative characterization of microstructural changes in irradiated alloys.",
-      "llm_tldr_cn": "针对人工从SEM图像提取微观结构参数的低效且易错问题，该文提出自动化流程，利用拓扑滤波与Sauvola局部阈值分割技术解决了孔隙相与晶粒相灰度重叠导致的分割困难，成功提取了烧结陶瓷的孔隙率、晶粒尺寸及孔径分布。该方法不依赖特定材料类型，可迁移至辐照合金中缺陷、析出相与孔洞等微观组织的定量表征，为辐照损伤演化研究提供了高效的计算分析工具。",
-      "llm_tldr": "针对人工从SEM图像提取微观结构参数的低效且易错问题，该文提出自动化流程，利用拓扑滤波与Sauvola局部阈值分割技术解决了孔隙相与晶粒相灰度重叠导致的分割困难，成功提取了烧结陶瓷的孔隙率、晶粒尺寸及孔径分布。该方法不依赖特定材料类型，可迁移至辐照合金中缺陷、析出相与孔洞等微观组织的定量表征，为辐照损伤演化研究提供了高效的计算分析工具。",
-      "llm_tags": [
-        "query:rad-damage"
-      ],
-      "matched_query_tag": "query:rad-damage",
-      "matched_query_text": "radiation induced defect evolution and microstructure changes",
-      "matched_requirement_id": "req-6",
-      "selection_source": "fresh_fetch",
-      "quick_tier": "6"
-    }
-  ]
+  "quick_skim": []
 }
