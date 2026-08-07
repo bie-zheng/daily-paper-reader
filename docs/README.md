@@ -6,30 +6,29 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-08-05
-- 运行时间：2026-08-05 21:55:11 UTC
+- 最新运行日期：2026-08-07
+- 运行时间：2026-08-07 01:29:18 UTC
 - 运行状态：成功
 - 本次总论文数：2
-- 精读区：1
-- 速读区：1
+- 精读区：0
+- 速读区：2
 
 ### 今日简报（AI）
-今日精读1篇、速读1篇，聚焦离子注入氧化镓损伤机制与高熵合金微观结构预测。
-
-最值得关注：β-Ga2O3在Yb注入下从相变到非晶化的损伤积累过程，评分9.0/10。
-
-建议优先精读该氧化镓论文，速读可作为高熵合金深度学习方法的延伸参考。
-- 详情：[/202608/05/README](/202608/05/README)
+今日速读2篇论文，聚焦物理信息神经网络与陶瓷微观结构分析。  
+最值得关注：PINN用于4D-STEM稀疏应变场重建（6.0/10），以及烧结陶瓷计算微观结构分析（6.0/10）。  
+建议下一步可精读其中一篇，或扩展检索同主题近期工作。
+- 详情：[/202608/07/README](/202608/07/README)
 
 ### 精读区论文标签
-1. [From phase transformation to amorphization: damage accumulation in Yb-implanted \b{eta}-Ga2O3](/202608/05/2608.03798v1-from-phase-transformation-to-amorphization-damage-accumulation-in-yb-implanted-beta-ga2o3)  
-   标签：评分：9.0/10、query:rad-damage
-   evidence：直接研究离子辐照诱导的缺陷演化与微观结构变化，采用多技术表征
+- 本次无精读推荐。
 
 ### 速读区论文标签
-1. [Deep Learning for Accelerated Long-Horizon Forecasting of Multicomponent Multiphase Microstructure Evolution in High-Entropy Alloys](/202608/05/2607.27820v1-deep-learning-for-accelerated-long-horizon-forecasting-of-multicomponent-multiphase-microstructure-evolution-in-high-entropy-alloys)  
+1. [Physics-Informed Neural Networks for Sparse Strain-Field Reconstruction in 4D-STEM](/202608/07/2608.01601v1-physics-informed-neural-networks-for-sparse-strain-field-reconstruction-in-4d-stem)  
    标签：评分：6.0/10、query:rad-damage
-   evidence：多组元合金微观组织演化的深度学习代理模型，可迁移用于辐照FeCr组织模拟
+   evidence：面向稀疏4D-STEM应变重建的物理信息神经网络，可应用于辐照引起的微结构应变变化研究。
+2. [Computational Microstructure Analysis of Sintered Ceramics](/202608/07/2608.04216v1-computational-microstructure-analysis-of-sintered-ceramics)  
+   标签：评分：6.0/10、query:rad-damage
+   evidence：可迁移至辐照微观结构分析的自动化SEM微观结构量化方法
 
 
 <div class="dpr-home-promo-card">

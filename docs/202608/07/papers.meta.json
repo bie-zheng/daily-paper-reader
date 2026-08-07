@@ -1,0 +1,39 @@
+{
+  "label": "2026-08-07",
+  "date": "2026-08-07",
+  "generated_at": "2026-08-07T01:29:23",
+  "count": 2,
+  "papers": [
+    {
+      "paper_id": "202608/07/2608.01601v1-physics-informed-neural-networks-for-sparse-strain-field-reconstruction-in-4d-stem",
+      "section": "quick",
+      "title_en": "Physics-Informed Neural Networks for Sparse Strain-Field Reconstruction in 4D-STEM",
+      "authors": "Roberto dos Reis, Gabriel T. dos Santos, Yukun Liu, Xiaobing Hu, Vinayak P. Dravid",
+      "date": "2026-08-03",
+      "pdf": "https://arxiv.org/pdf/2608.01601v1",
+      "score": "6.0",
+      "evidence": "面向稀疏4D-STEM应变重建的物理信息神经网络，可应用于辐照引起的微结构应变变化研究。",
+      "tldr": "4D-STEM定量应变映射常因密集扫描损伤束敏感样品，为此提出物理信息神经网络（PINN）用于稀疏探测位置下的应变场重建。该方法在训练损失中嵌入弹性平衡与Saint-Venant兼容性，采用正弦激活残差网络和自适应配置点。在实验PbGeSnSe1.5Te1.5应变图上，仅10%采样即可恢复人字形应变带，εxx的R²达0.80，且比压缩感知和GP回归误差更低。该框架兼顾物理自洽性与不确定性量化，可推广至多种材料体系。",
+      "tags": "query:rad-damage",
+      "abstract_en": "Quantitative strain mapping using four-dimensional scanning transmission electron microscopy (4D-STEM) typically requires densely sampled scans that can damage beam-sensitive specimens. We develop a physics-informed neural network (PINN) for sparse 4D-STEM strain reconstruction that embeds elastic equilibrium and Saint-Venant compatibility in the training loss through automatic differentiation. The architecture combines a coordinate-based implicit representation, sine activations with stable second derivatives, frozen residual-scale normalization, an exponential physics-weight ramp, and residual-based adaptive collocation. We apply a sine-activated residual network to an experimental $180\\times400$-pixel strain map of domain-structured PbGeSnSe$_{1.5}$Te$_{1.5}$. Across $1$-$75%$ sampling ($720$-$54{,}000$ probe positions), $R^2$ for $\\varepsilon_{xx}$ reaches $0.80$ at $10%$ sampling and saturates near $0.86$ by $25%$; the chevron strain-band morphology is recovered from $10%$ of probe positions. At $10%$ sampling, the PINN reduces mean absolute error by approximately $26%$ relative to compressed sensing and $22%$ relative to Gaussian-process regression. An ablation against an equal-capacity data-only SIREN shows that the PDE prior improves accuracy at extreme sparsity and consistently improves physical self-consistency, but biases the reconstruction when data are abundant. Monte Carlo dropout and mean-field variational inference provide per-pixel epistemic uncertainty maps correlated with reconstruction error. With an appropriate constitutive model, the framework is adaptable to strain mapping across diverse material systems.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202608/07/2608.04216v1-computational-microstructure-analysis-of-sintered-ceramics",
+      "section": "quick",
+      "title_en": "Computational Microstructure Analysis of Sintered Ceramics",
+      "authors": "Nikhil Dhanankam, Deeksha Kodangal, Rajendra K. Bordia, Ulf D. Schiller",
+      "date": "2026-08-04",
+      "pdf": "https://arxiv.org/pdf/2608.04216v1",
+      "score": "6.0",
+      "evidence": "可迁移至辐照微观结构分析的自动化SEM微观结构量化方法",
+      "tldr": "针对从烧结陶瓷SEM图像中手动提取微观结构性质耗时的问题，本文提出自动化流程，结合拓扑滤波与Sauvola阈值分割，克服孔隙/晶粒强度重叠导致的单峰直方图难题。在1200°C和1400°C样品上验证，IoU分别达95.14%和99.85%，接近手动精度。该工作流可高效自动提取孔隙率、粒径等参数，为材料机器学习数据集构建提供关键步骤。",
+      "tags": "query:rad-damage",
+      "abstract_en": "Characterizing materials through manual extraction of physical properties from microstructure images is a laborious process. This work presents a workflow to extract porosity, solid fraction, grain size distribution, and pore size distribution from scanning electron microscopy (SEM) images of sintered ceramic samples using an automated pipeline. The primary challenge for extracting physical properties from SEM images is the presence of unimodal histograms in SEM images as a result of the overlapping intensity ranges for the grain and pore phases. We evaluated several different methods for noise reduction and local thresholding of SEM images. We find that topological filtering in combination with Sauvola thresholding enables segmentation and extraction of physical property data from SEM images. We validated the automated pipeline by comparing our results with the results of manual analyses performed for samples sintered at 1200$^o$C and 1400$^o$C and achieved an Intersection over Union (IoU) score of 95.14% and 99.85%, respectively. The workflow provides an efficient means to automatically extract microstructure properties from SEM images as a crucial step in generating materials datasets for machine learning.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
