@@ -1,0 +1,103 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-08-08T20:35:51.218231+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 2,
+    "quick_skim_target": 11,
+    "quick_selected": 2
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2608.01601v1",
+      "source": "arxiv",
+      "title": "Physics-Informed Neural Networks for Sparse Strain-Field Reconstruction in 4D-STEM",
+      "abstract": "Quantitative strain mapping using four-dimensional scanning transmission electron microscopy (4D-STEM) typically requires densely sampled scans that can damage beam-sensitive specimens. We develop a physics-informed neural network (PINN) for sparse 4D-STEM strain reconstruction that embeds elastic equilibrium and Saint-Venant compatibility in the training loss through automatic differentiation. The architecture combines a coordinate-based implicit representation, sine activations with stable second derivatives, frozen residual-scale normalization, an exponential physics-weight ramp, and residual-based adaptive collocation. We apply a sine-activated residual network to an experimental $180\\times400$-pixel strain map of domain-structured PbGeSnSe$_{1.5}$Te$_{1.5}$. Across $1$-$75%$ sampling ($720$-$54{,}000$ probe positions), $R^2$ for $\\varepsilon_{xx}$ reaches $0.80$ at $10%$ sampling and saturates near $0.86$ by $25%$; the chevron strain-band morphology is recovered from $10%$ of probe positions. At $10%$ sampling, the PINN reduces mean absolute error by approximately $26%$ relative to compressed sensing and $22%$ relative to Gaussian-process regression. An ablation against an equal-capacity data-only SIREN shows that the PDE prior improves accuracy at extreme sparsity and consistently improves physical self-consistency, but biases the reconstruction when data are abundant. Monte Carlo dropout and mean-field variational inference provide per-pixel epistemic uncertainty maps correlated with reconstruction error. With an appropriate constitutive model, the framework is adaptable to strain mapping across diverse material systems.",
+      "authors": [
+        "Roberto dos Reis",
+        "Gabriel T. dos Santos",
+        "Yukun Liu",
+        "Xiaobing Hu",
+        "Vinayak P. Dravid"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci",
+        "physics.ins-det"
+      ],
+      "published": "2026-08-03T02:13:31+00:00",
+      "link": "https://arxiv.org/pdf/2608.01601v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Sparse 4D-STEM strain reconstruction via physics-informed neural network reduces beam damage and enables microstructure mapping",
+      "llm_evidence_cn": "基于物理信息神经网络的稀疏4D-STEM应变重建，可在降低电子束损伤同时表征微结构",
+      "llm_evidence": "基于物理信息神经网络的稀疏4D-STEM应变重建，可在降低电子束损伤同时表征微结构",
+      "canonical_evidence": "基于物理信息神经网络的稀疏4D-STEM应变重建，可在降低电子束损伤同时表征微结构",
+      "llm_tldr_en": "Physics-informed neural network reconstructs sparse 4D-STEM strain fields using elastic equilibrium and Saint-Venant constraints. Validated on a PbGe experimental map, it enables quantitative microstructure imaging with reduced beam damage.",
+      "llm_tldr_cn": "针对4D-STEM定量应变成像通常需要密集扫描且易损伤束敏样品的问题，本文提出一种物理信息神经网络，将弹性平衡与Saint-Venant相容性约束通过自动微分加入训练损失，实现稀疏采样下的应变场重建。网络采用坐标基隐式表示、正弦激活、冻结残差尺度归一化与残差自适应配点，并在180×400像素的域结构PbGe实验应变图上验证，结果表明稀疏采集下仍能准确重建畴结构应变。该方法为辐照等束敏材料的低损伤微结构定量表征提供了新的技术途径。",
+      "llm_tldr": "针对4D-STEM定量应变成像通常需要密集扫描且易损伤束敏样品的问题，本文提出一种物理信息神经网络，将弹性平衡与Saint-Venant相容性约束通过自动微分加入训练损失，实现稀疏采样下的应变场重建。网络采用坐标基隐式表示、正弦激活、冻结残差尺度归一化与残差自适应配点，并在180×400像素的域结构PbGe实验应变图上验证，结果表明稀疏采集下仍能准确重建畴结构应变。该方法为辐照等束敏材料的低损伤微结构定量表征提供了新的技术途径。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation induced defect evolution and microstructure changes",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.01210v1",
+      "source": "arxiv",
+      "title": "EBSD and Subtle Crystallographic Differences - A Study of Resolving Interlayer Spacings in Nb-Ni and Nb-Co mu-phases",
+      "abstract": "In ordered intermetallics, slight variations in lattice site occupancy and specific interlayer spacings have been identified as the sources of significant changes in critical resolved shear stress and therefore how a given phase may affect alloy properties. So far, atom positions and lattice site occupancies have traditionally been characterised by high-resolution transmission electron microscopy (HR-TEM) and X-ray diffraction (XRD), which are methods that offer either local detail or high statistical significance but not both. Electron backscatter diffraction (EBSD), by contrast, provides high spatial resolution across large sample areas and therefore, has the potential to enable the local investigation of interlayer spacing and site lattice occupancy with improved statistical reliability. The objectives of the study are to benchmark EBSDs capability for resolving these subtle features and to correlate them with compositional and mechanical properties. In this case study, we therefore show that EBSD can resolve key crystallographic features of mu-phase intermetallics, specifically interlayer spacings. We combine pattern matching with large-scale dynamical simulations of template libraries guided by XRD based information on lattice parameters. For this, we generate structures that vary in the spacing between triple-layer and Kagome layer and in the site lattice occupancy of the 3a site. This approach successfully predicts the change of interlayer spacing between Kagome and triple layers in Nb-Co and Nb-Ni mu-phases, in good agreement with XRD and HR-TEM.",
+      "authors": [
+        "Lukas Berners",
+        "Nisa Ulumuddin",
+        "Annika Baum",
+        "Silvia Richter",
+        "Khalil Rejiba",
+        "Joshua Spille",
+        "Siyuan Zhang",
+        "Christina Scheu",
+        "Joachim Mayer",
+        "Benjamin Berkels",
+        "T. Ben Britton",
+        "Sandra Korte-Kerzel"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ],
+      "published": "2026-08-02T12:50:32+00:00",
+      "link": "https://arxiv.org/pdf/2608.01210v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "EBSD resolves interlayer spacings and site occupancies in ordered intermetallics; directly applicable to B2 phase strengthening analysis.",
+      "llm_evidence_cn": "EBSD 分辨有序金属间化合物的层间距与占位，直接适用于 B2 相强化分析。",
+      "llm_evidence": "EBSD 分辨有序金属间化合物的层间距与占位，直接适用于 B2 相强化分析。",
+      "canonical_evidence": "EBSD 分辨有序金属间化合物的层间距与占位，直接适用于 B2 相强化分析。",
+      "llm_tldr_en": "Uses EBSD to resolve subtle crystallographic differences in Nb-Ni and Nb-Co mu-phases, providing an efficient way to study ordered intermetallic phase effects on alloy strength.",
+      "llm_tldr_cn": "该论文针对有序金属间化合物中原子占位与层间距的微小差异影响合金性能这一现象，提出利用EBSD来分辨Nb-Ni和Nb-Co μ相中的层间距。传统HR-TEM和XRD难以兼顾局部细节与统计显著性，EBSD则可在大面积上提供高空间分辨的晶体学信息。研究表明该方法能捕捉微妙的晶体学差异，为评估有序相对合金强化作用提供了一种有效的表征手段。这一方法可迁移到FeCr合金中B2相等有序相的精细结构分析。",
+      "llm_tldr": "该论文针对有序金属间化合物中原子占位与层间距的微小差异影响合金性能这一现象，提出利用EBSD来分辨Nb-Ni和Nb-Co μ相中的层间距。传统HR-TEM和XRD难以兼顾局部细节与统计显著性，EBSD则可在大面积上提供高空间分辨的晶体学信息。研究表明该方法能捕捉微妙的晶体学差异，为评估有序相对合金强化作用提供了一种有效的表征手段。这一方法可迁移到FeCr合金中B2相等有序相的精细结构分析。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "B2 phase strengthening in irradiated alloys",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
