@@ -1,0 +1,92 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-08-09T19:25:22.282796+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 2,
+    "quick_skim_target": 11,
+    "quick_selected": 2
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2608.04781v1",
+      "source": "arxiv",
+      "title": "A phase field model of coupled crack and dislocations: emission, blunting, and the necessity of dissipative toughening",
+      "abstract": "We propose a phase field model of a macrocracked single crystal in which the crack and the geometrically necessary dislocations descend from a single energy functional. Energy minimization alone then decides dislocation nucleation, through an integral criterion evaluated in closed form along slip chords. The criterion yields a size effect inaccessible to point-wise strength conditions: a grain-size-dependent yield stress. With slip suppressed the model reproduces Griffith fracture; with fracture suppressed, the nucleation load measured by the full non-smooth solver agrees with the closed-form nucleation criterion to four percent. The coupled computations produce a two-stage response: at loads an order of magnitude below cleavage, dislocation bands emitted from the notch tip blunt and shield it, raising the initiation load; once the crack grows, the bands heal; a compact cluster of like-signed dislocations travels with the tip, its canceling partner walls pinned at the grain boundary, and the dissipated fracture resistance equals the elastic one. In the purely energetic, dissipationless limit, emission shields the crack but does not toughen it; toughening requires dissipation, incorporated in the sequel through the threshold resistance to dislocation motion.",
+      "authors": [
+        "Khanh Chau Le",
+        "Thi My Kieu Tran"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci",
+        "math-ph",
+        "math.NA",
+        "physics.class-ph"
+      ],
+      "published": "2026-08-05T12:47:09+00:00",
+      "link": "https://arxiv.org/pdf/2608.04781v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Phase field model of crack and geometrically necessary dislocations from a single energy functional, transferable to dislocation loop formation in irradiated materials",
+      "llm_evidence_cn": "基于单一能量泛函的裂纹与几何必需位错相场模型，可迁移至辐照材料中位错环形成模拟",
+      "llm_evidence": "基于单一能量泛函的裂纹与几何必需位错相场模型，可迁移至辐照材料中位错环形成模拟",
+      "canonical_evidence": "基于单一能量泛函的裂纹与几何必需位错相场模型，可迁移至辐照材料中位错环形成模拟",
+      "llm_tldr_en": "This phase field model couples crack and geometrically necessary dislocations from one energy functional, providing a size-dependent yield stress and closed-form nucleation criterion; methodology transfers to dislocation loop studies in irradiated FeCr.",
+      "llm_tldr_cn": "辐照FeCr合金中位错环形成是辐照硬化的关键微观机制，但裂纹与位错耦合演化的相场模拟仍具挑战。该文从单一能量泛函出发构造裂纹-几何必需位错耦合相场模型，能量最小化自然决定位错成核，并给出沿滑移带的闭合积分判据。数值求解与理论判据吻合至4%，并揭示晶粒尺寸相关的屈服应力。该耦合框架可直接迁移至辐照诱导位错环与微裂纹演化的模拟，为理解辐照损伤提供相场方法支撑。",
+      "llm_tldr": "辐照FeCr合金中位错环形成是辐照硬化的关键微观机制，但裂纹与位错耦合演化的相场模拟仍具挑战。该文从单一能量泛函出发构造裂纹-几何必需位错耦合相场模型，能量最小化自然决定位错成核，并给出沿滑移带的闭合积分判据。数值求解与理论判据吻合至4%，并揭示晶粒尺寸相关的屈服应力。该耦合框架可直接迁移至辐照诱导位错环与微裂纹演化的模拟，为理解辐照损伤提供相场方法支撑。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "dislocation loop formation in irradiated FeCr",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.06220v1",
+      "source": "arxiv",
+      "title": "Geometric closure of classical nucleation theory for magnetic-field-controlled nanoparticle size across magnetic classes",
+      "abstract": "Controlling nanoparticle size during synthesis remains a central challenge in nanoscience, particularly in systems where external magnetic fields are used as continuous control parameters. Existing descriptions of magnetic-field-assisted nucleation are typically material-specific or rely on computationally intensive atomistic methods. Here, we reformulate classical nucleation theory as a geometrically closed thermodynamic framework by introducing a sphere-packing representation of atomic assembly. This construction establishes a direct link between discrete atomic structure and continuum free-energy contributions under applied magnetic fields, yielding a field-driven evolution equation for the critical nucleus size. The resulting theory provides a unified description of nanoparticle nucleation across superparamagnetic, paramagnetic, and diamagnetic systems within a single formalism. It quantitatively reproduces previously unresolved experimental observations for magnetite and nickel nanoparticles, namely the systematic reduction of mean particle size and narrowing of size distributions with increasing magnetic field. In the diamagnetic limit, the framework recovers our earlier analytical susceptibility-based description of silver nanoparticles, in which the field-dependent critical radius is governed by the induced-magnetization contribution to the nucleation free energy. Beyond modeling the reduction of mean particle size with increasing magnetic field, the framework reveals that the narrowing of size distributions emerges naturally from the curvature of the field-modified free-energy landscape. These results establish magnetic-field-assisted nucleation as a geometrically constrained thermodynamic process, providing a computationally efficient route for controlling nanoparticle size across distinct magnetic material classes.",
+      "authors": [
+        "Yazeed Tawalbeh",
+        "Mauro Fernandes Pereira"
+      ],
+      "primary_category": "cond-mat.mes-hall",
+      "categories": [
+        "cond-mat.mes-hall"
+      ],
+      "published": "2026-08-06T16:11:56+00:00",
+      "link": "https://arxiv.org/pdf/2608.06220v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Transferable classical nucleation theory with a field-driven evolution equation for critical nucleus, applicable to precipitation modeling in irradiated alloys",
+      "llm_evidence_cn": "可迁移的经典成核理论，含临界核的场驱动演化方程，可应用于辐照合金析出建模",
+      "llm_evidence": "可迁移的经典成核理论，含临界核的场驱动演化方程，可应用于辐照合金析出建模",
+      "canonical_evidence": "可迁移的经典成核理论，含临界核的场驱动演化方程，可应用于辐照合金析出建模",
+      "llm_tldr_en": "This paper reformulates classical nucleation theory using a sphere-packing representation, yielding a field-driven evolution equation for critical nucleus size that can be transferred to model precipitation in irradiated FeCr alloys.",
+      "llm_tldr_cn": "纳米颗粒尺寸控制是纳米科学中的核心挑战，尤其在外磁场作为连续控制参数的体系中，现有成核描述常受限于特定材料或依赖昂贵的原子级模拟。本文引入球堆积表示原子组装，将经典成核理论重构为几何封闭的热力学框架，建立离散原子结构与连续自由能之间的直接联系，推导出场驱动的临界核演化方程。该框架统一描述不同磁类别的成核行为，并可迁移至辐照诱导析出与点缺陷团簇的成核建模，为辐照FeCr合金析出强化研究提供方法支撑。",
+      "llm_tldr": "纳米颗粒尺寸控制是纳米科学中的核心挑战，尤其在外磁场作为连续控制参数的体系中，现有成核描述常受限于特定材料或依赖昂贵的原子级模拟。本文引入球堆积表示原子组装，将经典成核理论重构为几何封闭的热力学框架，建立离散原子结构与连续自由能之间的直接联系，推导出场驱动的临界核演化方程。该框架统一描述不同磁类别的成核行为，并可迁移至辐照诱导析出与点缺陷团簇的成核建模，为辐照FeCr合金析出强化研究提供方法支撑。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "precipitation hardening in irradiated FeCr alloys",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

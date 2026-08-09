@@ -1,0 +1,39 @@
+{
+  "label": "2026-08-09",
+  "date": "2026-08-09",
+  "generated_at": "2026-08-09T19:27:26",
+  "count": 2,
+  "papers": [
+    {
+      "paper_id": "202608/09/2608.04781v1-a-phase-field-model-of-coupled-crack-and-dislocations-emission-blunting-and-the-necessity-of-dissipative-toughening",
+      "section": "quick",
+      "title_en": "A phase field model of coupled crack and dislocations: emission, blunting, and the necessity of dissipative toughening",
+      "authors": "Khanh Chau Le, Thi My Kieu Tran",
+      "date": "2026-08-05",
+      "pdf": "https://arxiv.org/pdf/2608.04781v1",
+      "score": "7.0",
+      "evidence": "基于单一能量泛函的裂纹与几何必需位错相场模型，可迁移至辐照材料中位错环形成模拟",
+      "tldr": "针对宏观裂纹与位错耦合问题，提出统一能量泛函的相场模型，使裂纹和几何必要位错同时由能量最小化决定。位错形核通过沿滑移弦的闭式积分准则判定，产生与晶粒尺寸相关的屈服应力，克服点式强度条件的尺度局限。耦合计算揭示两阶段响应：裂纹扩展前位错带钝化并屏蔽裂尖，提高起裂载荷；扩展后位错带愈合，同类位错簇随裂尖移动，耗散断裂阻力等于弹性阻力。纯能量极限下屏蔽不增韧，增韧必须引入耗散。",
+      "tags": "query:rad-damage",
+      "abstract_en": "We propose a phase field model of a macrocracked single crystal in which the crack and the geometrically necessary dislocations descend from a single energy functional. Energy minimization alone then decides dislocation nucleation, through an integral criterion evaluated in closed form along slip chords. The criterion yields a size effect inaccessible to point-wise strength conditions: a grain-size-dependent yield stress. With slip suppressed the model reproduces Griffith fracture; with fracture suppressed, the nucleation load measured by the full non-smooth solver agrees with the closed-form nucleation criterion to four percent. The coupled computations produce a two-stage response: at loads an order of magnitude below cleavage, dislocation bands emitted from the notch tip blunt and shield it, raising the initiation load; once the crack grows, the bands heal; a compact cluster of like-signed dislocations travels with the tip, its canceling partner walls pinned at the grain boundary, and the dissipated fracture resistance equals the elastic one. In the purely energetic, dissipationless limit, emission shields the crack but does not toughen it; toughening requires dissipation, incorporated in the sequel through the threshold resistance to dislocation motion.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202608/09/2608.06220v1-geometric-closure-of-classical-nucleation-theory-for-magnetic-field-controlled-nanoparticle-size-across-magnetic-classes",
+      "section": "quick",
+      "title_en": "Geometric closure of classical nucleation theory for magnetic-field-controlled nanoparticle size across magnetic classes",
+      "authors": "Yazeed Tawalbeh, Mauro Fernandes Pereira",
+      "date": "2026-08-06",
+      "pdf": "https://arxiv.org/pdf/2608.06220v1",
+      "score": "6.0",
+      "evidence": "可迁移的经典成核理论，含临界核的场驱动演化方程，可应用于辐照合金析出建模",
+      "tldr": "磁场辅助成核的现有理论依赖特定材料或昂贵计算。本文通过球堆积表征原子组装，将经典成核理论重构为几何闭合热力学框架，导出磁场驱动的临界核尺寸演化方程。该框架统一描述超顺磁、顺磁和抗磁体系，定量重现磁铁矿、镍的尺寸减小与分布变窄，并在抗磁极限恢复银颗粒的解析结果。研究揭示磁场成核的本质是几何约束的热力学过程，为跨磁类纳米尺寸调控提供高效途径。",
+      "tags": "query:rad-damage",
+      "abstract_en": "Controlling nanoparticle size during synthesis remains a central challenge in nanoscience, particularly in systems where external magnetic fields are used as continuous control parameters. Existing descriptions of magnetic-field-assisted nucleation are typically material-specific or rely on computationally intensive atomistic methods. Here, we reformulate classical nucleation theory as a geometrically closed thermodynamic framework by introducing a sphere-packing representation of atomic assembly. This construction establishes a direct link between discrete atomic structure and continuum free-energy contributions under applied magnetic fields, yielding a field-driven evolution equation for the critical nucleus size. The resulting theory provides a unified description of nanoparticle nucleation across superparamagnetic, paramagnetic, and diamagnetic systems within a single formalism. It quantitatively reproduces previously unresolved experimental observations for magnetite and nickel nanoparticles, namely the systematic reduction of mean particle size and narrowing of size distributions with increasing magnetic field. In the diamagnetic limit, the framework recovers our earlier analytical susceptibility-based description of silver nanoparticles, in which the field-dependent critical radius is governed by the induced-magnetization contribution to the nucleation free energy. Beyond modeling the reduction of mean particle size with increasing magnetic field, the framework reveals that the narrowing of size distributions emerges naturally from the curvature of the field-modified free-energy landscape. These results establish magnetic-field-assisted nucleation as a geometrically constrained thermodynamic process, providing a computationally efficient route for controlling nanoparticle size across distinct magnetic material classes.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

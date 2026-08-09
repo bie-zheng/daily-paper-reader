@@ -1,0 +1,711 @@
+Title: A phase field model of coupled crack and dislocations: emission, blunting, and the necessity of dissipative toughening
+
+URL Source: https://arxiv.org/pdf/2608.04781v1
+
+Published Time: Thu, 06 Aug 2026 00:54:31 GMT
+
+Number of Pages: 36
+
+Markdown Content:
+# A phase field model of coupled crack and dislocations: emission, blunting, and the necessity of dissipative toughening 
+
+Khanh Chau Le a,b, ∗, Thi My Kieu Tran a,b 
+
+> aMechanics of Advanced Materials and Structures, Institute for Advanced Study in Technology, Ton Duc Thang University, Ho Chi Minh City, Vietnam
+> bFaculty of Civil Engineering, Ton Duc Thang University, Ho Chi Minh City, Vietnam
+
+Abstract 
+
+We propose a phase field model of a macrocracked single crystal in which the crack and the geometrically necessary dislocations descend from a sin-gle energy functional. Energy minimization alone then decides dislocation nucleation, through an integral criterion evaluated in closed form along slip chords. The criterion yields a size effect inaccessible to point-wise strength conditions: a grain-size-dependent yield stress. With slip suppressed the model reproduces Griffith fracture; with fracture suppressed, the nucleation load measured by the full non-smooth solver agrees with the closed-form nu-cleation criterion to four percent. The coupled computations produce a two-stage response: at loads an order of magnitude below cleavage, dislocation bands emitted from the notch tip blunt and shield it, raising the initiation load; once the crack grows, the bands heal; a compact cluster of like-signed dislocations travels with the tip, its canceling partner walls pinned at the grain boundary, and the dissipated fracture resistance equals the elastic one. In the purely energetic, dissipationless limit, emission shields the crack but does not toughen it; toughening requires dissipation, incorporated in the sequel through the threshold resistance to dislocation motion. 
+
+Keywords: phase-field fracture, continuum dislocation theory, dislocation nucleation, crack-tip blunting, brittle-to-ductile transition   
+
+> ∗Corresponding author
+> Email address: lekhanhchau@tdtu.edu.vn (Khanh Chau Le) arXiv:2608.04781v1 [cond-mat.mtrl-sci] 5 Aug 2026
+
+1. Introduction 
+
+Whether a stressed crack in a crystal advances by cleavage or is blunted by the emission of dislocations is the oldest question of the fracture mechan-ics of metals (Rice and Thomson, 1974; Gumbsch et al., 1998), and it is a question about nucleation : whether, at a given load, the crystal prefers to create new surface or new dislocations. Discrete dislocation plasticity cou-pled to a cohesive description of decohesion (Cleveringa et al., 2000) resolves this competition dislocation by dislocation, but with nucleation as a consti-tutive input and dissipation inseparable from the dynamics: it answers what fracture costs while postulating what nucleates. The variational phase field approach to fracture (Francfort and Marigo, 1998; Bourdin et al., 2000; Am-brosio and Tortorelli, 1990) answers the cleavage half of the alternative by energy minimization, and its success has motivated numerous extensions to ductile fracture in which the damage field is coupled to plasticity. These couplings now form three families. In the crystal-plasticity frame-work of DAMASK (Shanthraj et al., 2016, 2017; Roters et al., 2019), an elasto-viscoplastic flow rule with dislocation densities as internal variables drives the damage field through the plastic work. In gradient-extended cou-plings, the plastic variable itself carries spatial gradients: micromorphic for-mulations regularize the interaction of shear bands with the crack (Miehe et al., 2016b,a), and mechanism-based strain gradient plasticity feeds the ge-ometrically necessary dislocations, through Taylor hardening, into the flow stress, capturing its elevation ahead of the tip (Martínez-Pañeda et al., 2016; Kristensen et al., 2020). In the recent nucleation-oriented models, finally, damage onset is calibrated to a strength surface—through tailored energy decompositions (De Lorenzis and Maurini, 2022; Zolesi and Maurini, 2024) or, in the most recent formulation, through a reversible eigenstrain endowed with a degree-one strength potential (Vicentini et al., 2026). In the first two families, dislocation activity is governed by a flow rule—a point-wise condition on the stress, satisfied wherever it is met, and dissipative by construction—and the consequences are systematic. Dislocation nucle-ation is not an event: plastic flow exists wherever the criterion is met, with no threshold load, no emission site, and no discrete dislocation content. Where a plastic length is present, it enters the hardening or the regularization— it elevates the flow stress or sets the band width—but it does not produce a nucleation threshold: the size effects it generates are of hardening type, and the d−1 dependence of the initial yield stress of small grains, derived in 2Section 3.3, is not among them. Blunting has no mechanism: plastic strain smears the tip fields but produces no slip step on the crack surface. And because every increment of slip dissipates, the energetic content of disloca-tion emission—what shielding costs, as distinct from what wake dissipation costs—cannot be isolated within these formulations; this question is posed and answered in Section 6.3. The last of the nucleation-oriented models (Vi-centini et al., 2026) is, instructively, closer in structure to the present model: its eigenstrain is reversible, and its strength potential is positively homoge-neous of degree one. The difference lies in where thermodynamics permits the degree-one term to act. A free energy may depend only on state variables. The cohesive eigenstrain of these models is one—a reversible measure of the crack opening—and a degree-one energy in the variable itself is then admissi-ble; it yields a point-wise threshold, a strength surface, containing no length. Crystallographic slip, by contrast, is not a state variable: the same lattice configuration is reached by arbitrarily many slip histories, and slip therefore cannot carry free energy (Berdichevsky, 2006a,b). What is a state variable is the incompatible part of its gradient—the dislocation density (Nye, 1953; Bilby, 1955; Kröner, 1955)—and the degree-one term must accordingly act on the gradient. This placement, dictated by thermodynamics rather than cho-sen, is what converts the point-wise threshold into an integral one, evaluated along the characteristics, and endows it with the size and geometry depen-dence that a strength surface cannot express. Moreover, the eigenstrain of these models represents the opening of a cohesive crack, not crystallographic slip: they address the nucleation of fracture, not of dislocations. The regularization length of the fracture energy has, by contrast, earned a physical reading through its calibration against the material strength; but it regularizes the crack and says nothing about the plasticity. In the model pro-posed here the plastic side carries its own, independently identified lengths: the dislocation length ℓd = 1 /(bρ s), set by the Burgers vector and the sat-urated dislocation density, and the threshold modulus qc = μk/ (bρ s) of the dislocation energy. The model combines three classical ingredients. From the variational theory of fracture it takes the Ambrosio–Tortorelli representation of the crack by a damage field. From the physics of the crack tip it takes the Rice–Thomson picture of emission, blunting, and shielding (Rice and Thom-son, 1974). And from the continuum dislocation theory of single crystals (Berdichevsky, 2006a,b; Berdichevsky and Le, 2007; Le and Sembiring, 2008) it takes the energy of the geometrically necessary dislocations (Nye, 1953; 3Bilby, 1955; Kröner, 1955) as a logarithmic function of their density—whose expansion about the dislocation-free state begins with a term of degree one .This nonsmoothness is not a technical inconvenience but the physical heart of the model: a finite energetic cost per unit dislocation content at vanishing content is precisely what endows the theory with a nucleation threshold , in the same way that the degree-one dissipation of dry friction endows a block with a sticking threshold. To our knowledge, the resulting formulation is the first variational phase field model of a crack coupled to dislocations in which nucleation, blunting, and crack growth all emerge from the minimization of one energy functional. The contributions of the paper are the following. 1. A dislocation nucleation criterion of integral type, derived as the sta-bility condition of the dislocation-free state (Section 3): the crystal remains dislocation-free as long as the work extractable by any trial slip is outweighed by its dislocation-energy cost. By convex duality the criterion is evaluated in closed form along the slip chords, and it contains the size effects that point-wise conditions cannot produce: the inverse-thickness threshold of constrained shear, a grain-size-dependent yield stress consistent with the d−1 scaling reported at small grain sizes (Li, 1963; Conrad, 1963; Dunstan and Bushby, 2014), and a vanishing threshold on slip planes grazing bare free surfaces, which thereby act as dislocation sources, while passivated surfaces and grain boundaries restore a finite threshold. 2. A numerical method (Section 4) that treats the non-smoothness exactly— an alternating-direction splitting for the slip and a primal–dual active set method for the irreversible damage—together with two verification instruments that appear to be new in this context: the equipartition of the fracture energy as a mesh-adequacy diagnostic, and an a pos-teriori energy bound on the constraint gap as the correct convergence certificate for minimizers containing measure-valued slip. 3. A validation of both limits of the model (Section 5): with slip sup-pressed, regularized Griffith fracture is recovered with an effective tough-ness converging to Gc under mesh refinement; with fracture suppressed, the nucleation load measured by the full non-smooth solver agrees with the closed-form criterion to four percent, including the kinetics of the onset. 4. The coupled computations divide the response into two stages: at loads 4an order of magnitude below the cleavage load, dislocations are emitted in bands from the notch tip and blunt it, and the shielding they provide raises the initiation load by a factor 1.2–1.7 in stress intensity. Once the crack grows, the band structure heals; a compact cluster of like-signed dislocations travels with the tip at a standoff of the order of the damage length, its partner walls pinned at the grain boundary; the slope of the fracture energy with respect to crack advance equals the elastic resistance to a fraction of a percent, the surviving dislocation energy being stored, not dissipated. In the purely energetic, dissipationless limit, emission shields the crack—it delays initiation and screens the growing tip—but does not toughen the crystal: the classical distinction between shielding and toughening (Ritchie, 2011), here derived rather than postulated. The last result fixes the program of which this paper is the first stage. The model is predictive in the strict sense—its thresholds are computed be-fore the simulations that confirm them, and its observables (emission loads, standoff, size-effect scalings, the event sequence) are falsifiable—but it is de-liberately athermal and dissipationless, and the null result demonstrates that this limit, while it decides what nucleates and what structures exist, cannot decide what fracture costs. Toughening is dissipation in the wake, and its in-corporation through the threshold resistance to dislocation motion, together with the redundant dislocations and the configurational temperature of the thermodynamic dislocation theory, is the subject of the sequel; the thermally activated kinetics that turn the competition between emission and cleavage into a temperature-dependent one—the brittle-to-ductile transition—is the stage after that. That final stage has both an experimental destination and a theoretical counterpart already in place. The destination is the transi-tion measured on tungsten single crystals by Gumbsch et al. (1998), whose loading-rate dependence ties the transition to thermally activated dislocation processes at the tip and whose separation of the roles of nucleation and mo-bility is the experimental form of the question posed here. The counterpart is the theory of the transition developed within the thermodynamic disloca-tion framework (Langer, 2021; Le et al., 2023), which treats the crack and its dislocation population as a whole—a mean-field dynamical system whose kinetics render the transition temperature computable, but into which the spatial mechanics of emission, its energetic cost, and the shielding it provides enter as inputs. The present model is built at the opposite end: it resolves 5the fields and computes precisely those inputs, and the staged program is what connects the two. The paper is organized as follows. Section 2 formulates the model; Sec-tion 3 derives the nucleation criterion and its consequences; Section 4 de-scribes the numerical method and its certificates; Section 5 validates the two limits; Section 6 presents the coupled results; Section 7 discusses the findings and the outlook. 
+
+2. Variational formulation 
+
+2.1. Kinematics and fields 
+
+Consider a single crystal occupying in the undeformed state the 2D do-main Ω. Under the plane strain loading condition the crystal deforms with strains assumed small everywhere so that the geometrically linear theory applies. The state of the crystal is described by three fields: the 2D displace-ment vector u, with total (small) strain ε(u) = 12 (∇u + ∇u⊤); the scalar plastic slip β on a single slip system with slip direction s = (cos φ, sin φ) and slip-plane normal m = ( − sin φ, cos φ); and the scalar damage field α ∈ [0 , 1] ,with α = 0 intact and α = 1 fully broken material. The plastic strain is 
+
+εp = β P, P = 12
+
+ s ⊗ m + m ⊗ s, (1) and the elastic strain is εe = ε(u) − βP.Gradients of slip are of two kinds. A slip field varying only in the direction of m, i.e. from slip plane to slip plane, is rank-one compatible and stores no defects. A gradient along the slip direction , ∂sβ = s · ∇ β, corresponding to slip terminating within its own plane, measures the resultant Burgers vector of all geometrically necessary edge dislocations, whose dislocation lines are perpendicular to the plane under consideration (Nye, 1953; Bilby, 1955; Kröner, 1955). So, its (signed) density reads 
+
+ρ = 1
+
+b ∂sβ, (2) where b is the magnitude of the Burgers vector. The straight lines parallel to s are thus the characteristics of the defect content; their segments inside 
+
+Ω, the slip chords , organize the entire nucleation analysis of Section 3. 62.2. Energy functional 
+
+The model is defined by a single energy functional per unit depth, 
+
+J[u, β, α ] = 
+
+Z
+
+> Ω
+
+h
+
+g(α) ψe
+
+ ε(u) − βP + ψd
+
+ ∂sβ + ψc
+
+ α, ∇α i
+
+da , (3) with da = d x dy being the area element, whose three densities carry the elas-tic, dislocation, and fracture physics respectively. We postulate the following variational principle: The true fields ˇu, ˇβ, and ˇα minimize functional (3) among all kinematically admissible fields. Below are the descriptions of the three energy contributions. 
+
+Elastic energy. ψe(εe) = 12 εe : C : εe with the isotropic 4-rank plane-strain stiffness tensor C of Lamé constants (λ, μ ), degraded by the standard quadratic function 
+
+g(α) = (1 − η) (1 − α)2 + η, 0 < η ≪ 1, (4) with η a small residual stiffness. Only the elastic energy is degraded: damage is driven by the stored elastic energy alone, as in the Rice–Thomson setting (Rice and Thomson, 1974), while the dislocation energy below is a property of the crystal lattice and survives in the wake of the crack. 
+
+Dislocation energy. Following the continuum dislocation theory of single crystals having one active slip system (Berdichevsky, 2006b,a), the energy of the geometrically necessary dislocations is the logarithmic function of the density (2), of which we retain the first two terms of the expansion about 
+
+ρ = 0 ,
+
+ψd = μk 
+
+|ρ|
+
+ρs
+
++ 12
+
+ρ2
+
+ρ2
+
+> s
+
+
+
+= qc |∂sβ| + c2
+
+2
+
+ ∂sβ2, (5) where ρs is the saturated dislocation density, k a dimensionless energy factor of order 10 −3–10 −1, and 
+
+ℓd = 1
+
+bρ s
+
+, qc = μk ℓ d, c2 = μk ℓ 2 
+
+> d
+
+. (6) The degree-one term makes ψd nonsmooth at ρ = 0 : dislocation content has a finite energetic cost per unit density at vanishing density, which is the origin of the nucleation threshold derived in Section 3. The quadratic term regularizes dislocation walls to the thickness scale c2/q c = ℓd; it causes kinematic hardening but plays no role in dislocation nucleation. 7Fracture energy. Following the variational approach to brittle fracture (Francfort and Marigo, 1998; Bourdin et al., 2000), the crack is represented not as a surface of displacement discontinuity as in the traditional fracture mechanics (Griffith, 1921; Rice, 1968; Stumpf and Le, 1990) but through the damage field α, which localizes in narrow bands whose width is set by a regularization length ℓ; the Griffith surface energy is recovered in the limit 
+
+ℓ → 0 in the sense of Γ-convergence, by the elliptic regularization of Ambrosio and Tortorelli (1990) (AT2). We adopt this AT2-regularization in the form 
+
+ψc = Gc
+
+α2
+
+4ℓ + ℓ |∇α|2
+
+
+
+, (7) with fracture toughness Gc and regularization length ℓ, so that a fully devel-oped damage band of profile α = e−| d|/2ℓ carries surface energy exactly Gc
+
+per unit length. Three material lengths therefore coexist—the damage length ℓ, the dis-location length ℓd, and (below) the notch root radius—and, in contrast to formulations in which a single length is calibrated to regularize the crack, each carries independent physical identity: ℓ from (Gc, σ c), ℓd from (b, ρ s).
+
+Irreversibility. Damage is irreversible: along the loading program, α is constrained to be point-wise nondecreasing, and α ≤ 1. The slip β carries 
+
+no irreversibility constraint: the present paper studies the purely energetic (dissipationless) limit of the theory, in which plastic slip may heal. This mod-eling choice is deliberate; its principal consequence—that dislocation emis-sion shields the crack but produces exactly zero steady-state toughening—is derived in Section 6 and motivates the dissipative extension of the theory. 
+
+2.3. Geometry, loading, and boundary conditions 
+
+The primary configuration is a macrocracked single crystal modeled as the notched disk (see Fig. 1) 
+
+Ω = D \ C , D : x2 + y2 ≤ 1, C : (x + 1) 2 + y2
+
+ϵ2 ≤ 1, (8) with lengths measured in units of the specimen size L0 (one micron in the calibration below). The ellipse C is a rounded model of the pre-existing crack: its tip lies at the origin with root radius ρtip = ϵ2L0, so that ϵ interpolates between a blunt notch ( ρtip ≳ ℓ) and a mathematically sharp crack ( ρtip ≪ ℓ), in which case the damage length takes over the regularization of the tip. As a 8Figure 1: A notched disk. 
+
+whole, this notched disk models the grain surrounding the tip of a macrocrack in a polycrystalline material. On the outer circle ∂D the displacement of the plane-strain mode I crack-tip field is prescribed, 
+
+u1 = κ
+
+r r
+
+2π cos ϑ
+
+2
+
+
+
+1 − 2ν + sin 2 ϑ
+
+2
+
+
+
+,u2 = κ
+
+r r
+
+2π sin ϑ
+
+2
+
+
+
+2 − 2ν − cos 2 ϑ
+
+2
+
+
+
+,
+
+(9) in polar coordinates (r, ϑ ) centered at the crack tip, with ν the Poisson ratio. The amplitude κ is the normalized stress intensity factor; comparison with the standard form of linear fracture mechanics shows κ = KI /μ , so that the Griffith load of the sharp crack is κc = √E′Gc/μ with E′ = 2 μ/ (1 − ν). In the surfing protocol of Section 4.5 the center of the field (9) is translated along the crack path at fixed κ. On ∂D we further impose α = 0 ; the notch surface ∂C is traction-free with the natural condition for α.For the slip, the boundary ∂Ω is partitioned into a passivated part Γp, on which β = 0 (a coated/oxidized surface or a grain boundary through which dislocations cannot pass, so as a rule ∂D ⊆ Γp), and a free part Γf , on which 
+
+β satisfies the natural condition (a bare surface through which dislocations enter and leave, so as a rule ∂C ⊆ Γf ). This partition is a physical modeling choice, not a technicality: as shown in Section 3.4, it decides whether the crystal possesses a finite nucleation threshold at all. Both configurations are studied below. Note that, in case of crack growth/propagation, the Griffith cleavage dominates over the dislocation activity, so the boundary condition 9for β posed on the translated surface does not affect the whole behavior of the crack. 
+
+2.4. Parameter identification 
+
+The stress unit is μ and the length unit the specimen size L0 (one micron: the grain surrounding the macrocrack tip). The calibration is to tungsten at the micron scale: μ = 161 GPa, b = 0 .274 nm. The saturated density is taken as ρs = 1 .8 × 10 17 m−2, giving the dislocation length ℓd = 1 /(bρ s) = 20 nm. The dimensionless factor k is the small-density coefficient of the logarithmic dislocation energy, and only the product qc = μk/ (bρ s) enters the nucle-ation thresholds. The fracture parameters Gc = 3 .2 × 10 −4μL 0 = 51 .5 J/m 2
+
+correspond to a cleavage toughness KIc = 4 .9 MPa √m, of the order of the low-temperature single-crystal values. The parameters of each computation are collected in Table 1; where they depart from this calibration—notably the factor k of the nucleation test of Section 5.2—the departure is a validation setting chosen for the sharpness of the test, and is flagged there. 
+
+3. The dislocation nucleation criterion 
+
+3.1. The energetic criterion 
+
+We first ask under what conditions the dislocation-free state β ≡ 0 re-mains the minimizer of the energy at a given deformation and damage field. Freeze (u, α ) and regard the functional (3) of Section 2 as a functional of the plastic slip alone, 
+
+E[β] = 
+
+Z
+
+> Ω
+
+h
+
+g(α) ψe
+
+ ε(u) − βP + qc |∂sβ| + c2 
+
+> 2
+
+(∂sβ)2
+
+i
+
+da , (10) with P, qc = μkℓ d, and c2 = μkℓ 2 
+
+> d
+
+as in (1) and (6). Admissible slips satisfy 
+
+β = 0 on the passivated part Γp of the boundary and are unconstrained on the free part Γf .Two structural facts fix the character of the nucleation condition. First, 
+
+E is convex in β: the elastic term is positive definite in β, the bounded-variation (BV) term qc |∂sβ| is convex and positively homogeneous of degree one, and the c2-term is a convex quadratic in ∂sβ. Local stability of β = 0 and global energetic optimality therefore coincide; there is no gap between a sta-bility threshold and an energetic threshold, exactly as in the anti-plane and constrained-shear problems of continuum dislocation theory (Berdichevsky 10 Table 1: Parameters of the three computational configurations. Code units: lengths in units of L0 = 1 μm, stresses in units of μ. Physical values of the coupled configuration (tungsten, μ = 161 GPa, b = 0 .274 nm): ℓ = ℓd = 20 nm, ρtip = 2 .5 nm, ρs = 1 /(bℓ d) = 1.8 × 10 17 m−2, Gc = 51 .5 J/m 2, i.e. KIc = 4 .9 MPa √m.Griffith Nucleation Coupled (Sec. 5.1) (Sec. 5.2) (Sec. 6) domain disk square disk suppressed β α (frozen) —
+
+ν 0.30 0.30 0.30 
+
+Gc 3.2 × 10 −4 — 3.2 × 10 −4
+
+ℓ 0.02 0.02 0.02 
+
+ϵ 0.05 — (a) 0.05 
+
+φ — 70 .53 ◦ 70 .53 ◦
+
+k — 0.42 (b) 0.03 (c) 
+
+ℓd — 0.02 0.02 
+
+qc = μkℓ d — 8.4 × 10 −3 6 × 10 −4
+
+c2 = μkℓ 2 
+
+> d
+
+— 1.68 × 10 −4 1.2 × 10 −5
+
+β b.c. — β = 0 on ∂Ω (d) 
+
+loading surfing (e) ramp ¯v two-phase (f) 
+
+h/ℓ (path) 2.8–0.085 200 2 bilin. 0.085  
+
+> (a)
+
+Seeded crack of half-length a0 = 0 .15 in place of the notch. (b) Validation setting, not a calibration: chosen to place the threshold inside the Rice–Thomson window of the specimen so that case (i) of the chord criterion is tested sharply. (c) Physical calibration; only qc = μk/ (bρ s) enters the thresholds, while ℓd = c2/q c sets the wall thickness. (d) 
+
+β = 0 on ∂D (grain boundary), natural on ∂C (bare notch). (e) G/G c = 1 .2–1.69 . (f) 
+
+Initiation at Ginit /G c ≈ 3.0, measurement at Gmeas /G c = 1 .5 (Appendix B). 
+
+and Le, 2007; Le and Sembiring, 2008). Second, the quadratic terms con-tribute nothing at first order, so the threshold is governed by the competition between the elastic driving term and the degree-one BV term alone; the mod-ulus c2 sets the thickness of dislocation walls after nucleation but does not enter the nucleation condition. The first-variation (subdifferential) condition for β = 0 to minimize (10) reads: for every admissible trial slip δβ ,
+
+Z
+
+> Ω
+
+τ δβ da ≤ qc
+
+Z
+
+> Ω
+
+|∂s δβ | da , τ := σ : P , σ = g(α) C : ε(u), (11) The left-hand side is the work the resolved shear stress (Schmid’s stress) 
+
+τ of the (damage-degraded) stress field can extract from the trial slip dis-tribution; the right-hand side is the dislocation energy the trial must pay. 11 Nucleation occurs when, for some admissible δβ , extraction exceeds cost. We emphasize the integral, nonlocal character of (11), in the tradition of the energetic dislocation-nucleation thresholds of continuum dislocation theory (Berdichevsky and Le, 2007; Le and Sembiring, 2008): In contrast to phase field models of fracture with strength surface (De Lorenzis and Maurini, 2022; Zolesi and Maurini, 2024; Vicentini et al., 2026) no point-wise yield condition 
+
+τ ≤ τc is postulated anywhere in the model, and none would reproduce the size and geometry dependence derived below. 
+
+3.2. Dual form: the micro-stress and the chord evaluation 
+
+The operator ∂s differentiates only along the slip direction; its charac-teristics are the straight lines x(s) = x0 + s s, and the intersection of any such line with Ω is a union of segments which we call slip chords . (In a multiply-notched domain a single line may contribute several chords; each carries its own end conditions.) A chord end lying on Γp is called pinned ,one lying transversally on Γf free . The supremum implicit in (11) decom-poses along this foliation, and a one-dimensional duality computation on each chord yields the following evaluation. 
+
+Chord criterion. For a chord parametrized by arclength s ∈ [0 , L ] define 
+
+Q(s) = 
+
+Z s
+
+> 0
+
+τ  x(s′) ds′ , (12) 
+
+and let osc [0 ,L ] Q := max s∈[0 ,L ] Q(s) − min s∈[0 ,L ] Q(s) denote the oscillation of 
+
+Q over the chord. Condition (11) holds if and only if on every chord there exists a micro-stress q(s) = Q(s) − c, with c constant on the chord, such that 
+
+|q(s)| ≤ qc on [0 , L ], q = 0 at every free end. (13) 
+
+Explicitly: (i) pinned–pinned chord: c is unconstrained, and (13) is solvable if and only if osc [0 ,L ] Q ≤ 2qc;
+
+(ii) pinned–free chord (free end at s = L, say): c = Q(L) is forced, i.e. 
+
+q(s) = − R Ls τ ds′, and the condition is max s
+
+R Ls τ ds′ ≤ qc;
+
+(iii) free–free chord: solvability requires the chord balance R L 
+
+> 0
+
+τ ds = 0 , and then max s |Q(s)| ≤ qc. If the balance fails, the threshold is zero: the chord-constant slip δβ = const costs no dislocation energy and extracts work at any load. 
+
+12 Proof sketch. Fix a chord and restrict (11) to trial fields supported in a thin tube around it; the transverse direction contributes no BV cost, so the worst case is one-dimensional. For v(s) with v = 0 at pinned ends and 
+
+R L 
+
+> 0
+
+|v′| ds ≤ 1, integration by parts gives R L 
+
+> 0
+
+τ v ds = − R L
+
+> 0
+
+ Q−c v′ ds for any 
+
+c compatible with the end conditions (a boundary term (Q − c)v survives at free ends and is disposed of by the choice of c, or, on free–free chords, by the additional costless constant mode). Taking the supremum over the unit ball of measures v′ yields min c max s |Q − c| subject to the stated end constraints, which is the content of (i)–(iii). □
+
+The duality between the boundary conditions of β and of q—pinned slip 
+
+↔ free micro-stress, free slip ↔ vanishing micro-stress —is the transcription, at the level of the nucleation problem, of the natural/essential pairing of the underlying variational structure. The field q is precisely the Lagrange multiplier of the constraint ∂sβ = 0 ; in the numerical method of Section 4 it is realized, element by element, as the dual variable of the ADMM splitting, a correspondence we exploit both for detecting nucleation ( max |q|/q c → 1)and for the a posteriori certificates of Section 4.6. 
+
+3.3. The constrained-shear identity and the size effect 
+
+The criterion contains the classical energetic thresholds of continuum dis-location theory as the simplest special case. Consider a single crystal sheared between impenetrable boundaries a distance h apart along the slip direction, so that every chord is pinned–pinned of length h, and let the resolved stress be uniform, τ = μγ . Then Q(s) = μγs is linear, osc Q = μ|γ|h, and case (i) gives the energetic nucleation threshold 
+
+μ γ en h = 2 qc ⇐⇒ γen = 2kbρ s h, (14) the size effect of the energetic threshold in constrained shear (Berdichevsky and Le, 2007; Le and Sembiring, 2008). A point-wise criterion τ ≤ τc is size-independent and cannot produce (14); the integral criterion produces it in one line. The distinction is not academic, and the grain-size dependence of the yield stress is its sharpest expression. A strength surface is a point-wise condition on the stress; it contains no length, and therefore predicts a size-independent strength: it misses not merely the magnitude of the Hall–Petch effect but its existence. With grain boundaries blocking the slip—the natural realization of the condition β = 0 —every slip chord is pinned at both ends 13 with length of the order of the grain size d, and case (i) of the chord criterion applied to a uniform resolved stress gives the energetic threshold 
+
+τy ∼ 2qc
+
+d = 2μk bρ s d, (15) which means smaller grains are stronger, because the criterion integrates the stress over the chord and the chord is the grain. The exponent carries phys-ical information. The classical Hall–Petch relation (Hall, 1951; Petch, 1953) scales as d−1/2 and reflects yield governed by the transmission of slip through the boundary under the stress concentration of the dislocation pile-up; at smaller grain sizes, however, a growing body of experimental evidence sup-ports the scaling d−1 (Li, 1963; Conrad, 1963; Dunstan and Bushby, 2014), which is precisely (15): in small grains the energetic cost of placing the geometrically necessary dislocations in the grain controls the onset of slip directly, without pile-up amplification. A kindred d−1 effect on the initial yield stress was obtained from the self-energy of geometrically necessary dis-locations within strain gradient plasticity (Ohno and Okumura, 2007); there the linear defect energy modifies a flow rule, whereas here it enters a stability threshold of integral form, evaluated in closed form along the chords and cou-pled, below, to the crack. The present theory thus assigns the two observed regimes to two mechanisms—the energetic nucleation threshold at small d,derived here, and pile-up–mediated transmission at large d, which involves the dissipative threshold of the sequel and the wall of geometrically neces-sary dislocations that the model already forms at the pinned chord end—and predicts a crossover between them. No point-wise strength condition can pro-duce either regime. 
+
+3.4. Corollary: free surfaces as dislocation sources 
+
+Case (iii) and its degenerate limits have a physical content that we state separately because it controls the near-threshold behavior of notched bodies. First, on any chord meeting the free boundary at both ends, the chord-constant slip mode is energetically free: dislocations enter through one sur-face, traverse the crystal, and exit through the other, leaving uniform slip and no stored defect content. In the quasi-static energetic model this transit slip proceeds at whatever rate maintains the chord balance R τ ds = 0 ; it shields the stress field but stores no dislocations and, by the argument of Section 6, dissipates nothing. Second, where the slip direction is tangent to a free surface—the grazing characteristic through the tangency point of the 14 chord family—the end conditions in (13) degenerate: trial slips concentrated along the grazing chord achieve an unbounded ratio of extracted work to BV cost, the threshold vanishes, and the multiplier q acquires a component concentrated on the grazing line (a measure). Physically, a bare surface tan-gent to the slip plane acts as an inexhaustible dislocation source of vanishing activation threshold; passivating the surface ( β = 0 on Γp) removes the free ends and restores a finite threshold given by cases (i)–(ii). Both signatures are observed numerically and independently in Sections 5–6: the penalized multiplier diverges as √C along the grazing chord of the notched disk, and the nonsmooth solver activates surface microslip there at loads two orders of magnitude below the band-nucleation threshold, while the passivated config-uration exhibits the sharp finite threshold of case (ii). A rigorous analysis of the grazing limit is beyond the scope of this paper; we record it as a well-characterized prediction of the model. 
+
+4. Numerical method 
+
+4.1. Incremental problem and alternate minimization 
+
+The loading is applied as a sequence of boundary data (Section 2.3), and at each step the state is obtained by minimizing the functional (3) over all kinematically admissible fields subject to the irreversibility constraint 
+
+αn−1 ≤ α ≤ 1 point-wise , (16) where αn−1 is the damage of the previous step; the slip β carries no such constraint in the present, purely energetic model. The functional is convex in the pair (u, β ) at fixed α and convex in α at fixed (u, β ), but not jointly convex, and we minimize it by the alternate scheme standard in phase-field fracture (Bourdin et al., 2000): Block A minimizes over (u, β ) at frozen damage, Block B over α at frozen (u, β ), iterated to stagnation of the energy. Each half-step decreases J; this monotonicity is asserted at run time, and any violation aborts the computation. The two blocks are convex problems with unique minimizers, solved as follows. 
+
+4.2. Block A: splitting and dual ascent for the slip 
+
+At frozen α, Block A is a convex but nonsmooth problem: the bounded-variation term qc|∂sβ| is not differentiable at ∂sβ = 0 , and it is exactly this nonsmoothness that carries the nucleation threshold of Section 3; it must 15 be treated exactly, not smoothed. We introduce the slip gradient as an independent field, ξ = ∂sβ, and minimize the augmented Lagrangian 
+
+Lr[u, β, ξ, y ] = F [u, β ] + 
+
+Z
+
+> Ω
+
+qc|ξ| da +
+
+Z
+
+> Ω
+
+y  ∂sβ − ξ da + r
+
+2
+
+Z
+
+> Ω
+
+ ∂sβ − ξ2 da , 
+
+(17) where F collects the smooth part (elastic energy and the c2-term), y is the multiplier of the constraint ξ = ∂sβ, and r > 0 a penalty. One iteration of the alternating direction method of multipliers (ADMM) (Boyd et al., 2011) consists of 
+
+(u, β ) ← arg min Lr (a symmetric positive definite linear solve) ,ξ ← S qc/r 
+
+ ∂sβ + y/r , St(z) = sign( z) max  |z| − t, 0,y ← y + r  ∂sβ − ξ,
+
+(18) where the soft-threshold Sqc/r solves the ξ-subproblem point-wise and in closed form. The penalty r is selected by residual balancing during the first load steps and then frozen; its value affects only the convergence path, not the limit. The multiplier y is the discrete realization of the micro-stress q of Sec-tion 3.2: at convergence, |y| ≤ qc wherever ξ = 0 , and y = ±qc exactly on the slipped set, by the optimality of the threshold operation. This identifica-tion is used throughout: the approach of max |y|/q c to unity detects incipient nucleation, and the multiplier enters the a posteriori certificate of Section 4.6. 
+
+4.3. Block B: primal–dual active set for the damage 
+
+At frozen (u, β ), Block B is a quadratic minimization in α under the bound constraints (16). It is solved by the primal–dual active-set method (Hintermüller et al., 2002): the sets on which the lower and upper bounds are active are updated from the sign of the constraint residuals, the equality-constrained quadratic problem is solved on the inactive set, and the iteration terminates, typically in a few steps, when the active sets stabilize. Irre-versibility is thereby enforced exactly, not by penalty or history-field surro-gates. 
+
+4.4. Discretization and meshing 
+
+The notched disk is discretized by linear triangles on an unstructured mesh; the slip gradient ∂sβ is then constant on each element, so the auxiliary 16 field ξ and the multiplier y live element-wise and the threshold operation in (18) is a single scalar operation per element. (The rectangular specimen of Section 5 uses bilinear quadrilaterals with the corresponding Gauss-point fields.) Mesh generation is confined behind a single interface returning plain node and connectivity arrays, and the mesh is refined toward the notch tip, along the expected slip rays, and along the crack path. Crucially, the achieved element size on the crack path is measured and asserted at run time against the requirement h ≲ ℓ/ 4: a computation on an unresolved mesh aborts rather than returning plausible but wrong effective toughnesses. The necessity of this assertion is documented, with numbers, in Section 5. 
+
+4.5. Loading protocols 
+
+Two protocols are used. For nucleation measurements, the amplitude 
+
+κ of the boundary field (9) is ramped proportionally at fixed center. For toughness measurements, a crack driven by a fixed-amplitude field with a 
+
+translating center—the surfing protocol of Hossain et al. (2014)—reaches a steady state in which the tip follows the moving load at constant lag, and the fracture resistance is measured as the slope of the dissipated energy with respect to crack advance in that steady state, free of the stability ambiguities of fixed-center loading. The drive must be calibrated: it has to exceed the (a priori unknown) resistance for the crack to follow at all, yet a large overdrive with the tip ahead of the load center places the near field of the load on the freshly formed wake and re-damages it, inflating the measured resistance. We therefore choose the drive a modest margin above the resistance measured in a first pass, and verify a posteriori that the lag is positive; the quantitative effect of violating this rule is reported in Section 5. 
+
+4.6. Verification certificates 
+
+Every quantitative claim of Sections 5–6 is backed by run-time or a pos-teriori checks that we state here because two of them do not appear to be standard. 
+
+Equipartition as a mesh diagnostic. For the optimal damage profile of the functional (7), the local and gradient contributions to the fracture energy are equal. The ratio of the two, computed from the discrete solution in the wake of a propagated crack, therefore measures the adequacy of the resolution from the solution alone: on an unresolved mesh it is large (values above 3 were observed on a mesh with h/ℓ ≈ 2.8), while on resolved meshes it saturates near 1.4 rather than 1—the residual excess being a property of the irreversibly 17 frozen two-dimensional tip profile, not of the discretization. The ratio is thus a sensitive detector of gross under-resolution, with a known floor. 
+
+A-posteriori primal-gap certificate. For minimizers containing measure-valued slip—which occur on grazing characteristics, Section 3.4—the com-posite residual of the iteration (18) can stagnate through chatter of the dual variable on the singular set while the energetically relevant constraint is sat-isfied to high accuracy. The correct certificate is then not the solver residual but the direct energy bound: with γ = ∂sβ − ξ the primal gap of the con-verged state, the quantity qc
+
+R 
+
+> Ω
+
+|γ| da bounds the contribution the unresolved gap can make to any energy in the problem, and the computed slopes are accepted only when this bound is negligible against the fracture energy scale 
+
+Gc ∆a of the measurement. In the computations of Section 6 the bound is of order 10 −10 against a scale of 10 −5.In addition, elementary hygiene is enforced mechanically: the run mode and all mode-dependent parameters are set by a single selector echoed in the output, results are archived under mode-tagged names, and the energy monotonicity of Section 4.1 is asserted at every iteration. 
+
+5. Validation 
+
+The model contains two classical limits, and we validate each against an independent analytic result before turning to the coupled physics. With dis-locations suppressed it must reproduce Griffith fracture in the regularized form of Section 2.2 (Section 5.1); with fracture suppressed it must reproduce the dislocation nucleation threshold of the criterion of Section 3 (Section 5.2). In both cases the suppression is kinematic . For the plastic slip this is a con-sequence of the theory itself: under natural boundary conditions the chord-constant transit mode of Section 3.4 carries no defect energy, so no value of the dislocation-energy factor k, however large, can suppress dislocation activity energetically; the Griffith limit is defined by constraining β ≡ 0.
+
+5.1. The Griffith limit 
+
+The notched disk of Section 2.3 is loaded with ϵ = 0 .05 , so that the root radius ρtip = 2 .5 × 10 −3 is an order of magnitude below the damage length 
+
+ℓ = 0 .02 and the notch is effectively a sharp crack, regularized by ℓ alone. With β ≡ 0, the sharp-crack Griffith load is κc = √E′Gc/μ = 0 .0302 for 
+
+ν = 0 .30 , Gc = 3 .2 × 10 −4. The crack is driven by the surfing protocol of Section 4.5, and the effective fracture resistance Γ is extracted in three 18 independent ways: a global linear fit of the fracture energy against the crack extension; the fracture energy contained in a fixed window of the steady wake, divided by the window length (a direct measurement involving no fit); and the steady-state slope of the surfing response. Table 2 collects the results.             
+
+> Table 2: Griffith-limit validation: effective fracture resistance Γ/G cof the propagating damage band by three independent estimators, wake equipartition ratio Eloc /E grad (opti-mal profile: 1), band width at α > 0.5relative to the theoretical 4ℓln 2 , and mean lag of the crack tip behind the surfing load center. The first row documents the failure mode of an unresolved crack path and is retained deliberately.
+
+h/ℓ drive G/G c Γ/G c (fit) (wake) (surfing) equip. width lag 
+
+2.8 1.69 1.68 1.68 — 3.4 0 —
+
+0.18 1.69 1.078 1.072 1.082 1.44 1.17 −0.12 0.085 1.69 1.067 1.059 1.072 1.40 1.16 −0.12 0.085 1.20 1.059 1.045 1.060 1.37 1.14 +0 .04 
+
+Four observations. First, on resolved meshes the three estimators agree to within 1% at every drive, and the resistance converges toward Gc from above with the expected discretization overshoot of order h/ℓ ; the residual excess extrapolated to h → 0, of order 2% , is carried by the wake profile frozen at tip passage, which irreversibility prevents from relaxing to the one-dimensional optimum—the same effect that holds the width some 15% above 
+
+4ℓ ln 2 and the equipartition ratio near 1.4 rather than 1. Second, the drive must respect the positive-lag rule of Section 4.5: at G = 1 .69 Gc the tip runs ahead of the load center (negative lag), the trailing near field re-damages the fresh wake, and the measured resistance is inflated by about 1.5% relative to the calibrated drive G = 1 .2 Gc. Third, the first row shows what an un-resolved crack path produces: a resistance in error by 68% , an equipartition ratio of 3.4, and a band with no measurable width—large, plausible-looking, and wrong, which is why the mesh assertion of Section 4.4 exists and why we report the equipartition ratio as a solution-based resolution diagnostic. Fourth, the baseline is robust against the solver configuration: re-measuring the finest case under a different penalty schedule and tolerance reproduces 
+
+Γ/G c within one percent. 
+
+5.2. The dislocation nucleation threshold 
+
+The quantitative test of the criterion of Section 3 requires a configuration in which the chord evaluation is sharp: all slip chords pinned at both ends and 19 crossing the boundary transversally, i.e. case (i) of the chord criterion. (The notched disk is unsuitable for this purpose by the corollary of Section 3.4: its free or passivated notch surface carries grazing characteristics with degener-ate or measure-valued micro-stress, a prediction whose numerical signatures we confirm below.) We therefore use a square single crystal of side 1, dis-cretized by 200 × 200 bilinear elements, with a stationary crack of half-length 
+
+a0 = 0 .15 seeded at the center through the damage field, α = e−d/ 2ℓ with d
+
+the distance to the crack segment. Tension is applied by prescribed vertical displacements ±¯v on lubricated horizontal boundaries, β = 0 is imposed on the entire boundary, the slip system is inclined at φ = 70 .53 ◦, and k = 0 .42 
+
+places the threshold inside the Rice–Thomson window of the specimen. The damage field is frozen at the seed throughout, so that both evaluations below address the same linear elastic state: without this precaution the crack would begin to extend at ¯v ≈ 0.0075 , below the slip threshold, and the comparison would be contaminated by crack growth. The criterion is evaluated directly: one elastic solve at a reference load, integration of the resolved stress τ along every chord, and the exact linear scaling of Section 3.2 yield the predicted threshold 
+
+¯vpred nucl = 0 .00951 , (19) attained on the longest crack-free chord through the ligament, with the ex-trema of the micro-stress at the pinned boundary: at these parameters the predicted first event is whole-chord yield rather than a crack-tip dipole, the tip enhancement being outweighed by chord length. The full non-smooth solver, run on the identical configuration, activates slip between ¯v = 0 .0098 
+
+and 0.0100 : the integral slip measure R |ξ| da jumps by four orders of magni-tude across one load step, as sharp an onset as a discrete ramp can exhibit. The measured threshold exceeds the prediction by 4% , within the accounting of the O(h) effects (interpolation of τ , walls occupying one element at the pinned ends, load-step quantization). Beyond the single number, the kinet-ics of the onset match the criterion landscape: the margin of the criterion is nearly flat across the neighboring ligament chords, so that once the critical chord yields its neighbors follow in a narrow load window—and the computed slip indeed grows by three orders of magnitude over the next four load steps before settling to steady accumulation. The notched-disk phenomena predicted by the corollary of Section 3.4 are observed independently by two methods: on the free notch, the non-smooth 20 solver activates surface micro-slip at loads two orders of magnitude below the band scale, with negligible integral slip; and the penalized multiplier of the linear evaluation diverges as √C, with the divergence localized along the grazing characteristic through the surface tangency point. Both are signa-tures of the measure-valued micro-stress predicted there, and both disappear when the chord ends are pinned. 
+
+6. Coupled results 
+
+We now let all three fields evolve together. The configuration is the notched disk of Section 2.3 with ϵ = 0 .05 , the mesh of the finest Griffith computation ( h/ℓ = 0 .085 ), the passivated outer boundary and the free notch surface ( β = 0 on ∂D as the grain boundary blocking dislocations, natural condition on ∂C), and the physical dislocation-energy factor k = 0 .03 , so that qc = 6 × 10 −4. The crack is driven by the two-phase protocol of Table 1: ramped to G ≈ 3 Gc for initiation, then measured by surfing at G = 1 .5 Gc,comfortably above the elastic resistance measured in Section 5.1. Every number quoted below is certified in the sense of Section 4.6: two runs with different penalty schedules reproduce the resistance slope to one part in 10 3
+
+and the initiation drive exactly (Appendix B), and the a posteriori primal-gap bound is 4.2×10 −10 against the fracture-energy scale Gc ∆a ≈ 2.9×10 −5
+
+of the measurement. 
+
+6.1. The event sequence 
+
+Slip activity begins at κ = 0 .0037 —an order of magnitude below the Griffith scale κc = 0 .0302 . Its onset carries the signature predicted by the corollary of Section 3.4 for the notched geometry: the first activation is local-ized at the notch tip on the characteristic grazing the bare notch surface near the tip, with negligible integral slip, and the macroscopic slip content then grows continuously with the load rather than through a sharp threshold—for a notched crystal, “the” emission load is an interval, not a number, exactly because the tip itself acts as a low-threshold source. Crack growth, by con-trast, occurs only at the Griffith-scale drive, as in Section 5.1. The computed order of events—dislocation activity first, blunting next, cleavage-scale crack growth last, separated by an order of magnitude in load—is the sequence expected of a metal, produced here by energy minimization in a single func-tional rather than by a postulated yield condition. 21 Figure 2: The two stages of the coupled response: signed dislocation density ρ/ρ s at the end of the first stage ( κ = 0 .0524 , stationary crack, left) and in the steady propagation of the second stage ( a = 0 .481 , right). Both panels use the identical color scale, saturated at ±0.05 , chosen to render the band interior; the maximum, |ρ/ρ s| ≈ 2.3, is confined to the one-element boundary layer on the characteristic grazing the bare notch and grows under refinement, consistent with the measure-valued micro-stress of Section 3.4. Black: undeformed notch; red: deformed notch at true scale ( ×1). In the first stage, dislocation bands emanate from the notch tip and blunt it; in the second, the bands have healed and a compact cluster of like-signed dislocations travels with the tip at a peak standoff of       
+
+> 1.4±0.1in units of ℓ, its partner walls pinned at the grain boundary (Section 6.2); the dislocation energy of the traveling state is 0.56 of its pre-growth value.
+
+6.2. The two stages: band emission and blunting before growth; the traveling cluster during growth 
+
+The response of the coupled system divides into two stages, separated by an order of magnitude in load (Fig. 2). In the first stage, at loads beginning within the bracket established in Section 6.1, dislocations are emitted in bands from the notch tip (Fig. 3). Where a band meets the free surface, the material on the two sides translates relative to itself along s, producing a surface step that reshapes the notch: the tip opening displacement grows linearly with κ in the elastic regime and departs upward from that line when slip sets in, the excess being the plastic contribution to blunting. The emitted structure shields the tip: under the loading program of Section 4.5 the crack does not grow at κ = 1 .22 κc, and initiation is observed at κ = 1 .73 κc—the shielding elevates the apparent initiation load by a factor between 1.2 and 1.7 in stress intensity. The second stage begins with crack growth. The band structure, carrying no irreversibility, heals as the advancing crack relieves the field that sustained it; what survives near the tip is a compact cluster of geometrically necessary 22 Figure 3: First stage, tip region: slip bands emitted from the notch tip at κ = 0 .0524 ,an order of magnitude above the emission onset and below crack growth. Signed density  
+
+> ρ/ρ s, color scale as in Fig. 2; the leading band meets the bare notch surface along the grazing characteristic through the tangency point, the low-threshold dislocation source of Section 3.4. The deformed notch (red, true scale) shows the blunting produced by the surface steps of the bands; the undeformed profile is drawn in black.
+
+dislocations of a single sign ahead of and below the crack plane—coarse-graining N ≈ 32 discrete dislocations in 8–9 walls within a region of extent 
+
+≈ 7ℓ—which travels with the tip. Its canceling partner is not local: walls of the opposite sign, N ≈ 39 , remain pinned in the boundary layer of the passivated grain boundary, so that tip cluster and boundary walls together form a grain-spanning dipole; the residual net content of the field, −12% 
+
+of the total, is imaged by surface steps on the notch and crack faces where slip terminates. Measured over the steady advance a ∈ [0 .38 , 0.48] , the peak standoff of the cluster from the current tip is 1.4 ± 0.1 in units of ℓ (= ℓd
+
+in the present calibration; companion runs with ℓd = ℓ/ 2 and 2ℓ at fixed qc
+
+leave the standoff and the cluster extent unchanged in units of ℓ, identifying the damage length, not the dislocation length, as the controlling scale); the drift toward larger standoff late in the window reflects the approach of the tip to the grain boundary. This is the regularized image of the Rice–Thomson emitted dislocation (Rice and Thomson, 1974): the standoff is set by the competition between the attraction of the free surface and the repulsion of the crack-tip field, both encoded in the energy, and no parameter of the model prescribes it. The dislocation energy of the traveling state is 0.56 of its pre-growth value: propagation is screened by the cluster, but the band-23 Figure 4: Second stage (final state, a = 0 .481 ): plastic slip β (left, color scale saturated at ±0.04 , chosen to render the slipped region; maximum βmax = 0 .051 in the grazing boundary layer) and damage α (right). The slip that formed the first-stage bands has healed— β carries no irreversibility (Section 2.2)—and the surviving slip is confined to the neighborhood of the current tip; the damage field shows the crack grown from the notch along y = 0 . Together the two maps state the healing claim of Section 6.2 in the primal variables. 
+
+scale plasticity of the first stage does not survive it. 
+
+6.3. Zero dissipative toughening 
+
+The central quantitative result is stated by the decomposition of the steady-state resistance. Over the measurement window (primal-gap certifi-cate 4.2 × 10 −10 against Gc ∆a ≈ 2.9 × 10 −5), 
+
+1
+
+Gc
+
+dEcr 
+
+da = 1 .063 , 1
+
+Gc
+
+dEdis 
+
+da = 0 .17 , (20) to be compared with the purely elastic resistance Γ/G c = 1 .065 of Section 5.1 on the same mesh. The initiation jump of the two-phase drive overshoots the translating load center, so the tip leads the center over the early part of the window and trails it only late (mean lag −0.067 ); the measured slope is insensitive to this transient: restricted to the trailing-compliant steps it is 
+
+1.064 , within one part in a thousand of the full-window value. The two terms have different thermodynamic status. Irreversibility resides in the damage alone (Section 2.2): the fracture term is the only dissipated energy of the model, and its slope equals the elastic resistance to two parts per thousand. 24 -0.3 -0.25 -0.2 -0.15 -0.1 -0.05 0 0.05 0.1 -0.1 -0.05 00.05 0.1         
+
+> notch profile, true scale (x1)
+> undeformed end of stage i stage ii (final) load step
+> 010 20 30 40 50 60 70
+> TOD
+> 00.005 0.01 0.015 0.02 0.025 0.03 0.035 0.04 tip opening displacement across the stages
+> TOD end of stage i first growth
+
+Figure 5: Blunting across the two stages. Left: notch profile at true scale ( ×1)— undeformed (black), at the end of the first stage (blue), and in steady propagation (red; the load center is then at x0 = 0 .55 , and the opening near the original tip is carried by the crack faces). Right: tip opening displacement over the load program; dashed lines mark the end of the first stage (blue) and the first crack advance (red). The departure of the TOD from the initial linear (elastic) trend measures the plastic contribution of the bands to blunting; its behavior at first growth records the partial recession of the plastic blunting as the slip heals. 
+
+The dislocation term is stored, reversible energy—recoverable upon unload-ing by construction—and its small positive slope is a finite-grain effect: in an unbounded domain the traveling structure would translate rigidly and dEdis 
+
+> da
+
+would vanish exactly, whereas in the grain the walls pinned at the boundary and the changing chord geometry grow the stored content with advance, con-sistently with the standoff drift noted in Section 6.2. The value of this slope is the least certain number reported: as the small slope of a large stored con-tent it varies by 15% between the two solver schedules of Appendix B, while the resistance slope varies by one part in a thousand. Emission, screening, and blunting are all active—and the dissipated cost of fracture is unchanged. This is the classical distinction between crack-tip shielding and toughen-ing (Ritchie, 2011), here derived rather than postulated, and the computa-tion separates its two halves: shielding acts on the initiation load, elevating it by the measured factor 1.2–1.7, and screens the growing tip through the traveling cluster, while leaving the dissipated propagation resistance exactly elastic. Toughening is dissipation in the wake, and a theory without dissipa-tion has none to offer. The formulations that couple phase-field fracture to conventional plasticity cannot pose this question, because their plastic flow is dissipative by construction (e.g. Shanthraj et al., 2017; Miehe et al., 2016b; Kristensen et al., 2020); the present model isolates the energetic content of 25 emission and shows it to be toughening-neutral. The missing ingredient is the threshold resistance to dislocation motion, which converts healing into a frozen plastic wake; its incorporation—together with the redundant disloca-tions and the configurational temperature of the thermodynamic dislocation theory (Le, 2018)—is the subject of the sequel, for which the present result is the exact zero intercept of the toughening curve Γ( τf ) : Γ(0) = Γ elastic ,measured here to two parts per thousand. 
+
+7. Discussion & outlook 
+
+The model of this paper answers the Rice–Thomson question in its purely energetic form, and the answer has two stages. A single functional—elastic energy degraded by damage, the logarithmic dislocation energy of continuum dislocation theory, and the Ambrosio–Tortorelli fracture energy—decides by minimization alone whether the crystal creates new surface or new disloca-tions. The decision is quantitative and was made before the computations that confirmed it: the chord criterion predicted the nucleation threshold of the pinned square crystal to four percent, and bracketed the emission onset of the notched grain between two load programs consistently with the linear-in-qc estimate; with slip suppressed, the same functional reproduced Griffith fracture with a resistance converging to Gc. In the coupled computation the crystal then behaved as a metal in initiation and as a brittle solid in propaga-tion: bands emitted an order of magnitude below the cleavage load blunted the tip and raised the initiation load by a factor 1.2–1.7; upon growth the bands healed, a compact cluster of like-signed dislocations traveled with the tip at fixed standoff—its partner walls pinned at the grain boundary—and the dissipated fracture resistance equaled the elastic one to two parts per thousand, the surviving dislocation energy being stored, not spent. The results thus divide along a line that the model itself draws, and the division is the program of the theory. Energetics decides what nucleates and what structures exist: the threshold loads and their size dependence, the emission sites, the standoff of the cluster, the order of events. None of these requires a postulated yield condition, and none is available to a point-wise strength condition, which contains no length and therefore no size effect—the inverse-thickness threshold of constrained shear, the d−1 yield stress of small grains, and the vanishing threshold of the grazing chord at a bare surface are all consequences of the integral character of the criterion. What energetics cannot decide is what fracture costs. The certified null of Section 6.3 is the 26 exact statement: in the dissipationless limit, the emitted structure translates with the tip, the slip heals in the wake, screening redistributes stored energy without altering the balance per unit advance, and Γtotal = Γ elastic to two parts per thousand. Emission shields—it delays initiation and screens the growing tip; it does not toughen. The classical distinction between crack-tip shielding and toughening (Ritchie, 2011) is here derived rather than postu-lated, and it could not have been posed within formulations that couple the damage field to conventional plasticity, whose flow is dissipative by construc-tion and whose every increment of slip is billed to the fracture resistance whether or not it survives in the wake. The idealizations of the paper are deliberate, and lifting them in a fixed order is the sequel. The nearest is dissipation. Endowing the slip rate with a threshold resistance τf | ˙β|—the same degree-one structure, now in the rate, treated by the same shrinkage machinery—converts healing into a frozen plas-tic wake and the free transit slip of Section 3.4 into an activated process. The wake then stores dislocation energy that does not translate with the tip, the resistance acquires an R-curve from wake buildup, and the toughening curve 
+
+Γ( τf ) can be measured by the surfing protocol; the null result of the present paper is its exact zero intercept, Γ(0) = Γ elastic . On the same stage enter the redundant dislocations and the configurational temperature of the ther-modynamic dislocation theory (Le, 2018), which govern the storage and the stress–strain response of the wake beyond the geometrically necessary con-tent retained here. The stage after that is temperature: thermally activated kinetics of both slip and decohesion turn the competition between emission and cleavage into a rate- and temperature-dependent one, and the brittle-to-ductile transition becomes a computable crossover of the same functional rather than a postulated criterion. The quantitative benchmark of that stage is fixed: the transition temperature and its rate dependence measured in tungsten (Gumbsch et al., 1998), already addressed by the mean-field theories of Langer (2021) and Le et al. (2023); what the resolved fields of the present model contribute to that meeting point are the quantities those theories must assume—the emission thresholds, the shielding factor, and the energetic char-acter of the structure the tip carries. In particular, the retained cluster is characterized by the pair (N, standoff ) ≈ (32 , 1.4ℓ): precisely the coarse-grained object that the mean-field description parameterizes, here computed rather than assumed. Two open points are recorded rather than resolved. Mathematically, the grazing-chord limit—the measure-valued micro-stress and the vanishing 27 threshold at a tangent bare surface—is here a well-characterized prediction with two independent numerical signatures, but its rigorous analysis, and with it the proper function-space setting of slip that is BV along charac-teristics only, remains to be supplied. Physically, the crossover between the energetic d−1 regime of the yield stress derived here and the pile-up–mediated 
+
+d−1/2 regime of the Hall–Petch relation involves the dissipative threshold of the sequel and is a natural quantitative target for it. The model is falsifiable at every stage. It commits, with no fitted plastic-ity parameters beyond ( b, ρs, k), to the emission load of a passivated notch, to a standoff of the emitted cluster of the order of the damage length, to the 
+
+d−1 scaling of the yield stress of small grains, and to the asymmetry between bare and passivated surfaces as dislocation sources—each accessible to micro-pillar and in-situ TEM experiments at the micron scale. Energetics decides what nucleates and what exists; dissipation decides what survives and what it costs. The present paper is the exact statement of the first half. 
+
+Appendix A. Chord-criterion duality 
+
+This appendix carries out the duality computation behind the chord cri-terion of Section 3.2. Throughout, (u, α ) are frozen, so the resolved stress 
+
+τ = σ : P is a fixed field, and the question is for which τ the dislocation-free state β ≡ 0 minimizes the energy E[β] of Eq. (10). 
+
+Reduction to the chords. The operator ∂s differentiates only along the slip direction ⃗s. Introduce coordinates (s, t ) with s the arclength along the char-acteristics ⃗x =⃗x 0 + s⃗ s and t the transverse coordinate labeling them; the intersection of each characteristic with Ω is a union of chords, each carrying its own end conditions. Since the area element factorizes, da = ds dt , both sides of the stability condition (11) decompose by Fubini: 
+
+Z
+
+> Ω
+
+τ δβ da =
+
+Z
+
+dt 
+
+Z
+
+> chord (t)
+
+τ v ds, 
+
+Z
+
+> Ω
+
+|∂s δβ | da =
+
+Z
+
+dt 
+
+Z
+
+> chord (t)
+
+|v′| ds, 
+
+(A.1) where v(·) = δβ (·, t ) is the restriction of the trial slip to the chord and no transverse gradient enters the cost. Condition (11) therefore holds if and only if the one-dimensional inequality 
+
+Z L
+
+> 0
+
+τ v ds ≤ qc
+
+Z L
+
+> 0
+
+|v′| ds (A.2) 28 holds on (almost) every chord, for every v admissible on that chord: v = 0 
+
+at pinned ends, v unconstrained at free ends. 
+
+The one-dimensional duality. Let Q(s) = R s 
+
+> 0
+
+τ ds ′ and let c be an arbitrary constant. Integration by parts gives, for v of bounded variation, 
+
+Z L
+
+> 0
+
+τ v ds = (Q − c) vL 
+
+> 0
+
+−
+
+Z L
+
+> 0
+
+(Q − c) v′ ds. (A.3) The three cases of the chord criterion follow from the disposal of the boundary term. 
+
+(i) Pinned–pinned. Here v(0) = v(L) = 0 and the boundary term vanishes for every c. Hence | R τ v | ≤ max s |Q(s)−c| R |v′| for every c, and the sharpest bound is 
+
+sup R |v′|≤ 1
+
+Z L
+
+> 0
+
+τ v ds = min  
+
+> c
+
+max  
+
+> s
+
+|Q(s) − c| = 12 osc  
+
+> [0 ,L ]
+
+Q. (A.4) The supremum is attained in the limit by v′ = δs+ − δs− , i.e. v the indicator of the interval between the argmin s− and the argmax s+ of Q (cost 2,extracted work osc Q). Stability of β ≡ 0 on the chord is therefore equivalent to osc [0 ,L ] Q ≤ 2qc.
+
+(ii) Pinned–free. Let the pinned end be s = 0 and the free end s = L. The boundary term (Q(L) − c) v(L) survives with v(L) arbitrary; it is disposed of by the forced choice c = Q(L), giving the micro-stress 
+
+q(s) = Q(s) − Q(L) = −
+
+Z Ls
+
+τ ds ′, q(L) = 0 , (A.5) and the criterion max s |R Ls τ ds ′| ≤ qc. The extremal trial jumps from 0 to 
+
+±1 at the argmax of |q| and rides at constant value to the free end, where it exits at no cost. 
+
+(iii) Free–free. Constants are admissible at zero cost, so a finite threshold requires the chord balance R L 
+
+> 0
+
+τ ds = 0 ; if the balance fails, the chord-constant mode extracts work at any load and the threshold is zero. Under the balance, 
+
+Q(0) = Q(L) = 0 , the choice c = 0 annihilates both boundary terms, q = Q
+
+vanishes at both ends, and the criterion is max s |Q(s)| ≤ qc.29 The micro-stress as a multiplier. In all cases the computed q is the Lagrange multiplier of the constraint ∂sβ = 0 : it satisfies |q| ≤ qc on the stable chord, 
+
+q′ = τ in the interior, is free (a reaction) at pinned ends and vanishes at free ends—the natural/essential pairing dual to that of β. In the discretization of Section 4 this object is realized element-wise as the ADMM dual variable 
+
+y: at convergence |y| ≤ qc wherever ξ = 0 and y = ±qc on the slipped set, which is the discrete counterpart of the optimality conditions above and the basis of the nucleation detector max |y|/q c → 1.
+
+The grazing degeneracy. Where the slip direction is tangent to a free portion of the boundary, the chord family degenerates. Near the tangency point of a convex free arc, the characteristics cut segments with both ends on the free boundary; their balance R τ ds = 0 fails in general, so by case (iii) the threshold on these chords is zero, and trial slips concentrated on the grazing segments achieve an unbounded ratio of extracted work to BV cost. In the limit the multiplier acquires a component concentrated on the grazing characteristic—a measure rather than a function. Two numerical signatures identify this object: the penalized multiplier of the linear evaluation diverges as √C with the penalty constant C, localized on the grazing line, and the nonsmooth solver activates surface micro-slip there at loads far below the band scale, with negligible integral slip (Sections 5.2 and 6.1). Pinning the arc ( β = 0 on Γp) removes the free ends and restores the finite thresholds of cases (i)–(ii). A rigorous treatment of the grazing limit—and with it the proper function space for slips of bounded variation along the characteristics only—is beyond the scope of this paper. 
+
+Appendix B. Numerical certificates: definitions and failure modes observed 
+
+Every quantitative claim of Sections 5–6 is backed by one of the fol-lowing checks. We record their exact definitions, acceptance rules, and— deliberately—the failure modes we observed when they were violated, since the latter document why each check exists. 
+
+B.1 Mesh assertion on the crack path. At mesh generation the achieved element size along the intended crack path is measured, and the run aborts unless the median satisfies h ≤ ℓ/ 4. Failure mode (Table 1, first row): at 
+
+h/ℓ ≈ 2.8 the computation returns a plausible-looking resistance in error by 30 68% , a damage band with no measurable width, and an equipartition ratio of 3.4—large, convergent in appearance, and wrong. 
+
+B.2 Equipartition as a resolution diagnostic. For the AT2 fracture energy (7) the optimal one-dimensional profile α = e−| d|/2ℓ makes the local and gradient contributions point-wise equal. The ratio 
+
+Req =
+
+Z
+
+> W
+
+Gc α2/(4 ℓ) da 
+
+Z
+
+> W
+
+Gc ℓ |∇ α|2 da , (B.1) computed over a window W in the steady wake of a propagated crack, mea-sures the adequacy of the resolution from the solution alone. On resolved meshes it saturates in the range 1.2–1.4, against ≥ 3 when unresolved; the residual excess is carried by the two-dimensional tip profile frozen at passage by irreversibility, not by the discretization, and constitutes a known floor. Values well above this floor indicate gross under-resolution (observed: 3.4 at 
+
+h/ℓ ≈ 2.8, B.1). 
+
+B.3 A-posteriori primal-gap certificate. Let γ = ∂sβ − ξ be the constraint gap of the converged ADMM state. Since the degree-one density is 1-Lipschitz, |∂sβ| − | ξ| ≤ | γ|, the discrepancy that the unresolved gap can induce in any energy of the problem is bounded by 
+
+∆E ≤ qc
+
+Z
+
+> Ω
+
+|γ| da + c2
+
+2
+
+Z
+
+> Ω
+
+|γ| | ∂sβ + ξ| da, (B.2) of which the second, quadratic term is below 2 × 10 −8 of the first in all reported computations. The acceptance rule for a measured slope is qc
+
+R |γ| ≪ 
+
+Gc ∆a over the measurement window. Failure mode this certificate exists for: on grazing characteristics (Appendix A) the micro-stress is measure-valued and the composite ADMM residual stagnates through chatter of the dual variable on the singular set—at tolerances that would reject the state— while the energetically relevant constraint is satisfied to high accuracy. The correct certificate is the energy bound, not the solver residual. In the coupled computations of Section 6 the bound is 4.2×10 −10 against the fracture-energy scale Gc ∆a ≈ 2.9 × 10 −5.31 B.4 Energy monotonicity of the alternate scheme. Each half-step of the alternate minimization decreases the total energy exactly only if the inner problems are solved exactly; with the ADMM stopped at finite tolerance, bumps of the order of the inner-solver slack are expected and benign. The assertion is therefore Jnew ≤ Jold + ϵJ (1 + |Jold |) with ϵJ = 10 −7, calibrated to exceed the observed ADMM-slack chatter ( ∆J ∼ 10 −9 absolute at energy scale 10 −5) by two orders. Violations beyond this tolerance abort the run. 
+
+B.5 Positive-lag rule for surfing measurements. The fracture resistance is accepted if the crack tip trails the translating load center over the fitted win-dow (lag > 0), or if the slope fitted on the trailing-compliant subwindow re-produces the full-window slope to within the quoted precision; the latter case arises after the initiation jump of the two-phase drive (B.6), which overshoots the still-translating center. Failure mode (Table 1): at drive G = 1 .69 Gc the tip runs ahead of the center, the trailing near field re-damages the fresh wake, and the measured resistance is inflated by ≈ 1.5% relative to the calibrated drive G = 1 .2 Gc.
+
+B.6 Two-phase drive for shielded initiation. When dislocation shielding is strong, a drive sufficient to initiate growth exceeds the modest overdrive required by B.5. The protocol is then two-phase: the load is ramped and held at Ginit until the crack has advanced beyond a few ℓ, and is thereupon reduced to Gmeas for the surfing measurement; the resistance is fitted exclusively on the Gmeas window, subject to B.5. Each drive at which initiation fails is recorded: it is a lower bound on the shielding, ∆Kshield ≥ (pGinit /G c − 1) κc.In the production calibration ( k = 0 .03 ) the crack shows no growth when held at G = 1 .5 Gc and initiates at Ginit = 3 .0 Gc, bracketing the shielding at 1.22 –1.73 in stress intensity. 
+
+B.7 Reproducibility and hygiene. The run mode and all mode-dependent parameters are set by a single selector echoed in the output; results are archived under mode- and parameter-tagged names together with the pa-rameter set itself, so that every archive is self-describing. Re-measuring the finest Griffith case under a different penalty schedule and tolerance repro-duces Γ/G c within one percent (Section 5.1); re-running the coupled case under a different penalty schedule and tolerance reproduces the resistance slope to one part in 10 3 (1.0630 versus 1.0620 ), the initiation drive and the last stationary load exactly, and the field-quantile observables ( c0, vb, βmax ) to 
+
+2–3% ; the primal-gap bounds themselves differ between schedules, as solver 32 residuals should, while both satisfy the acceptance rule of B.3 with margins above 10 4.
+
+References 
+
+Ambrosio, L., Tortorelli, V.M., 1990. Approximation of functionals depend-ing on jumps by elliptic functionals via Γ-convergence. Communications on Pure and Applied Mathematics 43, 999–1036. Berdichevsky, V.L., 2006a. Continuum theory of dislocations revisited. Con-tinuum Mechanics and Thermodynamics 18, 195–222. Berdichevsky, V.L., 2006b. On thermodynamics of crystal plasticity. Scripta Materialia 54, 711–716. Berdichevsky, V.L., Le, K.C., 2007. Dislocation nucleation and work hard-ening in anti-plane constrained shear. Continuum Mechanics and Thermo-dynamics 18, 455–467. Bilby, B.A., 1955. Types of dislocation source, in: Report of Bristol Confer-ence on Defects in Crystalline Solids (Bristol 1954, London: The Physical Society), pp. 124–133. Bourdin, B., Francfort, G.A., Marigo, J.J., 2000. Numerical experiments in revisited brittle fracture. Journal of the Mechanics and Physics of Solids 48, 797–826. Boyd, S., Parikh, N., Chu, E., Peleato, B., Eckstein, J., 2011. Distributed optimization and statistical learning via the alternating direction method of multipliers. Foundations and Trends in Machine Learning 3, 1–122. Cleveringa, H.H.M., Van der Giessen, E., Needleman, A., 2000. A discrete dislocation analysis of mode I crack growth. Journal of the Mechanics and Physics of Solids 48, 1133–1157. Conrad, H., 1963. Effect of grain size on the lower yield and flow stress of iron and steel. Acta Metallurgica 11, 75–77. De Lorenzis, L., Maurini, C., 2022. Nucleation under multi-axial loading in variational phase-field models of brittle fracture. International Journal of Fracture 237, 61–81. 33 Dunstan, D.J., Bushby, A.J., 2014. Grain size dependence of the strength of metals: The Hall–Petch effect does not scale as the inverse square root of grain size. International Journal of Plasticity 53, 56–65. Francfort, G.A., Marigo, J.J., 1998. Revisiting brittle fracture as an energy minimization problem. Journal of the Mechanics and Physics of Solids 46, 1319–1342. Griffith, A.A., 1921. The phenomena of rupture and flow in solids. Philosoph-ical Transactions of the Royal Society of London. Series A 221, 163–198. Gumbsch, P., Riedle, J., Hartmaier, A., Fischmeister, H.F., 1998. Control-ling factors for the brittle-to-ductile transition in tungsten single crystals. Science 282, 1293–1295. Hall, E.O., 1951. The deformation and ageing of mild steel: III Discussion of results. Proceedings of the Physical Society. Section B 64, 747–753. Hintermüller, M., Ito, K., Kunisch, K., 2002. The primal-dual active set strategy as a semismooth Newton method. SIAM Journal on Optimization 13, 865–888. Hossain, M.Z., Hsueh, C.J., Bourdin, B., Bhattacharya, K., 2014. Effective toughness of heterogeneous media. Journal of the Mechanics and Physics of Solids 71, 15–32. Kristensen, P.K., Niordson, C.F., Martínez-Pañeda, E., 2020. A phase field model for elastic-gradient-plastic solids undergoing hydrogen embrittle-ment. Journal of the Mechanics and Physics of Solids 143, 104093. Kröner, E., 1955. Der fundamentale Zusammenhang zwischen Versetzungs-dichte und Spannungsfunktionen. Zeitschrift für Physik 142, 463–475. Langer, J.S., 2021. Fracture toughness of crystalline solids. Physical Review E 103, 063004. Le, K.C., 2018. Thermodynamic dislocation theory for non-uniform plastic deformations. Journal of the Mechanics and Physics of Solids 111, 157–169. Le, K.C., Jeong, H., Tran, T.M., 2023. Theory of transition from brittle to ductile fracture. Physical Review E 107, 055006. 34 Le, K.C., Sembiring, P., 2008. Analytical solution of plane constrained shear problem for single crystals within continuum dislocation theory. Archive of Applied Mechanics 78, 587–597. Li, J.C.M., 1963. Petch relation and grain boundary sources. Transactions of the Metallurgical Society of AIME 227, 239–247. Martínez-Pañeda, E., Niordson, C.F., Gangloff, R.P., 2016. Strain gradient plasticity-based modeling of hydrogen environment assisted cracking. Acta Materialia 117, 321–332. Miehe, C., Aldakheel, F., Raina, A., 2016a. Phase field modeling of duc-tile fracture at finite strains: A variational gradient-extended plasticity-damage theory. International Journal of Plasticity 84, 1–32. Miehe, C., Teichtmeister, S., Aldakheel, F., 2016b. Phase-field modelling of ductile fracture: a variational gradient-extended plasticity-damage theory and its micromorphic regularization. Philosophical Transactions of the Royal Society A: Mathematical, Physical and Engineering Sciences 374, 20150170. Nye, J.F., 1953. Some geometrical relations in dislocated crystals. Acta Metallurgica 1, 153–162. Ohno, N., Okumura, D., 2007. Higher-order stress and grain size effects due to self-energy of geometrically necessary dislocations. Journal of the Mechanics and Physics of Solids 55, 1879–1898. Petch, N.J., 1953. The cleavage strength of polycrystals. Journal of the Iron and Steel Institute 174, 25–28. Rice, J.R., 1968. A path independent integral and the approximate analysis of strain concentration by notches and cracks. Journal of Applied Mechanics 35, 379–386. Rice, J.R., Thomson, R., 1974. Ductile versus brittle behaviour of crystals. Philosophical Magazine 29, 73–97. Ritchie, R.O., 2011. The conflicts between strength and toughness. Nature Materials 10, 817–822. 35 Roters, F., Diehl, M., Shanthraj, P., Eisenlohr, P., Reuber, C., Wong, S.L., Maiti, T., Ebrahimi, A., Hochrainer, T., Fabritius, H.O., et al., 2019. DAMASK – The Düsseldorf Advanced Material Simulation Kit for model-ing multi-physics crystal plasticity, thermal, and damage phenomena from the single crystal up to the component scale. Computational Materials Science 158, 420–478. Shanthraj, P., Sharma, L., Svendsen, B., Roters, F., Raabe, D., 2016. Aphase field model for damage in elasto-viscoplastic materials. Computer Methods in Applied Mechanics and Engineering 312, 167–185. Shanthraj, P., Svendsen, B., Sharma, L., Roters, F., Raabe, D., 2017. Elasto-viscoplastic phase field modelling of anisotropic cleavage fracture. Journal of the Mechanics and Physics of Solids 99, 19–34. Stumpf, H., Le, K.C., 1990. Variational principles of nonlinear fracture me-chanics. Acta Mechanica 83, 25–37. Vicentini, F., Heinzmann, J., Carrara, P., De Lorenzis, L., 2026. Variational phase-field modeling of cohesive fracture with flexibly tunable strength surface. Journal of the Mechanics and Physics of Solids 207, 106424. Zolesi, C., Maurini, C., 2024. Stability and crack nucleation in variational phase-field models of fracture: effects of length-scales and stress multi-axiality. Journal of the Mechanics and Physics of Solids 192, 105802. 36

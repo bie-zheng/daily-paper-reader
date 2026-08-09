@@ -1,0 +1,857 @@
+Title: Geometric closure of classical nucleation theory for magnetic-field-controlled nanoparticle size across magnetic classes
+
+URL Source: https://arxiv.org/pdf/2608.06220v1
+
+Published Time: Fri, 07 Aug 2026 01:11:56 GMT
+
+Number of Pages: 18
+
+Markdown Content:
+# Geometric closure of classical nucleation theory for magnetic-field-controlled nanoparticle size across magnetic classes 
+
+## Yazeed Tawalbeh 1 and Mauro Fernandes Pereira 1,2,* 
+
+> 1
+
+Department of Physics, Khalifa University of Science and Technology, 127788 Abu Dhabi, United Arab Emirates 
+
+> 2
+
+Institute of Physics, Czech Academy of Sciences, 18221 Prague, Czech Republic 
+
+> *
+
+mauro.pereira@ku.ac.ae 
+
+## ABSTRACT 
+
+Controlling nanoparticle size during synthesis remains a central challenge in nanoscience, particularly in systems where external magnetic fields are used as continuous control parameters. Existing descriptions of magnetic-field-assisted nucleation are typically material-specific or rely on computationally intensive atomistic methods. Here, we reformulate classical nucleation theory as a geometrically closed thermodynamic framework by introducing a sphere-packing representation of atomic assembly. This construction establishes a direct link between discrete atomic structure and continuum free-energy contributions under applied magnetic fields, yielding a field-driven evolution equation for the critical nucleus size. The resulting theory provides a unified description of nanoparticle nucleation across superparamagnetic, paramagnetic, and diamagnetic systems within a single formalism. It quantitatively reproduces previously unresolved experimental observations for magnetite and nickel nanoparticles, namely the systematic reduction of mean particle size and narrowing of size distributions with increasing magnetic field. In the diamagnetic limit, the framework recovers our earlier analytical susceptibility-based description of silver nanoparticles, in which the field-dependent critical radius is governed by the induced-magnetization contribution to the nucleation free energy. Beyond modeling the reduction of mean particle size with increasing magnetic field, the framework reveals that the narrowing of size distributions emerges naturally from the curvature of the field-modified free-energy landscape. These results establish magnetic-field-assisted nucleation as a geometrically constrained thermodynamic process, providing a computationally efficient route for controlling nanoparticle size across distinct magnetic material classes. 
+
+Nanoparticles (NPs) are generally defined as structures with characteristic dimensions below approximately 100 nm. At these reduced length scales, materials exhibit physical and chemical properties that differ markedly from their bulk counterparts. In particular, the functional performance of NPs is governed by their size and morphology, which determine the surface-to-volume ratio, electronic structure, and interfacial behavior. Precise control over these structural parameters is therefore a fundamental requirement to enable predictable functionality across nanoscale systems. By tailoring size and morphology, NPs can be engineered for a wide range of applications, including nanoelectronics, catalytic systems for chemical processing and energy, sensing and biomedical platforms, such as imaging agents, tumor detection tools, and controlled therapeutic delivery, as well as quantum devices, advanced construction materials, biofuel stimulants, and food-related technologies 1–7 .Beyond their broad technological relevance, NPs are emerging as key building blocks in photonics and optoelectronics. In particular, they enable functionalities that are not readily accessible in bulk silicon platforms, thus extending the capabilities of silicon-based technologies 8–15 . Furthermore, NPs can act as versatile quantum emitters 16 , which underpin applications in quantum metrology and information science, where phenomena such as quantum squeezing enable enhanced measurement pre-cision 17 . In this context, NPs also provide a materials-efficient alternative to more complex architectures, such as superlattices and multiple quantum wells, for a wide range of optoelectronic applications 18–21 .Despite these advances, achieving reliable control over NP size during synthesis remains a central and unresolved challenge in nanoscience. Because key properties, including catalytic activity, optical response, magnetic behavior, and electronic structure, are highly size-dependent, even small variations in the NP radius can lead to substantial changes in performance. Among the external parameters explored to control NP formation, magnetic fields have emerged as a particularly powerful and experimentally accessible tool, offering a non-invasive and continuously tunable means of influencing nucleation. A growing body of experimental evidence shows that applied magnetic fields can significantly modify the size, morphology, and size distributions of NPs across superparamagnetic, paramagnetic, and diamagnetic systems 22–27 . However, these observations still lack a unified theoretical description, preventing the identification of general scaling relations between magnetic field strength, arXiv:2608.06220v1 [cond-mat.mes-hall] 6 Aug 2026 the free-energy landscape, and the critical nucleus size. Existing approaches are typically material-specific, limited to particular magnetic regimes, or rely on computationally intensive atomistic simulations. For example, our earlier susceptibility-only analytical treatments are restricted to specific regimes 28, 29 , whereas density-functional-theory studies can resolve detailed cluster or NP energetics during nucleation and growth but are generally limited to specific material systems and atomistic structures on the order of hundreds of atoms 30–32 . By contrast, the present thermodynamic formulation evolves the critical radius directly and can be applied efficiently to experimentally relevant NP size ranges beyond the practical atom-count limits of explicit DFT simulations. In this work, we reformulate classical nucleation theory as a geometrically closed thermodynamic framework for magnetic-field-driven NP nucleation. By introducing a sphere-packing representation of atomic assembly, we establish a direct link between discrete atomic structure and continuum free-energy contributions, yielding a field-driven evolution equation for the critical nucleus size. The resulting framework provides a unified treatment of superparamagnetic, paramagnetic, and diamagnetic systems, while embedding our earlier regime-specific analytical descriptions 28, 29 as limiting cases of a broader experimentally validated theory. The model represents each nucleus as a sphere-packed assembly consisting of a densely packed core surrounded by a defective shell of reduced packing efficiency, as illustrated in Fig. 1b. This construction closes classical nucleation theory geometrically by mapping discrete atomic packing onto continuum free-energy contributions. Within this framework, the applied magnetic field modifies the nucleation free-energy landscape, lowering the barrier and shifting the critical nucleus size, as illustrated schematically in Fig. 1a. The resulting field-dependent size distribution predicted by the model is shown for Nickel NPs in Fig. 1c. 
+
+## Results and Discussion 
+
+In this work, we validate the generalized thermodynamic framework using experimental datasets spanning different magnetic classes 28, 29 by establishing a connection between the magnetic field and the NP size that results under different magnetic configurations. We show that the framework successfully captures previously unexplained behavior in superparamagnetic magnetite NPs 22 , paramagnetic nickel NPs used for carbon nanofiber 26 and gallium nitride (GaN) nanowire growth 27 , and diamagnetic silver NPs synthesized using different methods 23, 24 .We introduce the work of formation ∆F as the free-energy barrier associated with forming a post-critical nucleus from the metastable parent phase. In CNT, the critical nucleus corresponds to the stationary point at the top of this barrier along the nucleation coordinate, rather than to a stable equilibrium minimum. The total free energy is decomposed into four physically distinct contributions to separate the classical nucleation terms from the magnetic-field-dependent terms. The surface and bulk terms are the standard classical nucleation contributions, whereas the induced-magnetization and permanent-moment entropy terms account for the two magnetic responses needed to treat diamagnetic, paramagnetic, and superparamagnetic systems within one framework. The latter entropy term is absent in the susceptibility-only analytical limit 28, 29 , which is why that earlier treatment cannot generally describe magnetic NPs with field-alignable moments. The resulting expression is 
+
+∆F(r, B) = 4πr2γ
+
+| {z } 
+
+> surface formation
+
+− n(x) ∆μ
+
+| {z }
+
+> bulk driving
+
+− n(x)Θ(σ )Va
+
+23
+
+μ0
+
+|χm|
+
+(3 + χm) B2
+
+| {z }
+
+> induced magnetization
+
+− kBT ln 
+
+ sinh (ξ )
+
+ξ
+
+| {z }
+
+> permanent moment
+
+(1) Here x = r/a, where a is the effective atomic radius defined from the atomic volume of the material (see Methods). The surface formation term represents the energetic cost of creating a new interface, where γ is the surface free energy. The bulk driving term accounts for the thermodynamic driving force through the chemical potential difference ∆μ, with n(x) denoting the number of atoms in the NP. The induced magnetization term captures the response of the system to the applied magnetic field, where Va is the volume of the building unit and χm is the magnetic susceptibility. The function Θ(σ ) accounts for the angular distribution of the induced magnetic moments relative to the field. It assigns a Gaussian weight to cos (θ ), where θ
+
+represents the angle between the induced magnetic moment and the magnetic field. The Gaussian has standard deviation σ
+
+centered at θ = 0 for paramagnetic systems and θ = π for diamagnetic systems. The final term represents the contribution of permanent magnetic moments, where ξ = mB /kBT , with m = m0n(x), which is proportional to the size of the NP. Thus, the orientational degree of freedom is assigned to one effective collective NP moment rather than to n(x) independent microscopic moments. We note that the contribution of the entropic term in the small ξ limit becomes quadratic; however, it remains unrelated to the induced magnetization term and does not result in double counting the energy, as the energy comes from two different sources. A detailed derivation of all terms in Eq. (1), including the full distinction between the susceptibility-response 
+
+> 2/18 Equilibrium State (without a magnetic field) metastable State Equilibrium State (with a magnetic field)
+
+Perfect Packing Defective Shell (a) (b) 
+
+(c) Figure 1. (a) Schematic illustration of the magnetic-field effect on the free-energy landscape. The thin red and blue curves are guide lines representing the free-energy barrier along the nucleation coordinate. The red curve corresponds to the absence of a magnetic field, while the blue curve corresponds to the presence of a magnetic field, illustrating that the applied field lowers the barrier associated with critical-nucleus formation. (b) Sphere-packing representation of a NP used in this work. (c) Model-generated size distribution for Ni NPs used in GaN nanowire growth 27 at the highest applied field in that dataset, 
+
+B = 0.818 T, chosen to illustrate the predicted distribution under the strongest field-induced size reduction. contribution and the orientational-alignment contribution, is provided in the Supplementary Information. Ref. 33 makes the same basic distinction. We represent the number of atoms inside an NP as a densely packed core surrounded by a defective shell, as shown in Fig. 1b. The expression of n(x) is 
+
+n(x) = φb(x − δ )3 + φd [x3 − (x − δ )3] (2) 
+
+φb = π 
+
+> 3√2
+
+is the optimal close-packing fraction, and φd = 0.517 is the imperfect surface-packing fraction fitted from sphere-packing data 34 . δ is the thickness of the defective, imperfectly packed shell. The defective shell is included because surface atoms are undercoordinated and are most directly exposed to external forces from the nucleation medium, including solvent, ligand, ionic, and field-mediated interactions. Therefore, the surface region is not expected to maintain the same packing efficiency as the bulk-like interior. This picture is consistent with experimentally observed crystalline-core/amorphous-shell NP structures, where the interior remains comparatively ordered while the surface shell is structurally disordered 35, 36 . The present mathematical model aims to capture this core-shell packing contrast through a dense core and a reduced-packing defective shell, thereby linking the discrete atomic count to the continuum free-energy terms. The reduced shell packing fraction is fitted from sphere-packing data to represent the effective packing loss of the surface layer. The model reduces to the densely packed limit when the defective shell vanishes, δ → 0, or when φd = φb, giving n(x) = φbx3. For large particles with x ≫ δ , the shell contribution becomes relatively small and the model also approaches the densely packed bulk limit. 
+
+3/18 In order to obtain the radius field relationship, we define the critical value of ∆F through a stationarity condition as 
+
+f (x, B) ≡ ∂ ∆F  
+
+> ∂x
+
+= 0. This condition defines a one-dimensional critical manifold in the (x, B) space. Rather than solving the stationarity condition independently for each value of the magnetic field, we reformulate the problem as a field-driven evolution along the critical manifold. By differentiating f (x(B), B), we track how the critical nucleus size, defined by the barrier stationarity condition, changes as B → B + dB and obtain an explicit differential equation for dx /dB dx dB =
+
+n′(x)
+
+h
+
+2KB + m0L(ξ ) + n(x)m20BkBT
+
+
+
+−csch 2ξ + 1 
+
+> ξ2
+
+i 
+
+8πγ a2 − n′′ (x) [ ∆μ + KB 2] − n′′ (x)m0BL (ξ ) − [n′(x)] 2m20B2
+
+> kBT
+
+
+
+−csch 2ξ + 1 
+
+> ξ2
+
+ (3) with K = Θ(σ ) Va  
+
+> 23
+> μ0
+> |χm|
+> 3+χm
+
+, L(ξ ) ≡ coth ξ − 1 
+
+> ξ
+
+, ξ = n(x)m0B/(kBT ), and −csch 2ξ + 1/ξ 2 = dL /dξ .We solve Eq. (3) numerically (at σ = 0) as an initial value problem with the initial condition x(B = 0) = x0 where x0 is the peak of the most frequent radius inferred from the experiments. The parameter set p = {∆μ, γ, m0, δ } is used as the least squares fit parameters varied iteratively to find the best fit parameter set p∗. We resolve the equation again using different initial conditions that correspond to the boundaries of the experimental size distribution to obtain a theoretical Gaussian size distribution that we use as a probability density function, along with rejection sampling to generate size histograms that can be compared with experiments, as shown in Fig. 3. This equation defines a continuous trajectory of the critical nucleus size as a function of the applied magnetic field. In classical nucleation theory, the critical nucleus represents the threshold size at which a cluster becomes thermodynamically favored to grow rather than dissolve. This threshold size sets the initial post-critical length scale from which later particle evolution proceeds. Therefore, comparison with experimentally measured NP radii is meaningful when post-nucleation processes, including subsequent growth, coalescence, aggregation, Ostwald ripening, and transport, either remain comparable across a given experimental series or do not reverse the field-dependent size hierarchy established during nucleation. Under this assumption, the measured particle radius is interpreted as the observable post-critical outcome of a field-selected critical seed, allowing the model to predict the magnetic-field dependence of the final radius. 
+
+General Case: Magnetite and Nickel NPs 
+
+To compare the theoretical predictions of our model with experimental datasets, we use datasets for Fe 3O4 Magnetite NPs 22 
+
+and Nickel NPs 26, 27 reported in the literature. The Magnetite NPs are superparamagnetic, although Magnetite is ferromagnetic in bulk and their data are reported in two different configurations. The first is the homogeneous configuration in which Magnetite NPs are prepared in a chamber at 200 ◦C where the magnetic field is uniform throughout the chamber. The second configuration is the gradient configuration in which Magnetite NPs are prepared in a chamber under the same temperature but with a non-uniform magnetic field inside, such that different regions inside the chamber are subject to different magnetic fields. Figs. 2a and 2b showcase the radius-field relations for the gradient and homogeneous configurations, respectively. Fig. 3 shows an overall comparison between the size distributions obtained using our theory and the selected experimental data. Nickel NP data are reported from experiments that involve the use of nickel NPs as catalyst seeds on top of which carbon nanofibers 26 and GaN nanowires 27 are grown, at temperatures of 700 K and 750 K, respectively. For these catalyst-mediated systems, the relevant assumption is that the magnetic field influences the formation and stabilization of the Ni seed size before or during the early stages of catalyst activation, while the subsequent CNF or GaN growth step preserves the field-dependent ordering of the catalyst particle sizes. The comparison therefore tests whether the measured catalyst radius follows the field-selected critical seed scale predicted by the nucleation model. The radius-field relations for both configurations are shown in Figs. 2c and 2d. The results presented in Figs. 2–5 demonstrate the predictability range of our model. The agreement between our model and experiments spans superparamagnetic magnetite and nickel NPs, in addition to diamagnetic silver NPs. This provides a computationally inexpensive alternative to atomistic and electronic-structure simulations. We note that direct atomistic or DFT studies for these exact magnetic-field-assisted synthesis datasets are not available to our knowledge; we therefore cite representative continuum, atomistic, and DFT-based nanomaterial calculations to contextualize computational cost and scope 37, 38 .Figure 2 shows that the theory captures the reduction in radius as the magnetic field increases and covers the experimental range almost entirely. Field-resolved parameter sensitivities and comparisons with simple empirical models are provided in Supplementary Section S6, “Sensitivity Analysis.” The distribution-normalized deviations reported in Fig. 2 show the strongest agreement for the Ni systems and indicate that the homogeneous magnetite configuration is captured better than the gradient configuration. In practical terms, εw compares the model-data mismatch with the width of the measured particle-size distribution: smaller values indicate that the predicted mean radius lies closer to the experimental mean relative to the spread of particle        
+
+> 4/18 01234567
+
+Magnetic field (T) 
+
+> 2468
+> Radius (nm)
+
+(a) 
+
+εw = 0.43      
+
+> 0510 15 20 25
+
+Magnetic field (T) 
+
+> 2468
+> Radius (nm)
+
+(b) 
+
+εw = 0.36      
+
+> 0.0 0.1 0.2 0.3 0.4 0.5
+
+Magnetic field (T) 
+
+> 10 20 30 40
+> Radius (nm)
+
+(c) 
+
+εw = 0.11         
+
+> 0.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8
+
+Magnetic field (T) 
+
+> 20 40 60 80 100
+> Radius (nm)
+
+(d) 
+
+εw = 0.07                 
+
+> 0.25 0.50 0.75 1.00 1.25 1.50
+> Normalized radius  r ′/r0
+> 0246
+> Magnetic field (T)
+> 0.0 0.2 0.4 0.6 0.8 1.0
+> Normalized free energy barrier height
+> 0.25 0.50 0.75 1.00 1.25 1.50
+> Normalized radius  r ′/r0
+> 0510 15 20
+> Magnetic field (T)
+> 0.0 0.2 0.4 0.6 0.8 1.0
+> Normalized free energy barrier height
+> 0.2 0.4 0.6 0.8 1.0 1.2
+> Normalized radius  r ′/r0
+> 0.0 0.1 0.2 0.3 0.4 0.5
+> Magnetic field (T)
+> 0.0 0.2 0.4 0.6 0.8 1.0
+> Normalized free energy barrier height
+> 0.2 0.4 0.6 0.8 1.0 1.2
+> Normalized radius  r ′/r0
+> 0.0 0.2 0.4 0.6 0.8
+> Magnetic field (T)
+> 0.0 0.2 0.4 0.6 0.8 1.0
+> Normalized free energy barrier height
+
+Figure 2. The radius–field relation for Magnetite NPs 22 in (a) the gradient configuration and (b) the homogeneous configuration, and for Nickel NPs used in the synthesis of (c) carbon nanofibers 26 and (d) GaN nanowires 27 . The blue markers are experimental points; the bars represent the size distribution width, not to be confused with measurement errors. The black line represents the solution of Eq.(3) for x(B = 0) = x0, the dashed lines are the solutions at the experimental bounds. The shaded region represents the possible sizes generated by the theory, and the insets showcase the effect of the magnetic field on the free-energy barrier height. The distribution-width-normalized RMS deviation, εw = [ N−1 ∑i(( rth 
+
+i − rexp 
+
+i )/wi)2]1/2, where wi is the plotted radius distribution width, is given by εw = 0.43, 0.36, 0.11, and 0.07 for panels (a)–(d), respectively. sizes. Values below 1 therefore indicate that the model deviation is smaller than the observed distribution width. According to this metric, the best agreement is obtained for Ni-GaN ( εw = 0.07), followed by Ni-CNF ( εw = 0.11), homogeneous magnetite (εw = 0.36), and gradient-field magnetite ( εw = 0.43). The remaining magnetite deviations are likely related to irregular NP shapes observed in TEM images 22 and to non-extensive thermodynamic effects that become important at small particle sizes 39, 40 .Figure 3 shows a comparison between the size distributions predicted by our theory and the experimental distributions for Magnetite NPs. An interesting feature of the model is that it naturally predicts a narrowing of the accessible NP size range as the magnetic field increases. This behavior emerges from the curvature of the free energy landscape and is reflected in the shrinking band of possible radii in Figs. 2 and 4. Such behavior is consistent with experimental observations in several magnetic field-assisted synthesis methods and suggests that magnetic fields may provide a practical route for not only controlling the size but also refining the size distributions. 
+
+Susceptibility-Only Limit: Silver NPs 
+
+For NPs that do not possess a permanent magnetic moment, such as Silver NPs 23, 24 , only the induced magnetization term affects the free energy landscape, so we take the limit m → 0 (or equivalently ξ → 0) in Eq. (3) to obtain: 
+
+dx dB = 2KB n ′(x)
+
+8πγ a2 − (∆μ + KB 2) n′′ (x) (4) Equation (4) is therefore the susceptibility-only limit of the generalized theory. Because this limit contains no logarithmic orientational-entropy contribution from permanent magnetic moments, it is expected to apply to diamagnetic Ag NPs but not 
+
+5/18 (b) (c) (d) (e) (a) Figure 3. (a) A violin plot comparing the experimental and theoretical size distributions of magnetite NPs 22 at selected magnetic-field values. The blue distributions correspond to the experimental data, while the red distributions correspond to the model-generated distributions. The vertical bars indicate the central radius of each distribution. In the homogeneous-field configuration, the theory predicts the field-induced shift toward smaller radii as the field increases from 1 T to 5 T. Panel (b) shows the homogeneous 1 T case, where the theoretical distribution is shifted toward larger radii than the experimental distribution but retains partial overlap with the experimental range. Panel (c) shows the homogeneous 5 T case, where the theoretical and experimental distributions overlap more strongly and are both concentrated near smaller radii. Panels (d) and (e) show the gradient-field cases at 0.8 T and 6.8 T, respectively. At 0.8 T, the theory captures the general radius range but remains shifted toward larger radii, whereas at 6.8 T the model predicts a compact small-radius distribution while the experimental data retain a broader high-radius tail. The green regions in panels (b)–(e) denote the shared overlap between theory and experiment. Overall, Fig. 3 shows that the model captures the qualitative narrowing and field-driven reduction of the magnetite NP size distributions, with larger deviations in the gradient-field cases where spatial field nonuniformity and irregular particle morphology are expected to be more important. necessarily to magnetic NPs whose field response includes moment alignment. Upon integration, Eq. (4) exactly recovers our previous analytical description 28, 29 . We first test this limiting case using the Silver NP data of Li et al. 24 , where the magnetic field is applied parallel or perpendicular to the stirring direction. As shown in Fig. 4, the reduced equation captures the experimentally observed decrease in Silver NP radius with increasing magnetic field, confirming that the earlier analytical model is recovered as the diamagnetic limit of the present framework. Mechanical stirring plays an important role in particle transport and aggregation during the synthesis process, as discussed by Li et al 24 . However, in the present framework, stirring does not directly determine the thermodynamic critical size of the NP. Instead, it primarily acts as a secondary transport mechanism that influences how atoms and clusters are delivered to the nucleating particle. The observed difference between the parallel and perpendicular magnetic field configurations therefore suggests that the magnetic field orientation modifies the effective surface free energy γ entering the nucleation free energy. In particular, the parallel configuration appears to correspond to a lower effective surface free energy, which leads to nucleation occurring at a smaller critical radius. Orientation-dependent modifications of surface tension have previously been observed experimentally by Hayakawa et al 41 and are discussed in detail in our previous work 29 .To test whether this limiting equation can serve as a general description, we applied the same two-anchor analytical      
+
+> 6/18 010 20 30 40 50
+
+Magnetic field (mT) 
+
+> 150 200 250 300 350 400
+> Radius (nm)
+
+(a)        
+
+> 025 50 75 100 125 150 175
+
+Magnetic field (mT) 
+
+> 200 300 400
+> Radius (nm)
+
+(b)             
+
+> 0.75 1.00 1.25 1.50
+> Normalized radius  r /r0
+> 010 20 30 40
+> Magnetic field (mT)
+> 0.0 0.5 1.0
+> Normalized free energy barrier height
+> 0.50 0.75 1.00 1.25 1.50 1.75
+> Normalized radius  r /r0
+> 050 100 150
+> Magnetic field (mT)
+> 0.0 0.5 1.0
+> Normalized free energy barrier height
+> 120 140 160 180 200 220
+
+Radius (nm) 
+
+> 0.02 0.04 0.06 0.08 0.10 0.12 0.14
+> Frequency
+
+(c)      
+
+> 100 120 140 160 180 200
+
+Radius (nm) 
+
+> 0.02 0.04 0.06 0.08 0.10 0.12 0.14
+> Frequency
+
+(d) Figure 4. The radius-field relation for Silver NPs 24 in the (a) parallel and (b) perpendicular configurations. Panels (c) and (d) show the theoretical size distributions at the last experimental point in the parallel and perpendicular configurations, respectively. The blue markers are experimental points, the black line represents the solution of Eq. (4) for x(B = 0) = x0, the dashed lines are the solutions at the experimental bounds. The shaded region represents the possible sizes predicted by the theory and the insets showcase the effect of the magnetic field on the free energy barrier height. construction to the magnetite and nickel datasets. As shown in Fig. 5, the susceptibility-only limit captures the endpoint radii by construction but fails to reproduce the intermediate radius-field trends, especially for magnetite and CNF-grown Ni. This comparison demonstrates that the Silver NP result is a valid limiting case, whereas magnetite and nickel require the full formulation in Eq. (3), including the logarithmic orientational-entropy term. 
+
+Limitations 
+
+The present model remains a thermodynamic description and therefore neglects kinetic processes such as diffusion-limited growth, aggregation, and coalescence, which may influence NP growth after the initial nucleation stage. Additionally, the sphere-packing representation used for the atomic structure of the NPs is an idealized description that may deviate from the true atomic arrangements in very small clusters. Despite these limitations, the proposed theory is still capable of describing the decreasing trend with larger magnetic field for multiple classes of magnetic materials. Another limitation arises from the fact that classical thermodynamics assumes extensivity of thermodynamic quantities, an assumption that may break down at nanometer length scales. For very small NPs, the large surface-to-volume ratio can introduce nonextensive effects in which thermodynamic quantities such as the chemical potential or surface free energy become size dependent 39, 40 . These effects may modify the detailed shape of the free energy landscape, particularly for clusters containing only a few hundred atoms, and could therefore contribute to the deviations observed in some experimental datasets. 
+
+## Materials and Methods 
+
+Theoretical Framework 
+
+We solve Eq. (3) numerically as an ordinary differential equation with the initial condition x(B = 0) = x0, which we infer from experiments, and treat the parameter set p = {∆μ, γ, m0, δ } as the least-squares fit parameters. We start the solver with a trial parameter set p0 and solve the ODE to obtain the trajectory x(B; p0). The resulting solution is evaluated at the experimental 
+
+7/18 0 1 2 3 4 5 6 7Magnetic field (T) 234567Radius (nm)                  
+
+> (a)
+> susceptibility only treatment from Ref. 27 Experimental data
+> 0510 15 20 Magnetic field (T) 1234567Radius (nm)
+> (b)
+> 0.0 0.1 0.2 0.3 0.4 0.5 Magnetic field (T) 010 20 30 40 Radius (nm)
+> (c)
+> 0.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 Magnetic field (T) 20 40 60 80 100 Radius (nm)
+> (d)
+
+Figure 5. Comparison between the susceptibility-only limiting equation and experimental radius-field data for (a) magnetite NPs in the gradient configuration, (b) magnetite NPs in the homogeneous configuration, (c) Ni NPs used for carbon nanofiber growth, and (d) Ni NPs used for GaN nanowire growth. The dashed black curves show the reduced analytical model obtained from Eq. (4), while the blue markers show experimental data. The mismatch shows that the limiting equation is not sufficient for magnetic NP systems. magnetic field values Bi to produce theoretical radii rth  
+
+> i
+
+= a x (Bi; p0). These predictions are then compared with the measured radii rexp  
+
+> i
+
+, and the parameters are iteratively updated using a nonlinear least–squares optimization procedure that minimizes the distribution-width-normalized residuals between theory and experiment. The parameter set p∗ that best reproduces the observed radius–field dependence is finally used for the results. The fitting is performed as a solve-compare-update loop. For each set of trial parameters, the ODE must be integrated again from B = 0 across the full range of the experimental field, since changing ∆μ, γ, m0, or δ changes the full trajectory. The optimizer therefore does not fit the data in an explicit closed form, but instead searches the parameter space through repeated numerical solutions of Eq. (3). At each iteration, the mismatch between the theoretical and experimental radii is evaluated, and the parameter values are adjusted until the residual no longer decreases appreciably. Since the sizes of NPs are often reported as histograms, we use the smallest and largest bins as the size bounds at each magnetic field value. We reevaluate the ODE with the parameter set p∗ at these bounds for B = 0 in order to generate a “band” of possible sizes according to the predictions of our theory, which is the shaded gray region enclosed by dashed black lines in Figs. 2, 4a and 4b. At any magnetic field value, we now have three points that represent the theoretical mean NP size (black line) and the theoretical bounds. We use these points to introduce a Gaussian distribution centered on the mean with its tails at the two theoretical bounds, with a standard deviation σ = min (r0 − rmin , rmax − r0)/3, placing the bounds at approximately 
+
+±3σ . This distribution is then interpreted as the predicted probability density of NP sizes at that magnetic field. The physical idea behind this procedure is that the ODE describes how a particle of a given initial size evolves under the magnetic field. By solving the same equation for the experimental mean size and for the lower and upper initial bounds, we effectively propagate the full initial size spread through the same thermodynamic evolution law. The spread obtained at the final magnetic field corresponds to the size distribution predicted by the theory. In this sense, the dashed solutions are not error bars, but the field-evolved boundaries of the NP ensemble. 
+
+> 8/18
+
+In the reduced coordinate x = r/a, a is not taken as the lattice constant. It is the radius of a sphere with the same volume as one material building unit, 
+
+a =
+
+ 3Va
+
+4π
+
+1/3
+
+.
+
+For an fcc elemental material, the conventional unit cell contains four atoms, so the building-unit volume is Va = a3lat /4 rather than a3lat . For Ni, this gives Va = 3.52 3/4 = 10 .9 Å 3 and therefore a = 1.38 Å 42 . For magnetite, the unit-cell volume is 8.396 3 ≈ 592 Å 3; dividing by the eight formula units in the unit cell gives Va ≈ 74 .0 Å 3, which gives a = 2.60 Å 42, 43 . These are the values used in the numerical calculations. For silver, we use the effective radius from our previous susceptibility-only treatment. To generate the theoretical histograms shown in Figs. 3 and 4, we sample 14 , 000 times from the Gaussian distribution described above using rejection sampling. First, a candidate radius rc is drawn uniformly from the interval bounded by the theoretical lower and upper sizes, [rmin , rmax ]. Then a second random number u is drawn uniformly from the interval [0, 1]. The Gaussian probability density P(rc) is evaluated at the candidate radius and normalized by its maximum value Pmax , which occurs at the mean radius. The candidate point is accepted if 
+
+u < P(rc)
+
+Pmax 
+
+,
+
+and is rejected otherwise. Repeating this procedure many times produces an ensemble of particle sizes distributed according to the target Gaussian. In other words, points near the theoretical mean are accepted more often, while points near the tails are accepted less often, which produces the intended size distribution. We note that Monte Carlo sampling was used only after the optimal parameter set p∗ had already been determined from the radius–field relation. The fitting is performed on the deterministic ODE solution, while the histogram generation is a second step used only to construct the predicted size distributions from the fitted theory. To reduce the dependence on any one stochastic realization, the sampling is not performed only once. Instead, the complete histogram-generation procedure is repeated 100 times with independent random seeds, and the resulting normalized histograms are averaged bin-by-bin before the final renormalization. This reduces Monte Carlo noise and produces a smoother theoretical histogram that is more suitable for comparison with the experimental distributions. The final histogram is binned on a uniform grid chosen to match the approximate bin width used in the corresponding experimental histogram, so that the visual comparison between theory and experiment is done on the same scale. For materials in the "susceptibility response" limit, which are materials with no permanent magnetic moment, such as silver NPs, we set m0 = 0, which implies ξ → 0. In this limit the logarithmic alignment term associated with permanent magnetic moments vanishes, and Eq. (3) reduces to Eq. (4). The reduced equation depends only on the quadratic susceptibility-response term and can be treated more explicitly. As shown in the Supplementary Information, multiplying Eq. (4) by its denominator leads to an exact differential form, which can then be integrated directly to obtain the first integral of the problem. The resulting integrated expression is 8πγ a2x(B) −  ∆μ + KB 2 n′(x(B)) = 0,
+
+after imposing the boundary conditions to solve for γ and ∆μ, we obtain exactly the same implicit radius–field relation obtained in our previous work 28, 29 .
+
+## Conclusion 
+
+We have reformulated classical nucleation theory as a geometrically closed thermodynamic framework for magnetic-field-driven NP nucleation. By introducing a sphere-packing representation of atomic assembly, the theory establishes a direct and quantitative link between discrete atomic structure and continuum free-energy contributions, enabling a quantitative description of how magnetic fields modify both the nucleation barrier and the critical nucleus size. The framework provides a general treatment of NP nucleation across superparamagnetic, paramagnetic, and diamagnetic systems within a single formalism. It quantitatively reproduces experimental observations for magnetite, nickel, and silver NPs, while recovering our previous analytical results as a limiting case of the generalized theory. Beyond quantitative agreement, the theory reveals that both the reduction in mean particle size and the narrowing of size distributions arise naturally from the geometry of the field-modified free-energy landscape. This identifies magnetic-field-assisted nucleation as a geometrically constrained thermodynamic process rather than a material-specific effect. Taken together, these results support a broadly applicable and computationally efficient framework for magnetic-field control of NP size, providing a possible route to model-guided design across distinct magnetic 
+
+> 9/18
+
+material classes. Looking forward, this framework can be used as a design tool for selecting magnetic-field conditions, material parameters, and synthesis windows that target desired NP sizes and size distributions. Because the model connects field strength directly to the nucleation free-energy landscape, it may guide the development of NP systems for catalysis, magnetic materials, electronic nanostructures, and field-assisted nanomanufacturing. 
+
+## Author contributions statement 
+
+M.F.P. conceived and coordinated the theoretical framework. Y.T. derived the generalized thermodynamic theoretical framework, performed the analytical calculations, and generated all the figures. All authors contributed to the interpretation of the results and to writing the manuscript. 
+
+## Funding 
+
+This publication is based upon work supported by Khalifa University under Award No. CIRA-2021-108. 
+
+## Competing interests 
+
+The authors declare no competing interests. 
+
+## Data availability 
+
+The datasets used and/or analyzed during the current study are available from the corresponding author on reasonable request. 
+
+## Appendix / Supplementary Information S1. Statistical alignment contribution for permanent magnetic moments 
+
+The logarithmic contribution to the free energy stems from the orientational statistics of a permanent dipole moment in a thermal bath. This term does not assume M ∝ B and instead follows from the field–dependent reduction of orientational entropy when a magnetic moment aligns with the field 44 .We consider an effective magnetic moment m associated with the nucleus in a uniform external magnetic field B = Bˆz. In the present framework, this moment is taken as m = n(x)m0, proportional to the nanoparticle size, with fixed magnitude for a given nucleus. The orientational degree of freedom therefore belongs to one effective collective nanoparticle moment, not to 
+
+n(x) independent microscopic moments. The interaction energy of a given orientation is 
+
+E(θ ) = −mB cos θ (S1) where θ is the angle between m and B. The canonical partition function over orientations is 
+
+Zor (B) = 
+
+> Z
+
+dΩ exp (β mB cos θ ) (S2) with β = 1/(kBT ) and dΩ = sin θ dθ dφ . Performing the integral gives 
+
+Zor (B) = 2π 
+
+> Zπ
+> 0
+
+sin θ exp (β mB cos θ ) dθ = 4π sinh ξξ (S3) where the dimensionless field parameter is 
+
+ξ = β mB = mB kBT (S4) The corresponding orientational free energy is 
+
+For (B) = −kBT ln Zor (B) (S5) Since the factor 4 π is independent of B it can be absorbed into an additive constant that does not affect field–dependent thermodynamic differences. The field–dependent contribution is therefore written as 
+
+Flog (B) = −kBT ln 
+
+ sinh ξξ
+
+
+
+(S6) 
+
+> 10/18
+
+Next, we add this term to a previously derived free energy expression 28, 29 , which successfully described the formation of diamagnetic Ag NPs under different configurations of an externally applied magnetic field 23, 24 
+
+∆F = −n(x)∆μ + γAs − Θ(σ )VNP 
+
+23
+
+μ0
+
+|χm|
+
+3 + χm
+
+B2 − kBT ln 
+
+ sinh ξξ
+
+
+
+(S7) Here ∆μ is the change in the chemical potential when forming a new phase, As = 4πr2 is the surface energy and γ is the surface free energy. VNP = n(x)Va where Va is the atomic volume and μ0 is the magnetic permeability of free space. The orientation factor Θ ≡ |⟨ cos θ ⟩| allows taking thermal deviations in the magnetization into consideration. We model finite-temperature fluctuation by assuming a Gaussian angular distribution centered at the energetically favored orientation ( θ0 = 0for paramagnetism, θ0 = π for diamagnetism), with standard deviation σ
+
+⟨cos θ ⟩ =  
+
+> R2π
+> 0
+
+cos θ exp 
+
+h
+
+− (θ −θ0)2 
+
+> 2σ2
+
+i
+
+dθ  
+
+> R2π
+> 0
+
+exp 
+
+h
+
+− (θ −θ0)2 
+
+> 2σ2
+
+i
+
+dθ
+
+(S8) The parameter σ represents the angular spread induced by thermal agitation and controls the degree of alignment (larger σ
+
+leads to a larger deviation from the perfect alignment). The susceptibility-response term and the orientational-alignment term represent two different magnetic contributions to the free energy. The susceptibility term arises naturally from the response of a magnetizable nucleus to an external magnetic field, 
+
+Fχ (x, B) = −Kn (x)B2, (S9) where 
+
+K = Θ(σ )Va
+
+23
+
+μ0
+
+|χm|
+
+3 + χm
+
+. (S10) This term describes how strongly the material responds to the applied field through the susceptibility χm and is linear in the amount of material through n(x). By contrast, the logarithmic term describes the loss of orientational entropy when naturally present magnetic moments become more aligned with the field, 
+
+For (x, B) = −kBT ln 
+
+ sinh ξξ
+
+
+
+, ξ = n(x)m0BkBT . (S11) The two terms can both contain a B2 dependence at low field, but they do not reduce to the same size dependence. Expanding the orientational term for ξ ≪ 1 gives 
+
+For (x, B) = −kBT
+
+ ξ 2
+
+6 + O(ξ 4)
+
+
+
+= − [n(x)m0]2B2
+
+6kBT + O(B4). (S12) Thus, the two low-field contributions scale differently, 
+
+Fχ ∝ n(x)χmB2, For ∝ n(x)2m20B2
+
+kBT . (S13) This different dependence on particle size, moment scale, and temperature shows that the two terms are not the same mathematical contribution in the present model. We therefore use χm to describe the material response to the field and m0 to describe the magnitude of the naturally present magnetic moment whose orientational entropy changes in the applied field. Ref. 33 makes the same basic distinction: the magnetic susceptibility describes the response of a material to an applied field, whereas the Langevin-type orientational contribution describes how existing moments become biased toward the field direction. In systems where both effects are relevant, both terms may be included; if a material is treated in the susceptibility-only limit, the orientational contribution is removed by setting m0 = 0. In applications where m is an effective moment of the nucleus, m is taken as m = n(x)m0 with m0 an atomic or molecular moment, so that ξ becomes size dependent through n(x)
+
+ξ (x, B) = n(x)m0BkBT (S14) The logarithmic term couples directly to the nucleus size through the atom-count function derived in the upcoming section. 
+
+> 11/18
+
+## S2. Atom-count function n(x)
+
+To relate the nanoparticle radius to the atom number, we adopt a core–shell sphere packing model. The interior is assumed to achieve optimal close packing with packing fraction 
+
+φb = π
+
+3√2Surface atoms experience reduced packing efficiency due to curvature and incomplete coordination. We therefore introduce a defective surface packing fraction φd . Separation of bulk and surface contributions 
+
+nbulk (r) = φb
+
+V (r − δ )
+
+Va
+
+(S15) 
+
+nsurf (r) = φd
+
+V (r) −V (r − δ )
+
+Va
+
+(S16) Using the reduced coordinate x = r/a, where a is the effective atomic radius defined from the atomic volume (formula-unit) Va
+
+in the main text, the atom-count function can be written as follows. 
+
+n(x) = φb(x − δ )3 + φd
+
+x3 − (x − δ )3 (S17) The parameter φd is obtained by fitting to the numerical data on the packing of the sphere 34 . This construction is consistent with the Steiner formula for convex bodies 45 and has been introduced in Refs. 28, 29 .
+
+## S3. Radius–field relation 
+
+The critical nucleus size at a given magnetic field is obtained from the barrier stationarity condition 
+
+∂ ∆F(x, B)
+
+∂ x = 0 (S18) In the present framework, the work of formation including magnetic contributions is written as 
+
+∆F(x, B) = −n(x)∆μ + γAs(x) + Fmag (x, B) + Flog (x, B) (S19) The critical radius x(B) is, therefore, implicitly defined by 
+
+f (x, B) ≡ ∂ ∆F
+
+∂ x = 0 (S20) Rather than solving this condition independently for each value of B, we reformulate the problem as a field-driven evolution along the critical manifold. 
+
+ddB f (x(B), B) = 0 (S21) Using the chain rule 
+
+∂ 2∆F
+
+∂ x2
+
+dx dB + ∂ 2∆F
+
+∂ x∂ B = 0 (S22) which gives the equation 
+
+dx dB = − ∂ 2∆F/∂ x∂ B
+
+∂ 2∆F/∂ x2 (S23) 
+
+> 12/18
+
+Substituting the quadratic magnetization response term 
+
+Fmag (x, B) = −Θ n(x)Va
+
+23
+
+μ0
+
+|χm|
+
+3 + χm
+
+B2 (S24) and the logarithmic alignment term 
+
+Flog (x, B) = −kBT ln 
+
+ sinh ξξ
+
+
+
+(S25) with 
+
+ξ (x, B) = n(x)m0BkBT (S26) Using this collective-moment form, the stationarity condition becomes 
+
+f (x, B) = 8πγ a2x − n′(x) ∆μ + KB 2 − n′(x)m0BL (ξ ) = 0. (S27) The two derivatives entering the critical-manifold evolution are therefore 
+
+∂ f
+
+∂ B = −n′(x)
+
+
+
+2KB + m0L(ξ ) + n(x)m20BkBT L′(ξ )
+
+
+
+,
+
+∂ f
+
+∂ x = 8πγ a2 − n′′ (x) ∆μ + KB 2 − n′′ (x)m0BL (ξ ) − [n′(x)] 2 m20B2
+
+kBT L′(ξ ).
+
+(S28) This fully specifies the differential equation for x(B)
+
+dx dB =
+
+n′(x)
+
+h
+
+2KB + m0L(ξ ) + n(x)m20BkBT
+
+
+
+−csch 2ξ + 1 
+
+> ξ2
+
+i 
+
+8πγ a2 − n′′ (x) [ ∆μ + KB 2] − n′′ (x)m0BL (ξ ) − [n′(x)] 2m20B2
+
+> kBT
+
+
+
+−csch 2ξ + 1 
+
+> ξ2
+
+ (S29) with K = Θ(σ ) Va  
+
+> 23
+> μ0
+> |χm|
+> 3+χm
+
+, L(ξ ) ≡ coth ξ − 1 
+
+> ξ
+
+, ξ = n(x)m0B/(kBT ), and −csch 2ξ + 1/ξ 2 = dL /dξ .
+
+## S4. Susceptibility Response Limit 
+
+In the susceptibility-response limit m0 = 0 we take ξ → 0 and so the differential equation reduces to 
+
+dx dB = 2KB n ′(x)
+
+8πγ a2 − (∆μ + KB 2) n′′ (x) (S30) Multiplying by the denominator and rearranging gives an implicit differential form 
+
+8πγ a2 −  ∆μ + KB 2 n′′ (x) dx − 2KB n ′(x) dB = 0 (S31) We define 
+
+M(x, B) = 8πγ a2 −  ∆μ + KB 2 n′′ (x) (S32) 
+
+N(x, B) = −2KB n ′(x) (S33) The exactness condition is ∂ M/∂ B = ∂ N/∂ x. Differentiation gives 
+
+∂ M
+
+∂ B = −2KB n ′′ (x) (S34) 
+
+∂ N
+
+∂ x = −2KB n ′′ (x) (S35) 
+
+13/18 so the equation is exact. Therefore, there exists a scalar function I(x, B) such that dI = M dx + N dB . Integrating M with respect to x gives 
+
+I(x, B) = 8πγ a2x −  ∆μ + KB 2 n′(x) + C(B) (S36) Taking ∂ /∂ B and enforcing ∂ I/∂ B = N yields C′(B) = 0 so C(B) is a constant and the first integral is 
+
+I(x, B) = 8πγ a2x −  ∆μ + KB 2 n′(x) = C (S37) The constant is fixed by the zero-field equilibrium condition at B = 0. For x(0) = x0 satisfying ∂ ∆F/∂ x = 0 in the zero field, one has 8 πγ a2x0 − ∆μ n′(x0) = 0 and therefore C = 0. Hence, the integrated form of the differential equation is 8πγ a2x(B) −  ∆μ + KB 2 n′(x(B)) = 0 (S38) which exactly matches the r vs. B relation from our previous work 28 (up to the substitution of anchor points). 
+
+## S5. Numerical details and histograms generation 
+
+The theoretical size distribution in each applied field is constructed by propagating the experimentally observed initial distribution forward through d r/dB, which is numerically integrated using an RK4 scheme from B = 0 to the target field B∗,starting from three distinct initial conditions, (1) the mean radius r0, (2) the upper experimental bound r0 + σ + 
+
+> 0
+
+, and (3) the lower experimental bound r0 − σ − 
+
+> 0
+
+, where σ + 
+
+> 0
+
+and σ − 
+
+> 0
+
+represent the experimental size distribution bounds at B = 0. This yields three trajectories whose endpoints at B∗ define the predicted mean radius μ, upper limit rmax , and lower limit rmin of the size distribution. The physical interpretation is that each particle in the ensemble follows the same thermodynamic ODE but from a different starting size; the spread [rmin , rmax ] at B∗ therefore represents the predicted size distribution that results from propagating the initial size distribution through the field-driven nucleation process. A truncated Gaussian N (r0, σ 2) supported on [rmin , rmax ] is then used to model the predicted size distribution at B∗, where the standard deviation is set to σ = min (r0 − rmin , rmax − r0)/3, placing the bounds approximately ±3σ from the mean. To eliminate sensitivity to any single stochastic realization, the procedure is repeated over N = 100 independent Monte Carlo draws of Ns = 14 ,000 samples each using distinct random seeds, and the resulting normalized frequency histograms are averaged bin-by-bin before renormalization. This ensemble averaging reduces Monte Carlo noise by a factor of √N = 10 relative to a single draw, yielding a smooth theoretical histogram with statistical quality equivalent to 1 .4 × 10 6 samples. The theoretical histogram is binned onto a uniform grid whose bin width matches the mean experimental bin width and whose range spans the full predicted interval [rmin , rmax ].
+
+## S6. Sensitivity Analysis 
+
+To clarify the role of adjustable parameters in the full model, we performed an additional sensitivity and benchmarking analysis using the same audited numerical implementation used to generate Fig. 2 of the main manuscript. The fitted parameter vector is written as (∆μ, Es, m0, δ ), where Es = 4πa2γ. For each dataset, we report field-resolved one-at-a-time percentage radius changes caused by ±20% parameter perturbations and a graphical comparison with simple empirical functions of the magnetic field. The field-resolved sensitivity tables report 100 ∗ (rpert − rbase )/rbase at each nonzero experimental magnetic-field value. They show that the radius-field trends are primarily controlled by the balance between the bulk driving term ∆μ and the collective-moment scale m0, while the predicted radii are comparatively insensitive to changes in Es and δ for the fitted parameter sets. The weak local sensitivity to Es reflects the small fitted surface-energy scale relative to the bulk and magnetic terms in these radius-field fits, especially once the field-dependent terms dominate at higher magnetic fields; it should therefore be interpreted as a local result of the fitted parameter set, not as a general statement that surface energy is unimportant in nucleation. The available experimental datasets are too sparse to provide unique formal uncertainties for all four fitted parameters, especially for the Ni datasets. Therefore, we interpret the fitted parameters as effective material parameters constrained by the measured radius-field trend rather than as independently identifiable microscopic constants. The empirical-model comparison in Fig. S1 uses three simple curve shapes as numerical benchmarks. The linear fit, 
+
+r(B) = c0 +c1B, assumes that the radius changes at a constant rate with magnetic field. The quadratic fit, r(B) = c0 +c1B+c2B2,adds curvature and is therefore more flexible, especially for sparse datasets. The rational fit, r(B) = c0/(1 + c1B2), represents a monotonic field-dependent decrease that can level off at larger fields. These functions are not nucleation models; they contain no free-energy landscape, no critical-nucleus condition, no distribution-propagation rule, and no connection to the susceptibility-only silver limit. For this reason, we use them only as benchmarks for numerical flexibility rather than as physical replacements for Eq. 3 in the main text. 
+
+> 14/18
+
+Table S1. Field-resolved one-at-a-time sensitivity analysis for Fe 3O4 gradient. Values are percentage changes in the predicted radius, 100 ∗ (rpert − rbase )/rbase , evaluated at the nonzero experimental magnetic-field values. For each column, only the indicated parameter is perturbed while the remaining fitted parameters and the zero-field radius are held fixed. 
+
+Magnetic field (T) ∆μ −20% ∆μ +20% Es −20% Es +20% m0 −20% m0 +20% δ −20% δ +20% 0.06 -0.97 +0.67 < 0.01 < 0.01 +0.80 -0.78 -0.04 +0.04 0.2 -2.63 +1.88 < 0.01 < 0.01 +2.27 -2.12 -0.13 +0.11 0.8 -5.78 +4.56 < 0.01 < 0.01 +5.55 -4.71 -0.40 +0.33 5.3 -8.81 +7.61 < 0.01 < 0.01 +9.36 -7.23 -0.83 +0.32 6.8 -9.09 +7.87 < 0.01 < 0.01 +9.69 -7.47 -0.75 +0.07 
+
+Table S2. Field-resolved one-at-a-time sensitivity analysis for Fe 3O4 homogeneous. Values are percentage changes in the predicted radius, 100 ∗ (rpert − rbase )/rbase , evaluated at the nonzero experimental magnetic-field values. For each column, only the indicated parameter is perturbed while the remaining fitted parameters and the zero-field radius are held fixed. 
+
+Magnetic field (T) ∆μ −20% ∆μ +20% Es −20% Es +20% m0 −20% m0 +20% δ −20% δ +20% 1 -4.40 +3.32 < 0.01 < 0.01 +4.03 -3.57 -0.24 +0.21 3 -6.90 +5.64 < 0.01 < 0.01 +6.89 -5.64 -0.53 +0.45 5 -7.77 +6.54 < 0.01 < 0.01 +8.01 -6.37 -0.72 +0.58 7 -8.21 +7.01 < 0.01 < 0.01 +8.60 -6.73 -0.83 +0.65 9 -8.48 +7.30 < 0.01 < 0.01 +8.97 -6.96 -0.91 +0.67 24 -9.38 +8.18 < 0.01 < 0.01 +10.06 -7.70 -0.86 +0.12 
+
+Table S3. Field-resolved one-at-a-time sensitivity analysis for Ni–CNF. Values are percentage changes in the predicted radius, 100 ∗ (rpert − rbase )/rbase , evaluated at the nonzero experimental magnetic-field values. For each column, only the indicated parameter is perturbed while the remaining fitted parameters and the zero-field radius are held fixed. 
+
+Magnetic field (T) ∆μ −20% ∆μ +20% Es −20% Es +20% m0 −20% m0 +20% δ −20% δ +20% 0.1 -3.88 +3.88 < 0.01 < 0.01 +4.85 -3.23 -0.15 +0.15 0.5 -5.43 +5.50 < 0.01 < 0.01 +6.88 -4.53 -0.51 +0.49 
+
+Table S4. Field-resolved one-at-a-time sensitivity analysis for Ni–GaN. Values are percentage changes in the predicted radius, 100 ∗ (rpert − rbase )/rbase , evaluated at the nonzero experimental magnetic-field values. For each column, only the indicated parameter is perturbed while the remaining fitted parameters and the zero-field radius are held fixed. 
+
+Magnetic field (T) ∆μ −20% ∆μ +20% Es −20% Es +20% m0 −20% m0 +20% δ −20% δ +20% 0.25 -7.16 +5.82 < 0.01 < 0.01 +4.39 -3.87 -0.05 +0.05 0.43 -8.61 +7.33 < 0.01 < 0.01 +4.29 -3.80 -0.09 +0.09 0.8 -9.63 +8.48 < 0.01 < 0.01 +3.39 -3.08 -0.18 +0.18 
+
+## References 
+
+1. Henini, M. Handbook of self assembled semiconductor nanostructures for novel devices in photonics and electronics 
+
+(Elsevier, 2011). 
+
+2. Razeghi, M. Semiconductor Device Technology , 41–82 (Springer US, Boston, MA, 2010). 
+
+3. Mishra, Y. K. & Adelung, R. Zno tetrapod materials for functional applications. Mater. Today 21 , 631–651, DOI: https://doi.org/10.1016/j.mattod.2017.11.003 (2018). 
+
+4. Mishra, Y. K., Kaushik, A. & Singh, A. Introduction to advanced materials for sensing and biomedical applications. Mater. Adv. 5, 6346–6350, DOI: 10.1039/D4MA90092H (2024). 
+
+5. Fabrizio, E. D. et al. Nanoparticles and nanostructures for biophotonic applications. In Hashim, A. A. (ed.) The Delivery of Nanoparticles , chap. 14, DOI: 10.5772/34988 (IntechOpen, Rijeka, 2012). 
+
+6. Dong, J. et al. Terahertz three-dimensional monitoring of nanoparticle-assisted laser tissue soldering. Biomed. Opt. Express 
+
+11 , 2254–2267, DOI: 10.1364/BOE.389561 (2020). 
+
+7. Kumar, Y. et al. Nanomaterials: stimulants for biofuels and renewables, yield and energy optimization. Mater. Adv. 2,5318–5343, DOI: 10.1039/D1MA00538C (2021).                                  
+
+> 15/18 01234567
+> Magnetic field (T)
+> 12345678
+> Radius (nm)
+> εw
+> Eq. 3: 0.43 Linear B: 0.33 Quadratic B: 0.30 Rational B2: 0.35
+> (a) Fe 3O4gradient
+> Measured mean Eq. 3 in the main text Linear B
+> Quadratic B
+> Rational B2
+> 0510 15 20
+> Magnetic field (T)
+> 12345678
+> Radius (nm)
+> εw
+> Eq. 3: 0.36 Linear B: 0.31 Quadratic B: 0.24 Rational B2: 0.33
+> (b) Fe 3O4homogeneous
+> 0.0 0.1 0.2 0.3 0.4 0.5
+> Magnetic field (T)
+> 010 20 30 40
+> Radius (nm)
+> εw
+> Eq. 3: 0.11 Linear B: 0.54 Quadratic B: 0.00 Rational B2: 0.60
+> (c) Ni–CNF
+> 0.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8
+> Magnetic field (T)
+> 20 40 60 80 100
+> Radius (nm)
+> εw
+> Eq. 3: 0.07 Linear B: 0.55 Quadratic B: 0.03 Rational B2: 0.52
+> (d) Ni–GaN
+
+Figure S1. Benchmark comparison between Eq. 3 in the main text and simple empirical functions fitted to the same radius-field datasets. Symbols and curves are defined as follows: blue triangles, measured mean radii with reported distribution widths; black solid line, Eq. 3 in the main text; purple dashed line, linear B fit, r(B) = c0 + c1B; orange dash-dotted line, quadratic 
+
+B fit, r(B) = c0 + c1B + c2B2; green dotted line, rational B2 fit, r(B) = c0/(1 + c1B2). The values printed in the upper-right box of each panel are distribution-width-normalized RMS deviations εw, where smaller values indicate closer agreement with the measured mean radius relative to the reported particle-size distribution width. The empirical curves provide a check on fitting flexibility: for sparse datasets, especially the Ni–CNF case, a quadratic function can interpolate the data with a very small residual while producing a nonphysical intermediate trend. 
+
+8. Zafar, H. & Pereira, M. F. Complementary and asymmetric tapered bent mid-infrared waveguide arrays for subwavelength-pitch integration and crosstalk minimization. Sci. Rep. 15 , 44122 (2025). 
+
+9. Zafar, H., Pereira, M. F., Kennedy, K. L. & Anjum, D. H. Fabrication-tolerant and CMOS-compatible polarization splitter and rotator based on a compact bent-tapered directional coupler. AIP Adv. 10 (2020). 
+
+10. Zafar, H. & Pereira, M. F. Recent progress in light polarization control schemes for silicon integrated photonics. Laser & Photonics Rev. 18 , 2301025 (2024). 
+
+11. Zafar, H. & Pereira, M. An efficient and compact mid-infrared polarization splitter and rotator based on a bifurcated tapered-bent waveguide. Sci. Reports 15 , 5160 (2025). 
+
+12. Zafar, H., Paredes, B., Villegas, J., Rasras, M. & Fernandes Pereira, M. O-band TE-and TM-mode densely packed adiabatically bent waveguide arrays on the silicon-on-insulator platform. Opt. Express 31 , 21389–21398 (2023). 
+
+13. Zafar, H. et al. Compact and broadband adiabatically bent superlattice-waveguides with negligible insertion loss and ultra-low crosstalk. IEEE J. Sel. Top. Quantum Electron. 29 , 1–9 (2023). 
+
+14. Zafar, H. & Pereira, M. F. A novel mid-infrared transverse magnetic mode pass periodic waveguide polarizer with low reflections. IEEE Access 12 , 48294–48300 (2024). 
+
+15. Zafar, H. et al. Compact broadband ( o, e, s, c, l & u bands) silicon te-pass polarizer based on ridge waveguide adiabatic s-bends. Opt. Express 30 , 10087–10095, DOI: 10.1364/OE.452823 (2022). 
+
+16/18 16. Uppu, R., Midolo, L., Zhou, X., Carolan, J. & Lodahl, P. Quantum-dot-based deterministic photon–emitter interfaces for scalable photonic quantum technology. Nat. Nanotechnol. 16 , 1308–1317, DOI: 10.1038/s41565-021-00965-6 (2021). 
+
+17. Wodedo, M. A., Tesfahannes, T. G., Darge, T. Y., Pereira, M. & Teklu, B. Amplifying two-mode squeezing in nanome-chanical resonators. IEEE Transactions on Quantum Eng. 6, 1–15, DOI: 10.1109/TQE.2025.3603459 (2025). 
+
+18. Pereira, M. F., Anfertev, V., Shevchenko, Y. & Vaks, V. Giant controllable gigahertz to terahertz nonlinearities in superlattices. Sci. Rep. 10 , 15950 (2020). 
+
+19. Pereira, M. F., Anfertev, V. A., Zubelli, J. P. & Vaks, V. L. Terahertz generation by gigahertz multiplication in superlattices. 
+
+J. Nanophotonics 11 , 046022, DOI: 10.1117/1.JNP.11.046022 (2017). 
+
+20. Pereira, M. F. Analytical expressions for numerical characterization of semiconductors per comparison with luminescence. 
+
+Materials 11 , DOI: 10.3390/ma11010002 (2018). 
+
+21. Vaks, V. et al. Sensing nitriles with THz spectroscopy of urine vapours from cancers patients subject to chemotherapy. Sci. Rep. 12 , 18117 (2022). 
+
+22. Ma, K. et al. Using gradient magnetic fields to control the size and uniformity of iron oxide nanoparticles for magnetic resonance imaging. ACS Appl. Nano Mater. 5, 7410–7417 (2022). 
+
+23. Kthiri, A. et al. Novel static magnetic field effects on green chemistry biosynthesis of silver nanoparticles in saccharomyces cerevisiae. Sci. Reports 11 , 20078 (2021). 
+
+24. Li, Z., Wang, Y., Yan, X. & Tang, S. Effects of a magnetic field on the nucleation and growth of silver nanoparticles prepared via chemical reduction. J. Nanotechnol. 2025 , 8982025 (2025). 
+
+25. Ualkhanova, M. et al. The influence of magnetic field on synthesis of iron nanoparticles. J. Nanosci. Nanotechnol. Appl. 3,1 (2019). 
+
+26. Luo, C., Fu, Q. & Pan, C. Strong magnetic field-assisted growth of carbon nanofibers and its microstructural transformation mechanism. Sci. reports 5, 9062 (2015). 
+
+27. Kim, J. S. et al. In situ magnetic field-assisted low temperature atmospheric growth of gan nanowires via the vapor–liquid– solid mechanism. ACS Appl. Mater. & Interfaces 6, 116–121 (2014). 
+
+28. Tawalbeh, Y., Ghazi, M. & Pereira, M. F. Controlling the size of nanoparticles using a magnetic field: a sphere packing approach. Sci. Reports 15 , 41725, DOI: 10.1038/s41598-025-29195-9 (2025). 
+
+29. Tawalbeh, Y. & Pereira, M. F. Magnetic field controlled nucleation and size selection of silver nanoparticles. Appl. Phys. B 
+
+132 , 42, DOI: 10.1007/s00340-026-08656-7 (2026). 
+
+30. Saidi, W. A. Density functional theory study of nucleation and growth of pt nanoparticles on mos2(001) surface. Cryst. Growth & Des. 15 , 642–652, DOI: 10.1021/cg5013395 (2015). 
+
+31. Wang, Y., Xiang, B., Yang, H.-Q. & Hu, C.-W. Density functional theory study on the nucleation and growth of ptn clusters on γ-al2o3(001) surface. ACS Omega 2, 3250–3259, DOI: 10.1021/acsomega.7b00342 (2017). 
+
+32. Baek, W., Das, S., Tan, S., Gavini, V. & Sun, W. Quasicrystal stability and nucleation kinetics from density functional theory. Nat. Phys. 21 , 980–987, DOI: 10.1038/s41567-025-02925-6 (2025). 
+
+33. Van Vleck, J. H. The Theory of Electric and Magnetic Susceptibilities (Oxford University Press, Oxford, England, 1932). Relevant discussion: pp. 29, 89–94, 186–195. 
+
+34. Spetch, E. Packomania. http://www.packomania.com (2023). Accessed: 5 Aug 2025. 
+
+35. Lü, X. et al. Conducting interface in oxide homojunction: Understanding of superior properties in black tio2. Nano Lett. 
+
+16 , 5751–5755, DOI: 10.1021/acs.nanolett.6b02454 (2016). 
+
+36. Kim, M.-G. et al. Crystalline/amorphous ni2p/ho2o3 core/shell nanoparticles for electrochemical reduction of co2 to acetone. ACS Appl. Energy Mater. 3, 11516–11522, DOI: 10.1021/acsaem.0c01868 (2020). 
+
+37. Giovannini, T. & Cappelli, C. Continuum vs. atomistic approaches to computational spectroscopy of solvated systems. 
+
+Chem. Commun. (Camb.) 59 , 5644–5660 (2023). 
+
+38. Makkar, P. & Ghosh, N. N. A review on the use of dft for the prediction of the properties of nanomaterials. RSC Adv. 11 ,27897–27924, DOI: 10.1039/D1RA04876G (2021). 
+
+39. Maniotis, N. & Frangis, N. The connection between hill’s nanothermodynamics and tsallis non-extensive statistical mechanics: Extracting the thermodynamic properties of a nanosystem. Phys. E: Low-dimensional Syst. Nanostructures 
+
+172 , 116285, DOI: https://doi.org/10.1016/j.physe.2025.116285 (2025). 
+
+> 17/18
+
+40. Guisbiers, G. Advances in thermodynamic modelling of nanoparticles. Adv. Physics: X 4, 1668299, DOI: 10.1080/ 23746149.2019.1668299 (2019). 
+
+41. Hayakawa, M. et al. Effect of moderate magnetic fields on the surface tension of aqueous liquids: a reliable assessment. 
+
+RSC advances 9, 10030–10033 (2019). 
+
+42. Haynes, W. M. CRC handbook of chemistry and physics (CRC press, 2016). 
+
+43. Cornell, R. M. & Schwertmann, U. The iron oxides: structure, properties, reactions, occurrences and uses (John Wiley & Sons, 2003). 
+
+44. Pathria, R. K. & Beale, P. D. Statistical mechanics (Academic Press Inc. (London), London, England, 2021), 4 edn. 
+
+45. Morvan, J.-M. The Steiner Formula for Convex Subsets , 153–164 (Springer Berlin Heidelberg, Berlin, Heidelberg, 2008).
