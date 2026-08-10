@@ -1,0 +1,39 @@
+{
+  "label": "2026-08-10",
+  "date": "2026-08-10",
+  "generated_at": "2026-08-10T20:20:00",
+  "count": 2,
+  "papers": [
+    {
+      "paper_id": "202608/10/2608.07445v1-permutation-invariant-neural-network-prediction-of-vacancy-formation-under-deformation-and-varying-chemical-environment-in-fcc-high-entropy-alloys",
+      "section": "deep",
+      "title_en": "Permutation invariant neural network prediction of vacancy formation under deformation and varying chemical environment in FCC high entropy alloys",
+      "authors": "Tanvir Sohail, Swarnava Ghosh",
+      "date": "2026-08-07",
+      "pdf": "https://arxiv.org/pdf/2608.07445v1",
+      "score": "8.0",
+      "evidence": "空位形成能制约辐照损伤，论文用置换不变神经网络预测高熵合金中的空位形成",
+      "tldr": "高熵合金中空位形成能显著影响扩散、辐照损伤和相稳定性，但其依赖化学环境与变形，原子模拟极为昂贵。本文开发了原子级置换不变机器学习框架，基于空位中心几何描述符和局部变形梯度不变量，统一描述化学无序与有限变形的耦合效应。模拟发现体积变形主导平均空位形成能变化，剪切影响较小，但位点间差异仍受化学环境控制。该模型预测准确且快数个数量级，为多尺度模型纳入应力依赖缺陷能提供了高效路径。",
+      "tags": "query:rad-damage",
+      "abstract_en": "Vacancy formation energies govern diffusion, irradiation damage, phase stability, and dynamic failure in high-entropy alloys (HEAs), yet their strong dependence on local chemical environments and mechanical deformation makes atomistic calculations prohibitively expensive for large-scale studies. Here, we develop an atomistically informed permutation invariant machine learning framework for predicting strain dependent vacancy formation energies in FCC HEAs from local atomic environments. The model employs a vacancy-centered representation constructed from objective geometric descriptors together with invariants of the local deformation gradient, enabling the coupled effects of chemical disorder and finite deformation to be learned within a unified framework. Atomistic simulations reveal that volumetric deformation is the dominant factor controlling the average variation in vacancy formation energy, whereas shear deformation has a comparatively minor influence. At the same time, substantial site to site variability persists under identical macroscopic loading, demonstrating that local chemical environments govern the statistical distribution of vacancy energetics beyond species-averaged trends. The proposed framework accurately predicts vacancy formation energies across diverse deformation states while providing orders-of-magnitude faster evaluation than direct atomistic simulations. These results establish an efficient route for incorporating stress-dependent defect energetics into multiscale models of diffusion, irradiation damage, and dynamic failure in chemically complex alloys.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202608/10/2608.03257v1-nanomorph-3d-an-end-to-end-physics-driven-unrolling-framework-for-nanomaterial-reconstruction",
+      "section": "quick",
+      "title_en": "NanoMorph-3D: An End-to-End Physics-Driven Unrolling Framework for Nanomaterial Reconstruction",
+      "authors": "Beiyuan Zhang, Hesong Li, Ziqi Wu, Ruiwen Shao, Ying Fu",
+      "date": "2026-08-04",
+      "pdf": "https://arxiv.org/pdf/2608.03257v1",
+      "score": "6.0",
+      "evidence": "纳米材料三维重构的物理驱动框架，可迁移至缺陷微结构表征",
+      "tldr": "电子断层成像受缺失楔问题与噪声干扰，传统算法产生几何畸变，现有学习方法难以捕捉复杂三维拓扑。提出NanoMorph-3D，基于纳米形态分类法，将近端梯度下降展开为可学习网络。设计层级注意力与物理归一化建模长程依赖，双域策略通过正弦注意力强制正弦图一致性。无监督双流机制弥合仿真与真实差距，实现高保真快速重建。",
+      "tags": "query:rad-damage",
+      "abstract_en": "Precise 3D characterization of nanomaterials is essential for unlocking structure-property relationships. However, standard electron tomography is fundamentally limited by the missing wedge problem. Consequently, conventional algorithms suffer from severe geometric distortions, a challenge further complicated by pervasive noise interference. Current learning-based methods either rely on physics-blind post-processing or employ end-to-end architectures constrained by local receptive fields, failing to capture complex 3D topologies. We propose NanoMorph-3D, a unified end-to-end framework grounded in a comprehensive Nanomorphological Taxonomy. Powered by a large-scale synthetic dataset explicitly modeling non-linear electron attenuation, we design a Physics-Driven Unrolled Network mapping proximal gradient descent into a learnable architecture. To capture complex internal topologies, we formulate a hierarchical attention mechanism with Physics-Normalization for long-range 3D dependencies and scale invariance. Crucially, our Dual-Domain strategy leverages Sinusoidal Attention to explicitly model physical projection trajectories, enforcing strict sinogram consistency to mitigate missing wedge artifacts. Finally, an unsupervised dual-stream mechanism bridges the simulation-to-reality gap. Experiments demonstrate NanoMorph-3D reconstructs diverse topologies with superior fidelity and speed.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,94 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-08-10T20:16:18.986774+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 1,
+    "deep_cap": 6,
+    "deep_selected": 1,
+    "quick_candidates": 1,
+    "quick_skim_target": 11,
+    "quick_selected": 1
+  },
+  "deep_dive": [
+    {
+      "id": "2608.07445v1",
+      "source": "arxiv",
+      "title": "Permutation invariant neural network prediction of vacancy formation under deformation and varying chemical environment in FCC high entropy alloys",
+      "abstract": "Vacancy formation energies govern diffusion, irradiation damage, phase stability, and dynamic failure in high-entropy alloys (HEAs), yet their strong dependence on local chemical environments and mechanical deformation makes atomistic calculations prohibitively expensive for large-scale studies. Here, we develop an atomistically informed permutation invariant machine learning framework for predicting strain dependent vacancy formation energies in FCC HEAs from local atomic environments. The model employs a vacancy-centered representation constructed from objective geometric descriptors together with invariants of the local deformation gradient, enabling the coupled effects of chemical disorder and finite deformation to be learned within a unified framework. Atomistic simulations reveal that volumetric deformation is the dominant factor controlling the average variation in vacancy formation energy, whereas shear deformation has a comparatively minor influence. At the same time, substantial site to site variability persists under identical macroscopic loading, demonstrating that local chemical environments govern the statistical distribution of vacancy energetics beyond species-averaged trends. The proposed framework accurately predicts vacancy formation energies across diverse deformation states while providing orders-of-magnitude faster evaluation than direct atomistic simulations. These results establish an efficient route for incorporating stress-dependent defect energetics into multiscale models of diffusion, irradiation damage, and dynamic failure in chemically complex alloys.",
+      "authors": [
+        "Tanvir Sohail",
+        "Swarnava Ghosh"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci",
+        "cond-mat.dis-nn",
+        "physics.comp-ph"
+      ],
+      "published": "2026-08-07T17:31:15+00:00",
+      "link": "https://arxiv.org/pdf/2608.07445v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "vacancy formation energies govern irradiation damage and are predicted by permutation invariant neural network in HEAs",
+      "llm_evidence_cn": "空位形成能制约辐照损伤，论文用置换不变神经网络预测高熵合金中的空位形成",
+      "llm_evidence": "空位形成能制约辐照损伤，论文用置换不变神经网络预测高熵合金中的空位形成",
+      "canonical_evidence": "空位形成能制约辐照损伤，论文用置换不变神经网络预测高熵合金中的空位形成",
+      "llm_tldr_en": "Predicts vacancy formation energies in FCC high-entropy alloys with a permutation invariant neural network using local geometric descriptors and deformation-gradient invariants, enabling fast yet accurate atomistic modeling of point defects relevant to irradiation damage.",
+      "llm_tldr_cn": "空位形成能是决定扩散、辐照损伤和相稳定性的关键参数，但高熵合金中其依赖局部化学环境和力学变形，原子级计算代价极高。本文提出一种基于置换不变神经网络的机器学习框架，利用客观几何描述符与变形梯度不变量预测应变相关的空位形成能。该模型能够捕捉化学环境与变形的耦合效应，为大规模研究合金中辐照损伤相关点缺陷行为提供高效工具。该方法有望推广到其他合金体系，支撑辐照条件下缺陷演化的多尺度模拟。",
+      "llm_tldr": "空位形成能是决定扩散、辐照损伤和相稳定性的关键参数，但高熵合金中其依赖局部化学环境和力学变形，原子级计算代价极高。本文提出一种基于置换不变神经网络的机器学习框架，利用客观几何描述符与变形梯度不变量预测应变相关的空位形成能。该模型能够捕捉化学环境与变形的耦合效应，为大规模研究合金中辐照损伤相关点缺陷行为提供高效工具。该方法有望推广到其他合金体系，支撑辐照条件下缺陷演化的多尺度模拟。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation-induced point defects and clusters",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2608.03257v1",
+      "source": "arxiv",
+      "title": "NanoMorph-3D: An End-to-End Physics-Driven Unrolling Framework for Nanomaterial Reconstruction",
+      "abstract": "Precise 3D characterization of nanomaterials is essential for unlocking structure-property relationships. However, standard electron tomography is fundamentally limited by the missing wedge problem. Consequently, conventional algorithms suffer from severe geometric distortions, a challenge further complicated by pervasive noise interference. Current learning-based methods either rely on physics-blind post-processing or employ end-to-end architectures constrained by local receptive fields, failing to capture complex 3D topologies. We propose NanoMorph-3D, a unified end-to-end framework grounded in a comprehensive Nanomorphological Taxonomy. Powered by a large-scale synthetic dataset explicitly modeling non-linear electron attenuation, we design a Physics-Driven Unrolled Network mapping proximal gradient descent into a learnable architecture. To capture complex internal topologies, we formulate a hierarchical attention mechanism with Physics-Normalization for long-range 3D dependencies and scale invariance. Crucially, our Dual-Domain strategy leverages Sinusoidal Attention to explicitly model physical projection trajectories, enforcing strict sinogram consistency to mitigate missing wedge artifacts. Finally, an unsupervised dual-stream mechanism bridges the simulation-to-reality gap. Experiments demonstrate NanoMorph-3D reconstructs diverse topologies with superior fidelity and speed.",
+      "authors": [
+        "Beiyuan Zhang",
+        "Hesong Li",
+        "Ziqi Wu",
+        "Ruiwen Shao",
+        "Ying Fu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-08-04T07:30:48+00:00",
+      "link": "https://arxiv.org/pdf/2608.03257v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Physics-driven 3D reconstruction framework for nanomaterials, transferable to defect microstructure characterization",
+      "llm_evidence_cn": "纳米材料三维重构的物理驱动框架，可迁移至缺陷微结构表征",
+      "llm_evidence": "纳米材料三维重构的物理驱动框架，可迁移至缺陷微结构表征",
+      "canonical_evidence": "纳米材料三维重构的物理驱动框架，可迁移至缺陷微结构表征",
+      "llm_tldr_en": "Proposes NanoMorph-3D, an end-to-end physics-driven unrolling framework with taxonomy-based synthetic data, to overcome missing-wedge artifacts and noise in electron tomography, achieving accurate 3D reconstruction of nanomaterials and enabling reliable defect microstructure analysis for structure-property studies.",
+      "llm_tldr_cn": "纳米材料的三维精确表征对理解结构-性质关系至关重要，但电子断层扫描存在缺失楔和噪声干扰，导致传统算法严重变形。现有学习方法依赖物理盲后处理或受限于局部感受野，难以捕获复杂三维拓扑。作者提出NanoMorph-3D，一个基于形态分类学的端到端物理驱动展开框架，并利用显式模拟非线性电子衰减的大规模合成数据集训练。实验表明该方法能够显著提升复杂纳米材料三维重构质量，为辐射诱导缺陷等微结构表征提供了可靠工具。",
+      "llm_tldr": "纳米材料的三维精确表征对理解结构-性质关系至关重要，但电子断层扫描存在缺失楔和噪声干扰，导致传统算法严重变形。现有学习方法依赖物理盲后处理或受限于局部感受野，难以捕获复杂三维拓扑。作者提出NanoMorph-3D，一个基于形态分类学的端到端物理驱动展开框架，并利用显式模拟非线性电子衰减的大规模合成数据集训练。实验表明该方法能够显著提升复杂纳米材料三维重构质量，为辐射诱导缺陷等微结构表征提供了可靠工具。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation induced defect evolution and microstructure changes",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

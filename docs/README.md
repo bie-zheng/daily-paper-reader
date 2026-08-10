@@ -6,27 +6,26 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-08-09
-- 运行时间：2026-08-09 19:27:20 UTC
+- 最新运行日期：2026-08-10
+- 运行时间：2026-08-10 20:19:54 UTC
 - 运行状态：成功
 - 本次总论文数：2
-- 精读区：0
-- 速读区：2
+- 精读区：1
+- 速读区：1
 
 ### 今日简报（AI）
-今日速读2篇论文，无精读，重点覆盖相场断裂模型与磁场控制纳米颗粒成核理论。最值得关注的是裂纹与位错耦合相场模型（7.0分），揭示发射、钝化及耗散增韧的必要性；其次为磁场调控纳米颗粒尺寸的经典成核几何闭合理论（6.0分）。建议普通读者优先精读第一篇，以理解材料断裂中位错与裂纹交互的核心机制。
-- 详情：[/202608/09/README](/202608/09/README)
+今日精读1篇、速读1篇，全情聚焦材料模拟前沿：高熵合金空位预测获8分高分，纳米重建框架亦有新意。最值得关注的是置换不变神经网络在FCC高熵合金变形与变化学环境下的空位形成能预测，精度与效率兼备；NanoMorph-3D则提供物理驱动的端到端重建思路，可作参考。建议普通读者优先精读高熵合金那篇，若对图像重建感兴趣，速读NanoMorph-3D即可。
+- 详情：[/202608/10/README](/202608/10/README)
 
 ### 精读区论文标签
-- 本次无精读推荐。
+1. [Permutation invariant neural network prediction of vacancy formation under deformation and varying chemical environment in FCC high entropy alloys](/202608/10/2608.07445v1-permutation-invariant-neural-network-prediction-of-vacancy-formation-under-deformation-and-varying-chemical-environment-in-fcc-high-entropy-alloys)  
+   标签：评分：8.0/10、query:rad-damage
+   evidence：空位形成能制约辐照损伤，论文用置换不变神经网络预测高熵合金中的空位形成
 
 ### 速读区论文标签
-1. [A phase field model of coupled crack and dislocations: emission, blunting, and the necessity of dissipative toughening](/202608/09/2608.04781v1-a-phase-field-model-of-coupled-crack-and-dislocations-emission-blunting-and-the-necessity-of-dissipative-toughening)  
-   标签：评分：7.0/10、query:rad-damage
-   evidence：基于单一能量泛函的裂纹与几何必需位错相场模型，可迁移至辐照材料中位错环形成模拟
-2. [Geometric closure of classical nucleation theory for magnetic-field-controlled nanoparticle size across magnetic classes](/202608/09/2608.06220v1-geometric-closure-of-classical-nucleation-theory-for-magnetic-field-controlled-nanoparticle-size-across-magnetic-classes)  
+1. [NanoMorph-3D: An End-to-End Physics-Driven Unrolling Framework for Nanomaterial Reconstruction](/202608/10/2608.03257v1-nanomorph-3d-an-end-to-end-physics-driven-unrolling-framework-for-nanomaterial-reconstruction)  
    标签：评分：6.0/10、query:rad-damage
-   evidence：可迁移的经典成核理论，含临界核的场驱动演化方程，可应用于辐照合金析出建模
+   evidence：纳米材料三维重构的物理驱动框架，可迁移至缺陷微结构表征
 
 
 <div class="dpr-home-promo-card">
