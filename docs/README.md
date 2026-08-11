@@ -6,26 +6,28 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-08-10
-- 运行时间：2026-08-10 20:19:54 UTC
+- 最新运行日期：2026-08-11
+- 运行时间：2026-08-11 19:51:19 UTC
 - 运行状态：成功
-- 本次总论文数：2
-- 精读区：1
+- 本次总论文数：1
+- 精读区：0
 - 速读区：1
 
 ### 今日简报（AI）
-今日精读1篇、速读1篇，全情聚焦材料模拟前沿：高熵合金空位预测获8分高分，纳米重建框架亦有新意。最值得关注的是置换不变神经网络在FCC高熵合金变形与变化学环境下的空位形成能预测，精度与效率兼备；NanoMorph-3D则提供物理驱动的端到端重建思路，可作参考。建议普通读者优先精读高熵合金那篇，若对图像重建感兴趣，速读NanoMorph-3D即可。
-- 详情：[/202608/10/README](/202608/10/README)
+今日仅速读1篇论文，暂无精读，整体关注度一般。
+
+最值得看的是烧结陶瓷微观结构的计算方法，评分6.0/10，可了解其分析思路。
+
+若时间有限，可先浏览该文图表与结论，后续再关注更高分文献。
+- 详情：[/202608/11/README](/202608/11/README)
 
 ### 精读区论文标签
-1. [Permutation invariant neural network prediction of vacancy formation under deformation and varying chemical environment in FCC high entropy alloys](/202608/10/2608.07445v1-permutation-invariant-neural-network-prediction-of-vacancy-formation-under-deformation-and-varying-chemical-environment-in-fcc-high-entropy-alloys)  
-   标签：评分：8.0/10、query:rad-damage
-   evidence：空位形成能制约辐照损伤，论文用置换不变神经网络预测高熵合金中的空位形成
+- 本次无精读推荐。
 
 ### 速读区论文标签
-1. [NanoMorph-3D: An End-to-End Physics-Driven Unrolling Framework for Nanomaterial Reconstruction](/202608/10/2608.03257v1-nanomorph-3d-an-end-to-end-physics-driven-unrolling-framework-for-nanomaterial-reconstruction)  
+1. [Computational Microstructure Analysis of Sintered Ceramics](/202608/11/2608.04216v1-computational-microstructure-analysis-of-sintered-ceramics)  
    标签：评分：6.0/10、query:rad-damage
-   evidence：纳米材料三维重构的物理驱动框架，可迁移至缺陷微结构表征
+   evidence：自动化微观结构定量
 
 
 <div class="dpr-home-promo-card">

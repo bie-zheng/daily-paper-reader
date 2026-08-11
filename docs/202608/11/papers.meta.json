@@ -1,0 +1,24 @@
+{
+  "label": "2026-08-11",
+  "date": "2026-08-11",
+  "generated_at": "2026-08-11T19:51:24",
+  "count": 1,
+  "papers": [
+    {
+      "paper_id": "202608/11/2608.04216v1-computational-microstructure-analysis-of-sintered-ceramics",
+      "section": "quick",
+      "title_en": "Computational Microstructure Analysis of Sintered Ceramics",
+      "authors": "Nikhil Dhanankam, Deeksha Kodangal, Rajendra K. Bordia, Ulf D. Schiller",
+      "date": "2026-08-04",
+      "pdf": "https://arxiv.org/pdf/2608.04216v1",
+      "score": "6.0",
+      "evidence": "自动化微观结构定量",
+      "tldr": "针对烧结陶瓷SEM图像中晶粒与孔隙灰度重叠导致分割困难的问题，提出自动化微观结构分析流程。采用拓扑滤波与Sauvola阈值分割，提取孔隙率、固相分数、晶粒尺寸及孔隙分布。在1200℃和1400℃样品上验证，IoU分别达95.14%和99.85%，优于手动分析。该流程为材料数据集高效生成提供支撑，助力机器学习应用。",
+      "tags": "query:rad-damage",
+      "abstract_en": "Characterizing materials through manual extraction of physical properties from microstructure images is a laborious process. This work presents a workflow to extract porosity, solid fraction, grain size distribution, and pore size distribution from scanning electron microscopy (SEM) images of sintered ceramic samples using an automated pipeline. The primary challenge for extracting physical properties from SEM images is the presence of unimodal histograms in SEM images as a result of the overlapping intensity ranges for the grain and pore phases. We evaluated several different methods for noise reduction and local thresholding of SEM images. We find that topological filtering in combination with Sauvola thresholding enables segmentation and extraction of physical property data from SEM images. We validated the automated pipeline by comparing our results with the results of manual analyses performed for samples sintered at 1200$^o$C and 1400$^o$C and achieved an Intersection over Union (IoU) score of 95.14% and 99.85%, respectively. The workflow provides an efficient means to automatically extract microstructure properties from SEM images as a crucial step in generating materials datasets for machine learning.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

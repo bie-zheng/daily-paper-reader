@@ -1,6 +1,9 @@
 * <a class="dpr-sidebar-root-link" href="#/">首页</a>
 * <a class="dpr-sidebar-root-link dpr-sidebar-noactive-link" href="javascript:void(0)" data-dpr-hash="#/tutorial/README">使用教程</a>
 * Daily Papers
+  * 2026-08-11 <!--dpr-date:20260811-->
+    * 速读区
+      * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202608/11/2608.04216v1-computational-microstructure-analysis-of-sintered-ceramics" data-sidebar-item="{&quot;title&quot;: &quot;Computational Microstructure Analysis of Sintered Ceramics&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2608.04216v1-computational-microstructure-analysis-of-sintered-ceramics&quot;, &quot;score&quot;: &quot;6.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;rad-damage&quot;}], &quot;evidence&quot;: &quot;自动化微观结构定量&quot;}">Computational Microstructure Analysis of Sintered Ceramics</a>
   * 2026-08-10 <!--dpr-date:20260810-->
     * 精读区
       * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202608/10/2608.07445v1-permutation-invariant-neural-network-prediction-of-vacancy-formation-under-deformation-and-varying-chemical-environment-in-fcc-high-entropy-alloys" data-sidebar-item="{&quot;title&quot;: &quot;Permutation invariant neural network prediction of vacancy formation under deformation and varying chemical environment in FCC high entropy alloys&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2608.07445v1-permutation-invariant-neural-network-prediction-of-vacancy-formation-under-deformation-and-varying-chemical-environment-in-fcc-high-entropy-alloys&quot;, &quot;score&quot;: &quot;8.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;rad-damage&quot;}], &quot;evidence&quot;: &quot;空位形成能制约辐照损伤，论文用置换不变神经网络预测高熵合金中的空位形成&quot;}">Permutation invariant neural network prediction of vacancy formation under deformation and varying chemical environment in FCC high entropy alloys</a>
