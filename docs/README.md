@@ -6,28 +6,31 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-08-11
-- 运行时间：2026-08-11 19:51:19 UTC
+- 最新运行日期：2026-08-12
+- 运行时间：2026-08-12 20:44:09 UTC
 - 运行状态：成功
-- 本次总论文数：1
+- 本次总论文数：2
 - 精读区：0
-- 速读区：1
+- 速读区：2
 
 ### 今日简报（AI）
-今日仅速读1篇论文，暂无精读，整体关注度一般。
+今日速读2篇论文，聚焦材料模拟与表征前沿。
 
-最值得看的是烧结陶瓷微观结构的计算方法，评分6.0/10，可了解其分析思路。
+值得关注：机器学习电荷密度模型可跨超胞预测缺陷形成能；暗场X射线显微镜揭示HgCdTe外延层位错处应变与晶格旋转。
 
-若时间有限，可先浏览该文图表与结论，后续再关注更高分文献。
-- 详情：[/202608/11/README](/202608/11/README)
+建议从缺陷能计算或X射线成像方向深入，留意方法普适性与实验分辨率限制。
+- 详情：[/202608/12/README](/202608/12/README)
 
 ### 精读区论文标签
 - 本次无精读推荐。
 
 ### 速读区论文标签
-1. [Computational Microstructure Analysis of Sintered Ceramics](/202608/11/2608.04216v1-computational-microstructure-analysis-of-sintered-ceramics)  
+1. [Predicting large-supercell defect formation energies from machine-learning charge density models trained on small supercells](/202608/12/2608.07997v1-predicting-large-supercell-defect-formation-energies-from-machine-learning-charge-density-models-trained-on-small-supercells)  
    标签：评分：6.0/10、query:rad-damage
-   evidence：自动化微观结构定量
+   evidence：缺陷形成能预测对于研究辐射诱导点缺陷和团簇至关重要。
+2. [Spatially resolved elastic strain and lattice rotation at threading dislocations in HgCdTe/CdZnTe epilayers by dark-field X-ray microscopy](/202608/12/2608.09841v1-spatially-resolved-elastic-strain-and-lattice-rotation-at-threading-dislocations-in-hgcdtecdznte-epilayers-by-dark-field-x-ray-microscopy)  
+   标签：评分：6.0/10、query:rad-damage
+   evidence：暗场X射线显微镜解耦位错应变与晶格旋转，可用于辐照位错环研究
 
 
 <div class="dpr-home-promo-card">

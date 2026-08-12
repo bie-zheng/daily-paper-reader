@@ -1,0 +1,39 @@
+{
+  "label": "2026-08-12",
+  "date": "2026-08-12",
+  "generated_at": "2026-08-12T20:44:14",
+  "count": 2,
+  "papers": [
+    {
+      "paper_id": "202608/12/2608.07997v1-predicting-large-supercell-defect-formation-energies-from-machine-learning-charge-density-models-trained-on-small-supercells",
+      "section": "quick",
+      "title_en": "Predicting large-supercell defect formation energies from machine-learning charge density models trained on small supercells",
+      "authors": "Junjie Zhou, Menglin Huang, Shiyou Chen",
+      "date": "2026-08-08",
+      "pdf": "https://arxiv.org/pdf/2608.07997v1",
+      "score": "6.0",
+      "evidence": "缺陷形成能预测对于研究辐射诱导点缺陷和团簇至关重要。",
+      "tldr": "第一性原理缺陷计算常受限于大超胞所需的巨大成本，而机器学习势的替代方案需要数千结构训练，数据效率低。本文提出机器学习电荷密度(MLCD)路线，利用空间电荷密度分析合理配置不同尺寸小超胞的训练集比例。仅需96个16-96原子小超胞，即可准确预测360原子大超胞中四种本征缺陷的形成能，缺陷级平均绝对误差低于0.05 eV，而相同数据训练的机器学习势误差超过1 eV。结果表明，基于电荷密度的学习比直接拟合能量-力更稳健地实现跨尺寸迁移，混合尺寸数据设计能大幅降低缺陷预测的计算成本。",
+      "tags": "query:rad-damage",
+      "abstract_en": "First-principles defect calculations are often limited by the cost of the large supercells required to suppress image interactions. Machine-learning interatomic potentials (MLIPs) provide another alternative, but training defect MLIPs typically requires thousands of structures and weeks of data generation. Since charge density is the key to density-functional-theory (DFT), we propose a machine-learning charge density (MLCD) route for predicting defect formation energies with higher data efficiency. We optimize the training set by integrating small supercells of varying sizes for better extrapolation, allocating their proportions based on spatial charge-density analysis. With only 96 supercells containing 16--96 atoms as the dataset, MLCD accurately predicts the formation energies of four intrinsic defects in 360-atom supercells, with defect-wise mean absolute error below 0.05 eV. In contrast, MLIPs trained on the same dataset can err by more than 1 eV. These results show that charge-density learning enables more robust cross-size transfer than direct energy-force fitting and that mixed-size data design can substantially reduce the cost of defect prediction.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202608/12/2608.09841v1-spatially-resolved-elastic-strain-and-lattice-rotation-at-threading-dislocations-in-hgcdtecdznte-epilayers-by-dark-field-x-ray-microscopy",
+      "section": "quick",
+      "title_en": "Spatially resolved elastic strain and lattice rotation at threading dislocations in HgCdTe/CdZnTe epilayers by dark-field X-ray microscopy",
+      "authors": "C. Yildirim, A. Benhadjira, P. Ballet, T. N. Tran Caliste, J. Baruchel, C. Detlefs, D. Brellier, M. P. Kabukcuoglu",
+      "date": "2026-08-10",
+      "pdf": "https://arxiv.org/pdf/2608.09841v1",
+      "score": "6.0",
+      "evidence": "暗场X射线显微镜解耦位错应变与晶格旋转，可用于辐照位错环研究",
+      "tldr": "衬底穿透位错（TD）向HgCdTe外延层传播，严重影响红外探测器性能，但其局部应变场难以分辨。采用反射几何暗场X射线显微镜对7微米厚(111)异质外延层成像，结合弱束差像单帧区分衬底点状位错与外延层岛状缺陷。核平均取向差将每个TD解析为层厚度的7微米特征，同时测得轴向应变瓣约±5×10⁻⁵。该方法实现了TD弹性应变和晶格旋转的高分辨表征，为器件级材料优化提供了关键手段。",
+      "tags": "query:rad-damage",
+      "abstract_en": "Threading dislocations (TDs) propagating from a Cd$_{1-y}$Zn$_{y}$Te (CZT) substrate into a liquid-phase-epitaxy Hg$_{1-x}$Cd$_{x}$Te (MCT) epilayer set the minority-carrier lifetime and dark-current floor of mid-wave infrared focal-plane arrays, yet at device-grade densities their local strain fields have been accessible only through topography, which conflates lattice tilt and elastic strain. We apply dark-field X-ray microscopy in reflection geometry to a \\SI{7}{\\micro\\metre}-thick (111) MCT/CZT epilayer. Shallow Bragg angle and absorption makes the signal layer dominated while the numerical aperture of the objective keeps the layer and substrate rocking curves convolved, so weak-beam images on either side of the rocking curve and their difference image the correlated defects in a single frame: dot-like substrate TDs and the elongated, in-plane island features they nucleate in the layer. Kernel average misorientation resolves each TD as a \\SI{7}{\\micro\\metre} signature, the layer thickness, alongside axial strain lobes of $\\pm(4$ to $5)\\times10^{-5}$.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
