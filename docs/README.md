@@ -6,31 +6,26 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-08-12
-- 运行时间：2026-08-12 20:44:09 UTC
+- 最新运行日期：2026-08-13
+- 运行时间：2026-08-13 21:10:07 UTC
 - 运行状态：成功
-- 本次总论文数：2
-- 精读区：0
-- 速读区：2
+- 本次总论文数：1
+- 精读区：1
+- 速读区：0
 
 ### 今日简报（AI）
-今日速读2篇论文，聚焦材料模拟与表征前沿。
-
-值得关注：机器学习电荷密度模型可跨超胞预测缺陷形成能；暗场X射线显微镜揭示HgCdTe外延层位错处应变与晶格旋转。
-
-建议从缺陷能计算或X射线成像方向深入，留意方法普适性与实验分辨率限制。
-- 详情：[/202608/12/README](/202608/12/README)
+今日精读1篇关于铜中能量依赖退道效应的蒙特卡洛模拟论文，评分8.0/10。  
+最值得关注的是退道行为随能量的变化规律及其模拟新见解，适合材料辐照与离子通道领域读者。  
+可进一步对比实验数据或探索其他晶体方向，以验证模型的普适性。
+- 详情：[/202608/13/README](/202608/13/README)
 
 ### 精读区论文标签
-- 本次无精读推荐。
+1. [Energy-Dependent Dechanneling in Cu: Insights from Monte Carlo Channeling Simulations](/202608/13/2608.12017v1-energy-dependent-dechanneling-in-cu-insights-from-monte-carlo-channeling-simulations)  
+   标签：评分：8.0/10、query:rad-damage
+   evidence：蒙特卡洛沟道模拟可区分晶体中的点缺陷与扩展缺陷团簇，直接适用于辐照诱导缺陷识别
 
 ### 速读区论文标签
-1. [Predicting large-supercell defect formation energies from machine-learning charge density models trained on small supercells](/202608/12/2608.07997v1-predicting-large-supercell-defect-formation-energies-from-machine-learning-charge-density-models-trained-on-small-supercells)  
-   标签：评分：6.0/10、query:rad-damage
-   evidence：缺陷形成能预测对于研究辐射诱导点缺陷和团簇至关重要。
-2. [Spatially resolved elastic strain and lattice rotation at threading dislocations in HgCdTe/CdZnTe epilayers by dark-field X-ray microscopy](/202608/12/2608.09841v1-spatially-resolved-elastic-strain-and-lattice-rotation-at-threading-dislocations-in-hgcdtecdznte-epilayers-by-dark-field-x-ray-microscopy)  
-   标签：评分：6.0/10、query:rad-damage
-   evidence：暗场X射线显微镜解耦位错应变与晶格旋转，可用于辐照位错环研究
+- 本次无速读推荐。
 
 
 <div class="dpr-home-promo-card">

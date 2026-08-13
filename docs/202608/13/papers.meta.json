@@ -1,0 +1,24 @@
+{
+  "label": "2026-08-13",
+  "date": "2026-08-13",
+  "generated_at": "2026-08-13T21:10:12",
+  "count": 1,
+  "papers": [
+    {
+      "paper_id": "202608/13/2608.12017v1-energy-dependent-dechanneling-in-cu-insights-from-monte-carlo-channeling-simulations",
+      "section": "deep",
+      "title_en": "Energy-Dependent Dechanneling in Cu: Insights from Monte Carlo Channeling Simulations",
+      "authors": "Przemyslaw Jozwik, Cyprian Mieszczynski, Renata Ratajczak, Andrzej Turos",
+      "date": "2026-08-12",
+      "pdf": "https://arxiv.org/pdf/2608.12017v1",
+      "score": "8.0",
+      "evidence": "蒙特卡洛沟道模拟可区分晶体中的点缺陷与扩展缺陷团簇，直接适用于辐照诱导缺陷识别",
+      "tldr": "离子沟道技术是研究晶体缺陷的重要工具，但定量解析需依赖精确的模拟模型。本文提出基于Monte Carlo方法的McChasy程序，能够模拟不同能量下离子沟道行为并定量识别缺陷类型与分布。通过重现Cu晶体实验中观测到的“elbow”特征，验证了该方法可区分点缺陷与扩展缺陷的能量依赖差异，为材料缺陷分析提供了灵活高效的工具。",
+      "tags": "query:rad-damage",
+      "abstract_en": "Ion channeling and backscattering techniques are powerful tools for studying crystal lattice disorders and defect structures in crystalline materials. However, the accurate interpretation of channeling phenomena necessitates the utilization of simulation models that account for the intricate interactions between point defects, dislocations, and extended defect clusters. The present paper introduces a Monte Carlo method that reproduces experimental spectra over a wide range of analyzing beam energies and enables quantitative identification of defect types and distributions. The simulations reveal characteristic energy dependencies that distinguish point defects from extended defects, offering a novel perspective on disturbances caused, for example, by ion implantation in metals and semiconductors. To this end, the McChasy code has been developed as a flexible and accessible tool for scientists, enabling the modeling of various crystal systems, including complex semiconductors, multilayer epitaxial films, and oxide crystals. The program's integration of experimental data on ion channeling with defect modeling establishes a robust framework for defect analysis in materials science. The present article expounds upon the simulation capabilities of the program by reproducing the characteristic \"elbows\" in channeling spectra that were previously observed in experiments conducted on Cu crystals.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

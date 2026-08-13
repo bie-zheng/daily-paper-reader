@@ -1,0 +1,55 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-08-13T21:09:00.138882+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 1,
+    "deep_cap": 6,
+    "deep_selected": 1,
+    "quick_candidates": 0,
+    "quick_skim_target": 11,
+    "quick_selected": 0
+  },
+  "deep_dive": [
+    {
+      "id": "2608.12017v1",
+      "source": "arxiv",
+      "title": "Energy-Dependent Dechanneling in Cu: Insights from Monte Carlo Channeling Simulations",
+      "abstract": "Ion channeling and backscattering techniques are powerful tools for studying crystal lattice disorders and defect structures in crystalline materials. However, the accurate interpretation of channeling phenomena necessitates the utilization of simulation models that account for the intricate interactions between point defects, dislocations, and extended defect clusters. The present paper introduces a Monte Carlo method that reproduces experimental spectra over a wide range of analyzing beam energies and enables quantitative identification of defect types and distributions. The simulations reveal characteristic energy dependencies that distinguish point defects from extended defects, offering a novel perspective on disturbances caused, for example, by ion implantation in metals and semiconductors. To this end, the McChasy code has been developed as a flexible and accessible tool for scientists, enabling the modeling of various crystal systems, including complex semiconductors, multilayer epitaxial films, and oxide crystals. The program's integration of experimental data on ion channeling with defect modeling establishes a robust framework for defect analysis in materials science. The present article expounds upon the simulation capabilities of the program by reproducing the characteristic \"elbows\" in channeling spectra that were previously observed in experiments conducted on Cu crystals.",
+      "authors": [
+        "Przemyslaw Jozwik",
+        "Cyprian Mieszczynski",
+        "Renata Ratajczak",
+        "Andrzej Turos"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci",
+        "physics.atom-ph"
+      ],
+      "published": "2026-08-12T12:54:02+00:00",
+      "link": "https://arxiv.org/pdf/2608.12017v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Monte Carlo channeling simulation distinguishes point defects from extended defect clusters in crystals, directly applicable to radiation-induced defect identification",
+      "llm_evidence_cn": "蒙特卡洛沟道模拟可区分晶体中的点缺陷与扩展缺陷团簇，直接适用于辐照诱导缺陷识别",
+      "llm_evidence": "蒙特卡洛沟道模拟可区分晶体中的点缺陷与扩展缺陷团簇，直接适用于辐照诱导缺陷识别",
+      "canonical_evidence": "蒙特卡洛沟道模拟可区分晶体中的点缺陷与扩展缺陷团簇，直接适用于辐照诱导缺陷识别",
+      "llm_tldr_en": "A Monte Carlo channeling method reproduces experimental energy-dependent spectra and distinguishes point defects from extended clusters, offering a quantitative defect characterization tool for radiation damage studies.",
+      "llm_tldr_cn": "本文针对离子沟道背散射分析中缺陷表征困难的问题，提出了一种蒙特卡洛模拟方法，可再现宽能量范围的实验谱，并定量区分点缺陷与扩展缺陷（位错、缺陷团簇）。结果表明缺陷类型具有特征性能量依赖关系，为晶体材料中辐照损伤的缺陷识别与分布分析提供了新途径。该方法对结构材料辐照损伤机制研究具有直接支撑作用。",
+      "llm_tldr": "本文针对离子沟道背散射分析中缺陷表征困难的问题，提出了一种蒙特卡洛模拟方法，可再现宽能量范围的实验谱，并定量区分点缺陷与扩展缺陷（位错、缺陷团簇）。结果表明缺陷类型具有特征性能量依赖关系，为晶体材料中辐照损伤的缺陷识别与分布分析提供了新途径。该方法对结构材料辐照损伤机制研究具有直接支撑作用。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation-induced point defects and clusters",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": []
+}
