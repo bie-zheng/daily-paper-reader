@@ -1,0 +1,24 @@
+{
+  "label": "2026-08-15",
+  "date": "2026-08-15",
+  "generated_at": "2026-08-15T20:28:38",
+  "count": 1,
+  "papers": [
+    {
+      "paper_id": "202608/15/2608.12967v1-elastic-properties-of-cubic-silicon-carbide-with-si-vacancies",
+      "section": "quick",
+      "title_en": "Elastic properties of cubic silicon carbide with Si vacancies",
+      "authors": "Carlos P. Herrero, Eduardo R. Hernandez, Gabriela Herrero-Saboya",
+      "date": "2026-08-13",
+      "pdf": "https://arxiv.org/pdf/2608.12967v1",
+      "score": "7.0",
+      "evidence": "研究硅空位点缺陷及其对弹性性质的影响，与辐照诱导点缺陷相关",
+      "tldr": "碳化硅中的硅空位会显著改变其力学响应，但核量子效应的影响尚不明确。本研究采用路径积分分子动力学与紧束缚哈密顿量模拟，并用DFT验证，系统考察了含空位3C-SiC的弹性性质。结果表明，硅空位使C11、C12、C44及体积模量明显软化，低温下核量子运动进一步加剧软化；空位还将最大可持续拉伸压力降低约4GPa。工作揭示了点缺陷与量子涨落的协同作用，为SiC在极端环境与量子技术中的应用提供了微观见解。",
+      "tags": "query:rad-damage",
+      "abstract_en": "We investigate how silicon vacancies modify the elastic response and mechanical stability of cubic 3C-SiC. Our approach employs path-integral molecular dynamics simulations, including the classical-nuclei limit, based on an efficient tight-binding Hamiltonian, whose accuracy is validated against density-functional-theory calculations. This framework enables a quantitative assessment of nuclear quantum effects arising from zero-point motion. Across a broad range of temperatures and hydrostatic pressures, spanning both tensile and compressive regimes, silicon vacancies are found to substantially renormalize the elastic constants $C_{11}$, $C_{12}$, and $C_{44}$, as well as the bulk modulus, relative to the defect-free crystal. Inclusion of nuclear quantum motion produces an additional softening of these elastic properties, particularly at low temperatures, demonstrating that quantum fluctuations make a measurable contribution to the mechanical response of defective SiC. Vacancies also affect the mechanical stability domain of 3C-SiC, lowering the maximum sustainable tensile pressure by approximately 4 GPa for a defect concentration of 0.016 per lattice site. These results reveal an interplay between point defects and quantum lattice fluctuations in determining the elastic behavior of SiC, providing microscopic insight relevant for both extreme-environment structural applications and defect-based quantum technologies.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

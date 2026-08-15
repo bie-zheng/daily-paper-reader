@@ -1,0 +1,2362 @@
+Elastic properties of cubic silicon carbide with Si vacancies
+Carlos P. Herrero1, Eduardo R. Hern´andez1, and Gabriela Herrero-Saboya2
+1Instituto de Ciencia de Materiales de Madrid, Consejo Superior de
+Investigaciones Cient´ıﬁcas (CSIC), Campus de Cantoblanco, 28049 Madrid, Spain
+2CNR-IOM Democritos National Simulation Center, Istituto Oﬃcina dei Materiali,
+c/o SISSA, via Bonomea 265, IT-34136 Trieste, Italy
+(Dated: August 14, 2026)
+We investigate how silicon vacancies modify the elastic response and mechanical stability of cu-
+bic 3C-SiC. Our approach employs path-integral molecular dynamics simulations, including the
+classical-nuclei limit, based on an eﬃcient tight-binding Hamiltonian, whose accuracy is validated
+against density-functional-theory calculations. This framework enables a quantitative assessment of
+nuclear quantum eﬀects arising from zero-point motion. Across a broad range of temperatures and
+hydrostatic pressures, spanning both tensile and compressive regimes, silicon vacancies are found
+to substantially renormalize the elastic constants C11, C12, and C44, as well as the bulk modulus,
+relative to the defect-free crystal.
+Inclusion of nuclear quantum motion produces an additional
+softening of these elastic properties, particularly at low temperatures, demonstrating that quantum
+ﬂuctuations make a measurable contribution to the mechanical response of defective SiC. Vacancies
+also aﬀect the mechanical stability domain of 3C-SiC, lowering the maximum sustainable tensile
+pressure by approximately 4 GPa for a defect concentration of 0.016 per lattice site. These results
+reveal an interplay between point defects and quantum lattice ﬂuctuations in determining the elas-
+tic behavior of SiC, providing microscopic insight relevant for both extreme-environment structural
+applications and defect-based quantum technologies.
+I.
+INTRODUCTION
+Bulk silicon carbide is a semiconducting material with
+exceptional properties, such as high thermal conduc-
+tivity, strength, and refractive index, as well as low
+thermal expansion, which makes it attractive for high-
+temperature and high-power electronics [1, 2]. The elas-
+tic properties of SiC have been studied over the years
+by theoretical [3–7] and experimental approaches [8–10],
+because of their importance in both basic research and
+technological applications. In particular, the cubic phase
+3C-SiC, stable under ambient conditions, is one of the
+most studied polymorphs of silicon carbide, and its me-
+chanical properties have been extensively analyzed [4–
+9, 11, 12].
+Silicon carbide has emerged as a promising platform
+for quantum technologies because it hosts optically ad-
+dressable spin defects, including the silicon vacancy (VSi)
+in various polymorphs [13–16]. These defects arise from
+missing Si atoms and possess localized electron spins
+that can be optically initialized, controlled, and read out,
+with long coherence times under suitable protocols [17–
+21].
+VSi centers emit near-infrared photons applicable
+for ﬁber-based communication, and enable ﬁnely-tuned
+nanoscale sensing of ﬁelds, temperature, and strain.
+The VSi defect in cubic SiC has been investigated by
+means of several theoretical methods, including ab ini-
+tio density-functional-theory (DFT) calculations [22–26]
+and ﬁnite-temperature atomistic simulations, especially
+molecular dynamics (MD) [19, 27–30].
+These studies
+have provided insight into the structural, electronic, op-
+tical, and dynamical properties of silicon vacancies in
+this material [19, 27, 31–33]. In contrast, mechanical as-
+pects of vacancy-containing SiC, particularly its elastic
+response, have received less attention [26, 29, 30, 32].
+MD simulations have addressed defect energetics [27],
+stability [19], and mechanical properties of the defective
+solid [29, 30], as well as irradiation-induced defect cre-
+ation [28, 29].
+In particular, Li and Xiao [29] studied
+the inﬂuence of point defects on the tensile strength, i.e.,
+the maximum stress the material can endure when being
+stretched before it fractures. In this context, a precise
+determination of the mechanical instability threshold is
+limited by the presence of metastable conﬁgurations dur-
+ing the material deformation.
+In this paper, we use MD simulations to study the
+inﬂuence of neutral silicon vacancies on the elastic prop-
+erties of 3C-SiC over the temperature range T = 50 to
+1200 K, and hydrostatic pressures from P = −44 GPa
+(tension) to 60 GPa (compression). We describe the in-
+teratomic interactions through an eﬃcient tight-binding
+(TB) Hamiltonian, whose accuracy is validated by DFT
+calculations at T = 0 [34–36].
+The inclusion of neg-
+ative pressures allows us to approach the mechanical
+stability limit of the material, and to analyze the shift
+of the spinodal point Ps in the presence of vacancies.
+Within this framework, the combination of trustworthy
+electronic structure calculations with ﬁnite-temperature
+MD simulations provides an eﬃcient groundwork to ana-
+lyze the interplay between temperature, stress, and struc-
+ture in vacancy-containing SiC [37]. The outcome of our
+simulations gives helpful insight on the elastic properties
+of 3C-SiC. To assess the eﬀect of nuclear quantum mo-
+tion (for both C and Si), we have also carried out path-
+integral molecular dynamics (PIMD) simulations based
+on the same TB-derived interactions [38–41]. According
+to our results, such quantum corrections cause in some
+cases appreciable changes in the elastic constants of the
+vacancy-containing solid at relatively low temperatures.
+arXiv:2608.12967v1  [cond-mat.mtrl-sci]  13 Aug 2026
+
+
+2
+Our main goal in this paper is threefold. First, we focus
+on the inﬂuence of temperature and pressure on the elas-
+tic properties of defective SiC, and in particular on the
+eﬀect of Si vacancies upon its mechanical stability from
+a ﬁrm thermodynamic basis. Second, we concentrate on
+the response of physical features, e.g. bulk modulus, to
+the defect concentration. Third, we analyze the eﬀect of
+nuclear quantum motion on elastic and structural prop-
+erties, with especial emphasis on the induced softening
+of the material, usually neglected in this kind of calcula-
+tions.
+The paper is organized as follows: in Sec. II we present
+the computational methods employed, including molec-
+ular dynamics simulations, tight-binding method, and
+DFT procedure. In Sec. III, we outline the results and
+discussion for the energy (III.A), atomic mean-square
+displacements (III.B), volume (III.C), elastic constants
+(III.D), and bulk modulus (III.E). The main ﬁndings are
+summarized in Sec. IV.
+II.
+METHOD OF CALCULATION
+We investigate structural and mechanical properties of
+3C silicon carbide containing Si vacancies by means of
+two types of molecular dynamics simulations, which al-
+low us to determine the equilibrium states of this system
+under diﬀerent temperature and pressure conditions. On
+the one hand, we perform classical MD simulations, in
+which the atomic motion is governed by Newton’s equa-
+tions of motion, numerically integrated over time. On
+the other hand, we employ PIMD simulations in order to
+explicitly account for the quantum nature of the atomic
+nuclei.
+From a computational perspective, the main diﬀerence
+between these two approaches lies in the representation
+of the atomic nuclei.
+In PIMD simulations, each nu-
+cleus is modeled as an ensemble of NTr replicas (Trotter
+number), which behave as classical particles (beads) ar-
+ranged in a ring-polymer conﬁguration [38, 39, 42, 43].
+This mapping gives rise to a pseudoclassical system that
+provides accurate equilibrium quantum-mechanical prop-
+erties. By comparing results obtained from classical MD
+and PIMD simulations, one can quantitatively assess the
+magnitude of nuclear quantum eﬀects in various physical
+observables. Within this framework, the classical limit is
+recovered by setting NTr = 1, for which each ring poly-
+mer collapses into a single particle, and quantum delo-
+calization eﬀects are absent.
+An important issue in our ﬁnite-temperature simu-
+lations concerns the choice of interatomic interactions,
+which must be described as realistically as possible. In
+principle, this could be achieved by employing ab initio
+density-functional theory or Hartree-Fock self-consistent
+potentials.
+However, such approaches would severely
+limit the accessible simulation times and/or the size of
+the simulation cell within reasonable computational re-
+sources. For this reason, we derive the interatomic in-
+teractions from an eﬃcient non-orthogonal TB Hamil-
+tonian, parameterized on the basis of DFT calculations
+[34]. This class of TB methods has been shown to pro-
+vide reliable results for a wide range of properties in both
+condensed-matter and molecular systems [35, 36].
+The TB formalism employed in our MD simulations
+is adapted from the TROCADERO package [44]. The
+parameterization for systems containing C and Si atoms
+was developed in Refs. [34, 45], and has been successfully
+applied to the study of bulk silicon carbide [46–48], iso-
+topic and nuclear quantum eﬀects in 3C-SiC [37, 49, 50],
+and surface reconstructions of this material [45]. More
+recently, it has also been used to investigate various
+physical properties of newly synthesized SiC monolayers
+[51, 52]. A comprehensive discussion of the capability of
+this type of TB approach to describe diverse properties
+of molecular and condensed-matter systems can be found
+in the work of Goringe et al. [35]. We emphasize that our
+“classical” MD simulations are based on the TB-derived
+interatomic interaction rather than on an empirical ef-
+fective potential. Thus, the term “classical” refers exclu-
+sively to the treatment of the nuclear dynamics, as noted
+above.
+Our simulations were performed in the isothermal-
+isobaric (NPT ) ensemble, using algorithms based on
+well-established methods reported in the literature [53,
+54]. In the PIMD simulations, staging coordinates were
+employed to represent the bead positions within the ring
+polymers.
+Each staging coordinate was coupled to a
+chain of four Nos´e-Hoover thermostats to maintain a con-
+stant temperature. In addition, the barostat was con-
+nected to a chain of four thermostats, allowing the vol-
+ume ﬂuctuations required to sample the target pressure
+[39, 55].
+The equations of motion were integrated nu-
+merically using the reversible reference system propaga-
+tor algorithm (RESPA), which enables the use of multiple
+time steps for fast and slow dynamical variables [56]. For
+the fast degrees of freedom, such as thermostat variables
+and bead-bead interactions, we employed a time step of
+δt = 0.25 fs. For the slower dynamics associated with the
+interatomic forces, a larger time step of ∆t = 1 fs was
+used. Further details of the simulation methodology can
+be found elsewhere [55, 57].
+Our simulations, including both classical MD and
+PIMD, were primarily performed using 2 × 2 × 2 and
+3 × 3 × 3 supercells of the face-centered cubic unit cell
+of 3C-SiC, containing N0 = 64 and 216 atoms, respec-
+tively, and subject to periodic boundary conditions. To
+assess the convergence of the T = 0 results with respect
+to system size, including the minimum energy E0 and the
+formation energy Ef, some calculations were performed
+using larger supercells with up to N0 = 1000 atoms. The
+conﬁgurational space was sampled over a temperature
+range from 50 to 1200 K and under hydrostatic pressures
+P between −44 and 60 GPa. Within the framework of
+elasticity theory, one has σxx = σyy = σzz = −P, where
+σij denotes the components of the stress tensor. Accord-
+ingly, negative and positive values of P correspond to
+
+
+3
+tensile and compressive pressures, respectively.
+In both classical MD and PIMD simulations, 2 × 105
+time steps were used for system equilibration.
+Subse-
+quently, ensemble averages were accumulated over 8×106
+time steps for N0 = 64, and over 6 × 106 steps for
+N0 = 216. In the PIMD simulations, the Trotter number
+NTr was chosen to be temperature dependent according
+to the relation NTrT = 6000 K. This choice ensures an
+approximately constant level of accuracy across the en-
+tire temperature range considered [57].
+Near the limit of mechanical stability under tensile
+pressure, some simulations were carried out in the canoni-
+cal (NV T ) ensemble. This approach allows access to ten-
+sile pressures closer to the spinodal point, where NPT
+simulations become unstable due to the emergence of
+large volume ﬂuctuations.
+In our TB calculations, the electronic degrees of free-
+dom in reciprocal space were sampled at the Γ point
+(k = 0) only. Tests with larger k-point sets showed a
+small shift in the total energy, without signiﬁcantly af-
+fecting the energy diﬀerences relevant to our study. The
+minimum energy E0 (classical limit at T = 0) exhibits a
+minor shift, which decreases with increasing simulation
+cell size. A similar trend is observed for the mean energy
+per atom at ﬁnite temperatures across diﬀerent cell sizes
+[51].
+To assess the accuracy of the tight-binding method
+used to describe the elastic properties of defective 3C-
+SiC, we carried out ﬁrst-principles DFT calculations at
+T = 0.
+These calculations were performed to analyze
+aspects that are not directly accessible from the existing
+literature. We used the Quantum ESPRESSO pack-
+age [58, 59], with the Perdew-Burke-Ernzerhof exchange-
+correlation functional optimized for solids (PBEsol) [60],
+and projector-augmented-wave (PAW) pseudopotentials
+for both carbon and silicon [61].
+The kinetic energy
+and charge density cutoﬀs for the plane-wave basis set
+were ﬁxed to 45 Ry and 400 Ry, respectively. Calcula-
+tions were performed for cubic SiC supercells containing
+N0 −1 = 215 atoms and a single silicon vacancy, un-
+der periodic boundary conditions.
+The Brillouin zone
+was sampled at the Γ point only. The reference lattice
+parameter was taken as the optimal one for the conven-
+tional cell, a = 4.36 ˚A. Spin polarization was included
+to determine the ground-state spin conﬁguration of the
+silicon vacancy.
+DFT has been widely used to investigate structural,
+thermodynamic, electronic, and mechanical properties of
+SiC [62–65].
+In particular, ab initio studies of silicon
+vacancies have reported their formation energies, stable
+charge and spin states, and relaxed atomic structures
+[15, 19, 25, 31, 32], as well as diﬀusion pathways and
+migration barriers in the solid [23, 24, 66, 67].
+These
+results provide a useful benchmark to asses how accu-
+rately approximate approaches, such as the tight-binding
+method employed in the present work, capture defect-
+related properties of 3C-SiC.
+III.
+RESULTS AND DISCUSSION
+A.
+Energetics
+In this section, we investigate the internal energy of cu-
+bic SiC containing VSi defects, as obtained from classical
+MD and PIMD simulations performed in the NPT en-
+semble over a wide range of temperatures and pressures.
+Before presenting the simulation results, we examine the
+vacancy formation energy Ef, which provides a useful
+characterization of these point defects. For a supercell
+containing N0 atoms, the formation energy of a neutral
+silicon vacancy VSi is deﬁned as [20, 67, 68]:
+Ef(VSi) = E(N0 −1) −E(N0) + µSi ,
+(1)
+where E(N0 −1) denotes the total energy of a super-
+cell containing a single Si vacancy, and E(N0) is the to-
+tal energy of the defect-free SiC supercell. Under Si-rich
+conditions, µSi in Eq. (1) corresponds to the chemical po-
+tential of silicon, i.e., the energy per atom in bulk Si. In
+the C-rich (Si-poor) limit, the silicon chemical potential is
+given by µSi = µSiC−µC, where µSiC = 2E(N0)/N0 is the
+chemical potential of a Si–C atom pair, and µC is taken
+as the chemical potential of bulk diamond [20, 67, 68].
+We use DFT calculations to establish the reference
+atomic structure and formation energies of VSi at T = 0,
+and subsequently evaluate the accuracy of the corre-
+sponding predictions obtained with the TB Hamiltonian.
+As a benchmark for our DFT calculations, we consider
+the negatively charged silicon vacancy, V −
+Si , which has
+been identiﬁed experimentally by electron paramagnetic
+resonance (EPR) spectroscopy [69]. The observed EPR
+signal was assigned to a silicon vacancy in a quartet elec-
+tronic state with tetrahedral (Td) symmetry. Consistent
+with this assignment, our calculations predict a Td geom-
+etry with spin S = 3/2 as the ground-state conﬁguration.
+The distance between the four carbon atoms nearest to
+the vacancy is found to be 3.34 ˚A.
+Removing one electron from V −
+Si produces a slight dis-
+tortion toward C3v symmetry and stabilizes a spin-triplet
+state (S = 1). This high-spin conﬁguration is consistent
+with the S = 3/2 ground state of V −
+Si and is in agreement
+with a recent systematic study of point defects in 3C-SiC
+[25]. In the distorted structure, one of the four nearest-
+neighbor carbon atoms relaxes slightly toward the plane
+deﬁned by the other three carbon atoms. At the equilib-
+rium lattice parameter, the displaced carbon atom is sep-
+arated by 3.36 ˚A from each of the three coplanar neigh-
+bors, whereas the distances between the coplanar carbon
+atoms are 3.40 ˚A. The trigonal distortion lifts the degen-
+eracy of the t2 manifold, yielding a doubly degenerate
+e level and a non-degenerate a1 level. The e states ac-
+commodate three electrons, while the a1 state remains
+unoccupied.
+The calculated formation energy for the neutral va-
+cancy is 7.44 eV under C-rich conditions and 7.99 eV
+under Si-rich conditions. The tetrahedral conﬁguration
+
+
+4
+0
+200
+400
+600
+800
+1000
+System  size  (N0)
+7
+7.5
+8
+8.5
+9
+9.5
+10
+Formation  energy  (eV)
+Si  rich
+C  rich
+Si  vacancy
+FIG. 1. Formation energy of a silicon vacancy as a function of
+supercell size for 3C-SiC, calculated with the TB Hamiltonian
+used in this work. Open circles and squares correspond to Si-
+rich and C-rich environments, respectively. Lines are guides
+to the eye.
+remains energetically competitive, with formation ener-
+gies of 7.52 eV (C-rich) and 8.08 eV (Si-rich), in good
+agreement with the values reported in Ref. [25].
+Pre-
+vious ab initio studies have reported formation ener-
+gies ranging from 6.8 to 7.5 eV under C-rich conditions
+[32, 33], and from 7.3 to 8.3 eV under Si-rich conditions
+[20, 23, 25, 32, 33]. We further note that the formation
+energies of silicon vacancies in other technologically rele-
+vant SiC polytypes, including 4H- and 6H-SiC, are com-
+parable to those obtained for the cubic phase [68, 70, 71].
+The dependence of the calculated formation energy for
+the VSi defect upon the supercell size has been analyzed
+earlier for various charge states [25, 67, 72]. Going to
+the results obtained with the TB method, we show in
+Fig. 1 the formation energy Ef of a neutral silicon va-
+cancy in 3C-SiC as a function of the supercell size N0.
+The results are reported for Si-rich (circles) and C-rich
+(squares) environments and were obtained from energy
+minimization calculations (classical T = 0 limit) for each
+supercell size. These data correspond to a vacancy con-
+centration xv = 1/N0, spanning the range from 10−3
+to 1.6 × 10−2. To extrapolate the formation energy to
+the large-size limit (N0 →∞), we ﬁt the ﬁnite-size data
+shown in Fig. 1 to the linear relation Ef = E∞
+f + c xv,
+where c is a ﬁtting parameter that accounts for resid-
+ual size eﬀects.
+Restricting the ﬁt to supercells with
+N0 > 140, we obtain E∞
+f
+= 7.93(2) eV and 9.54(2) eV
+under C-rich and Si-rich conditions, respectively. These
+formation energies, obtained within the TB model, are
+somewhat higher than the corresponding DFT values re-
+ported above for the neutral vacancy under both chemical
+limits.
+We now turn to our simulation results for SiC with sili-
+0
+200
+400
+600
+800
+1000
+1200
+Temperature  (K)
+0
+5
+10
+15
+20
+25
+Energy  (eV / supercell)
+defect-free, PIMD
+Si vac,   PIMD
+3 (N0-1) kBT
+Si vac,  cl. MD
+N0 = 64
+P = 0
+FIG. 2.
+Energy E −E0 vs temperature for a SiC super-
+cell (N0 = 64) containing a silicon vacancy.
+Symbols dis-
+play results of classical MD (open circles) and PIMD sim-
+ulations (open squares).
+The label “cl” denotes “classi-
+cal”. The dashed line represents the classical thermal energy:
+Ecl = 3(N0 −1)kBT , and the dashed-dotted line through the
+PIMD results is a guide to the eye. The solid curve represents
+the outcome of PIMD simulations of defect-free 3C-SiC with
+N0 = 64 atoms, referred to its minimum-energy conﬁguration
+[50].
+con vacancies as a function of temperature T and pressure
+P. The total energy is expressed as E = E0+Epot+Ekin,
+where Epot and Ekin denote the potential and kinetic
+energy, respectively, and E0 is the reference energy of
+the classical model at T = 0 and P = 0, correspond-
+ing to the minimum-energy conﬁguration.
+In Fig. 2
+we present the energy diﬀerence E −E0 as a function
+of temperature at vanishing pressure (P = 0).
+Open
+circles and squares represent results from classical MD
+and PIMD simulations, respectively, for a supercell with
+N0 = 64. The broken line shows the classical thermal en-
+ergy, Ecl = 3(N0−1)kBT . At low temperatures, the clas-
+sical MD data closely follow this linear behavior, while at
+higher temperatures they progressively deviate from the
+harmonic expectation, with clear departures becoming
+apparent in Fig. 2 for T > 700 K.
+The energies obtained from PIMD simulations are
+systematically higher than their classical counterparts.
+In the limit T
+→0, we obtain a zero-point energy
+EZP = 6.84 eV (or EZP = 108 meV/atom), and the
+two sets of data progressively converge as the tempera-
+ture increases, reﬂecting the reduced importance of nu-
+clear quantum eﬀects at higher T . This value of EZP is
+lower by 4 meV/atom compared to that of perfect 3C-
+SiC crystal [50].
+Within the harmonic approximation,
+the zero-point energy of the defective supercell is given
+by EZP = 3(N0 −1)ℏω/2, where ω denotes the mean
+phonon frequency. The reduction of EZP in the presence
+of a vacancy therefore indicates a softening of the atomic
+
+
+5
+0
+200
+400
+600
+800
+1000
+1200
+Temperature  (K)
+-0.12
+-0.1
+-0.08
+-0.06
+-0.04
+-0.02
+0
+Kinetic  energy  change  (eV)
+C
+Si
+Si  vacancy
+FIG. 3. Temperature dependence of the change in overall ki-
+netic energy of C (circles) and Si atoms (squares), as obtained
+from PIMD simulations for 3C-SiC supercells with a single Si
+vacancy. Open and solid symbols correspond to N0 = 64 and
+216, respectively. Error bars are on the order of the symbol
+size. Dashed lines are guides to the eye.
+vibrational modes in the vicinity of the defect.
+For a
+larger supercell with N0 = 216, we obtain at low temper-
+ature EZP = 111 meV/atom, which is closer to the value
+reported for defect-free SiC (112 meV/atom [50]).
+The changes in vibrational frequencies induced by the
+vacancy are also reﬂected in the atomic kinetic energy at
+ﬁnite T .
+To quantify this eﬀect, we calculate the dif-
+ference between the total Ekin of C or Si atoms in a
+supercell containing a Si vacancy and that of the same
+number of atoms for the perfect SiC crystal. In Fig. 3,
+we show the temperature dependence of the variation in
+the total kinetic energy of N0/2 carbon atoms (circles)
+and N0/2 −1 silicon atoms (squares) in the supercell,
+resulting from the presence of the vacancy. Open and
+solid symbols correspond to supercells with N0 = 64 and
+216, respectively.
+In a classical model, this diﬀerence
+would vanish, since the kinetic energy per atom is given
+by E
+cl
+kin = 3kBT/2, independent of the local environment
+or interatomic interactions (equipartition theorem). At
+low temperatures, we ﬁnd for N0 = 64 reductions in Ekin
+of 105(1) meV for C atoms and 29(1) meV for Si atoms.
+The larger decrease for carbon arises from the stronger
+quantum delocalization of atoms near the vacancy. The
+data in Fig. 3 also indicate a slight dependence on su-
+percell size: the kinetic energy changes for carbon are
+marginally smaller for N0 = 216 compared to N0 = 64,
+likely due to a minor ﬁnite-size eﬀect. The error bars are
+comparable to the symbol size.
+Our simulations, both classical and PIMD, provide
+separate evaluations of the kinetic and potential energy
+of the solid [39, 51, 73]. This distinction can be used to
+probe anharmonicities in the lattice vibrations by exam-
+-40
+-20
+0
+20
+40
+Pressure  (GPa)
+0
+0.2
+0.4
+0.6
+0.8
+1
+1.2
+Energy  (eV / atom)
+DFT, T = 0
+TB, T = 0
+TB, T = 300 K, cl
+TB, T = 300 K, q
+Si vacancy
+N0 = 216
+tension
+compression
+FIG. 4. Energy per atom vs hydrostatic pressure P. The solid
+line and open circles represent the results obtained from DFT
+and TB calculations, respectively, at T = 0. Solid symbols
+indicate data from classical MD (squares) and PIMD simu-
+lations (diamonds) at T = 300 K. The labels “cl” and “q”
+denote “classical” and “quantum”, respectively.
+ining deviations between these energies, which would be
+identical in the purely harmonic limit. Anharmonic ef-
+fects are most pronounced in the PIMD results, as they
+persist down to low temperatures due to zero-point mo-
+tion.
+For a Si vacancy, our simulations yield a ratio
+Ekin/Epot = 0.96 at low T , decreasing to 0.92 at the
+highest temperatures considered. This corresponds to a
+diﬀerence between the kinetic and potential energies that
+grows from 4% to 8% with increasing temperature, high-
+lighting the increasing importance of anharmonicity.
+We now examine the evolution of the energy under hy-
+drostatic pressure P. In Fig. 4, we present the energy
+diﬀerence E −E0 as a function of P for a supercell with
+N0 = 216 and a Si vacancy (xv = 4.6 × 10−3). The solid
+curve and open circles correspond to energies obtained
+at T = 0 from DFT and TB calculations, respectively.
+In both cases, the reference energy is taken for the un-
+stressed solid (P = 0). The two data sets are in close
+agreement over a wide pressure range, including the en-
+tire interval shown in Fig. 4. The largest deviations be-
+tween both sets occur under tension (P < −30 GPa),
+where the TB energy is slightly higher than the DFT re-
+sult. For pressures approaching P ≈−36 GPa, near the
+mechanical stability limit of the material (spinodal point,
+where the bulk modulus B →0; see below), this trend
+reverses, with the TB energy becoming lower than the
+DFT energy.
+Solid symbols in Fig. 4 represent simulation results at
+T = 300 K. For the classical data, we observe an al-
+most rigid upward shift of 3kBT per atom, relative to the
+tight-binding results at zero temperature. This indicates
+that anharmonic contributions to the classical system
+energy are minimal in the pressure range considered at
+
+
+6
+T = 300 K. At P = 0, the PIMD simulations show an en-
+ergy increase δE = 51 meV/atom relative to the classical
+result. This diﬀerence rises to 56 meV/atom under com-
+pression at P = 60 GPa and decreases to 27 meV/atom
+under tension at P = −35 GPa. This behavior is primar-
+ily due to the increase of the mean phonon frequency ω
+with hydrostatic pressure, which enhances the diﬀerence
+δE between quantum and classical energies, particularly
+at relatively low temperatures.
+At low T , the rate of
+change of δE with pressure can be expressed as:
+∂(δE)
+∂P
+= 3ℏ
+2
+∂ω
+∂P ,
+(2)
+an expression that is generally positive, as shown below.
+The quantum zero-point expansion is governed by the
+anharmonicity of the vibrational modes.
+Within the
+quasi-harmonic approximation, each phonon mode con-
+tributes to the T = 0 crystal expansion through the
+product of its zero-point energy and the corresponding
+Gr¨uneisen parameter γω [74–76].
+One may also intro-
+duce an overall, mode-independent Gr¨uneisen parameter
+γ, deﬁned in terms of the mean frequency ω as [50, 77]:
+γ = −∂(log ω)
+∂(log V ) = −V
+ω
+∂ω
+∂V .
+(3)
+Using the deﬁnition of the isothermal bulk modulus, B =
+−V (∂P/∂V )T , Eq. (2) can be rewritten as
+∂(δE)
+∂P
+= 3ℏ
+2
+ω
+B γ ,
+(4)
+from which it follows that ∂(δE)/∂P > 0. Indeed, ω and
+B are strictly positive, and γ is generally positive as well;
+in particular, for cubic SiC one ﬁnds γ ∼1 [3, 8].
+We now compare the pressure dependence of the su-
+percell energy in the presence of a Si vacancy with that
+of the pristine crystal. In both cases, the energies are
+referenced to their corresponding absolute minima, i.e.,
+∆E = E −E0. At zero pressure and T = 300 K, the
+classical value of ∆E for the perfect crystal is approxi-
+mately 70 meV higher than for the defective supercell.
+This diﬀerence arises mainly from the thermal contribu-
+tion associated with the missing Si atom in the defective
+system at 300 K. In addition, a smaller residual contri-
+bution originates from the elastic energy induced by the
+thermal lattice expansion at ﬁnite temperature.
+Upon application of hydrostatic pressure, either com-
+pressive or tensile, the energy of the defective crystal
+increases more rapidly than that of the pristine mate-
+rial. Under compression, the diﬀerence between the two
+systems grows steadily with increasing pressure, reach-
+ing 0.53 eV/supercell at P = 50 GPa.
+This behav-
+ior indicates that the presence of the vacancy enhances
+the energetic cost of compressive deformation, reﬂecting
+the larger local lattice distortions induced around the
+defect site.
+A similar trend is observed under tensile
+stress, although the eﬀect becomes substantially more
+pronounced. In the negative-pressure regime, ∆E rises
+signiﬁcantly faster for the defective supercell than for the
+perfect crystal. For P = −38 GPa, which is close to the
+spinodal instability discussed below, the energy diﬀerence
+reaches 8.6 eV/supercell. The markedly stronger sensi-
+tivity of the vacancy-containing system to tensile strain
+suggests that the defect weakens the mechanical stability
+of the crystal under expansion, amplifying anharmonic
+lattice eﬀects and facilitating the onset of mechanical in-
+stability. Note that this trend of the pressure-induced
+changes in ∆E corresponds to the classical limit. Consid-
+ering both the defective and perfect crystal in the quan-
+tum model, we ﬁnd similar results, since in both cases
+the main contribution to the energy change comes from
+elastic deformations of the material, which are similar for
+the quantum and classical cases.
+B.
+Atomic mean-square displacements
+We present results for the mean-square displacement
+(MSD), (∆r)2 = ⟨r2⟩−⟨r⟩2, of C and Si atoms in
+vacancy-containing cubic silicon carbide, as obtained
+from our simulations.
+PIMD provides a framework to
+calculate atomic MSDs as a function of temperature, al-
+lowing us to distinguish between a classical (thermal)
+contribution and an intrinsically quantum contribution.
+Within the path-integral formalism, the classical part is
+associated with the motion of the center of gravity (cen-
+troid) of the quantum paths, whereas the quantum con-
+tribution is related to the mean spatial extent of the ring
+polymers that describe the quantum delocalization of the
+atomic nuclei.
+Fig. 5 shows the temperature dependence of the atomic
+MSDs derived from PIMD simulations. Results are pre-
+sented for (a) carbon and (b) silicon atoms in an SiC
+supercell with N0 = 216.
+For the C atoms, we ﬁnd
+markedly diﬀerent MSDs for nearest neighbors of the va-
+cancy (solid circles) and for atoms farther away in the su-
+percell (open squares), as expected from the additional
+free volume created by the missing Si atom at the va-
+cancy. In the low-T limit, we obtain square displacements
+(∆r)2 of 1.1 × 10−2 ˚A2 and 6.4 × 10−3 ˚A2, respectively,
+which correspond to zero-point motion.
+The ratio be-
+tween these two MSDs increases with temperature, from
+1.7 at low T to 2.0 at 1200 K. For comparison, the solid
+line in Fig. 5(a) indicates the MSD of C atoms in the
+defect-free solid, which lies close to that of C atoms far
+from the vacancy in the defective supercell.
+A similar trend is found for the MSD of Si atoms,
+shown in Fig. 5(b), where atomic displacements in the
+defective crystal become slightly larger than those in
+the perfect crystal with increasing temperature. Open
+squares in Fig. 5(b) correspond to MSD values obtained
+for a smaller supercell with N0 = 64. At low temper-
+ature, these results agree with those of the larger su-
+percell within the error bars. However, as the tempera-
+ture increases, the MSD calculated for N0 = 64 becomes
+
+
+7
+0
+200
+400
+600
+800
+1000
+Temperature  (K)
+0
+1
+2
+3
+4
+5
+10
+2 (∆ r)
+2   (Å
+2)
+defect-free  SiC 
+Si-vacancy  neighbor
+non-nearest neighbor
+(a)  C  atoms
+Si vacancy
+N0 = 216
+0
+200
+400
+600
+800
+1000
+Temperature  (K)
+0
+5
+10
+15
+20
+25
+10
+3 (∆ r)
+2    (Å
+2)
+SiC,  N0 = 216  
+VSi - N0 = 216
+VSi - N0 = 64
+Si  vacancy
+(b)  Si  atoms
+FIG. 5. Atomic mean-square displacement, (∆r)2, in defec-
+tive 3C-SiC as a function of temperature for (a) carbon and
+(b) silicon atoms. Symbols represent results of PIMD sim-
+ulations for a vacancy-containing supercell with N0 = 216.
+Solid circles in (a) correspond to C atoms nearest-neighbor
+of the vacancy, and open squares indicate the MSD of far-
+ther atoms. Solid circles in (b) indicarte averages of MSDs
+for all Si atoms in the defective supercell. Open squares in
+(b) denote the MSD of silicon atoms for N0 = 64 with an Si
+vacancy. Error bars are in the order of the symbol size. Solid
+lines in (a) and (b) corresppond to MSDs in defect-free cubic
+SiC. Dashed lines through the simulation data are guides to
+the eye.
+progressively smaller than that obtained for N0 = 216.
+This diﬀerence arises mainly from the contribution of
+long-wavelength vibrational modes that are present in
+the larger supercell but absent in the smaller one. In-
+deed, for a cubic supercell of linear size L, the maximum
+wavelength of the vibrational modes is eﬀectively limited
+by λmax ≈L, corresponding to a minimum wavenumber
+kmin = 2π/λmax, which scales as kmin ∼N −1/3
+0
+.
+The
+inﬂuence of the supercell size is most pronounced at high
+temperature, where quantum eﬀects become less impor-
+tant and atomic motion approaches the classical limit. A
+detailed analysis of this ﬁnite-size eﬀect for larger super-
+cells is beyond the scope of the present work, since a sys-
+tematic convergence study of ﬁnite-temperature MSDs
+remains computationally unaﬀordable within our PIMD
+framework.
+In contrast, we have veriﬁed the conver-
+gence of the lattice parameter a, as discussed below in
+Sec. III.C.
+The atomic MSDs discussed here are closely related
+to the kinetic energy presented in Sec. III.A. In fact, a
+larger MSD corresponds to a lower kinetic energy Ekin.
+In the language of the ring-polymer representation used
+in PIMD, a larger radius of gyration is associated with
+a smaller Ekin. This relationship can be understood in
+terms of Heisenberg’s uncertainty principle, as discussed
+below.
+For a quantum particle of mass M, the root-mean-
+square deviations of a coordinate x and its conjugate
+momentum px satisfy the inequality ∆x ∆px ≥ℏ/2 (see,
+e.g., Ref. [78]).
+Moreover, the kinetic energy, Ekin =
+⟨p2⟩/2M, may be written as
+Ekin = (∆p)2
+2M
+,
+(5)
+since in the absence of diﬀusion one has (∆p)2 = ⟨p2⟩−
+⟨p⟩2 = ⟨p2⟩, because ⟨p⟩= 0.
+From the uncertainty
+principle, one obtains
+(∆px)2 ≥
+ℏ2
+4(∆x)2 .
+(6)
+Taking into account that, for a cubic crystal, (∆x)2 =
+(∆y)2 = (∆z)2 = (∆r)2/3, and combining Eqs. (5) and
+(6), we arrive at
+Ekin ≥H ≡
+9ℏ2
+8M(∆r)2 ,
+(7)
+where H is a function of the atomic MSD.
+For a quantum particle in a given environment, the
+function H reaches its maximum value in the low-T
+limit, where (∆r)2 attains its minimum, corresponding
+to the zero-point MSD. Conversely, the kinetic energy
+Ekin approaches its minimum value as T →0. There-
+fore, the zero-temperature limit provides a consistency
+check of our results through Eq. (7). Such consistency
+has previously been veriﬁed for perfect solids, in partic-
+ular for silicon and carbon atoms in 3C-SiC [50]. From
+the results shown in Figs. 3 and 5(a) for C atoms neigh-
+boring an Si vacancy, we obtain at low temperature
+Ekin = 4.1 × 10−2 eV and (∆r)2 = 1.1 × 10−2 ˚A2,
+which yield a ratio Ekin/H = 1.15. The minimum pos-
+sible value of this ratio, Ekin/H = 1, is attained when
+∆x ∆px = ℏ/2 (and similarly for the other Cartesian co-
+ordinates), as realized for an isotropic three-dimensional
+
+
+8
+harmonic oscillator in the limit T →0. In solids, how-
+ever, the presence of a dispersion of vibrational frequen-
+cies leads to values of Ekin/H that are systematically
+larger than unity. For example, within a Debye model
+this ratio equals 9/8 = 1.125 in the low-T limit, inde-
+pendently of the Debye frequency ωD [79]. This value
+is close to that obtained here for C atoms adjacent to
+a VSi center, as well as for silicon and carbon atoms in
+defect-free 3C-SiC [50].
+The increased MSD of atoms neighboring the vacancy
+reﬂects a larger spatial extent of their quantum paths
+(i.e., larger radius of gyration in the PIMD representa-
+tion), which is a direct manifestation of zero-point motion
+in regions of reduced atomic coordination. Thus, vacan-
+cies not only perturb the classical lattice but also am-
+plify the quantum ﬂuctuations of nearby atoms. These
+enhanced quantum ﬂuctuations near defects can have sig-
+niﬁcant consequences for material properties. For exam-
+ple, the larger atomic delocalization may increase phonon
+scattering, reducing thermal conductivity in defect-rich
+regions, and facilitate defect-assisted diﬀusion by lower-
+ing the eﬀective barriers for atomic migration. Hence,
+understanding the MSD and quantum delocalization
+around vacancies is not only important for fundamen-
+tal insight, but also for predicting the thermomechani-
+cal and transport behavior of silicon carbide and related
+materials.
+Moreover, the quantum lattice ﬂuctuations
+revealed by our simulations may have implications for
+defect-based spin qubits associated with the silicon va-
+cancy in SiC. Since hyperﬁne couplings and spin-phonon
+interactions depend sensitively on the local atomic conﬁg-
+uration, nuclear quantum delocalization could contribute
+to the renormalization of these interactions and thereby
+aﬀect spin-decoherence mechanisms.
+C.
+Volume
+For the minimum-energy conﬁguration of the neutral
+silicon vacancy, the TB model employed in this work pre-
+dicts a defect structure exhibiting a C3v distortion, in
+agreement with the DFT results (see Sec. III.A). How-
+ever, the T = 0 calculations indicate that the energy
+diﬀerence between the C3v ground state and the higher-
+symmetry Td conﬁguration is very small, on the order
+of 10 meV. This near-degeneracy points to a shallow
+potential-energy landscape around the defect and sug-
+gests that a small thermal activation is required for the
+system to access symmetry-equivalent distorted conﬁgu-
+rations. At ﬁnite temperatures, both classical MD and
+PIMD simulations yield a thermally averaged structure
+with apparent Td symmetry. Such behavior is expected
+when the symmetry-lowering distortion is associated with
+an energy scale comparable to thermal ﬂuctuations. As
+the system evolves, it readily explores the equivalent C3v
+minima through thermally activated motion, and the re-
+sulting time-averaged atomic conﬁguration therefore re-
+covers the higher tetrahedral symmetry. The eﬀective Td
+symmetry observed in the ﬁnite-temperature simulations
+is maintained throughout the entire range of tempera-
+tures and hydrostatic pressures considered in this work.
+Our DFT calculations at T = 0 indicate that the pre-
+ferred conﬁguration of the VSi center depends on the
+applied pressure.
+The silicon vacancy is known to be
+metastable with respect to the VC-CSi complex, and at
+zero pressure both atom conﬁgurations are separated by
+an energy barrier of about 2 eV [25, 66, 72].
+Under
+compression, the trigonal distortion associated to VSi be-
+comes more pronounced, as one of the carbon nearest
+neighbors to the vacancy progressively approaches the
+remaining three coplanar C atoms.
+For P ≳55 GPa
+(a ≈4.0 ˚A), the VSi center is no longer a minimum on the
+potential-energy surface and relaxes into the VC-CSi con-
+ﬁguration. Thus, our DFT results suggest that the en-
+ergy barrier between both conﬁgurations decreases with
+increasing hydrostatic pressure, although quantifying its
+pressure dependence requires further thorough analysis.
+In any case, our DFT data indicate that the VSi conﬁgu-
+ration becomes unstable at a pressure close to that where
+3C-SiC ceases to be the thermodynamically stable phase
+of the material (P ∼60 GPa), and therefore does not
+directly aﬀect the present discussion, since we focus on
+the eﬀects of Si vacancies themselves on the properties of
+the cubic phase. Under tensile pressure, the tendency is
+opposite, as the trigonal conﬁguration progressively ap-
+proaches a tetrahedral one.
+We note that relatively small supercells may intro-
+duce interactions between periodically repeated vacan-
+cies, leading to a ﬁnite dispersion of defect-related states
+and inﬂuencing the local atomic relaxations. In this con-
+text, employing diﬀerent supercell sizes provides a direct
+means of probing vacancy-concentration eﬀects. In par-
+ticular, the 2 × 2 × 2 (N0 = 64) and 3 × 3 × 3 (N0 = 216)
+supercells correspond to substantially diﬀerent vacancy
+concentrations, allowing us to identify systematic trends
+in the calculated properties. To assess the convergence
+of the equilibrium lattice parameter predicted by the TB
+method at T = 0 K, we also considered systems con-
+taining N0 = 512 and 1000 sites, both for pristine and
+vacancy-containing crystals. For these larger supercells,
+we obtain the same value of a0 for the perfect crystal
+within the precision of our energy-minimization proce-
+dure.
+For supercells containing a single vacancy, the
+calculated lattice parameters are a0 = 4.3460 ˚A and
+4.3462 ˚A for N0 = 512 and 1000, respectively.
+These
+results, together with those obtained for smaller super-
+cells, indicate a linear dependence of a0 on the vacancy
+concentration xv. A similar behavior was found in DFT
+calculations of the lattice parameter at T = 0 K for
+N0 = 512, suggesting that the observed variations are
+primarily governed by the vacancy concentration rather
+than by ﬁnite-size eﬀects. This issue is further discussed
+below in connection with the crystal density at T = 0
+and 300 K.
+We now analyze the eﬀect of VSi centers on the crys-
+tal volume of 3C-SiC, as derived from TB data at ﬁ-
+
+
+9
+0
+200
+400
+600
+800
+1000
+1200
+Temperature  (K)
+4.34
+4.35
+4.36
+4.37
+4.38
+Lattice  parameter  (Å)
+No defects,  MD
+No defects,  PIMD
+Si vac.  MD
+Si vac.  PIMD
+FIG. 6.
+Temperature dependence of the lattice paramer a
+of 3C-SiC with a single silicon vacancy (xv = 0.016). Solid
+and open circles represent results of classical MD and PIMD,
+respectively. For comparison, data for defect-free silicon car-
+bide are shown as solid diamonds (classical MD) and open
+diamonds (PIMD). Dashed lines are guides to the eye.
+nite temperatures. In the following, we consider the va-
+cancy concentration as xv = nv/N0, where nv is the
+number of Si vacancies in the supercell.
+In Fig. 6 we
+show the temperature dependence of the lattice param-
+eter a of unstressed 3C-SiC, obtained for a simulation
+cell with N0 = 64, containing a single silicon vacancy
+(xv = 0.016). Symbols represent the results of our sim-
+ulations: solid circles correspond to classical MD, while
+open circles denote PIMD calculations. The lattice pa-
+rameter a obtained from classical simulations exhibits an
+almost linear dependence on T , with a slope ∂a/∂T that
+increases slightly with temperature.
+At low tempera-
+tures, a converges to a value a0 = 4.3421 ˚A, with a slope
+∂a/∂T = 2.2 × 10−5 ˚A/K. Around T = 1000 K the slope
+increases to 2.6 × 10−5 ˚A/K. In PIMD simulations (open
+circles), we obtain a larger lattice parameter, converging
+at low T to a = 4.352 ˚A. This corresponds to an increase
+of 0.01 ˚A due to zero-point expansion with respect to
+the classical result. Although this diﬀerence may appear
+small, it is much larger than the precision limit of lattice
+parameters of semiconductors that has been achieved for
+many years using diﬀraction techniques [80].
+For comparison with our results for defect-bearing SiC,
+Fig. 6 also includes data obtained from both types of
+molecular dynamics simulations for the ideal silicon car-
+bide crystal with N0 = 64 (diamonds). In the presence of
+a Si vacancy, we observe a reduction of the lattice param-
+eter a by 6×10−3 and 7×10−3 ˚A in the classical MD and
+PIMD results, respectively. This means a defect-induced
+linear strain ǫL = ∆a/a = −1.4 × 10−3 for the classical
+case and −1.6 × 10−3 for the quantum one. This diﬀer-
+ence in lattice parameters decreases as the vacancy con-
+-40
+-20
+0
+20
+40
+Pressure  (GPa)
+-5
+0
+5
+10
+15
+20
+10
+3 εL
+TB, N0 = 64, 300 K
+TB, N0 = 216, 300 K
+TB. N0 = 64, normalized
+DFT, N0 = 216, T = 0
+Si  vacancy
+tension
+compression
+FIG. 7. Pressure dependence of the strain ǫL = ∆a/a of sil-
+icon carbide with a Si vacancy at 300 K. Solid circles and
+squares are data points obtained from classical MD simula-
+tions for supercell size N0 = 64 and 216, respectively. Open
+diamonds represent the strain for N0 = 64 divided by the
+ratio 216/64 = 3.375. Error bars are in the order of the sym-
+bol size. The solid line corresponds to the DFT results for
+N0 = 216 at T = 0. Dashed lines are guides to the eye.
+centration is reduced. For N0 = 216 (xv = 4.6×10−3), it
+amounts to 2×10−3 ˚A for both types of simulations, with
+a defect-induced strain ∆a/a = −4.6 × 10−4, i.e., about
+three times smaller than that for N0 = 64.
+We note
+that quantum and classical results for the lattice param-
+eter converge to each other as temperature is raised, for
+both defect-free and vacancy-containing material, since
+in general quantum corrections become less relevant at
+high T .
+The linear strain in vacancy-containing SiC exhibits a
+pronounced dependence on applied pressure, with a par-
+ticularly strong response under tensile loading.
+Fig. 7
+shows the strain ǫL as a function of hydrostatic pressure
+obtained from classical MD simulations at T = 300 K:
+solid circles for N0 = 64 (xv = 0.016) and solid squares
+for N0 = 216 (xv = 4.6 × 10−3). Under negative pres-
+sure (tension), the strain increases rapidly, reaching val-
+ues of 0.017 and 5×10−3, respectively, at P = −38 GPa.
+Upon further increase in tensile stress, the material be-
+comes mechanically unstable and approaches the spin-
+odal point, at which the pressure derivative of the vol-
+ume (or, equivalently, of the lattice parameter) becomes
+arbitrarily large, i.e., (∂a/∂P)T →−∞. In contrast, un-
+der compressive pressure the strain decreases smoothly
+with increasing P, attaining at P = 50 GPa values of
+−5.1 × 10−3 and −1.4 × 10−3 for N0 = 64 and 216, re-
+spectively. A qualitatively similar pressure dependence
+of the strain is obtained from PIMD simulations. These
+results are systematically slightly larger than those ob-
+tained from classical MD, reﬂecting the inﬂuence of nu-
+clear quantum eﬀects. However, the diﬀerences between
+
+
+10
+the two datasets are small and remain almost indistin-
+guishable at the scale of Fig. 7.
+One observes from our MD simulations that, for a
+given pressure P, the strain ǫL is proportional to the
+defect concentration xv. In fact, the open diamonds in
+Fig. 7 correspond to the strain obtained for N0 = 64
+at several pressure values, divided by 3.375 (the ratio
+216/64). After this scaling, the data collapse onto the
+strain results for N0 = 216, conﬁrming the linear de-
+pendence on xv. An observable feature of the pressure
+dependence of the strain, shown in Fig. 7, is the sign
+change of ǫL as the applied pressure varies. Speciﬁcally,
+the strain is negative under compressive pressure and be-
+comes positive under tensile pressure. For our TB re-
+sults, this sign reversal is characterized by a relatively
+steep slope, ∂ǫL/∂P = −1.3 × 10−4 GPa−1, for N0 = 64.
+This behavior suggests that the pressure Pc, deﬁned by
+ǫL = 0, may depend sensitively on the particular compu-
+tational model employed, as well as on the temperature
+T . For the representative case T = 300 K, we obtain
+Pc = −9.9 GPa, independently of the defect concentra-
+tion xv.
+The solid line in Fig. 7 shows the strain ǫL obtained
+from our DFT calculations for N0 = 216 at T = 0. Over
+the entire pressure range considered, the DFT values are
+approximately 2 × 10−3 larger than the corresponding
+TB results for the same supercell size. A notable diﬀer-
+ence is that the DFT strain remains positive even at the
+highest compressive pressures investigated, whereas the
+TB values are negative for P > 0. The most likely origin
+of this discrepancy lies in the limitations of the TB de-
+scription under compression. Since the TB parametriza-
+tion was optimized to reproduce structural and electronic
+properties near equilibrium, it may not fully capture
+the pressure dependence of the local bonding environ-
+ment around the Si vacancy at positive pressures. While
+the TB model provides a reasonably accurate description
+of several pressure-dependent properties of the defective
+crystal, the quantity ǫL is determined by small diﬀerences
+in defect-induced lattice relaxations and is therefore par-
+ticularly sensitive to inaccuracies in the underlying inter-
+atomic interactions. We also note that zero-temperature
+TB calculations yield values of ǫL very similar to those
+obtained at T = 300 K and shown in Fig. 7. The dis-
+crepancy between the TB and DFT results is therefore
+not attributable to ﬁnite-temperature eﬀects.
+The pressure dependence of the strain, and in particu-
+lar the fact that ∂ǫL/∂P < 0, can be understood in terms
+of the pressure-induced changes of the lattice parameter
+in defect-free and vacancy-containing materials.
+For a
+cubic solid, one generally has
+∂a
+∂P = −a
+3B ,
+(8)
+where B denotes the bulk modulus. The relative changes
+in the lattice parameter a caused by the presence of va-
+cancies are smaller than the corresponding changes in B
+(see below), with the bulk modulus being reduced in the
+0
+0.01
+0.02
+0.03
+Vacancy  fraction  (xv)
+3.1
+3.15
+3.2
+Density  (g / cm
+3)
+Si  vacancies
+T = 300 K
+T =  0 K
+no relaxation
+PIMD
+FIG. 8. Density of 3C-SiC vs fraction of silicon vacancies.
+Data are given for T = 0 (energy minimization, circles) and
+300 K (classical MD simulations, squares; PIMD simulations,
+diamonds). Open and solid symbols correspond to supercell
+size N0 = 64 and 216, respectively.
+Solid lines are ﬁts to
+the classical data. A triangle indicates the density for xv =
+1.9 × 10−3 (N0 = 512) at T = 0 K. Error bars, when not
+shown, are on the order or smaller than the symbol size. The
+broken line represents the expected density in the absence of
+atomic relaxation around the vacancies at T = 300 K.
+defective material. Consequently, for a given pressure P,
+the derivative in Eq. (8) is more negative for vacancy-
+containing SiC. This directly leads to a negative pressure
+derivative of the strain.
+It is instructive to analyze the behavior of the crystal
+density ρ in the presence of vacancies. On the one hand,
+the density is expected to decrease due to the absence
+of Si atoms from their lattice sites; on the other hand,
+this reduction may be partially compensated by atomic
+relaxation in the vicinity of the vacancies. In Fig. 8 we
+show the dependence of the material density on the va-
+cancy concentration xv for P = 0. Circles represent the
+density at T = 0, as obtained from energy minimization,
+while squares correspond to values derived from classical
+MD simulations at T = 300 K. In both cases, open and
+solid symbols denote supercells with N0 = 64 (nv = 1
+and 2) and N0 = 216 (nv = 1, 2, and 3), respectively.
+The continuous lines are linear ﬁts to the classical data
+at T = 0 and 300 K. These lines are parallel over the
+range of vacancy concentrations investigated here, with
+a slope ∂ρ/∂xv = −4.0 g/cm3 per vacancy/site.
+It is worthwhile to comment on the origin of the error
+bars associated with the data points in Fig. 8.
+These
+uncertainties arise from two main sources. First, for va-
+cancy concentrations corresponding to more than one de-
+fect per supercell (nv > 1), the material density depends
+on the relative spatial arrangement of the Si vacancies.
+Second, there is the intrinsic statistical uncertainty asso-
+ciated with volume ﬂuctuations in the isothermal-isobaric
+
+
+11
+simulations performed at ﬁnite temperature. To quantify
+the eﬀect of vacancy arrangement, we considered ﬁve dif-
+ferent random conﬁgurations for each value of xv. The
+resulting dispersion in supercell volumes, together with
+the statistical ﬂuctuations, was used to estimate the error
+bars shown in Fig. 8. Overall, the results remain consis-
+tent with a linear dependence of the density on xv, as
+discussed above.
+In the absence of atomic relaxation in the vicinity of
+Si vacancies (i.e., assuming no change in volume), the
+density satisﬁes
+ρ(T )
+ρ0(T ) = 1 −nv
+MSi
+M0
+;
+(9)
+where ρ0(T ) denotes the density of the ideal crystal at
+temperature T . The quantity
+M0 = N0
+2 (MSi + MC)
+(10)
+represents the total atomic mass of the defect-free super-
+cell, with MSi and MC the atomic masses of Si and C,
+respectively. Eq. (9) can be rewritten as
+ρ(T ) = ρ0(T )
+
+1 −xv
+MSi
+⟨M⟩
+
+,
+(11)
+where ⟨M⟩= M0/N0 is the average atomic mass.
+The expected dependence of the density on xv at 300 K
+in the absence of atomic relaxation is shown in Fig. 8
+as a dashed line.
+In this limit, one has ∂ρ/∂xv =
+−ρ0 MSi/⟨M⟩, which for T = 300 K yields a value of
+−4.5 g/cm3 per vacancy/site. This slope is somewhat
+more negative than that obtained from the simulations.
+The discrepancy indicates that atomic relaxation in the
+vicinity of the vacancies induces a contraction of the ma-
+terial (i.e., an increase in density), which compensates
+approximately 11% of the density reduction associated
+with the decreased mass of the supercell due to the pres-
+ence of vacant sites.
+Within the framework of density analysis, nuclear
+quantum motion, or phonon quantization, is expected
+to reduce the density as a consequence of the lattice ex-
+pansion associated with such motion.
+Open and solid
+diamonds in Fig. 8 denote the densities obtained from
+PIMD simulations for Si vacancies in supercells with
+N0 = 64 and 216, respectively, at 300 K. At this tem-
+perature, we observe a reduction in density of approxi-
+mately 0.01 g/cm−3 relative to the corresponding classi-
+cal results. This decrease is essentially independent of the
+vacancy concentration xv within the range considered.
+D.
+Elastic constants
+In this section, we analyze the eﬀect of silicon vacan-
+cies on the elastic constants of 3C-SiC. The compliance
+elastic constants, Sij, are calculated at several tempera-
+tures by applying selected components of the stress ten-
+sor σij in isothermal-isobaric simulations. For example,
+when σxx̸ = 0 and all other stress components vanish
+(σij = 0 for ij̸ = xx), one obtains S11 = ǫxx/σxx and
+S12 = ǫyy/σxx, where ǫij are the components of the strain
+tensor extracted from classical MD or PIMD simulations
+[77, 81, 82]. To determine S44, a shear stress σxy is ap-
+plied, yielding S44 = ǫxy/σxy.
+The stiﬀness constants
+C11, C12, and C44 are then obtained from the compliance
+constants using the standard relations for cubic crystals
+[77, 81]:
+C11 =
+S11 + S12
+(S11 −S12)(S11 + 2S12) ,
+(12)
+C12 = −
+S12
+(S11 −S12)(S11 + 2S12) ,
+(13)
+C44 =
+1
+S44
+.
+(14)
+In Fig. 9, we show the temperature dependence of the
+stiﬀness elastic constants of 3C-SiC obtained from our
+simulations: (a) C11, (b) C12, and (c) C44. Solid and
+open circles correspond to results for vacancy-containing
+SiC (xv = 0.016) derived from classical MD (labeled “cl”)
+and PIMD simulations (labeled “q”), respectively. For
+comparison, the elastic constants of the perfect crystal
+are also included in Fig. 9 and are represented by dia-
+monds. Considering ﬁrst the results for the defect-free
+material, we ﬁnd that the classical elastic constants de-
+crease with increasing temperature, with slopes that be-
+come progressively less negative at higher T . The quan-
+tum results for all three elastic constants are system-
+atically lower than their classical counterparts and ap-
+proach the zero-temperature limit with a vanishing slope
+(∂Cij/∂T →0 as T →0).
+Looking at the results for the vacancy-containing ma-
+terial (circles in Fig. 9), we observe that C12 behaves
+similarly to the perfect crystal, following the trend seen
+in both classical and quantum data. In contrast, C11 and
+C44 exhibit an increase with temperature up to approxi-
+mately 400 K, a behavior that is barely noticeable for the
+classical C44 in Fig. 9(c). Overall, nuclear quantum ef-
+fects reduce the stiﬀness constants of the defective solid,
+particularly at low temperatures, in a manner analogous
+to the ideal crystal.
+Comparing the values of Cij for the defective and per-
+fect solid, we ﬁnd that the former exhibit an appreciable
+reduction in C11 and C44 due to the presence of Si va-
+cancies, relative to the perfect crystal. Examining the
+low-temperature classical results for a defect concentra-
+tion of xv = 0.016, we observe decreases of 23% and 18%
+for C11 and C44, respectively. In contrast, C12 increases
+in the presence of VSi centers, rising by 17% compared
+to the defect-free material in the classical low-T limit.
+A similar trend in the changes of the stiﬀness constants
+was reported by Fan et al.
+[32] based on DFT calcu-
+lations at zero temperature for xv = 0.016: they found
+decreases in C11 and C44 along with an increase in C12
+relative to the perfect crystal. The increase in C12 in our
+results (17%) is somewhat larger than that reported in
+
+
+12
+0
+200
+400
+600
+800
+1000
+Temperature  (K)
+320
+360
+400
+440
+Elastic  constant  (GPa)
+C11
+cl
+q
+cl
+q
+defect-free SiC
+Si  vacancy
+(a)
+0
+200
+400
+600
+800
+1000
+Temperature  (K)
+100
+120
+140
+160
+Elastic  constant  (GPa)
+Si  vacancy, cl
+Si  vacancy, q
+defect-free SiC, cl
+defect-free SiC, q
+C12
+(b)
+defect-free  SiC
+Si  vacancy
+0
+200
+400
+600
+Temperature  (K)
+200
+220
+240
+260
+Elastic  constant  (GPa)
+C44
+(c)
+defect-free SiC
+Si  vacancy
+cl
+q
+cl
+q
+FIG. 9. Temperature dependence of the stiﬀness elastic con-
+stants of vacancy-containing 3C-SiC: (a) C11, (b) C12, (c)
+C44, as derived from classical MD (solid circles) and PIMD
+simulations (open circles). For comparsison, solid and open
+diamonds represent outcomes of MD and PIMD simulations
+for defect-free SiC, respectively. The labels “cl” and “q” de-
+note “classical” and “quantum”, respectively. Error bars are
+in the order of the symbol size. Dashed lines are guides to
+the eye.
+those ab initio calculations (11%). The dependence of
+the stiﬀness constants on vacancy concentration in cu-
+bic SiC has also been investigated in Ref. [30] using MD
+simulations. These authors did not observe a rise in C12
+for the vacancy-containing material, but rather a slight
+decrease.
+It is instructive to analyze the relationship between
+the temperature dependence of the elastic constants and
+the atomic MSD discussed above. On the one hand, the
+classical results for the stiﬀness constants Cij display
+an approximately linear behavior at low T , associated
+with a linear increase in the MSD (∆r)2 as temperature
+rises.
+On the other hand, the low-T elastic constants
+derived from PIMD simulations are reduced relative to
+the classical values due to nuclear quantum motion. In
+this case, the temperature derivative tends to zero in the
+zero-temperature limit, i.e., ∂Cij/∂T →0 as T →0. At
+higher temperatures, the classical and quantum results
+for Cij progressively converge, mirroring the analogous
+convergence observed in the MSD [50]. A similar behav-
+ior is found for the bulk modulus in both classical and
+quantum simulations, as discussed below in Sec. III.E.
+In the context of elastic properties, the Poisson’s ratio,
+ν, characterizes the relationship between transverse and
+longitudinal strains under an applied stress. For cubic
+SiC, it is calculated as ν = −S12/S11 [10].
+At T →
+0, our classical simulations of defective SiC yield ν =
+0.33, compared to ν = 0.30 from low-temperature PIMD
+data.
+This indicates that zero-point quantum motion
+reduces the Poisson ratio by approximately 9%. As the
+temperature increases, ν decreases in both classical and
+quantum simulations. At T = 1000 K, the classical and
+quantum values converge to ν = 0.26, with diﬀerences
+within error bars.
+For comparison, we note that applying the same proce-
+dure to defect-free SiC at low temperature yields a Pois-
+son’s ratio of ν = 0.24 [50], which is lower than the value
+obtained for the defective material. The increase in ν in
+the presence of VSi defects is related to the decrease in
+C11 and the increase in C12 observed in Fig. 9 relative
+to the perfect solid. Indeed, using Eqs. (12) and (13),
+one has ν = C12/(C11 + C12). A similar increase in ν
+for vacancy-containing SiC has been reported by Rabiee
+et al. [30] from MD simulations using the empirical Ter-
+soﬀpotential, as well as by Qin et al. [26] and Fan et
+al.
+[32] from DFT calculations. The elastic constants
+and Poisson’s ratio discussed here correspond to a rel-
+atively high vacancy concentration (xv = 0.016), which
+produces signiﬁcant changes relative to the perfect solid.
+To ﬁrst order, these corrections scale linearly with xv, as
+observed for the material density in Fig. 8 and for the
+bulk modulus discussed below in Sec. III.E.
+E.
+Bulk modulus
+In this section, we focus on the isothermal bulk mod-
+ulus, B = −V (∂P/∂V )T , with particular emphasis on
+
+
+13
+0
+200
+400
+600
+800
+1000
+Temperature  (K)
+190
+200
+210
+220
+230
+240
+250
+Bulk  modulus  (GPa)
+vol. fluct., MD
+vol. fluct., PIMD
+elast. const., MD
+Si  vacancy
+defect-free
+SiC
+cl
+q
+FIG. 10.
+Temperature dependence of the bulk modulus of
+3C-SiC with a single silicon vacancy (xv = 0.016), obtained
+from the volume ﬂuctuations by using Eq. (15).
+Solid cir-
+cles and squares represent results drived from classical MD
+(denoted as “cl”) and PIMD simulations (denoted as “q”),
+respectively. Open diamonds indicate data for the classical
+bulk modulus calculated from the elastic constants by means
+of Eq.(16).
+The solid line represents the results for a per-
+fect 3C-SiC crystal found from classical MD simulations [50].
+Dashed lines are guides to the eye.
+its dependence on temperature, pressure, and vacancy
+concentration. An alternative to evaluating B through
+the volume derivative of the pressure is provided by the
+ﬂuctuation formula [83]:
+B = kBT V
+(∆V )2 ,
+(15)
+where V denotes the volume of the simulation cell and
+(∆V )2 are the mean-square volume ﬂuctuations. This
+expression is especially well suited for atomistic simula-
+tions performed in the isothermal-isobaric ensemble, as
+it avoids the need to compute numerical derivatives from
+data obtained at diﬀerent volumes or pressures.
+In Fig. 10 we show the temperature dependence of the
+bulk modulus B for cubic SiC containing a silicon va-
+cancy (xv = 0.016), as obtained from Eq. (15).
+Solid
+circles and squares denote results from classical MD and
+PIMD simulations, respectively. The classical data ex-
+hibit an almost linear decrease of B at low temperatures,
+characterized by a sizeable slope ∂B/∂T , which becomes
+progressively less negative as the temperature increases.
+At T = 1000 K, B is reduced by approximately 15% rel-
+ative to its low-temperature value. When nuclear quan-
+tum eﬀects are included, B is further reduced with re-
+spect to the classical results, most noticeably at low tem-
+peratures. In the limit T →0, this reduction amounts to
+16(1) GPa, corresponding to a 7% decrease of the bulk
+modulus due to atomic zero-point motion. As the tem-
+perature rises, the two data sets converge, and their dif-
+ference falls below 1% at T = 1000 K.
+The solid curve in Fig. 10 represents the temperature
+dependence of the bulk modulus of defect-free 3C-SiC,
+obtained from classical MD simulations using the same
+TB approach. By comparing this curve with the classi-
+cal results for the vacancy-containing system, we observe
+a systematic reduction of B over the entire temperature
+range due to the presence of a silicon vacancy. This de-
+crease amounts to 20(1) GPa at low temperatures and
+remains sizable, 16(1) GPa, at T = 1000 K.
+To elucidate the low-temperature behavior of B, as
+obtained from both classical MD and PIMD simulations
+using Eq. (15), we recall that the mean-square volume
+ﬂuctuations scale as (∆V )2 ∼T . That is, at low tem-
+peratures they increase linearly with T in both classical
+and quantum treatments [50].
+Consequently, the tem-
+perature dependence of B(T ) is largely governed by the
+behavior of the volume V (T ). In the classical limit, V
+increases linearly with T , whereas in the quantum case
+one ﬁnds ∂V/∂T →0 for T →0, as required by the
+third law of thermodynamics (vanishing thermal expan-
+sion). According to Eq. (15), this implies, to ﬁrst order,
+a linear dependence of B on T in classical simulations,
+while ∂B/∂T →0 for the PIMD results, in agreement
+with the third law [84, 85]. We note that this thermody-
+namic requirement is not fulﬁlled by the classical data,
+for which ∂B/∂T < 0 persists down to the lowest temper-
+atures. Finally, inspection of Eq. (15) together with the
+bulk modulus obtained from our simulations shows that
+the reduction of B due to nuclear quantum eﬀects at low
+temperatures is associated with an increase in the volume
+ﬂuctuations (∆V )2 relative to the classical case.
+This
+increase is proportionally larger than the corresponding
+increase in the average volume V .
+The isothermal bulk modulus can also be obtained
+from the elastic constants through an expression valid
+for cubic crystals [77, 81, 86]:
+B = C11 + 2 C12
+3
+.
+(16)
+Open diamonds in Fig. 10 denote classical values of B cal-
+culated using Eq. (16). These results are in close agree-
+ment with those derived from the ﬂuctuation formula in
+Eq. (15), providing a consistency check for our calcula-
+tions.
+We now turn to the dependence of B on the vacancy
+concentration xv in silicon carbide. Fig. 11 displays the
+bulk modulus as a function of xv for T = 0 (minimum-
+energy conﬁgurations, squares) and for T = 300 K (clas-
+sical MD simulations, circles). Results are shown for su-
+percells with N0 = 64 (solid symbols) and 216 (open
+symbols). Dashed lines represent linear ﬁts to the data
+of the form B = B(0) + b xv, where B(0) is the bulk
+modulus of the perfect crystal. The ﬁtted parameter b is
+1155(50) and 1190(50) GPa per vacancy/site for T = 0
+and 300 K, respectively. Within the uncertainty of both
+the data points and the ﬁtted parameters, the two B(xv)
+lines are nearly parallel.
+As a consequence, for a va-
+
+
+14
+0
+0.01
+0.02
+0.03
+Vacancy  fraction   (xv)
+180
+200
+220
+240
+Bulk  modulus  (GPa)
+T = 0
+Si vacancies
+T = 300 K
+P = 0
+cl
+q
+FIG. 11. Bulk modulus of 3C-SiC vs fraction of silicon va-
+cancies. Data are given for T = 0 (energy minimization) and
+at T = 300 K for classical MD (circles, denoted as “cl”) and
+PIMD simulations (diamonds, denoted as “q”).
+Solid and
+open symbols are data points for supercell size N0 = 64 and
+216, respecively. Error bars, when not shown, are on the or-
+der or smaller than the symbol size. Dashed lines are ﬁts to
+the data points.
+cancy concentration xv = 0.01 we ﬁnd a reduction of
+the bulk modulus of approximately 12 GPa, correspond-
+ing to about 5% of B(0). A further reduction in B is
+found from PIMD simulations of defective silicon carbide
+at T = 300 K, as shown in Fig. 11 for various vacancy
+concentrations xv (diamonds).
+The bulk modulus de-
+creases monotonically with increasing xv, following the
+same qualitative trend observed in the classical simula-
+tions. Quantum nuclear ﬂuctuations additionally soften
+the material, yielding lower values of B throughout the
+studied concentration range. The dependence on vacancy
+concentration remains approximately linear and is char-
+acterized by a slope parameter b = 1140(60) GPa per
+vacancy/site, similar to the values reported above.
+For comparison, a linear ﬁt to the DFT results for
+B(xv) yields a slope parameter of b = 890 GPa per
+vacancy/site, somewhat smaller than the corresponding
+TB value. The signiﬁcance of this diﬀerence is, however,
+limited by the small number of vacancy concentrations
+that can be explored with DFT calculations. As a con-
+sequence, it is diﬃcult to assign a reliable uncertainty to
+the DFT-derived value of b and to assess quantitatively
+the discrepancy between both approaches. Nevertheless,
+the lower DFT value can be plausibly attributed to its
+more accurate treatment of the local atomic relaxations
+around vacancies. These relaxations tend to redistribute
+and partially delocalize the strain ﬁeld induced by the de-
+fects, thereby reducing their impact on the macroscopic
+elastic response. In contrast, the more localized bond-
+ing description inherent to the TB model may enhance
+the apparent stiﬀness reduction associated with each va-
+cancy, leading to a larger value of b.
+As
+discussed
+previously
+for
+the
+crystal
+density
+(Sec. III.C and Fig. 8), the bulk modulus B at a given
+defect fraction xv may also depend on the speciﬁc spa-
+tial arrangement of the Si vacancies in conﬁgurations
+with nv > 1.
+Although our results do not reveal a
+strong sensitivity to the defect distribution, a measur-
+able dependence on the vacancy arrangement is never-
+theless observed. This eﬀect contributes additional vari-
+ability beyond the statistical ﬂuctuations associated with
+the isothermal-isobaric ensemble employed in the simu-
+lations, thereby increasing the resulting error bars.
+At this point, we note that the Si vacancy concen-
+trations realized in our supercell calculations are neces-
+sarily higher than those typically encountered in exper-
+imental samples. This is a general limitation of ﬁnite-
+temperature defect simulations with TB-derived inter-
+actions, where computational cost restricts the accessi-
+ble supercell sizes. As a consequence, residual interac-
+tions between periodically repeated vacancies may in-
+crease the magnitude of the calculated defect-induced
+modiﬁcations, particularly for elastic properties.
+Nev-
+ertheless, the structural perturbation associated with an
+isolated Si vacancy remains relatively localized, suggest-
+ing that the trends obtained here are representative of the
+dilute-defect regime. In the low-concentration limit, the
+variation of elastic constants is expected to scale approxi-
+mately linearly with vacancy concentration. The present
+results may therefore be regarded as ﬁnite-concentration
+reference values that can be extrapolated toward exper-
+imentally relevant concentrations. This interpretation is
+further supported by the nearly linear behavior obtained
+in our calculations where the relative changes in the elas-
+tic response remain proportional to xv within the statis-
+tical uncertainty of the simulations. Such behavior in-
+dicates that, in this regime, collective vacancy-vacancy
+eﬀects are still limited and the calculated elastic soften-
+ing is primarily governed by the local perturbation intro-
+duced by individual defects.
+The linear trend obtained above for B as a function
+of xv can be used for an estimation of vacancy-induced
+changes in the bulk modulus under experimentally ac-
+cessible conditions, where the defect concentration is ex-
+pected to remain in the dilute regime. Thus, our result
+∂B/∂xv ≈1200 GPa per vacancy/site deﬁnes a quanti-
+tative reference for such estimations. This suggests that
+Si vacancies may contribute to the elastic response of
+SiC in irradiated or nonstoichiometric samples, particu-
+larly in situations where defect accumulation occurs dur-
+ing growth, implantation, or prolonged operation under
+extreme conditions. This discussion concerning the ex-
+trapolation of bulk-modulus variations toward the dilute-
+defect limit can also be extended to other physical prop-
+erties of the crystal, such as the density ρ shown in Fig. 8.
+In this case, the calculated dependence on vacancy con-
+centration is likewise approximately linear within the ex-
+plored range (see Sec. III.C).
+We now examine the dependence of the bulk modulus
+
+
+15
+-40
+-20
+0
+20
+40
+Pressure  (GPa)
+0
+100
+200
+300
+Bulk  modulus  (GPa)
+Si vac, DFT, T = 0
+defect-free, SiC, cl
+Si vacancy, cl
+T = 300 K
+tension
+compression
+FIG. 12. Bulk modulus of defective 3C-SiC (xv = 0.016), as
+derived from classical MD at T = 300 K for several hydro-
+static pressures (open circles). The dashed line through the
+data points is a guide to the eye. Solid squares represent the
+bulk moduluus of perfect 3C-SiC, obtained from classical MD
+simulations [50]. Results of DFT calculations at T = 0 are
+presented as a continuous curve.
+of vacancy-containing 3C-SiC on the hydrostatic pressure
+P. The results are shown in Fig. 12, where both tensile
+(P < 0) and compressive (P > 0) regimes are consid-
+ered. Open circles correspond to classical MD simula-
+tions performed at T = 300 K for a vacancy concentra-
+tion xv = 0.016. Results from PIMD simulations at this
+temperature are almost indistinguishable from the clas-
+sical ones at the scale of the ﬁgure and are therefore not
+shown. The TB results at T = 0 are slightly larger than
+the classical values at T = 300 K and are omitted for clar-
+ity. For comparison, we include the pressure dependence
+of the bulk modulus for the ideal crystal, obtained from
+classical MD simulations (solid squares) at 300 K [50].
+As expected, these values are systematically higher than
+those for vacancy-containing SiC over the entire pressure
+range considered. The solid line in Fig. 12 represents the
+evolution of B with pressure, as derived from our T = 0
+DFT calculations, and lies close to the TB results for the
+defective material at 300 K.
+As in the defect-free crystal, vacancy-containing SiC
+exhibits a rapid decrease of B with increasing tensile
+pressure, eventually vanishing at pressures close to P ≈
+−40 GPa. This behavior signals the onset of mechan-
+ical instability.
+Speciﬁcally, for xv = 0.016 at 300 K,
+we obtain a spinodal pressure of Ps = −39(1) GPa,
+compared to Ps = −43 GPa for the perfect crystal
+(xv = 0) [7].
+Thus, the presence of vacancies reduces
+the stability region by approximately 4 GPa at this de-
+fect concentration. In the vicinity of the spinodal pres-
+sure, the bulk modulus follows the expected scaling law
+B ∼(P −Ps)1/2, with a diverging derivative ∂B/∂P
+at Ps, in agreement with thermodynamic predictions
+[7].
+In Sec. III.A we assumed a spinodal pressure of
+Ps = −39 GPa for a vacancy concentration of xv = 0.016
+at 300 K, consistent with the divergence observed in the
+slope of the energy-pressure curve.
+This value of Ps
+agrees with the extrapolation of the bulk modulus B to
+zero under tensile conditions at this temperature.
+In the present context, the term “spinodal” does not
+refer to phase separation in the classical thermodynamic
+sense (as in a binary mixture driven by compositional
+ﬂuctuations). Rather, it denotes the mechanical stabil-
+ity limit associated with the loss of convexity of the free
+energy with respect to volume or strain, i.e., the point
+at which ∂2F/∂V 2 = 0 (F being the Helmholtz free en-
+ergy [84]). At this point, the bulk modulus B vanishes,
+marking the emergence of mechanical instability. Conse-
+quently, at the spinodal pressure the solid can no longer
+sustain increasing tensile stress and becomes unstable
+with respect to strain ﬂuctuations. In our atomistic sim-
+ulations, the vicinity of the spinodal pressure Ps is char-
+acterized by pronounced volume ﬂuctuations, which may
+lead to crystal breakdown and, ultimately, to fragmenta-
+tion.
+This behavior is related to the calculations of the ten-
+sile strength of defective 3C-SiC reported by Li and Xiao
+[29], who performed MD simulations of large supercells
+subjected to uniaxial stress. The tensile strength mea-
+sures the maximum stress (or strain) that a material can
+sustain before mechanical failure. For the defect-free ma-
+terial, these authors found a tensile strength of about
+90 GPa, close to the stability limit under uniaxial pres-
+sure obtained in our previous study [37]. For silicon car-
+bide containing VSi defects, they observed a signiﬁcant
+decrease in tensile strength with increasing vacancy con-
+centration xv. For xv = 0.016, we estimate from their re-
+sults a reduction of the tensile strength of approximately
+10 GPa. Dividing this value by a factor of 3 to obtain
+the corresponding hydrostatic pressure component asso-
+ciated to the uniaxial stress allows a direct comparison
+with the shift of 4 GPa found in our calculations of Ps,
+showing reasonable agreement between both results.
+IV.
+SUMMARY
+This paper presents a theoretical investigation of the
+structural and elastic properties of 3C-SiC containing sil-
+icon vacancies, with particular emphasis on the role of
+nuclear quantum eﬀects and the mechanical stability of
+the material under tensile stress. Silicon carbide is widely
+used in electronic and structural applications, and Si va-
+cancies have recently gained attention due to their rel-
+evance for quantum technologies.
+Understanding how
+these defects inﬂuence the mechanical response of SiC is
+therefore of both fundamental and technological impor-
+tance.
+The study is based on classical and path-integral
+molecular dynamics simulations employing a validated
+tight-binding Hamiltonian. This combined approach al-
+
+
+16
+lows for a consistent comparison between classical be-
+havior and quantum nuclear motion arising from zero-
+point ﬂuctuations. Structural and elastic properties are
+analyzed over a wide range of temperatures and hydro-
+static pressures, including both compressive and tensile
+regimes.
+The presence of Si vacancies is found to signiﬁcantly
+modify the elastic response of 3C-SiC. In particular, the
+elastic constants C11 and C44, as well as the bulk mod-
+ulus, are reduced compared to those of the defect-free
+crystal, and an increase is found for C12. These changes
+reﬂect the local lattice distortions induced by vacancies
+and the resulting weakening of interatomic bonding. Nu-
+clear quantum motion further causes reductions in all
+cases, especially at low temperatures, where zero-point
+motion leads to additional lattice softening.
+A central result of this work concerns the mechani-
+cal stability of vacancy-containing 3C-SiC under tensile
+pressure. The bulk modulus decreases rapidly with in-
+creasing tension and vanishes at a spinodal pressure that
+deﬁnes the limit of mechanical stability: Ps = −39 GPa
+for xv = 0.016 at 300 K. The presence of Si vacancies
+shifts this spinodal pressure toward less negative values,
+reducing the stability region of the material.
+For the
+vacancy concentrations considered, the maximum sus-
+tainable tensile pressure is lowered by several gigapas-
+cals compared to the ideal crystal.
+Near the stability
+limit, large volume ﬂuctuations are observed, indicating
+the onset of mechanical instability and eventual struc-
+tural breakdown.
+In summary, we have shown that silicon vacancies in-
+duce appreciable modiﬁcations of the elastic constants
+and bulk modulus of cubic 3C-SiC, and that nuclear
+quantum motion further softens these properties, espe-
+cially at low temperatures.
+Vacancies also reduce the
+maximum sustainable tensile pressure, altering the me-
+chanical stability domain of the crystal. These ﬁndings
+provide a quantitative framework for understanding the
+interplay between point defects and lattice mechanics
+in SiC. Moreover, the quantum-induced lattice ﬂuctua-
+tions identiﬁed here may have implications for defect-
+based spin qubits: since hyperﬁne couplings and spin-
+phonon interactions are sensitive to the local atomic envi-
+ronment, nuclear quantum delocalization could inﬂuence
+spin relaxation and decoherence mechanisms in silicon-
+vacancy centers.
+ACKNOWLEDGMENTS
+R. Ram´ırez is gratefully acknowledged for insightful
+discussions on the physical properties of silicon carbide
+and for his valuable support with the simulation codes.
+This work was funded by the Ministerio de Ciencia,
+Innovaci´on y Universides (Spain) under Grant PID2022-
+139776NB-C66 and by the “Severo Ochoa Centres of
+Excellence” program under Grant CEX2024-001445-S.
+We also acknowledge the CINECA award within the
+ISCRA initiative (Italy) for providing high-performance
+computing resources and technical support.
+Data availability
+The data that support the ﬁndings of this article are
+openly available [87].
+[1] Xu She, Alex Q. Huang, Oscar Lucia,
+and Burak
+Ozpineci, “Review of silicon carbide power devices and
+their applications,” IEEE Trans. Ind. Electron. 64, 8193–
+8205 (2017).
+[2] E. Papanasam, Prashanth B. Kumar, B. Chanthini,
+E. Manikandan,
+and Lucky Agarwal, “A comprehen-
+sive review of recent progress, prospect and challenges of
+silicon carbide and its applications,” Silicon 14, 12887–
+12900 (2022).
+[3] Dinesh Varshney, S. Shriya, M. Varshney, N. Singh, and
+R. Khenata, “Elastic and thermodynamical properties of
+cubic (3C) silicon carbide under high pressure and high
+temperature,” J. Theor. Appl. Phys. 9, 221–249 (2015).
+[4] Zheng Ran, Chunming Zou, Zunjie Wei, Hongwei Wang,
+Rong Zhang,
+and Ning Fang, “Phase transitions and
+elastic anisotropies of SiC polymorphs under high pres-
+sure,” Ceram. Inter. 47, 6187–6200 (2021).
+[5] Pilar Pertierra, Miguel A. Salvado, Ruth Franco,
+and
+J. Manuel Recio, “Pressure and temperature stability
+boundaries of cubic SiC polymorphs: a ﬁrst-principles in-
+vestigation,” Phys. Chem. Chem. Phys. 24, 16228–16236
+(2022).
+[6] F. Shimojo, I. Ebbsjo, R. K. Kalia, A. Nakano, J. P.
+Rino,
+and P. Vashishta, “Molecular dynamics simula-
+tion of structural transformation in silicon carbide under
+pressure,” Phys. Rev. Lett. 84, 3338–3341 (2000).
+[7] C. P. Herrero, R. Ram´ırez, and G. Herrero-Saboya, “Cu-
+bic silicon carbide under tensile pressure: Spinodal insta-
+bility,” Chem. Phys. 573, 112005 (2023).
+[8] K. K. Zhuravlev,
+Alexander
+F. Goncharov,
+S. N.
+Tkachev, P. Dera, and V. B. Prakapenka, “Vibrational,
+elastic, and structural properties of cubic silicon carbide
+under pressure up to 75 GPa: Implication for a primary
+pressure scale,” J. Appl. Phys. 113, 113503 (2013).
+[9] D. H. Lee and J. D. Joannopoulos, “Simple scheme for de-
+riving atomic force-constants - application to SiC,” Phys.
+Rev. Lett. 48, 1846–1849 (1982).
+[10] W R L Lambrecht, B Segall, M Methfessel, and M Van-
+schilfgaarde, “Calculated elastic-constants and deforma-
+tion potentials of cubic SiC,” Phys. Rev. B 44, 3685–3694
+(1991).
+[11] C.
+Nisr,
+Y.
+Meng,
+A.
+A.
+MacDowell,
+J.
+Yan,
+V. Prakapenka,
+and S. H. Shim, “Thermal expansion
+of SiC at high pressure-temperature and implications for
+
+
+17
+thermal convection in the deep interiors of carbide exo-
+planets,” J. Geophys. Res. Planets 122, 124–133 (2017).
+[12] Kierstin Daviau and Kanani K. M. Lee, “High-pressure,
+high-temperature behavior of silicon carbide: A review,”
+Crystals 8, 217 (2018).
+[13] William F. Koehl, Bob B. Buckley, F. Joseph Heremans,
+Greg Calusine, and David D. Awschalom, “Room tem-
+perature coherent control of defect spin qubits in silicon
+carbide,” Nature 479, 84–U108 (2011).
+[14] Z. Shang, A. Hashemi, Y. Berencen, H-P Komsa, P. Er-
+hart, S. Zhou, M. Helm, A. Krasheninnikov, V,
+and
+G. Astakhov, V, “Local vibrational modes of Si vacancy
+spin qubits in SiC,” Phys. Rev. B 101, 144109 (2020).
+[15] Peter Udvarhelyi,
+Gergo
+Thiering,
+Naoya Morioka,
+Charles Babin, Florian Kaiser, Daniil Lukin, Takeshi
+Ohshima, Jawad Ul-Hassan, Nguyen Tien Son, Jelena
+Vuckovic, Jorg Wrachtrup,
+and Adam Gali, “Vibronic
+states and their eﬀect on the temperature and strain
+dependence of silicon-vacancy qubits in 4H-SiC,” Phys.
+Rev. App. 13, 054017 (2020).
+[16] Matthias Widmann, Matthias Niethammer, Dmitry Yu.
+Fedyanin, Igor A. Khramtsov, Torsten Rendler, Ian D.
+Booker, Jawad Ul Hassan, Naoya Morioka, Yu-Chen
+Chen,
+Ivan G. Ivanov,
+Nguyen Tien Son,
+Takeshi
+Ohshima, Michel Bockstedte, Adam Gali, Cristian Bon-
+ato, Sang-Yun Lee,
+and Joerg Wrachtrup, “Electrical
+charge state manipulation of single silicon vacancies in
+a silicon carbide quantum optoelectronic device,” Nano
+Lett. 19, 7173–7180 (2019).
+[17] L. Gordon, A. Janotti, and C. G. Van de Walle, “Defects
+as qubits in 3C- and 4H-SiC,” Phys. Rev. B 92, 045208
+(2015).
+[18] Viktor Ivady, Joel Davidsson, Nguyen Tien Son, Takeshi
+Ohshima, Igor A. Abrikosov, and Adam Gali, “Identiﬁ-
+cation of Si-vacancy related room-temperature qubits in
+4H silicon carbide,” Phys. Rev. B 96, 161114 (2017).
+[19] Elizabeth M. Y. Lee, Alvin Yu, Juan J. de Pablo,
+and
+Giulia Galli, “Stability and molecular pathways to the
+formation of spin defects in silicon carbide,” Nature Com-
+mun. 12, 6325 (2021).
+[20] Tommaso Fazio, Ioannis Deretzis, Giuseppe Fisicaro,
+Elisabetta Paladino, and Antonino La Magna, “Stabil-
+ity and decoherence analysis of the silicon vacancy in
+3C-SiC,” Phys. Rev. A 109, 022603 (2024).
+[21] Cunzhi Zhang, Francois Gygi,
+and Giulia Galli, “En-
+gineering the formation of spin-defects from ﬁrst princi-
+ples,” Nature Commun. 14, 5985 (2023).
+[22] P De´ak, J Mir´o, A Gali, L Udvardi, and H Overhof, “The
+spin state of the neutral silicon vacancy in 3C-SiC,” Appl.
+Phys. Lett 75, 2103–2105 (1999).
+[23] M Bockstedte, A Mattausch,
+and O Pankratov, “Ab
+initio study of the migration of intrinsic defects in 3C-
+SiC,” Phys. Rev. B 68, 205201 (2003).
+[24] R Rurali, E Hern´andez, P Godignon, J Rebollo,
+and
+P Ordej´on, “First principles studies of neutral vacancies
+diﬀusion in SiC,” Comp. Mater. Sci. 27, 36–42 (2003).
+[25] Peter A. Schultz,
+Renee M. Van Ginhoven,
+and
+Arthur H. Edwards, “Theoretical study of intrinsic de-
+fects in cubic silicon carbide 3C-SiC,” Phys. Rev. B 103,
+195202 (2021).
+[26] Yiming Qin, Ce Zheng, Hongru Jin, ShanShan Xu,
+Jing Zhang, Chong Wei, Cheng Zhang,
+and Xiaoqiang
+Li, “The eﬀects of vacancies and ﬁssion products on
+the structures and properties of β-SiC: a ﬁrst-principles
+study,” J. Mater. Res. Tech. 24, 5598–5612 (2023).
+[27] M Salvador, J M Perlado, A Mattoni, F Bernardini,
+and L Colombo, “Defect energetics of β-SIC using a
+new tight-binding molecular dynamics model,” J. Nucl.
+Mater. 329, 1219–1222 (2004).
+[28] L Malerba, J M Perlado, A S´anchez-Rubio, I Pastor,
+L Colombo, and T D de la Rubia, “Molecular dynamics
+simulation of defect production in irradiated β-SiC,” J.
+Nucl. Mater. 283, 794–798 (2000).
+[29] Yingying Li, Yan Li, and Wei Xiao, “Point defects and
+grain boundary eﬀects on tensile strength of 3C-SiC stud-
+ied by molecular dynamics simulations,” Nucl. Eng. Tech.
+51, 769–775 (2019).
+[30] Hadiseh
+Rabiee,
+Aliakbar
+Hassanzadeh,
+Hossein
+Sakhaeinia,
+and Ghasem Alahyarizadeh, “Eﬀect of the
+point defect of silicon carbide cladding on mechanical
+properties: a molecular-dynamics study,” Chem. Papers
+78, 3815–3830 (2024).
+[31] A Zywietz, J Furthm¨uller, and F Bechstedt, “Vacancies
+in SiC: Inﬂuence of Jahn-Teller distortions, spin eﬀects,
+and crystal structure,” Phys. Rev. B 59, 15166–15180
+(1999).
+[32] Touwen Fan, Wei Liu, Zixiong Ruan, Yuxin Cao, Tuo
+Ye, Jinzhong Liu, Feng Zhong, Xiaochao Tan, Houjiang
+Liang, Dongchu Chen, Pingying Tang,
+and Yuanzhi
+Wu, “First-principles investigation of eﬀects of defects
+on the physical properties of 3C-SiC under high tempera-
+tures and pressures,” J. Mater. Res. Tech. 20, 3633–3645
+(2022).
+[33] Ye Zhang, Shangting Jiang, Ye Li, Changchang Chen,
+Zhiyong Chen, and Xinlin Wang, “The inﬂuence of point
+defects on the electronic structures and optical properties
+of 3C-SiC,” AIP Adv. 14, 055009 (2024).
+[34] D. Porezag, Th. Frauenheim, Th. K¨ohler, G. Seifert, and
+R. Kaschner, “Construction of tight-binding-like poten-
+tials on the basis of DFT theory: application to carbon,”
+Phys. Rev. B 51, 12947 (1995).
+[35] C. M. Goringe, D. R. Bowler, and E. Hern´andez, “Tight-
+binding modelling of materials,” Rep. Prog. Phys. 60,
+1447–1512 (1997).
+[36] L. Colombo, “Tight-binding molecular dynamics:
+A
+primer,” Riv. Nuovo Cimento 28, 1–59 (2005).
+[37] C. P. Herrero, E. R. Hern´andez, G. Herrero-Saboya, and
+R. Ram´ırez, “Pressure-induced mechanical instabilities
+in cubic SiC: Structural and electronic properties,” Phys.
+Rev. B 112, 054106 (2025).
+[38] D. M. Ceperley, “Path-integrals in the theory of con-
+densed helium,” Rev. Mod. Phys. 67, 279 (1995).
+[39] C. P. Herrero and R. Ram´ırez, “Path-integral simulation
+of solids,” J. Phys.: Condens. Matter 26, 233201 (2014).
+[40] Claudio Cazorla and Jordi Boronat, “Simulation and un-
+derstanding of atomic and molecular quantum crystals,”
+Rev. Mod. Phys. 89, 035003 (2017).
+[41] B. G. A. Brito, L. Candido,
+and G. Q. Hai, “Nu-
+clear quantum eﬀects in cubic silicon carbide from path-
+integral Monte Carlo simulations,” Phys. Rev. Mater. 9,
+113602 (2025).
+[42] R. P. Feynman, Statistical Mechanics (Addison-Wesley,
+New York, 1972).
+[43] M. J. Gillan, “The quantum simulation of hydrogen in
+metals,” Phil. Mag. A 58, 257 (1988).
+[44] R. Rurali and E. Hernandez, “TROCADERO: a multiple-
+algorithm
+multiple-model
+atomistic
+simulation
+pro-
+gram,” Comp. Mater. Sci. 28, 85–106 (2003).
+
+
+18
+[45] Rafael Gutierrez, Thomas Frauenheim, Thomas K¨ohler,
+and Gothard Seifert, “Stability of silicon carbide struc-
+tures: from clusters to solid surfaces,” J. Mater. Chem.
+6, 1657–1663 (1996).
+[46] R. Ram´ırez, C. P. Herrero, E. R. Hern´andez, and M. Car-
+dona, “Path-integral molecular dynamics simulation of
+3C-SiC,” Phys. Rev. B 77, 045210 (2008).
+[47] J. L. Mercer, “Tight-binding models for compounds: Ap-
+plication to SiC,” Phys. Rev. B 54, 4650–4659 (1996).
+[48] N. Bernstein, H. J. Gotsis, D. A. Papaconstantopoulos,
+and M. J. Mehl, “Tight-binding calculations of the band
+structure and total energies of the various polytypes of
+silicon carbide,” Phys. Rev. B 71, 075203 (2005).
+[49] C. P. Herrero, R. Ram´ırez,
+and M. Cardona, “Isotope
+eﬀects on the lattice parameter of cubic SiC,” Phys. Rev.
+B 79, 012301 (2009).
+[50] C. P. Herrero, R. Ram´ırez, and G. Herrero-Saboya, “Nu-
+clear quantum eﬀects in structural and elastic proper-
+ties of cubic silicon carbide,” Phys. Rev. B 109, 104112
+(2024).
+[51] Carlos P. Herrero and Rafael Ram´ırez, “Quantum ef-
+fects in two-dimensional silicon carbide,” J. Phys. Chem.
+Solids 171, 110980 (2022).
+[52] C. M. Polley, H. Fedderwitz, T. Balasubramanian, A. A.
+Zakharov, R. Yakimova, O. B¨acke, J. Ekman, S. P. Dash,
+S. Kubatkin,
+and S. Lara-Avila, “Bottom-up growth
+of monolayer honeycomb SiC,” Phys. Rev. Lett. 130,
+076203 (2023).
+[53] M. E. Tuckerman, B. J. Berne,
+and G. J. Martyna,
+“Reversible multiple time scale molecular dynamics,” J.
+Chem. Phys. 97, 1990–2001 (1992).
+[54] G. J. Martyna, A. Hughes,
+and M. E. Tuckerman,
+“Molecular dynamics algorithms for path integrals at
+constant pressure,” J. Chem. Phys. 110, 3275–3290
+(1999).
+[55] M. E. Tuckerman, Statistical Mechanics:
+Theory and
+Molecular Simulation (Oxford University Press, Oxford,
+2010).
+[56] G. J. Martyna, M. E. Tuckerman, D. J. Tobias,
+and
+M. L. Klein, “Explicit reversible integrators for extended
+systems dynamics,” Mol. Phys. 87, 1117 (1996).
+[57] C. P. Herrero and R. Ram´ırez, “Quantum eﬀects in
+graphene monolayers:
+Path-integral simulations,” J.
+Chem. Phys. 145, 224701 (2016).
+[58] Paolo Giannozzi, Stefano Baroni, Nicola Bonini, Mat-
+teo Calandra, Roberto Car, Carlo Cavazzoni, Davide
+Ceresoli, Guido L. Chiarotti, Matteo Cococcioni, Ismaila
+Dabo, Andrea Dal Corso, Stefano de Gironcoli, Ste-
+fano Fabris, Guido Fratesi, Ralph Gebauer, Uwe Ger-
+stmann, Christos Gougoussis, Anton Kokalj, Michele
+Lazzeri, Layla Martin-Samos, Nicola Marzari, Francesco
+Mauri, Riccardo Mazzarello, Stefano Paolini, Alfredo
+Pasquarello, Lorenzo Paulatto, Carlo Sbraccia, Sandro
+Scandolo, Gabriele Sclauzero, Ari P. Seitsonen, Alexan-
+der Smogunov, Paolo Umari, and Renata M. Wentzcov-
+itch, “Quantum Espresso: a modular and open-source
+software project for quantum simulations of materials,”
+J. Phys.: Condens. Matter 21, 395502 (2009).
+[59] P. Giannozzi, O. Andreussi, T. Brumme, O. Bunau,
+M. Buongiorno Nardelli, M. Calandra, R. Car, C. Cavaz-
+zoni, D. Ceresoli, M. Cococcioni, N. Colonna, I. Carn-
+imeo, A. Dal Corso, S. de Gironcoli, P. Delugas, R. A.
+DiStasio, A. Ferretti, A. Floris, G. Fratesi, G. Fugallo,
+R. Gebauer, U. Gerstmann, F. Giustino, T. Gorni, J. Jia,
+M. Kawamura, H.-Y. Ko, A. Kokalj, E. K¨u¸c¨ukbenli,
+M. Lazzeri, M. Marsili, N. Marzari, F. Mauri, N. L.
+Nguyen, H.-V. Nguyen, A. Otero de la Roza, L. Paulatto,
+S. Ponc´e, D. Rocca, R. Sabatini, B. Santra, M. Schlipf,
+A. P. Seitsonen, A. Smogunov, I. Timrov, T. Thon-
+hauser, P. Umari, N. Vast, X. Wu, and S. Baroni, “Ad-
+vanced capabilities for materials modelling with Quan-
+tum Espresso,” J. Phys.: Condens. Matter 29, 465901
+(2017).
+[60] John P. Perdew, Adrienn Ruzsinszky, Gabor I. Csonka,
+Oleg A. Vydrov, Gustavo E. Scuseria, Lucian A. Con-
+stantin, Xiaolan Zhou,
+and Kieron Burke, “Restoring
+the density-gradient expansion for exchange in solids and
+surfaces,” Phys. Rev. Lett. 100, 136406 (2008).
+[61] Pseudopotentials for C and Si atoms were taken from
+the Quantum Espresso PseudoPotential Download Page:
+http://www.quantum-espresso.org/legacy tables,
+ﬁles:
+C.pbesol-n-kjpaw psl.1.0.0.UPF,
+Si.pbesol-n-kjpaw psl.1.0.0.UPF.
+[62] C. H. Park, B. H. Cheong, K. H. Lee, and K. J. Chang,
+“Structural and electronic properties of cubic, 2H, 4H,
+and 6H SiC,” Phys. Rev. B 49, 4485–4493 (1994).
+[63] K. Karch, P. Pavone, W. Windl, O. Schutt,
+and
+D. Strauch, “Ab-initio calculation of structural and
+lattice-dynamical properties of silicon carbide,” Phys.
+Rev. B 50, 17054–17063 (1994).
+[64] P. Kackell, B. Wenzien,
+and F. Bechstedt, “Electronic
+properties of cubic and hexagonal SiC polytypes from
+ab-initio calculations,” Phys. Rev. B 50, 10761–10768
+(1994).
+[65] E. Cannuccia and A. Gali, “Thermal evolution of silicon
+carbide electronic bands,” Phys. Rev. Mater. 4, 014601
+(2020).
+[66] R Rurali, E Hern´andez, P Godignon, J Rebollo,
+and
+P Ordej´on, “First-principles studies of the diﬀusion of
+B impurities and vacancies in SiC,” Phys. Rev. B 69,
+125203 (2004).
+[67] Rodrick Kuate Defo, Xingyu Zhang, David Bracher,
+Gunn Kim, Evelyn Hu, and Efthimios Kaxiras, “Ener-
+getics and kinetics of vacancy defects in 4H-SiC,” Phys.
+Rev. B 98, 104103 (2018).
+[68] Hao Wang, Zhanfeng Yan, Jian Zheng, Guanbo Wang,
+Xiankun Liu, Qijie Feng, Jiting Tian, Xiao Liu, Chan
+Gao, Bin Tang, and Wei Zhou, “Ab initio study of neu-
+tral point defect properties in 6H-SiC based on the SCAN
+functional,” J. Nucl. Mater. 605, 155582 (2025).
+[69] H
+Itoh,
+A
+Kawasuso,
+T
+Ohshima,
+M
+Yoshikawa,
+I Nashiyama, S Tanigawa, S Misawa, H Okumura, and
+S Yoshida, “Intrinsic defects in cubic silicon carbide,”
+Physica Status Solidi A 162, 173–198 (1997).
+[70] Jun-Ichi Iwata, Chikara Shinei, and Atsushi Oshiyama,
+“Density-functional study of atomic and electronic struc-
+tures of multivacancies in silicon carbide,” Phys. Rev. B
+93, 125202 (2016).
+[71] Shangting Jiang, Ye Li, Zhiyong Chen, Weihua Zhu, Qin-
+mao Wu, Hongyu He, and Xinlin Wang, “The eﬀects of
+defects on the defect formation energy, electronic band
+structure, and electron mobility in 4H-SiC,” AIP Adv.
+12, 065311 (2022).
+[72] Fabien Bruneval and Guido Roma, “Energetics and
+metastability of the silicon vacancy in cubic SiC,” Phys.
+Rev. B 83, 144116 (2011).
+[73] R. Ram´ırez and C. P. Herrero, “Kinetic energy of protons
+in ice Ih and water: A path integral study,” Phys. Rev.
+
+
+19
+B 84, 064130 (2011).
+[74] Nicolas Mounet and Nicola Marzari, “First-principles de-
+termination of the structural, vibrational and thermody-
+namic properties of diamond, graphite, and derivatives,”
+Phys. Rev. B 71, 205214 (2005).
+[75] A Debernardi and M Cardona, “Isotopic eﬀects on the
+lattice constant in compound semiconductors by pertur-
+bation theory: An ab initio calculation,” Phys. Rev. B
+54, 11305–11310 (1996).
+[76] Carlos P. Herrero and Rafael Ram´ırez, “Isotopic eﬀects
+in structural properties of graphene,” Eur. Phys. J. B 93,
+146 (2020).
+[77] N. W. Ashcroft and N. D. Mermin, Solid State Physics
+(Saunders College, Philadelphia, 1976).
+[78] C. Cohen-Tannoudji, B. Liu,
+and F. Lal¨oe, Quantum
+Mechanics, 2nd ed., Vol. 1 (Wiley, New York, 2020).
+[79] Carlos P. Herrero and Rafael Ram´ırez, “Nuclear quantum
+eﬀects in graphane,” Chem. Phys. 533, 110737 (2020).
+[80] A. Kazimorov, J. Zegenhagen,
+and M. Cardona, “Iso-
+topic mass and lattice constant: X-ray standing wave
+measurements,” Science 282, 930 (1998).
+[81] C. Kittel, Introduction to Solid State Physics, 8th ed.
+(Wiley, New York, 2005).
+[82] P. Y. Yu and M. Cardona, Fundamentals of Semiconduc-
+tors (Springer, Berlin, 1996).
+[83] L. D. Landau and E. M. Lifshitz, Statistical Physics, 3rd
+ed. (Pergamon, Oxford, 1980).
+[84] H. B. Callen, Thermodynamics and an Introduction to
+Thermostatistics (John Wiley, New York, 1985).
+[85] R. S. Berny, S. A. Rice, and J. Ross, Physical Chemistry
+(Oxford University Press, New York, 2000).
+[86] M. Jamal, S. Jalali Asadabadi, Iftikhar Ahmad,
+and
+H. A. Rahnamaye Aliabad, “Elastic constants of cubic
+crystals,” Comp. Mater. Sci. 95, 592–599 (2014).
+[87] C.
+P.
+Herrero,
+“Elastic
+properties
+of
+cubic
+sili-
+con carbide with Si vacancies,” [Data set], Zenodo,
+https://doi.org/10.5281/zenodo.19090672 (2026).

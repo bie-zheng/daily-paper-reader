@@ -1,0 +1,54 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-08-15T20:26:49.873073+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 1,
+    "quick_skim_target": 11,
+    "quick_selected": 1
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2608.12967v1",
+      "source": "arxiv",
+      "title": "Elastic properties of cubic silicon carbide with Si vacancies",
+      "abstract": "We investigate how silicon vacancies modify the elastic response and mechanical stability of cubic 3C-SiC. Our approach employs path-integral molecular dynamics simulations, including the classical-nuclei limit, based on an efficient tight-binding Hamiltonian, whose accuracy is validated against density-functional-theory calculations. This framework enables a quantitative assessment of nuclear quantum effects arising from zero-point motion. Across a broad range of temperatures and hydrostatic pressures, spanning both tensile and compressive regimes, silicon vacancies are found to substantially renormalize the elastic constants $C_{11}$, $C_{12}$, and $C_{44}$, as well as the bulk modulus, relative to the defect-free crystal. Inclusion of nuclear quantum motion produces an additional softening of these elastic properties, particularly at low temperatures, demonstrating that quantum fluctuations make a measurable contribution to the mechanical response of defective SiC. Vacancies also affect the mechanical stability domain of 3C-SiC, lowering the maximum sustainable tensile pressure by approximately 4 GPa for a defect concentration of 0.016 per lattice site. These results reveal an interplay between point defects and quantum lattice fluctuations in determining the elastic behavior of SiC, providing microscopic insight relevant for both extreme-environment structural applications and defect-based quantum technologies.",
+      "authors": [
+        "Carlos P. Herrero",
+        "Eduardo R. Hernandez",
+        "Gabriela Herrero-Saboya"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ],
+      "published": "2026-08-13T08:48:11+00:00",
+      "link": "https://arxiv.org/pdf/2608.12967v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "study of Si vacancy point defects and their effect on elastic properties, relevant to radiation-induced point defects",
+      "llm_evidence_cn": "研究硅空位点缺陷及其对弹性性质的影响，与辐照诱导点缺陷相关",
+      "llm_evidence": "研究硅空位点缺陷及其对弹性性质的影响，与辐照诱导点缺陷相关",
+      "canonical_evidence": "研究硅空位点缺陷及其对弹性性质的影响，与辐照诱导点缺陷相关",
+      "llm_tldr_en": "Uses path-integral molecular dynamics with a tight-binding Hamiltonian to show that silicon vacancies strongly renormalize elastic constants of 3C-SiC, offering quantitative point-defect physics useful for radiation-damage modeling.",
+      "llm_tldr_cn": "立方碳化硅是一种重要的核用结构材料，其辐照损伤常引入硅空位等点缺陷。本文采用基于紧束缚哈密顿量的路径积分分子动力学，并结合DFT验证，系统研究了硅空位对3C-SiC弹性常数和力学稳定性的影响。结果表明，硅空位会在宽温度压力范围内显著改变C11、C12、C44和体弹模量，且核量子效应影响明显。这些定量结果对理解辐照条件下点缺陷引起的材料力学性能退化具有重要意义。",
+      "llm_tldr": "立方碳化硅是一种重要的核用结构材料，其辐照损伤常引入硅空位等点缺陷。本文采用基于紧束缚哈密顿量的路径积分分子动力学，并结合DFT验证，系统研究了硅空位对3C-SiC弹性常数和力学稳定性的影响。结果表明，硅空位会在宽温度压力范围内显著改变C11、C12、C44和体弹模量，且核量子效应影响明显。这些定量结果对理解辐照条件下点缺陷引起的材料力学性能退化具有重要意义。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation-induced point defects and clusters",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}
