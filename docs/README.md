@@ -6,26 +6,28 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-08-15
-- 运行时间：2026-08-15 20:28:31 UTC
+- 最新运行日期：2026-08-16
+- 运行时间：2026-08-16 20:20:24 UTC
 - 运行状态：成功
 - 本次总论文数：1
 - 精读区：0
 - 速读区：1
 
 ### 今日简报（AI）
-今日速读1篇论文，聚焦碳化硅材料缺陷研究。  
-最值得关注的是Si空位对立方碳化硅弹性性质的影响（7.0/10）。  
-建议可精读此文，或进一步关注空位浓度与力学性能的定量关系。
-- 详情：[/202608/15/README](/202608/15/README)
+今日仅速读1篇论文，聚焦无序合金在有限温度下的相稳定性与力学性能的机器学习方法。
+
+该方向结合机器学习与热力学，有望加速高温合金设计，但精读深度尚缺。
+
+建议后续补充精读，重点关注模型对温度效应的处理与数据集覆盖范围。
+- 详情：[/202608/16/README](/202608/16/README)
 
 ### 精读区论文标签
 - 本次无精读推荐。
 
 ### 速读区论文标签
-1. [Elastic properties of cubic silicon carbide with Si vacancies](/202608/15/2608.12967v1-elastic-properties-of-cubic-silicon-carbide-with-si-vacancies)  
-   标签：评分：7.0/10、query:rad-damage
-   evidence：研究硅空位点缺陷及其对弹性性质的影响，与辐照诱导点缺陷相关
+1. [Machine-learning approach for the phase stability and mechanical properties of disordered alloys at finite temperature](/202608/16/2608.10465v1-machine-learning-approach-for-the-phase-stability-and-mechanical-properties-of-disordered-alloys-at-finite-temperature)  
+   标签：评分：6.0/10、query:rad-damage
+   evidence：机器学习原子间势用于合金相稳定性计算，可迁移至辐照FeCr建模
 
 
 <div class="dpr-home-promo-card">

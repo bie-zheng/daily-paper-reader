@@ -1,0 +1,54 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-08-16T20:19:07.059818+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 1,
+    "quick_skim_target": 11,
+    "quick_selected": 1
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2608.10465v1",
+      "source": "arxiv",
+      "title": "Machine-learning approach for the phase stability and mechanical properties of disordered alloys at finite temperature",
+      "abstract": "The prediction of stable alloys forming solid-state solutions across large portions of the composition space is a serious theoretical challenge, since one has to evaluate the Gibbs free energy, including both configurational and vibrational contributions. This requires an energy theory capable of extremely high throughput. By taking the Ni-Pd system as prototype, we construct an efficient Jacobi-Legendre machine-learning potential based on density-functional-theory data, which provides accurate energies and forces across the entire composition space. Based on a cluster expansion up to three-body terms and only 873 trainable parameters, this allows us to compute the partition function by directly integrating all accessible microstates, differing for composition, atomic configuration and thermal agitation. We confirm that Ni and Pd are fully miscible, forming an $fcc$ solid-state solution. This is only metastable at room temperature, while becomes thermodynamically stable at around 600~K, with the stability achieved first at the Pd-rich end of the composition range. Interestingly, entropy and heat capacity analysis reveal a competition between the solid-state solution and two intermetallic phases with long-period L1$_0$ structure for NiPd and NiPd$_3$. All in all, our approach offers a powerful and high-throughput workflow for the study of disordered alloys, an approach that can be extended to multi-component systems such as high-entropy alloys.",
+      "authors": [
+        "Rutchapon Hunkao",
+        "Urvesh Patil",
+        "Stefano Sanvito"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ],
+      "published": "2026-08-11T04:23:38+00:00",
+      "link": "https://arxiv.org/pdf/2608.10465v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "machine-learned interatomic potential for finite-temperature alloy phase stability; transferable to irradiated FeCr modeling",
+      "llm_evidence_cn": "机器学习原子间势用于合金相稳定性计算，可迁移至辐照FeCr建模",
+      "llm_evidence": "机器学习原子间势用于合金相稳定性计算，可迁移至辐照FeCr建模",
+      "canonical_evidence": "机器学习原子间势用于合金相稳定性计算，可迁移至辐照FeCr建模",
+      "llm_tldr_en": "An efficient Jacobi-Legendre machine-learning potential, built from DFT data, predicts finite-temperature phase stability and mechanical properties of disordered alloys. Demonstrated on Ni-Pd with 873 parameters, it enables direct partition-function integration via cluster expansion, offering a transferable computational framework for modeling irradiated FeCr alloys.",
+      "llm_tldr_cn": "无序合金在广阔成分空间中的相稳定性预测是理论挑战，需要包含构型和振动熵的吉布斯自由能。本文以Ni-Pd体系为原型，基于DFT数据构建了Jacobi-Legendre机器学习势，并结合至三体团簇展开，仅用873个可训练参数即可高精度地计算整个成分空间的能量与力，进而直接积分配分函数获得有限温度性质。该方法为高效高通量筛选合金成分、预测力学性能提供了新途径，也为后续研究辐照条件下FeCr等合金的相稳定性与缺陷行为奠定了计算基础。",
+      "llm_tldr": "无序合金在广阔成分空间中的相稳定性预测是理论挑战，需要包含构型和振动熵的吉布斯自由能。本文以Ni-Pd体系为原型，基于DFT数据构建了Jacobi-Legendre机器学习势，并结合至三体团簇展开，仅用873个可训练参数即可高精度地计算整个成分空间的能量与力，进而直接积分配分函数获得有限温度性质。该方法为高效高通量筛选合金成分、预测力学性能提供了新途径，也为后续研究辐照条件下FeCr等合金的相稳定性与缺陷行为奠定了计算基础。",
+      "llm_tags": [
+        "query:rad-damage:composite"
+      ],
+      "matched_query_tag": "query:rad-damage:composite",
+      "matched_query_text": "Papers central to 辐照损伤FeCr合金B2相增强相关论文检索, especially work that connects or combines: radiation damage mechanisms in structural materials; radiation-induced point defects and clusters; B2 phase strengthening in irradiated alloys; precipitation hardening in irradiated FeCr alloys; dislocation loop formation in irradiated FeCr; radiation induced defect evolution and microstructure changes; Studies on radiation damage in FeCr alloys with B2 phase strengthening; Microstructure evolution of B2 phase in FeCr alloys under irradiation.",
+      "matched_requirement_id": "req-composite-rad-damage",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
