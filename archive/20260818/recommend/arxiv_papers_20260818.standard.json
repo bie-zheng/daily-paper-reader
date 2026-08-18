@@ -1,0 +1,90 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-08-18T19:21:21.634886+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 2,
+    "quick_skim_target": 11,
+    "quick_selected": 2
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2608.10048v1",
+      "source": "arxiv",
+      "title": "Numerical modeling of microstructure evolution in nanocrystalline alloys - grain boundary segregation, solute drag and mechanics",
+      "abstract": "Nanocrystalline (NC) alloys hold much promise as structural alloys due to their superior mechanical properties over traditional coarser grained microcrystalline alloys. Strength of metallic alloys is related to the underlying grain size - as represented by the classical Hall-Petch relation. Generally, a metals strength increases with decreasing mean grain size from the micrometer scale to the nanometer scale, until about a mean size of 20 nm. Any further decrease of grain size results in decreasing strength. Thus, there is an optimal range of mean grain size for most metals about which maximum material strength can be obtained. In the context of NC alloys, stabilization of the grain size in this optimal range is one of the primary synthesis challenges. Since nm-scale mean grain sizes are desired, phenomena like GB solute segregation and solute precipitation are utilized during alloy synthesis to mitigate grain growth. Numerical modeling the phenomena of GB-solute interactions and the evolution of these stabilized GBs under mechanical load are of immense interest to the NC alloy community. To enrich the numerical modeling formulations available in this space, we present here a phase-field method based numerical framework to model GB segregation, solute precipitation and effect of external loading on NC alloys. While some of these effects have been modeled in isolation, a unified treatment of the solute and GB segregation with mechanics interactions has not be considered in the literature. We present a 3D FEM finite-strain phase-field formulation for modeling grain evolution and microstructure stabilization. Beyond the formulation, various case studies demonstrate the applicability of this framework. Further, thermodynamic and kinetic arguments are provided based on the evolution of GB energy to explain the effects of solute drag, GB pinning and mechanical deformation.",
+      "authors": [
+        "Prakarsh Pandey",
+        "Shiva Rudraraju"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ],
+      "published": "2026-08-10T14:23:19+00:00",
+      "link": "https://arxiv.org/pdf/2608.10048v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Numerical modeling of microstructure evolution in alloys with segregation and mechanics, directly relevant to radiation-induced microstructure change studies",
+      "llm_evidence_cn": "合金微观结构演变的数值模拟，涵盖偏析与力学行为，与辐照诱导微结构变化研究直接相关",
+      "llm_evidence": "合金微观结构演变的数值模拟，涵盖偏析与力学行为，与辐照诱导微结构变化研究直接相关",
+      "canonical_evidence": "合金微观结构演变的数值模拟，涵盖偏析与力学行为，与辐照诱导微结构变化研究直接相关",
+      "llm_tldr_en": "Numerical modeling of microstructure evolution in nanocrystalline alloys couples grain boundary segregation, solute drag and mechanics, explaining Hall-Petch breakdown below 20 nm grain size.",
+      "llm_tldr_cn": "纳米晶合金因晶粒细小而具有优异力学性能，但强度在晶粒尺寸约20纳米以下反而下降。本文通过数值建模研究纳米晶合金微观结构演化，耦合晶界偏析、溶质拖拽与力学行为。模拟描述了晶粒尺寸变化对强度的影响规律，解释了存在最优晶粒尺寸范围的物理原因。该模型为理解结构合金中的微观结构演化与力学响应提供了框架，对辐照条件下缺陷演化和微结构变化的研究具有方法论借鉴价值。",
+      "llm_tldr": "纳米晶合金因晶粒细小而具有优异力学性能，但强度在晶粒尺寸约20纳米以下反而下降。本文通过数值建模研究纳米晶合金微观结构演化，耦合晶界偏析、溶质拖拽与力学行为。模拟描述了晶粒尺寸变化对强度的影响规律，解释了存在最优晶粒尺寸范围的物理原因。该模型为理解结构合金中的微观结构演化与力学响应提供了框架，对辐照条件下缺陷演化和微结构变化的研究具有方法论借鉴价值。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation induced defect evolution and microstructure changes",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.10465v1",
+      "source": "arxiv",
+      "title": "Machine-learning approach for the phase stability and mechanical properties of disordered alloys at finite temperature",
+      "abstract": "The prediction of stable alloys forming solid-state solutions across large portions of the composition space is a serious theoretical challenge, since one has to evaluate the Gibbs free energy, including both configurational and vibrational contributions. This requires an energy theory capable of extremely high throughput. By taking the Ni-Pd system as prototype, we construct an efficient Jacobi-Legendre machine-learning potential based on density-functional-theory data, which provides accurate energies and forces across the entire composition space. Based on a cluster expansion up to three-body terms and only 873 trainable parameters, this allows us to compute the partition function by directly integrating all accessible microstates, differing for composition, atomic configuration and thermal agitation. We confirm that Ni and Pd are fully miscible, forming an $fcc$ solid-state solution. This is only metastable at room temperature, while becomes thermodynamically stable at around 600~K, with the stability achieved first at the Pd-rich end of the composition range. Interestingly, entropy and heat capacity analysis reveal a competition between the solid-state solution and two intermetallic phases with long-period L1$_0$ structure for NiPd and NiPd$_3$. All in all, our approach offers a powerful and high-throughput workflow for the study of disordered alloys, an approach that can be extended to multi-component systems such as high-entropy alloys.",
+      "authors": [
+        "Rutchapon Hunkao",
+        "Urvesh Patil",
+        "Stefano Sanvito"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ],
+      "published": "2026-08-11T04:23:38+00:00",
+      "link": "https://arxiv.org/pdf/2608.10465v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Machine-learning potential predicts phase stability and mechanical properties of disordered alloys, transferable to irradiation-affected structural alloys",
+      "llm_evidence_cn": "机器学习势预测无序合金相稳定性与力学性能，可迁移至辐照影响的结构合金研究",
+      "llm_evidence": "机器学习势预测无序合金相稳定性与力学性能，可迁移至辐照影响的结构合金研究",
+      "canonical_evidence": "机器学习势预测无序合金相稳定性与力学性能，可迁移至辐照影响的结构合金研究",
+      "llm_tldr_en": "A Jacobi-Legendre machine-learning potential for disordered alloys enables efficient finite-temperature prediction of phase stability and mechanical properties, offering a transferable tool for structural alloy design under irradiation.",
+      "llm_tldr_cn": "预测无序合金在宽广成分范围内的稳定相与力学性能需要同时评估位形与振动自由能贡献，对能量计算方法提出高通量要求。本文以Ni-Pd体系为例，构建了基于密度泛函数据的高效Jacobi-Legendre机器学习势，仅用873个可训练参数即可精确描述全成分空间的能量与受力，并结合三体团簇展开直接积分配分函数。该方法可计算任意温度下的热力学性质，为多元合金相稳定性与力学性能的高通量预测提供了新途径，对辐照结构材料的研究具有借鉴价值。",
+      "llm_tldr": "预测无序合金在宽广成分范围内的稳定相与力学性能需要同时评估位形与振动自由能贡献，对能量计算方法提出高通量要求。本文以Ni-Pd体系为例，构建了基于密度泛函数据的高效Jacobi-Legendre机器学习势，仅用873个可训练参数即可精确描述全成分空间的能量与受力，并结合三体团簇展开直接积分配分函数。该方法可计算任意温度下的热力学性质，为多元合金相稳定性与力学性能的高通量预测提供了新途径，对辐照结构材料的研究具有借鉴价值。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation damage mechanisms in structural materials",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

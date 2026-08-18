@@ -1,0 +1,1095 @@
+Title: Numerical modeling of microstructure evolution in nanocrystalline alloys - grain boundary segregation, solute drag and mechanics
+
+URL Source: https://arxiv.org/pdf/2608.10048v1
+
+Published Time: Wed, 12 Aug 2026 00:08:55 GMT
+
+Number of Pages: 26
+
+Markdown Content:
+# Numerical modeling of microstructure evolution in nanocrystalline alloys - grain boundary segregation, solute drag and mechanics 
+
+Prakarsh Pandey and Shiva Rudraraju 
+
+> Department of Mechanical Engineering, University of Wisconsin-Madison, Madison, WI, USA
+
+Abstract 
+
+Nanocrystalline (NC) alloys hold significant promise as structural alloys due to their superior mechanical properties over the traditional coarser grained microcrystalline alloys. Strength of metallic alloys is related to the underlying microstructural grain size - as represented by the classical Hall-Petch relation. Generally, a metals strength increases with decreasing mean grain size from the micrometer scale to the nanometer scale, until about a mean size of 20 nm. Any further decrease of grain size results in decreasing strength. Thus, there is an optimal range of mean grain size for most metals (about 20nm-10nm) about which maximum material strength can be obtained. In the context of NC alloys, stabilization of the grain size in this optimal range is one of the primary synthesis challenges. A large volume fraction of NC alloy microstructure is occupied by GBs. Since GBs increase the internal energy of the system through GB surface energy, during solidification and grain growth phase there is tendency to minimize GBs through grain coarsening. However, since smaller nanometer scale mean grain sizes are desired, certain phenomena like GB solute segregation and solute precipitation are utilized during alloy synthesis to mitigate grain growth below an optimal size. Numerical modeling these phenomena of GB-solute interactions and the evolution of these stabilized GBs under mechanical load are of immense interest to the NC alloy com-munity. To enrich the numerical modeling formulations available in this space, we present here a phase-field method based numerical framework to model GB segregation, solute pre-cipitation and effect of external loading on NC alloys. While some of these effects have been modeled in isolation, a unified treatment of the solute-GB segregation-mechanics interac-tions has not be considered in the literature. We present a three dimensional, FEM method based, finite-strain phase-field formulation for modeling grain evolution and microstructure stabilization in NC alloys. Beyond the formulation and its computational implementation, various case studies demonstrate the applicability of this framework. Further, thermody-namic and kinetic arguments are provided based on the evolution of GB energy to explain the effects of solute drag, GB pinning and mechanical deformation. arXiv:2608.10048v1 [cond-mat.mtrl-sci] 10 Aug 2026 1. Introduction 
+
+Mechanical properties manifested by metallic alloys are a result of the load bearing abil-ity of the underlying microstructure. The deformational response and related morphology evolution (grain evolution, dislocations, voids/cracks, phase transformations, etc.) at the grain-scale are the primary mechanisms that contribute to the structural scale elasto-plastic, fracture, fatigue and creep responses. Therefore, microstructure evolution at the grain-scale has long been studied in order to understand and predict the macroscopic mechanical prop-erties. It is well known that optimal size, orientation and distribution of grains can improve material properties to a significant degree - resulting in a constant search for optimal syn-thesis, heat treatment and deformational processes modulating grain size through alloying, grain growth, refinement and recrystallization. Thus, the study of optimality and control over grain morphology attracts constant interest from the material synthesis and manufactur-ing community. Increasing the GB density is understood to yield a significant improvement in mechanical properties (elasto-plastic response; fracture and fatigue response; wear and tribological behavior) of alloys [1, 2, 3, 4]. Examples of materials with high GB density in-clude multilayered systems and nanocrystalline materials with layer thickness or grain sizes of the order of tens to hundreds of nanometers, wherein the increased grain interfaces block or impede dislocation motion leading to changes in the plastic strain accommodation in the material. Controlled grain growth during material synthesis can be achieved through mitigating GB migration velocity or changing the orientation of GB migration. Both of these effects can be achieved through an enhanced understanding and control over GB interactions with solute atoms dissolved in the alloy. It has long been known that interaction between solute and GBs can increase the recrystallization time [5]. This phenomenon became known as solute drag, and well known mechanisms like Zener pinning [6, 7, 8] and solute segregation [9, 10] are known to affect GB migration. For easier understanding of the interaction between solute and grain boundaries, it is convenient to classify solute particles into two categories i) stationary solute particles and ii) moving solute particles. Both of these categories have been intensively studied and interaction of stationary solute particles with GB is known as Zener pinning, whereas interaction of moving solute particles is better known as solute drag effect. In this paper we focus on the interaction of moving solute atoms with GBs. First theoretical treatment for solute drag was presented by Lücke and Detert [11] who showed that drag force was caused due to diffusion of solute atoms into the GBs. A rigorous thermodynamic analysis of this phenomenon was presented by Cahn [12], showing that composition profile is symmetric for a stationary GB and drag force is generated due to asymmetry generated in the composition profile due to moving GB, and GB migration velocity can be a nonlinear function of driving force due to segregation, which under isotropic assumptions is linear. Cahn also predicted that GB migration kinetics can exist in two regimes a) low velocity 2regime, in which GB migration is governed by diffusion of solute atoms into GBs, and b) high velocity regime, in which diffusion is not necessary and GB migration is governed by atomic jump across the GB, and effect of GB velocity and solute diffusivity on drag force are opposite to each other. Hillert and Sundman [13] later proposed their solution for steady state composition profile for a regular solution based on Gibb’s free energy dissipation rather than Cahn, whose study was based on drag force. Hillert’s method is equivalent to Cahn for a dilute solution with an advantage that it can be applied to phase transformations using Gibb’s free energy dissipation. Various numerical studies have been performed to study the behavior of solute drag on solidification [14, 15], solid state phase transformations [16], and on moving GBs. In-creasingly, diffuse interface methods like phase-field modeling are the numerical method of choice for modeling microstructure evolution phenomena. To model solute drag effect in a phase-field framework, segregation of solute atoms to the GB and diffusion within the GB must be considered. Cha [17] proposed the first phase-field model that included solute drag effect. Later, Strandlund[18] presented an effective mobility approach using the model by Odqvist[19]. They suggested that drag effect can be captured in a phase-field representation if physically realistic mobilities are considered. However, in these models solute drag effect was not explicitly considered. Grönhagen and ˙Agren [20] were successful in modelling so-lute drag effect by introducing a solute-composition dependent double-well potential in the Gibb’s free energy expression and using diffusion flux for solute given by Onsager’s linear law of irreversible thermodynamics. They showed that their “dynamic solute drag” model was consistent with Cahn’s and could describe dynamics of solute segregation to a stationary boundary as well as solute drag on a moving GB. Kim and Park [21] demonstrated that model presented by Grönhagen and ˙Agren could quantitatively describe solute drag and GB migration. They extended the model further to study abnormal grain growth, successfully showing that abnormal grain growth could be described by solute drag effect similar to par-ticle pinning which has been traditionally used to study abnormal grain growth. Li et.al. [22] also used the same model and were able to show the solute composition at the moving GB could increase with increased GB migration velocity and can be larger than equilib-rium value, which has been experimentally observed [23, 24, 25], but could not be explained through Cahn’s theory. These models studied solute segregation and solute acting on the GB in a dilute solution in which the solute was assumed to be completely miscible at all compositions. It has been found that solute segregation is the dominant phenomenon leading to reduction in GB energy in alloys with compositions away from the dilute limit and in literature the term ’solute drag’ has been primarily used to explain this behavior. However, there have been experimental ev-idences for nano-crystalline alloys in which solute is not miscible and system phase separates into solute rich and solute depleted zones through spinodal decomposition in the alloys with 3increased solute compositions. In immiscible alloys, both GB solute segregation and parti-cle pinning due to precipitated solute rich regions affect grain growth. Most analytical and simulation studies have assumed immobile particles for Zener pinning, and while studying GB segregation - they do not consider immiscible alloys and precipitated solute particles. Effect of precipitated solute rich regimes to explain the stability of nano-crystalline alloys was studied by Murdoch and Schuh [26], who developed stability maps for nano-crystalline alloys explained by GB heat of segregation and alloy heat of mixing, and divided these maps into three regimes: a) where GB segregation does not result in stable structure, b) where macroscopic phase-separation is preferred despite the stability against grain growth, and c) where system is stable against grain growth and phase separation. An effective phase-field model incorporating solute segregation and precipitation was presented by Fadi et. al. [27], who studied the evolution of grain microstructures in terms of heat of segregation and heat of mixing - resulting in phase separation of solute atoms between the grains and the GBs. They consider a composition dependent double-well potential in the Gibb’s free energy expression, and the solute evolution was governed by the conserved Cahn-Hilliard [28] equation. We use this approach as a motivation for our current work. The driving force for GB migration can be derived from the GB surface energy, lattice defect energy and stored elastic energy. Applying external deformation on a microstructure can cause significant changes in GB migration as shown by Schönfelder [29], who uses molec-ular dynamics simulations of a copper bi-crystal to demonstrate that a driving force can be generated by applying anisotropic strain, provided energy densities are different in both grains. However, the rates at which GB surface energy, defect energy and elastic energy can be minimized dictates their relative contribution to the driving force. If stored elastic energy can be minimized further than the GB surface energy, then grain growth can be considered to be significantly driven by the stored elastic energy. A polycrystalline phase-field model was presented by Tonks et. al. [30] who demonstrated that the amount of applied deformation accelerates the grain growth, compared to a relaxed polycrystal, in low temperature regions. However, in high temperature regions, grain growth is accelerated but the effect of applied deformation is reduced. To enrich the numerical modeling frameworks available in this space of modeling mi-crostructure evolution in NC alloys, we present here a phase-field method based numerical framework to model GB segregation, solute precipitation and effect of external loading on NC alloys. While some of these effects have been modeled in isolation, a unified treatment of the solute-GB segregation-mechanics interactions has not be considered in the literature. Further, the existing treatments are based on infinitesimal-strain formulation of mechanics and mostly developed in the finite difference methods (FDM) framework. This work de-rives from earlier advances on the phase-field modeling front presented by Grönhagen and ˙Agren [20], Fadi et. al. [27] and Tonks et. al.[31], and seeks to present a three dimensional, 4FEM method based, finite-strain phase-field formulation for modeling grain evolution and microstructure stabilization in NC alloys. Beyond the formulation and its computational im-plementation, various case studies demonstrate the applicability of this framework. Further, thermodynamic and kinetic arguments are provided based on the evolution of GB energy to explain the effects of solute drag, GB pinning and mechanical deformation. 
+
+2. Free energy based representation of nanocrystalline grain evolution 
+
+In this work, we adopt a phase-field based numerical treatment for modeling grain evo-lution, and the related phenomena of GB segregation and solute drag that are relevant to nanocrystalline alloys. The phase-field method is a popular free energy based treatment of microstructure evolution and the underlying interface kinetics. It has been widely used for modeling metallic solidification [32, 33, 34], solid-state phase transformations [35, 36, 37], grain growth [38, 39], etc., to name a few related applications. In the phase-field method, grain scale microstructure is numerically represented with a set of conserved or non-conserved (structural) order parameters that change continuously in space across diffuse GBs. The interfacial kinetics is modeled by evolving the phase-field variables via parabolic partial dif-ferential equations of diffusion - either the classical Fickian kinetics, or the more involved Cahn-Hilliard kinetics [28] (for conserved order parameters) and Allen-Cahn kinetics [40] (for non-conserved order parameters). Using a phase-field approach, we model multigrain microstructure evolution by associat-ing each grain with an order parameter that takes on the value of unity within the grain, and a value of zero in all the surrounding grains. Each such order parameter representing a grain has a smooth transition from zero to one across its corresponding diffuse GB. Grains with different orientation in the system are represented with different order parameters, represented by the set φ = {φ1, φ 2, φ 3, ......., φ N }, where N is the total number of unique grain-orientations in the microstructure considered. For each ith grain-orientation, the bulk region is represented by the state φ = {0, 0, ..., φ i = 1 , ..., 0, 0}, whereas its grain boundaries are represented by the state, 0 < φ i < 1. The numerical values of the order parameters are further bounded by the constraint, ∑Ni=1 φi = 1 , that is enforced via the construction of a suitable energy density parametrized in terms of the order parameters. The spatio-temporal evolution of the order parameters, and thereby the evolution of the underlying grain morphology, is governed by the classical Allen-Cahn kinetics [40]: 
+
+∂φ i
+
+∂t = −Mφ
+
+(δL φ
+
+δφ i
+
+)
+
+, where i = 1 , 2...N (1) where Lφ is the free energy density (Lagrangian) of the system and Mφ is the GB mobility. Using standard arguments of reversible thermodynamics, the variational derivative of the Lagrangian is identified as the chemical potential driving the evolution, and is given by: 
+
+μφ = δL φ
+
+δφ 
+
+5The free energy of the system that is minimized by the above kinetics is given by: 
+
+Π = 
+
+∫
+
+> Ω
+
+Lφ dV =
+
+∫
+
+> Ω
+
+[
+
+g(φ) + 
+
+> N
+
+∑
+
+> i=1
+
+ǫ
+
+2 |∇ φi|2
+
+]
+
+dV 
+
+In the above equation, the first term of the Lagrangian, g(φ), is a double-well potential representing the driving force for grain growth, and the second term represents the gradient energy term parametrized by the interface parameter, ǫ. The specific form of the double-well potential construction considered here is given by [27]: 
+
+g(φ) = 43
+
+[
+
+1 − 4
+
+> N
+
+∑
+
+> i=1
+
+φ3 
+
+> i
+
++ 3 ( N∑
+
+> i=1
+
+φ2
+
+> i
+
+)2]
+
+Substituting above expressions in Equation 1 yields the governing equation to model multi-grain evolution through the evolution of each order parameter, 
+
+∂φ i
+
+∂t = −Mφi
+
+(∂ g (φ)
+
+∂ φ i
+
+− ǫ
+
+> N
+
+∑
+
+> i=1
+
+∇2φi
+
+)
+
+, where i = 1 , 2...N (2) The above governing equations are a standard treatment for modeling grain growth, and these equations minimize the free energy by minimizing the GB energy through grain coars-ening, i.e., by reducing the fraction of GBs compared to the bulk. This model is relevant to grain growth and recrystallization in traditional microcrystalline metallic alloys. However, in nanocrystalline alloys, additional physical mechanisms of GB segregation and solute drag caused by solute precipitation counter this tendency for grain coarsening. Thus, to model mi-crostructure evolution in nanocrystalline alloys, it’s important to effectively represent these mechanisms. Further, it is also important to model mechanical deformation in conjunction with these mechanisms to study the physically relevant problem of grain size stabilization under load. The incorporation of these additional mechanisms along with finite-strain me-chanics is treated below. 
+
+2.1. Numerical basis of modeling GB segregation and solute drag 
+
+On top of the standard grain growth model described in the previous section, we aim to incorporate the ability to model three phenomena: Solute drag caused by (1) GB segregation of solute and (2) Solute precipitation at GB and junctions, and (3) Finite-strain mechanics for modeling deformation. As stated earlier, the utility of these three models is in studying the effect of these physical phenomena in stabilizing grain sizes in nanocrystalline alloys, against the natural tendency for grain coarsening in regular metallic alloys. The central tenet of the phase-field model is first order kinetics driven by free energy minimization. In the standard model of grain growth described in the previous section, the system free energy is minimized by material points in the bulk moving to one of the wells, 6(i) Order parameter energy density 
+
+BC    
+
+> (ii) Solute energy density (iii) Strain energy density (iv) Resulting solute distribution at the grain boundaries Grain boundary segregation model Solute precipitation model
+> 000000111
+> Height of the double well modulated by the solute composition
+
+# + ++ +
+
+A   
+
+> Standard model of grain growth
+> 01
+> (i) Order parameter energy density (ii) Resulting grain microstructure solute distribution contours
+> grain boundary contour
+
+Figure 1: Schematics showing the free energy density construction for modeling (A) Standard grain growth, (B) GB segregation, and (C) Solute precipitation. For the later two cases, representative free energy density constructions for the (i) order parameter, (ii) solute composition, and (iii) mechanics fields are shown in the first, second and third column, respectively. Also shown in the fourth column are the (iv) resulting grain microstructure and solute distribution at the GBs and junctions. 
+
+located at φ = 0 and φ = 1 in the order parameter space, in the double-well characteriza-tion of the free energy density. A schematic showing the construction of these double-well potentials in the order parameter space is shown in Figure 1. A unified treatment of the construction of these minimizing potentials for the three phenomena of interest listed earlier and its integration with mechanics is a unique aspect of this work. To stabilize grain growth and avoid further grain coarsening as in nanocrystalline alloys, one needs to make it energetically favorable in the free energy density space for the solute atoms to segregate to the GBs and junctions, and then impede the movement of these GBs. In this section, we will look at two different strategies of modulating the order parameter free energy density as a function of solute composition and also consider the relevant kinetics for the solute atoms. Broadly, this is achieved by modulating a thermodynamic term (double-well height) and a kinetic term (solute mobility) in the coupled phase-field representation of grain structure along with the solute distribution. As stated in the introduction, while some of these strategies have been previously considered in the literature, here we present an integrated framework of both these mechanisms in conjunction with the model for mechanical 
+
+7deformation .
+
+> Model of GB segregation.
+
+GB segregation is a commonly observed mechanism through which impurity atoms affect the grain growth in a polycrystalline alloy. Impurity atoms via diffusion segregate along the GB and inhibit the GB migration in the system. To develop a thermodynamic model for GB segregation and impurity drag effect, we assume that impurity atoms in the alloy form an ideal solution in which case bulk free energy of the system can be given as, 
+
+G(c, φ) = F (c) + g(φ)W (c) (3) here F (c) represents the free energy of the mixing in the alloy which under the ideal solution approximation is given by, 
+
+F (c) = (1 − c)Gφ + c G sol + RT 
+
+(
+
+c ln (c) + (1 − c) ln (1 − c)
+
+)
+
+(4) and W (c) = Wφ(1 −c)+ Wcc and g(φ) represents a solute composition dependent double-well potential. W (c) is constructed so as to energetically prefer lower solute compositions. Such a construction favors solute diffusion towards the GB, and this diffusion is governed by the classical Fick’s law, 
+
+∂c ∂t = −∇ · J (5) with the flux, J, given by, 
+
+J = −c (1 − c) Msol ∇μ (6) where Msol is isotropic solute mobility and μ is the solute chemical potential. With the solu-tion model and the free energy expression considered above, the resulting diffusion equation driving the order parameters is given by, 
+
+∂φ i
+
+∂t = −Mφi
+
+(
+
+W (c)∂g (φ)
+
+∂φ i
+
+− ǫ∇2φi
+
+)
+
+(7) As the double-well height is now a function of the solute composition, this leads to a dependency of the GB thickness on the solute composition ( δ = ǫ/W (c)). To maintain a fixed GB width we introduce a new scaled parameter ˜ǫ = ǫ/W (c). With the introduction of this scaled parameter, the governing equation of grain growth in the presence of a solute distribution is given by, 
+
+∂φ i
+
+∂t = −Mφi W (c)
+
+(∂g (φ)
+
+∂φ i
+
+− ˜ǫ ∇2φi
+
+)
+
+(8) 8Model of solute precipitation. 
+
+The second case we consider is a phase separating solution, in which the free energy of the system is given by, 
+
+Π = 
+
+∫
+
+> Ω
+
+Lc dV =
+
+∫
+
+> Ω
+
+[
+
+G(c, φ) + ǫ
+
+2 |∇ φi|2 + κ
+
+2 |∇ c|2
+
+]
+
+dV (9) Here G(c, φ) has the form given by Equation (3), but the free energy density of the solution is given by, 
+
+F (c) = (1 − c)Gφ + cG sol + RT 
+
+(
+
+c ln (c) + (1 − c) ln (1 − c)
+
+)
+
++ Ω mix c(1 − c) (10) where Ωmix c(1 −c) is the heat of mixing. The evolution of the solute field is governed through the classical Cahn-Hilliard [28] equation, 
+
+∂c ∂t = ∇ · 
+
+[
+
+Msol ∇
+
+( δL c
+
+δc 
+
+)] 
+
+(11) This equation leads to fourth order spatial derivatives on the composition variable c, so to make this more suitable for the numerical formulation considered later in this work, we choose to instead write this equation as two separate coupled equations, 
+
+∂c ∂t = Msol ∇2μ (12) 
+
+μ = ∂G (c, φ )
+
+∂c − κ∇2c (13) 
+
+> Model of mechanical deformation.
+
+Considering the framework of finite-strain mechanics, total free energy of the system with the addition of the elastic strain energy density is given by, 
+
+Π = 
+
+∫
+
+> Ω
+
+Lu dV =
+
+∫
+
+> Ω
+
+[
+
+g(φ) + ǫ
+
+2
+
+> N
+
+∑
+
+> i=1
+
+|∇ φi|2 + 12 E : C(φ) : E
+
+]
+
+dV (14) where E is the Green-Lagrange strain metric and C(φ) is an average elasticity tensor that is expressed a function of the elasticity tensors corresponding to each grain orientation, Ci,and is given by, 
+
+C(φ) = 
+
+∑Ni=1 h(φi)Ci
+
+∑Ni=1 h(φi) (15) where h(φi) = (1 + sin (π(φi − 12 )) )/2 is a smooth function of grain orientations [30]. Ignoring inertial effects and body forces, the governing equation of mechanical equilibrium is given by, 
+
+∇ · P = 0 (16) where P = δL u 
+
+> δF
+
+is the first Piola-Kirchhoff stress that here is a function of the strain as well as the underlying grain orientations. 9Previously we looked at three phenomenon namely GB segregation, solute precipitation and mechanical deformations. However, in a realistic system these phenomenon occur simul-taneously. From modeling perspective GB segregation and solute precipitation are similar phenomenon difference being in the interaction between solute particles and base metal. As discussed previously when solute particles and base metal form an ideal solution we observe GB segregation, while solute precipitation is observed when a regular solution is formed. Henceforth, we present a coupled model which incorporated the previously discussed phe-nomenon. 
+
+> Coupled model of grain growth with GB segregation and mechanical deformation.
+
+Assuming solute particles form an ideal solution with the base metal and system is mechan-ically deformed, total free energy of the system, considering finite strain mechanics, can be given as, 
+
+Π = 
+
+∫
+
+> Ω
+
+L dV =
+
+∫
+
+> Ω
+
+[
+
+G(c, φ) + ǫ
+
+2
+
+> N
+
+∑
+
+> i=1
+
+|∇ φi|2 + 12 E : C(φ) : E
+
+]
+
+dV (17) here G(c, φ) due to assumption of ideal solution model takes the same form as equation (3) and (4), and can be given in a complete form as, 
+
+G(c, φ) = (1 − c)Gφ + cG sol + RT 
+
+(
+
+c ln (c) + (1 − c) ln (1 − c)
+
+)
+
++ g(φ)W (c) (18) Following the same assumptions regarding mechanical deformations and same treatment of interfacial energy parameter as presented previously, governing equations for evolutions of order parameter and solute, and governing equation of mechanical equilibrium can be given as, 
+
+∂φ i
+
+∂t = −Mφi W (c)
+
+(∂g (φ)
+
+∂φ i
+
+− ˜ǫ∇2φi
+
+)
+
+− Mφi
+
+2
+
+(
+
+E : ∂C(φ)
+
+∂φ i
+
+: E
+
+)
+
+∂c ∂t = c(1 − c)Msol ∇2μμ = ∂F (c)
+
+∂c + g(φ)∂W (c)
+
+∂c 
+
+∇ · P = 0 
+
+(19) 
+
+> Coupled model of grain growth with solute precipitation and mechanical deformation.
+
+With the assumption of a regular solution model, total free energy of the mechanically deformed system, considering finite strain mechanics, can be given as, 
+
+Π = 
+
+∫
+
+> Ω
+
+L dV =
+
+∫
+
+> Ω
+
+[
+
+G(c, φ) + ǫ
+
+2
+
+> N
+
+∑
+
+> i=1
+
+|∇ φi|2 + κ
+
+2 |∇ c|2 + 12 E : C(φ) : E
+
+]
+
+dV (20) 10 here G(c, φ) under the assumption of regular solution model takes the form as presented in equation (3) and (10), and can be given as, 
+
+G(c, φ) = (1 − c)Gφ + cG sol + RT 
+
+(
+
+c ln (c) + (1 − c) ln (1 − c)
+
+)
+
++ Ω mix c(1 − c) + g(φ)W (c) (21) Based on the given free energy expression governing equations for evolution for order pa-rameter and solute evolution, and governing equations for mechanics can be given as, 
+
+∂φ i
+
+∂t = −Mφi W (c)
+
+(∂g (φ)
+
+∂φ i
+
+− ˜ǫ∇2φi
+
+)
+
+− Mφi
+
+2
+
+(
+
+E : ∂C(φ)
+
+∂φ i
+
+: E
+
+)
+
+∂c ∂t = Msol ∇2μμ = ∂G (c, φ)
+
+∂c − κ∇2c
+
+∇ · P = 0 
+
+(22) 
+
+3. Variational Formulation 
+
+We now pose the above governing equations in their weak (integral) form. This formula-tion is used to solve these equations within a standard finite element framework. Find the primal fields {φi, c, μ, u},
+
+φi ∈ Sφi , Sφi = {φi ∈ H1(Ω) | φi = φ′ 
+
+> i
+
+∀ X ∈ Γφi },c ∈ Sc, Sc = {c ∈ H1(Ω) | c = c′ ∀ X ∈ Γc},μ ∈ Sμ, Sμ = {μ ∈ H1(Ω) | μ = μ′ ∀ X ∈ Γμ},
+
+u ∈ Su, Su = {u ∈ H1(Ω) | u = u′ ∀ X ∈ Γu}
+
+such that for their respective variations {w, ˜w, ν, w},
+
+∀ w ∈ Vφi , Vφi = {w ∈ H1(Ω) | w = 0 ∀ X ∈ Γφi },
+
+∀ ˜w ∈ Vc, Vc = { ˜w ∈ H1(Ω) | ˜w = 0 ∀ X ∈ Γc},
+
+∀ ν ∈ Vμ, Vν = {ν ∈ H1(Ω) | ν = 0 ∀ X ∈ Γμ},
+
+∀ w ∈ Vu, Vu = {w ∈ H1(Ω) | w = 0 ∀ X ∈ Γu}
+
+we satisfy the following integral equations in each of the different cases listed below, 11 Grain boundary segregation. Weak form of the equations for the order parameter and solute: 
+
+∫
+
+> Ω
+
+w ∂φ i
+
+∂t dV = −Mφi W (c)
+
+∫
+
+> Ω
+
+w ∂g (φ)
+
+∂φ i
+
+dV − Mφi W (c) ˜ǫ
+
+∫
+
+> Ω
+
+∇w · ∇ φ dV 
+
+∫
+
+> Ω
+
+˜w ∂c ∂t dV = −Msol 
+
+∫
+
+> Ω
+
+c (1 − c) ∇ ˜w · ∇ μ dV 
+
+∫
+
+> Ω
+
+ν μ dV =
+
+∫
+
+> Ω
+
+ν ∂F (c)
+
+∂c dV +
+
+∫
+
+> Ω
+
+ν g (φ)∂W (c)
+
+∂c dV 
+
+(23) 
+
+Solute precipitation. Modified weak form of the equations for only the solute: 
+
+∫
+
+> Ω
+
+˜w ∂c ∂t dV = −Msol 
+
+∫
+
+> Ω
+
+∇ ˜w · ∇ μ dV 
+
+∫
+
+> Ω
+
+νμ dV =
+
+∫
+
+> Ω
+
+ν ∂G (c, φ)
+
+∂c dV + κ
+
+∫
+
+> Ω
+
+∇ν · ∇ c dV 
+
+(24) 
+
+Mechanics driven grain growth. Weak form of the equations for order parameter evolution with mechanical equilibrium: 
+
+∫
+
+> Ω
+
+w ∂φ i
+
+∂t dV = −Mφi
+
+∫
+
+> Ω
+
+w ∂g (φ)
+
+∂φ i
+
+dV −Mφi ǫ
+
+∫
+
+> Ω
+
+∇w · ∇ φidV − Mφi
+
+2
+
+∫
+
+> Ω
+
+w
+
+(
+
+E : ∂C(φ)
+
+∂φ i
+
+: E
+
+)
+
+dV 
+
+∫
+
+> Ω
+
+∇w · PdV = 0 
+
+(25) 
+
+Mechanics driven grain growth with GB segregation. Weak form of the equation(19) for evolution of order parameter, solute, and mechanical equilibrium: 
+
+∫
+
+> Ω
+
+w ∂φ i
+
+∂t dV = −Mφi W (c)
+
+∫
+
+> Ω
+
+w ∂g (φ)
+
+∂φ i
+
+dV − Mφi W (c)˜ ǫ
+
+∫
+
+> Ω
+
+∇w · ∇ φidV − Mφi
+
+2
+
+∫
+
+> Ω
+
+w
+
+(
+
+E : ∂C(φ)
+
+∂φ i
+
+: E
+
+)
+
+dV 
+
+∫
+
+> Ω
+
+˜w ∂c ∂t dV = −Msol 
+
+∫
+
+> Ω
+
+c (1 − c) ∇ ˜w · ∇ μ dV 
+
+∫
+
+> Ω
+
+ν μ dV =
+
+∫
+
+> Ω
+
+ν ∂F (c)
+
+∂c dV +
+
+∫
+
+> Ω
+
+ν g (φ)∂W (c)
+
+∂c dV 
+
+∫
+
+> Ω
+
+∇w · PdV = 0 
+
+(26) 12 Mechanics driven grain growth with solute precipitation. Weak form of the equation(22) for evolution of order parameter, solute, and mechanical equilibrium: 
+
+∫
+
+> Ω
+
+w ∂φ i
+
+∂t dV = −Mφi W (c)
+
+∫
+
+> Ω
+
+w ∂g (φ)
+
+∂φ i
+
+dV − Mφi W (c)˜ ǫ
+
+∫
+
+> Ω
+
+∇w · ∇ φidV − Mφi
+
+2
+
+∫
+
+> Ω
+
+w
+
+(
+
+E : ∂C(φ)
+
+∂φ i
+
+: E
+
+)
+
+dV 
+
+∫
+
+> Ω
+
+˜w ∂c ∂t dV = −Msol 
+
+∫
+
+> Ω
+
+∇ ˜w · ∇ μ dV 
+
+∫
+
+> Ω
+
+νμ dV =
+
+∫
+
+> Ω
+
+ν ∂G (c, φ)
+
+∂c dV + κ
+
+∫
+
+> Ω
+
+∇ν · ∇ c dV 
+
+∫
+
+> Ω
+
+∇w · PdV = 0 
+
+(27) In all cases, no flux boundary conditions are considered for the order parameters and solute fields. 
+
+4. Computational implementation 
+
+Time integration of diffusion equations uses the backward Euler method. In the following sections ∆t = tn+1 − tn will be used to denote the time step. Here, we present a time-discrete form of Equation (23) only, however similar forms can be obtained for Equation (24) and Equation (25) as well, 
+
+∫
+
+> Ω
+
+w(φn+1  
+
+> i
+
+− φni ) dV = −MφW (cn+1 )∆ t
+
+∫
+
+> Ω
+
+( ∂g (φn+1 )
+
+∂φ n+1 
+
+> i
+
++ ˜ǫ ∇w · ∇ φn+1 
+
+> i
+
+)
+
+dV 
+
+∫
+
+> Ω
+
+˜w(cn+1 − cn) dV = −Msol ∆t
+
+∫
+
+> Ω
+
+cn+1 (1 − cn+1 ) ∇ ˜w · ∇ μn+1 dV 
+
+∫
+
+> Ω
+
+ν μ n+1 dV =
+
+∫
+
+> Ω
+
+νF ′(cn+1 ) dV +
+
+∫
+
+> Ω
+
+ν g (φn+1 )W ′(cn+1 ) dV 
+
+(28) A C0-continuous basis code based on the standard Finite Element Method (FEM) is used to solve the above weak forms of the governing equations. The code base is an in-house, C++ programing language based, parallel code framework with adaptive meshing and adaptive time-stepping - build on top of the deal.II open source Finite Element library [41]. 
+
+5. Results 
+
+We now present simulations of the numerical formulations of grain growth, solute seg-regation and drag, and mechanical deformation. In each case, we model grain growth and investigate how GB evolution or its stabilization is achieved - with and without external loads. While the formulations presented in this work are for three dimensional problem 13 geometries, considering the computational complexity of these simulations with numerous order parameters, we initially focus on 2D grain evolution examples, but later also discuss a 3D example (albeit a thin 3D slice of material). The polycrystalline grain structures con-sidered have about 60 grains with six different sets of grain orientations that are randomly assigned to the grains. When present, the solute atoms are initially considered as homo-geneously distributed over the entire domain. For the 2D simulations, the computational discretization consider a mesh of 128 ×128 elements, and in 3D a similar mesh density is considered with a few elements along the thickness direction of the thin material slices. To quantify the evolution of the GBs, we use the GB energy as a measure of the total GB length in a domain at any instance. This is a good measure of the total grain length as the GB energy is directly proportional to the GB length under the assumption of a fixed GB thickness. 
+
+5.1. Grain Boundary Segregation     
+
+> (a)
+> 246800.2 0.4 0.6 0.8 1c(t=0) c(t=100) c(t=250) c(t=500) (t=500) (t=2000) GB movement direction
+> (b) Figure 2: (a) Double-well potential and driving force for grain growth without interaction of solute atoms (blue) and with GB segregation (red), (b) Solute composition across GB at different time instances and asymmetry of the solute profile across GB caused by GB movement.
+
+We now focus on the thermodynamics and kinetics of GB segregation and the drag effect created on GB migration by solute particles. Figures 2a and Figures 2b are instructive for the discussion presented. In the formulation presented, GB segregation is achieved via the solute composition dependent double-well potential. Double-well potential, g(φ), by construction results in a positive contribution to the free energy in the GB region (implicitly delineated using the gradient of the order parameters), and a zero contribution in bulk region. The height of the double-well potential depends upon solute composition, W (c). Ideally, W (c)
+
+14 would be estimated using molecular dynamics simulation or from experimental observations as different impurity/solute atoms may induce a different grain growth driving force. In this work, we have chosen a linear dependence, W (c) = Wφ(1 − c) + cW c, and it has been set up as a decreasing function of solute composition by the choice of the parameters Wφ = 1 
+
+and Wc = −0.1. This drives the solute atoms to diffuse into the GB region via Fickian diffusion to attain a lower free energy for the system. Here, Wφ and Wc are the heights of double-well potential in case of solute free GB and solute rich GB, respectively. These also represent the driving force for grain growth in the system( ∆Gφ and ∆Gc in Figure 2a). Thus, solute segregation into GB creates a drag effect which reduces the overall driving force for grain growth. The kinetics of the drag effect can be better understood by examining solute composition across the GB. Figure 2b shows solute composition at different nodes across the GB in a FE simulation, and it can be seen that, with time, solute particles diffuse from the bulk region to the GB region and segregate along the GB. As a result solute composition increases in the GB and reduces in the bulk region and the solute forms a symmetric composition profile across a stationary GB( φ(t = 500) ). However, during GB migration( φ(t = 2000) ), solute composition profile across GB becomes asymmetric which causes a drag effect on the moving GB, reducing GB migration speed. As the GB migrates, it drags the segregated solute with it, and if solute mobility is comparably lower than the GB mobility the asymmetry becomes prominent. This effect might not be evident, if solute mobility is kept to be of the same order as GB mobility in the simulation. In summary, in the presented model free energy has been setup in a way that effect of solute composition on double-well potential directly reflects on the GB mobility, and thus the slow kinetics of the GB is achieved through the thermodynamics. Figure 3 shows a comparison of evolving grain structure in the absence and the presence of GB segregation in a polycrystalline NC alloy. Here, we assume initial state of solute to be homogeneously distributed in the system with a composition of 0.3. Then we allow the solute to diffuse for about 500 time steps in the equilibration stage of the simulation during which solute atoms segregate to the GB. Figure 3(d,e,f) show the GBs after solute has segregated into the GB. It should be clear from the discussion presented above that 
+
+W (c) plays an important role in modeling GB segregation and the solute drag effect. To understand its effect in more detail, we investigate grain growth in NC alloys with different values of Wc. Figure 4 shows evolution of grain structure over time for different values of 
+
+Wc (Wc = 0 .2, −0.1 and −0.4). We see that Wc = −0.4 offers the maximum drag effect as the thermodynamic driving force for grain growth decreases the most in this case. Further, to quantify the solute drag effect, we compute total GB energy ( ǫ
+
+> 2
+
+∑Ni=1 |∇ φ|2) in the system. Figure 10a shows a comparison of GB energy in the system with and without GB segregation. It can be seen that GB energy decreases much slowly in case of GB segregation as compared to grain growth without any segregation effect. The initial increase in the GB 15 grain boundary solute 
+
+> Figure 3: Comparison of grain structure evolution at three different time steps without interaction of the solute atoms (a,b,c) and with the drag effect due to GB segregation (d,e,f).
+
+energy in case of segregation is during the equilibration time for GB stabilization. Similarly Figure 10b shows GB energy variation with time for different values of Wc, and it can be seen that Wc = −0.4 offers maximum drag effect as GB energy variation is slowest with time as compared to Wc = 0 .2 and Wc = −0.1.
+
+5.2. Solute Precipitation 
+
+In the previous section, we studied the effects of GB segregation which assumes an ideal solution model. However, NC alloys mostly form a regular solution in which the system phase separates into solute rich and solute depleted zones through spinodal decomposition. Figure 5 presents a comparison of evolving grain structure with time in the presence and absence of solute precipitation. Similar to the case of GB segregation, we allow for the solute to evolve in the system through Equations 12 and 13. We observe solute precipitating at the triple junctions of the GBs, as the double-well potential, g(φ), by construction attains its maxima at the triple junctions. To minimize the total free energy of the system, solute atoms start to diffuse towards the GBs and the triple junctions, and eventually form precipitates at the triple junctions. As shown in Figures 5(d,e,f), the solute atoms initially precipitate to the GBs. However, with the passage of time, the solute atoms eventually diffuse towards the triple junctions to form precipitates. The thermodynamic arguments about the drag force presented in the previous results section for GB segregation remain valid for solute precipitate as well. However, here the drag effect is mostly localized to the GB triple junctions to which the solute has precipitated. 16 solute           
+
+> Figure 4: Comparison of evolving grain structure with different drag force exerted on GB, controlled by Wc;
+> Wc= 0 .2(a,b,c), Wc=−0.1(d,e,f), Wc=−0.4(g,h,i)
+
+This is unlike the case of GB segregation discussed earlier where the drag force acts on the entire GB. As the solute atoms precipitate to the triple junctions, they impose a pinning effect on the GBs and prevent the triple junctions to migrate. This eventually leads to the fixation of all the triple junctions in the grain structure, and the solute-free GBs can only evolve between the fixed triple junctions. This leads to the stabilization of the NC alloy grain structure. The temporal evolution of the GB energy also supports this argument. As can be seen in Figure 10c, for the case of solute precipitation, the GB energy stagnates in the system after some time - indicating a stable grain structure. 
+
+5.3. Effect of mechanical deformation 
+
+In previous sections, we looked at the drag effect caused by impurity/solute atoms present in the system. In this section, we examine the effects of external loading on grain growth. For this case, we apply a Dirichlet boundary condition on the displacement at the right end, as shown in Figure 6. We consider an elastic anisotropy for the grains such that the elastic modulus in the e2 direction is twice its value along the e1 direction, where e1 and e2 are the local crystallographic orientation of each grain. Due to elastic anisotropy considered, in addition to GB energy minimization, grain growth is now also driven so as to minimize 17 grain boundary solute 
+
+> Figure 5: Comparison of grain structure at different time steps without soute interaction (a,b,c) and with solute precipitaiton( d,e,f), demonstrating the pinning behavior of the solute precipitates at the triple junc-tions.
+
+the stored elastic strain energy. This results in differential deformation of the grains along the different crystallographic axes, and this imposes an additional driving force on the GBs. As will be shown, we observe that the rate of grain growth increases due to this additional driving force from strain energy minimization under an external load.  
+
+> X X
+> e e
+> Figure 6: Displacement boundary conditions applied on the geometry. Also shown in the inset image are the local crystallographic direction of the grains.
+
+Figure 7 presents a comparison of evolving grain structure with and without the effects of external load. To observe the effects of external load on grain growth, we apply desired boundary conditions before the GBs are numerically permitted to migrate (non-zero GB 18 mobility). 
+
+grain boundary 
+
+displacement 
+
+> Figure 7: Comparison of grain structure without load (a,b,c), and with the application of uniaxial tensile load (d,e,f).
+
+Under influence of an applied load, grain growth is driven by minimization of the GB energy as well as minimization of the elastic strain energy. In this context, ∫
+
+> Ω
+
+( ∂G (φ) 
+
+> ∂φ i
+
+−
+
+ǫ∇2φi
+
+)dV denotes the chemical energy contribution for grain growth, and 12
+
+∫
+
+> Ω
+
+(E : ∂C(φ) 
+
+> ∂φ i
+
+:
+
+E)dV denotes strain energy contribution for grain growth. Depending on their individual contributions, GB energy and strain energy may either complement each other or compete against each other. If ∫
+
+> Ω
+
+(∂G (φ) 
+
+> ∂φ i
+
+− ǫ∇2φi
+
+)
+
+dV > 12
+
+∫ 
+
+> Ω
+
+E : ∂C(φ) 
+
+> ∂φ i
+
+: E dV , strain energy has a significantly lower contribution towards grain growth than GB energy, and the underlying microstructure of the NC alloy remains only minimally affected. However, if ∫
+
+> Ω
+
+( ∂G (φ) 
+
+> ∂φ i
+
+−
+
+ǫ∇2φ
+
+)
+
+dV < 12
+
+∫ 
+
+> Ω
+
+E : ∂C(φ) 
+
+> ∂φ i
+
+: E dV , grain growth is driven by mechanics and we see a grain structure for which stored elastic strain energy decreases more rapidly than the GB energy, resulting in a higher rate of grain growth. This effect can be seen by examining the grain structure in Figure 7, as well as by comparing the total GB energy of the system in Figure 10d. As has been observed in the simulations, during grain growth, grains with crystal orientations that favor minimum strain energy are preferred - resulting in a directionally aligned microstructure. As a consequence, since mechanical properties of NC alloys are a result of the underlying grain microstructure, preferred grain orientations (texture) can be achieved though mechanical loading during fabrication of NC alloy parts [30, 31]. 19 5.4. Solute drag effect in the presence of deformation 
+
+In the previous sections, we have separately considered the effects of GB segregation, solute precipitation and mechanics driven grain growth. However, in the physical system, all these effects play out together and are coupled. Thus, to better appreciate grain growth and grain stabilization in NC alloys, it is important to look at the combined effects of these phenomena. Here, we will consider a 3D geometry with both the effects of solute interaction and mechanics on GB evolution. As mentioned earlier, the formulations presented in this work are for 3D problem domains, however, considering the computational complexity of the simulations with numerous order parameters, we initially focussed on 2D grain evolution examples, but now present a 3D example to demonstrate geometric generality of this frame-work. We will consider two different cases: (I) GB segregation with an applied load, and (II) Solute precipitation with an applied load, both on a 3D domain with the same initial grain structure as the 2D examples considered in the previous sections.  
+
+> grain boundary solute
+> displacement X! X" X! X" X#
+> Figure 8: Grain growth with the solute drag effect due to GB segregation and mechanics (d,e,f), and its comparison with standard grain growth without GB segregation and mechanics (a,b,c).
+
+Figure 8 shows a comparison of evolving grain structure in Case (I) (GB segregation with mechanics) - grain growth without solute precipitation. Here, GB segregation and mechanics are competing against each other. Grain growth is encouraged due to strain energy minimization, but the drag force on the moving grain boundary from GB solute segregation impedes faster grain growth as discussed in Section 5.3. However, elastic strain energy does drive the direction in which GBs migrate. By examining the GB energy variation in the system (Figure 10e) we can observe that the rate of grain growth has indeed been reduced, but the solute drag effect is not as strong as seen in Section 5.1 due to the additional driving force provided by strain energy minimization. 20 grain boundary solute  
+
+> displacement X! X" X! X" X#
+> Figure 9: Grain growth with the solute drag effect due to solute precipitation and mechanics (d,e,f), and its comparison with standard grain growth without solute precipitation and mechanics (a,b,c).
+
+Figure 9 presents grain growth simulation for Case (II) (Solute precipitation with me-chanics) - grain growth with solute precipitation. We observe that as in Section 5.2, solute atoms precipitate to the triple junctions and have a pinning effect on these junctions. Al-though an external load has been applied on the system, stored strain energy does not have much effect on grain growth as the triple junctions become immobile due to solute pinning effect - resulting in a very stable grain structure. This fact can be further appreciated by observing the GB energy variation in the system (Figure 10f) which shows that the GBs have fully stabilized, and thus, the GB energy remains constant. 21 0 2 4 6 8 10 12 5 · 10 −2
+
+0.10.15 0.20.25 
+
+T × 10 3 (time step) 
+
+> Υ
+
+GB segregation without drag 
+
+(a) 
+
+0 2 4 6 8 10 12 0.15 0.20.25 0.3
+
+T × 10 3 (time step) 
+
+> Υ
+
+Wc = 0 .2
+
+Wc = −0.1
+
+Wc = −0.4
+
+(b) 
+
+0 2 4 6 8 10 12 5 · 10 −2
+
+0.10.15 0.20.25 
+
+T × 10 3 (time step) 
+
+> Υ
+
+precipitation without drag 
+
+(c) 
+
+0 2 4 6 8 10 12 5 · 10 −2
+
+0.10.15 0.2
+
+T × 10 3 (time step) 
+
+> Υ
+
+with deformation without deformation 
+
+(d) 
+
+0 2 4 611.522.53
+
+·10 −3
+
+T × 10 3 (time step) 
+
+> Υ
+
+without drag segregation+deformation 
+
+(e) 
+
+1 2 3 4 5 6 71.522.53
+
+·10 −3
+
+T × 10 3 (time step) 
+
+> Υ
+
+without drag precipitation+deformation 
+
+(f) Figure 10: GB energy variation in the system for (a) GB segregation in 2D (Section 5.1), (b) for different values of Wc in GB segregation in 2D (Section 5.1), (c) solute precipitation in 2D (Section 5.2), (d) applied load in 2D (Section 5.3), (e) GB segregation with applied load in 3D (Section 5.4), and (f) solute precipitation with applied load in 3D (Section 5.4) 
+
+22 6. Conclusion 
+
+In this work, we have modeled important phenomena that are known to affect grain growth in nanocrystalline alloys. To this end, we have considered the effects of GB solute segregation, solute precipitation, and mechanical deformation. We have developed a coupled phase-field model, considering a solute composition dependent double-well potentials, and studied their effect on grain growth. We have considered both an ideal solution model to represent solute behavior in the dilute limit to model GB segregation, and a regular solu-tion model to explain solute precipitation when there exists a miscibility gap and system undergoes a phase separation. We carried out a parametric studies to estimate the effect of the solute drag force on the GB movement in cases of GB segregation and solute precipi-tation. We also present a mechano-chemical phase-field model to understand the effects of mechanical deformation on grain growth in NC alloys. We observe that GB segregation and solute precipitation offer a drag force on the moving GB, in turn reducing the grain growth driving force, thus, stabilizing the grain structure in NC alloys. However, under the effect of an applied load, the rate of grain growth increases due to the additional driving force on GBs from strain energy minimization. For a broader understanding of microstructure stabi-lization, we also present studies of the coupled effects of GB segregation, solute precipitation and mechanical loading. This work numerically demonstrates that in NC alloys, grain size stabilization can be achieved through impurity/solute atoms, and that the orientations of the stabilized grain microstructures can be modulated by applying mechanical deformation. 
+
+References 
+
+[1] P. La, J. Ma, Y. T. Zhu, J. Yang, W. Liu, Q. Xue, R. Z. Valiev, Dry-sliding tribological properties of ultrafine-grained ti prepared by severe plastic deformation, Acta materialia 53 (2005) 5167–5173. [2] I. Szlufarska, A. Nakano, P. Vashishta, A crossover in the mechanical response of nanocrystalline ceramics, Science 309 (2005) 911–914. [3] M. A. Meyers, A. Mishra, D. J. Benson, Mechanical properties of nanocrystalline materials, Progress in materials science 51 (2006) 427–556. [4] J. P. Hirth, The influence of grain boundaries on mechanical properties, 1972. [5] G. Masing, K. Lucke, P. Nolting, Influence of small additions on recrystallization be-havior of superpurity aluminum, Z. Metallk (1956). [6] M. Hillert, Inhibition of grain-growth by 2nd-phase particles, Acta Metallurgica 36 (1988) 3177–3181. 23 [7] C. Smith, Grains, phases and interfaces - an interpretation of microstructure, Trans Am. Ins. Min. Engg. 175 (1948) 15–51. [8] G. Hassold, H. E. D. Srolovitz, Effects of particle-size on inhibited grain-growth, Scr. Metall. 24 (1990) 101–107. [9] R. Kirchheim, Grain coarsening inhibited by solute segregation, Acta Materialia 50 (2002) 413–419. [10] R. Kirchheim, Reducing grain boundary, dislocation line and vacancyformation energies by solute segregation. ii. experimental evidence and consequences, Acta Materialia 55 (2007) 5139–5148. [11] K. Lücke, K. Detert, A quantitative theory of grain boundary motion and recrystalliza-tion in metals in the presence of impurities, Acta Metallurgica 5 (1957) 628–637. [12] J. W. Cahn, Impurity drag effect in grain boundary motion, Acta Metallurgica 10 (1962) 789–798. [13] M. Hillert, B. Sundman, A treatment of the solute drag on moving grain boundaries and phase interfaces in binary alloys, Acta Metallurgica 24 (1976) 731–743. [14] A. A. Wheeler, W. J. Boettinger, G. B. McFadden, Phase-field model of solute trapping during solidification, Physical Review E 47 (1993) 1893–1909. [15] N. A. Ahmad, A. A. Wheeler, W. J. Boettinger, G. B. McFadden, Solute trapping and solute drag in a phase-field model of rapid solidification, Physical Review E 58 (1998) 3436–3450. [16] I. Loginova, J. Odqvist, G. Amberg, J. Ågren, The phase-field approach and solute drag modeling of the transition to massive γ→ α transformation in binary fe-c alloys, Acta Materialia 51 (2003) 1327–1339. [17] P. R. Cha, S. G. Kim, D. H. Yeon, J. K. Yoon, A phase field model for the solute drag on moving grain boundaries, Acta Materialia 50 (2002) 3817–3829. [18] H. Strandlund, J. Odqvist, J. Ågren, An effective mobility approach to solute drag in computer simulations of migrating grain boundaries, Computational Materials Science 44 (2008) 265–273. [19] J. Odqvist, B. Sundman, J. Ågren, A general method for calculating deviation from local equilibrium at phase interfaces, Acta Materialia 51 (2003) 1035–1043. [20] K. Grönhagen, J. Ågren, Grain-boundary segregation and dynamic solute drag the-ory—a phase-field approach, Acta Materialia 55 (2007) 955–960. 24 [21] S. G. Kim, Y. B. Park, Grain boundary segregation, solute drag and abnormal grain growth, Acta Materialia 56 (2008) 3739–37539. [22] J. Li, J. Wang, G. Yang, Phase field modeling of grain boundary migration with solute drag, Acta Materialia 57 (2009) 2108–2120. [23] M. B. Kasen, Some observations on boundary segregation during grain growth annealing of ultrapurity aluminum, Acta Metallurgica 20 (1972) 105–113. [24] T. Xu, S. Song, A kinetic model of non-equilibrium grain-boundary segregation, Acta Metallurgica 37 (1989) 2499–2506. [25] M. Jahazi, J. J. Jonas, The non-equilibrium segregation of boron on original and moving austenite grain boundaries, Mater Sci Engg A 335 (2002) 49–61. [26] H. A. Murdoch, C. A. Schuh, Stability of binary nanocrystalline alloys against grain growthand phase separation, Acta Materiallia 61 (2013) 2121–2132. [27] F. Abdeljawad, P. Lu, N. Argibay, C. B. G, B. L. Boyce, S. M. Foiles, Grain boundary segregation in immiscible nanocrystalline alloys, Acta Materiallia 126 (2017) 528–539. [28] J. W. Cahn, J. E. Hilliard, Free energy of a non uniform system. i, interfacial free energy, J. of Chemical Physics 28 (1958) 258–267. [29] B. Schönfelder, D. Wolf, S. R. Phillpot, M. Furtkamp, Molecular-dynamics method for the simulation of grain-boundary migration, Interface Science 5 (1997) 245–262. [30] M. Tonks, P. Millett, Phase field simulations of elastic deformation-driven grain growth in2d copper polycrystals, Mat. Sci. and Engg A 528 (2011) 4086–4091. [31] M. Tonks, P. Millett, W. Cai, D. Wolf, Analysis of the elastic strain energy driving force for grain boundarymigration using phase field simulation, Scripta Materialia 63 (1997) 1049–1052. [32] R. Kobayashi, Modeling and numerical simulations of dendritic crystal growth, Physica D: Nonlinear Phenomena 63 (1993) 410–423. [33] W. J. Boettinger, J. A. Warren, C. Beckermann, A. Karma, Phase-field simulation of solidification, Annual review of materials research 32 (2002) 163–194. [34] K. Bhagat, S. Rudraraju, Modeling of dendritic solidification and numerical analysis of the phase-field approach to model complex morphologies in alloys, arXiv preprint arXiv:2210.14449 (2022). 25 [35] H. Nishimori, A. Onuki, Pattern formation in phase-separating alloys with cubic sym-metry, Physical Review B 42 (1990) 980. [36] Y. Wang, D. Banerjee, C.-C. Su, A. Khachaturyan, Field kinetic model and computer simulation of precipitation of l12 ordered intermetallics from fcc solid solution, Acta materialia 46 (1998) 2983–3001. [37] T. Jiang, S. Rudraraju, A. Roy, A. Van der Ven, K. Garikipati, M. L. Falk, Multiphysics simulations of lithiation-induced stress in li 1+ xti 2o4 electrode particles, The Journal of Physical Chemistry C 120 (2016) 27871–27881. [38] L.-Q. Chen, W. Yang, Computer simulation of the domain dynamics of a quenched sys-tem with a large number of nonconserved order parameters: The grain-growth kinetics, Physical Review B 50 (1994) 15752. [39] S. DeWitt, S. Rudraraju, D. Montiel, W. B. Andrews, K. Thornton, Prisms-pf: Ageneral framework for phase-field modeling with a matrix-free finite element method, npj Computational Materials 6 (2020) 1–12. [40] S. Allen, J. Cahn, A microscopic theory for antiphase boundary motion and its appli-cation to antiphase domain coarsening, Acta Metallurgica 27 (1979) 1085–1095. [41] D. Arndt, et al., The deal.II library, version 9.5, 2023. URL: 
+
+https://dealii.org/deal95-preprint.pdf . doi:10.1515/jnma-2023-0089. 26
