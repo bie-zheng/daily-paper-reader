@@ -1,0 +1,100 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-08-19T20:42:29.905120+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 2,
+    "quick_skim_target": 11,
+    "quick_selected": 2
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2608.17619v1",
+      "source": "arxiv",
+      "title": "Irradiation-Induced Spin Bath Evolution and as-Grown Hydrogen Defects in CVD Diamond Revealed by NV-Based DEER Spectroscopy",
+      "abstract": "The aim of this paper is to provide the reader with a review and current state of the art of the fabrication of high T2 coherence diamond, optimised by the use of double electron-electron resonance (DEER) spectroscopy. Using DEER, we study the formation, transformation, and annealing of paramagnetic defects in as-grown CVD diamond and after post-processing. Electron irradiation leads to the formation of an additional S = 1/2 resonance in the DEER spectrum, which we consider to be a composite X ensemble. By tracking the concentrations of X and P1 point defects during annealing from 650C to 1200C, we find that the X ensemble initially consists of a mixture of V- spins and interstitial spins, which disappear at about 650C. Vacancies migrate during annealing, forming clusters that persist to 1000C and disappear upon annealing at 1200C, contributing to the X ensemble signal. We have developed a model of the influence of the mixed spin bath on the coherence of NV centers, which includes independent couplings with P1 centers, V-, divacancies, and interstitials. Detailed DEER studies allowed us to reveal and resolve a weak signal from two additional S = 1/2 species associated with hydrogen: NVH- and consistent with a substitutional hydrogen defect, which overlaps the vacancy spectral line. Taken together, these results show that the NV-DEER method is a powerful tool for investigating paramagnetic defects in diamond with high precision and nanoscale resolution, essential for material optimisation. The achieved high T2 coherence time is consistent with the spin bath model, and the crystals reach the quality required for advanced quantum sensing applications.",
+      "authors": [
+        "Olga Rubinas",
+        "Jeroen Prooth",
+        "Michael Petrov",
+        "Remy Vandebosch",
+        "Emilie Bourgeois",
+        "David Chvatil",
+        "Milos Nesladek"
+      ],
+      "primary_category": "quant-ph",
+      "categories": [
+        "quant-ph",
+        "physics.atom-ph"
+      ],
+      "published": "2026-08-18T10:33:30+00:00",
+      "link": "https://arxiv.org/pdf/2608.17619v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Directly studies electron irradiation-induced point defects and their annealing evolution in diamond, matching radiation-induced point defects and clusters requirement.",
+      "llm_evidence_cn": "直接研究电子辐照诱导的金刚石中点缺陷及其退火演化，匹配辐照诱导点缺陷与团簇需求。",
+      "llm_evidence": "直接研究电子辐照诱导的金刚石中点缺陷及其退火演化，匹配辐照诱导点缺陷与团簇需求。",
+      "canonical_evidence": "直接研究电子辐照诱导的金刚石中点缺陷及其退火演化，匹配辐照诱导点缺陷与团簇需求。",
+      "llm_tldr_en": "Uses NV-based DEER spectroscopy to reveal electron-irradiation-induced paramagnetic defect ensembles in CVD diamond and their annealing transformations, tracking point-defect concentrations to clarify the nature of composite X defects.",
+      "llm_tldr_cn": "本文利用基于NV中心的DEER谱学研究CVD金刚石中辐照诱导的自旋浴演化与原生氢缺陷。通过跟踪X与P1点缺陷在退火中的浓度变化，发现X集合体由V-和间隙原子自旋混合而成，并随退火转变。该工作揭示了电子辐照缺陷的形成与转化机制，为优化高T2相干金刚石材料提供了重要实验依据。",
+      "llm_tldr": "本文利用基于NV中心的DEER谱学研究CVD金刚石中辐照诱导的自旋浴演化与原生氢缺陷。通过跟踪X与P1点缺陷在退火中的浓度变化，发现X集合体由V-和间隙原子自旋混合而成，并随退火转变。该工作揭示了电子辐照缺陷的形成与转化机制，为优化高T2相干金刚石材料提供了重要实验依据。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation-induced point defects and clusters",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.16774v1",
+      "source": "arxiv",
+      "title": "Automated Burgers Vector Identification for Individual Dislocations in Bulk Crystals",
+      "abstract": "Weak-beam imaging in dark-field X-ray microscopy (DFXM) can resolve individual dislocations in bulk crystals, but assigning Burgers vectors from the resulting contrast typically requires manual comparison with forward simulations. Here, we train a physics-informed convolutional neural network (CNN) on geometrical optics simulations of isolated dislocations in face-centred cubic (FCC) aluminium, incorporating crystallographic constraints into the learning pro- cess. The model identifies Burgers vectors from weak-beam integrated rocking-curve images. On synthetic test data, the model achieves an accuracy of approximately 93%. In an experimental cross-slip case, the constrained model as- signs 72.7% of the layer-wise predictions to the reference Burgers vector. These results show that simulation-trained, physics-informed CNNs represent a step toward automated dislocation identification in DFXM.",
+      "authors": [
+        "Abderrahmane Benhadjira",
+        "Carsten Detlefs",
+        "Vincent Favre-Nicolin",
+        "Henning Friis Poulsen",
+        "Grethe Winther",
+        "Can Yildirim",
+        "Sina Borgi"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ],
+      "published": "2026-08-17T16:20:46+00:00",
+      "link": "https://arxiv.org/pdf/2608.16774v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Automated Burgers vector identification for individual dislocations in bulk crystals, directly applicable to analyzing dislocation loops in irradiated FeCr.",
+      "llm_evidence_cn": "体相晶体中单个位错的伯氏矢量自动识别，可应用于辐照FeCr中位错环的分析。",
+      "llm_evidence": "体相晶体中单个位错的伯氏矢量自动识别，可应用于辐照FeCr中位错环的分析。",
+      "canonical_evidence": "体相晶体中单个位错的伯氏矢量自动识别，可应用于辐照FeCr中位错环的分析。",
+      "llm_tldr_en": "Automated Burgers vector identification from dark-field X-ray microscopy images using a physics-informed CNN, validated on FCC aluminum and experimental cross-slip, enabling dislocation characterization in bulk crystals such as irradiated FeCr.",
+      "llm_tldr_cn": "该研究针对暗场X射线显微镜弱束成像中位错伯氏矢量需手动对比模拟的局限，提出一种基于物理约束卷积神经网络的自动识别方法。模型在几何光学模拟的FCC铝孤立位错上训练，合成测试精度约93%，并在实验交叉滑移位错中验证。该方法可推广到辐照FeCr等体相晶体中位错环的自动表征，为辐照微结构分析提供工具。",
+      "llm_tldr": "该研究针对暗场X射线显微镜弱束成像中位错伯氏矢量需手动对比模拟的局限，提出一种基于物理约束卷积神经网络的自动识别方法。模型在几何光学模拟的FCC铝孤立位错上训练，合成测试精度约93%，并在实验交叉滑移位错中验证。该方法可推广到辐照FeCr等体相晶体中位错环的自动表征，为辐照微结构分析提供工具。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "dislocation loop formation in irradiated FeCr",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

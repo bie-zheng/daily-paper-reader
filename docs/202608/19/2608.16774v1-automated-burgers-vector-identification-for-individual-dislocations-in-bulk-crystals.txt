@@ -1,0 +1,394 @@
+Title: Automated Burgers Vector Identification for Individual Dislocations in Bulk Crystals
+
+URL Source: https://arxiv.org/pdf/2608.16774v1
+
+Published Time: Tue, 18 Aug 2026 02:24:30 GMT
+
+Number of Pages: 19
+
+Markdown Content:
+# Automated Burgers Vector Identification for Individual Dislocations in Bulk Crystals 
+
+Abderrahmane Benhadjira a,b,1, ∗∗ , Carsten Detlefs a, Vincent Favre-Nicolin a,b , Henning Friis Poulsen c, Grethe Winther d, Can Yildirim a, Sina Borgi c,1, ∗
+
+> aEuropean Synchrotron Radiation Facility, Grenoble, 38043, France
+> bUniv. Grenoble Alpes, Grenoble, 38400, France
+> cDepartment of Physics, Technical University of Denmark, Kgs. Lyngby, 2800, Denmark
+> dDepartment of Mechanical Engineering, Technical University of Denmark, Kgs. Lyngby, 2800, Denmark
+
+Abstract 
+
+Weak-beam imaging in dark-field X-ray microscopy (DFXM) can resolve individual dislocations in bulk crystals, but assigning Burgers vectors from the resulting contrast typically requires manual comparison with forward simulations. Here, we train a physics-informed convolutional neural network (CNN) on geometrical optics simulations of isolated dislocations in face-centred cubic (FCC) aluminium, incorporating crystallographic constraints into the learning pro-cess. The model identifies Burgers vectors from weak-beam integrated rocking-curve images. On synthetic test data, the model achieves an accuracy of approximately 93%. In an experimental cross-slip case, the constrained model as-signs 72.7% of the layer-wise predictions to the reference Burgers vector. These results show that simulation-trained, physics-informed CNNs represent a step toward automated dislocation identification in DFXM. 
+
+Keywords: Burgers vector, X-ray imaging, X-ray di ff raction, DFXM, Deep learning, Dislocations 
+
+1. Introduction 
+
+The plastic deformation of crystalline materials is governed by the nucleation, motion, interaction, and accumula-tion of line defects known as dislocations, which accommodate permanent shape changes at the atomic scale (Hirth and Lothe, 1992). These dislocations form complex networks that evolve under stress and strongly influence key mechanical properties such as strength, ductility, and toughness. As their density and arrangement change during de-formation, they promote the formation of hierarchical structures such as planar dislocation networks delineating more equiaxed cells(Winther and Huang, 2007; Moussa et al., 2017) or dislocation interaction with grain boundaries (Guo et al., 2020), ultimately shaping the macroscopic behavior of metals and other crystalline solids. Beyond mechanical response, dislocations are also important in semiconductor materials, where their strain fields and defect cores can introduce electronic states, a ff ect carrier transport, and act as radiative or non-radiative recombination centers. Con-sequently, they can influence optical and electronic properties such as photoluminescence, carrier lifetime, leakage current, and device e ffi ciency (Sauer et al., 1985; Schröter et al., 1995; Speck and Rosner, 1999; Reiche and Kittler, 2016). Capturing dislocation behavior is therefore central to both fundamental materials science and engineering applications, including the design of structural materials, microelectronic components, optoelectronic devices, and energy technologies. To model these processes, multiscale frameworks have been developed ranging from discrete dislocation dynamics (DDD) simulations (Devincre et al., 2011; Po et al., 2014) to continuum dislocation dynamics (CDD) simulations (Mohamed et al., 2015; Pachaury et al., 2022). However, these models heavily depend on having realistic initial spatial dislocation distributions as well as statistics on dislocation interactions and mobilities at the microscale. Accurate, 
+
+> ∗Corresponding author e-mail: borgi@dtu.dk
+> ∗∗ Contributing author e-mail: abderrahmane.benhadjira@esrf.fr
+> 1These authors contributed equally to the presented work. arXiv:2608.16774v1 [cond-mat.mtrl-sci] 17 Aug 2026
+
+spatially resolved experimental data on individual dislocations in real materials is crucial for validating and refining these simulations. Despite decades of progress in electron microscopy and di ff raction methods, a significant need remains for experimental techniques that can non-destructively resolve individual dislocations in three dimensions (3D) within bulk samples under realistic conditions (Lang et al., 1997; Ludwig et al., 2001; Simons et al., 2015a; Brennan et al., 2022; Hänschke et al., 2012; Danilewsky, 2020; Tanuma et al., 2012). The characterization of dislocations has previously relied heavily on electron microscopy techniques. Trans-mission electron microscopy (TEM) remains the gold standard for imaging individual dislocations with near-atomic spatial resolution and has played a central role in developing our understanding of dislocation core structures and interactions (Williams and Carter, 2009). More recently, electron backscatter di ff raction (EBSD), and in particular its high-resolution variant (HR-EBSD), has demonstrated the ability to map dislocation-induced lattice rotations and even resolve individual dislocations under favorable conditions (Moussa et al., 2017; Ernould et al., 2022). However, these techniques are inherently limited to two-dimensional (2D) surfaces or thin-foil samples, making them less suited for studying the dynamics of evolving 3D dislocation networks under stress in bulk specimens. To overcome these limitations, dark-field X-ray microscopy (DFXM) has emerged as a powerful alternative for non-destructive imaging of dislocations deeply embedded within crystalline materials. DFXM uses high-energy syn-chrotron X-rays and objective-based imaging in Bragg di ff raction geometry to probe specific crystallographic planes at depth, o ff ering sub-micrometer spatial resolution and sensitivity to strain fields on the order of 10 −4 radians (Simons et al., 2015b; Jakobsen et al., 2019; Yildirim et al., 2023). By tuning to weak-beam conditions, DFXM selectively enhances contrast from regions of lattice distortion, allowing individual dislocations to be imaged and tracked in situ 
+
+during mechanical loading (Dresselhaus-Marais et al., 2021b; Frankus et al., 2025). Despite these advantages, in-terpreting weak-beam images still requires significant manual input or comparison to simulations, and the volume of data acquired in 3D or dynamic experiments can quickly become a bottleneck for analysis. As such, there is a growing need for automated, scalable approaches that can extract dislocation-level information from DFXM data with minimal user intervention. Recent advances in DFXM have demonstrated the technique’s potential for resolving not only static dislocation structures, but also their dynamics and interactions in 3D. For example, Dresselhaus-Marais et al. (2021a) and Yildirim et al. (2023) imaged individual dislocations in bulk aluminium with sub-micrometer resolution, while Frankus et al. (2025) captured the 3D evolution of dislocation pile-ups during tensile loading, o ff ering experimental insight into collective dislocation behavior under stress. In addition to these e ff orts, Pal et al. (2025) extended the classical invisibility criterion from TEM to DFXM by analysing asymmetries in rocking curves across multiple tilt directions, providing a framework for deducing Burgers vectors from angular contrast patterns. Building on some of these developments, the work in Borgi et al. (2025) introduced a framework that uses ge-ometrical optics (GO) to simulate weak-beam DFXM images for isolated dislocations in face-centred cubic (FCC) aluminium crystals (Poulsen et al., 2017, 2021; Borgi et al., 2024). By generating libraries of simulated images that span all possible combinations of slip planes, Burgers vectors, and line directions, it was demonstrated that the identity of a dislocation can be inferred from a single weak-beam image through cross-correlation, provided that the dislocation is well isolated and the imaging conditions are optimized. This established a new paradigm for direct, quantitative dislocation identification from sparse 2D data, o ff ering a valuable complement to more time-consuming 3D reconstructions. Although identification via cross-correlation with forward-modelled images can be accurate, it requires com-parisons across many possible configurations and may not scale easily to high-throughput or real-time workflows. In time-resolved experiments, where dislocation structures evolve under applied stress, the amount of image data increases, placing further demands on analysis pipelines. Moreover, as experimental setups diversify, e.g. probing dif-ferent reflections, geometries, and materials, the parameter space of possible dislocation images also expands. These trends highlight the need for automated methods that can generalize across experimental conditions, reduce user input, and provide fast and reliable dislocation identification at scale. Machine learning (ML) has been increasingly adopted in microscopy and di ff raction to accelerate data interpreta-tion and enable real-time feedback during experiments. In electron microscopy, ML has been used to improve orien-tation mapping accuracy and classify deformation mechanisms from di ff raction-based image data such as EBSD and scanning transmission electron microscopy (STEM) (Ding et al., 2021; Wittwer and Seita, 2022). For instance, Zhang et al. (2019) employed convolutional neural networks (CNNs) to extract dislocation microstructures from EBSD data. Similarly, Yassar et al. (2010) used artificial neural networks (ANNs) to predict the flow stress of micropillars, incor-2𝜙 𝜒 𝑥ℓ 𝑦ℓ 𝑧ℓ 𝜁𝑣 𝜁ℎ 
+
+CRL 
+
+Δ𝐸 /𝐸 
+
+Monochromator Slits + Condenser 
+
+𝑘𝑖𝑛 
+
+Goniometer Beam Detector a) 
+
+𝑘𝑜𝑢𝑡 
+
+2𝜃 b)              
+
+> 𝑸 𝒔
+> 𝒚
+> 𝑸
+> 𝒔 𝒚 Figure 1: Schematic of the DFXM geometry used for the simulations and experiments. A monochromator defines the relative energy bandwidth
+> ∆E/E, while slits and a one-dimensional condenser set the beam size, incoming divergences ( ζv, ζ h), and illuminated sheet height ∆zℓ.The di ff racted beam at angle 2 θis collected by the compound refractive lens (CRL) and recorded on the downstream detector. Insets (a) and (b) show the crystal orientations for the two reflections used in this work, with di ff raction vector ˆ Q, the crystallographic direction ˆ yparallel to yℓ, and surface-normal direction of the sample, ˆ sin the di ff racted-beam plane. The ˆ ydirection is plotted inversely for visualization. The ϕscan rocks the sample about yℓ, while the χscan rolls the sample about xℓ.
+
+porating dislocation density and model size as input features. Tao et al. (2024) used ML models to predict micropillar compression behavior based on DDD simulations. Additionally, Hiemer et al. (2023) applied kernel ridge regression (KRR) to establish links between plasticity and dislocation characteristics, analysing the influence of strain rate, dis-location density, and strengthening mechanisms in FCC metals. In X-ray di ff raction applications, Masto et al. (2024) used a U-net for inpainting Bragg coherent di ff raction patterns a ff ected by detector gaps, and Yanxon et al. (2023) used traditional ML models to classify artifacts in X-ray di ff raction data. These advances demonstrate the potential of supervised learning for extracting physically meaningful information from high-dimensional image data, and suggest that similar strategies could enhance the scalability and automation of dislocation analysis in DFXM. A second, pragmatic motivation is acquisition speed: learning-based analyses can sometimes tolerate lower signal-to-noise ratios (SNR), allowing a trade-o ff between dose and throughput. In EBSD, physics-guided dictionary index-ing and related methods routinely index patterns at reduced dwell times and are explicitly robust to noise, enabling near-real-time throughput (De Graef, 2020; Lenthe et al., 2019). Recent work pushes this further by denoising or re-constructing patterns from subsampled scans with ML, sustaining indexing fidelity at lower SNR (Krishna et al., 2023; Broad et al., 2025). By the same logic, well-calibrated DFXM setups may allow shorter exposures while retaining reliable predictions, increasing acquisition rates. In this work, we present a supervised ML approach for identifying the Burgers vector of an isolated dislocation in weak-beam integrated (WBI) rocking-curve images Benhadjira et al. (2026). CNNs based on the ResNet-18 architec-ture He et al. (2015) are trained on GO simulations to associate image features with specific Burgers vectors across a range of dislocation types and orientations. We compare a purely data-driven model with a crystallographically constrained model, evaluate uncertainty estimates, test transfer between reflections, and apply the trained models to experimental DFXM images of isolated dislocations. Once trained, the model assigns a Burgers-vector label to new cropped images within milliseconds, reducing the need for manual comparison against simulated libraries (Borgi et al., 2025). Focusing on isolated dislocations in WBI rocking curves, we assess the potential and present limitations of simulation-trained CNNs for scalable Burgers vector identification in bulk materials. 3Figure 2: Rocking curve measured around the nominal Bragg condition, ϕ = 0◦, for the Q = [111] reflection of the aluminium single crystal. The blue curve shows the mean intensity, in the ROI, of the acquired di ff raction images as a function of sample rotation. Red markers highlight the data points along the rocking curve and raw images are added as insets at each point along the curve. The insets have the same intensity ranges for their color range, to highlight the e ff ect of the strong-beam condition and weak-beam conditions e ff ect on dislocation contrast in DFXM, with all the images having a mean intensity above the dashed black line being in the so-called strong-beam condition. There is a zoom in of the inset at   
+
+> ϕ=0.008 ◦, here one can see a domain in the ROI where multiple dislocations have strong contrast to the background noise.
+
+2. Methods 
+
+The training datasets were generated from geometrical-optics (GO) DFXM simulations, following Borgi et al. (2025). A schematic of the experimental geometry is shown in Fig. 1. The simulated dislocation configurations were specified by the Burgers vector, line direction, and slip plane, as described in Sec. 2.2. For each configuration, two di ff raction vectors were considered: ⃗ qhkl = [002] and ⃗ qhkl = [¯ 1¯ 1¯ 1]. The model was trained using simulated weak-beam DFXM images obtained within the GO approximation. In a rocking curve, the weak-beam regime corresponds to the tails away from the nominal Bragg condition, as illustrated in Fig. 2. There the strong-beam condition, where the crystal lattice is in di ff raction and the image intensity is high, the contrast for dislocations is low. However, when the sample is rotated away from the nominal condition, the mean intensity decreases and the di ff raction contrast changes, as highlighted in Fig. 2 with the large inset at ϕ = 0.008 ◦.In the weak-beam condition the dislocations have strong contrast to the background noise and can be seen as blobs or streaks depending on the dislocation character. In this work, WBI images were obtained by summing all images acquired under the weak-beam conditions along the rocking curve, only excluding the strong-beam condition images with intensities ≥ 20% of the peak mean intensity, marked with the dashed line in Fig. 2. In this regime, the di ff racted intensity is reduced and the contrast is dominated by strain-induced deviations from the Bragg condition, making dislocation distortion fields more visible. By contrast, images near the rocking-curve maximum correspond to the strong-beam condition, where multiple scattering and dynamical di ff raction e ff ects can dominate the image contrast. Because these e ff ects are not captured by the GO model, strong-beam images were excluded from training. 
+
+2.1. Ground truth: Geometrical Optics 
+
+In DFXM, forward modelling of dislocation contrast can be e ffi ciently achieved using a GO approach. In the weak-beam regime, where dynamical di ff raction e ff ects are minimal, GO approximates di ff raction via ray tracing and couples the local deformation fields of the crystal to the anisotropic angular and energy acceptance of the microscope. This provides a computationally inexpensive framework that enables experiment planning, real-time interpretation during beamtime, and post-experimental analysis of dislocation structures. The GO formalism is divided into reciprocal- and direct-space stages and follows Poulsen et al. (2021). In recip-rocal space, we sample ray directions uniformly over the objective’s acceptance cone, the numerical aperture (NA), 4and their transmission is then weighted by the objective’s angular acceptance. We parametrize directions by the out-of-plane azimuth angle, η, and the in-plane deviation from the nominal scattering angle, ∆2θ = 2θ − 2θ0, (cf. Fig. 1). The probability that a ray with direction ( η, 2θ) reaches the detector is governed by the objective’s angular accep-tance. Monte Carlo sampling of this angular domain, together with the incident energy spread, ε = ∆ E/E, and small vertical /horizontal beam divergences, ( ζv, ζ h), is mapped to a local reciprocal-space frame, ( qrock , qroll , q∥), in crystal coordinates. In the small-angle limit, the components are 
+
+qrock = − ζv
+
+2 − ∆2θ
+
+2 , (1) 
+
+qroll = − ζh
+
+2 sin θ − cos θ η, (2) 
+
+q∥ = ε + 1tan θ − ζv
+
+2 + ∆2θ
+
+2
+
+!
+
+, (3) The imaging-frame components ( q′
+
+> rock
+
+, q2θ) follow by a rotation through the Bragg angle, θ, within the di ff raction plane, 
+
+q′ 
+
+> rock
+
+= cos θ qrock + sin θ q∥, (4) 
+
+q2θ = − sin θ qrock + cos θ q∥. (5) Voxelization of ( q′
+
+> rock
+
+, qroll , q2θ) over the sampled rays yields the three-dimensional resolution kernel Res qi , which en-codes the instrument’s angular /energy acceptance. Throughout, we use normalized di ff raction vectors, q = ∆ Q/|Q0|,appropriate to the narrow range in reciprocal space probed in DFXM. In direct space, this kernel is coupled to the elastic fields of dislocations via the deformation gradient tensor, F .For a dislocation with Burgers vector ˆ b, slip-plane normal ˆ n, and line direction ˆ t, F is written as a superposition of edge and screw ( Fedge , Fscrew ) components: 
+
+F = Fscrew cos α + Fedge sin α, (6) where α is the angle between ˆ b and ˆ t. In grain coordinates, to easily fit to the corresponding reciprocal space compo-nents, the micro-mechanical model is described as 
+
+Hg = (Fg)−T − I, (7) with Fg the deformation gradient in the grain frame and I the identity matrix. The scattering vectors that determine the simulated image are then constructed from the scattering vector in sample-, grain-, and imaging-space respectively 
+
+qs = UsHg⃗ qhkl , (8) where Us transforms from sample to grain coordinates and ⃗ qhkl is the normalized scattering vector along the Miller indices ( hkl ). 
+
+qg = qs +
+
+
+
+ϕ − ∆θχ
+
+∆θ/ tan θ
+
+ , (9) where ϕ, χ, and ∆θ describe small o ff sets in the goniometer degrees of freedom. 
+
+qi = Θqg, (10) and Θ applies the Bragg-angle rotation to imaging space. By accumulating contributions from all illuminated voxels through Res qi , a synthetic DFXM image is generated. 5This forward-modelling framework captures the characteristic weak-beam contrast of dislocations in DFXM. Its computational e ffi ciency and interpretability make it suitable for generating the large simulated datasets used to train the ML model. To emulate experimental photon statistics and strengthen the training, simple Poisson distributed shot noise was applied to each simulated image and then combined with a thermal noise component representing the detector back-ground. The shot noise was applied to the signal intensity in each pixel of the simulated image, while the thermal noise was fitted to a dark frame (background signal) from an experimental measurement performed at the ID06 beam-line at the European Synchrotron Radiation Facility (ESRF) (Kutsal et al., 2019). The best fit for the thermal noise was found to be a non-central Student’s t-distribution with degrees-of-freedom ν = 13 .067, o ff set from zero (mean) 
+
+μ = 98 .012, and a scale parameter ρ = 3.095, as shown in Fig. 3a. The resulting noise model was then sampled pixel-wise and added to the simulated images, producing noisy counterparts that exhibit both the elevated background level and stochastic fluctuations observed experimentally. Representative examples of a raw and noisy image are shown in Fig. 3b and c, respectively, with the corresponding line profiles in Fig. 3d illustrating the e ff ect of the noise on the signal while preserving the dislocation contrast. To obtain the WBI images, a full rocking curve is simulated for each digital phantom described in Section 2.2. The rocking curve is generated by rotating the sample with the ϕ motor over ±5 × 10 −4 degrees using 40 steps. The stack is then integrated over the weak-beam regime, where the intensity is below 20% of the maximum intensity, excluding the strong-beam condition. All images are background subtracted, normalized, and stored with their Burgers vector labels for supervised CNN training. 
+
+2.2. Digital phantoms 
+
+To create each digital phantom, we use three right-handed coordinate frames, as described in Borgi et al. (2024) and Borgi et al. (2025). In short, the laboratory frame (subscript ℓ) has xℓ parallel to the incident beam direction; zℓ is perpendicular to xℓ; and yℓ completes the horizontal direction. The sample frame (subscript s) is obtained by rotating about yℓ by the Bragg angle θ. The grain frame (subscript g) is related to the sample frame by the orientation matrix 
+
+U:
+
+U =
+
+
+
+ˆs1 ˆs2 ˆs3
+
+ˆy1 ˆy2 ˆy3
+
+ˆQ1 ˆQ2 ˆQ3
+
+ . (11) where ˆ s is the sample surface normal of the di ff racted beam, ˆ y is the grain direction parallel to the yℓ axis, and ˆQ is the di ff raction vector. For the two reflections used in this work, the relation between the grain and laboratory coordinates is illustrated in Fig. 1 insets (a) and (b). Similar to Borgi et al. (2025), where a library of GO-based DFXM simulations was used to identify the Burgers vectors of isolated dislocations by cross-correlation with experimental weak-beam images, the present work uses the same simulation framework to generate a labelled training dataset for supervised learning. Each configuration corresponds to a single, straight dislocation embedded in an otherwise perfect FCC aluminium crystal and is defined by its slip plane, Burgers vector, and line direction. For FCC aluminium, the slip systems are of the type {111 }⟨ 110 ⟩,with perfect-dislocation Burgers vectors ˆ b = a 
+
+> 2
+
+⟨110 ⟩. Treating ˆ b and − ˆb as equivalent gives six unique ⟨110 ⟩ Burgers-vector labels. These were combined with the four active {111 } slip planes, and the dislocation line direction was rotated in 10 ◦ increments, giving 6 × 36 × 4 = 864 possible configurations. For each di ff raction vector, 840 configurations were retained after removing 24 configurations that are invisible under the corresponding di ff raction condition. This invisibility follows from the relation between the di ff raction vector and the Burgers vector ˆ Q · ˆb = 0. 
+
+2.3. Convolutional Neural Network Model 
+
+The implemented model is a CNN trained in a supervised manner. Network parameters are optimized via back-propagation to minimize a cross-entropy loss between predicted and reference Burgers-vector labels (Rumelhart et al., 1986; Buscema, 1998). During training, batches of DFXM images are passed through the network, and outputs are compared with reference annotations. Gradients are computed and used to update the weights through stochastic gradient descent (Robbins and Monro, 1951). This process is repeated until convergence, i.e. , until the loss stabilizes. 6Figure 3: Noise model used to make simulated images closer to the experimental detector response. (a) Detector thermal background noise, shown in grey, fitted with a non-central Student’s t distribution, shown in blue, with ν = 13 .067, μ = 98 .012, and ρ = 3.095. (b) Raw simulated image containing an isolated dislocation near the centre of the field of view. (c) Same image after adding thermal and shot noise. (d) Line-intensity profiles across the raw and noisy images in (b) and (c). 
+
+The input data consist of 510 × 170 pixel images generated from the GO simulations, each containing a single individual dislocation. The network architecture is based on the pre-activation ResNet-18 design (Fig. 4) He et al. (2016). It begins with an initial convolutional layer with 16 filters, doubling at each subsequent stage up to 256. Downsampling is implemented using strided convolutions, and batch normalization with rectified linear unit (ReLU) activation is applied throughout to stabilize and accelerate training. After the convolutional blocks, global average pooling is applied to reduce each feature map to a single value, yielding a compact feature representation. This vector is passed through a fully connected layer that outputs scores for the six candidate Burgers-vector labels. The network is implemented in PyTorch and trained for 100 epochs with stochastic gradient descent, an initial learning rate of 1 × 10 −2 that is reduced adaptively by a scheduler, and a batch size of 16. Training took 37 min on single NVIDIA Tesla V100-SXM2-32GB graphics processing units (GPUs). 
+
+2.4. Evaluation protocol 
+
+The crystallographically constrained (CC) model was trained using a loss function that combines the standard data-driven cross-entropy objective with soft crystallographic constraints. For sample i, let zi,c denote the logit for Burgers-vector label c, pi,c = softmax( zi)c the corresponding predicted probability, Vi the set of Burgers-vector labels compatible with the known slip system, and Ii the complementary set of incompatible labels. The loss is 
+
+L = − 1
+
+N
+
+> N
+
+X
+
+> i=1
+> C
+
+X
+
+> c=1
+
+yi,c log pi,c + α
+
+N
+
+> N
+
+X
+
+> i=1
+
+X
+
+> u∈I i
+
+pi,u + λ
+
+N
+
+> N
+
+X
+
+> i=1
+
+1
+
+|V i||I i|
+
+X
+
+> v∈V i
+
+X
+
+> u∈I i
+
+m −  zi,v − zi,u
+
+ + . (12) Here, yi,c is the one-hot target label, [ a]+ = max(0 , a), α controls the penalty on crystallographically incompatible probability mass, and λ controls the logit-margin penalty. The second term discourages probability assignment to Burgers vectors that are incompatible with the slip system of sample i, while the third term encourages compatible logits to exceed incompatible logits by a margin m. These terms do not impose the crystallographic constraint exactly, but bias the optimization toward slip-system-consistent predictions. After training, model performance was evaluated using prediction metrics and probabilistic uncertainty diagnos-tics. The predicted label was defined as ˆci = arg max  
+
+> c
+
+pi,c, (13) 7FCC Burgers vector Ground Truth Experimental  Neural Network 
+
+> Crystallographic constrained loss
+
++Figure 4: CNN workflow for FCC Burgers vector identification. The network is trained on simulated ground-truth WBI images using a crystallo-graphically constrained loss, then validated on experimental dislocation images to identify the Burgers vectors. 
+
+and the prediction accuracy was computed as Accuracy = 1
+
+N
+
+> N
+
+X
+
+> i=1
+
+I (ˆ ci = ci) , (14) where ci is the true Burgers-vector label and I(·) is the indicator function. Accuracy provides a global measure of predictive performance, but it can be insensitive to label imbalance. Therefore, the macro-averaged F1 score was also reported. For each label c, let TP c, FP c, and FN c denote the number of true positives, false positives, and false negatives, respectively: Precision c = TP c
+
+TP c + FP c
+
+, Recall c = TP c
+
+TP c + FN c
+
+, (15) and F1 c = 2 Precision c Recall c
+
+Precision c + Recall c
+
+. (16) The macro-averaged F1 score is Macro F1 = 1
+
+C
+
+> C
+
+X
+
+> c=1
+
+F1 c. (17) This metric gives equal weight to each Burgers-vector label and provides a label-balanced measure of performance. Label-specific errors were examined using the confusion matrix M, where Mi j denotes the number of samples with true label i predicted as label j. This representation was used to identify systematic substitutions between candidate Burgers vectors and to determine whether errors were concentrated in particular labels. The quality of the predicted probability distribution was assessed using the negative log-likelihood (NLL), NLL = − 1
+
+N
+
+> N
+
+X
+
+> i=1
+
+log pi,ci . (18) 8Figure 5: Training performance for the data-driven and crystallographically constrained prediction models. (a) Training loss as a function of epoch. The data-driven model reaches a lower final loss, while the constrained model stabilizes at a higher loss because the objective includes additional crystallographic penalty terms. (b) Prediction accuracy as a function of epoch. Both models converge to similar performance, with the constrained model giving slightly higher accuracy after convergence. 
+
+Unlike accuracy, the NLL depends on the probability assigned to the true label and penalizes confident incorrect predictions strongly. It therefore provides a complementary measure of probabilistic performance. Predictive uncertainty was quantified using the entropy of the predicted label-probability distribution. For sample 
+
+i,
+
+Hi = −
+
+> C
+
+X
+
+> c=1
+
+pi,c log pi,c. (19) Large entropy values indicate that the predicted probability mass is spread over several Burgers-vector labels, whereas small values indicate more concentrated predictions. Further, the epistemic component of uncertainty was estimated using mutual information from T stochastic forward passes. Let p(t) 
+
+> i,c
+
+denote the predicted probability for label c on stochastic pass t. The mutual information (MI) for sample i is then estimated as 
+
+MI i = −
+
+> C
+
+X
+
+> c=1
+
+¯pi,c log ¯ pi,c − 1
+
+T
+
+> T
+
+X
+
+> t=1
+
+−
+
+> C
+
+X
+
+> c=1
+
+p(t) 
+
+> i,c
+
+log p(t)
+
+> i,c
+
+ . (20) The mutual information measures the sensitivity of the predictive distribution to stochastic model variations and is used here as a diagnostic for epistemic uncertainty. Elevated values may indicate reflection conditions or Burgers-vector labels for which the learned representation is less certain. Together, accuracy, macro F1, the confusion matrix, NLL, predictive entropy, and mutual information provide complementary diagnostics of prediction performance and predictive confidence. 
+
+3. Results 
+
+3.1. Training and Test Performance 
+
+> Table 1: Comparison of performance and uncertainty estimates for the data-driven and crystallographically constrained models. Accuracy and macro F1 quantify predictive performance, while negative log-likelihood (NLL), mean entropy, and mean mutual information (MI) summarize confidence calibration, total predictive uncertainty, and epistemic uncertainty, respectively.
+
+Model type Accuracy (%) Macro F1 (%) NLL Mean Entropy Mean MI 
+
+Data-driven 88.59 88.07 0.2556 0.4000 0.0660 Crystallographically constrained 93.53 89.63 0.1824 0.3246 0.0410 To evaluate prediction performance, the purely data-driven model and the CC model were compared using the training curves in Fig. 5 and the quantitative metrics summarized in Table 1. Both models learn rapidly during the 9initial epochs, indicating that the dominant discriminative features are captured early in training. The data-driven model reaches a lower training loss, as expected, because it is optimized only for the image-label objective. The CC model maintains a higher loss because the objective includes additional crystallographic penalty terms. This higher loss should therefore not be interpreted directly as poorer prediction performance. Despite its higher training loss, the CC model achieves better test performance. Its accuracy increases from 88.59% to 93.53%, while the macro F1 score increases from 88.07% to 89.63%. The larger gain in accuracy than in macro F1 indicates that the improvement is not equally distributed across all output labels, but the constrained model still gives a modest improvement in label-balanced performance. These results suggest that the crystallographic terms act as domain-informed regularization, reducing the number of physically inconsistent predictions without removing all label-specific ambiguities. The uncertainty-related metrics follow the same trend. The negative log-likelihood decreases from 0.2556 for the data-driven model to 0.1824 for the CC model, while the mean predictive entropy and mean mutual information decrease from 0.4000 to 0.3246 and from 0.0660 to 0.0410, respectively. These values do not prove that the model is calibrated under all experimental conditions, but they show that the constraint improves both accuracy and uncertainty behavior on the simulated test set. The predictive entropy distributions in Fig. 6 provide additional insight into these averages. For both models, the distributions are concentrated near low entropy values, but the data-driven model has broader high-entropy and high-mutual-information tails. The CC model reduces this spread, consistent with the interpretation that crystallographic constraints reduce ambiguous or unstable predictions. All in all, the simulated-data results show that the CC model improves the prediction and uncertainty metrics relative to the purely data-driven model for the same WBI task. The improvement is meaningful, but it remains specific to the simulated isolated-dislocation setting and must be interpreted together with the experimental and cross-reflection tests below. 
+
+3.2. Experimental Validation 
+
+The trained CNN models were evaluated using experimental DFXM data from Frankus et al. (2026). The dataset contains three-dimensional observations of individual dislocations in pure aluminium, including a dislocation exhibit-ing double cross-slip. Cross-slip is a thermally activated process in which a screw segment transfers from its original 
+
+{111 } glide plane to another {111 } plane containing the same Burgers vector (Püschl, 2002; Lu et al., 2002; Hussein et al., 2015). Double cross-slip involves two successive cross-slip events and allows a screw dislocation to bypass obstacles while conserving its Burgers vector. For the experimentally observed dislocation, the two identified slip planes are (1¯ 1¯ 1) and (11¯ 1), with respective normals 
+
+n1 = [1¯ 1¯ 1] , n2 = [11¯ 1] . (21) Because the Burgers vector must lie in both planes, it must satisfy 
+
+b · n1 = 0, b · n2 = 0. (22) It must therefore be parallel to the intersection of the two planes: 
+
+b ∥ n1 × n2 = [1¯ 1¯ 1] × [11¯ 1] = 2[101] . (23) Since perfect dislocations in FCC aluminium have Burgers vectors of the type a/2⟨110 ⟩, the crystallographically allowed Burgers vector is 
+
+b = ± a
+
+2 [101] . (24) The sign cannot be distinguished from the integrated weak-beam contrast. This independently determined crystallo-graphic constraint makes the double-cross-slip dislocation a particularly useful experimental test of the CNN outputs. The models were tested on the integrated experimental weak-beam images using the procedure described in Section 2. For the evaluation, regions of interest were selected manually around the dislocation signal in individual WBI images. The selected regions were cropped and preprocessed using the same procedure as for the simulated data, including resizing and intensity normalization. Figure 7 shows the experimental cross-slip case used for evaluation. 10 Figures 7a and b present WBI images from two layer sections of the same dislocation. These sections correspond to the orange and blue cross-slip planes shown in Fig. 7c. The prediction percentages for this experimental case are listed in Table 2. The reference Burgers vector of the double cross-slipping dislocation is [¯ 1 0 ¯ 1]. For the data-driven model, predictions are split between the reference Burgers vector, with 45 .5%, and [0 ¯ 1 1], with 54 .5%. After applying the crystallographic constraint, the reference Burgers vector becomes the dominant prediction, increasing to 72 .7%. The remaining predictions are assigned to [¯ 1 ¯ 1 0] and [0 ¯ 1 1], with 9 .1% and 18 .2%, respectively. The constraint therefore shifts the experimental prediction distribution toward the Burgers vector expected from the cross-slip geometry. 
+
+> Table 2: Prediction performance for the experimental cross-slip case across 10 layers. The reference Burgers vector is [¯ 1 0 ¯ 1].
+
+Model Predicted Burgers vector Prediction percentage (%) Data-driven [¯ 1 0 ¯ 1] 45.5 
+
+[0 ¯ 1 1] 54.5 Crystallographically constrained [¯ 1 ¯ 1 0] 9.1 [¯ 1 0 ¯ 1] 72.7 
+
+[0 ¯ 1 1] 18.2 
+
+4. Discussion 
+
+The results show that incorporating crystallographic information into the learning process improves Burgers vector identification from WBI DFXM images of isolated dislocations. The CC model optimizes the image-based prediction task while also penalizing candidate Burgers vectors that are incompatible with the known slip geometry. Its im-proved test performance and uncertainty metrics indicate that this constraint acts as a useful form of domain-informed regularization for the simulated test set. In practice, uncertainty metrics are useful because they can flag predictions that should be treated with caution or selected for further inspection. However, the uncertainty analysis here is based on the simulated test distribution and Monte Carlo dropout; additional calibration on larger experimental datasets is needed before these values can be used as absolute confidence estimates. The experimental double cross-slip case provides a first test of transfer from simulated weak-beam images to real DFXM data. This is a demanding case because the dislocation changes slip plane and line direction while retaining the same Burgers vector. The constrained model assigns the largest fraction of predictions to the reference Burgers vector, supporting the usefulness of the crystallographic constraint. The result should nevertheless be interpreted as a  
+
+> Figure 6: Uncertainty estimates for the data-driven and crystallographically constrained models on simulated test data. (a) Kernel-density estimates of predictive entropy. Both models peak at low entropy, but the data-driven model has a broader high-entropy tail. (b) Kernel-density estimates of mutual information. Both distributions are concentrated near zero, while the data-driven model shows a wider tail toward higher epistemic uncertainty.
+
+11 Figure 7: Experimental cross-slip case used for Burgers vector prediction. (a,b) Integrated weak-beam images from dislocation layer sections extracted from the orange and blue planes shown in (c), respectively. (c) Reconstructed 3D dislocation trajectory intersecting the two cross-slip planes. (d) Mean predicted probability across the analysed layers for the data-driven and crystallographically constrained models. The red highlighted label corresponds to the reference Burgers vector. 
+
+validation case rather than a broad experimental benchmark. The remaining disagreement with the reference Burgers vector is likely related to the simulation–experiment gap, including noise, background variations, intensity overlap with neighbouring dislocations, and changes in dislocation contrast as the dislocation character varies along the line. The reflection-specific results in Fig. A.10 provide insight into what the CNN learns from the training data. Al-though models trained and tested on the same reflection perform well, direct transfer between the FCC (002) and (111) reflections is poor. This behaviour is consistent with the reflection-dependent invisibility criterion: for a given di ff raction vector, Burgers vectors satisfying ˆ Q · ˆb = 0 produce little or no dislocation contrast and are therefore absent or weakly represented in the corresponding training data. The cross-reflection confusion matrices suggest that the CNN learns both the morphology of visible dislocations and this reflection-specific visibility rule. When applied to a di ff erent reflection, it continues to suppress Burgers vectors that were invisible under the training geometry, even when they are visible under the test geometry. Thus, the poor transfer reflects an internalized ˆ Q · ˆb prior rather than purely random uncertainty or ambiguous contrast. This result demonstrates that the network extracts physically meaningful information from the simulated DFXM images, but also reveals a visibility-dependent bias. Reliable inference therefore requires training data that represent the experimental di ff raction geometry, detector response, and weak-beam integration procedure. The crystal orienta-tion must also be known a priori because di ff erent azimuthal angles can produce di ff erent dislocation contrasts for the same Burgers vector, as illustrated in Fig. A.9. The ESRF beamline (Isern et al., 2025) is particularly suitable for this approach because it enables 3DXRD orientation mapping to be combined with DFXM imaging (Shukla et al., 2025), providing the required orientation information. Future models could incorporate the di ff raction vector, reflection in-dex, and sample orientation as explicit inputs. Reflection-aware or multi-branch architectures (Ngiam et al., 2011) may further help distinguish Burgers-vector information from reflection-dependent visibility. 12 Finally, the present study is restricted to isolated dislocations in FCC aluminium and to WBI rocking curves for which geometrical-optics simulations provide a suitable training basis. Extension to crowded dislocation struc-tures and overlapping contrast fields will require moving from cropped single-dislocation classification toward joint detection and identification. Overall, the results establish the feasibility of simulation-trained, crystallographically constrained CNNs for Burgers-vector identification while defining the experimental conditions and methodological developments required for broader application. 
+
+5. Conclusion 
+
+We have demonstrated CNN-based Burgers vector identification of isolated dislocations in WBI DFXM images using models trained entirely on GO simulations. Introducing crystallographic constraints improves simulated test performance and reduces uncertainty estimates, showing that physically informed learning can regularize the model beyond a purely data-driven image-label objective. The experimental cross-slip case shows that the constrained model can transfer to real DFXM data in a representative isolated-dislocation example, even when the local slip geome-try changes along the dislocation line. Together, these results define a practical path toward simulation-trained and uncertainty-aware Burgers vector identification, while emphasizing the need for reflection-aware models and broader experimental validation. 
+
+Acknowledgments 
+
+We acknowledge support by the European Union’s Horizon 2020 Research and Innovation Programme under the Marie Sklodowska-Curie COFUND scheme (grant agreement No. 101034267), by the European Research Council (ERC) Advanced Grant No. 885022, and by the European Spallation Source (ESS) Lighthouse on Hard Materials in 3D, SOLID (Danish Agency of Science and Higher Education, grant No. 8144-00002B). We also thank the ESRF for granting the beamtime (https: // doi.org /10.15151 /ESRF-ES-1005347817) on ID06-HXM for the experiment. 
+
+Data availability 
+
+The code used to generate the ground-truth data is available at https://github.com/borgis/Geometrical_ Optics_master . The code used to estimate the Burgers vector is available at https://github.com/Benhadjira/ dfxm-bv .
+
+Appendix A. Supplementary materials 
+
+The supplementary figures provide additional information on reflection-specific training and transfer between di ff raction reflections. Figure A.8 shows the training loss, validation accuracy, and normalized confusion matrices for models trained and evaluated on a single reflection. The (002)-only model reaches higher label-wise agreement than the (111)-only model, while the (111)-only model shows stronger o ff -diagonal confusion for several candidate Burgers vectors. Figure A.9 illustrates the dependence of the simulated DFXM contrast on the azimuthal angle ψ, defined here as rotation about the fixed di ff raction vector. For a given Burgers vector, changes in ψ can produce substantial changes in the projected contrast morphology and intensity distribution. Hence, models should be trained using simulations generated at the appropriate experimental azimuthal angle. Figure A.10 tests whether a model trained on one reflection can be applied directly to a di ff erent reflection. The low cross-reflection accuracies show that this transfer is not reliable for the present training setup and motivate future models that include reflection information explicitly. 13 Figure A.8: Single-reflection training performance on simulated WBI images. The top row shows a model trained and evaluated using only the FCC (002) reflection, and the bottom row shows the corresponding result for the FCC (111) reflection. For each reflection, the left and middle panels show training and validation loss and accuracy over 50 epochs, respectively. The right panels show normalized confusion matrices for the six Burgers-vector labels. Both single-reflection models learn the prediction task, but the label-wise confusion patterns di ff er between reflections, showing that the available contrast and label separability depend on di ff raction geometry. 
+
+References 
+
+Benhadjira, A., Detlefs, C., Borgi, S., Favre-Nicolin, V., Yildirim, C., 2026. Deep learning-assisted weak beam identification in dark-field x-ray microscopy. npj Computational Materials URL: http://dx.doi.org/10.1038/ s41524-026-02127-5 , doi: 10.1038/s41524-026-02127-5 .Borgi, S., Ræder, T.M., Carlsen, M.A., Detlefs, C., Winther, G., Poulsen, H.F., 2024. Simulations of disloca-tion contrast in dark-field x-ray microscopy. Journal of Applied Crystallography 57, 358–368. doi: 10.1107/ S1600576724001183 .Borgi, S., Winther, G., Poulsen, H.F., 2025. Individual dislocation identification in dark-field x-ray microscopy. Journal of Applied Crystallography 58. doi: 10.1107/S1600576724001183 .Brennan, M.C., Howard, M., Marzouk, Y., Dresselhaus-Marais, L.E., 2022. Analytical methods for superresolution dislocation identification in dark-field x-ray microscopy. Journal of Materials Science 57, 14890–14904. URL: 
+
+https://doi.org/10.1007/s10853-022-07465-5 , doi: 10.1007/s10853-022-07465-5 .Broad, Z., Robinson, A.W., Wells, J., Nicholls, D., Moshtaghpour, A., Kirkland, A.I., Browning, N.D., 2025. Compressive electron backscatter di ff raction imaging. Journal of Microscopy 298, 44–57. URL: https:// onlinelibrary.wiley.com/doi/abs/10.1111/jmi.13379 , doi: https://doi.org/10.1111/jmi.13379 ,
+
+arXiv:https://onlinelibrary.wiley.com/doi/pdf/10.1111/jmi.13379 .Buscema, M., 1998. Back propagation neural networks. Substance Use & Misuse 33, 233–270. doi: 10.3109/ 10826089809115863 .Danilewsky, A.N., 2020. X-ray topography—more than nice pictures. Crystal Research and Technology 55, 2000012. doi: 10.1002/crat.202000012 .14 Figure A.9: Simulated DFXM contrast for three FCC a/2⟨110 ⟩ dislocations measured at the fixed q = 111 reflection. Rows correspond to Burgers-vector directions [10¯ 1], [01¯ 1], and 011, while columns show crystal rotations of ψ = 0◦, 60 ◦, and 240 ◦. The variation across rows and columns reflects the dependence of the DFXM contrast on both Burgers-vector orientation and the azimuth rotation angle 
+
+15 Figure A.10: Cross-reflection confusion matrices on simulated data. (a) Model trained on the FCC (111) reflection and tested on the FCC (002) reflection, giving an accuracy of 17.6%. (b) Model trained on the FCC (002) reflection and tested on the FCC (111) reflection, giving an accuracy of 15.7%. The prediction-density distributions above the matrices show that the models retain reflection-specific label preferences when transferred to the other reflection, consistent with the reflection dependence of the ˆ Q · ˆb visibility condition. 
+
+De Graef, M., 2020. A dictionary indexing approach for ebsd. IOP Conference Series: Materials Science and Engineering 891, 012009. URL: https://doi.org/10.1088/1757-899X/891/1/012009 , doi: 10.1088/ 1757-899X/891/1/012009 .Devincre, B., Madec, R., Queyreau, S., Kubin, L.P., 2011. Modeling crystal plasticity with dislocation dynamcis simulations : the “MICROMEGAS” code., in: Mechanics of Nano-Objects, pp. 81–99. URL: https://edf.hal. science/hal-01830722 .Ding, Z., Zhu, C., De Graef, M., 2021. Determining crystallographic orientation via hybrid convolutional neural network. Materials Characterization 178, 111213. doi: 10.1016/j.matchar.2021.111213 .Dresselhaus-Marais, L.E., Winther, G., Howard, M., Gonzalez, A., Breckling, S., Yildirim, C., Cook, P.K., Kutsal, M., Detlefs, C., Eggert, J.H., Simons, H., Poulsen, H.F., 2021a. In-situ visualization of long-range dislocation interactions at the edge of melting. Science Advances 7, abe8311. Dresselhaus-Marais, L.E., Winther, G., Howard, M., Gonzalez, A., Breckling, S.R., Yildirim, C., Cook, P.K., Kutsal, M., Simons, H., Detlefs, C., Eggert, J.H., Poulsen, H.F., 2021b. In situ visualization of long-range defect interactions at the edge of melting. Science Advances 7, eabe8311. doi: 10.1126/sciadv.abe8311 ,
+
+arXiv:https://www.science.org/doi/pdf/10.1126/sciadv.abe8311 .Ernould, C., Taupin, V., Beausir, B., Fundenberger, J.J., Maloufi, N., Guyon, J., Bouzy, E., 2022. Characterization of a nanopipe dislocation in GaN by means of HR-EBSD and field dislocation mechanics analysis. Materials Characterization 194, 112351. doi: 10.1016/j.matchar.2022.112351 .Frankus, F., Borgi, S., Zelenika, A., Ali, B., Lamas, R.R., Poulsen, H.F., Winther, G., 2025. Visualising dislocations dynamics in a pile-up. Technical University of Denmark. Frankus, F., Borgi, S., Zelenika, A., Ali, B., Rodriguez-Lamas, R., Poulsen, H.F., Winther, G., 2026. Revealing dis-location interactions controlling mechanical properties of metals. URL: https://arxiv.org/abs/2604.11397 ,doi: 10.48550/ARXIV.2604.11397 .16 Guo, Y., Collins, D.M., Tarleton, E., Hofmann, F., Wilkinson, A.J., Britton, T.B., 2020. Dislocation density distribu-tion at slip band-grain boundary intersections. Acta Materialia 182, 172–183. doi: 10.1016/j.actamat.2019. 10.031 .Hänschke, D., Helfen, L., Altapova, V., Danilewsky, A., Baumbach, T., 2012. Three-dimensional imaging of disloca-tions by X-ray di ff raction laminography. Applied Physics Letters 101, 244103. doi: 10.1063/1.4769988 .He, K., Zhang, X., Ren, S., Sun, J., 2015. Deep residual learning for image recognition. doi: 10.48550/ARXIV. 1512.03385 .He, K., Zhang, X., Ren, S., Sun, J., 2016. Deep residual learning for image recognition, in: Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, pp. 770–778. doi: 10.1109/CVPR.2016.90 .Hiemer, S., Fan, H., Zaiser, M., 2023. Relating plasticity to dislocation properties by data analysis: scaling vs. machine learning approaches. Materials Theory 7. doi: 10.1186/s41313-022-00050-y .Hirth, J.P., Lothe, J., 1992. Theory of Dislocations. Krieger Pub Co. Hussein, A.M., Rao, S.I., Uchic, M.D., Dimiduk, D.M., El-Awady, J.A., 2015. Microstructurally based cross-slip mechanisms and their e ff ects on dislocation microstructure evolution in FCC crystals. Acta Materialia 85, 180– 190. doi: 10.1016/j.actamat.2014.10.067 .Isern, H., Brochard, T., Dufrane, T., Brumund, P., Papillon, E., Scortani, D., Hino, R., Yildirim, C., Rodriguez Lamas, R., Li, Y., Sarkis, M., Detlefs, C., 2025. The esrf dark-field x-ray microscope at id03. Journal of Physics: Confer-ence Series 3010, 012163. Jakobsen, A.C., Simons, H., Ludwig, W., Yildirim, C., Leemreize, H., Porz, L., Detlefs, C., Poulsen, H.F., 2019. Mapping of individual dislocations with dark-field X-ray microscopy. Journal of Applied Crystallography 52, 122–132. doi: 10.1107/S1600576718017302 .Krishna, K.V.M., Madhavan, R., Pantawane, M.V., Banerjee, R., Dahotre, N.B., 2023. Machine learning based de-noising of electron back scatter patterns of various crystallographic metallic materials fabricated using laser directed energy deposition. Ultramicroscopy 247, 113703. URL: https://www.sciencedirect.com/science/ article/pii/S0304399123000207 , doi: https://doi.org/10.1016/j.ultramic.2023.113703 .Kutsal, M., Bernard, P., Berruyer, G., Cook, P.K., Hino, R., Jakobsen, A.C., Ludwig, W., Ormstrup, J., Roth, T., Simons, H., Smets, K., Sierra, J.X., Wade, J., Wattecamps, P., Yildirim, C., Poulsen, H.F., Detlefs, C., 2019. The esrf dark-field x-ray microscope at id06. IOP Conf. Series: Materials Science and Engineering 580, 012007. Lang, A., Makepeace, A., Martineau, P., Cooper, M., 1997. Combining optical microscopy, x-ray microradiography and x-ray topography in the study of individual cvd diamond crystallites. Diamond and Related Materials 6, 1226–1230. doi: 10.1016/s0925-9635(97)00026-5 .Lenthe, W.C., Singh, S., Graef, M.D., 2019. A spherical harmonic transform approach to the indexing of electron back-scattered di ff raction patterns. Ultramicroscopy 207. doi: 10.1016/j.ultramic.2019.112841 .Lu, G., Bulatov, V.V., Kioussis, N., 2002. Dislocation constriction and cross-slip: An ab initio study. Physical Review B 66, 144103. doi: 10.1103/PhysRevB.66.144103 .Ludwig, W., Cloetens, P., Härtwig, J., Baruchel, J., Hamelin, B., Bastie, P., 2001. Three-dimensional imaging of crystal defects by ‘topo-tomography’. J. Appl. Crystallogr. 34, 602–607. doi: 10.1107/S002188980101086X .Masto, M., Favre-Nicolin, V., Leake, S., Schülli, T., Richard, M.I., Bellec, E., 2024. Patching-based deep-learning model for the inpainting of bragg coherent di ff raction patterns a ff ected by detector gaps. Journal of Applied Crys-tallography 57, 966–974. doi: 10.1107/s1600576724004163 .17 Mohamed, M.S., Larson, B.C., Tischler, J.Z., El-Azab, A., 2015. A statistical analysis of the elastic distortion and dislocation density fields in deformed crystals. Journal of the Mechanics and Physics of Solids 82, 32–47. URL: 
+
+https://www.sciencedirect.com/science/article/pii/S0022509615001167 , doi: https://doi.org/ 10.1016/j.jmps.2015.05.011 .Moussa, C., Bernacki, M., Besnard, R., Bozzolo, N., 2017. Statistical analysis of dislocations and dislocation bound-aries from ebsd data. Ultramicroscopy 179, 63–72. doi: https://doi.org/10.1016/j.ultramic.2017.04. 005 .Ngiam, J., Khosla, A., Kim, M., Nam, J., Lee, H., Ng, A.Y., 2011. Multimodal deep learning, in: Proceedings of the 28th International Conference on Machine Learning, pp. 689–696. Pachaury, Y., Po, G., El-Azab, A., 2022. Discrete dislocation dynamics for crystal rves. part 1: Periodic network kinematics. Journal of the Mechanics and Physics of Solids 163, 104861. doi: https://doi.org/10.1016/j. jmps.2022.104861 .Pal, D., Wang, Y., Gurunathan, R., Dresselhaus-Marais, L., 2025. Measuring the burgers vector of dislocations with dark-field x-ray microscopy. J. Appl. Cryst. 58. doi: doi.org/10.1107/S1600576724011968 .Po, G., Mohamed, M.S., Crosby, T., Erel, C., El-Azab, A., Ghoniem, N., 2014. Recent Progress in Discrete Disloca-tion Dynamics and Its Applications to Micro Plasticity. Jom 66, 2108–2120. doi: 10.1007/s11837-014-1153-2 .Poulsen, H.F., Dresselhaus-Marais, L.E., Carlsen, M.A., Detlefs, C., Winther, G., 2021. Geometrical-optics formalism to model contrast in dark-field x-ray microscopy. Journal of Applied Crystallography 54, 1555–1571. URL: 
+
+https://doi.org/10.1107/S1600576721007287 , doi: 10.1107/S1600576721007287 .Poulsen, H.F., Jakobsen, A.C., Simons, H., Ahl, S.R., Cook, P.K., Detlefs, C., 2017. X-ray di ff raction microscopy based on refractive optics. Journal of Applied Crystallography 50, 1441–1456. URL: https://doi.org/10. 1107/S1600576717011037 , doi: 10.1107/S1600576717011037 .Püschl, W., 2002. Models for dislocation cross-slip in close-packed crystal structures: A critical review. Progress in Materials Science 47. Reiche, M., Kittler, M., 2016. Electronic and optical properties of dislocations in silicon. Crystals 6, 74. doi: 10. 3390/cryst6070074 .Robbins, H., Monro, S., 1951. A stochastic approximation method. The Annals of Mathematical Statistics 22, 400–407. doi: 10.1214/aoms/1177729586 .Rumelhart, D.E., Hinton, G.E., Williams, R.J., 1986. Learning representations by back-propagating errors. Nature 323, 533–536. doi: 10.1038/323533a0 .Sauer, R., Weber, J., Stolz, J., Weber, E.R., Küsters, K.H., Alexander, H., 1985. Dislocation-related photolumines-cence in silicon. Applied Physics A 36, 1–13. doi: 10.1007/BF00616453 .Schröter, W., Kronewitz, J., Gnauert, U., Riedel, F., Seibt, M., 1995. Bandlike and localized states at extended defects in silicon. Physical Review B 52, 13726–13729. doi: 10.1103/PhysRevB.52.13726 .Shukla, A., Yildirim, C., Ball, J.A.D., Detlefs, C., Cretton, A.A.W., Sarkis, M., La Bella, M., Ludwig, W., Zhang, Y., Henningsson, N.A., 2025. Bridging grain mapping and dark field x-ray microscopy for multiscale di ff raction imaging. URL: https://arxiv.org/abs/2508.17897 , doi: 10.48550/ARXIV.2508.17897 .Simons, H., King, A., Ludwig, W., Detlefs, C., Pantleon, W., Schmidt, S., Stöhr, F., Snigireva, I., Snigirev, A., Poulsen, H.F., 2015a. Dark-field x-ray microscopy for multiscale structural characterization. Nature Communications 6, 6098. URL: https://doi.org/10.1038/ncomms7098 , doi: 10.1038/ncomms7098 .18 Simons, H., Stohr, F., Michael-Lindhart, J., Jensen, F., Hansen, O., Detlefs, C., Poulsen, H.F., 2015b. Full-field hard x-ray microscopy with interdigitated silicon lenses. Opt. Commun. 359, 460. doi: 10.1016/j.optcom.2015.09. 103 .Speck, J.S., Rosner, S.J., 1999. The role of threading dislocations in the physical properties of gan and its alloys. Physica B: Condensed Matter 273–274, 24–32. doi: 10.1016/S0921-4526(99)00399-3 .Tanuma, R., Mori, D., Kamata, I., Tsuchida, H., 2012. X-ray microbeam three-dimensional topography imaging and strain analysis of basal-plane dislocations and threading edge dislocations in 4H-SiC. Applied Physics Express 5, 061301. doi: 10.1143/APEX.5.061301 .Tao, J., Wei, D., Yu, J., Kan, Q., Kang, G., Zhang, X., 2024. Micropillar compression using discrete dislocation dynamics and machine learning. Theoretical and Applied Mechanics Letters 14, 100484. doi: 10.1016/j.taml. 2023.100484 .Williams, D., Carter, C., 2009. Transmission Electron Microscopes. Second edition ed., Springer. Winther, G., Huang, X., 2007. Dislocation structures. part ii. slip system dependence. Philosophical Magazine 87, 5215–5235. doi: 10.1080/14786430701591505 .Wittwer, M., Seita, M., 2022. A machine learning approach to map crystal orientation by optical microscopy. npj Computational Materials 8, 1–9. doi: 10.1038/s41524-021-00688-1 .Yanxon, H., Weng, J., Parraga, H., Xu, W., Ruett, U., Schwarz, N., 2023. Artifact identification in x-ray di ff raction data using machine learning methods. J. Synchrotron Radiat. 30, 137–146. Yassar, R.S., AbuOmar, O., Hansen, E., Horstemeyer, M.F., 2010. On dislocation-based artificial neural network modeling of flow stress. Materials & Design 31, 3683–3689. doi: 10.1016/j.matdes.2010.02.051 .Yildirim, C., Poulsen, H.F., Winther, G., Detlefs, C., Huang, P.H., Dresselhaus-Marais, L.E., 2023. Exten-sive 3d mapping of dislocation structures in bulk aluminum. Scientific Reports 13, 3834. doi: 10.1038/ s41598-023-30767-w .Zhang, Q., Polikarpov, M., Klimova, N., Larsen, H., Mathiesen, R., Emerich, H., Thorkildsen, G., Snigireva, I., Snigirev, A., 2019. Investigation of ‘glitches’ in the energy spectrum induced by single-crystal diamond compound x-ray refractive lenses. J. Synchrotron Radiat. 26, 109–118. doi: 10.1107/S1600577518014856 .19

@@ -1,0 +1,39 @@
+{
+  "label": "2026-08-19",
+  "date": "2026-08-19",
+  "generated_at": "2026-08-19T20:43:45",
+  "count": 2,
+  "papers": [
+    {
+      "paper_id": "202608/19/2608.17619v1-irradiation-induced-spin-bath-evolution-and-as-grown-hydrogen-defects-in-cvd-diamond-revealed-by-nv-based-deer-spectroscopy",
+      "section": "quick",
+      "title_en": "Irradiation-Induced Spin Bath Evolution and as-Grown Hydrogen Defects in CVD Diamond Revealed by NV-Based DEER Spectroscopy",
+      "authors": "Olga Rubinas, Jeroen Prooth, Michael Petrov, Remy Vandebosch, Emilie Bourgeois, David Chvatil, Milos Nesladek",
+      "date": "2026-08-18",
+      "pdf": "https://arxiv.org/pdf/2608.17619v1",
+      "score": "7.0",
+      "evidence": "直接研究电子辐照诱导的金刚石中点缺陷及其退火演化，匹配辐照诱导点缺陷与团簇需求。",
+      "tldr": "针对CVD金刚石中自旋相干性受顺磁缺陷影响的问题，本文利用基于NV色心的DEER谱学系统研究了辐照诱生自旋浴的演化及氢相关缺陷。通过退火追踪X与P1缺陷浓度变化，识别出X复合体由空位、间隙原子等构成，并建立混合自旋浴对NV相干性的影响模型。该方法实现纳米级精度缺陷表征，为量子传感材料优化提供关键手段。",
+      "tags": "query:rad-damage",
+      "abstract_en": "The aim of this paper is to provide the reader with a review and current state of the art of the fabrication of high T2 coherence diamond, optimised by the use of double electron-electron resonance (DEER) spectroscopy. Using DEER, we study the formation, transformation, and annealing of paramagnetic defects in as-grown CVD diamond and after post-processing. Electron irradiation leads to the formation of an additional S = 1/2 resonance in the DEER spectrum, which we consider to be a composite X ensemble. By tracking the concentrations of X and P1 point defects during annealing from 650C to 1200C, we find that the X ensemble initially consists of a mixture of V- spins and interstitial spins, which disappear at about 650C. Vacancies migrate during annealing, forming clusters that persist to 1000C and disappear upon annealing at 1200C, contributing to the X ensemble signal. We have developed a model of the influence of the mixed spin bath on the coherence of NV centers, which includes independent couplings with P1 centers, V-, divacancies, and interstitials. Detailed DEER studies allowed us to reveal and resolve a weak signal from two additional S = 1/2 species associated with hydrogen: NVH- and consistent with a substitutional hydrogen defect, which overlaps the vacancy spectral line. Taken together, these results show that the NV-DEER method is a powerful tool for investigating paramagnetic defects in diamond with high precision and nanoscale resolution, essential for material optimisation. The achieved high T2 coherence time is consistent with the spin bath model, and the crystals reach the quality required for advanced quantum sensing applications.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202608/19/2608.16774v1-automated-burgers-vector-identification-for-individual-dislocations-in-bulk-crystals",
+      "section": "quick",
+      "title_en": "Automated Burgers Vector Identification for Individual Dislocations in Bulk Crystals",
+      "authors": "Abderrahmane Benhadjira, Carsten Detlefs, Vincent Favre-Nicolin, Henning Friis Poulsen, Grethe Winther, Can Yildirim, Sina Borgi",
+      "date": "2026-08-17",
+      "pdf": "https://arxiv.org/pdf/2608.16774v1",
+      "score": "6.0",
+      "evidence": "体相晶体中单个位错的伯氏矢量自动识别，可应用于辐照FeCr中位错环的分析。",
+      "tldr": "暗场X射线显微术（DFXM）中的弱束成像可分辨体材料中的单个位错，但确定伯格斯矢量通常需人工对比模拟。本文训练物理信息卷积神经网络，以FCC铝中孤立位错的几何光学模拟为输入并融入晶体学约束。模型对合成测试数据的伯格斯矢量识别准确率约93%。在实验交叉滑移案例中，约束模型将72.7%的逐层预测分配给参考伯格斯矢量。结果表明，模拟训练的物理信息CNN可推动DFXM位错识别自动化。",
+      "tags": "query:rad-damage",
+      "abstract_en": "Weak-beam imaging in dark-field X-ray microscopy (DFXM) can resolve individual dislocations in bulk crystals, but assigning Burgers vectors from the resulting contrast typically requires manual comparison with forward simulations. Here, we train a physics-informed convolutional neural network (CNN) on geometrical optics simulations of isolated dislocations in face-centred cubic (FCC) aluminium, incorporating crystallographic constraints into the learning pro- cess. The model identifies Burgers vectors from weak-beam integrated rocking-curve images. On synthetic test data, the model achieves an accuracy of approximately 93%. In an experimental cross-slip case, the constrained model as- signs 72.7% of the layer-wise predictions to the reference Burgers vector. These results show that simulation-trained, physics-informed CNNs represent a step toward automated dislocation identification in DFXM.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

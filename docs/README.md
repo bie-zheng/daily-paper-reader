@@ -6,29 +6,27 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-08-18
-- 运行时间：2026-08-18 19:22:37 UTC
+- 最新运行日期：2026-08-19
+- 运行时间：2026-08-19 20:43:41 UTC
 - 运行状态：成功
 - 本次总论文数：2
 - 精读区：0
 - 速读区：2
 
 ### 今日简报（AI）
-今日速读2篇论文，聚焦纳米合金晶界偏析与机器学习预测合金性能。  
-值得关注：机器学习方法可高效评估无序合金的相稳定性与力学性能，纳米合金模拟则揭示溶质拖曳与晶界演化的关联。  
-建议下一步可精读其中一篇，重点验证机器学习模型在高温合金中的适用性。
-- 详情：[/202608/18/README](/202608/18/README)
+今日共速读2篇论文，无精读，聚焦材料表征与晶体缺陷分析。值得关注的是CVD金刚石中NV色心自旋调控与辐照缺陷演化，以及块体晶体位错的自动识别方法。建议后续对这两篇进行精读，深入理解其技术细节与适用场景。
+- 详情：[/202608/19/README](/202608/19/README)
 
 ### 精读区论文标签
 - 本次无精读推荐。
 
 ### 速读区论文标签
-1. [Numerical modeling of microstructure evolution in nanocrystalline alloys - grain boundary segregation, solute drag and mechanics](/202608/18/2608.10048v1-numerical-modeling-of-microstructure-evolution-in-nanocrystalline-alloys---grain-boundary-segregation-solute-drag-and-mechanics)  
+1. [Irradiation-Induced Spin Bath Evolution and as-Grown Hydrogen Defects in CVD Diamond Revealed by NV-Based DEER Spectroscopy](/202608/19/2608.17619v1-irradiation-induced-spin-bath-evolution-and-as-grown-hydrogen-defects-in-cvd-diamond-revealed-by-nv-based-deer-spectroscopy)  
+   标签：评分：7.0/10、query:rad-damage
+   evidence：直接研究电子辐照诱导的金刚石中点缺陷及其退火演化，匹配辐照诱导点缺陷与团簇需求。
+2. [Automated Burgers Vector Identification for Individual Dislocations in Bulk Crystals](/202608/19/2608.16774v1-automated-burgers-vector-identification-for-individual-dislocations-in-bulk-crystals)  
    标签：评分：6.0/10、query:rad-damage
-   evidence：合金微观结构演变的数值模拟，涵盖偏析与力学行为，与辐照诱导微结构变化研究直接相关
-2. [Machine-learning approach for the phase stability and mechanical properties of disordered alloys at finite temperature](/202608/18/2608.10465v1-machine-learning-approach-for-the-phase-stability-and-mechanical-properties-of-disordered-alloys-at-finite-temperature)  
-   标签：评分：6.0/10、query:rad-damage
-   evidence：机器学习势预测无序合金相稳定性与力学性能，可迁移至辐照影响的结构合金研究
+   evidence：体相晶体中单个位错的伯氏矢量自动识别，可应用于辐照FeCr中位错环的分析。
 
 
 <div class="dpr-home-promo-card">
