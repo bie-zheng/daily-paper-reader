@@ -1,0 +1,1362 @@
+Title: Universal Thermodynamic Interatomic Potentials for Crystalline Materials
+
+URL Source: https://arxiv.org/pdf/2608.14502v1
+
+Published Time: Mon, 17 Aug 2026 01:06:44 GMT
+
+Number of Pages: 26
+
+Markdown Content:
+# Universal Thermodynamic Interatomic Potentials for Crystalline Materials 
+
+Juno Nam, 1 Bowen Deng, 1 Xiaochen Du, 1 Luis Barroso-Luque, 2
+
+Benjamin Kurt Miller, 2, ∗ and Rafael G´ omez-Bombarelli 1, †
+
+> 1
+
+Department of Materials Science and Engineering, Massachusetts Institute of Technology, Cambridge, MA 02139, USA 
+
+> 2
+
+Fundamental AI Research, Meta, San Francisco, CA 94105, USA ‡
+
+(Dated: August 17, 2026) Free energies govern solid-state phase stability, yet computational materials discovery still relies largely on ground-state energies because free energy calculations require ensemble averages. We introduce the thermodynamic interatomic potential (TIP), which extends an interatomic potential from its static energy to a thermodynamically consistent Gibbs free energy model, with thermody-namic responses following from temperature and pressure by automatic differentiation. We imple-ment TIP[UMA] using the universal potential UMA, train it on free energies from quasi-harmonic to molecular dynamics fidelity, and calibrate it to higher-resolution calculations or experiment. From a single evaluation, it returns the equation of state of a crystal and locates phase transitions among competing branches, including dynamically stabilized phases. Fine-tuning extends the model to alloy solubility limits and miscibility gaps. TIP makes the free energy as accessible as the potential energy, opening finite-temperature phase stability to high-throughput discovery. 
+
+I. INTRODUCTION 
+
+Phase diagrams, stability fields, and metastability win-dows in solid-state materials science are determined by free energies at the relevant conditions, not by ground-state energies alone. Nevertheless, computational mate-rials discovery still relies heavily on static density func-tional theory (DFT) energetics and convex-hull construc-tions, because large-scale screening workflows were built around ground-state data [1–3]. This creates a persistent imbalance: structure and energy predictions are available at large scale, whereas the temperature- and pressure-dependent free energies remain less available, more com-putationally expensive, and less standardized [4]. This imbalance arises because a ground-state energy characterizes one relaxed configuration, whereas a free energy averages over a thermodynamic ensemble includ-ing entropic contributions. Computing a free energy re-quires averaging over thermally accessible configurations for each structure and thermodynamic condition. Ap-proximating this ensemble can be inaccurate because vi-brational and configurational contributions often deter-mine phase stability, and vibrational free energies alone can shift phase boundaries by amounts comparable to configurational contributions [5, 6]. The vibrational con-tribution is particularly demanding because it is strongly temperature dependent and deviates increasingly from harmonic behavior as anharmonicity grows. Phase sta-bility depends on small free-energy differences between competing phases and decomposition products, rather    
+
+> ∗bkmi@meta.com
+> †rafagb@mit.edu
+> ‡Meta-affiliated authors served solely in an advisory role. All ac-cess to the models, datasets, and code, as well as the development and release of the dataset and code, was carried out exclusively by the non-Meta authors or their academic institution.
+
+than only on formation from the elements [7, 8]. There-fore, these free energies must be resolved precisely, over the temperature and pressure ranges in which the solid phases remain stable or metastable [9, 10]. First-principles thermodynamics has been addressing this burden by coarse-graining free energies into tractable effective models. The cluster expansion [11–13] repre-sents the configurational energy of a crystal on a fixed parent lattice as a sum of effective interactions fitted to first-principles energies, and statistical-mechanical calcu-lations then yield composition–temperature phase behav-ior [14, 15]. This approach applies when a crystal can be represented as occupations on a parent lattice [16, 17], but its interactions are specific to a chemistry and lattice and must be refitted for a new system. Additionally, the fitted quantity is usually configurational energy, and tem-perature enters through a separate statistical-mechanical calculation rather than as model inputs. A separate hierarchy addresses the vibrational free energy of a fixed crystal. Quasi-harmonic lattice dy-namics, built on density functional perturbation the-ory [18] and finite-displacement phonon workflows [19], is the default route to solid-state free energies. Be-cause it absorbs anharmonicity only into the volume de-pendence of harmonic phonons, it grows fragile in the regimes that govern many functional solids: soft modes, strong phonon renormalization, entropy-stabilized high-temperature phases, and mechanically unstable harmonic references. Self-consistent phonon theories [20], tempera-ture dependent effective potential methods [21], and for-malisms for unstable phases [22, 23] address these cases. At higher fidelity, explicit free energy integration eval-uates absolute free energies based on molecular dynam-ics (MD) simulations, where thermodynamic integration proceeds through Frenkel–Ladd switching [24], reversible scaling [25], and alchemical switching [26], realized as nonequilibrium MD workflows [27, 28]. The computa-tional cost increases with the degree of anharmonicity arXiv:2608.14502v1 [cond-mat.mtrl-sci] 14 Aug 2026 2resolved, and is especially high when energies and forces are evaluated from first principles. Universal machine learning interatomic potentials (MLIPs) [29–35] reduce this computational cost by repro-ducing first-principles energies and forces across broad chemical spaces, enabling high-throughput relaxation and large-scale MD without system-specific refitting. However, MLIPs predict the potential energy of individ-ual configurations. Free energy calculations still require ensemble sampling for each structure and condition, even though individual force evaluations are computationally inexpensive. An alternative is to model free energy directly rather than apply a statistical-mechanical calculation to an en-ergy model. The CALPHAD method [36, 37] repre-sents the Gibbs free energy of each phase as an ana-lytic function of temperature and composition, assessed from experimental and first-principles data. These as-sessments are semi-empirical, specific to each chemical system, and often proprietary. Descriptor-based Gibbs free energy model [38] predicts temperature-dependent free energies of stoichiometric solids using compact, inter-pretable composition-level descriptors, but they are lim-ited to near-ambient pressure and lack the structural res-olution needed to identify phase transitions. Structure-resolved surrogates have been developed for specific sys-tems, such as a machine-learned metastable phase di-agram of carbon [39], but remain confined to a single chemistry or a narrow class of structures. A chemically transferable, branch-resolved Gibbs free-energy model is still needed, which spans harmonic and anharmonic fi-delity levels and derives thermodynamic response func-tions from one differentiable surface. We therefore introduce the thermodynamic inter-atomic potential (TIP). Conceptually, TIP integrates three complementary ideas from existing approaches to solid-state thermodynamics (Fig. 1a): it inherits the chemical transferability of MLIPs; represents the ther-modynamics of an ordered branch with an efficient sur-rogate, analogous to the cluster expansion but with-out lattice- or chemistry-specific parameterization; and adopts the CALPHAD philosophy of modeling free en-ergy directly as a differentiable thermodynamic function. Together, these elements enable equilibrium properties and thermodynamic response functions to be predicted without repeated statistical-mechanical calculations. For a relaxed ordered bulk crystal, TIP encodes the structure once and returns a differentiable approxima-tion to that branch’s Gibbs free energy surface across a range of temperature and pressure in a single evalu-ation. This confines the statistical-mechanical cost to training, so the free energy of a new crystal within the model’s domain follows without further sampling. TIP resolves the vibrational thermodynamics of one ordered branch at a time, and configurational thermodynamics is obtained by sampling ordered branches across composi-tion, extending the model to solid solutions and misci-bility gaps. The current model identifies transitions only among the supplied branch candidates, i.e., it does not discover crystal structures. Also, the liquid state is out-side the present scope because it has no ordered branch representation. TIP is built on a universal interatomic potential and trained sequentially on quasi-harmonic and MD free energies, and experimental calibration data. We demonstrate prediction of equations of state and high-temperature phase transitions, including phases without stable harmonic references.   
+
+> II. RESULTS A. Thermodynamic Interatomic Potentials
+
+TIP predicts the Gibbs free energy of an ordered crys-tal as a continuous function of temperature and pressure, from its relaxed structure (Fig. 1b). While conventional free energy calculations require thermal ensemble sam-pling and thermodynamic path integration at every state point, TIP instead evaluates a fitted continuous surface. We enable this via free energy adaptation : the absolute Gibbs free energy of a crystal is decomposed into its static (0 K) energy plus a smooth thermodynamic resid-ual . A pre-trained MLIP supplies the static relaxed en-ergy U ◦, so the adapter model learns only the residual ˆGδ (x◦; T, P ), giving the predicted Gibbs free energy ˆG(x◦; T, P ) = U ◦ + ˆGδ (x◦; T, P ). (1) Learning ˆGδ rather than ˆG reduces the structure-dependent dynamic range of the target and focuses the adapter on finite-temperature contributions. A single re-laxed structure then generates an entire free energy sur-face over ( T, P ). The frozen MLIP encodes the structure, and the adapter uses its per-atom features and the thermo-dynamic variables (T, P ) as inputs (Fig. 1c). The thermodynamic backbone is temperature- and pressure-agnostic: from the structure features alone, it predicts the coefficients of a closed-form thermodynamic expres-sion, and ( T, P ) enter only through the analytic head. The functional forms are drawn from established physical models: the temperature dependence combines a quan-tum Einstein oscillator vibrational free energy with a low-order polynomial, as in CALPHAD Gibbs energy func-tions [36, 37], and the pressure–volume relation of each per-atom contribution follows a Murnaghan-like equation of state [40]. Because these forms are analytic, the fit-ted coefficients carry physical meaning, and derivatives of the free energy, including higher-order responses, remain smooth by construction. Furthermore, automatic differ-entiation yields thermodynamic conjugate variables such as volume and entropy, and thermodynamic responses, such as heat capacity, bulk modulus, and thermal ex-pansion, from the same ˆG, ensuring thermodynamic con-sistency within the model. Because the analytic head assembles the free energy from per-atom contributions, 3ML Interatomic Potential 
+
+> ML Interatomic Potential
+> MLIP
+> Thermodynamic Adapter
+> Thermodynamic Adapter
+> thermo. variables
+> transfer
+> Backbone Material Structure
+> Features
+> Energy Head Thermo Backbone Analytic Head
+> thermo. variables thermo. response
+
+badc   
+
+> Pre-training
+> Quasi-harmonic approximation
+> Mid-training
+> Nonequilibrium molecular dynamics Ordered phases: Response matching
+> Disordered phases: Differentiable MCMC
+> Experimental measurements
+> Post-training
+> Thermodynamic Interatomic Potentials
+> CALPHAD Cluster Expansion
+> chemically transferable analytic & experiment aligned configurational formalism
+> MLIP
+
+e
+
+Fig. 1. Free energy adaptation with a thermodynamic interatomic potential (TIP). (a) A TIP combines three established routes to solid-state thermodynamics: the chemical transferability of MLIPs, the configurational phase stability formalism of the cluster expansion, and the analytic, experiment-aligned free energy representation of CALPHAD. (b) A TIP augments a pre-trained MLIP with a thermodynamic adapter: for each locally relaxed branch representative x◦, the frozen MLIP encodes x◦, and the adapter combines those features with ( T, P ) to predict the branch Gibbs free energy ˆG(T, P ). (c) 
+
+Architecture: the MLIP backbone’s energy head returns the static reference U ◦ := U (x◦) and its per-atom features condition the adapter, whose analytic head outputs the thermodynamic residual ˆGδ (T, P ). Their sum defines ˆG, and its derivatives give the response properties. (d) Three-stage training: pre-training on quasi-harmonic ( T, P ) grids, mid-training on anharmonic absolute free energies from nonequilibrium MD, and post-training against experimental data by response matching for ordered phases (e.g., heat capacity) and differentiable reweighting for disordered phases (e.g., composition–temperature binodals). 
+
+(e) Wall-clock time per Gibbs free energy evaluation on a given x◦: nonequilibrium MD ( ∼10 4 s) and the quasi-harmonic approximation ( ∼10 2 s) compared with one TIP[UMA] evaluation ( ∼10 −1 s), five and three orders of magnitude faster. 
+
+model inference requires only the relaxed unit cell, even though the training labels are computed on the large su-percells required to converge phonon and MD free en-ergies. TIP is therefore trained to reproduce those free energies from a unit cell input, at a computational cost set by the unit cell rather than the simulation supercell. This reduces calculations requiring hours of explicit sam-pling or minutes of a quasi-harmonic workflow to seconds of model inference (Fig. 1e). TIP models one ordered crystalline branch at a time, represented by its relaxed representative x◦. A branch may be a basin of the potential energy surface, asymmetry-constrained stationary point for a dynamically stabilized phase (Fig. 1b), a distinct polymorph, or a distinct chemical ordering. Each branch has a distinct predicted free energy surface ˆG(x◦; T, P ). Stable phases and the transitions between phases are then resolved by comparing the predicted free energies of the candidate branches. The formal branch construction and its under-lying assumptions are given in Supplementary Note A. This way, a TIP realizes the coarse-grained free energy landscape of first-principles phase stability theory [6] in a differentiable, transferable form, made practical by uni-versal MLIPs and improved statistical-mechanical algo-rithms. Our instantiation, TIP[UMA], is built on Universal Models for Atoms (UMA) [41], an MLIP trained across chemistries on large DFT datasets. It is trained in three stages of increasing physical fidelity (Fig. 1d). Pre-training fits dense quasi-harmonic free energy grids over (T, P ), which are computationally cheap and abundant but approximate each potential energy basin as har-monic. Mid-training corrects toward anharmonic, ab-solute free energies computed from nonequilibrium MD. Because a TIP exposes the thermodynamic responses as consistent derivatives of a single free energy surface, mea-4sured responses can supervise TIP directly, whereas an MLIP could obtain the same observables only through ensemble reweighting. Post-training exploits this, cal-ibrating against experiment by matching measured re-sponses, such as heat capacity, for ordered phases and through differentiable reweighting of Monte Carlo simu-lations for disordered phases.  
+
+> B. Multi-Fidelity Gibbs Free Energy Dataset
+
+Training a structure-conditioned free energy surrogate requires thermodynamic labels at scale, which no single method can provide both efficiently and accurately. We therefore assemble a multi-fidelity dataset that combines abundant, approximate labels with sparse but accurate labels (Fig. 2a). We draw the initial structures from the Materials Project [1], retain metastable entries within 0.2 eV/atom of the convex hull (123 ,424 structures), and relax each to an ordered branch representative x◦ with UMA [41]. A representative subset is selected by BIRCH clustering [43] of the UMA structure embeddings, so that computationally expensive labels are assigned to a struc-turally diverse set of representatives while low-fidelity la-bels cover all structures. The low-fidelity signal is the QHA Gibbs free energy 
+
+GQHA (T, P ), computed for every structure; it is com-putationally inexpensive and includes volume-dependent harmonic vibrational contributions but neglects anhar-monic mode coupling. The high-fidelity signal is the absolute Gibbs free energy GMD (T, P ) from nonequilib-rium MD, computed only on representatives by combin-ing a Frenkel–Ladd absolute reference on a fast surro-gate potential (Orb-v3 [42], trained on the same materi-als dataset as UMA) with an alchemical transfer to the accurate target potential; it includes anharmonic effects but is far more demanding. After quality filtering, the dataset comprises over 120 ,000 QHA Gibbs free energy surfaces and roughly 95 ,000 MD state points, spanning temperatures from 0 K up to 4000 K and pressures up to 40 GPa. The combined labels cover much of the periodic table (Fig. 2b) and a broad range of the thermodynamic residual Gδ over temperature and pressure (Fig. 2c).  
+
+> C. Validation and Error Analysis
+
+After pre-training on the quasi-harmonic ( T, P ) grids and mid-training on the anharmonic MD labels, we eval-uate TIP[UMA] on a held-out validation set not used in training (Fig. 3). Across the filtered validation set, the model attains a global median absolute Gibbs energy error of 10 .3 meV atom −1. For context, the descriptor-based Gibbs free energy model of Bartel et al. [38] re-ported test errors of 46–60 meV atom −1, although the targets and validation datasets differ. The TIP[UMA] error is also comparable to the energy scale governing polymorph competition: experimentally observed inor-ganic phases have a median energy above the convex hull of approximately 15 meV atom −1 [9], while chemistry-dependent metastability windows can extend to tens or hundreds of meV atom −1 [10]. The element-resolved er-rors concentrate in chemically distinct regions (Fig. 3a): the halogens, chalcogens, alkali and alkaline-earth metals, heavy p-block elements, and actinides carry the largest median errors, whereas most transition metals sit at or below the global median. These groups include soft, po-larizable, and strongly anharmonic chemistries whose ab-solute free energies are difficult to converge, and rare chemistries like actinides are sparsely represented in the Materials Project pool. Error trends with thermodynamic state and the un-derlying nonequilibrium MD convergence are more sys-tematic (Fig. 3b). Comparing the pre-trained and mid-trained models (light versus dark bars), mid-training on the MD labels lowers the median error about threefold at every temperature, correcting the offset between the quasi-harmonic pre-training and the absolute MD refer-ence. For the mid-trained model, the error grows only weakly with temperature and more strongly at high pres-sure, and its strongest dependence is on the Frenkel–Ladd switching dissipation of the high-fidelity calculation. At the highest dissipation, the signed median error also be-comes positive, indicating systematic bias rather than symmetric scatter. Such high-dissipation labels are only a small fraction of the dataset (Fig. 3b, left). Because the dissipated work measures how far each switching trajec-tory departs from reversibility, the positive bias at high dissipation reflects the convergence of the free energy la-bels rather than a failure of the surrogate. The least-converged calculations are removed by a per-leg dissipa-tion filter during curation. These trends indicate that improving label coverage and convergence is more likely to reduce worst-case errors than increasing the model ca-pacity.  
+
+> D. Ordered Crystalline Phases
+
+For an ordered crystalline branch, the equilibrium re-sponse functions are derivatives of the Gibbs free energy, and TIP[UMA] predicts this surface from a single re-laxed structure. From this, we evaluate heat capacities, equations of state, polymorphic transitions, and a phase diagram (Fig. 4). For 255 stoichiometric solids curated from the NIST– JANAF thermochemical tables [44] (Methods), the mid-trained model predicts the standard entropy and heat capacity with median absolute errors of 2 .28 and 1.94 J K −1 (mol atoms) −1 (Fig. 4a). The predicted per-atom heat capacity tracks the NIST–JANAF val-ues [44] closely for Al 2O3 and CaO over the full tem-perature range, correctly recovering ˆCP → 0 as T → 0(Fig. 4b). Because the MD labels do not directly con-strain heat capacity, mid-training regularizes CP toward the frozen quasi-harmonic model, while the analytic Ein-5ac 
+
+> Materials Database Low-Fidelity QHA Gibbs Dataset High-Fidelity MD Gibbs Dataset
+> Filter and Relax Cluster Initial Structures Quasi-Harmonic Approximation NPT Equilibration NVT Frenkel–Ladd Switching NPT Alchemical Switching Representatives
+> fast harm. base
+
+b
+
+> → Pre-training → Mid-training
+
+Fig. 2. Multi-fidelity Gibbs free energy dataset. (a) Data-generation workflow. Structures from a materials database are filtered and relaxed with the base potential Ubase (UMA [41]); the quasi-harmonic approximation (QHA) on each yields the low-fidelity QHA Gibbs dataset GQHA (T, P ). Clustering selects representatives, which are equilibrated under N P T dynamics with a fast potential Ufast (Orb-v3 [42]) and then processed by N V T Frenkel–Ladd switching [24] (absolute free energy against a harmonic Einstein crystal reference) and N P T alchemical switching (transfer from the fast to the base Hamiltonian); combining the two contributions gives the high-fidelity MD Gibbs dataset GMD (T, P ). (b) Elemental coverage of the MD Gibbs dataset: the periodic table is colored by the number of dataset entries containing each element. (c) Distribution of the residual Gibbs free energy Gδ of the MD Gibbs dataset versus temperature (left) and pressure (right), shown as two-dimensional histograms with the marginal count distributions above; white lines mark the quartiles (Q1, median, Q3). 
+
+stein term preserves the low-temperature limit. Mid-training adds an anharmonic free energy correction with-out replacing the quasi-harmonic low-temperature heat-capacity behavior with the classical MD limit. The larger errors for Cr 2O3 and Fe 3O4 arise from magnetic 
+
+λ-anomalies (the antiferromagnetic N´ eel and ferrimag-netic Curie transitions) in the measured CP , which lie outside the vibrational contributions. An additional ex-plicit magnetic or electronic term could capture these contributions (see Discussion). The volumetric response of forsterite Mg 2SiO 4 shows that the predicted compres-sion and thermal expansion reproduce the UMA reference behavior (Fig. 4c,d). Both the UMA QHA reference and the model predictions retain the known volume overesti-mate of the Perdew–Burke–Ernzerhof (PBE) functional, inherited from its systematic underbinding and a prop-erty of the training target rather than the adapter. Post-training against experimental labels later removes it (see below). We next examine temperature-driven polymorphic transitions involving high-temperature phases that the quasi-harmonic surface does not describe adequately (Fig. 4e–h). These transitions are entropy-driven and re-quire anharmonic treatment: the high-temperature bcc metals are dynamically unstable at 0 K and have no har-monic reference, while for CaSiO 3 a harmonic reference exists but omits the anharmonic entropy that sets the transition [20–23]. Consistent with these limitations, the pre-trained model produces no ∆ G = 0 crossing for Ti or Sc, and for Hf and CaSiO 3 it crosses only far above exper-iment (near 3200 and 2200 K, against 2016 and 1398 K). After mid-training on nonequilibrium MD free energies, the model predicts three of the four (Sc only in part, be-low), placing the Ti and Hf α-hcp → β-bcc transitions and the CaSiO 3 wollastonite → pseudowollastonite tran-sition within ∼250 K of experiment. Of the four, only Ti has both phases in the MD training set, while Sc and Hf have their high-temperature bcc phase held out and CaSiO 3 has neither polymorph. These entropy-driven transitions are recovered even though mid-training up-dates only a lightweight adapter on a frozen encoder, indicating that the MD labels provide transferable an-harmonic corrections. The Sc α-hcp → β-bcc transition (Fig. 4h) is recovered only in part: mid-training moves 6ab          
+
+> Fig. 3. Validation error analysis. (a) Element-wise val-idation error. Periodic-table map of the median absolute Gibbs error for each element, computed over the filtered val-idation data points that contain that element; elements rep-resented by fewer than 20 validation state points are shown in gray. The black tick on the colorbar marks the global median absolute error. (b) Thermodynamic and dissipation trends. Signed Gibbs error distributions as functions of tem-perature, pressure, and Frenkel–Ladd (FL) dissipation for the filtered validation set. Left panels show two-dimensional count histograms of the mid-trained model on a logarithmic color scale; right panels show the binned median absolute error and the signed median error (meV atom −1) for the pre-trained (light) and mid-trained (dark) models. The dotted line in the absolute-median panels marks the global median absolute error.
+
+∆G toward a crossing but does not produce a crossing at the measured transition temperature, showing that the anharmonic correction remains imperfect where high-fidelity training data are sparse. The pre- and mid-trained models so far inherit the systematic volume overestimate of the PBE reference. Post-training (Fig. 1d) removes this bias, calibrating the model against the Holland–Powell experimental thermo-dynamic assessment over the Si–Al–Mg–Ca–O chemical space [45]. The model is fitted on the binary and ternary oxides, with the quaternary oxides held out (Methods and Supplementary Note D). The calibration lowers the bulk modulus error against experiment from ∼13% to a few percent, decreases the reaction Gibbs free en-ergy and entropy errors, and removes the ∼5% volume overestimate from the PBE offset (Fig. 4c,d, TIP[UMA] post). The metrics on the held-out quaternary phases improve alongside those on the fitted binary and ternary ones (Fig. 4i), indicating that the representation learned through pre- and mid-training supports transferability, so calibration on a small experimental set refines the surface rather than fitting each chemistry independently. The same calibration also corrects the SiO 2 pressure– temperature phase diagram (Fig. 4j–l): the mid-trained model spuriously stabilizes cristobalite at ambient con-ditions, and post-training restores quartz as the ambient ground state and the quartz → coesite → stishovite or-dering within the supplied candidate set [48].  
+
+> E. Disordered Solid Solutions
+
+Ordered branches are only part of the phase stabil-ity problem: alloy solubility limits and miscibility gaps require configurational disorder in addition to ordered-branch thermodynamics. TIP treats these systems by evaluating branch free energies across composition on a parent lattice, which defines the configurational Hamil-tonian used to sample the disordered state. That free en-ergy can then be calibrated against a chosen reference in either of two complementary directions: bottom-up , dis-tilling a higher-resolution calculation for a target chem-istry into the surrogate, or top-down , matching measured phase boundaries. The dilute solubility of Sc in fcc Al, which depends on the vibrational entropy of dissolution in addition to con-figurational mixing [49], provides a bottom-up example of chemistry-specific fine-tuning across disordered composi-tions and configurations (Fig. 5a). At each temperature and P = 0, TIP[UMA] evaluates the Gibbs free energies required to compute the dissolution free energy ∆ Gsol (T )relative to the adjacent Al–Al 3Sc convex hull (Eq. (21)). The equilibrium solubility then follows from the ideal-dilute relation xSc ≈ exp( −∆Gsol /k BT ) (Eq. (22)). Us-ing only 0 K static energies from the baseline UMA potential (no vibrational free energy), the estimate in-creases with temperature through the ideal-mixing term but remains about an order of magnitude below the mea-sured solubility across 600–900 K. Including branch vi-brational free energies increases xSc by one to nearly two orders of magnitude over that static line, reach-ing the measured range even from the pre-trained model with no Al–Sc-specific tuning. We then test chemistry-specific distillation by fine-tuning the surrogate on an additional set of UMA quasi-harmonic free energies for diverse fcc Al–Sc structures spanning compositions and configurations using a lightweight low-rank adaptation (LoRA) [50] (Methods and Supplementary Note B). The 7aeji k lf g hb c d 
+
+> stishovite coesite cristobalite cristobalite crst liquid
+> β-quartz
+> α-quartz quartz tridymite stishovite coesite coesite stishovite
+
+* *****
+
+Fig. 4. Thermodynamics of ordered crystalline phases from a learned free energy surface. (a) Mid-trained mean absolute error in heat capacity CP and standard entropy S(298 K) across the NIST–JANAF benchmark of 255 stoichiometric solids, with medians of 1 .94 ( CP ) and 2 .28 ( S) J K −1 (mol atoms) −1. (b) Mid-trained heat capacity CP (T ) (solid lines) against NIST–JANAF values [44] (open circles). The larger deviations for Cr 2O3 and Fe 3O4 occur near magnetic λ-anomalies (N´ eel and Curie transitions) outside the model’s vibrational scope. (c) Isothermal compression V (P ) at 300 K and (d) thermal expansion 
+
+V (T ) at P ≈ 0 for forsterite Mg 2SiO 4, comparing experiment (Holland–Powell [45]), the UMA quasi-harmonic reference, and TIP[UMA] across pre-, mid-, and post-training. The quasi-harmonic reference and the pre- and mid-trained models share the known PBE volume overestimate, which post-training removes. (e–h) Temperature-driven polymorphic transitions, shown as the per-atom Gibbs difference ∆ G(T ) between the high- and low-temperature phases for the pre-trained and mid-trained models: (e) Ti, (f ) Hf, (g) CaSiO 3, and (h) Sc. The ∆ G = 0 crossing (circle) is the predicted transition temperature, and the dashed line and star mark experimental transition [46, 47] with the shaded band spanning a ±250 K tolerance. The pre-trained surface shows no crossing (Ti, Sc) or one far above experiment (Hf, CaSiO 3), whereas mid-training recovers the transitions, Sc only in part. (i) Accuracy of the pre-, mid-, and post-trained models on the Holland–Powell ordered-oxide benchmark for the reaction Gibbs free energy, standard entropy, and bulk modulus B0, on a training partition (binary and ternary oxides) and a held-out partition (quaternary oxides). Post-training improves every metric on both, including the held-out quaternaries. (j–l) SiO 2 pressure–temperature phase diagram for (j) the mid-trained model, (k) the post-trained model, and (l) the experimentally assessed topology [48]. The mid-trained model spuriously stabilizes cristobalite at ambient conditions, whereas post-training recovers the low-pressure quartz field and the quartz, coesite, stishovite ordering within the supplied candidate set. Red asterisks mark comparisons for which the experimental value was included in calibration. 8a b c        
+
+> Iterative optimization
+> *
+> Fig. 5. Calibration of TIP[UMA] for disordered phases using computational and experimental references.
+> Lightweight fine-tuning fits the frozen free energy surrogate to a chosen reference and extends it from ordered branches to configurationally disordered solid solutions, preserving thermodynamic consistency. (a) Dilute Sc solubility in fcc Al versus temperature, obtained from the dissolution free energy relative to the adjacent Al–Al 3Sc convex hull (Section IV). By accounting for vibrational entropy, TIP[UMA] predicts the measured order of magnitude and tracks the quasi-harmonic UMA reference (UMA QHA), whereas the 0 K static estimate falls about an order of magnitude below the measured value; Al–Sc-focused fine-tuning (pre to post) moves the model toward that reference. The computed reference itself lies above the measured solubility, an offset set by the reference thermodynamics rather than the surrogate. (b) Workflow for a disordered phase: TIP[UMA] scores lattice configurations, well-tempered semigrand Monte Carlo samples the mixing free energy, a common-tangent construction yields the miscibility gap, and differentiable reweighting calibrates the surrogate. (c) Au–Pt miscibility gap, composition in Pt atomic percent (at.%): iterated differentiable reweighting moves the TIP[UMA] binodal from its initial prediction to the experimental solvus, the Pt-concentration error falling over the iterations (inset). Horizontal bars are the seed spread, one standard deviation of the branch Pt concentration across four independent well-tempered metadynamics seeds. Red asterisks mark comparisons for which the experimental value was included in calibration.
+
+fine-tuned model then more closely reproduces the ded-icated Al–Sc quasi-harmonic reference. While the refer-ence overpredicts the measured high-temperature solu-bility by a factor of three to four, this example evaluates fidelity to the computational reference rather than agree-ment with experiment. The Au–Pt miscibility gap provides a top-down exam-ple in which the model is calibrated to the experimental solvus [51, 52]. Since TIP[UMA] assigns each lattice con-figuration a branch-conditioned Gibbs free energy that includes explicit temperature and pressure dependence, it serves as a temperature- and pressure-dependent con-figurational Hamiltonian analogous to a cluster expan-sion. Semigrand canonical Monte Carlo [53], accelerated by well-tempered metadynamics [54], therefore samples the mixing free energy across composition directly on the surrogate. A common-tangent construction then yields the miscibility gap (Fig. 5b), and differentiable reweight-ing [55] of the stored samples calibrates the surrogate toward the measured solvus over successive cycles. To reduce computational cost, the structure is fully relaxed every few steps, the stored samples are reused within each cycle, and the metadynamics bias is warm-started between cycles (Methods and Supplementary Note B). Over these cycles, the predicted binodal moves toward the measured solvus (Fig. 5c), and the error in Pt con-centration falls (inset). The same surrogate supports both ordered and disordered thermodynamics and can be specialized against computational or experimental refer-ences. In both cases, differentiable calibration refines an effective free energy model against the available reference without fitting a separate configurational Hamiltonian, providing a flexible realization of the coarse-graining pro-gram of first-principles phase stability theory [6].  
+
+> F. Chemical Trends in Predicted Responses
+
+To examine what chemical information its learned atomic contributions encode, we analyze its per-atom contributions. Although it is supervised only on structure-level thermodynamics, its head assembles each Gibbs free energy surface additively from per-atom con-tributions. This decomposition defines per-atom en-tropy ˆSi and volume ˆVi that sum to the structure totals ( ˆS = P 
+
+> i
+
+ˆSi, ˆV = P 
+
+> i
+
+ˆVi). We therefore test whether these learned descriptors follow established chemical trends (Fig. 6). Across the periodic table, the predicted per-atom en-tropy ˆSi is largest for large, soft, polarizable elements such as the heavy alkali metals, Tl, Hg, and the heavy halogens, and smallest for compact covalent and stiff re-fractory species such as B, C, Si, P, and the early-to-mid transition metals (Fig. 6a). The element-level medians of entropy and volume are strongly correlated, and both generally increase with atomic mass (Fig. 6b). Notable 9a bc d e f      
+
+> HWONS, Se Pb(4+) SFe, Co, Ni Fe, Co, Ni Pb(2+) Se Te Ta Kr Xe Cl Br ICs Rb Tl Hg K
+> PPb OP Ni Nd S
+> BNBCo Er
+
+Fig. 6. Chemical trends in predicted entropy and volume. Predicted per-atom entropy ˆS and volume ˆV from TIP[UMA] at T = 1000 K and P = 0 GPa, across the filtered high-fidelity dataset. (a) Periodic table colored by each element’s median predicted entropy. (b) Element-level median entropy versus median volume, colored by atomic mass, with faint guide lines connecting elements within the same group; the two are strongly correlated. (c–f ) Site-resolved entropy–volume density maps, each grouping sites by one aspect of local chemistry over all sites of the central element, with diamonds marking the group medians. (c) Neighbor identity, Ti–X, for neighbors O, S, Se, and Te. (d,e) Bond character: covalent B–N and P–S/P–Se sites versus metallic Fe, Co, and Ni borides and phosphides. (f ) Formal valence, Pb–O: compact Pb 4+ versus expanded Pb 2+ ,softened by a stereochemically active 6 s2 lone pair. 
+
+exceptions are Ta and W, which remain compact with low entropy because of their strong bonding, in contrast to softer elements such as I, Cs, Tl, and Hg with similar masses, which occupy larger volumes with higher entropy. Compared with the composition-level descriptor of the Gibbs free energy from Bartel et al. [38], in which atomic mass enters directly through a reduced-mass term along-side volume, TIP[UMA] shows a related but more mixed dependence, with mass dependence mediated mainly by the bonding environment and atomic volume. This pat-tern is consistent with vibrational entropy increasing as local bonding softens and effective atomic volume grows. Within an element, much of the variation arises from local environment, and because TIP[UMA] is structure-conditioned and per-atom, it resolves variation that a composition-level descriptor averages away. We group sites by neighbor identity, bond character, and formal valence (Fig. 6c–f). For Ti, predicted volume and en-tropy increase monotonically as the dominant neighbor becomes heavier and more polarizable from O through S, Se, and Te (Fig. 6c). Bond character separates sites at similar predicted volume: stiff, low-coordination co-valent sites, such as threefold B–N or P bound to S and Se, fall well below the soft, high-coordination metallic sites of the corresponding borides and transition-metal phosphides (Fig. 6d,e). This separation is consistent with the established microscopic picture of vibrational entropy: short, stiff, high-frequency bonds carry little entropy, while soft, low-frequency metallic bonding car-ries much more [5, 6]. Formal valence provides an addi-tional distinction: even when the neighboring chemistry is the same, the response descriptors separate by oxida-tion state. In Pb–O, compact, near-octahedral Pb 4+ has lower predicted entropy, while Pb 2+ has larger predicted volume and entropy, consistent with its stereochemically active 6 s2 lone pair (Fig. 6f). Because only the structure-level properties are super-vised and atomic decompositions of bulk responses are non-unique, ˆSi and ˆVi should be interpreted as learned descriptors rather than physical observables. Even so, 10 their agreement with several established trends in local chemistry provides qualitative evidence that the repre-sentation captures chemically meaningful structure.  
+
+> III. DISCUSSION
+
+TIP predicts a branch-conditioned Gibbs free energy surface G(x◦; T, P ) from a relaxed crystal structure. Au-tomatic differentiation yields volume, entropy, and heat capacity from that surface rather than from separate pre-dictions. The model is trained across fidelities, from quasi-harmonic grids to molecular dynamics free ener-gies, and calibrated against either higher-resolution cal-culations or experiment. TIP therefore links several ap-proaches for first-principles thermodynamics within one differentiable model. The present model includes vibrational and config-urational contributions but omits magnetic and elec-tronic entropy. The heat capacity anomalies of Cr 2O3
+
+and Fe 3O4 (Fig. 4) illustrate this limitation. Includ-ing this entropy is a prerequisite for magnetic and mixed-valence solids, where it can qualitatively rear-range the phase diagram [56]. The modular adapter could include these additional residual terms analogous to magnetic models in CALPHAD [57]. Alternatively, charge- and spin-informed per-atom features, for exam-ple from CHGNet [33], could be supplied to the encoder. This would offer a complementary route in which the model resolves the magnetic and electronic entropy from electronic-structure-derived features directly. Point de-fects [58], surfaces [59], and interfaces lie outside the or-dered bulk branches. Their free energies scale per defect or per area rather than with bulk atom count. Extending TIP to these objects would require chemical potentials and finite-size or slab treatments. Occupational disorder is resolved here by conditioning each branch on a spe-cific ordering and sampling compositions with semigrand canonical Monte Carlo, so the configurational search re-mains computationally costly. Supplying site occupan-cies directly as continuous inputs [26] could reduce or replace explicit configurational sampling and enable effi-cient alloy thermodynamics. A second limitation is the quality of the high-fidelity reference. TIP[UMA]’s worst-case error tracks the Frenkel–Ladd switching dissipation of the underlying cal-culation more strongly than with the tested variables (Fig. 3). Accuracy is therefore set by the quality of the free energy labels, making label convergence and coverage major determinants of accuracy. Improvements should therefore prioritize tighter reversibility of the switching simulations, broader chemical and structural coverage, and extension to higher pressures and disordered struc-tures. The underlying level of theory imposes a separate limit: the PBE underbinding inherited from UMA sets a systematic volume and bulk modulus bias that exper-imental post-training can correct empirically but cannot remove from the underlying reference. Rebuilding the same construction on a base potential trained at a higher level of theory would address this bias at its source. Fi-nally, extension to liquids requires both new absolute ref-erence states [60] and input representations that do not depend on a relaxed ordered branch. Meeting both re-quirements would enable full solid–liquid phase diagrams. Together, these extensions define a broader goal: a dif-ferentiable thermodynamic foundation model calibrated to first-principles and experimental data and evaluated at MLIP-like inference compute cost. Such a model would make finite-temperature free energies and response func-tions routine inputs to materials discovery.   
+
+> IV. METHODS A. Branch-conditioned Gibbs free energy
+
+TIP models the Gibbs free energy of an ordered branch labeled by its relaxed reference structure x◦. Each x◦
+
+is obtained by a symmetry-constrained relaxation of the static potential energy surface. The branch-conditioned isothermal-isobaric ( N P T ) partition function restricts configuration space to the basin B(x◦) that relaxes onto 
+
+x◦, and the resulting G(x◦; T, P ) marginalizes vibra-tional and cell fluctuations within the branch. The for-mal branch map, the partition function construction, and the three theoretical assumptions (branch representabil-ity, finite-( T, P ) branch stability, and fixed-branch scope) that make this target well defined are given in Supple-mentary Note A. For modeling, we use the static/thermodynamic split of Eq. (1), with U ◦ := U (x◦) the static energy of the branch representative and ˆGδ absorbing all finite-( T, P )contributions. The zero-point energy is excluded from the labels (Eq. (8)), to maintain consistency with the classical MD reference, which carries no zero-point con-tribution. This convention also avoids an ill-defined harmonic zero-point energy for dynamically unstable branches with imaginary modes. First-order equilibrium responses follow as branch-conditioned thermodynamic derivatives, 
+
+S = −
+
+ ∂G ∂T 
+
+
+
+> P
+
+, V =
+
+ ∂G ∂P 
+
+
+
+> T
+
+, (2) and the second-order responses (heat capacity, isother-mal bulk modulus, and volumetric thermal expansion) follow from higher derivatives of the same G,
+
+CP = −T
+
+ ∂2G∂T 2
+
+
+
+> P
+
+, (3) 
+
+B = −V
+
+ ∂2G∂P 2
+
+−1
+
+> T
+
+, (4) 
+
+α = 1
+
+V∂2G∂T ∂P . (5) 11  
+
+> B. Gibbs free energy model
+
+We parametrize the thermodynamic residual atomwise to respect extensivity, ˆGδ (x◦; T, P ) = 
+
+> N
+
+X
+
+> i=1
+
+ˆgδi (hi; T, P ), (6) where hi is the per-atom latent feature produced by the thermodynamic backbone introduced in the main text (Fig. 1c). The backbone is an equivariant PaiNN en-coder [61] that takes the frozen MLIP’s scalar ( l=0) and vector ( l=1) per-atom features, and refines them by equivariant message passing over the local geometry. The encoder receives neither temperature nor pressure, so ( T, P ) enter only at the head; we use a trunk with 
+
+rmax = 6 ˚ A, d = 64 latent features, 16 radial basis func-tions, and 3 message-passing layers. Each per-atom resid-ual is written so that the volume is exactly the pressure derivative, ˆgδi (hi; T, P ) = ˆ g(0)  
+
+> i
+
+(hi; T ) + 
+
+Z P
+
+> 0
+
+ˆVi(hi; T, p ) d p, (7) so that ˆV = ∂ ˆGδ /∂P = P 
+
+> i
+
+ˆVi holds by construction, while ˆS = −∂ ˆG/∂T follows by automatic differentiation in temperature. The zero-pressure reference branch combines an Ein-stein oscillator vibrational term with a low-order poly-nomial in a normalized temperature τ := T /T max (with 
+
+Tmax = 4000 K a fixed global scale), ˆg(0)  
+
+> i
+
+(hi; T ) = c0 + c1τ + c2τ 2 + c3τ 3
+
++ 3 kBT ln  1 − e−θE/T , (8) with the coefficients {ck} and the Einstein temperature 
+
+θE = Tmax [softplus( ˜θ) + θmin ] predicted from hi. This five-coefficient form ( c0–c3 and θE) is the model used in pre-training. Mid-training augments this branch with two gated anharmonic terms, adding the coefficients clog 
+
+and cinv for seven in total, ˆg(0) ,mid  
+
+> i
+
+(hi; T ) = ˆ g(0)  
+
+> i
+
+(hi; T ) + w(τ )
+
+h
+
+clog τ ln τ + cinv 
+
+τ
+
+i
+
+,
+
+(9) where sigmoidal gate w(τ ) = (τ /τ E)p/[1 + ( τ /τ E)p], with τE := θE/T max and p = 4. This confines the 
+
+τ ln τ and 1 /τ corrections to temperatures above θE, so they represent anharmonic behavior beyond the quasi-harmonic reference while leaving the low-temperature branch intact. Each atomic volume contribution follows a Murnaghan-like pressure response [40] whose per-atom parameters are softplus-transformed quadratic functions of τ ,
+
+V0,i (τ ) = softplus   P 2 
+
+> k=0
+
+aV0 
+
+> k
+
+τ k + V0,min , (10) 
+
+B0,i (τ ) = softplus   P 2 
+
+> k=0
+
+aB0 
+
+> k
+
+τ k + Boff 
+
+ + B0,min , (11) 
+
+B′
+
+> 0,i
+
+(τ ) = 1 + softplus   P 2 
+
+> k=0
+
+aB′ 
+
+> 0
+> k
+
+τ k + B′
+
+> 0,min
+
+, (12) the additive floors enforce V0,i > 0, B0,i > 0, B′ 
+
+> 0,i
+
+> 1, and θE > 0. An offset initializes the initial bulk mod-ulus near Boff = 100 GPa. This parametrization gives the closed-form atomwise volume and analytic pressure integral ˆVi(τ, P ) = V0,i (τ ) x−1/B ′  
+
+> 0,i (τ)
+> i
+
+, (13) 
+
+Z P
+
+> 0
+
+ˆVi(τ, p ) d p = V0,i (τ ) B0,i (τ )
+
+B′
+
+> 0,i
+
+(τ ) − 1
+
+ x(B′   
+
+> 0,i (τ)−1) /B ′
+> 0,i (τ)
+> i
+
+− 1,
+
+(14) with xi := 1 + B′
+
+> 0,i
+
+(τ ) P/B 0,i (τ ). The head uses the Murnaghan-like form because its pressure inte-gral Eq. (14) is closed-form and yields an analytic Gibbs free energy, whereas the Vinet form used for the quasi-harmonic fit [62] requires a numerical root solve. An ablation comparing the two forms gave comparable ac-curacy.  
+
+> C. Multi-fidelity dataset
+
+Source curation and splits. The Materials Project pool [1] is filtered to metastable entries within 0.2 eV/atom of the convex hull (123 ,424 structures) and each structure is relaxed with UMA ( UMA-S-1.1 , omat 
+
+task) [41] to its static branch representative via ASE [63]. A representative subset of 26 ,226 structures is obtained by BIRCH clustering [43] of the UMA embeddings un-der a Euclidean radius threshold of 0 .15, split 90 /10 into 23 ,603 training and 2 ,623 validation representatives. The remaining structures are mapped to the nearest represen-tative in embedding space, and the low-fidelity stream is sampled with inverse-cluster-size weights. 
+
+Low-fidelity quasi-harmonic labels. The low-fidelity signal is the quasi-harmonic approximation [18, 19]. At each cell volume, the Helmholtz free energy is the sum of the quantum harmonic oscillator free energies over the Brillouin-zone phonon branches. Imaginary-frequency modes, whose harmonic free energy is ill-defined, are ex-cluded from this sum. Phonons are computed by finite displacements of 0 .01 ˚ A in an approximately isotropic su-percell of minimum side length 12 ˚ A with Phonopy [19]. Thermal properties are then evaluated from 0 K to 
+
+Tm + 500 K in 5 K steps, where Tm is a predicted melt-ing point [64] read from the Materials Project meta-data. Repeating this over a 12-point isotropic strain grid ( η ∈ [−0.08 , 0.03]) traces the free energy against volume. A Legendre transform at fixed pressure and a Vinet equation-of-state fit [62] then yield the branch-12 conditioned Gibbs free energy, with the zero-point con-tribution subtracted. The governing equations are given in Supplementary Note B. For training, one ( T, P ) point is sampled per structure, with T drawn uniformly over the same 0 to Tm + 500 K range used for the grid and 
+
+P ∼ U([0 , 40] GPa). Samples with equation-of-state RMS residual above 5 meV/atom or a negative fitted bulk modulus are rejected, leaving 122 ,913 accepted sur-faces (111 ,402 training / 11 ,511 validation). 
+
+High-fidelity molecular dynamics labels. The high-fidelity signal is the absolute Gibbs free en-ergy from nonequilibrium MD, computed only on representatives. Each representative is re-laxed with a fast, non-equivariant Orb-v3 potential (orb-v3-conservative-inf-omat ) [42] and sampled at several independent state points (∼4 per ma-terial on average), each an independent draw of 
+
+T ∼ U ([100 K , T m + 500 K]) and P ∼ U ([0 , 40] GPa). The absolute Gibbs free energy is assembled as 
+
+GUMA = GOrb FL + ∆ GOrb →UMA , (15) a Frenkel–Ladd reference on the Orb-v3 Hamiltonian fol-lowed by an alchemical transfer to the equivariant UMA target at the same ( T, P ), obtained in the three steps below. 
+
+Step 1: N P T equilibration. At each state point, an approximately isotropic ∼1,000-atom supercell is equi-librated under N P T for ∼10 ps with a 1 fs timestep, an isotropic Martyna–Tobias–Klein barostat [65], and a Nos´ e–Hoover chain thermostat [66] (100 fs coupling). 
+
+Step 2: Frenkel–Ladd switching. The absolute Helmholtz free energy of the Orb-v3 crystal is obtained by Frenkel–Ladd thermodynamic integration [24] at the fixed equilibrated cell ( N V T , Langevin thermostat). Amixed Hamiltonian U (r; λ) = (1 − λ) U (r) + λ U harm (r)connects the physical potential to an Einstein crystal reference Uharm , whose per-atom spring constants ki =3kBT / ⟨∆r2 
+
+> i
+
+⟩ are estimated from a 10 ps mean-squared-displacement run. The coupling is then driven along a smooth polynomial schedule λ(t) with zero slope at both endpoints [26, 67]: forward over 25 ps, re-equilibrated in the harmonic reference for 5 ps, then backward over 25 ps. Symmetrizing the accumulated nonequilibrium work W s over the forward and backward legs [25] can-cels the leading dissipation, ∆F = 12
+
+ EP0→1 [W s] − EP1→0 [W s], (16) and the absolute branch-conditioned Gibbs free energy follows by adding the closed-form Einstein reference 
+
+Fharm , the P V term at the equilibrated cell, and a center-of-mass correction FCOM ,
+
+GFL (x◦; T, P ) = Fharm (T )−∆F +P V +FCOM (T ). (17) The reference free energy and the center-of-mass correc-tion are given in Supplementary Note B. 
+
+Step 3: Alchemical switching. To avoid a full Frenkel– Ladd calculation on the computationally expensive UMA potential, we transfer the absolute free energy from the Orb-v3 Hamiltonian to UMA at the same state (x◦; T, P ). The mixed Hamiltonian U (r; λ) = (1 −
+
+λ) U Orb + λ U UMA is driven under N P T along the same schedule λ(t): forward over 5 ps, re-equilibrated at UMA for 1 ps, then backward over 5 ps. Symmetrizing the two legs as in Eq. (16) yields the Gibbs free energy difference ∆GOrb →UMA , and the absolute free energy transfers by the triangle relation of Eq. (15). Because Orb-v3 and UMA are trained on overlapping density functional the-ory data, this single alchemical step is a small perturba-tion. The general two-Hamiltonian derivation is given in Supplementary Note B. 
+
+Quality filtering and dataset. Each state point must pass four filters that reject unconverged or non-crystalline runs. The equilibrated cell edge must stay within a factor of two of its 0 K value (scale factor in [0 .5, 2.0]), excluding collapse or sublimation. The atoms’ time-averaged dis-placement from their lattice sites must not exceed 1 .0 ˚ A, removing configurations that melt or reconstruct. The 
+
+N P T cell volume must reach equilibrium within 8 ,000 of its 10 ,000 steps, leaving a sufficient production win-dow. The residual switching dissipation, half the sum of the forward and backward nonequilibrium work, must stay below 0 .05 eV/atom for both the Frenkel–Ladd and alchemical switches. After filtering, 95 ,308 state points remain (85 ,774 training / 9 ,534 validation; 22 ,894 / 2 ,548 unique materials). Complete dataset sizes are tabulated in Supplementary Note C. Because Tm only sets the sam-pling ceiling, state points above it are retained as the metastable continuation of the crystalline branch.  
+
+> D. Multi-fidelity training
+
+Pre-training. Both training stages supervise the ther-modynamic residual Gδ = G − U ◦ rather than the abso-lute G. Pre-training trains the model from scratch with a graph-normalized L1 loss on the residual and its differ-entiated responses, 
+
+Lpre = LG + λV LV + λS LS
+
++ λCP LCP + λB LB + λα Lα, (18) where LG matches the QHA Gibbs residual, and the re-maining terms match its volume, entropy, heat capac-ity, isothermal bulk modulus, and thermal expansion. Hence, the full first- and second-order ( T, P ) structure of G is supervised. The response labels come from the QHA equation-of-state fit and finite-temperature sten-cils. Extensive terms are normalized per atom. Per-sample response losses are capped to prevent rare patho-logical states from dominating optimization (loss weights in Supplementary Note C). Optimization uses Adam [68] (learning rate 6 × 10 −4, per-GPU batch size 32, gradient clipping at norm 10) over ∼125 ,000 optimization steps. 
+
+Mid-training. Mid-training initializes from the pre-13 trained checkpoint and applies a LoRA update [50] to the linear layers of the thermodynamic backbone and head, with all other weights frozen. The update has rank 8, scaling factor 16, and no dropout, adding ∼44 ,000 train-able parameters. Mid-training activates the augmented Einstein basis of Eq. (9) by adding two anharmonic co-efficients initialized to zero. The training target becomes the MD Gibbs residual, with the UMA-relaxed structure kept as input. Because the MD labels provide G and the equilibrated cell volume but no higher derivatives, the loss reduces to LG matching the MD Gibbs residual, LV
+
+matching the MD equilibrium volume ( λV = 0 .05), and a heat-capacity regularizer ( λreg  
+
+> CP
+
+= 0 .005), 
+
+Lmid = LG + λV LV + λreg  
+
+> CP
+
+Lreg  
+
+> CP
+
+. (19) The regularizer Lreg  
+
+> CP
+
+is a smooth-L1 penalty on the de-viation of the predicted per-atom heat capacity from the frozen pre-trained value, with the tolerance set to 1 J K −1 (mol atoms) −1. It ties the temperature de-pendence of the entropy and heat capacity to the well-behaved pre-trained model, while permitting an abso-lute anharmonic correction. Optimization uses Adam at learning rate 2 × 10 −4, and the training runs for approx-imately ∼87 ,000 steps.  
+
+> E. Experimental alignment for ordered phases
+
+NIST–JANAF heat-capacity and entropy benchmark. 
+
+The heat-capacity and entropy accuracy of Fig. 4a is measured against the NIST–JANAF thermochemical ta-bles [44], after restriction to solid phases. The noble gases and diatomic gases, whose JANAF records are gaseous element reference states rather than solids, are excluded. For each remaining species, we use data from 100 K to the first melting or vaporization transition, hard-capped at 4000 K. On the resulting set of 255 solids, we report the per-material mean absolute error between the recorded and predicted CP and S.
+
+Holland–Powell calibration. For ordered phases, the post-training stage calibrates against the ds62 internally consistent thermodynamic assessment [45] using a prede-fined set of Si–Al–Mg–Ca–O minerals (the training/held-out phase split and the reaction set are tabulated in Sup-plementary Note D). The absolute Gibbs free energy in-herits a PBE-level offset from the QHA and MD stages, so the objective matches only relative stabilities and re-sponse derivatives rather than absolute G. It is a smooth-
+
+L1 objective combining phase-equilibrium, single-phase anchor, and reference-curve terms, 
+
+Lpost = Lrxn + λpoly Lpoly + λB0 LB0 + λS0 LS0 + λV0 LV0
+
++ λV LV + λCP LCP + λshape Lshape + λreg Lreg . (20) The dominant terms Lrxn and Lpoly match the experi-mentally assessed reaction and polymorph Gibbs differ-ences ∆ G(T, P ) across the preset. The anchors LB0 , LS0 ,and LV0 match the ds62 single-phase bulk modulus, stan-dard entropy, and molar volume at 298 .15 K and 1 bar through the differentiated responses of Eqs. (2) and (4). On the training phases, LV and LCP match the ds62 ref-erence V (T, P ) and CP (T ) curves, and Lshape matches the phase-centered Gibbs surface ˆG(T, P ) − ˆG(T0, P 0). The final term Lreg is an L2 penalty toward the pre-calibration weights. The residual bulk-modulus error against experiment is a further PBE bias shared by both earlier stages. This stage therefore fine-tunes the full thermodynamic adapter (the encoder-attached heads to-gether with the equation-of-state parameters), allowing the equation of state parameters to adjust. The per-term weights are listed in Supplementary Note D. Optimiza-tion uses Adam (learning rate 1 × 10 −4, gradient clipping at norm 5) for 350 steps. 
+
+SiO 2 pressure–temperature phase diagram. The dia-gram (Fig. 4j–l) is constructed from the calibrated sur-face by evaluating ˆG(T, P ) for the five polymorphs on a grid in temperature (300–2400 K) and pressure (0– 14 GPa) and taking the minimum-G phase at each grid point. Zero contours of pairwise Gibbs free energy differ-ences define the phase boundaries.  
+
+> F. Disordered solid solutions
+
+For a disordered solid solution, we evaluate or-dered branches across composition and calibrate them against a reference: bottom-up by fine-tuning on ahigher-resolution computation, or top-down by itera-tively reweighting sampled configurations onto a mea-sured phase boundary. Both freeze the encoder backbone and update only a lightweight adapter: the bottom-up fit trains the LoRA layers, and the top-down calibration ad-ditionally updates the analytic thermodynamic heads. 
+
+Dilute solubility (bottom-up). The dilute solubility of Sc in fcc Al is determined by the branch free energies of pure Al, the dilute Sc-substituted solid solution, and the Al 3Sc (L1 2) compound. The per-Sc free energy of dissolving one Al 3Sc unit into a 256-site fcc Al is ∆Gsol = G(Al 255 Sc) − G(Al 3Sc) − 252 G(Al) , (21) with G(Al) the per-atom Gibbs free energy of pure fcc Al, and the dilute limit follows from the ideal-dilute equi-librium 
+
+xSc 
+
+1 − xSc 
+
+= exp 
+
+
+
+− ∆Gsol 
+
+kBT
+
+
+
+. (22) The bottom-up calibration fine-tunes the LoRA layers on a dedicated Al–Sc quasi-harmonic dataset so this dilute solubility approaches the quasi-harmonic UMA reference; the vibrational entropy of dissolution, which the 0 K static estimate omits, sets the solubility’s order of magni-tude [6, 49]. This dataset densely samples the fcc Al–Sc composition axis, a chemically disordered region under-14 represented in pre-training. The dataset contains 491 substitutional supercells of up to 64 atoms spanning the full range from pure Al to pure Sc across 65 distinct Sc fractions. The orderings at each composition are selected for pair-correlation diversity. Each structure carries a UMA quasi-harmonic Gibbs free energy computed by the low-fidelity procedure (Supplementary Note B). Start-ing from the pre-trained checkpoint, the rank-8, scaling-16 adapter matches these labels with the Gibbs, vol-ume, entropy, and heat-capacity terms of the pre-training loss Eq. (18) ( λV = 0 .1, λS = 0 .005, λCP = 0 .001), opti-mized with Adam (learning rate 1 × 10 −4, batch size 16, gradient clipping at norm 10) for 100 epochs. 
+
+Semigrand canonical Monte Carlo. Equilibrium com-positions within an ordered branch are sampled by sem-igrand canonical Monte Carlo (SGCMC) [53] on a fixed parent lattice, accelerated by well-tempered metadynam-ics [54]. At fixed species assignment z, the atomic po-sitions and cell are relaxed onto the branch representa-tive, so vibrational and cell free energy contributions en-ter only through the surrogate Gθ , while identity-swap moves zi → z′ are accepted with probability 
+
+Pacc (zi → z′) = min  1, e −β[∆ Gθ +μzi −μz′ +∆ Vbias ], (23) where ∆Gθ is the change in the surrogate branch-conditioned Gibbs free energy of the swap and ∆ Vbias 
+
+is the accompanying change in the metadynamics bias. Full geometry relaxation is performed at every 10 steps when a configuration is stored as a training or reweight-ing sample (after a 40% burn-in). Intermediate steps score each swap with a single surrogate evaluation on the running configuration, which enhances the sampling efficiency. Each simulation runs 20 ,000 steps. Each step attempts a composition-changing identity move or a composition-conserving swap with equal probability. Metadynamics deposits a bias Vbias on the composi-tion collective variable c(z) (0 .05 eV Gaussians every 25 steps, bias factor γ = 10); in the long-time limit 
+
+Vbias → − (1 − 1/γ ) GSGC (c) + const, so the equilibrium concentration distribution 
+
+πSGC (c) ∝ exp  − β G SGC (c; x◦, T, P, μ) (24) is recovered by reweighting [69], and sweeping the chem-ical potentials μ traces the branch-conditioned phase boundary in composition space. The parent-lattice as-sumptions are detailed in Supplementary Note B. 
+
+Differentiable reweighting. The top-down calibra-tion matches a measured phase boundary, the Au–Pt solvus [51, 52], by differentiable reweighting [55] of the stored SGCMC and metadynamics samples. Differen-tiable reweighting re-scores the recorded configurations under updated adapter parameters without re-running the sampler. At each state point, the coexistence chem-ical potential is determined by equating the semigrand free energies of the two basins (the common-tangent condition). The adapter parameters then minimize a weighted error between the predicted and experimen-tal binodal concentrations, regularized by an energy-drift penalty that keeps the importance weights valid and an 
+
+L2 penalty toward the pre-calibration weights. The bin-odal concentrations depend on the parameters through the reweighted samples and through the implicitly dif-ferentiated coexistence root, which makes this regression loss differentiable in the adapter parameters, and opti-mization uses Adam (learning rate 5 × 10 −6, gradient clipping at norm 5) for 160 gradient steps per cycle. We repeat the calibration cycle five times: within each cycle the stored samples are reused by reweighting, and be-tween cycles the reference simulation is re-run at the up-dated parameters, warm-starting its metadynamics bias from the previous cycle to speed convergence. The re-gression loss, the reweighting estimator, the coexistence root, and its implicit gradient are given in Supplementary Note B. 
+
+> CODE AVAILABILITY
+
+The dataset and code to reproduce the results will be made publicly available upon acceptance of this manuscript. 
+
+> ACKNOWLEDGMENTS
+
+The authors thank X. Fu for the discussions that in-spired the conception of this project, and M. Schebek, P. Holderrieth, Y. Du, M. Cheng, K. Sheriff, Z. W. Ulissi, M. Gao, C. L. Zitnick, B. M. Wood, and others from the FAIR Chemistry team for helpful scientific disscussions. J.N. acknowledges support from the Mathworks Fellow-ship. B.D. would like to acknowledge the funding support by Shell Inc. X.D. acknowledges funding from Amazon as part of the MIT Climate and Sustainability Consortium (MCSC). This research used resources of the National Energy Research Scientific Computing Center (NERSC), a Department of Energy Office of Science User Facility using NERSC award ALCC-ERCAP-m5068. 
+
+> COMPETING INTERESTS
+
+The authors declare no competing interests. 
+
+> [1] A. Jain, S. P. Ong, G. Hautier, W. Chen, W. D. Richards, S. Dacek, S. Cholia, D. Gunter, D. Skinner, G. Ceder, and K. A. Persson, Commentary: The Materials Project:
+
+15 
+
+A materials genome approach to accelerating materials innovation, APL Mater. 1, 011002 (2013). [2] S. Kirklin, J. E. Saal, B. Meredig, A. Thompson, J. W. Doak, M. Aykol, S. R¨ uhl, and C. Wolverton, The Open Quantum Materials Database (OQMD): assessing the ac-curacy of DFT formation energies, npj Comput. Mater. 
+
+1, 15010 (2015). [3] W. Sun, C. J. Bartel, E. Arca, S. R. Bauers, B. E. Matthews, B. Orva˜ nanos, B.-R. Chen, M. F. Toney, L. T. Schelhas, W. Tumas, J. Tate, A. Zakutayev, S. Lany, A. M. Holder, and G. Ceder, A map of the inorganic ternary metal nitrides, Nat. Mater. 18 , 732 (2019). [4] K. Tolborg, J. Klarbring, A. M. Ganose, and A. Walsh, Free energy predictions for crystal stability and synthe-sisability, Digital Discovery 1, 586 (2022). [5] G. Garbulsky and G. Ceder, Contribution of the vibra-tional free energy to phase stability in substitutional al-loys: Methods and trends, Phys. Rev. B 53 , 8993 (1996). [6] A. Van De Walle and G. Ceder, The effect of lattice vi-brations on substitutional alloy thermodynamics, Rev. Mod. Phys. 74 , 11 (2002). [7] C. J. Bartel, A. W. Weimer, S. Lany, C. B. Musgrave, and A. M. Holder, The role of decomposition reactions in assessing first-principles predictions of solid stability, npj Comput. Mater. 5, 4 (2019). [8] C. J. Bartel, A. Trewartha, Q. Wang, A. Dunn, A. Jain, and G. Ceder, A critical examination of compound stabil-ity predictions from machine-learned formation energies, npj Comput. Mater. 6, 97 (2020). [9] W. Sun, S. T. Dacek, S. P. Ong, G. Hautier, A. Jain, W. D. Richards, A. C. Gamst, K. A. Persson, and G. Ceder, The thermodynamic scale of inorganic crys-talline metastability, Sci. Adv. 2, e1600225 (2016). [10] M. Aykol, S. S. Dwaraknath, W. Sun, and K. A. Persson, Thermodynamic limit for synthesis of metastable inor-ganic materials, Sci. Adv. 4, eaaq0148 (2018). [11] J. M. Sanchez, F. Ducastelle, and D. Gratias, Generalized cluster description of multicomponent systems, Physica A Stat. Mech. Appl. 128 , 334 (1984). [12] J. W. D. Connolly and A. R. Williams, Density-functional theory applied to phase transformations in transition-metal alloys, Phys. Rev. B 27 , 5169 (1983). [13] P. Zhong, T. Chen, L. Barroso-Luque, F. Xie, and G. Ceder, An ℓ0ℓ2-norm regularized regression model for construction of robust cluster expansions in multicompo-nent systems, Phys. Rev. B 106 , 024203 (2022). [14] M. Asta, D. de Fontaine, M. van Schilfgaarde, M. Sluiter, and M. Methfessel, First-principles phase-stability study of fcc alloys in the Ti-Al system, Phys. Rev. B 46 , 5055 (1992). [15] D. De Fontaine, Cluster approach to order-disorder trans-formations in alloys, in Solid state physics , Vol. 47 (El-sevier, 1994) pp. 33–176. [16] G. Ceder, A. Van der Ven, C. Marianetti, and D. Mor-gan, First-principles alloy theory in oxides, Model. Simul. Mater. Sci. Eng. 8, 311 (2000). [17] A. van de Walle and G. Ceder, Automating first-principles phase diagram calculations, J. Phase Equilib. 
+
+23 , 348 (2002). [18] S. Baroni, S. De Gironcoli, A. Dal Corso, and P. Gi-annozzi, Phonons and related crystal properties from density-functional perturbation theory, Rev. Mod. Phys. 
+
+73 , 515 (2001). [19] A. Togo and I. Tanaka, First principles phonon calcula-tions in materials science, Scr. Mater. 108 , 1 (2015). [20] P. Souvatzis, O. Eriksson, M. Katsnelson, and S. Rudin, Entropy driven stabilization of energetically unstable crystal structures explained from first principles theory, Phys. Rev. Lett. 100 , 095901 (2008). [21] O. Hellman, P. Steneteg, I. A. Abrikosov, and S. I. Simak, Temperature dependent effective potential method for accurate free energy calculations of solids, Phys. Rev. B 
+
+87 , 104111 (2013). [22] J. C. Thomas and A. V. d. Ven, Finite-temperature prop-erties of strongly anharmonic and mechanically unsta-ble crystal phases from first principles, Phys. Rev. B 88 ,214111 (2013). [23] A. Van De Walle, Q. Hong, S. Kadkhodaei, and R. Sun, The free energy of mechanically unstable phases, Nat. Commun. 6, 7559 (2015). [24] D. Frenkel and A. J. Ladd, New Monte Carlo method to compute the free energy of arbitrary solids. application to the fcc and hcp phases of hard spheres, J. Chem. Phys. 
+
+81 , 3188 (1984). [25] M. de Koning, A. Antonelli, and S. Yip, Optimized free-energy evaluation using a single reversible-scaling simu-lation, Phys. Rev. Lett. 83 , 3973 (1999). [26] J. Nam, J. Peng, and R. G´ omez-Bombarelli, Interpola-tion and differentiation of alchemical degrees of freedom in machine learning interatomic potentials, Nat. Com-mun. 16 , 4350 (2025). [27] S. Menon, Y. Lysogorskiy, J. Rogal, and R. Drautz, Auto-mated free-energy calculation from atomistic simulations, Phys. Rev. Mater. 5, 103801 (2021). [28] B. Cheng and M. Ceriotti, Computing the absolute Gibbs free energy in atomistic simulations: Applications to de-fects in solids, Phys. Rev. B 97 , 054102 (2018). [29] V. L. Deringer, M. A. Caro, and G. Cs´ anyi, Machine learning interatomic potentials as emerging tools for ma-terials science, Adv. Mater. 31 , 1902765 (2019). [30] J. Behler and M. Parrinello, Generalized neural-network representation of high-dimensional potential-energy sur-faces, Phys. Rev. Lett. 98 , 146401 (2007). [31] A. P. Bart´ ok, M. C. Payne, R. Kondor, and G. Cs´ anyi, Gaussian approximation potentials: The accuracy of quantum mechanics, without the electrons, Phys. Rev. Lett. 104 , 136403 (2010). [32] C. Chen and S. P. Ong, A universal graph deep learning interatomic potential for the periodic table, Nat. Com-put. Sci. 2, 718 (2022). [33] B. Deng, P. Zhong, K. Jun, J. Riebesell, K. Han, C. J. Bartel, and G. Ceder, CHGNet as a pretrained universal neural network potential for charge-informed atomistic modelling, Nat. Mach. Intell. 5, 1031 (2023). [34] I. Batatia, P. Benner, Y. Chiang, A. M. Elena, D. P. Kov´ acs, J. Riebesell, X. R. Advincula, M. Asta, M. Avay-lon, W. J. Baldwin, et al. , A foundation model for atom-istic materials chemistry, J. Chem. Phys. 163 , 184110 (2025). [35] A. Mazitov, F. Bigi, M. Kellner, P. Pegolo, D. Tisi, G. Fraux, S. Pozdnyakov, P. Loche, and M. Ceriotti, PET-MAD as a lightweight universal interatomic poten-tial for advanced materials modeling, Nat. Commun. 16 ,10653 (2025). [36] L. Kaufman and H. Bernstein, Computer Calculation of Phase Diagrams: With Special Reference to Refractory Metals (Academic Press, New York, 1970). 16 
+
+[37] H. Lukas, S. G. Fries, and B. Sundman, Computational thermodynamics: the Calphad method (Cambridge Uni-versity Press, 2007). [38] C. J. Bartel, S. L. Millican, A. M. Deml, J. R. Rumptz, W. Tumas, A. W. Weimer, S. Lany, V. Stevanovi´ c, C. B. Musgrave, and A. M. Holder, Physical descriptor for the Gibbs energy of inorganic crystalline solids and temperature-dependent materials chemistry, Nat. Com-mun. 9, 4168 (2018). [39] S. Srinivasan, R. Batra, D. Luo, T. Loeffler, S. Manna, H. Chan, L. Yang, W. Yang, J. Wen, P. Darancet, and S. K. R. S. Sankaranarayanan, Machine learning the metastable phase diagram of covalently bonded carbon, Nat. Commun. 13 , 3251 (2022). [40] F. D. Murnaghan, The compressibility of media under extreme pressures, Proc. Natl. Acad. Sci. U. S. A. 30 ,244 (1944). [41] B. M. Wood, M. Dzamba, X. Fu, M. Gao, M. Shuaibi, L. Barroso-Luque, K. Abdelmaqsoud, V. Gharakhanyan, J. R. Kitchin, D. S. Levine, K. Michel, A. Sriram, T. Co-hen, A. Das, A. Rizvi, S. J. Sahoo, Z. W. Ulissi, and C. L. Zitnick, UMA: A family of universal models for atoms, in The Thirty-ninth Annual Conference on Neural Infor-mation Processing Systems (2025). [42] B. Rhodes, S. Vandenhaute, V. ˇSimkus, J. Gin, J. God-win, T. Duignan, and M. Neumann, Orb-v3: atom-istic simulation at scale (2025), arXiv:2504.06231 [cond-mat.mtrl-sci]. [43] T. Zhang, R. Ramakrishnan, and M. Livny, BIRCH: an efficient data clustering method for very large databases, SIGMOD Rec. 25 , 103 (1996). [44] M. W. Chase, NIST-JANAF Thermochemical Tables ,4th ed., Journal of Physical Chemistry Reference Data, Monograph No. 9 (American Chemical Society and American Institute of Physics for the National Institute of Standards and Technology, 1998). [45] T. J. B. Holland and R. Powell, An improved and ex-tended internally consistent thermodynamic dataset for phases of petrological interest, involving a new equation of state for solids, J. Metamorph. Geol. 29 , 333 (2011). [46] A. T. Dinsdale, SGTE data for pure elements, Calphad 
+
+15 , 317 (1991). [47] P. Richet, R. A. Robie, and B. S. Hemingway, Thermody-namic properties of wollastonite, pseudowollastonite and CaSiO3 glass and liquid, Eur. J. Mineral. 3, 475 (1991). [48] V. Swamy, S. K. Saxena, B. Sundman, and J. Zhang, A thermodynamic assessment of silica phase diagram, J. Geophys. Res. Solid Earth 99 , 11787 (1994). [49] V. Ozoli¸ nˇ s and M. Asta, Large vibrational effects upon calculated phase boundaries in Al-Sc, Phys. Rev. Lett. 
+
+86 , 448 (2001). [50] E. J. Hu, Y. Shen, P. Wallis, Z. Allen-Zhu, Y. Li, S. Wang, L. Wang, and W. Chen, LoRA: Low-rank adap-tation of large language models, in International Confer-ence on Learning Representations (2022). [51] A. S. Darling, R. A. Mintern, and J. C. Chaston, The gold-platinum system, J. Inst. Met. 81 , 125 (1952). [52] A. M¨ unster and K. Sagel, Separation curve and critical point of the system gold-platinum, Z. Phys. Chem. 23 ,415 (1960), in German. [53] B. Sadigh, P. Erhart, A. Stukowski, A. Caro, E. Mar-tinez, and L. Zepeda-Ruiz, Scalable parallel Monte Carlo algorithm for atomistic simulations of precipitation in al-loys, Phys. Rev. B 85 , 184203 (2012). [54] A. Barducci, G. Bussi, and M. Parrinello, Well-tempered metadynamics: a smoothly converging and tunable free-energy method, Phys. Rev. Lett. 100 , 020603 (2008). [55] S. Thaler and J. Zavadlav, Learning neural network po-tentials from experimental data via Differentiable Tra-jectory Reweighting, Nat. Commun. 12 , 6884 (2021). [56] F. Zhou, T. Maxisch, and G. Ceder, Configurational elec-tronic entropy and the phase diagram of mixed-valence oxides: The case of Li xFePO 4, Phys. Rev. Lett. 97 ,155704 (2006). [57] M. Hillert and M. Jarl, A model for alloying in ferromag-netic metals, Calphad 2, 227 (1978). [58] I. Mosquera-Lois, S. R. Kavanagh, J. Klarbring, K. Tol-borg, and A. Walsh, Imperfections are not 0 K: free en-ergy of point defects in crystals, Chem. Soc. Rev. 52 ,5812 (2023). [59] X. Du, J. K. Damewood, J. R. Lunger, R. Millan, B. Yildiz, L. Li, and R. G´ omez-Bombarelli, Machine-learning-accelerated simulations to enable automatic sur-face reconstruction, Nat. Comput. Sci. 3, 1034 (2023). [60] R. Paula Leite, R. Freitas, R. Azevedo, and M. de Kon-ing, The Uhlenbeck-Ford model: Exact virial coefficients and application as a reference system in fluid-phase free-energy calculations, J. Chem. Phys. 145 , 194101 (2016). [61] K. Sch¨ utt, O. Unke, and M. Gastegger, Equivariant mes-sage passing for the prediction of tensorial properties and molecular spectra, in International conference on ma-chine learning (PMLR, 2021) pp. 9377–9388. [62] P. Vinet, J. R. Smith, J. Ferrante, and J. H. Rose, Tem-perature effects on the universal equation of state of solids, Phys. Rev. B 35 , 1945 (1987). [63] A. Hjorth Larsen, J. Jørgen Mortensen, J. Blomqvist, I. E. Castelli, R. Christensen, M. Dulak, J. Friis, M. N. Groves, B. Hammer, C. Hargus, et al. , The atomic sim-ulation environment—a Python library for working with atoms, J. Phys.: Condens. Matter 29 , 273002 (2017). [64] Q.-J. Hong, S. V. Ushakov, A. van de Walle, and A. Navrotsky, Melting temperature prediction using a graph neural network model: From ancient minerals to new materials, Proc. Natl. Acad. Sci. U. S. A. 119 ,e2209630119 (2022). [65] G. J. Martyna, D. J. Tobias, and M. L. Klein, Constant pressure molecular dynamics algorithms, J. Chem. Phys. 
+
+101 , 4177 (1994). [66] G. J. Martyna, M. L. Klein, and M. Tuckerman, Nos´ e– Hoover chains: The canonical ensemble via continuous dynamics, J. Chem. Phys. 97 , 2635 (1992). [67] M. de Koning and A. Antonelli, Einstein crystal as a reference system in free energy estimation using adiabatic switching, Phys. Rev. E 53 , 465 (1996). [68] D. P. Kingma and J. Ba, Adam: A method for stochastic optimization (2014), arXiv:1412.6980 [cs.LG]. [69] P. Tiwary and M. Parrinello, A time-independent free energy estimator for metadynamics, J. Phys. Chem. B 
+
+119 , 736 (2015). Supplementary Information for Universal Thermodynamic Interatomic Potentials for Crystalline Materials 
+
+Juno Nam, 1 Bowen Deng, 1 Xiaochen Du, 1 Luis Barroso-Luque, 2
+
+Benjamin Kurt Miller, 2, ∗ and Rafael G´ omez-Bombarelli 1, †
+
+> 1
+
+Department of Materials Science and Engineering, Massachusetts Institute of Technology, Cambridge, MA 02139, USA 
+
+> 2
+
+Fundamental AI Research, Meta, San Francisco, CA 94105, USA 
+
+(Dated: August 17, 2026) 
+
+CONTENTS 
+
+A. Theoretical Formalism and Statistical Basis 21. Notation 22. Assumptions 23. Branch-Conditioned Gibbs Free Energy 34. Statistical Basis of the Learned Free Energy 3B. Derivations of the Free Energy and Sampling Methods 41. Quasi-Harmonic Approximation 42. Frenkel–Ladd Switching 43. Alchemical Switching 54. Semigrand Canonical Monte Carlo 65. Differentiable Reweighting 7C. Training Details 81. Multi-Fidelity Training 82. Analytic Head Constants and Numerical Evaluation 8D. Holland–Powell Calibration and Benchmark Details 8References 10    
+
+> ∗bkmi@meta.com †rafagb@mit.edu
+
+2  
+
+> A. THEORETICAL FORMALISM AND STATISTICAL BASIS
+> Table S1. Summary of the notation.
+
+Symbol Description 
+
+N Number of atoms in a crystal 
+
+x Crystal structure ( L, z, [r]) 
+
+x◦ Branch representative (relaxed structure) 
+
+L Cell matrix (GL +(3 , R)) 
+
+V Cell volume (det L > 0) 
+
+z Atomic species in a crystal ( AN )
+
+m Atomic masses ( RN>0)
+
+r Cartesian atomic positions ( R3×N )
+
+c Composition on a parent lattice 
+
+O◦ Relaxed/reference observable OO∗ Equilibrium (ensemble) average of O
+
+ˆO Predicted observable OP External pressure 
+
+T External temperature 
+
+β Inverse temperature 1 /k BTU Potential energy (of a configuration) 
+
+U ◦ Static reference energy U (x◦)
+
+F Helmholtz free energy ( N V T )
+
+G Gibbs free energy ( N P T )
+
+Gδ Thermal residual ( G − U ◦)
+
+CP Isobaric heat capacity 
+
+V0 Equilibrium volume at P = 0 
+
+B0 Isothermal bulk modulus at P = 0 
+
+α Volumetric thermal expansion coefficient 
+
+S(298 K) Standard entropy at 298 K 
+
+λ Switching (coupling) coordinate ([0 , 1]) 
+
+γ Well-tempered metadynamics bias factor 
+
+μz Chemical potential of species z
+
+∆μ Semigrand chemical potential difference 
+
+θ TIP parameters  
+
+> 1. Notation
+
+Table S1 summarizes the notation used throughout this work. A periodic crystal of N atoms is represented by the triple 
+
+x = ( L, z, [r]) ∈ X N , (S1) where L ∈ GL +(3 , R) is the cell matrix whose columns are the lattice vectors. The species z = ( z1, . . . , z N ) ∈AN are drawn from the periodic table A (a finite set of chemical elements). The symbol [ r] denotes the periodic Cartesian configuration of the N atoms, i.e., the equiva-lence class of r ∈ R3×N modulo lattice translations. We fix the residual O(3) gauge associated with global rota-tions and reflections by restricting L to upper-triangular form with positive diagonal entries. The cell matrix induces the Bravais lattice LZ3 with fundamental-cell volume V := det L > 0, and each pe-riodic position [ ri] has a unique representative in that domain. For a structure-dependent observable O(x), we write 
+
+O◦ := O(x◦) for its zero-temperature value at the branch representative, and 
+
+O∗ := Ex∼πN P T [O(x)] (S2) for its expectation under the branch-conditioned N P T 
+
+Gibbs measure πN P T (x; x◦, T, P ) ∝ e−β (U (x)+ P V ) sup-ported on B(x◦) (the branch, defined in the Assumptions below), formally normalized in Eq. (S9).  
+
+> 2. Assumptions
+
+The thermodynamic interatomic potential (TIP) mod-els the Gibbs free energy of an ordered bulk crystal branch indexed by the reference structure x◦. To make this precise, let 
+
+X ◦ 
+
+> N
+
+⊂ X N (S3) denote the subset of reference (relaxed) configurations. We then introduce a deterministic, idempotent branch map 
+
+Rsym : XN → X ◦ 
+
+> N
+
+, Rsym ◦ Rsym = Rsym , (S4) that maps each periodic structure x ∈ X N to its branch representative Rsym (x) ∈ X ◦ 
+
+> N
+
+. In practice, Rsym is im-plemented by minimizing the base potential energy U
+
+(the UMA potential for TIP[UMA]) while constraining the reference space group, so that Rsym (x) is a station-ary point 
+
+∇r,LU Rsym (x) ≈ 0 (S5) under the imposed constraint. For ordinary phases, the constraint is inactive and Rsym coincides with un-constrained 0 K relaxation. For dynamically stabilized phases such as bcc Ti above the martensitic transi-tion, the constraint is essential because the static high-symmetry archetype is not itself a mechanical minimum. The preimage 
+
+B(x◦) := R−1sym (x◦) = {x ∈ X N : Rsym (x) = x◦} (S6) is the branch (or basin) associated with x◦, and the fam-ily {B (x◦)}x◦∈X ◦ 
+
+> N
+
+partitions XN by construction. The formulation uses three assumptions: (A1) Branch representability. The reference structure 
+
+x◦ ∈ X ◦ 
+
+> N
+
+is a fixed point of Rsym , i.e., Rsym (x◦) = 
+
+x◦, and a stationary point of U under the symme-3try constraint defining Rsym , but it need not be an unconstrained local minimum. (A2) Finite-(T, P ) branch stability. At the queried (T, P ), the branch B(x◦) is a stable or metastable 
+
+N P T basin: the system equilibrates within B(x◦)on the simulation timescale, while escape to other branches is exponentially rare over that timescale. (A3) Fixed-branch scope. A TIP models the branch-conditioned Gibbs free energy G(x◦; T, P ) obtained by restricting the N P T partition function to x ∈B(x◦). Competing branches are compared after evaluating G for their respective representatives. A1 treats x◦ as a branch label rather than requiring an unconstrained mechanical minimum, admitting dy-namically stabilized phases. A2 makes the conditioned ensemble well-defined, so that long-time molecular dy-namics (MD) initialized in B(x◦) samples the branch er-godically. A3 limits the target to a single branch, and therefore requires an unambiguous symmetry constraint for Rsym . 
+
+> 3. Branch-Conditioned Gibbs Free Energy
+
+Following the fixed-ordering coarse-graining frame-work of vibrational alloy thermodynamics [S1], a TIP targets the Gibbs free energy of a crystal conditioned on its branch label x◦ ∈ X ◦ 
+
+> N
+
+, rather than the free energy summed over all branches. At fixed cell L, the branch-conditioned canonical (N V T ) partition function is 
+
+Z(x◦, L; T ) := 1
+
+σ(z) Λ 3N
+
+> m
+
+Z
+
+> BL(x◦)
+
+exp  − βU (x) dr,
+
+(S7) where β := 1 /k BT , BL(x◦) := B(x◦) ∩ { x : cell( x) = L}
+
+is the slice of the branch at fixed cell, σ(z) is the indistinguishability factor for permutations of identi-cal species, and Λ 3N 
+
+> m
+
+:= QNi=1 (h2/2πm ikBT )3/2 is the species-resolved thermal de Broglie prefactor obtained by integrating out atomic momenta. The associated branch-conditioned Helmholtz free energy is 
+
+F (x◦, L; T ) := −kBT ln Z(x◦, L; T ). (S8) The branch-conditioned isothermal-isobaric (N P T )partition function is the Laplace transform of Z over the cell degrees of freedom at fixed pressure, ∆( x◦; T, P ) := 
+
+Z
+
+e−βP V Z(x◦, L; T ) d L, (S9) where the integral runs over cell matrices L consistent with the branch, in the upper-triangular gauge intro-duced in the Notation subsection, and V = det L. Here dL denotes a fixed reference measure on cell matrices. Its choice and the discrete multiplicity of equivalent lattice bases enter G only through a subextensive normalization that is negligible per atom and cancels in the branch differences and ( T, P )-derivatives used here. The corre-sponding branch-conditioned Gibbs free energy is 
+
+G(x◦; T, P ) := −kBT ln ∆( x◦; T, P ). (S10) By construction, G(x◦; T, P ) is a branchwise quantity, obtained by marginalizing over the vibrational and cell-shape fluctuations within a single branch B(x◦). Sum-ming over the disjoint branches gives the free energy over the full configuration space, 
+
+G(T, P ) = −kBT ln X 
+
+> x◦∈X ◦
+> N
+
+exp  − β G (x◦; T, P ). (S11) For a chemically disordered system, this branch sum is evaluated by sampling the disjoint branches on a parent lattice, as in the main-text solid solution examples. We carry this out by configurational sampling on a parent lattice, as for the disordered solid solutions of the main text. Equilibrium observables within the branch are ob-tained as standard thermodynamic derivatives of 
+
+G(x◦; T, P ), 
+
+S = −
+
+ ∂G ∂T 
+
+
+
+> P
+
+, V =
+
+ ∂G ∂P 
+
+
+
+> T
+
+. (S12) For modeling purposes, we split the target into a static reference and a thermodynamic residual, 
+
+G(x◦; T, P ) = U ◦ + Gδ (x◦; T, P ), (S13) where U ◦ := U (x◦) is the zero-temperature potential en-ergy of the branch representative and Gδ is the thermo-dynamic residual that contains all finite-( T, P ) contribu-tions.  
+
+> 4. Statistical Basis of the Learned Free Energy
+
+The quasi-harmonic approximation (QHA) and nonequilibrium MD simulation free energies use different nuclear statistics. After removal of the zero-point term, the QHA label in Eq. (S16) is the quantum thermal-occupation free energy P 
+
+> q
+
+wq
+
+P 
+
+> ν
+
+kBT ln(1 − e−βℏωqν ), whereas the Frenkel–Ladd free energy in Eq. (S27) is classical: it is built on the classical Einstein reference of Eq. (S26) and sampled by classical molecular dy-namics. The two limits agree as βℏω → 0, where 
+
+kBT ln(1 − e−βℏω ) → kBT ln( βℏω) reproduces the clas-sical form of Eq. (S26). At low temperatures, they dif-fer: the quantum heat capacity approaches zero, whereas the classical harmonic heat capacity approaches 3 N k B.The analytic head combines these targets by retaining the quantum Einstein term 3 kBT ln(1 − e−θE/T ), while fitting MD-derived anharmonic corrections over the sam-pled temperature range. Mid-trained TIP[UMA] there-4fore retains nuclear quantum effects (except the zero-point offset) at the harmonic level and incorporates clas-sical anharmonic corrections from MD.   
+
+> B. DERIVATIONS OF THE FREE ENERGY AND SAMPLING METHODS 1. Quasi-Harmonic Approximation
+
+The QHA [S2, S3] provides the low-fidelity approxi-mation for G(x◦; T, P ) that retains volume-dependent vibrational physics while neglecting anharmonic mode coupling. We use it as the low-fidelity training signal for TIP[UMA]. For a fixed cell L, we expand the potential energy around the cell-constrained relaxed positions r◦(L) := arg min r U (r; L) to second order, 
+
+U (r; L) ≈ U ◦(L) + 12 ∆r⊤Φ( L) ∆ r, (S14) where ∆ r := r−r◦(L), U ◦(L) := U (r◦(L); L) is the cell-constrained static energy, and Φ( L) is the interatomic force-constant matrix at r◦(L). By lattice periodicity the mass-weighted force constants block-diagonalize over the Brillouin zone: at each wavevector q the dynamical matrix eΦ( q; L) ∈ C3n×3n (n atoms per unit cell) has eigenvalues ω2 
+
+> qν
+
+(L) indexed by the branch ν = 1 , . . . , 3n.Within this harmonic ansatz at fixed cell, the canonical partition function factorizes into independent quantum harmonic oscillators, giving the closed-form Helmholtz free energy 
+
+FQHA (L, T ) = U ◦(L) + Fvib (L, T ), (S15) with the vibrational contribution 
+
+Fvib (L, T ) = X
+
+> q
+
+wq
+
+> 3n
+
+X
+
+> ν=1
+
+ ℏ ωqν (L)2+ kBT ln 
+
+
+
+1 − e−βℏωqν (L)
+
+, (S16) per unit cell, where the sum runs over a regular mesh of wavevectors q in the first Brillouin zone with weights normalized to P 
+
+> q
+
+wq = 1. The first term is the zero-point energy and the second is the thermal occupation contribution. The cell dependence of ωqν (L) accounts for the thermal expansion and Gr¨ uneisen-type effects that a fixed-cell harmonic approximation omits. The force constants are obtained from finite displacements in the relaxed supercell and Fourier-interpolated onto the Brillouin-zone mesh with Phonopy [S3]. We dis-card modes below a small near-zero cutoff, including the three acoustic Γ-point modes and small imaginary modes caused by numerical noise, to avoid singular occupation terms. The branch-conditioned QHA Gibbs free energy is ob-tained by minimizing F (L, T ) + P V over cells consistent with the branch, 
+
+GQHA (x◦; T, P ) := min 
+
+> L
+
+FQHA (L, T ) + P V , (S17) where the minimization runs over cells consistent with the branch B(x◦). In practice we restrict the search to an isotropic-strain family L(η) := (1 + η) L◦ around the branch representative, evaluate FQHA on a strain grid, and fit the resulting FQHA (V, T ) with a Vinet equation of state [S4] to perform the minimization analytically. Subtracting the static reference yields the QHA approx-imation to the thermodynamic residual, 
+
+Gδ
+
+> QHA
+
+(x◦; T, P ) := GQHA (x◦; T, P ) − U ◦, (S18) which is the regression target for the low-fidelity training signal. Within the isotropic-strain restriction, QHA is exact for a harmonic vibrational Hamiltonian and captures leading volumetric anharmonicity through ωqν (L). It neglects anisotropic cell relaxation and mode-mode cou-pling, and breaks down when any ω2 
+
+> qν
+
+(L) < 0 along the relevant cell trajectory [S5]. For dynamically sta-bilized branches covered by assumption (A1), the static reference x◦ is itself unstable under unconstrained relax-ation, and QHA must be augmented or replaced by a finite-temperature method such as Frenkel–Ladd switch-ing (Section B 2).  
+
+> 2. Frenkel–Ladd Switching
+
+Frenkel–Ladd switching [S6] computes the absolute Helmholtz free energy of a single crystalline branch by thermodynamic integration along a path that connects the physical Hamiltonian to an analytically tractable har-monic reference. We follow the optimized switching vari-ant of de Koning et al. [S7]. Let U (r) denote the physical potential energy of the branch evaluated at the cell L∗ equilibrated at the target (T, P ) under the branch-conditioned N P T ensemble, and define the Einstein crystal reference 
+
+Uharm (r) := 12
+
+> N
+
+X
+
+> i=1
+
+ki ri − r◦
+
+> i
+> 2
+
+, (S19) where r◦ 
+
+> i
+
+are the relaxed atomic positions of x◦ and ki
+
+are species-resolved spring constants. The mixed Hamil-tonian 
+
+U (r; λ) := (1 − λ) U (r) + λ U harm (r), λ ∈ [0 , 1] ,
+
+(S20) interpolates between the two endpoints. Letting πλ(r) ∝
+
+e−βU (r;λ) denote the canonical ( N V T ) measure under the mixed Hamiltonian at fixed λ, the reversible-work 5theorem reads 
+
+Fharm − F =
+
+Z 10
+
+Er∼πλ [Uharm (r) − U (r)] d λ. (S21) For a finite-rate switching trajectory in which λ(t) is driven from 0 to 1 over a time τs, the accumulated nonequilibrium work 
+
+W s := 
+
+Z τs
+
+> 0
+
+˙λ(t) Uharm (r(t)) − U (r(t))  dt (S22) is a path-dependent random variable whose distribution depends on the switching protocol; let P0→1 and P1→0 de-note the forward and backward switching path measures, each initialized from the corresponding equilibrium end-point. The driving follows a smooth polynomial sched-ule [S8, S9] in the reduced time ˜ t = t/τ s,
+
+λ(˜ t) = ˜ t5 70˜ t4 − 315˜ t3 + 540˜ t2 − 420˜ t + 126 , (S23) whose slope d λ/ d˜ t = 630 ˜ t4(1 − ˜t)4 vanishes at both endpoints and reduces the dissipation relative to a lin-ear ramp. The Jarzynski–Crooks dissipation inequality 
+
+EP0→1 [W s] ≥ Fharm − F holds with equality only in the quasistatic limit. Forward and backward trajectories are combined symmetrically [S7] so that the leading-order dissipation cancels, giving the bidirectional estimator ∆F = 12
+
+ EP0→1 [W s] − EP1→0 [W s] (S24) and the bidirectional dissipation diagnostic 
+
+Ed := 12
+
+ EP0→1 [W s] + EP1→0 [W s]. (S25) The reference free energy is known in closed form: the classical Einstein crystal of N independent three-dimensional oscillators with frequencies ωi := pki/m i
+
+has 
+
+Fharm (T ) = 3 kBT
+
+> N
+
+X
+
+> i=1
+
+ln 
+
+ ℏωi
+
+kBT
+
+
+
+, (S26) so the absolute Helmholtz free energy of the physical branch follows from Eq. (S24) as 
+
+F (x◦, L∗; T ) = Fharm (T ) − ∆F. (S27) Pinning each atom to its lattice site r◦ 
+
+> i
+
+in Uharm also fixes the center of mass of the reference, a constraint absent from the unconstrained crystal partition function. The corresponding finite-size correction [S6] is 
+
+FCOM (T ) = −kBT ln 
+
+
+
+Vprim 
+
+
+
+2πk BT
+
+> N
+
+X
+
+> i=1
+
+ν2
+
+> i
+
+ki
+
+−3/2
+
+,
+
+(S28) where Vprim is the primitive-cell volume and νi := 
+
+mi/ P 
+
+> j
+
+mj are the mass fractions. Combining the abso-lute Helmholtz free energy, the G = F +P V conversion at the equilibrated cell, and the COM correction yields the Frenkel–Ladd estimate of the branch-conditioned Gibbs free energy 
+
+GFL (x◦; T, P ) = Fharm (T ) − ∆F + P V + FCOM (T ).
+
+(S29) Because this G = F + P V conversion evaluates the Helmholtz free energy at the single equilibrated cell L∗
+
+rather than integrating over cell fluctuations, the esti-mate Eq. (S29) is an approximation to the full branch-conditioned N P T Gibbs free energy Eq. (S10). This is the same cell-fluctuation approximation adopted in the CALPHY workflow [S10]. The neglected cell-fluctuation contribution arises from the few cell degrees of freedom, so it is of order kBT per simulation cell and subextensive, hence negligible per atom for the ∼1,000-atom supercells used here. It can nonetheless grow for strongly flexible or anharmonic cells.  
+
+> 3. Alchemical Switching
+
+Alchemical switching estimates the Gibbs free energy difference between two potential energy surfaces U A and 
+
+U B at the same thermodynamic state ( x◦; T, P ), without requiring an absolute reference for either. The mixed Hamiltonian 
+
+U (r; λ) := (1 −λ) U A(r)+ λ U B (r), λ ∈ [0 , 1] , (S30) interpolates between the two surfaces at fixed species and temperature, holding species and temperature fixed while allowing the cell variables to respond to ( T, P ). Both legs are run in the N P T ensemble. The same forward-backward symmetrization of Eq. (S24), with switching path measures PA→B and PB→A replacing P0→1 and 
+
+P1→0, now yields the Gibbs free energy difference ∆GA→B (x◦; T, P ) := GB − GA
+
+= 12
+
+ EPA→B [W s] − EPB→A [W s],
+
+(S31) where each switching work is defined as in Eq. (S22) with the integrand Uharm − U replaced by U B − U A.Combining alchemical switching with an absolute Frenkel–Ladd estimate Eq. (S29) performed against a faster potential A transfers the absolute Gibbs free en-ergy onto a target surface B via the triangle relation 
+
+GB (x◦; T, P ) = GA(x◦; T, P ) + ∆ GA→B (x◦; T, P ).
+
+(S32) We use this with A = Orb-v3 (the faster reference) and 
+
+B = UMA (the target): an absolute Frenkel–Ladd ref-erence is computed on a faster potential, and a single alchemical step then transfers it onto the target sur-6face, sidestepping the computational cost of a direct Frenkel–Ladd calculation on the latter. Because Orb-v3 and UMA are trained on overlapping density functional theory data, their potential energy surfaces are closely matched, so the dissipation is much smaller than that of the Frenkel–Ladd switching.  
+
+> 4. Semigrand Canonical Monte Carlo
+
+We combine semigrand canonical Monte Carlo (SGCMC) [S11] with well-tempered metadynamics (WT-MetaD) [S12] to sample equilibrium species concentra-tions on a fixed parent lattice. The parent lattice is a structural template defined by L◦ and N atomic sites 
+
+r◦ = ( r◦ 
+
+> 1
+
+, . . . , r◦ 
+
+> N
+
+) shared by all species assignments un-der consideration. For each z ∈ A N , the corresponding branch representative is 
+
+x◦ 
+
+> z
+
+:= Rsym 
+
+ (L◦, z, [r◦])  ∈ X ◦ 
+
+> N
+
+, (S33) and the SGCMC ensemble is supported on the parent-lattice union S 
+
+> z∈A N
+
+B(x◦ 
+
+> z
+
+). The Markov chain samples only the discrete site-occupancy variable z: the continu-ous coordinates ( r, L) are relaxed onto the branch repre-sentative and contribute only through the marginalized branch-conditioned Gibbs free energy 
+
+G(z; T, P ) := G(x◦ 
+
+> z
+
+; T, P ) (S34) of Eq. (S10). We assume the parent lattice is pre-served across all assignments under consideration, i.e., 
+
+Rsym acts site-locally without breaking the shared lat-tice topology. This excludes vacancies, interstitials, and symmetry-changing reconstructions, which change the site count or lattice topology and lie outside this scope. Within this formalism, SGCMC samples a Gibbs mea-sure at fixed N , T , P , and chemical potentials μ := (μz )z∈A , while the assignment z ∈ A N fluctuates; meta-dynamics promotes sampling across the relevant com-position basins so that all phases of interest are visited within a single trajectory. The SGC ensemble is sampled over the discrete assign-ment z by identity swap moves , with the configurational coordinates ( r, L) relaxed onto the branch representa-tive: select a site i uniformly at random, propose chang-ing its species zi → z′ ∈ A , and accept with probability 
+
+Pacc (zi → z′) = min 
+
+
+
+1, e −β [∆ Gθ +μzi −μz′ +∆ Vbias ]
+
+,
+
+(S35) where ∆Gθ is the change in the surrogate branch-conditioned Gibbs free energy Gθ under the swap, eval-uated on the running configuration, and ∆ Vbias is the accompanying change in the well-tempered metadynam-ics bias Eq. (S37) on the composition collective vari-able. Only chemical-potential differences are physical, so we fix a reference species z0 ∈ A and parametrize the ensemble by ∆ μz := μz − μz0 for z̸ = z0. De-tailed balance with Eq. (S35) yields, at fixed bias, the bi-ased semigrand measure πθ (z) ∝ exp  − β Gθ (z; T, P ) −
+
+P 
+
+> z∈A
+
+μz Nz (z) − β V bias (c(z))  as the stationary distri-bution of the Markov chain [S11]; the unbiased semigrand distribution Eq. (S40) is recovered by reweighting. The acceptance ratio of Eq. (S35) requires only the surrogate Gibbs change ∆ Gθ and the bias change of the proposed swap, obtained from a single surrogate evalua-tion on the running configuration. The full symmetry-constrained relaxation occurs only on logging steps, i.e., when the configurations are retained as training or reweighting samples. Intermediate proposals are not relaxed, which reduces the computational cost of sam-pling, while all stored configurations are fully relaxed. For intermediate proposals, evaluating Gθ on the run-ning configuration approximates the relaxed branch free energy G(x◦ 
+
+> z
+
+) of Eq. (S34). The acceptance probabil-ity depends only on the free energy difference of two configurations that differ by a single swap, for which the relaxation contribution largely cancels, and every stored sample carries the fully relaxed value used in the reweighting of Section B 5. In the production runs, each step attempts a composition-changing identity move or a composition-conserving swap with equal probability. The well-tempered bias of Eq. (S37) deposits 0 .05 eV Gaus-sians every 25 steps with bias factor γ = 10. Configu-rations are retained for relaxation and labeling every 10 steps after a 40% burn-in. To accelerate composition sampling, define the compo-sition collective variable 
+
+c(z) := 1
+
+N
+
+ Nz (z)
+
+> z∈A
+
+, Nz (z) := 
+
+> N
+
+X
+
+> i=1
+
+1{zi = z},
+
+(S36) which lives on the ( |A|− 1)-simplex. Well-tempered meta-dynamics [S12] deposits Gaussian kernels along the CV trajectory, 
+
+Vbias (c, t ) = X
+
+> t′≤t
+
+w(t′) exp 
+
+
+
+− ∥c − c(t′)∥2
+
+2σ2
+
+
+
+, (S37) with deposition heights rescaled by the running bias, 
+
+w(t) = w0 exp 
+
+
+
+− Vbias (c(t), t )(γ − 1) kBT
+
+
+
+. (S38) The bias factor γ > 1 sets an effective CV temperature 
+
+Teff := γT ; in the long-time limit the bias converges to 
+
+Vbias (c) t→∞ 
+
+−−−→ − 
+
+
+
+1 − 1
+
+γ
+
+
+
+GSGC (c; x◦, T, P, μ) + const ,
+
+(S39) where GSGC (c; · · · ) is the projection of the SGC Gibbs free energy onto the composition CV at fixed branch and external conditions. The equilibrium concentration distribution at ( T, P, μ)on the branch B(x◦) is recovered by reweighting accord-7ing to Eq. (S39), 
+
+πSGC (c; x◦, T, P, μ) ∝ exp  − β G SGC (c; x◦, T, P, μ),
+
+(S40) and is reweighted from the biased trajectory using the time-independent estimator of Tiwary and Parrinello [S13]. Equilibrium concentrations are identified with the basin-conditioned mean concentrations of πSGC , and sweeping μ at fixed (T, P ) traces out the branch-conditioned phase boundary in composition space.  
+
+> 5. Differentiable Reweighting
+
+The parameters θ of a Gibbs free energy model 
+
+Gθ (z; T, P ) are fine-tuned to reproduce experimental binodal concentrations by differentiable reweighting [S14] of stored SGCMC plus WTMetaD samples. For clarity, we specialize to a binary alloy with species A = {A, B },scalar concentration c(z) := NB (z)/N , and chemical po-tential difference ∆ μ := μB − μA. The basins b ∈ { A, B }
+
+label the two coexisting phases (A-rich and B-rich). Gen-eralization to multi-species alloys follows by replacing c
+
+with the simplex-valued composition c of Eq. (S36) and ∆μ with a vector of chemical-potential differences rela-tive to a reference species. For each experimental state point m = ( Tm, P m), we run a single reference SGCMC plus WTMetaD simula-tion at parameters θ0 and chemical potential ∆ μ0,m cho-sen close to coexistence so that both basins are sampled, and store Mm decorrelated samples 
+
+Dm := zm,i , c m,i , V m,i , κ m,i  
+
+> Mm
+> i=1
+
+, (S41) where cm,i := c(zm,i ), Vm,i := V (m)bias (cm,i , t i) is the meta-dynamics bias of Eq. (S37) at the deposition time ti,and κm,i is the time-dependent reweighting offset of well-tempered reweighting [S13] (an irrelevant additive con-stant if a frozen final bias is used). The simulator is not differentiated; gradients flow only through reweighted ob-servables on Dm.For a candidate ( θ, ∆μ), the importance log-weight of sample i relative to the reference is 
+
+ℓm,i (θ, ∆μ) := −βm
+
+Gθ (zm,i ; Tm, P m)
+
+− Gθ0 (zm,i ; Tm, P m) − N (∆ μ − ∆μ0,m ) cm,i 
+
+
+
++ βm (Vm,i − κm,i ), (S42) with βm := 1/k BTm. The bracketed term is the semigrand-energy difference between candidate and ref-erence parameters, and the Vm,i − κm,i term unbiases the metadynamics bias accumulated during the reference simulation. Normalizing by softmax, 
+
+wm,i (θ, ∆μ) := exp ℓm,i (θ, ∆μ)
+
+PMm 
+
+> j=1
+
+exp ℓm,j (θ, ∆μ) , (S43) yields a finite-sample estimator of any semigrand expec-tation under the candidate measure 
+
+bE(m)
+
+> θ, ∆μ
+
+[O] := 
+
+> Mm
+
+X
+
+> i=1
+
+wm,i (θ, ∆μ) O(zm,i ). (S44) The differentiable observable for binodal calibration is a basin-conditioned mean concentration, not the full free energy profile. Define basin masks Mm,b : [0 , 1] → { 0, 1}
+
+on the concentration axis, with Mm,b (c) = 1 iff c lies in the support of basin b identified from the unbiased ref-erence profile (typically the interval enclosing the corre-sponding minimum, with the boundary between basins placed near the intervening barrier). The basin-local weights and predicted binodal concentration are 
+
+w(b)
+
+> m,i
+
+(θ, ∆μ) := Mm,b (cm,i ) exp ℓm,i (θ, ∆μ)
+
+P 
+
+> j
+
+Mm,b (cm,j ) exp ℓm,j (θ, ∆μ) , (S45) 
+
+bcm,b (θ, ∆μ) := X
+
+> i
+
+w(b)
+
+> m,i
+
+(θ, ∆μ) cm,i . (S46) At coexistence, ∆ μ is the value enforcing equal semi-grand free energies of the two basins, so it is not a free parameter. With unnormalized basin partition function 
+
+Zm,b (θ, ∆μ) := X
+
+> i
+
+Mm,b (cm,i ) exp ℓm,i (θ, ∆μ), (S47) coexistence reads Zm,A (θ, ∆μ) = Zm,B (θ, ∆μ), or equiv-alently 
+
+Hm(θ, ∆μ) := ln Zm,A (θ, ∆μ) − ln Zm,B (θ, ∆μ) = 0 .
+
+(S48) For each θ, Eq. (S48) is solved for ∆ μ as a scalar root-finding problem using the stored samples Eq. (S41) with-out additional simulation. The condition Eq. (S48) is the “common-tangent construction” for the binodal: the two basins, evaluated at a common candidate ∆ μ, share the same tangent slope, and equality of their semigrand free energies (equivalently Zm,A = Zm,B ) makes that tan-gent “touch” both branches of the composition free en-ergy. Denoting the solution by ∆ μ⋆m(θ), the coexistence-conditioned binodal observable is 
+
+bc ⋆m,b (θ) := bcm,b 
+
+ θ, ∆μ⋆m(θ). (S49) Implicit differentiation of Eq. (S48) yields the gradient of ∆μ⋆m with respect to θ,d∆ μ⋆m
+
+dθ = bE(m,A )[∇θ Gθ ] − bE(m,B )[∇θ Gθ ]
+
+N  bc ⋆m,A − bc ⋆m,B 
+
+ , (S50) where bE(m,b ) denotes the basin-local expectation with weights w(b) 
+
+> m,i
+
+at ∆ μ = ∆ μ⋆m(θ). Given experimental binodal data {cexp 
+
+> m,b
+
+} across state points m and basins b ∈ { A, B }, the model parameters 8are obtained by minimizing the weighted regression loss 
+
+L(θ) := λbin 
+
+X
+
+> m
+
+X
+
+> b∈{ A,B }
+
+ bc ⋆m,b (θ) − cexp 
+
+> m,b
+
+2
+
++ λdrift 
+
+X
+
+> m
+
+∆drift ,m (θ)2 + λanchor ∥θ − θ0∥22, (S51) with cexp  
+
+> m,b
+
+the experimental boundary concentrations. The energy-drift term ∆drift ,m (θ) := 1
+
+N M mMmX
+
+> i=1
+
+Gθ (zm,i ) − Gθ0 (zm,i ) (S52) measures the absolute per-atom change in the surrogate branch free energy between the reference parameters θ0
+
+and the current θ, averaged over the Mm stored sam-ples Dm of Eq. (S41) at state point m. This term limits the parameter update within each cycle and maintains overlap with the sampled distribution. The final term is an L2 penalty toward the same reference parameters 
+
+θ0. The parameters are optimized by Adam (learning rate 5 × 10 −6, gradient clipping at norm 5) for 160 gra-dient steps within each cycle, with weights λbin = 100, 
+
+λdrift = 300, and λanchor = 3 × 10 4 in the deployed Au– Pt calibration. Within each calibration cycle, the stored samples are reused by reweighting without further simu-lation; between cycles, the reference SGCMC plus WT-MetaD simulation is re-run at the updated parameters and coexistence estimate. Between cycles, the metady-namics bias is initialized from the previous cycle. Be-cause successive parameter updates are small, fewer de-position steps are required to reconverge.   
+
+> C. TRAINING DETAILS 1. Multi-Fidelity Training
+
+Table S2 lists the weights and per-response caps.      
+
+> Table S2. Pre-training loss terms. Each is a L1penalty on the residual values. The extensive quantities are normal-ized per atom; the intensive responses are not. The cap (in the units shown) bounds each per-sample contribution, and a global gradient-norm clip of 10 applies to the summed loss.
+
+Term Units Per atom λ Cap 
+
+LG eV atom −1 yes 1 —
+
+LV ˚A3 atom −1 yes 0.25 —
+
+LS J K −1 (mol atoms) −1 yes 0.005 200 
+
+LCP J K −1 (mol atoms) −1 yes 0.003 200 
+
+LB GPa no 0.003 2000 
+
+Lα 10 −5 K−1 no 0.05 200 The trained thermodynamic adapter is small relative to the frozen encoder it augments. The UMA representa-tion ( UMA-S-1.1 ) carries ∼1.5 × 10 8 parameters, of which 
+
+∼6 × 10 6 are active per structure through its mixture-of-experts routing. The trainable thermodynamic adapter has ∼2.1 × 10 5 parameters. Of these, the analytic co-efficient heads account for ∼9 × 10 3. Mid-training adds a ∼4.4 × 10 4-parameter LoRA update [S15] (Methods), bringing the adapter to ∼2.6 × 10 5 parameters in total, of which the LoRA update is about 17%.  
+
+> 2. Analytic Head Constants and Numerical Evaluation
+
+The head uses two fixed global normalization scales, 
+
+Tmax = 4000 K and Pmax = 40 GPa. The reduced temperature τ = T /T max and the normalized pressure 
+
+P/P max each map their sampled range into (0 , 1]. Neither normalization scale is material specific, so the predicted surface is a function of structure alone. All head quan-tities use a fixed unit system: per-atom energies in eV, temperatures in K, per-atom volumes in ˚ A3, and pres-sures in GPa. The reference coefficients c0–c3, clog , and 
+
+cinv are then per-atom energies, and θE is a tempera-ture. The equation-of-state parameters are read as V0,i 
+
+in ˚ A3, B0,i in GPa, and B′ 
+
+> 0,i
+
+dimensionless. The polyno-mial coefficients aV0 
+
+> k
+
+, aB0 
+
+> k
+
+, and aB′ 
+
+> 0
+> k
+
+enter their softplus as dimensionless numbers. In the Murnaghan volume inte-gral the pressure enters only through the dimensionless ratio B′
+
+> 0,i
+
+P/B 0,i , and the pressure-volume work, formed in ˚ A3 GPa, is converted to eV with 1 eV /˚A3 = 160 .2 GPa before it is added to the reference branch. All remaining constants are fixed as follows: the normalized Einstein-temperature floor θmin = 10 −4, the temperature floor 
+
+τmin = 10 −8 (both in units of Tmax ), and the gate expo-nent p = 4 regularize the normalization and vibrational terms. The equation-of-state floors V0,min = 10 −6 ˚A3,
+
+B0,min = 10 −3 GPa, and B′ 
+
+> 0,min
+
+= 10 −3, together with the Murnaghan argument floor xmin = 10 −8, keep the equation of state well-defined. The initialization bias 
+
+Boff = 100 GPa is added inside the B0,i softplus so the untrained bulk modulus starts near 100 GPa.  
+
+> D. HOLLAND–POWELL CALIBRATION AND BENCHMARK DETAILS
+
+The experimental anchoring of ordered phases (Meth-ods) uses the Holland–Powell ds62 dataset [S16]: a pre-defined set of Si–Al–Mg–Ca–O crystalline phases (Ta-ble S3) together with reactions among them (listed be-low). For each phase, ds62 provides the experimentally assessed single-phase properties at 298 .15 K and 1 bar (the isothermal bulk modulus B0, the thermal expan-sivity α, the standard entropy S(298 K), and the molar volume V0). Every reaction and polymorph contributes a Gibbs free energy difference target. The training phases are the binary and ternary oxides above the divider in Ta-ble S3. The six quaternary oxides below the divider, to-9gether with the held-out reactions that form them, are excluded from fine-tuning and used only for evaluation. Held-out accuracy therefore measures transfer from bi-nary and ternary training phases to quaternary phases. Phase abbreviations follow Holland and Powell [S16].   
+
+> Table S3. Holland–Powell benchmark phases. Binary and ternary phases used for training are listed above the di-vider; quaternary phases used only for evaluation are listed below.
+
+Abbrev. Composition Mineral q SiO 2 quartz trd SiO 2 tridymite crst SiO 2 cristobalite coe SiO 2 coesite stv SiO 2 stishovite per MgO periclase lime CaO lime cor Al 2O3 corundum fo Mg 2SiO 4 forsterite mwd Mg 2SiO 4 wadsleyite mrw Mg 2SiO 4 ringwoodite en Mg 2Si 2O6 enstatite mpv MgSiO 3 Mg-perovskite mak MgSiO 3 akimotoite cen Mg 2Si 2O6 clinoenstatite pren Mg 2Si 2O6 protoenstatite lrn Ca 2SiO 4 larnite rnk Ca 3Si 2O7 rankinite wo CaSiO 3 wollastonite cpv CaSiO 3 Ca-perovskite pswo CaSiO 3 pseudowollastonite wal CaSiO 3 walstromite cstn CaSi 2O5 Ca-Si titanite ky Al 2SiO 5 kyanite and Al 2SiO 5 andalusite sill Al 2SiO 5 sillimanite sp MgAl 2O4 spinel mont CaMgSiO 4 monticellite merw Ca 3MgSi 2O8 merwinite ak Ca 2MgSi 2O7 akermanite di CaMgSi 2O6 diopside py Mg 3Al 2Si 3O12 pyrope gr Ca 3Al 2Si 3O12 grossular Reactions are written with the ds62 phase abbrevia-tions of Table S3. 
+
+Training (15): 
+
+• 2 per + q → fo 
+
+• fo + q → en 
+
+• lime + q → wo 
+
+• cor + q → ky 
+
+• cor + q → and 
+
+• cor + q → sill 
+
+• 2 lime + q → lrn 
+
+• 3 lime + 2 q → rnk 
+
+• lime + 2 q → cstn 
+
+• per + cor → sp 
+
+• cen → en 
+
+• pren → en 
+
+• pswo → wo 
+
+• and → ky 
+
+• sill → ky 
+
+Polymorph (16): 
+
+• trd → q
+
+• crst → q
+
+• coe → q
+
+• stv → coe 
+
+• mwd → fo 
+
+• mrw → fo 
+
+• 2 mpv → en 
+
+• 2 mak → en 
+
+• cen → en 
+
+• pren → en 
+
+• cpv → wo 
+
+• pswo → wo 
+
+• wal → wo 
+
+• and → ky 
+
+• sill → ky 
+
+• sill → and 
+
+Held-out (6): 
+
+• per + lime + q → mont 
+
+• 3 lime + per + 2 q → merw 
+
+• 2 lime + per + 2 q → ak 
+
+• wo + per + q → di 
+
+• 1.5 en + cor → py 
+
+• 3 wo + cor → gr The post-training objective is smooth-L1 (Huber) throughout, apart from the L2 weight regularizer Lreg .The reaction, polymorph, and shape terms are normal-ized per atom. All loss terms are evaluated on the training phases, and Lrxn and Lpoly run over the 15 training reactions and 16 polymorph pairs above. The single-phase anchors LB0 , LS0 , and LV0 target the ds62 
+
+bulk modulus, entropy, and molar volume tabulated at 298 .15 K and 1 bar. The remaining data terms target the ds62 apparent Gibbs surface Gds62 (T, P ). A global gradient-norm clip of 5 applies to the summed loss. The per-term weights are collected in Table S4.    
+
+> Table S4. Post-training loss terms for ordered phases.
+> Per-term weights λof the experimental calibration objective (Methods).
+
+Term Target λ
+
+Lrxn reaction ∆ G 1
+
+Lpoly polymorph ∆ G 0.5
+
+LB0 B0 0.003 
+
+LS0 S(298 K) 0.003 
+
+LV0 V0 0.015 
+
+LV V (T, P ) 0.05 
+
+LCP CP (T ) 0.3
+
+Lshape G(T, P ) − G(T0, P 0) 0.1
+
+Lreg pre-calibration weights 0.00001 10 
+
+[S1] A. Van De Walle and G. Ceder, The effect of lattice vi-brations on substitutional alloy thermodynamics, Rev. Mod. Phys. 74 , 11 (2002). [S2] S. Baroni, S. De Gironcoli, A. Dal Corso, and P. Giannozzi, Phonons and related crystal properties from density-functional perturbation theory, Rev. Mod. Phys. 73 , 515 (2001). [S3] A. Togo and I. Tanaka, First principles phonon calcula-tions in materials science, Scr. Mater. 108 , 1 (2015). [S4] P. Vinet, J. R. Smith, J. Ferrante, and J. H. Rose, Tem-perature effects on the universal equation of state of solids, Phys. Rev. B 35 , 1945 (1987). [S5] A. Van De Walle, Q. Hong, S. Kadkhodaei, and R. Sun, The free energy of mechanically unstable phases, Nat. Commun. 6, 7559 (2015). [S6] D. Frenkel and A. J. Ladd, New Monte Carlo method to compute the free energy of arbitrary solids. application to the fcc and hcp phases of hard spheres, J. Chem. Phys. 81 , 3188 (1984). [S7] M. de Koning, A. Antonelli, and S. Yip, Optimized free-energy evaluation using a single reversible-scaling sim-ulation, Phys. Rev. Lett. 83 , 3973 (1999). [S8] M. de Koning and A. Antonelli, Einstein crystal as a ref-erence system in free energy estimation using adiabatic switching, Phys. Rev. E 53 , 465 (1996). [S9] J. Nam, J. Peng, and R. G´ omez-Bombarelli, Interpola-tion and differentiation of alchemical degrees of freedom in machine learning interatomic potentials, Nat. Com-mun. 16 , 4350 (2025). [S10] S. Menon, Y. Lysogorskiy, J. Rogal, and R. Drautz, Automated free-energy calculation from atomistic sim-ulations, Phys. Rev. Mater. 5, 103801 (2021). [S11] B. Sadigh, P. Erhart, A. Stukowski, A. Caro, E. Mar-tinez, and L. Zepeda-Ruiz, Scalable parallel Monte Carlo algorithm for atomistic simulations of precipita-tion in alloys, Phys. Rev. B 85 , 184203 (2012). [S12] A. Barducci, G. Bussi, and M. Parrinello, Well-tempered metadynamics: a smoothly converging and tunable free-energy method, Phys. Rev. Lett. 100 ,020603 (2008). [S13] P. Tiwary and M. Parrinello, A time-independent free energy estimator for metadynamics, J. Phys. Chem. B 
+
+119 , 736 (2015). [S14] S. Thaler and J. Zavadlav, Learning neural network po-tentials from experimental data via Differentiable Tra-jectory Reweighting, Nat. Commun. 12 , 6884 (2021). [S15] E. J. Hu, Y. Shen, P. Wallis, Z. Allen-Zhu, Y. Li, S. Wang, L. Wang, and W. Chen, LoRA: Low-rank adaptation of large language models, in International Conference on Learning Representations (2022). [S16] T. J. B. Holland and R. Powell, An improved and ex-tended internally consistent thermodynamic dataset for phases of petrological interest, involving a new equation of state for solids, J. Metamorph. Geol. 29 , 333 (2011).

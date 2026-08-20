@@ -6,27 +6,27 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-08-19
-- 运行时间：2026-08-19 20:43:41 UTC
+- 最新运行日期：2026-08-20
+- 运行时间：2026-08-20 20:47:10 UTC
 - 运行状态：成功
 - 本次总论文数：2
 - 精读区：0
 - 速读区：2
 
 ### 今日简报（AI）
-今日共速读2篇论文，无精读，聚焦材料表征与晶体缺陷分析。值得关注的是CVD金刚石中NV色心自旋调控与辐照缺陷演化，以及块体晶体位错的自动识别方法。建议后续对这两篇进行精读，深入理解其技术细节与适用场景。
-- 详情：[/202608/19/README](/202608/19/README)
+今日共速读2篇材料模拟论文，均获6.0分，暂无精读。值得关注方向：晶体材料通用热力学势，以及含氦泡/晶界钨中氢扩散与热导率的机器学习预测。下一步可针对这两个主题各选一篇精读，深入对比方法论与适用范围。
+- 详情：[/202608/20/README](/202608/20/README)
 
 ### 精读区论文标签
 - 本次无精读推荐。
 
 ### 速读区论文标签
-1. [Irradiation-Induced Spin Bath Evolution and as-Grown Hydrogen Defects in CVD Diamond Revealed by NV-Based DEER Spectroscopy](/202608/19/2608.17619v1-irradiation-induced-spin-bath-evolution-and-as-grown-hydrogen-defects-in-cvd-diamond-revealed-by-nv-based-deer-spectroscopy)  
-   标签：评分：7.0/10、query:rad-damage
-   evidence：直接研究电子辐照诱导的金刚石中点缺陷及其退火演化，匹配辐照诱导点缺陷与团簇需求。
-2. [Automated Burgers Vector Identification for Individual Dislocations in Bulk Crystals](/202608/19/2608.16774v1-automated-burgers-vector-identification-for-individual-dislocations-in-bulk-crystals)  
+1. [Universal Thermodynamic Interatomic Potentials for Crystalline Materials](/202608/20/2608.14502v1-universal-thermodynamic-interatomic-potentials-for-crystalline-materials)  
    标签：评分：6.0/10、query:rad-damage
-   evidence：体相晶体中单个位错的伯氏矢量自动识别，可应用于辐照FeCr中位错环的分析。
+   evidence：提供普适热力学原子间势方法，可用于FeCr等合金辐照缺陷与相稳定性模拟
+2. [Graph neural network prediction of temperature-dependent hydrogen diffusion and thermal conductivity tensors of tungsten containing helium bubbles and grain boundaries](/202608/20/2608.15609v1-graph-neural-network-prediction-of-temperature-dependent-hydrogen-diffusion-and-thermal-conductivity-tensors-of-tungsten-containing-helium-bubbles-and-grain-boundaries)  
+   标签：评分：6.0/10、query:rad-damage
+   evidence：针对含氦泡与晶界的钨微观结构预测输运性能张量，与辐照缺陷对材料性能的影响密切相关
 
 
 <div class="dpr-home-promo-card">

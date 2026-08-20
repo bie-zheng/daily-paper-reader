@@ -1,0 +1,98 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-08-20T20:45:24.498656+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 2,
+    "quick_skim_target": 11,
+    "quick_selected": 2
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2608.14502v1",
+      "source": "arxiv",
+      "title": "Universal Thermodynamic Interatomic Potentials for Crystalline Materials",
+      "abstract": "Free energies govern solid-state phase stability, yet computational materials discovery still relies largely on ground-state energies because free energy calculations require ensemble averages. We introduce the thermodynamic interatomic potential (TIP), which extends an interatomic potential from its static energy to a thermodynamically consistent Gibbs free energy model, with thermodynamic responses following from temperature and pressure by automatic differentiation. We implement TIP[UMA] using the universal potential UMA, train it on free energies from quasi-harmonic to molecular dynamics fidelity, and calibrate it to higher-resolution calculations or experiment. From a single evaluation, it returns the equation of state of a crystal and locates phase transitions among competing branches, including dynamically stabilized phases. Fine-tuning extends the model to alloy solubility limits and miscibility gaps. TIP makes the free energy as accessible as the potential energy, opening finite-temperature phase stability to high-throughput discovery.",
+      "authors": [
+        "Juno Nam",
+        "Bowen Deng",
+        "Xiaochen Du",
+        "Luis Barroso-Luque",
+        "Benjamin Kurt Miller",
+        "Rafael Gómez-Bombarelli"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci",
+        "cond-mat.stat-mech",
+        "cs.AI",
+        "cs.LG",
+        "physics.chem-ph"
+      ],
+      "published": "2026-08-14T17:16:27+00:00",
+      "link": "https://arxiv.org/pdf/2608.14502v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Provides a universal thermodynamic interatomic potential method relevant for finite-temperature defect and phase stability simulations in alloys like FeCr",
+      "llm_evidence_cn": "提供普适热力学原子间势方法，可用于FeCr等合金辐照缺陷与相稳定性模拟",
+      "llm_evidence": "提供普适热力学原子间势方法，可用于FeCr等合金辐照缺陷与相稳定性模拟",
+      "canonical_evidence": "提供普适热力学原子间势方法，可用于FeCr等合金辐照缺陷与相稳定性模拟",
+      "llm_tldr_en": "Introduces thermodynamic interatomic potential (TIP) extending static potentials to a Gibbs free energy model trained from quasi-harmonic to MD fidelity, enabling efficient finite-temperature equation-of-state and phase stability predictions for crystalline materials, a transferable tool for radiation defect studies",
+      "llm_tldr_cn": "针对材料辐照模拟中自由能计算成本高的问题，提出一种热力学原子间势（TIP），将传统原子间势扩展为热力学一致的吉布斯自由能模型。通过准谐近似到分子动力学精度的自由能数据训练，并可用高精度计算或实验校准。单次评估即可获得晶体状态方程并定位相变位置，为FeCr等合金中辐照缺陷团簇稳定性和相变研究提供了可迁移的模拟工具。",
+      "llm_tldr": "针对材料辐照模拟中自由能计算成本高的问题，提出一种热力学原子间势（TIP），将传统原子间势扩展为热力学一致的吉布斯自由能模型。通过准谐近似到分子动力学精度的自由能数据训练，并可用高精度计算或实验校准。单次评估即可获得晶体状态方程并定位相变位置，为FeCr等合金中辐照缺陷团簇稳定性和相变研究提供了可迁移的模拟工具。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation-induced point defects and clusters",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.15609v1",
+      "source": "arxiv",
+      "title": "Graph neural network prediction of temperature-dependent hydrogen diffusion and thermal conductivity tensors of tungsten containing helium bubbles and grain boundaries",
+      "abstract": "Helium bubbles and grain boundaries in tungsten plasma-facing components alter hydrogen-isotope transport and thermal conduction by orders of magnitude, yet evaluating these transport properties for a given microstructure requires hours of molecular dynamics (MD) per configuration. We present a graph neural network surrogate that maps a tungsten atomic configuration containing helium bubbles and grain boundaries directly to the full $3\\times3$ symmetric tensors of the hydrogen diffusion coefficient $D_H(T)$ and the thermal conductivity $κ(T)$ at arbitrary temperature. Anisotropy is captured by a rotation-equivariant tensor pooling layer; temperature enters through predicted temperature-independent parameters (an Arrhenius pair $(D_0,E_a)$, a phonon conductivity tensor, and a defect residual resistivity) expanded analytically via the Arrhenius and Wiedemann-Franz-Matthiessen relations. Training labels for 635 microstructures are generated with an embedded-atom-method potential (Green-Kubo conductivity and multi-temperature tracer diffusion); the electronic channel is calibrated against published irradiation-degradation measurements, and the pipeline is anchored to a first-principles machine-learning potential (VASP+FLARE) through paired MD calibration runs and an active-learning loop. The learned activation energies (median 0.21 eV, rising in bubble and grain-boundary structures) reproduce literature hydrogen migration barriers and trapping physics, and the equivariant pooling keeps predictions consistent across arbitrarily oriented sub-blocks. Coupled finite-element thermal-hydrogen analyses driven by the surrogate show that conductivity degradation changes predicted hydrogen permeation by a factor of 2.5 through the temperature field. The model returns both tensors in milliseconds, enabling microstructure-resolved transport input for component-scale analyses of fusion divertors.",
+      "authors": [
+        "S. Saito",
+        "M. I. Kobayashi",
+        "T. Kasahara"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ],
+      "published": "2026-08-16T08:14:00+00:00",
+      "link": "https://arxiv.org/pdf/2608.15609v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Surrogate GNN predicts transport tensors for W microstructures with He bubbles and grain boundaries, relevant to radiation defect effects on material properties",
+      "llm_evidence_cn": "针对含氦泡与晶界的钨微观结构预测输运性能张量，与辐照缺陷对材料性能的影响密切相关",
+      "llm_evidence": "针对含氦泡与晶界的钨微观结构预测输运性能张量，与辐照缺陷对材料性能的影响密切相关",
+      "canonical_evidence": "针对含氦泡与晶界的钨微观结构预测输运性能张量，与辐照缺陷对材料性能的影响密切相关",
+      "llm_tldr_en": "A graph neural network surrogate maps W configurations with He bubbles and grain boundaries to temperature-dependent hydrogen diffusion and thermal conductivity tensors, enabling fast microstructure-property prediction.",
+      "llm_tldr_cn": "针对含氦泡和晶界的钨等离子体面向部件，采用分子动力学评估氢输运和热导性能非常耗时的问题，本文构建了图神经网络替代模型，将原子构型直接映射为温度依赖的氢扩散系数张量和热导率张量。通过旋转等变张量池化层捕捉各向异性，并引入温度输入实现任意温度预测。该代理模型大幅加速了微观结构−性能关系评估，可用于辐照缺陷演化对材料宏观性能影响的快速预测。",
+      "llm_tldr": "针对含氦泡和晶界的钨等离子体面向部件，采用分子动力学评估氢输运和热导性能非常耗时的问题，本文构建了图神经网络替代模型，将原子构型直接映射为温度依赖的氢扩散系数张量和热导率张量。通过旋转等变张量池化层捕捉各向异性，并引入温度输入实现任意温度预测。该代理模型大幅加速了微观结构−性能关系评估，可用于辐照缺陷演化对材料宏观性能影响的快速预测。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation induced defect evolution and microstructure changes",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
