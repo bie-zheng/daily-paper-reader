@@ -1,0 +1,54 @@
+{
+  "label": "2026-08-21",
+  "date": "2026-08-21",
+  "generated_at": "2026-08-21T20:50:21",
+  "count": 3,
+  "papers": [
+    {
+      "paper_id": "202608/21/2608.16652v1-a-nuclear-quantum-corrected-machine-learning-potential-reveals-quantum-enhanced-hydrogen-segregation-at-general-grain-boundaries-in-alpha-iron",
+      "section": "quick",
+      "title_en": "A nuclear-quantum-corrected machine-learning potential reveals quantum-enhanced hydrogen segregation at general grain boundaries in alpha-iron",
+      "authors": "Kazuma Ito",
+      "date": "2026-08-17",
+      "pdf": "https://arxiv.org/pdf/2608.16652v1",
+      "score": "6.0",
+      "evidence": "量子修正机器学习势研究α-Fe中氢在晶界缺陷处的偏析，可迁移到辐照缺陷模拟",
+      "tldr": "氢在金属中的核量子效应在室温下也显著影响氢脆相关的扩散与陷阱过程，但显式量子模拟对复杂环境成本极高。本文利用300K质心约束路径积分分子动力学得到的量子平均力，重新标记基于原子簇展开的PACE机器学习势的训练配置，获得无额外DFT计算的NQC-PACE。该势能准确描述α-Fe中氢在空位、位错、表面和一般晶界处的捕获、H-H相互作用以及扩散行为。巨正则蒙特卡洛/分子动力学模拟显示，核量子效应显著增强氢在一般晶界的偏析，与实验趋势更吻合，从而为复杂材料中轻元素量子效应的大规模模拟提供高效框架。",
+      "tags": "query:rad-damage",
+      "abstract_en": "Atomistic descriptions of hydrogen diffusion and trapping at defects are essential for understanding hydrogen embrittlement. As the lightest solute in metals, hydrogen exhibits nuclear quantum effects that alter these processes even at room temperature. Explicit treatment of such effects is computationally demanding, limiting large-scale simulations of complex environments. Here, we use an Fe-H machine-learning interatomic potential (MLIP) based on the performant implementation of the atomic cluster expansion (PACE), covering diverse Fe-H environments, and relabel the training configurations underpinning its transferability with quantum mean forces from centroid-constrained path-integral molecular dynamics at 300 K. This yields a nuclear-quantum-corrected PACE (NQC-PACE) without additional density functional theory calculations. At parent PACE, NQC-PACE describes nuclear quantum effects on hydrogen trapping at vacancies, dislocations, surfaces and general grain boundaries, H-H interactions, and diffusion in alpha-Fe. Grand-canonical Monte Carlo/molecular dynamics simulations show nuclear quantum effects markedly enhance hydrogen segregation at general grain boundaries and trapping behaviour in closer agreement with experimental trends. This enhancement arises from selective quantum stabilisation of open, anisotropically soft local environments. Our framework uses finite-temperature quantum mean forces to relabel the configurational space covered by an MLIP, enabling large-scale analysis of complex materials where light-element quantum effects matter.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202608/21/2608.19116v1-janus-a-multi-modal-foundation-neural-sampler-for-disordered-materials",
+      "section": "quick",
+      "title_en": "JANUS: A Multi-modal Foundation Neural Sampler for Disordered Materials",
+      "authors": "Denis Blessing, Mouyang Cheng, Maximilian Schebek, Jutta Rogal, Mingda Li, Carles Domingo-Enrich, Yuanqi Du",
+      "date": "2026-08-19",
+      "pdf": "https://arxiv.org/pdf/2608.19116v1",
+      "score": "6.0",
+      "evidence": "面向合金相行为与自由能的多模态神经采样方法，可用于FeCr合金B2相/析出模拟",
+      "tldr": "无序材料需在固定组成和体积外采样，原子身份与结构耦合导致离散-连续采样代价高昂。JANUS提出多模态神经采样器，用等变图神经网络耦合连续扩散和掩码离散扩散，直接基于能量评估训练，无需平衡数据。在Ising、ΔμNPT合金及μVT半导体中，它用少三个数量级的能量评估复现蒙特卡洛平衡结果，恢复自由能，并发现硅E中心及S-Ti、B-O-O等缺陷，后者获混合泛函验证。该工作统一离散与连续弛豫，为无序材料热力学采样与逆向设计奠定基础。",
+      "tags": "query:rad-damage",
+      "abstract_en": "Many problems in disordered materials require sampling beyond fixed composition and volume, where coupled changes in atomic identities and structure create a prohibitively expensive discrete-continuous sampling problem. Here we introduce JANUS, a multimodal neural sampler that couples continuous and masked discrete diffusion through an equivariant graph neural network trained directly from energy evaluations, without pre-generated equilibrium data. In benchmark Ising and isobaric $ΔμNPT$ alloy systems, JANUS reproduces reference Monte Carlo equilibrium observables and recovers free energies and phase behavior with more than three orders of magnitude fewer energy evaluations. In multicomponent alloys, JANUS enables conditional steering toward prescribed chemical short-range order and enhanced bulk modulus and, when coupled to a large language model evolutionary agent, performs efficient inverse design for balanced optical and mechanical properties. In semiconductors like silicon and diamond, JANUS explores vacancies and dopants spanning 15 elements in grand-canonical $μVT$ ensembles, recovers established defects including the silicon $E$ centre, and identifies new candidate defect pairs and triplets for quantum engineering, including S-Ti in silicon and B-O-O in diamond, with deep in-gap states validated by hybrid-functional density functional theory. By unifying discrete site identities with continuous structural and volumetric relaxation, JANUS provides a foundation for thermodynamic sampling, characterization and inverse design of chemically disordered materials.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202608/21/2608.19544v1-composition-driven-phase-evolution-in-sm-doped-bifeo3-via-latent-field-reconstruction-of-atomically-resolved-stem-data",
+      "section": "quick",
+      "title_en": "Composition-Driven Phase Evolution in Sm-Doped BiFeO3 via Latent-Field Reconstruction of Atomically Resolved STEM Data",
+      "authors": "Newsha Javanmardi, Christopher T. Nelson, Anna N. Morozovska, Eugene A. Eliseev, Ichiro Takeuchi, Sergei V. Kalinin",
+      "date": "2026-08-20",
+      "pdf": "https://arxiv.org/pdf/2608.19544v1",
+      "score": "6.0",
+      "evidence": "原子分辨STEM隐场重建可映射晶格位移/应变，适用于辐照显微组织分析",
+      "tldr": "铁电材料功能取决于原子尺度结构，但传统STEM定量分析依赖原子柱定位。本文提出潜在布拉格场重构方法，将图像解译为连续的结构映射，无需显式原子拟合。应用于Sm掺杂BiFeO3系列，清晰展示了从R3c铁电相到Pnma非极性相的成分驱动演化，包括局域周期双倍序的出现与连通。该方法为原子尺度相变研究提供了物理可解释的补充工具。",
+      "tags": "query:rad-damage",
+      "abstract_en": "Functionalities of ferroelectric materials are governed by the spatial organization and coupling of polarization, strain, lattice rotation, and structural order accessible via atomically resolved scanning transmission electron microscopy (STEM) images. Quantitative interpretation of atomic-resolution STEM data has conventionally relied on locating atomic columns and converting their fitted coordinates into local structural descriptors. Here, we develop a field-based approach in which atomic-resolution images are represented by spatially varying latent Bragg fields, whose amplitudes and phases provide continuous maps of crystalline order, lattice displacement, strain, rotation, and mode-specific residual structure. The observed atomically resolved images are decoded from the latent fields. We apply this framework to image series of Sm-substituted BiFeO3 spanning 0-20% Sm and crossing the composition-driven boundary between the R3c ferroelectric phase and the orthorhombic, nonpolar Pnma phase. Conventional atom-resolved parameterization is used as an independent validation, showing that reconstructed Bragg amplitude tracks local atomic-column intensity and that field-derived shear reproduces unit-cell angular distortions obtained from atom fitting. The combined analysis reveals a systematic evolution from extended ferroelectric domains at low Sm concentration, through the appearance and growth of localized regions with period-doubled Pnma order at intermediate compositions, to a connected Pnma-dominated state at high Sm content. The period-doubled order is accompanied by enhanced shear and lattice rotation and by progressive reorganization of the ferroelectric domain structure. These results establish latent-field reconstruction as a physically interpretable complement to atom finding and provide a unified framework for resolving composition-driven phase evolution in ferroic materials.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

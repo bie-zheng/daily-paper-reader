@@ -6,27 +6,32 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-08-20
-- 运行时间：2026-08-20 20:47:10 UTC
+- 最新运行日期：2026-08-21
+- 运行时间：2026-08-21 20:50:13 UTC
 - 运行状态：成功
-- 本次总论文数：2
+- 本次总论文数：3
 - 精读区：0
-- 速读区：2
+- 速读区：3
 
 ### 今日简报（AI）
-今日共速读2篇材料模拟论文，均获6.0分，暂无精读。值得关注方向：晶体材料通用热力学势，以及含氦泡/晶界钨中氢扩散与热导率的机器学习预测。下一步可针对这两个主题各选一篇精读，深入对比方法论与适用范围。
-- 详情：[/202608/20/README](/202608/20/README)
+今日速读3篇材料模拟论文，均获6.0分，无精读。  
+最值得关注：机器学习势揭示α-铁晶界氢偏析的量子增强效应，以及面向无序材料的多模态神经采样器JANUS。  
+建议下一步精读原文，重点看量子修正与AI重建方法如何提升材料预测精度。
+- 详情：[/202608/21/README](/202608/21/README)
 
 ### 精读区论文标签
 - 本次无精读推荐。
 
 ### 速读区论文标签
-1. [Universal Thermodynamic Interatomic Potentials for Crystalline Materials](/202608/20/2608.14502v1-universal-thermodynamic-interatomic-potentials-for-crystalline-materials)  
+1. [A nuclear-quantum-corrected machine-learning potential reveals quantum-enhanced hydrogen segregation at general grain boundaries in alpha-iron](/202608/21/2608.16652v1-a-nuclear-quantum-corrected-machine-learning-potential-reveals-quantum-enhanced-hydrogen-segregation-at-general-grain-boundaries-in-alpha-iron)  
    标签：评分：6.0/10、query:rad-damage
-   evidence：提供普适热力学原子间势方法，可用于FeCr等合金辐照缺陷与相稳定性模拟
-2. [Graph neural network prediction of temperature-dependent hydrogen diffusion and thermal conductivity tensors of tungsten containing helium bubbles and grain boundaries](/202608/20/2608.15609v1-graph-neural-network-prediction-of-temperature-dependent-hydrogen-diffusion-and-thermal-conductivity-tensors-of-tungsten-containing-helium-bubbles-and-grain-boundaries)  
+   evidence：量子修正机器学习势研究α-Fe中氢在晶界缺陷处的偏析，可迁移到辐照缺陷模拟
+2. [JANUS: A Multi-modal Foundation Neural Sampler for Disordered Materials](/202608/21/2608.19116v1-janus-a-multi-modal-foundation-neural-sampler-for-disordered-materials)  
    标签：评分：6.0/10、query:rad-damage
-   evidence：针对含氦泡与晶界的钨微观结构预测输运性能张量，与辐照缺陷对材料性能的影响密切相关
+   evidence：面向合金相行为与自由能的多模态神经采样方法，可用于FeCr合金B2相/析出模拟
+3. [Composition-Driven Phase Evolution in Sm-Doped BiFeO3 via Latent-Field Reconstruction of Atomically Resolved STEM Data](/202608/21/2608.19544v1-composition-driven-phase-evolution-in-sm-doped-bifeo3-via-latent-field-reconstruction-of-atomically-resolved-stem-data)  
+   标签：评分：6.0/10、query:rad-damage
+   evidence：原子分辨STEM隐场重建可映射晶格位移/应变，适用于辐照显微组织分析
 
 
 <div class="dpr-home-promo-card">
