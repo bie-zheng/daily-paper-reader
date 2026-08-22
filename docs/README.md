@@ -6,32 +6,26 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-08-21
-- 运行时间：2026-08-21 20:50:13 UTC
+- 最新运行日期：2026-08-22
+- 运行时间：2026-08-22 20:15:29 UTC
 - 运行状态：成功
-- 本次总论文数：3
-- 精读区：0
-- 速读区：3
+- 本次总论文数：2
+- 精读区：1
+- 速读区：1
 
 ### 今日简报（AI）
-今日速读3篇材料模拟论文，均获6.0分，无精读。  
-最值得关注：机器学习势揭示α-铁晶界氢偏析的量子增强效应，以及面向无序材料的多模态神经采样器JANUS。  
-建议下一步精读原文，重点看量子修正与AI重建方法如何提升材料预测精度。
-- 详情：[/202608/21/README](/202608/21/README)
+今日精读硒化铋X射线损伤研究，并速读低温合成铂氢薄膜热稳定性。最值得关注的是同步辐射TXM-XRD联用揭示的累积损伤机制，该方向对材料表征具参考价值。下一步可延伸了解辐照环境下材料稳定性调控策略。
+- 详情：[/202608/22/README](/202608/22/README)
 
 ### 精读区论文标签
-- 本次无精读推荐。
+1. [Cumulative X-ray Damage in Bismuth Selenide Examined by Simultaneous TXM and XRD](/202608/22/2608.19341v1-cumulative-x-ray-damage-in-bismuth-selenide-examined-by-simultaneous-txm-and-xrd)  
+   标签：评分：8.0/10、query:rad-damage
+   evidence：直接研究X射线辐照下Bi2Se3累积辐射损伤与微观结构演化
 
 ### 速读区论文标签
-1. [A nuclear-quantum-corrected machine-learning potential reveals quantum-enhanced hydrogen segregation at general grain boundaries in alpha-iron](/202608/21/2608.16652v1-a-nuclear-quantum-corrected-machine-learning-potential-reveals-quantum-enhanced-hydrogen-segregation-at-general-grain-boundaries-in-alpha-iron)  
-   标签：评分：6.0/10、query:rad-damage
-   evidence：量子修正机器学习势研究α-Fe中氢在晶界缺陷处的偏析，可迁移到辐照缺陷模拟
-2. [JANUS: A Multi-modal Foundation Neural Sampler for Disordered Materials](/202608/21/2608.19116v1-janus-a-multi-modal-foundation-neural-sampler-for-disordered-materials)  
-   标签：评分：6.0/10、query:rad-damage
-   evidence：面向合金相行为与自由能的多模态神经采样方法，可用于FeCr合金B2相/析出模拟
-3. [Composition-Driven Phase Evolution in Sm-Doped BiFeO3 via Latent-Field Reconstruction of Atomically Resolved STEM Data](/202608/21/2608.19544v1-composition-driven-phase-evolution-in-sm-doped-bifeo3-via-latent-field-reconstruction-of-atomically-resolved-stem-data)  
-   标签：评分：6.0/10、query:rad-damage
-   evidence：原子分辨STEM隐场重建可映射晶格位移/应变，适用于辐照显微组织分析
+1. [Hydrogen (deuterium) dynamics and thermal stability in ion-irradiated platinum-hydride thin films synthesized at low temperature](/202608/22/2608.15543v1-hydrogen-deuterium-dynamics-and-thermal-stability-in-ion-irradiated-platinum-hydride-thin-films-synthesized-at-low-temperature)  
+   标签：评分：7.0/10、query:rad-damage
+   evidence：离子辐照缺陷与氢相互作用及热稳定性
 
 
 <div class="dpr-home-promo-card">

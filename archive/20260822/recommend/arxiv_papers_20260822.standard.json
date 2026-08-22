@@ -1,0 +1,115 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-08-22T20:12:44.178484+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 1,
+    "deep_cap": 6,
+    "deep_selected": 1,
+    "quick_candidates": 1,
+    "quick_skim_target": 11,
+    "quick_selected": 1
+  },
+  "deep_dive": [
+    {
+      "id": "2608.19341v1",
+      "source": "arxiv",
+      "title": "Cumulative X-ray Damage in Bismuth Selenide Examined by Simultaneous TXM and XRD",
+      "abstract": "Bismuth selenide (Bi2Se3) is a topological insulator with potential applications in thermoelectrics, spintronics, and optoelectronics. However, its response to radiation remains poorly understood. We investigate cumulative X-ray damage in Bi2Se3 using simultane- ous transmission X-ray microscopy (TXM) and X-ray diffraction (XRD) at the Pohang Accelerator Laboratory X-Ray Free Electron Laser (PAL-XFEL) over 27,000 successive pulses. We observe distinct damage mechanisms: rapid hole formation via vaporization within 100 pulses, followed by slower grain refinement and material sputtering over thousands of thermal cycles. Williamson-Hall analysis reveals a progressive transformation from single-crystal to nanocrystalline structure, with grain sizes decreasing from mi- cron to nanometer scale. Finite-element modeling confirms that X-rays penetrate 13.47 μm, driving local temperatures above 1600 K with subsequent cooling between pulses. Scanning electron microscopy identifies three characteristic morphologies correspond- ing to different thermal histories: sputter streaks, prismatic crystals, and disordered microcrystals. Our results demonstrate that grain-boundary formation creates a feedback mechanism that accelerates damage in later pulses. This work establishes a method- ology for studying radiation damage across multiple length scales and provides insight into topological insulator stability under extreme conditions",
+      "authors": [
+        "Sophie E Parsons",
+        "Bernard Kozioziemski",
+        "Daewoong Nam",
+        "Eric Folsom",
+        "Can Yildirim",
+        "Sean Breckling",
+        "Sungwook Choi",
+        "Eric C. Galtier",
+        "Arnulfo Gonzalez",
+        "Deja Dominguez",
+        "Emlyn Frederick",
+        "Marylesa M. Howard",
+        "Sara Jessica Irvine",
+        "Kento Katagiri",
+        "Sangsoo Kim",
+        "Seonghan Kim",
+        "Sunam Kim",
+        "Stephan Kuschel",
+        "R. Stewart McWilliams",
+        "Norimasa Ozaki",
+        "Alison M. Saunders",
+        "Hyunjung Kim",
+        "Jon Eggert",
+        "Leora Dresselhaus-Marais"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ],
+      "published": "2026-08-19T18:04:27+00:00",
+      "link": "https://arxiv.org/pdf/2608.19341v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Direct study of cumulative radiation damage and microstructure evolution in Bi2Se3 under X-ray irradiation",
+      "llm_evidence_cn": "直接研究X射线辐照下Bi2Se3累积辐射损伤与微观结构演化",
+      "llm_evidence": "直接研究X射线辐照下Bi2Se3累积辐射损伤与微观结构演化",
+      "canonical_evidence": "直接研究X射线辐照下Bi2Se3累积辐射损伤与微观结构演化",
+      "llm_tldr_en": "Simultaneous TXM and XRD reveal distinct X-ray damage mechanisms in Bi2Se3: rapid vaporization, then grain refinement and sputtering, with transformation from single-crystal to nanocrystalline.",
+      "llm_tldr_cn": "硒化铋等拓扑绝缘体的辐射响应尚不清楚。该工作利用PAL-XFEL的同步透射X射线显微镜和X射线衍射，在27000个连续脉冲下研究累积X射线损伤。观察到不同损伤机制：约100个脉冲内快速蒸发成孔，随后数千个热循环中发生晶粒细化和材料溅射。Williamson-Hall分析显示材料从单晶逐渐转变为纳米晶。这一结果为理解材料在高通量X射线下的辐射损伤演化提供了直接实验证据。",
+      "llm_tldr": "硒化铋等拓扑绝缘体的辐射响应尚不清楚。该工作利用PAL-XFEL的同步透射X射线显微镜和X射线衍射，在27000个连续脉冲下研究累积X射线损伤。观察到不同损伤机制：约100个脉冲内快速蒸发成孔，随后数千个热循环中发生晶粒细化和材料溅射。Williamson-Hall分析显示材料从单晶逐渐转变为纳米晶。这一结果为理解材料在高通量X射线下的辐射损伤演化提供了直接实验证据。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation induced defect evolution and microstructure changes",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2608.15543v1",
+      "source": "arxiv",
+      "title": "Hydrogen (deuterium) dynamics and thermal stability in ion-irradiated platinum-hydride thin films synthesized at low temperature",
+      "abstract": "Hydrogen (H) and deuterium (D) interactions with transition metals play a central role in heterogeneous catalysis and hydrogen-related technologies. While H-Pt surface interactions have been extensively studied, direct investigations of hydrogen incorporation and transport in Pt remain limited due to its low solubility. Here, we study H(D) incorporation and desorption dynamics in metastable $PtH(D)_x$ thin films prepared by low-energy ion irradiation, enabling hydrogen loading far above equilibrium concentrations. Nuclear reaction analysis (NRA) reveals a nonuniform hydrogen depth profile with two accumulation regions: the subsurface and the film-substrate interface. Thermal desorption spectroscopy (TDS) exhibits two desorption peaks near 190 and 230 K, consistent with hydrogen release from these sites. Resistance relaxation measurements, analyzed within a two-parallel-channel conduction model, indicate different relaxation kinetics for subsurface and near-interface hydrogen. Arrhenius analysis reveals two thermally activated processes for $PtH_x$ with an average hydrogen concentration of $x = 0.15$, with activation energies of $130 \\pm 18$ meV (subsurface) and $164 \\pm 26$ meV (near interface). Above 140 K, D exhibits slower relaxation rates with activation energies of $117 \\pm 8$ and $121 \\pm 7$ meV for $PtD_x$ prepared under the same implantation dose. Within experimental uncertainty, the activation barriers remain comparable, while the prefactors are reduced significantly for D, indicating isotope-dependent attempt frequencies and zero-point energy effects. TDS simulations based on the Polanyi-Wigner formalism reproduce the experimental desorption spectra by resolving subsurface and near-interface contributions, in agreement with the NRA profile. These findings provide insight into hydrogen kinetics in $PtH_x$ for Pt-based catalysis, sensing, and hydrogen-metal interactions.",
+      "authors": [
+        "S. S. Das",
+        "T. Ozawa",
+        "Y. Komatsu",
+        "R. Shimizu",
+        "T. Hitosugi",
+        "K. Fukutani"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ],
+      "published": "2026-08-16T05:31:49+00:00",
+      "link": "https://arxiv.org/pdf/2608.15543v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "ion irradiation effects, defect-related hydrogen trapping and thermal stability",
+      "llm_evidence_cn": "离子辐照缺陷与氢相互作用及热稳定性",
+      "llm_evidence": "离子辐照缺陷与氢相互作用及热稳定性",
+      "canonical_evidence": "离子辐照缺陷与氢相互作用及热稳定性",
+      "llm_tldr_en": "Investigates hydrogen/deuterium incorporation and thermal stability in ion-irradiated platinum-hydride thin films, linking irradiation-induced defects to hydrogen accumulation and desorption behavior.",
+      "llm_tldr_cn": "该论文针对低能离子辐照下过渡金属氢化物薄膜中氢/氘聚集与热稳定性问题，利用离子辐照实现超平衡氢负载，借助核反应分析和热脱附谱等实验手段，揭示了氢在亚表面和薄膜-衬底界面的非均匀深度分布及脱附动力学。研究发现辐照引入的缺陷显著影响氢的捕获与释放，为辐照材料中缺陷-氢相互作用和微结构演化提供了关键的实验证据。",
+      "llm_tldr": "该论文针对低能离子辐照下过渡金属氢化物薄膜中氢/氘聚集与热稳定性问题，利用离子辐照实现超平衡氢负载，借助核反应分析和热脱附谱等实验手段，揭示了氢在亚表面和薄膜-衬底界面的非均匀深度分布及脱附动力学。研究发现辐照引入的缺陷显著影响氢的捕获与释放，为辐照材料中缺陷-氢相互作用和微结构演化提供了关键的实验证据。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation induced defect evolution and microstructure changes",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}

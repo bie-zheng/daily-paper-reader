@@ -1,0 +1,39 @@
+{
+  "label": "2026-08-22",
+  "date": "2026-08-22",
+  "generated_at": "2026-08-22T20:15:35",
+  "count": 2,
+  "papers": [
+    {
+      "paper_id": "202608/22/2608.19341v1-cumulative-x-ray-damage-in-bismuth-selenide-examined-by-simultaneous-txm-and-xrd",
+      "section": "deep",
+      "title_en": "Cumulative X-ray Damage in Bismuth Selenide Examined by Simultaneous TXM and XRD",
+      "authors": "Sophie E Parsons, Bernard Kozioziemski, Daewoong Nam, Eric Folsom, Can Yildirim, Sean Breckling, Sungwook Choi, Eric C. Galtier, Arnulfo Gonzalez, Deja Dominguez, Emlyn Frederick, Marylesa M. Howard, Sara Jessica Irvine, Kento Katagiri, Sangsoo Kim, Seonghan Kim, Sunam Kim, Stephan Kuschel, R. Stewart McWilliams, Norimasa Ozaki, Alison M. Saunders, Hyunjung Kim, Jon Eggert, Leora Dresselhaus-Marais",
+      "date": "2026-08-19",
+      "pdf": "https://arxiv.org/pdf/2608.19341v1",
+      "score": "8.0",
+      "evidence": "直接研究X射线辐照下Bi2Se3累积辐射损伤与微观结构演化",
+      "tldr": "拓扑绝缘体Bi2Se3的辐射损伤机制尚不明晰。本研究在PAL-XFEL上同步使用TXM和XRD，对27,000个连续X射线脉冲下的损伤过程进行原位观测。发现快速气化成孔与慢速晶粒细化及溅射两种机制，并揭示晶界形成加速后期损伤的反馈效应，建立了跨尺度辐射损伤研究方法。",
+      "tags": "query:rad-damage",
+      "abstract_en": "Bismuth selenide (Bi2Se3) is a topological insulator with potential applications in thermoelectrics, spintronics, and optoelectronics. However, its response to radiation remains poorly understood. We investigate cumulative X-ray damage in Bi2Se3 using simultane- ous transmission X-ray microscopy (TXM) and X-ray diffraction (XRD) at the Pohang Accelerator Laboratory X-Ray Free Electron Laser (PAL-XFEL) over 27,000 successive pulses. We observe distinct damage mechanisms: rapid hole formation via vaporization within 100 pulses, followed by slower grain refinement and material sputtering over thousands of thermal cycles. Williamson-Hall analysis reveals a progressive transformation from single-crystal to nanocrystalline structure, with grain sizes decreasing from mi- cron to nanometer scale. Finite-element modeling confirms that X-rays penetrate 13.47 μm, driving local temperatures above 1600 K with subsequent cooling between pulses. Scanning electron microscopy identifies three characteristic morphologies correspond- ing to different thermal histories: sputter streaks, prismatic crystals, and disordered microcrystals. Our results demonstrate that grain-boundary formation creates a feedback mechanism that accelerates damage in later pulses. This work establishes a method- ology for studying radiation damage across multiple length scales and provides insight into topological insulator stability under extreme conditions",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202608/22/2608.15543v1-hydrogen-deuterium-dynamics-and-thermal-stability-in-ion-irradiated-platinum-hydride-thin-films-synthesized-at-low-temperature",
+      "section": "quick",
+      "title_en": "Hydrogen (deuterium) dynamics and thermal stability in ion-irradiated platinum-hydride thin films synthesized at low temperature",
+      "authors": "S. S. Das, T. Ozawa, Y. Komatsu, R. Shimizu, T. Hitosugi, K. Fukutani",
+      "date": "2026-08-16",
+      "pdf": "https://arxiv.org/pdf/2608.15543v1",
+      "score": "7.0",
+      "evidence": "离子辐照缺陷与氢相互作用及热稳定性",
+      "tldr": "氢与铂的相互作用对催化等至关重要，但铂中氢溶解度低，限制了对其动力学的研究。本工作利用低能离子辐照制备过饱和PtH(D)x薄膜，结合核反应分析和热脱附谱发现氢在次表面和界面处富集，并呈现两个脱附峰。电阻弛豫测试结合双通道导电模型，得到次表面和界面氢的激活能，并观测到氢氘同位素效应。基于Polanyi-Wigner的模拟复现了脱附谱，揭示了氢在铂中的非均匀动力学行为。",
+      "tags": "query:rad-damage",
+      "abstract_en": "Hydrogen (H) and deuterium (D) interactions with transition metals play a central role in heterogeneous catalysis and hydrogen-related technologies. While H-Pt surface interactions have been extensively studied, direct investigations of hydrogen incorporation and transport in Pt remain limited due to its low solubility. Here, we study H(D) incorporation and desorption dynamics in metastable $PtH(D)_x$ thin films prepared by low-energy ion irradiation, enabling hydrogen loading far above equilibrium concentrations. Nuclear reaction analysis (NRA) reveals a nonuniform hydrogen depth profile with two accumulation regions: the subsurface and the film-substrate interface. Thermal desorption spectroscopy (TDS) exhibits two desorption peaks near 190 and 230 K, consistent with hydrogen release from these sites. Resistance relaxation measurements, analyzed within a two-parallel-channel conduction model, indicate different relaxation kinetics for subsurface and near-interface hydrogen. Arrhenius analysis reveals two thermally activated processes for $PtH_x$ with an average hydrogen concentration of $x = 0.15$, with activation energies of $130 \\pm 18$ meV (subsurface) and $164 \\pm 26$ meV (near interface). Above 140 K, D exhibits slower relaxation rates with activation energies of $117 \\pm 8$ and $121 \\pm 7$ meV for $PtD_x$ prepared under the same implantation dose. Within experimental uncertainty, the activation barriers remain comparable, while the prefactors are reduced significantly for D, indicating isotope-dependent attempt frequencies and zero-point energy effects. TDS simulations based on the Polanyi-Wigner formalism reproduce the experimental desorption spectra by resolving subsurface and near-interface contributions, in agreement with the NRA profile. These findings provide insight into hydrogen kinetics in $PtH_x$ for Pt-based catalysis, sensing, and hydrogen-metal interactions.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
