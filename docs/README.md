@@ -6,26 +6,27 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-08-22
-- 运行时间：2026-08-22 20:15:29 UTC
+- 最新运行日期：2026-08-23
+- 运行时间：2026-08-23 19:47:14 UTC
 - 运行状态：成功
 - 本次总论文数：2
-- 精读区：1
-- 速读区：1
+- 精读区：0
+- 速读区：2
 
 ### 今日简报（AI）
-今日精读硒化铋X射线损伤研究，并速读低温合成铂氢薄膜热稳定性。最值得关注的是同步辐射TXM-XRD联用揭示的累积损伤机制，该方向对材料表征具参考价值。下一步可延伸了解辐照环境下材料稳定性调控策略。
-- 详情：[/202608/22/README](/202608/22/README)
+今日速读2篇论文，聚焦无序材料与缺陷行为。最值得关注α-MnO₂中本征点缺陷的异常特性（7.0分），及面向无序材料的多模态神经采样器JANUS（6.0分）。建议后续优先深读高分解读，并尝试理解采样器如何应用于其他无序体系。
+- 详情：[/202608/23/README](/202608/23/README)
 
 ### 精读区论文标签
-1. [Cumulative X-ray Damage in Bismuth Selenide Examined by Simultaneous TXM and XRD](/202608/22/2608.19341v1-cumulative-x-ray-damage-in-bismuth-selenide-examined-by-simultaneous-txm-and-xrd)  
-   标签：评分：8.0/10、query:rad-damage
-   evidence：直接研究X射线辐照下Bi2Se3累积辐射损伤与微观结构演化
+- 本次无精读推荐。
 
 ### 速读区论文标签
-1. [Hydrogen (deuterium) dynamics and thermal stability in ion-irradiated platinum-hydride thin films synthesized at low temperature](/202608/22/2608.15543v1-hydrogen-deuterium-dynamics-and-thermal-stability-in-ion-irradiated-platinum-hydride-thin-films-synthesized-at-low-temperature)  
+1. [Anomalous behavior of native point defects in C2-ordered antiferromagnet $α$-MnO$_2$](/202608/23/2608.20039v1-anomalous-behavior-of-native-point-defects-in-c2-ordered-antiferromagnet--mno2)  
    标签：评分：7.0/10、query:rad-damage
-   evidence：离子辐照缺陷与氢相互作用及热稳定性
+   evidence：利用DFT研究晶体中本征点缺陷（间隙、空位、反位）的稳定性，可为辐照诱导缺陷研究提供可迁移方法。
+2. [JANUS: A Multi-modal Foundation Neural Sampler for Disordered Materials](/202608/23/2608.19116v1-janus-a-multi-modal-foundation-neural-sampler-for-disordered-materials)  
+   标签：评分：6.0/10、query:rad-damage
+   evidence：面向无序合金的神经采样方法，可高效模拟平衡相行为，对辐照缺陷与析出演化建模具有方法学价值
 
 
 <div class="dpr-home-promo-card">

@@ -1,0 +1,518 @@
+Title: Anomalous behavior of native point defects in C2-ordered antiferromagnet α-MnO_2
+
+URL Source: https://arxiv.org/pdf/2608.20039v1
+
+Published Time: Fri, 21 Aug 2026 01:03:59 GMT
+
+Number of Pages: 33
+
+Markdown Content:
+# Anomalous behavior of native point defects in C2-ordered antiferromagnet α-MnO 2
+
+Archana Sharma 
+
+Department of Physics, Indian Institute of Technology Bombay, Mumbai 400076, India 
+
+Brahmananda Chakraborty ∗
+
+High Pressure and Synchrotron Radiation Physics Division, Bhabha Atomic Research Centre, Trombay, Mumbai 400085, India †
+
+α-MnO 2 is an emerging material for electronic, optoelectronic, and energy applications, owing to its structural flexibility and defect-driven functionality. During synthesis of α-MnO 2, native oxygen vacancies readily form and are typically compensated by foreign dopants. A thorough understanding of intrinsic defects is therefore essential for enabling controlled extrinsic doping and optimizing material performance. Using density functional approach, we investigate the structural, electronic, magnetic, and optical properties of the ground state C2-type antiferromagnetic α-MnO 2 in the presence of native point defects, including interstitials, vacancies, and antisites. We compute their thermodynamic stability, incorporating electrostatic corrections to eliminate spurious long-range interactions. Mn interstitial (Mn i) and Mn antisite O (Mn O) introduce shallow donor levels, whereas O-vacancy (V O) exhibit amphoteric behavior and act as compensating centers. The calculated defect formation energies reveal pronounced competition between donor- and acceptor-type native defects, leading to strong intrinsic defect compensation under both Mn-rich and O-rich growth conditions. The presence of defects significantly perturbs the electronic structure of α-MnO 2, introducing spin-polarized midgap states while O interstitial (O i) preserves the host antiferromagnetic order. Mn vacancy (V Mn ) remains ionized across the band gap and behaves as a shallow acceptor, suggesting its potential role under suitable non-equilibrium growth conditions, whereas O antisite Mn (O Mn )forms deep acceptor levels. BSE@G 0W0 calculations reveal a strongly anisotropic optical response in stoichiometric α-MnO 2, while native point defects introduce pronounced sub-gap excitations and enhanced dielectric screening, with vacancies producing the largest effect. 
+
+I. INTRODUCTION 
+
+Manganese oxides, with various polymorphs and stoi-chiometries, have attracted significant attention due to their natural abundance, environmental compatibility, and high chemical reactivity [1]. Various MnO 2 phases such as pyrolusite ( β), ramsdellite (R), hollandite ( α), intergrowth ( γ), spinel ( λ), and layered ( δ) have been widely used in technologies including catalysis, batter-ies, supercapacitors, solid-state ionics, magnetoresistive devices, filtration, and sensors [2–6]. Among these, α-MnO 2 has emerged as a particularly promising candidate due to its unique tunnel framework, low cost, and ease of synthesis [6]. 
+
+α-MnO 2 crystallizes in a tetragonal structure (space group I4/m ), comprising double chains of edge-sharing MnO 6 octahedra [7]. The Mn 4+ ions adopt a spin-polarized 3 d3 configuration, while O 2− ions remain spin-unpolarized in 2 p6 states [2]. Corner-sharing connectivity among octahedra forms 2 ×2 tunnels (0.46 nm × 0.46 nm) that can accommodate cations and molecules [8]. This structural flexibility enables tuning of the electrochemical and physical properties of α-MnO 2 via ion intercalation or doping [9–12]. The material is known to exhibit anti-ferromagnetic (AFM) ordering of the C2-type below the N´ eel temperature ( TN = 24 .5 K), with AFM coupling be-  
+
+> ∗brahma@barc.gov.in
+> †Also at Homi Bhabha National Institute, Mumbai 400085, India
+
+tween corner-sharing Mn atoms and weak ferromagnetic interactions between edge-sharing octahedra [13]. Despite its technological relevance, stoichiometric α-MnO 2 is difficult to synthesize, as the tunnels tend to trap stabilizing cations (e.g., K+, Ba 2+ ) or wa-ter molecules following oxygen vacancy formation [14, 15]. While these dopants help stabilize the frame-work, they also alter the Mn oxidation states and in-duce Jahn–Teller distortions, lowering the symmetry to monoclinic ( I2/m ) [14, 16, 17]. Consequently, exper-imentally synthesized α-MnO 2 often appears in cryp-tomelane or hollandite forms, depending on the tunnel-occupying species [15, 18]. These structural and chemi-cal modifications improve conductivity and facilitate cat-alytic properties in α-MnO 2 [8, 14, 16]. For example, Fe-doped α-MnO 2 has demonstrated enhanced catalytic activity in oxygen evolution and industrial-scale photo-catalysis [19, 20]. While the role of extrinsic doping has been explored extensively [9, 21, 22], the nature, energetics, and elec-tronic signatures of intrinsic point defects in stoichiomet-ric α-MnO 2 remain largely unexplored. This is a critical knowledge gap, as native point defects such as vacan-cies, interstitials, and antisites can introduce localized states in the band gap, act as charge trapping centers, and significantly influence the electronic structure, mag-netic ordering, and transport behavior. Interestingly, the ease of oxygen vacancy formation due to the presence of exposed MnO 6 octahedra suggests a natural tendency for charge imbalance in α-MnO 2, often compensated by arXiv:2608.20039v1 [cond-mat.mtrl-sci] 20 Aug 2026 2tunnel cation occupancy [14, 15, 21]. Therefore, under-standing the thermodynamic and electronic behavior of native defects is crucial not only for evaluating the in-trinsic conductivity and defect tolerance of α-MnO 2, but also for guiding extrinsic doping, as native defects often dominate compensation behavior and govern dopant in-corporation and effectiveness. However, the electronic structure of stoichiometric α-MnO 2 remains poorly characterized. Experimental mea-surements of the band gap are inconsistent, with reported values ranging from 1.16 to 2.23 eV depending on sam-ple morphology and dimensional confinement [15, 23– 26]. These discrepancies arise partly from the presence of dopants and the lack of measurements below the N´ eel temperature, implying that the true AFM ground state is rarely probed experimentally [13, 27]. Since the elec-tronic structure of transition metal oxides is sensitive to magnetic ordering, this complicates comparison between theory and experiment. To better understand its inher-ent semiconducting behavior, we compute more accurate electronic band structure and band gap using G 0W0 ap-proximation. In this work, we present a comprehensive first-principles study of native point defects in stoichiometric 
+
+α-MnO 2, which, to the best of our knowledge, has not been reported previously. Using density functional the-ory calculations, we systematically investigate the for-mation energies and charge transition levels of oxygen vacancy (V O), oxygen interstitial (O i), manganese in-terstitial (Mn i), manganese vacancy (V Mn ), manganese antisite on oxygen site (Mn O), and oxygen antisite on manganese site (O Mn ), including finite-size corrections. We evaluate the thermodynamic stability of these de-fects under both Mn-rich and O-rich conditions and an-alyze their influence on the electronic structure, optical properties and dielectric response. Our results provide crucial insights into the intrinsic defect physics and opti-cal activity of α-MnO 2, laying the foundation for defect engineering and controlled doping strategies to tailor its electronic, opto-electronic, and catalytic performance for device applications.  
+
+> II. COMPUTATIONAL METHODS
+
+First-principles calculations are performed in the den-sity functional theory (DFT) framework with spin polar-ization, implemented in the Vienna ab initio simulation package (VASP) code [28]. The Perdew-Burke-Ernzerhof (PBE) exchange-correlation functional is treated within the generalized gradient approximation (GGA) [29]. All calculations are performed with collinear spin configu-rations, with the magnetic moments initialized to con-verge to the ground state C2-type AFM ordering. The Brillouin zone is sampled with a Γ-centered 4 ×4×4 and 4×4×8 k -mesh of the Monkhorst-Pack scheme [30] for primitive and conventional unit cell optimization, respec-tively. The electronic wave functions are expanded in the projector augmented wave (PAW) basis set [31], employ-ing a cutoff energy of 450 eV. Semicore potentials of Mn (3 s23p64s23d5) and O (2 s22p4) are included due to the importance of core-valence exchange in d-electron sys-tems [32]. The Gaussian smearing method is used with a smearing parameter of 0.05 eV. To simulate isolated defects, we choose a 1 ×1×3 su-percell of α-MnO 2 to reduce the interaction between pe-riodic defect images, particularly in the c-lattice direc-tion, and the Brillouin zone is sampled using a 4 ×4×4
+
+k -point grid. The atoms in the lattice containing de-fects are allowed to relax until the maximum force on an atom is 5 meV/˚ A and the energy tolerance of 10 −7
+
+eV for electronic iterations is reached. The presence of strongly correlated 3 d electrons in Mn requires the in-clusion of inter-atomic interactions through the Hubbard potential ( U ). Thus, all structures are relaxed using the rotationally invariant PBE+ U method by Dudarev [33], followed by electronic structure calculations. The on-site Coulomb interaction for Mn 3 d states is determined through a systematic assessment over the range U = 2-5 eV. For each value of U , the structural parameters, Mn magnetic moments, electronic band gap, and the total-energy difference between the C2 antiferromagnetic (AFM) and ferromagnetic (FM) configurations are eval-uated. The experimentally observed C2 AFM ordering is found to be energetically stable for U ≤ 3.8 eV, whereas larger U values favor a FM ground state. The band gap increases with U up to 3.8 eV and decreases thereafter. The optimized lattice parameters and Mn magnetic mo-ment at U = 3.8 eV are in good agreement with avail-able experimental data [34, 35]. Based on the correct magnetic ground state and its suitability as a starting point for subsequent G 0W0 calculations, U = 3.8 eV is adopted throughout this work. The detailed benchmark-ing results are provided in Fig. S1 of the Supplemental Material (SM) [36]. We have also calculated quasiparticle band gaps us-ing the single-shot G 0W0 approximation [37, 38] on the PBE+ U wavefunctions. The response function is calcu-lated using a Γ-centered 2 ×2×4 q-point mesh. We have utilized 768 valence and conduction bands and 100 fre-quency points, ensuring that the quasiparticle band gap (QP) is well converged. The band energies are inter-polated through maximally localized Wannier functions (MLWFs), as implemented in the WANNIER90 code [39]. The initial projections for Mn and O atoms are cho-sen to be (s, d) and (s, p) orbitals, respectively. The 
+
+k -point path is generated through the SeeK-path code [40]. The oxidation state (OS) of the Mn ion is de-termined using the projection-based method by Sit et al. [41], which has been effective in determining the OS of transition metal elements in various complex materi-als [42, 43]. The phonon dispersion curves are calculated using linear response density functional perturbation the-ory (DFPT) [44] as implemented in the PHONOPY code [45]. The defects analyzed in this study include interstitials 3    
+
+> FIG. 1. Crystal structures of α-MnO 2in C2-AFM configuration: (a) primitive unit cell, and (b) conventional tetragonal structure. Spin up and spin down alignments are represented by green and orange octahedra. (c) Calculated phonon dispersion spectra of the conventional lattice along the high-symmetry points. The three acoustic modes near the Γ-point are shown in blue.
+
+(Mn i, O i), vacancies (V Mn , V O), and antisites (Mn O,OMn ). We calculate the formation energies of these de-fects using a supercell approach, according to 
+
+Ef (Dq ) = Etot (Dq )−Etot (bulk) −X
+
+> j
+
+nj μj +qE F +Ecorr ,
+
+(1) where Etot (bulk) is the total energy per supercell of sto-ichiometric α-MnO 2, Etot (Dq ) is the total energy with a defect of charge q, nj is the number of atoms of element 
+
+j (Mn or O) added to or removed from a defect-free cell, to its respective reservoir with chemical potential, μj to form the defect cell. EF is the Fermi energy referenced to the valence band maximum (VBM), and Ecorr is the electrostatic correction term, discussed in Sec. III D. While formation energies help predict defect concen-trations and stabilities, the position of charge transi-tion levels (CTLs) [46] is important to identify whether the defects are shallow or deep and whether they act as donors or acceptors. The CTLs are calculated by: 
+
+ε(q/q ′) = Ef (Dq ) − Ef (Dq′
+
+)
+
+q′ − q , (2) indicating the Fermi level at which the stable charge state transitions from q to q′.The excitonic optical properties are computed by solv-ing the Bethe–Salpeter equation (BSE) [47] on top of single-shot G 0W0 quasiparticle energies and wave func-tions. The BSE kernel includes the screened direct elec-tron–hole attraction and the unscreened exchange inter-action. A total of 180 valence and 84 conduction bands are included in constructing the BSE Hamiltonian to achieve sufficient convergence of the low-energy optical response. The macroscopic dielectric function is eval-uated within the Tamm–Dancoff approximation, which has been shown to provide reliable optical spectra for transition-metal oxides.     
+
+> III. RESULTS AND DISCUSSION A. Bulk properties of α-MnO 2crystal
+
+The lattice parameters for the C2-AFM magnetic con-figuration of α-MnO 2 relaxed using the PBE+ U func-tional (for U = 3.8 eV) are calculated as a = 9.83 ˚ A and c = 2.91 ˚ A , which are in good agreement with the exper-imental results [34]. The local magnetic moment on each Mn is 3.14 μB , which is very close to the one reported by Li et al. [35]. The oxidation state of each Mn ion is Mn(IV), corresponding to 3 d3 configuration. This shows a uniform octahedral crystal field splitting between the 3d3 states of Mn ions into threefold degenerate, occu-pied t2g states and the double degenerate, unoccupied eg
+
+states. Each Mn atom is coordinated to six O atoms, forming an octahedron as shown in Fig. 1(a)and 1(b). The calculated Mn-O bond length for each of the six bonds is 1.93 ˚ A , which closely matches the experimental values [48]. The inclusion of spin-orbit coupling (SOC) has a negligible effect on the band structure, as illustrated in Fig. S2. Consequently, SOC effects are omitted in the subsequent calculations for computational efficiency without compromising accuracy. Fig. 1(c) presents the calculated phonon band structure of α-MnO 2 with the conventional cell. The absence of imaginary frequencies in the phonon dispersion confirms the dynamic stabil-ity of the structure at 0 K. For α-MnO 2, the dielectric response is anisotropic, and the dielectric tensor ϵ∞ is computed using DFPT [49], yielding values of 8.25 and 9.49 along the a and c directions, respectively, consistent with the underlying crystal anisotropy. Several experimental and theoretical studies have re-ported a wide range of band gap values for α-MnO 2,largely influenced by sample morphology, measurement techniques, and magnetic ordering. For instance, the 4optical band gap estimated from UV-visible absorption spectra for α-MnO 2 nanorods is reported to be 1.53 eV [23], which closely matches the 1.65 eV value observed by Salari et al. [25]. A lower optical gap of 1.16 eV has also been reported [24], aligning well with the value of 1.18 eV obtained from vertex-corrected GW calcula-tions [50]. Sakai et al. found that ultrathin α-MnO 2
+
+nanosheets (0.5 nm thick) exhibit a band gap of 2.23 eV [26], a shift attributed to quantum confinement effects. Similarly, Gao et al. reported a band gap of 1.32 eV in α-MnO 2 nanofibers with diameters of 20-60 nm and lengths of 1-6 μm [15]. Using the PBE+ U functional, band gaps of 1.3 eV [18] and 1.28 eV [51] are obtained with U = 1.6 eV and U = 2.4 eV, respectively. Crespo et al. [52] obtained a larger value of 2.2 eV using the HSE06 hybrid functional, although their calculations predicted a ferro-magnetic ground state. Vertex-corrected self-consistent GW approaches yield band gaps of 1.67-1.94 eV [50].       
+
+> FIG. 2. (a),(b) Spin-polarized electronic band structures of conventional cell of α-MnO 2using DFT+ Uand DFT+G 0W0
+> level of theory. High symmetry points Z |Z0 and M |X are denoted by Z and M, for brevity. Red(blue) color denotes spin-up(spin-down) bands. The Fermi level is scaled to 0 eV.
+
+In our calculations, we find an indirect band gap of 1.52 eV using the PBE+ U method [cf. Fig. 2(a)], which is in close agreement with previous theoretical and ex-perimental results. The G 0W0@PBE+ U calculated band gap increases to 2.58 eV as shown in Fig. 2(b). Given the overall agreement of PBE+ U with experimental esti-mates and its computational efficiency, we adopt it for subsequent discussions. All the computed parameters discussed in this section are presented in Table I.  
+
+> B. Electronic structure of isolated defects
+
+To investigate the electronic properties of defective α-MnO 2, we begin with an analysis of the stoichiometric material using a 1 × 1 × 3 supercell. Figs. 3(a) and 3(b) show the band-decomposed charge densities correspond-ing to the valence band maximum (VBM) and conduc-tion band minimum (CBM), respectively. The VBM is predominantly composed of O-2 p states, while the CBM exhibits hybridized contributions from both Mn-3 d and O-2 p orbitals. The computed electronic band structure,                               
+
+> TABLE I. Lattice constants ( a,c), local magnetic moment on Mn ( μMn ), band gap ( Eg) from PBE+ Uand G W0meth-ods, and macroscopic dielectric constant ( ε∞) along a-axis (εa) and c-axis ( εc) for stoichiometric α-MnO 2. Experimen-tal and theoretical references from literature are included for comparison.
+> a,c(˚ A) μMn (μB)Eg(eV) ε∞
+> This work 9.83, 2.91 3.14 1.52 (PBE+ U)2.58 (G 0W0)8.25 ( εa)9.49 ( εc)Exp. 9.75, 2.86 a3.94-4.04 b1.16-2.23 c-Theory Ref. [18, 52] [51, 53] 1.18-2.20 dRef. [50]
+> aRef. [34]
+> bRef. [35]
+> cRef. [15, 23–26]
+> dRef. [18, 50–52]
+
+presented in Fig. S3(a), reveals significant band fold-ing effects due to the enlarged unit cell, resulting in an increased number of bands within the Brillouin zone. The orbital-projected density of states (PDOS), shown in Fig. 5(a), confirms the dominance of O-2 p states in the valence band, with moderate Mn-3 d participation, while the conduction band consists primarily of Mn-3 d
+
+and O-2 p hybridized states. Although experimental data on the band edges of stoichiometric α-MnO 2 is currently unavailable, these results provide a crucial baseline for identifying defect-induced states and evaluating the semi-conducting character of defective structures.            
+
+> FIG. 3. (a), (b) Band-decomposed spin charge densities of the VBM and the CBM for the 1 ×1×3α-MnO 2supercell. Isosurfaces are plotted with a value of 2 .6×10 −3e˚A−3.
+
+We now examine the effect of intrinsic point defects, including interstitials, vacancies, and antisite defects, on the electronic structure of α-MnO 2. The representative defect configurations are shown in Fig. S4. The cor-responding projected density of states (PDOS) and the electronic band structures are presented in Fig. 4(b)-4(g) and Fig. S3(b)-S3(g), respectively. The charge density wave functions of the defect-induced states are shown in Fig. 5. 5         
+
+> FIG. 4. Local density of states (DOS) projected onto Mn-t2g(blue), Mn-eg(magenta), and O-2 p(red) orbitals for (a) 1 ×1×3
+> α-MnO 2supercell without defects, (b)-(g) with intrinsic point defects. Total DOS is shown in solid black line. The Fermi level is scaled to 0 eV.
+> 1. Interstitials
+
+Mn interstitial (Mn i) incorporated at the center of the tunnel forms two symmetric bonds with nearby lattice O atoms residing in opposite octahedra [cf. Fig. S4(a)]. The Mn i–O bond lengths along the diagonals are 2.21 ˚ Aand 2.39 ˚ A, respectively, with concomitant changes in ad-jacent O–Mn lattice distances (2.25 ˚ A and 2.01 ˚ A). The PDOS for the neutral Mn i defect shows a spin-majority doublet defect state near the VBM, originating from hy-bridized Mn-eg and O-2 p orbitals [cf. [Fig. 4(a)] and S3(b)]. The corresponding charge density reveals defect-state localization on the adjacent lattice O atoms and nearby lattice Mn ions in opposite octahedra, resulting in reduction of these Mn(IV) to Mn(III) [cf. Fig. 5(a)]. Each reduced Mn contributes 1 μB , while the Mn i retains its oxidation state of Mn(II), contributing 5 μB . The net magnetic moment of the system increases to 7 μB .Notably, the Mn i, characterized by a filled t32g e2 
+
+> g
+
+config-uration, remains spectroscopically inert with respect to charge addition or removal. Interstitial O atom (O i) is investigated at two distinct sites: within the tunnel center and adjacent to a lat-tice O atom. The latter configuration is energetically more favorable by 1.89 eV/defect, forming a dimer with a neighboring O atom [cf. Fig. S4(b)]. The resulting Oi–O bond length is 1.30 ˚ A, intermediate between those in O 2 (1.21 ˚ A) and peroxide (1.47 ˚ A). The PDOS and spin-polarized band structure display doubly occupied and singly unoccupied antibonding pp* states near the Fermi level, while bonding pp orbitals lie deeper in the valence band [cf. Figs. 4(e) and Fig. S4(e)]. The presence of electrons in the antibonding orbitals are responsible for enlarged O i-O bond length as compared to free O 2.The corresponding wavefunctions [cf. Figs. 5(b), 5(c)] in-dicate that the charge localization occurs on both O i-O dimer and surrounding three Mn ions. One of the Mn ions is reduced to Mn(III) (due to electron localization) 6        
+
+> FIG. 5. Defect wave functions of 1 ×1×3α-MnO 2supercell with (a) a Mn interstitial (Mn i); (b), (c) an O interstitial (O i); (d) single Mn vacancy (V Mn ); (e), (f) single O vacancy (V O); (g), (h) Mn antisite O (Mn O); (i), (j) O antisite Mn (O Mn ). Isosurfaces are plotted with charge density values (in 10 −3e˚A−3) of 5.4, 7.6, 6.6, 4.5, 9.1, and 1.7, respectively. Spin-up and spin-down densities are represented by yellow and cyan isosurfaces. The Mn interstitial atom is shown in blue, and neighboring O atoms in green. Dashed black circle denotes an O-vacancy.
+
+[cf. Fig. 5(b)], while holes localize on other neighboring Mn sites [cf. Fig. 5(c)]. Furthermore, despite localized electron charges on both O i-O dimer and the reduced Mn ion, the net magnetic moment remains zero.  
+
+> 2. Vacancies
+
+Mn vacancy (V Mn ) disrupts six Mn–O bonds, effec-tively removing three electrons and leaving six oxygen dangling bonds [cf. Fig. S4(c)]. These O atoms relax slightly outwards by ∼0.08 ˚ Adue to the electron-deficient region at the vacant site. The electronic structure of neu-tral V Mn shows defect-induced unoccupied states arising primarily from O 2 p orbitals, which appear near the the Fermi level [cf. Fig. 4(c)]. Additionally, a few occupied defect states are observed close to the VBM, although they are unlikely to contribute significantly to conduc-tion. Interestingly, one of the defect bands near the VBM touches the Fermi level, as shown more distinctly in Fig. S3(c). The presence of this partially filled, oxygen-derived state at the Fermi level indicates the formation of delocalized hole states. This is corroborated by the de-fect charge density, which shows hole delocalization over the six uncoordinated oxygen atoms surrounding the Mn vacancy [cf. Fig. 5(d)], resulting in a net magnetic mo-ment of 5 μB . These findings highlight the role of V Mn 
+
+in modulating both the electronic and magnetic response of α-MnO 2.O vacancy (V O) is modeled at two non-equivalent lat-tice O sites, with the more stable configuration favored by 364 meV [ref. Figs. S4(d), S4(e)]. Removal of an O atom leaves excess electrons, which localize on two adja-cent Mn sites, reducing them from Mn(IV) to Mn(III), as depicted in Fig. 6(e), giving rise to a net magnetic moment of 2 μB . A third Mn ion relaxes toward a neigh-boring O atom, forming a short Mn–O bond (1.82 ˚ A). The PDOS and the band structure reveal doubly occu-pied Mn-eg defect states inside the band gap, along with an unoccupied hybrid Mn-eg –O-2 p state [cf. Figs. 4(d) and S3(f)]. Notably, one of the occupied defect states lies very close to the VBM, suggesting it is unlikely to con-tribute to thermally activated ionization [cf. Fig. S3(f)]. The corresponding charge densities [Figs. 5(e)-5(f)] indi-cate strong electron localization on the reduced Mn sites and hole density on the third Mn ion, giving rise to both donor and acceptor states.  
+
+> 3. Antisites
+
+In the Mn O antisite, substitution of Mn at an O site causes the defect to relax toward the tunnel center, forming three Mn–O bonds of approximately 2.1 ˚ A [cf. Fig. S4(f)]. The resulting excess electrons localize on four neighboring lattice Mn ions near V O, reducing them from Mn(IV) to Mn(III), while the substituted Mn remains unaltered in its electronic configuration. The PDOS and the band structure reveal spin-split occupied defect states within the gap, comprising three spin-majority (two Mn-
+
+eg and one Mn-t2g ) orbitals and one spin-minority Mn-
+
+eg orbital hybridized with O-2 p orbitals [cf. Figs. 4(d) and Fig. S3(d)]. Several unoccupied defect states are also observed near the CBM, although they are unlikely to contribute significantly to conduction. For clearer vi-sualization, the corresponding band structure is shown in Fig. S3(d). The spin-polarized charge distributions of two occupied defect states near the Fermi level are shown in Figs. 5(g) and 5(h). These reveal strong electron lo-calization on the three reduced lattice Mn sites adjacent 7to the O-vacancy, as well as on a fourth reduced lattice Mn site in a neighboring octahedron, resulting in a net magnetic moment of 7 μB .For the O Mn antisite, where an O substitutes a Mn site forms bond with two neighboring lattice O atoms of 1.41 ˚ A bond length each, resembling a peroxide-like O2− 
+
+> 2
+
+species [cf. Fig. S4(g)]. The PDOS and the band structure exhibit spin-split antibonding states near the Fermi level, originating from diatomic pp* hybridization [cf. Figs. 4(g) and Fig. S3(g)]. As shown in Fig. S3(g), two occupied and two unoccupied states emerge close to the Fermi level, significantly reducing the band gap to approximately 240 meV and indicating the presence of shallow defect states. The spin densities of two distinct unoccupied states, illustrated in Figs. 5(i) and 5(j), show hole delocalization across the defect O atom and sur-rounding lattice O atoms. This configuration results in a net magnetic moment of 3 μB . The O Mn antisite thus manifests hybrid features of both O i and V Mn , but with comparatively less delocalized electronic states.                                       
+
+> TABLE II. Calculated formation enthalpy ∆ Hf(in eV) for various Mn-O phases using PBE+ Uand HSE06 functionals, compared to the experimental measurements taken from Ref. [54] and theoretical values from Ref. [1]. We cannot find reliable experimental data for ∆ Hffor α-MnO 2.Present work Literature PBE+ UHSE06 PBE+ UHSE06 Expt. MnO -3.96 -3.90 -3.92 -3.83 -3.99
+> α-Mn 2O3-9.74 -9.54 -9.39 -9.03 -9.93 Mn 3O4-13.9 -14.0 -13.7 -13.8 -14.4
+> β-MnO 2-4.82 -4.72 -4.51 -4.47 -5.39
+> α-MnO 2-4.95 -4.75 ---
+> C. Phase stability
+
+For the thermodynamic stability of α-MnO 2, the chem-ical potentials must satisfy the following condition: 
+
+μMn + 2 μO = ∆ Hf (MnO 2), (3) where ∆ Hf (MnO 2) is the formation enthalpy of α-MnO 2, calculated to be −4.95 ( −4.75) eV using the PBE+ U (HSE06) method. The reference chemical po-tentials μMn and μO correspond to bulk Mn in its δ
+
+phase and the energy per atom of an O 2 molecule in its spin-polarized triplet ground state, respectively. These reference limits are indicated by the vertical and hori-zontal dashed lines in Fig. 6. To prevent the formation of competing manganese oxide phases, such as α-Mn 2O3,Mn 3O4, and MnO, the chemical potentials must also sat-isfy 
+
+xμ Mn + yμ O ≤ ∆Hf (Mn xOy ), (4)              
+
+> FIG. 6. Chemical potential phase diagram (stability triangle) for α-MnO 2showing the allowed range of atomic chemical potentials μMn and μO.The dashed vertical and horizontal lines represent the upper limits set by the elemental phases of Mn and O, respectively. Thermodynamic stability of α-MnO 2
+> is achieved when μMn and μOlie within the cyan triangular region (black boundary). The boundary lines corresponding to competing phases α-Mn 2O3, Mn 3O4, and MnO are shown in red, blue, and magenta, respectively.
+
+where ∆ Hf (Mn xOy ) are the experimental formation enthalpies of the competing Mn xOy phases listed in Table II. The formation energies obtained using PBE+ U and HSE06 are consistent with previous theoretical results [1] and are in good agreement with the experimental data reported in Ref. [54]. Since the experimental formation enthalpy of α-MnO 2 is not available, the experimental value of β-MnO 2 is used to estimate the lower bounds of 
+
+μMn and μO, shown by the black solid line in Fig. 6. The calculated ∆ Hf (MnO 2) for β-MnO 2 is −4.82 ( −4.72) eV using PBE+ U (HSE06), compared to the experimental value of −5.39 eV [54]. Both functionals yield similar for-mation energies, consistent with earlier reports [2]. Us-ing the constraints given by Eqs. (3) and (4), the upper bound of μMn and the corresponding lower bound of μO
+
+are determined. Beyond these limits, the formation of competing phases such as α-Mn 2O3 becomes favorable. The resulting thermodynamic stability region of α-MnO 2
+
+is shown as the cyan area in the phase diagram in Fig. 6.   
+
+> D. Finite-size effects in charged defects
+> 1. FNV and extended-FNV correction schemes
+
+Finite-size effects arising from spurious electrostatic in-teractions between periodically repeated charged defects are corrected using the electrostatics-based Freysoldt-Neugebauer-Van de Walle (FNV) scheme [55]. In this ap-proach, a Gaussian model charge together with a static 8dielectric constant is employed to evaluate the electro-static energy Emodel (Ω) for supercells of varying volume Ω, which is subsequently extrapolated to the dilute limit to obtain the isolated defect energy Eiso .The model electrostatic energy for the doubly posi-tively charged Mn interstitial (Mn 2+ i ) is evaluated using a Gaussian charge distribution with a width of 1.7 ˚ A, cho-sen to reproduce the spatial extent of the DFT-computed defect charge density [cf. Fig. 7(a)]. Starting from a 1 × 1 × 3 supercell, the cell is uniformly scaled, and 
+
+Emodel is computed as a function of Ω [cf. Fig. 7(b)]. The resulting data are fitted to a third-order polyno-mial and extrapolated to the infinite-size limit, yield-ing Eiso = 2 .09 eV. The difference between Eiso and 
+
+Emodel for the 1 × 1 × 3 supercell defines the lattice cor-rection Elat , which accounts for long-range Coulomb in-teractions. In addition, electrostatic corrections are evaluated us-ing the extended-FNV (eFNV) scheme following Kuma-gai and Oba [56], which is particularly suitable for sys-tems with anisotropic dielectric screening. In contrast to the original FNV approach, the eFNV method employs a point-charge (PC) model, enabling a rigorous treatment of long-range Coulomb interactions within an anisotropic dielectric medium. Within this formalism, the correction to the defect formation energy in Eq. 1 is expressed as 
+
+EFNV /eFNV corr = EFNV − q ∆V iso /aniso q . (5) Here, EFNV corresponds to the lattice correction Elat 
+
+in the FNV scheme and to the point-charge correction energy EPC in the eFNV scheme. The term ∆ V iso /aniso 
+
+> q
+
+represents the potential alignment-like correction. In the FNV scheme, this term is obtained by comparing the planar-averaged model potential ( Vmodel ,q ) with the DFT defect-induced potential ( VDFT ,q ), defined as the differ-ence between the electrostatic potentials of the defective and pristine supercells, VDFT ,q = Vq − Vbulk as shown in Fig. 7(c). In the eFNV scheme, ∆ V aniso  
+
+> q
+
+is evaluated us-ing atomic site electrostatic potentials by comparing the PC potential VPC ,q with VDFT ,q . The PC potential at an arbitrary position r is computed using the generalized Ewald summation: 
+
+VPC ,q(r) = X
+
+> Ri
+
+q
+
+p|ε|
+
+erfc 
+
+
+
+γp(Ri − r) · ε−1 · (Ri − r)
+
+p(Ri − r) · ε−1 · (Ri − r)
+
+− πq 
+
+Ωγ2 + X 
+
+> Gi̸=0
+
+4πq 
+
+Ωexp  −Gi · ε · Gi/4γ2
+
+Gi · ε · Gi
+
+· eiGi·r,
+
+(6) where Ri and Gi denote lattice vectors in real and reciprocal space, respectively. The alignment-like term ∆V aniso  
+
+> q
+
+is obtained by averaging ∆ VPC ,q over atomic sites within a sampling region located outside a sphere inscribed within the Wigner-Seitz cell of radius RWS ,thereby minimizing the influence of local structural re-laxations. This procedure replaces the planar-averaging approach of the original FNV scheme and provides a more robust evaluation for systems exhibiting significant atomic displacements. As illustrated in Fig. 7(d), the atomic site potentials VDFT ,q , VPC ,q , and ∆ V aniso  
+
+> q
+
+ex-hibit significant spatial variation in the vicinity of the defect, but converge to a well-defined constant value in the region beyond RWS , enabling an unambiguous deter-mination of the alignment correction. 
+
+FIG. 7. (a) Plane-averaged defect charge densities computed using DFT (black solid line) and the model charge (red solid line) along the c-axis. (b) Electrostatic energies (filled circles) and the corresponding third-order polynomial fit (red solid line) for the (2 +) charged defect as a function of the inverse cube root of the supercell volume (Ω). The extrapolated value (E iso ) at Ω −1/3 = 0 is indicated by an open circle. (c) Plane-averaged model potential, Vmodel,q (red) and DFT difference potential (black). (d) Electrostatic potentials VDFT,q , VPC,q ,and ∆ V aniso q evaluated at the atomic positions in the 1 ×1×3
+
+α-MnO 2 supercell with a Mn i defect. The spatial region used for averaging ∆ V aniso q is outside of the sphere with radius 
+
+RWS . The defect center is shown by the orange dashed line. 
+
+The total correction thus comprises a long-range Coulomb contribution ( EFNV ) and a short-range poten-tial alignment-like term ( −q ∆V iso /aniso  
+
+> q
+
+), which together remove spurious electrostatic interactions under periodic boundary conditions. The resulting correction energies for all defects considered in this work, obtained using both FNV and eFNV schemes, are summarized in Ta-ble S1. 
+
+2. Finite-size convergence and role of dielectric anisotropy in charge corrections 
+
+To further evaluate finite-size corrections, we compute the formation energies of selected charged defects (Mn 2+  
+
+> i
+
+,V3−
+
+> Mn
+
+, Mn 2+ O , O 1− 
+
+> i
+
+, V 1− 
+
+> O
+
+, and O 2−
+
+> Mn
+
+) using 1 × 1 × 3 (72-atom), 2 × 2 × 7 (672-atom) and 3 × 3 × 10 (2160-atom) supercells as shown in Fig. 8. These supercells are 9constructed to ensure near-isotropic expansion, with the 3 × 3 × 10 supercell approaching a cubic geometry. The uncorrected energies are extrapolated to the dilute limit using aΩ−1 +bΩ−1/3 +c, where Ω is the supercell volume. Without corrections, strong size dependence is observed, whereas finite-size correction significantly improves con-vergence.          
+
+> FIG. 8. Calculated formation energies of (a) Mn 2+ i, (b) V 3−
+> Mn ,(c) Mn 2+ O, (d) O −
+> i, (e) V −
+> O, and O 2−
+> Mn in α-MnO 2as a function of the inverse cube root of the supercell volume (Ω). The hor-izontal axis represents the formation energy calculated with the largest supercell and extended FNV corrections. The uncorrected formation energies (black solid circles) are fit-ted with a third order polynomial function (red line). The isotropic FNV corrections and anisotropic FNV corrections are represented by blue squares and orange triangles.
+
+The role of dielectric anisotropy is examined through a systematic comparison between the isotropic FNV and anisotropic eFNV correction schemes. The relative per-formance of the two approaches is found to depend sen-sitively on the specific defect and charge state. In par-ticular, the eFNV scheme yields improved convergence with increasing supercell size for defects such as Mn 2+ i
+
+and Mn 2+ O , primarily due to differences in the long-range electrostatic correction term, while the contribution from potential alignment remains comparatively small [cf. Ta-ble S1]. The strong sensitivity of Mn i and Mn O to the dielectric treatment reflects their anisotropic charge dis-tribution along the tunnel structure, thereby necessitat-ing a tensorial dielectric description. In contrast, V 3−
+
+> Mn
+
+and V 1− 
+
+> O
+
+exhibit comparatively better convergence be-havior with the isotropic FNV scheme, whereas O 1− 
+
+> i
+
+and O2− 
+
+> Mn
+
+show only weak sensitivity to the choice of correc-tion method, with differences remaining within ∼0.1 eV. These results indicate that no single correction scheme universally provides the best convergence for all defects. Therefore, in the present work, the correction methodol-ogy for each defect configuration is selected based on the supercell convergence behavior, with the corrected for-mation energies referenced to the largest supercell calcu-lations where the differences between the FNV and eFNV schemes become substantially reduced. The charge-state dependence of the correction is an-alyzed in Fig. S5. While an overall quadratic depen-dence on q is observed, the data are better described by 
+
+Ecorr = aq 2 + bq + c, where the linear term arises from potential alignment. This contribution is significant for low charge states and leads to deviations from simple proportional scaling (e.g., between q = +1 and q = +2). For Mn qi , partial cancellation between quadratic and lin-ear terms results in a relatively smaller correction for 
+
+q = +2. This behavior is consistently observed in both FNV and eFNV schemes, indicating that it is intrinsic to the correction formalism. Based on the above results, the eFNV scheme is em-ployed for all defects except V Mn and V O, for which the standard FNV correction is adequate.  
+
+> E. Defect formation energies
+
+The formation energies of native point defects in α-MnO 2 are evaluated as a function of oxygen chemical potential under Mn-rich and O-rich conditions as shown in Fig. 9. To assess convergence, calculations are per-formed using both 1 × 1 × 3 (72-atom) and 2 × 2 × 7(672-atom) supercells (Table III). The formation ener-gies differ by only a fraction of an eV, indicating that the smaller supercell is sufficient for describing native defects. The corresponding magnetic moments are also listed in Table III.                                                         
+
+> TABLE III. Defect formation energies (in eV) for native point defects in α-MnO 2computed using DFT+ Uin two different supercell sizes: 1 ×1×3 (72 atoms) and 2 ×2×7 (672 atoms), under Mn-rich and O-rich conditions. The last column lists the net magnetic moment ( μ) for each defect. Defect type 1×1×32×2×7μ
+> (μB)Mn-rich O-rich Mn-rich O-rich Mn i0.798 2.48 0.955 2.63 7Oi2.71 1.87 2.78 1.94 0VMn 6.02 4.34 6.07 4.40 5VO0.643 1.48 0.679 1.52 2Mn O1.46 3.97 1.59 4.10 7OMn 7.11 4.59 7.11 4.59 3
+
+VO is the most stable neutral defect, followed by Mn i and O i under Mn-rich conditions and O-rich con-ditions, respectively. The uncorrected formation ener-gies for various charge states are shown in Figs. S6 and S7, while the FNV and eFNV corrected results are pre-sented in Figs. S8-S11, with numerical values summarized in Table S2. The corresponding charge transition levels (CTLs) are listed in Table IV. The differences in CTLs obtained using the FNV and eFNV schemes arise from the variation in their respective correction energies. No-tably, relatively large deviations are estimated for most defects, whereas the O i and O Mn defects exhibit only small differences within ∼0.1 eV. Additionally, finite-size 10           
+
+> FIG. 9. Calculated formation energies of native point de-fects in the neutral state as a function of the oxygen chemical potential ( μO), referenced to the minimum oxygen chemical potential ( μmin ), in the 1 ×1×3α-MnO 2supercell. The range of μOcorresponds to the thermodynamic stability lim-its of the host compound.
+
+effects for charged defects are assessed using the larger 2 × 2 × 7 supercell. The corrected formation energies dif-fer by less than ∼0.1-0.15 eV compared to the smaller cell [cf. Table S2], and CTLs shift by less than ∼0.1 eV [cf. Table S3]. The qualitative features, including the amphoteric nature of V O, remain unchanged, confirming the reliability of the 1 × 1 × 3 supercell.                            
+
+> TABLE IV. Charge transition levels (in eV) for native point defects in 1 ×1×3α-MnO 2supercell corrected using FNV (extended FNV) approach, referenced to the VBM. Defect type Charge transition levels (2+/1+) (1+/0) (0/1 −)(1 −/2 −)(2 −/3 −)Mn i1.24 1.39 (1.47) Oi0.328 1.17 (0.358) (1.11) VMn 0.636 1.31 (0.277) (0.699) VO0.228 0.755 (0.208) (0.885) Mn O0.263 1.25 (0.676) OMn 0.512 1.28 (0.407) (1.23)
+> 1. Interstitials
+
+The Mn i defect exhibits a relatively low formation en-ergy of 0.798 eV in the neutral charge state under Mn-rich conditions [cf. Fig. 9]. Upon inclusion of FNV correc-tions, the negative-U behavior associated with the (1 +)charge state in the uncorrected formation energies is re-moved [cf. Figs. S8(a) and S9(a)]. As a result, the de-fect stabilizes in distinct (2 +), (1 +), and (0) charge states across the band gap. However, within the eFNV correc-tion scheme, the defect exhibits negative-U behavior in-volving the neutral charge state, which favors direct tran-sitions between the ionized leading to ionized (2 +) and (1 +) configurations. Nevertheless, the (1 +) charge state remains thermodynamically stable. The thermodynamic transition level ϵ(2 +/1+) is located 44 meV below the CBM, indicating that Mn i behaves as a shallow double donor. Similar behavior has been reported for interstitial defects in TiO 2 and SnO 2 [57, 58]. Under Mn-rich con-ditions, the corrected formation energies of the (1 +) and (2 +) charge states are −0.755 eV and −2.23 eV, respec-tively [cf. Fig. S10(a)]. Under O-rich conditions, Mn i
+
+continues to exhibit comparatively low formation energy in the (2 +) charge state [cf. Fig. S11(a)], while remaining thermodynamically accessible in the (1 +) state. The O i defect allows for (1 +), (0), and (1 −) charge states within the band gap [cf. Figs. S8(b) and S9(b)]. Under O-rich conditions, the neutral O i has a low for-mation energy of 1.87 eV [cf. Fig. 7]. Using model charge calculation, the correction to formation energy is 0.245 eV, while PC correction energy is 0.131 eV . After accounting for potential alignment, E FNV corr is cal-culated to be 0.157 eV and 0.371 eV for the (1 +) and (1 −) states, respectively, comparable to the correspond-ing E eFNV corr values of 0.126 eV and 0.312 eV [cf. Table S1]. The charge transition levels ϵ(1 +/0) and ϵ(0 /1−) are lo-cated at 1.16 eV below the CBM and 1.11 eV above the VBM, respectively, indicating amphoteric behavior.  
+
+> 2. Vacancies
+
+The Mn vacancy (V Mn ) has high formation energies of 4.34 eV and 6.02 eV under O-rich and Mn-rich con-ditions, respectively, due to the need to break six Mn-O bonds [cf. Fig. 9]. The stable charge states are (1 −), (2 −), and (3 −) as indicated in Figs. S8(c) and S9(c). The defect exhibits negative-U behavior associated with the neutral state, which is destabilized compared to its ionized forms. As a result, V Mn is predicted to always be ionized. The FNV-corrected transition levels, ϵ(1 −/2−)and ϵ(2 −/3−), are located 0.636 eV and 1.31 eV above the VBM, respectively. Therefore, V Mn can behave not only as a shallow acceptor but also as an electron trap near the CBM. FNV corrections to the formation energy are 0.037 eV, 0.523 eV, and 1.47 eV for the (1 −), (2 −), and (3 −) states, respectively [cf. Table S1]. The O vacancy (V O) has the lowest formation energy 11 under both Mn-rich and O-rich conditions in the neutral state, with formation energies of 0.643 eV and 1.48 eV, respectively, as shown in Fig. 9]. Stable charge states include (1 +), (0), and (1 −) within the band gap region [cf. Figs. S8(d), S9(d)]. The transition level ϵ(1 +/0) lies 1.29 eV below the CBM, respectively, while ϵ(0 /1−) is positioned 0.755 eV above the VBM, which act as com-pensating centers. The presence of both donor-like and acceptor-like charge states confirms the amphoteric na-ture of V O. Most first-principles studies of oxygen va-cancies in transition-metal oxides have primarily consid-ered only positively charged and neutral states (V 2+ , V +,and V 0). In TiO 2, V O acts as a double donor and re-mains ionized across the Fermi level, with no amphoteric behavior reported [58]. In SnO 2, V 2+ O and Sn 4+ i are re-ported as dominant donor-type defects exhibiting shallow states [57]. In both cases, finite-size corrections were not explicitly included. In contrast, Ramo et al. [59] consid-ered multiple charge states, including negative ones, in monoclinic HfO 2, suggesting that V O can also act as an electron trap. However, the position of these defect levels relative to the conduction-band edge may be underesti-mated, possibly due to the absence of finite-size correc-tions. Overall, the amphoteric behavior of V O remains less explored in most oxides and sensitive to computa-tional treatment. To assess the sensitivity of defect levels to the Hubbard parameter ( U ), we evaluated the charge transition levels (CTLs) of V O for U values in the range of 2-5 eV as shown in Fig. S12. The evolution of CTLs with U reflects the increased localization of Mn-3 d states, which modifies their relative alignment with respect to the band edges. The donor transition level shifts progressively toward the VBM with increasing U , while the acceptor level moves toward the midgap region up to U = 3 .8 eV and shifts back toward the CBM for larger U values. Importantly, within the physically justified range ( U ≤ 3.8 eV), both donor- and acceptor-type levels remain inside the band gap, indicating that the amphoteric character of V O is robust with respect to the choice of U . 
+
+> 3. Antisites
+
+The Mn O antisite exhibits a relatively low formation energy of 1.46 eV in the neutral charge state under Mn-rich conditions [cf. Fig. 9]. Within the band gap, the defect stabilizes in the (0), (1 +), and (2 +) charge states upon inclusion of FNV corrections [cf. Figs. S8(e) and S9(e)]. Upon incorporating eFNV corrections, the defect exhibits negative-U behavior associated with the neutral state. Consequently, the neutral state remains thermo-dynamically unstable, and the defect preferentially ex-ists in ionized configurations, indicative of shallow donor character, similar to the Mn i defect [cf. Figs. S10(e) and S11(e)]. The thermodynamic transition level, ϵ(2 +/1+), is located 0.844 eV below the conduction band minimum (CBM), suggesting that the defect can act both as a com-pensating center and as a donor. The O Mn antisite is found to be stable in the (0), (1 −), and (2 −) charge states within the gap [Figs. S8(f), S9(f)]. It has high formation energies of 4.59 eV under O-rich and 7.11 eV under Mn-rich conditions, owing to the disruption of multiple Mn-O bonds. The transition lev-els ϵ(0 /1−) and ϵ(1 −/2−) (including eFNV corrections) are located 0.407 eV and 1.23 eV above the VBM, re-spectively, indicative of deep acceptor states. The for-mation energy corrections (E eFNV corr ), including potential alignment, are -0.036 eV and 0.428 eV for the (1 −) and (2 −) states, respectively.  
+
+> F. Stability
+
+Figs. 10(a) and 10(b) show the formation energies of isolated native defects in α-MnO 2 as a function of the chemical potential (Fermi level) under Mn-rich and O-rich growth conditions, respectively. These plots identify the thermodynamically stable defect charge states and their corresponding charge transition levels over the ac-cessible Fermi-level range. They also provide insight into the intrinsic defect thermodynamics that are relevant for extrinsic doping strategies. The defect formation energies are evaluated using the eFNV correction scheme for all defects except V O and V Mn , for which the conventional FNV correction provides better convergence, as discussed in the previous sections. For completeness, formation-energy diagrams obtained using purely FNV and purely eFNV corrections are presented in Figs. S13 and S14, re-spectively. Apart from small quantitative differences for Mn i and Mn O, the relative stability of the defect charge states and the overall defect thermodynamics remain un-changed. Energetically, Mn i and V O are the dominant native defects in α-MnO 2. Mn i remains ionized in the (2 +)and (1 +) charge states and introduces shallow donor lev-els, with the ε(2 +/1+) transition level located 44 meV below the CBM [cf. Fig. 10]. The negative forma-tion energy of the (2 +) state indicates a strong ten-dency for spontaneous incorporation at tunnel sites in high concentrations, consistent with experimental obser-vations [14, 15]. In contrast, V O exhibits amphoteric be-havior in α-MnO 2, introducing both donor- and acceptor-like levels within the band gap. The (1 −) charge state of V O becomes energetically favorable and shows nega-tive formation energy under Mn-rich conditions. Unlike many binary oxides, where oxygen vacancies often act as shallow donors [57, 58], the oxygen vacancy in α-MnO 2
+
+forms comparatively deep donor levels. The formation energy diagrams further reveal pro-nounced intrinsic defect compensation. Under both Mn-rich and O-rich conditions, Mn 2+ i possesses the lowest formation energy over a wide Fermi-level range near the VBM, whereas V − 
+
+> O
+
+becomes increasingly favorable as the Fermi level approaches the CBM. Consequently, any at-tempt to shift the Fermi level toward either band edge 12        
+
+> FIG. 10. (a), (b) Variation of formation energies for stable charge states of native point defects in 1 ×1×3α-MnO 2supercell as a function of the Fermi level under Mn-rich and O-rich conditions. Charge transition levels are indicated in parentheses. The green (yellow) shaded region represents the regime of spontaneous (non-spontaneous) defect formation.
+
+thermodynamically promotes the formation of compen-sating native defects. Such behavior indicates that na-tive defects impose intrinsic constraints on the achiev-able Fermi-level position. To illustrate these compensa-tion tendencies, we identify the Fermi-level positions at which the formation energies of Mn 2+ i and V − 
+
+> O
+
+become zero. These quantities should not be interpreted as equi-librium Fermi levels or rigorous doping limits and serve only as indicators of the onset of spontaneous donor or acceptor defect formation. Under Mn-rich conditions, the formation energy of Mn 2+ i becomes zero ∼1.14 eV above the VBM, indicat-ing that moving the Fermi level further toward the va-lence band edge would strongly favor spontaneous forma-tion of donor-like Mn interstitials, thereby compensating acceptors. In contrast, the formation energy of V − 
+
+> O
+
+ap-proaches zero ∼0.173 eV below the CBM, indicating that VO becomes thermodynamically accessible only when the Fermi level approaches the conduction band edge. These trends indicate that Mn i constitutes the dominant low-energy donor-type native defect under Mn-rich growth conditions, while V O acts as the corresponding compen-sating acceptor-like defect as the Fermi level approaches the conduction-band edge. Together, these defects illus-trate the strong intrinsic self-compensation revealed by the calculated defect thermodynamics. Under O-rich conditions, the formation energies of Mn-related defects (Mn i, Mn O and V O) increase significantly, whereas those of O-related defects (V Mn , O Mn and O i)decrease. Consequently, the onset of spontaneous Mn i
+
+formation shifts closer to the VBM ( ∼0.289 eV), reflect-ing a reduced tendency for donor compensation under O-rich conditions. At the same time, V − 
+
+> O
+
+remains ener-getically accessible near the conduction band edge. These results demonstrate that the balance between donor- and acceptor-type native defects is highly sensitive to the chemical environment. However, the present calculations alone do not establish the equilibrium carrier type or the feasibility of intrinsic n- or p-type conductivity, which would require a full charge-neutrality analysis. Rather, they identify the dominant native compensating defects that must be considered in future extrinsic doping strate-gies for α-MnO 2.Other defects such as V Mn and O Mn exhibit relatively higher formation energies, and thus their equilibrium concentrations remain low. Nevertheless, V Mn remains ionized across the entire Fermi level range, with V −
+
+> Mn
+
+acting as a shallow acceptor. Although these defects are not thermodynamically dominant, they may become rel-evant under non-equilibrium growth conditions or in the presence of suitable extrinsic dopants. To elucidate the low formation energies of Mn 2+ i and V−
+
+> O
+
+, we analyze the associated structural relaxations in 
+
+α-MnO 2. Mn 2+ i is readily accommodated within the tun-nel structure with minimal lattice distortion. In contrast, a neutral Mn atom, due to its larger effective size, would introduce significant strain, resulting in a higher forma-tion energy. Ionized Mn species are therefore sufficiently compact to fit within the tunnel, which explains the rel-ative stability of charged Mn interstitials, with Mn 2+ i be-ing the most favorable configuration. Removal of an O atom coordinated to three Mn ions introduces two excess electrons that localize on two Mn sites, leaving the third Mn relatively electron-deficient with an unoccupied defect state [cf. Fig. 5]. This un-even charge distribution induces asymmetric relaxation: the Mn associated with the hole state shifts outward significantly ( ∼0.09 ˚ A), while the other two Mn show minor displacements toward the defect ( ∼0.015 ˚ A). For V+O, the relaxation becomes more symmetric, with the two Mn ions moving slightly away from the defect centre (∼0.035 ˚ A) and the third Mn moving slightly toward the 13 vacancy ( ∼0.021 ˚ A). In contrast, V − 
+
+> O
+
+exhibits strongly asymmetric distortion: the two Mn ions remain nearly unchanged, while the Mn associated with the hole state moves markedly towards the defect site ( ∼0.152 ˚ A). The pronounced inward displacement reflects stabilization of the localized hole state, driving charge redistribution and structural distortion that underpin the amphoteric be-havior of V O.         
+
+> FIG. 11. (a),(b) Imaginary part of dielectric constant ε2(ω)and (c),(d) real part of dielectric constant ε1(ω) for 1 ×1×3
+> α-MnO 2supercell, calculated using IPA and GW+BSE level of theory.
+> G. Optical Properties
+
+Previous sections demonstrate that intrinsic point de-fects significantly modify the electronic structure of α-MnO 2. Since the optical response is directly governed by the underlying electronic states, we now investigate the defect-induced changes in the excitonic optical properties of α-MnO 2 within the GW+BSE framework to assess its potential for electronic and optoelectronic applications. The calculated BSE and independent-particle approx-imation (IPA) spectra of pristine 1 × 1 × 3 α-MnO 2 along the three crystallographic directions are shown in Fig. 11. The optical response exhibits pronounced anisotropy be-tween the in-plane ( E ∥ a, b ) and out-of-plane ( E ∥ c) di-rections due to the tetragonal crystal structure. Inclusion of electron–hole interactions within the BSE framework enhances the absorption intensity and produces sharp structures, particularly for light polarized along the c
+
+axis. The absorptive part of the dielectric function ε2(ω)reveals an absorption onset at ∼1.6 eV in the BSE spec-trum, which is absent in the IPA results owing to exci-tonic effects [cf. Figs. 11(a) and 11(b)]. Although the overall spectral shape is redshifted relative to the IPA spectrum, the difference in the absorption onset is mod-est ( ∼110 meV). The first optically active excitonic peak appears at 1.76 eV for E ∥ a, b and at 2.33 eV for E ∥ c, indi-cating a direction-dependent onset of optical transitions. This agrees well with experimental spectra reported for a structurally related variant of α-MnO 2 [23], as measure-ments for the pristine bulk phase are not available. The most intense peak occurs at 2.45 eV for the in-plane direc-tion, whereas the spectrum for E ∥ c exhibits a double-peaked structure with strong features at 2.33 and 2.88 eV, followed by a narrow peak at 3.19 eV and a shoul-der around ∼3.4 eV. These results indicate that α-MnO 2
+
+is optically active in the visible and ultraviolet energy ranges and exhibits moderate anisotropy. The dispersive part of the dielectric function ε1(ω) is shown in Figs. 11(c) and 11(d). The main spectral fea-tures occur at photon energies corresponding to the peaks in ε2(ω), namely at 2.45 eV for E ∥ a, b and 2.33 eV for E ∥ c. The static dielectric constant increases from 6.21 in the ( ab ) plane to 9.28 along the c axis, indicat-ing stronger electronic polarizability along this direction. The calculated static dielectric constants, together with the energies of the first peak (FP) and the most intense (MI) peaks in ε2(ω), are summarized in Table V. The introduction of intrinsic defects significantly mod-ifies the low-energy optical response and dielectric screen-ing, as shown in Figs. 12 and 13. The most prominent feature of the defective systems is the appearance of ab-sorption peaks below 2 eV, whereas the higher-energy features in the visible region remain largely unchanged. Optical anisotropy persists in the defective structures and becomes more pronounced in the low-energy region of the spectra. For donor-type defects such as Mn i and Mn O, the first optical peaks exhibit relatively small red-shifts and reduced intensity compared with other defects [cf. Figs. 12(a) and 12(c)]. This behavior can be at-tributed to enhanced electronic screening arising from the excess electrons associated with these donor states, as shown in Figs. 5(b) and 5(d). These peaks involve tran-sitions from electrons in the defect-induced gap states to the conduction bands. In contrast, acceptor-type defects such as V Mn , O Mn ,Oi, and V O produce pronounced redshifts in the absorp-tion spectra due to reduced electronic screening. For ex-ample, V Mn defect exhibits a defect-induced absorption characterized by a double-peaked structure in the low-energy region, with the lowest optical transition energy of ∼81 meV for E ∥ a. These excitations arise from tran-sitions between the defect states and conduction-band states at different energies. Similarly, O Mn introduces additional low-energy absorption features. Interestingly, the spectra for the amphoteric defects O i and V O dis-play sharp low-energy peaks with maxima at 0.233 eV and 0.458 eV, respectively, for E ∥ c. In particular, V O
+
+produces sharp absorption peaks in the low-energy region along all three directions. To ensure that these defect-induced features are not artifacts of the relatively small supercell used in the 14               
+
+> FIG. 12. (a)-(f) Imaginary part of dielectric constant ε2(ω) for (a)-(f) for the isolated native defects in 1 ×1×3α-MnO 2
+> supercell, calculated using GW+BSE level of theory. Peaks indicate inter-band and defect-related transitions.
+> FIG. 13. Real part of dielectric constant ε1(ω) for (a)-(f) isolated native defects in 1 ×1×3α-MnO 2supercell, calculated using GW+BSE level of theory.
+
+GW+BSE calculations, we perform additional DFT+ U
+
+calculations for a larger 2 × 2 × 7 supercell containing 672 atoms. While minor quantitative differences are ob-served, the positions of the main spectral features and the qualitative trends associated with different defects remain essentially unchanged [cf. Fig. S15]. The changes in the low-energy absorption region are also reflected in the dielectric response shown in Fig. 13. For donor-type defects, the static dielectric constant de-creases slightly, whereas for acceptor-type defects it in-creases, particularly along the c axis. Notably, V O and Oi lead to enhanced dielectric constants for E ∥ c, while VMn produces a large dielectric response ( ε = 16 .7), in-dicating strong polarization effects. Overall, the opti-15                                                                                                  
+
+> TABLE V. Static dielectric constant ( ε), and energy positions of the first peak (FP) and most intense (MI) peaks in ε2(ω)for the stoichiometric 1 ×1×3α-MnO 2supercell and various point defects along E∥a,E∥b, and E∥c, calculated at the GW+BSE level of theory. Energies are in eV.
+> E∥aE∥bE∥c
+> Defect εFP MI εFP MI εFP MI Pristine 6.21 1.76 2.45 6.21 1.76 2.45 9.28 2.33 2.33, 2.88 Mn i5.88 1.17 2.51 6.51 1.13 3.77 9.10 1.23 2.34, 2.92 Oi6.31 0.531 2.52 6.26 0.398 3.52 12.4 0.233 2.35, 2.91 VMn 16.7 0.081 2.57 8.25 0.592 2.57 13.1 0.511 2.35, 2.92 VO6.36 0.919 2.58 6.87 0.919 2.58 11.3 0.458 2.35, 2.91 Mn O6.10 1.29 3.34 6.10 1.23 3.51 8.67 1.24 2.34, 2.92 OMn 6.88 0.947 3.53 7.38 0.798 3.45 9.69 0.798 2.36, 2.86
+
+cal spectra exhibit stronger intensity for light polarized along the c direction, indicating that the dominant op-tical transitions occur along the tunnel direction of the crystal structure. These results highlight the strong sensitivity of the op-tical response of α-MnO 2 to the nature of intrinsic point defects. The introduction of defect states within the band gap enables optical transitions in the near-infrared and visible regions. Such defect-induced redshifts in ab-sorption, particularly for vacancy defects, suggest poten-tial routes for tuning the optical properties of α-MnO 2
+
+through controlled defect engineering for near-infrared optoelectronic applications.  
+
+> IV. CONCLUSIONS
+
+In summary, we have carried out a detailed first-principles study of native point defects in C2-type an-tiferromagnetic α-MnO 2, focusing on their thermody-namic stability, charge transition levels, electronic and optical properties. Mn i acts as shallow double donor, whereas V O, O i, and O Mn introduce deep states. Mn O
+
+exhibits both shallow and deep donor levels while V Mn 
+
+gives rise to both shallow and deep acceptor levels. V O,the most common defect in α-MnO 2, emerges as an amphoteric compensating defect which differs from its conventional donor character in transition metal oxides. The calculated defect formation energies reveal intrin-sic defect compensation arising from competing donor-and acceptor-type native defects, whose relative stability depends sensitively on the chemical environment. No-tably, V Mn remains ionized throughout the band gap and behaves as a shallow acceptor, suggesting that it may become relevant under suitable non-equilibrium growth conditions. Overall, the excitonic optical response of α-MnO 2 is highly sensitive to native defects, which induce defect-assisted low-energy absorption and increased di-electric screening without significantly altering the intrin-sic high-energy O-2 p and Mn-3 d transitions. The present work is limited to the defect thermodynamics directly accessible from the calculated defect formation energies and charge transition levels. Nevertheless, our results establish a comprehensive understanding of the intrinsic defect physics and optical activity of α-MnO 2, provid-ing a strong foundation for future studies of equilibrium defect thermodynamics, defect engineering, and extrinsic doping for advanced electronic and optoelectronic appli-cations. 
+
+> ACKNOWLEDGMENTS
+
+High Performance Computing facilities of Indian Insti-tute of Technology Bombay (IITB) and Bhabha Atomic Research Centre (BARC) were used in this work. AS thanks Prof. Alok Shukla for his support and encourage-ment and acknowledges IITB for the Institute Postdoc-toral Fellowship (IPDF).        
+
+> [1] Cesare Franchini, Raimund Podloucky, Joachim Paier, Martijn Marsman, and Georg Kresse. Ground-state prop-erties of multivalent manganese oxides: Density func-tional and hybrid density functional calculations. Physi-cal Review B—Condensed Matter and Materials Physics ,75(19):195128, 2007. I, II, III C [2] Daniil A Kitchaev, Haowei Peng, Yun Liu, Jianwei Sun, John P Perdew, and Gerbrand Ceder. Energetics of mno 2 polymorphs in density functional theory. Physical Re-view B , 93(4):045132, 2016. I, III C [3] Ruijie Yang, Yingying Fan, Ruquan Ye, Yuxin Tang, Xiehong Cao, Zongyou Yin, and Zhiyuan Zeng. Mno2-based materials for environmental applications. Advanced Materials , 33(9):2004862, 2021. [4] Rog´ erio A Davoglio, Gema Cabello, Jose F Marco, and Sonia R Biaggio. Synthesis and characterization of α-mno2 nanoneedles for electrochemical supercapacitors.
+> Electrochimica Acta , 261:428–435, 2018.
+
+16 
+
+[5] Fan Xiankai, Xiang Kaixiong, Zhou Wei, Deng Weina, Zhu Hai, Chen Liang, and Chen Han. A novel improve-ment strategy and a comprehensive mechanism insight for α-mno2 energy storage in rechargeable aqueous zinc-ion batteries. Carbon Energy , 6(9):e536, 2024. [6] Bogdan-Ovidiu Taranu, Stefan Danica Novaconi, Madalina Ivanovici, Jo˜ ao Nuno Gon¸ calves, and Flo-rina Stefania Rus. α-mno2 nanowire structure obtained at low temperature with aspects in environmental re-mediation and sustainable energy applications. Applied Sciences , 12(13):6821, 2022. I [7] Anders Bystr¨ om and Ann Marie Bystr¨ om. The crystal structure of hollandite, the related manganese oxide min-erals, and α-mno2. Acta Crystallographica , 3(2):146–154, 1950. I [8] Merzuk Kaltak, Marivi Fernandez-Serra, and Mark S Hy-bertsen. Charge localization and ordering in a 2 mn 8 o 16 hollandite group oxides: Impact of density functional the-ory approaches. Physical Review Materials , 1(7):075401, 2017. I [9] Matthias J Young, Aaron M Holder, Steven M George, and Charles B Musgrave. Charge storage in cation in-corporated α-mno2. Chemistry of Materials , 27(4):1172– 1180, 2015. I [10] J Luo, HT Zhu, JK Liang, GH Rao, JB Li, and ZM Du. Tuning magnetic properties of α-mno2 nanotubes by k+ doping. The Journal of Physical Chemistry C,114(19):8782–8786, 2010. [11] Mechthild L¨ ubke, Afriyanti Sumboja, Liam McCafferty, Ceilidh F Armer, Albertus D Handoko, Yonghua Du, Kit McColl, Furio Cora, Dan Brett, Zhaolin Liu, et al. Transition-metal-doped α-mno2 nanorods as bifunctional catalysts for efficient oxygen reduction and evolution re-actions. ChemistrySelect , 3(9):2613–2622, 2018. [12] Timothy N Lambert, Julian A Vigil, Suzanne E White, Collin J Delker, Danae J Davis, Maria Kelly, Michael T Brumbach, Mark A Rodriguez, and Brian S Swartzen-truber. Understanding the effects of cationic dopants on α-mno2 oxygen reduction reaction electrocatalysis. 
+
+The Journal of Physical Chemistry C , 121(5):2789–2797, 2017. I [13] Naoichi Yamamoto, Tadashi Endo, Masahiko Shimada, and Toshio Takada. Single crystal growth of α-mno2. 
+
+Japanese Journal of Applied Physics , 13(4):723, 1974. I [14] Yifei Yuan, Chun Zhan, Kun He, Hungru Chen, Wen-tao Yao, Soroosh Sharifi-Asl, Boao Song, Zhenzhen Yang, Anmin Nie, Xiangyi Luo, et al. The influence of large cations on the electrochemical properties of tunnel-structured metal oxides. Nature communications ,7(1):13374, 2016. I, III F [15] Tao Gao, Marianne Glerup, Frank Krumeich, Reinhard Nesper, Helmer Fjellv˚ ag, and Poul Norby. Microstruc-tures and spectroscopic properties of cryptomelane-type manganese dioxide nanofibers. The Journal of Physical Chemistry C , 112(34):13134–13140, 2008. I, III A, c, III F [16] Jingtao Hou, Liangliang Liu, Yuanzhi Li, Mingyang Mao, Haiqin Lv, and Xiujian Zhao. Tuning the k+ concentra-tion in the tunnel of oms-2 nanorods leads to a significant enhancement of the catalytic activity for benzene oxida-tion. Environmental science & technology , 47(23):13730– 13736, 2013. I [17] Liyu Li and David L King. Synthesis and characterization of silver hollandite and its application in emission control. 
+
+Chemistry of materials , 17(17):4335–4343, 2005. I [18] Eric Cockayne and Lan Li. First-principles dft+ u studies of the atomic, electronic, and magnetic structure of α-mno2 (cryptomelane). Chemical Physics Letters , 544:53– 58, 2012. I, III A, I, d [19] S Said, Heba H El Maghrabi, M Riad, and S Mikhail. Photo-catalytic selective organic transformations by fe-doped octahedral molecular sieves (manganese oxide) nano-structure. Journal of Asian Ceramic Societies ,6(2):169–181, 2018. I [20] Ankita Mathur and Aditi Halder. One-step synthesis of bifunctional iron-doped manganese oxide nanorods for rechargeable zinc–air batteries. Catalysis Science & Technology , 9(5):1245–1254, 2019. I [21] Linxia Wang, Minghui Wu, Xiuyao Lang, Shan Gao, and Weichao Wang. High-performance nitrogen fixation over mo atom modified defective α-mno2 (001). Chem-CatChem , 12(15):3937–3945, 2020. I [22] Ping Li, Shujuan Zhan, Lan Yao, Ya Xiong, and Shuanghong Tian. Highly porous α-mno2 nanorods with enhanced defect accessibility for efficient catalytic ozona-tion of refractory pollutants. Journal of Hazardous Ma-terials , 437:129235, 2022. I [23] Deepti Gangwar and Chandana Rath. Structural, opti-cal and magnetic properties of α-and β-mno2 nanorods. 
+
+Applied Surface Science , 557:149693, 2021. I, III A, c, III G [24] Wen-Xiao Liu, Xiao-Lei Zhu, Shou-Qing Liu, Qin-Qin Gu, and Ze-Da Meng. Near-infrared-driven selective pho-tocatalytic removal of ammonia based on valence band recognition of an α-mno2/n-doped graphene hybrid cat-alyst. ACS omega , 3(5):5537–5546, 2018. III A [25] Hadi Salari and Mona Kohantorabi. Facile template-free synthesis of new α-mno 2 nanorod/silver iodide p–n junction nanocomposites with high photocatalytic per-formance. New Journal of Chemistry , 44(18):7401–7411, 2020. III A [26] Nobuyuki Sakai, Yasuo Ebina, Kazunori Takada, and Takayoshi Sasaki. Photocurrent generation from semi-conducting manganese oxide nanosheets in response to visible light. The Journal of Physical Chemistry B,109(19):9651–9655, 2005. I, III A, c [27] Giancarlo Trimarchi, Zhi Wang, and Alex Zunger. Poly-morphous band structure model of gapping in the an-tiferromagnetic and paramagnetic phases of the mott insulators mno, feo, coo, and nio. Physical Review B ,97(3):035107, 2018. I [28] G. Kresse and J. Furthm¨ uller. Efficient iterative schemes for ab initio total-energy calculations using a plane-wave basis set. Phys. Rev. B , 54:11169–11186, 1996. II [29] J. P. Perdew, K. Burke, and M. Ernzerhof. Generalized gradient approximation made simple. Phys. Rev. Lett. ,77:3865–3868, 1996. II [30] H. J. Monkhorst and J. D. Pack. Special points for brillouin-zone integrations. Phys. Rev. B , 13:5188–5192, 1976. II [31] P. E. Bl¨ ochl. Projector augmented-wave method. Phys. Rev. B , 50:17953–17979, 1994. II [32] E Engel. Relevance of core-valence interaction for elec-tronic structure calculations with exact exchange. Physi-cal Review B—Condensed Matter and Materials Physics ,80(16):161205, 2009. II [33] S. L. Dudarev, G. A. Botton, S. Y. Savrasov, C. J. Humphreys, and A. P. Sutton. Electron-energy-loss spec-tra and the structural stability of nickel oxide: An lsda+u 17 
+
+study. Phys. Rev. B , 57:1505–1509, 1998. II [34] Michael M Thackeray. Manganese oxides for lithium bat-teries. Progress in Solid State Chemistry , 25(1-2):1–71, 1997. II, III A, a [35] Liping Li, Yinzhen Pan, Lijuan Chen, and Guangshe Li. One-dimensional α-mno2: trapping chemistry of tun-nel structures, structural stability, and magnetic transi-tions. Journal of Solid State Chemistry , 180(10):2896– 2904, 2007. II, III A, b [36] See Supplemental Material at [URL will be inserted by publisher] for details of Hubbard parameter U bench-marking; electronic band structures with and without SOC; electrosatic correction terms using FNV and ex-tended FNV approaches; defect-induced band structures; optimized defect geometries; finite-size correction scaling with the charge; detailed uncorrected and corrected de-fect formation energies under Mn-rich and O-rich condi-tions; convergence tests for charge transition levels with 
+
+U ; stability diagrams using FNV and eFNV corrected formation energies; supercell convergence tests for opti-cal spectra within IPA. II [37] L. Hedin and S. Lundqvist. Effects of electron-electron and electron-phonon interactions on the one-electron states of solids. Solid State Phys. , 23:1–181, 1970. II [38] M. S. Hybertsen and S. G. Louie. Electron correlation in semiconductors and insulators: Band gaps and quasipar-ticle energies. Phys. Rev. B , 34:5390–5413, 1986. II [39] A. A. Mostofi, J. R. Yates, G. Pizzi, Y. S. Lee, I. Souza, D. Vanderbilt, and N. Marzari. An updated version of wannier90: A tool for obtaining maximally-localised wannier functions. Computer Physics Communications ,185(8):2309–2310, Aug 2014. II [40] Yoyo Hinuma, Giovanni Pizzi, Yu Kumagai, Fumiyasu Oba, and Isao Tanaka. Band structure diagram paths based on crystallography. Computational Materials Sci-ence , 128:140–184, 2017. II [41] Patrick H-L Sit, Roberto Car, Morrel H Cohen, and Annabella Selloni. Simple, unambiguous the-oretical approach to oxidation state determination via first-principles calculations. Inorganic Chemistry ,50(20):10259–10267, 2011. II [42] Calvin Ku and Patrick H-L Sit. Oxidation-state con-strained density functional theory for the study of electron-transfer reactions. Journal of Chemical Theory and Computation , 15(9):4781–4789, 2019. II [43] Iurii Timrov, Francesco Aquilante, Matteo Cococcioni, and Nicola Marzari. Accurate electronic properties and intercalation voltages of olivine-type li-ion cathode ma-terials from extended hubbard functionals. PRX Energy ,1(3):033003, 2022. II [44] Xavier Gonze and Changyol Lee. Dynamical matrices, born effective charges, dielectric permittivity tensors, and interatomic force constants from density-functional per-turbation theory. Physical Review B , 55(16):10355, 1997. II [45] Atsushi Togo, Laurent Chaput, Terumasa Tadano, and Isao Tanaka. Implementation strategies in phonopy and phono3py. Journal of Physics: Condensed Matter ,35(35):353001, 2023. II [46] Christoph Freysoldt, Blazej Grabowski, Tilmann Hickel, J¨ org Neugebauer, Georg Kresse, Anderson Janotti, and Chris G Van de Walle. First-principles calculations for point defects in solids. Reviews of modern physics ,86(1):253–305, 2014. II [47] Michael Rohlfing and Steven G Louie. Electron-hole exci-tations and optical spectra from first principles. Physical Review B , 62(8):4927, 2000. II [48] Norihito Kijima, Takuji Ikeda, Kenichi Oikawa, Fujio Izumi, and Yuji Yoshimura. Crystal structure of an open-tunnel oxide α-mno2 analyzed by rietveld refinements and mem-based pattern fitting. Journal of Solid State Chemistry , 177(4-5):1258–1267, 2004. III A [49] Ivo Souza, Jorge ´Iniguez, and David Vanderbilt. First-principles approach to insulators in finite electric fields. 
+
+Physical review letters , 89(11):117602, 2002. III A [50] Mohamed S Abdallah and Alfredo Pasquarello. Elec-tronic structure of α-mno 2 and β-mno 2 through gw with vertex corrections. Physical Review Materials ,9(1):015402, 2025. III A, III A, I, d [51] Mirriam Chepkoech, Daniel P Joubert, and George O Amolo. First principles calculations of the thermoelec-tric properties of α-mno 2 and β-mno 2. The European Physical Journal B , 91:1–11, 2018. III A, I [52] Y Crespo and N Seriani. Electronic and magnetic prop-erties of α-mno 2 from ab initio calculations. Physi-cal Review B—Condensed Matter and Materials Physics ,88(14):144428, 2013. III A, I, d [53] Ruchika Mahajan, Arti Kashyap, and Iurii Timrov. Pivotal role of intersite hubbard interactions in fe-doped α-mno2. The Journal of Physical Chemistry C ,126(33):14353–14365, 2022. I [54] Sophie Fritsch, Jeffrey E Post, Steven L Suib, and Alexandra Navrotsky. Thermochemistry of framework and layer manganese dioxide related phases. Chemistry of materials , 10(2):474–479, 1998. II, III C, III C [55] Christoph Freysoldt, J¨ org Neugebauer, and Chris GVan de Walle. Fully ab initio finite-size corrections for charged-defect supercell calculations. Physical review let-ters , 102(1):016402, 2009. III D 1 [56] Yu Kumagai and Fumiyasu Oba. Electrostatics-based finite-size corrections for first-principles point defect cal-culations. Physical Review B , 89(19):195205, 2014. III D 1 [57] C ¸ etin Kılı¸ c and Alex Zunger. Origins of coexistence of conductivity and transparency in sno 2. Physical review letters , 88(9):095501, 2002. III E 1, III E 2, III F [58] Sutassana Na-Phattalung, Michael F Smith, Kwiseon Kim, Mao-Hua Du, Su-Huai Wei, SB Zhang, and Sukit Limpijumnong. First-principles study of native defects in anatase ti o 2. Physical Review B—Condensed Mat-ter and Materials Physics , 73(12):125205, 2006. III E 1, III E 2, III F [59] D Mu˜ noz Ramo, JL Gavartin, AL Shluger, and G Bersuker. Spectroscopic properties of oxygen va-cancies in monoclinic hf o 2 calculated with periodic and embedded cluster density functional theory. Physi-cal Review B—Condensed Matter and Materials Physics ,75(20):205336, 2007. III E 2 Supplemental Material for “Anomalous behavior of native point defects in C2-ordered antiferromagnet α-MnO 2”
+
+Archana Sharma 
+
+> Department of Physics, Indian Institute of Technology Bombay, Mumbai 400076, India
+
+Brahmananda Chakraborty ∗
+
+> High Pressure and Synchrotron Radiation Physics Division, Bhabha Atomic Research Centre, Trombay, Mumbai 400085, India †
+
+This supporting document contains the following entries: S1. Benchmarking of the Hubbard parameter U ................................................................. S2 S2. SOC included band structure of pristine α-MnO 2 ........................................................ S3 S3. Electronic structures and optimized geometries of native defects ............................ S4-S5 S4. Charge-state dependence of finite-size corrections ................................................... S5-S6 S5. Defect formation energies and charge transition levels ............................................ S7-S13 S6. Effect of the Hubbard U on charge transition levels of V O.......................................... S14 S7. Comparison between FNV and eFNV stability diagrams ............................................ S15 S8. Supercell-size convergence of defect-induced optical spectra ....................................... S16   
+
+> ∗brahma@barc.gov.in
+> †Also at Homi Bhabha National Institute, Mumbai 400085, India
+
+S2  
+
+> S1. Benchmarking of the Hubbard parameter U
+
+The Hubbard parameter ( U ) employed for Mn 3 d states is benchmarked by comparing the structural, magnetic, and electronic properties of α-MnO 2 with available experimental data. Fig. S1 summarizes the variation of lattice parameters, local magnetic moment, band gap, and relative energies of the C2-ordered antiferromagnetic (AFM) and ferromagnetic (FM) configurations as a function of U . Based on these results, U = 3 .8 eV is adopted throughout this work.        
+
+> FIG. S1. Benchmarking of Hubbard parameter ( U): Variation of U with (a) lattice parameters ( a,band c), local magnetic moment on Mn ( μMn ), band gap (eV), and total energies of α-MnO 2with AFM and FM configurations.
+
+S3  
+
+> S2. SOC included band structure of pristine α-MnO 2
+
+To assess the influence of spin-orbit coupling (SOC), the electronic band structure of pristine α-MnO 2 was calculated with SOC included. As shown in Fig. S2, SOC has only a negligible effect near the band edges.   
+
+> FIG. S2. Electronic band structure of primitive unit cell of α-MnO 2including SOC effect.
+
+S4 
+
+S3. Electronic structures and optimized geometries of native defects 
+
+Fig. S3(a) shows the spin-polarized electronic band structure of pristine 1 × 1 × 3 α-MnO 2. Owing to the enlarged supercell, pronounced band-folding effects are observed, leading to a higher density of electronic bands within the Brillouin zone. Figs. S3(b)–S3(g) present the spin-polarized band structures of 1 × 1 × 3 α-MnO 2 supercell containing the various native point defects, highlighting the defect-induced electronic states that emerge within the band gap. The corresponding fully relaxed atomic structures for all defect configurations are shown in Fig. S4. 
+
+FIG. S3. Spin-polarized electronic band structure of (a) 1 × 1 × 3 α-MnO 2 supercell with (b, e) interstitials (Mn i, O i), (c, f) vacancies (V Mn , V O), and (d, g) antisites (Mn O, O Mn ), calculated using DFT+ U level of theory. Red(blue) color denotes spin-up(spin-down) bands. The Fermi level is scaled to 0 eV. High symmetry points Z |Z0 and M |X are denoted by Z and M, for brevity. S5 
+
+FIG. S4. Optimized defect geometries of 1 × 1 × 3 α-MnO 2 supercell with (a, b) interstitials (Mn i, O i), (c-e) vacancies (V Mn ,VO, V O’), and (f,g) antisites (Mn O, O Mn ). Interstitial atoms (Mn, O) and Mn O are shown in blue while neighboring O atoms in green. O Mn is depicted in green color. 
+
+S4. Charge-state dependence of finite-size corrections 
+
+Finite-size corrections for charged defects were evaluated using both the Freysoldt–Neugebauer–Van de Walle (FNV) and extended-FNV (eFNV) schemes. As shown in Fig. S5, the correction exhibits an overall quadratic dependence on the charge state but is more accurately described by (E corr = aq 2 + bq + c), where the linear term originates from potential alignment. This contribution is particularly important for low charge states, leading to deviations from simple (q 2) scaling. 
+
+FIG. S5. (a) FNV scaling and (b) extended-FNV scaling of the charged defects in α-MnO 2 supercell with respect to various charges (q). For the defects O i, O Mn , V Mn and V O, q takes the negative values. The correction energies are fitted with a function of aq 2 + bq + c. S6 
+
+TABLE S1. Electrostatic correction terms ( EFNV/eFNV corr in eV) for each defect type in 1 × 1 × 3 α-MnO 2 supercell for stable charge states: lattice correction term ( Elat ) and potential alignment term (∆ V iso q ) for FNV corrections, and point-charge correction term ( EPC ) and point-charge potential alignment term (∆ V aniso q ) for extended-FNV corrections. 
+
+Defect type Charge state Elat (EPC ) ∆V iso q (∆ V aniso q ) EFNV corr EeFNV corr 
+
+Mn i 1+ 0.238(0.131) 0.369(0.422) −0.130 −0.298 2+ 0.954(0.523) 0.839(0.802) 0.115 −0.279 Oi 1+ 0.245(0.131) 0.088(0.005) 0.157 0.126 1− 0.245(0.131) −0.125( −0.181) 0.371 0.312 VMn 1− 0.249(0.131) 0.213(0.223) 0.037 −0.092 2− 0.997(0.523) 0.474(0.484) 0.523 0.039 3− 2.24(1.18) 0.776(0.793) 1.47 0.384 VO 1+ 0.162(0.131) −0.022( −0.074) 0.183 0.205 1− 0.162(0.131) 0.001( −0.157) 0.161 0.288 Mn O 1+ 0.238(0.131) 0.183(0.412) 0.055 −0.281 2+ 0.954(0.523) 0.323(0.641) 0.631 −0.118 OMn 1− 0.240(0.131) 0.173(0.166) 0.067 −0.036 2− 0.961(0.523) 0.380(0.095) 0.581 0.428 S7 
+
+S5. Defect formation energies and charge transition levels 
+
+This section presents the defect formation energies obtained using uncorrected [Figs. S6 and S7], FNV-corrected [Figs. S8 and S9]and eFNV-corrected [Figs. S10 and S11] calculations under Mn-rich and O-rich conditions. The corrected formation energies at the band edges are listed in Table S2, while the corresponding thermodynamic charge-transition levels are compiled in Table S3. 
+
+TABLE S2. Corrected formation energies (in eV) of charged defects in the 1 × 1 × 3 α-MnO 2 (2 × 2 × 7) supercell at band edges, for both Mn-rich and O-rich environments. Extended FNV corrections are applied to all the defects except V Mn and VO defects where standard FNV corrections are used. 
+
+Defect type Charge state Mn-rich O-rich VBM CBM VBM CBM 
+
+Mn i 1 −0.755 ( −0.755) 0.764 (0 .764) 0.923 (0.922) 2.44 (2.44) 2 −2.23 ( −2.23) 0.807 ( −0.808) −0.555 ( −0.554) 2.48 (2.48) Oi 1 2.35 (2 .38) 3.87 (3 .90) 1.51 (1 .54) 3.03 (3 .06) 
+
+−1 3.82 (3 .85) 2.30 (2 .33) 2.98 (3 .01) 1.46 (1 .49) VMn −1 5.94 (5 .97) 4.42 (4 .45) 4.26 (4 .29) 2.74 (2 .77) 
+
+−2 6.57 (6 .60) 3.53 (3 .56) 4.89 (4 .92) 1.85 (1 .88) 
+
+−3 7.87 (7 .84) 3.31 (3 .28) 6.19 (6 .16) 1.63 (1 .60) VO 1 0.414 (0 .414) 1.93 (1 .93) 1.25 (1 .25) 2.77 (2 .77) 
+
+−1 1.40 (1 .40) −0.122 ( −0.123) 2.24 (2 .24) 0.717 (0 .717) Mn O 1 −0.135 ( −0.129) 1.38 (1 .39) 2.38 (2 .39) 3.90 (3 .90) 2 −0.812 ( −0.806) 2.23 (2 .24) 1.70 (1 .70) 4.74 (4 .75) OMn −1 7.51 (7 .56) 5.99 (6 .04) 4.99 (5 .04) 3.48 (3 .53) 
+
+−2 8.74 (8 .68) 5.70 (5 .65) 6.22 (6 .17) 3.18 (3 .12) TABLE S3. Charge transition levels (in eV) for native point defects in 2 × 2 × 7 α-MnO 2 supercell, referenced to the VBM (corrected using FNV approach). Defect type Charge transition levels (2+/1+) (1+/0) (0/1 −) (1 −/2 −) (2 −/3 −)Mn i 1.24 1.39 Oi 0.329 1.18 VMn 0.659 1.33 VO 0.228 0.755 Mn O 0.284 1.25 OMn 0.512 1.23 S8 
+
+FIG. S6. (a)-(f) Uncorrected formation energies of point defects in various charge states as a function of the Fermi level under Mn-rich conditions in 1 × 1 × 3 α-MnO 2 supercell. The stable (unstable) charge states are shown by the solid (dashed) lines. S9 
+
+FIG. S7. (a)-(f) Uncorrected formation energies of point defects in various charge states as a function of the Fermi level under O-rich conditions in 1 × 1 × 3 α-MnO 2 supercell. The stable (unstable) charge states are shown by the solid (dashed) lines. S10 
+
+FIG. S8. (a)–(f) FNV corrected formation energies of native point defects in various charge states under Mn-rich conditions in 1 × 1 × 3 α-MnO 2 supercell, plotted as a function of the Fermi level. Solid (dashed) lines represent thermodynamically stable charge (metastable or unstable) states. The Fermi level spans the PBE+ U band gap, ranging from the VBM at 0 eV to the CBM at 1.52 eV. S11 
+
+FIG. S9. (a)–(f) FNV corrected formation energies of native point defects in various charge states under O-rich conditions in 1 × 1 × 3 α-MnO 2 supercell, plotted as a function of the Fermi level. Solid (dashed) lines represent thermodynamically stable charge (metastable or unstable) states. S12 
+
+FIG. S10. (a)–(f) Extended-FNV corrected formation energies of native point defects in various charge states under Mn-rich conditions in 1 × 1 × 3 α-MnO 2 supercell, plotted as a function of the Fermi level. Solid (dashed) lines represent thermody-namically stable charge (metastable or unstable) states. S13 
+
+FIG. S11. (a)–(f) Extended-FNV corrected formation energies of native point defects in various charge states under O-rich conditions in 1 × 1 × 3 α-MnO 2 supercell, plotted as a function of the Fermi level. Solid (dashed) lines represent thermody-namically stable charge (metastable or unstable) states. S14   
+
+> S6. Effect of the Hubbard Uon charge transition levels of V O
+
+Charge transition levels (CTLs) of V O calculated with Hubbard (U) values ranging from 2 to 5 eV are shown in Fig. S12. Increasing U enhances the localization of Mn-3 d states, causing the donor level to shift toward the VBM, while the acceptor level moves toward midgap up to U = 3.8 eV before shifting back toward the CBM. Within the physically relevant range U ≤ 3.8) eV, both donor and acceptor CTLs remain inside the band gap, reflecting the robustness of the amphoteric nature of V O against the choice of U .   
+
+> FIG. S12. Variation of charge transition levels (CTLs) of V Oas a function of Hubbard parameter U.
+
+S15 
+
+S7. Comparison between FNV and eFNV stability diagrams 
+
+To examine the sensitivity of the defect stability analysis to the choice of electrostatic correction, Fig. S13 compares the stability diagrams obtained using only FNV corrections, while Fig. S14 presents the corresponding results obtained exclusively using eFNV corrections. 
+
+FIG. S13. (a), (b) Variation of formation energies (FNV corrected) for stable charge states of native point defects in 1 × 1 × 3
+
+α-MnO 2 supercell as a function of the Fermi level under Mn-rich and O-rich conditions. Charge transition levels are indicated in parentheses. The green (yellow) shaded region represents the regime of spontaneous (non-spontaneous) defect formation. 
+
+FIG. S14. (a), (b) Variation of formation energies (eFNV corrected) for stable charge states of native point defects in 1 × 1 × 3
+
+α-MnO 2 supercell as a function of the Fermi level under Mn-rich and O-rich conditions. Charge transition levels are indicated in parentheses. The green (yellow) shaded region represents the regime of spontaneous (non-spontaneous) defect formation. S16 
+
+> S8. Supercell-size convergence of defect-induced optical spectra
+
+Fig. S15 compares the imaginary dielectric function of defective α-MnO 2 calculated within the independent-particle approximation(IPA) using 1 ×1×3 and 2 ×2×7 supercells. The close agreement between the spectra confirms that the defect-induced features are not artifacts of the smaller supercell employed in the GW+BSE calculations. Although minor quantitative differences are present, the principal spectral features and the qualitative defect-dependent trends remain unchanged.

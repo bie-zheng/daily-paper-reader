@@ -1,0 +1,39 @@
+{
+  "label": "2026-08-23",
+  "date": "2026-08-23",
+  "generated_at": "2026-08-23T19:47:18",
+  "count": 2,
+  "papers": [
+    {
+      "paper_id": "202608/23/2608.20039v1-anomalous-behavior-of-native-point-defects-in-c2-ordered-antiferromagnet--mno2",
+      "section": "quick",
+      "title_en": "Anomalous behavior of native point defects in C2-ordered antiferromagnet $α$-MnO$_2$",
+      "authors": "Archana Sharma, Brahmananda Chakraborty",
+      "date": "2026-08-20",
+      "pdf": "https://arxiv.org/pdf/2608.20039v1",
+      "score": "7.0",
+      "evidence": "利用DFT研究晶体中本征点缺陷（间隙、空位、反位）的稳定性，可为辐照诱导缺陷研究提供可迁移方法。",
+      "tldr": "α-MnO2因结构灵活和缺陷驱动功能受关注，但本征点缺陷对掺杂行为影响尚不明确。本文用DFT并加静电校正研究C2反铁磁基态中本征缺陷稳定性，结合BSE@G0W0计算光学性质。结果显示Mn间隙和Mn反位O为浅施主，O空位呈两性补偿，Mn空位为浅受主，施主-受主竞争造成强本征补偿。缺陷诱导亚带隙激发并增强介电响应，为可控掺杂提供理论指导。",
+      "tags": "query:rad-damage",
+      "abstract_en": "$α$-MnO$_2$ is an emerging material for electronic, optoelectronic, and energy applications, owing to its structural flexibility and defect-driven functionality. During synthesis of $α$-MnO$_2$, native oxygen vacancies readily form and are typically compensated by foreign dopants. A thorough understanding of intrinsic defects is therefore essential for enabling controlled extrinsic doping and optimizing material performance. Using density functional approach, we investigate the structural, electronic, magnetic, and optical properties of the ground state C2-type antiferromagnetic $α$-MnO$_2$ in the presence of native point defects, including interstitials, vacancies, and antisites. We compute their thermodynamic stability, incorporating electrostatic corrections to eliminate spurious long-range interactions. Mn interstitial (Mn$_\\text{i}$) and Mn antisite O (Mn$_\\text{O}$) introduce shallow donor levels, whereas O-vacancy (V$_\\text{O}$) exhibit amphoteric behavior and act as compensating centers. The calculated defect formation energies reveal pronounced competition between donor- and acceptor-type native defects, leading to strong intrinsic defect compensation under both Mn-rich and O-rich growth conditions. Mn vacancy (V$_\\text{Mn}$) remains ionized across the band gap and behaves as a shallow acceptor, suggesting its potential role under suitable non-equilibrium growth conditions, whereas O antisite Mn (O$_\\text{Mn}$) forms deep acceptor levels. BSE@G$_0$$W_0$ calculations reveal a strongly anisotropic optical response in stoichiometric $α$-MnO$_2$, while native point defects introduce pronounced sub-gap excitations and enhanced dielectric screening, with vacancies producing the largest effect.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202608/23/2608.19116v1-janus-a-multi-modal-foundation-neural-sampler-for-disordered-materials",
+      "section": "quick",
+      "title_en": "JANUS: A Multi-modal Foundation Neural Sampler for Disordered Materials",
+      "authors": "Denis Blessing, Mouyang Cheng, Maximilian Schebek, Jutta Rogal, Mingda Li, Carles Domingo-Enrich, Yuanqi Du",
+      "date": "2026-08-19",
+      "pdf": "https://arxiv.org/pdf/2608.19116v1",
+      "score": "6.0",
+      "evidence": "面向无序合金的神经采样方法，可高效模拟平衡相行为，对辐照缺陷与析出演化建模具有方法学价值",
+      "tldr": "针对无序材料中原子种类与结构耦合变化的离散-连续采样难题，提出多模态神经采样器JANUS，通过等变图神经网络联合连续扩散与掩码离散扩散，直接从能量评估训练而无需预生成平衡数据。在伊辛和等压ΔμNPT合金体系中，以低于参考蒙特卡洛三个数量级的能量评估复现平衡观测并恢复自由能与相行为；在多组分合金中可条件调控化学短程序与体模量，并借助大语言模型进化智能体实现光学与力学性能的逆设计。在硅和金刚石中，JANUS探索涵盖15种元素的空位与掺杂，重现硅E中心等已知缺陷，并识别出具有深能级带隙态的新候选缺陷对和三聚体，为热力学采样与逆向设计提供统一基础。",
+      "tags": "query:rad-damage",
+      "abstract_en": "Many problems in disordered materials require sampling beyond fixed composition and volume, where coupled changes in atomic identities and structure create a prohibitively expensive discrete-continuous sampling problem. Here we introduce JANUS, a multimodal neural sampler that couples continuous and masked discrete diffusion through an equivariant graph neural network trained directly from energy evaluations, without pre-generated equilibrium data. In benchmark Ising and isobaric $ΔμNPT$ alloy systems, JANUS reproduces reference Monte Carlo equilibrium observables and recovers free energies and phase behavior with more than three orders of magnitude fewer energy evaluations. In multicomponent alloys, JANUS enables conditional steering toward prescribed chemical short-range order and enhanced bulk modulus and, when coupled to a large language model evolutionary agent, performs efficient inverse design for balanced optical and mechanical properties. In semiconductors like silicon and diamond, JANUS explores vacancies and dopants spanning 15 elements in grand-canonical $μVT$ ensembles, recovers established defects including the silicon $E$ centre, and identifies new candidate defect pairs and triplets for quantum engineering, including S-Ti in silicon and B-O-O in diamond, with deep in-gap states validated by hybrid-functional density functional theory. By unifying discrete site identities with continuous structural and volumetric relaxation, JANUS provides a foundation for thermodynamic sampling, characterization and inverse design of chemically disordered materials.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,2456 @@
+Title: JANUS: A Multi-modal Foundation Neural Sampler for Disordered Materials
+
+URL Source: https://arxiv.org/pdf/2608.19116v1
+
+Published Time: Thu, 20 Aug 2026 01:08:55 GMT
+
+Number of Pages: 38
+
+Markdown Content:
+# JANUS: A Multi-modal Foundation Neural Sampler for Disordered Materials 
+
+Denis Blessing 1,2,*,# , Mouyang Cheng 1,3,4,*,# , Maximilian Schebek 5, Jutta Rogal 6, Mingda Li 3,7 , Carles Domingo-Enrich 1,† , and Yuanqi Du 1,† 
+
+> 1
+
+Microsoft Research New England, Cambridge, MA 02142, USA 
+
+> 2
+
+Karlsruhe Institute of Technology, 76131 Karlsruhe, Germany 
+
+> 3
+
+Center for Computational Science and Engineering, MIT, Cambridge, MA 02139, USA 
+
+> 4
+
+Department of Materials Science and Engineering, MIT, Cambridge, MA 02139, USA 
+
+> 5
+
+Department of Physics, Freie Universit ¨ at Berlin, 14195 Berlin, Germany 
+
+> 6
+
+Initiative for Computational Catalysis, Flatiron Institute, New York, NY 10010, USA 
+
+> 7
+
+Department of Nuclear Science and Engineering, MIT, Cambridge, MA 02139, USA 
+
+> *
+
+These authors contributed equally. 
+
+> #
+
+Work done during internship at Microsoft Research. 
+
+> †
+
+Correspondence. Email: carlesd@microsoft.com, yuanqidu@microsoft.com 
+
+ABSTRACT 
+
+Many problems in disordered materials require sampling beyond fixed composition and volume, where coupled changes in atomic identities and structure create a prohibitively expensive discrete-continuous sampling problem. Here we introduce JANUS, a multimodal neural sampler that couples continuous and masked discrete diffusion through an equivariant graph neural network trained directly from energy evaluations, without pre-generated equilibrium data. In benchmark Ising and isobaric ∆μNPT alloy systems, JANUS reproduces reference Monte Carlo equilibrium observables and recovers free energies and phase behavior with more than three orders of magnitude fewer energy evaluations. In multicomponent alloys, JANUS enables conditional steering toward prescribed chemical short-range order and enhanced bulk modulus and, when coupled to a large language model evolutionary agent, performs efficient inverse design for balanced optical and mechanical properties. In semiconductors like silicon and diamond, JANUS explores vacancies and dopants spanning 15 elements in grand-canonical μV T ensembles, recovers established defects including the silicon E centre, and identifies new candidate defect pairs and triplets for quantum engineering, including S-Ti in silicon and B-O-O in diamond, with deep in-gap states validated by hybrid-functional density functional theory. By unifying discrete site identities with continuous structural and volumetric relaxation, JANUS provides a foundation for thermodynamic sampling, characterization and inverse design of chemically disordered materials. 
+
+Introduction 
+
+The thermodynamic state of a crystalline disordered material is defined not only by its reference lattice, but by an ensemble of chemical configurations, atomic displacements, defects and cell volumes 1–4 . Chemical disorder arises when multiple elements or vacancies occupy common crystallographic sites without forming a perfectly ordered arrangement, as in substitutional alloys, cation-disordered ceramics and defect-rich semiconductors 1, 2 .These configurations may exhibit clustering and chemical short-range order (SRO) through the competition between energetic interactions and configurational entropy 5, 6 . Concurrently, thermal atomic motion and cell fluctuations modify local coordination, strain and bonding, contributing vibrational and pressure-volume effects and coupling chemical order to structural relaxation 3, 4, 7 . Such couplings are central to the thermodynamics of diverse disordered systems, ranging from high-entropy alloys and ceramics to disordered solid electrolytes 8–10 , where variations in local chemical and structural environments can reshape phase stability 3, 11 , ionic transport 12 , catalytic activity 13 ,mechanical response 14 and defect energetics 15 . Predictive modeling therefore requires joint sampling of chemical configurations, lattice vibrations and cell relaxation rather than treating them as separate problems. However, conventional sampling remains computationally demanding even when only occupational disorder is arXiv:2608.19116v1 [cond-mat.mtrl-sci] 19 Aug 2026 considered. Markov-chain Monte Carlo generates a sequential trajectory of lattice configurations, whose energies are evaluated at each step. Its slow mixing near phase transitions, limited parallelism and increasing cost for large supercells make systematic exploration across temperatures and compositions particularly expensive 2, 16 . Moreover, these simulations are not amortized: each new temperature, composition or thermodynamic condition generally requires an independent sampling run. Incorporating structural relaxation and vibrational motion further requires coupling chemical transmutation moves with molecular dynamics (MD), substantially increasing the number of energy and force evaluations 17, 18 . Recently, a broad class of neural samplers based on deep generative models has emerged to directly approximate target Boltzmann distributions, enabling efficient generation of effectively independent equilibrium configurations and amortized sampling across thermodynamic conditions. For example, autoregressive models, including the most recent transformer-based architectures, enable direct sampling and tractable likelihood evaluation 19–21 , whereas discrete diffusion models provide flexible generative processes over large categorical state spaces 22–24 . However, existing approaches predominantly operate on discrete variables defined on fixed lattice sites and cell geometries, leaving off-lattice atomic fluctuations and composition-dependent volume changes unaccounted for. A general neural sampler capable of jointly treating discrete chemical identities and occupancies, continuous atomic coordinates, and cell degrees of freedom across flexible thermodynamic ensembles is still lacking. In this work, we introduce JANUS, a multimodal neural sampler that jointly learns chemical occupations, atomic displacements and cell-volume fluctuations in crystalline disordered materials. Reflecting its two complementary facets, JANUS builds upon the previous continuous neural sampler for NV T ensemble 25 , coupling masked discrete diffusion over atomic identities and vacancies with continuous diffusion over atomic coordinates and cell volume. Starting from prescribed lattice sites with masked identities, the discrete process unmasks chemical configurations in random order, while the continuous process transports simple Gaussian priors toward equilibrium distributions of structural and volumetric fluctuations. An E(3)-equivariant graph neural network, trained on configurations bootstrapped by JANUS itself, learns the coupled forward and reverse stochastic dynamics directly from the target potential energy. This construction enables direct sampling in flexible thermodynamic ensembles, including isobaric semi-grand-canonical (SGC) ∆μNPT and grand-canonical (GC) μV T ensembles. The path weights from forward and backward stochastic processes further yield free energy, ensemble-property estimates, and conditional steering towards a target observable, while a single model can be amortized across temperatures and chemical potentials and extrapolated to larger system sizes at inference. We first benchmark JANUS on the Ising model and fcc Cu-Ni alloys. For the Ising model, JANUS reproduces the temperature- and field-dependent equilibrium spin populations and the ferromagnetic-paramagnetic phase transition. For Cu-Ni in the isobaric SGC ensemble, it captures equilibrium compositions, structural and volumetric relaxation, and composition-dependent free energies across temperature, while extrapolating beyond the system sizes used during training. We then demonstrate JANUS for thermodynamic sampling in chemically disordered alloys with competing phases. It recovers the Cu-Ag miscibility gap and the competition between fcc and bcc phases in Ni-Cr, reproducing composition- and temperature-dependent free energy landscapes and phase boundaries with more than three orders of magnitude fewer target-energy evaluations than reference Monte Carlo sampling. In the CrCoNi alloy, JANUS captures chemical SRO observed in experiment and supports inference-time steering toward prescribed Warren-Cowley parameters or enhanced bulk modulus. Coupled to a large language model (LLM) evolutionary agent, JANUS further identifies Pareto-optimal multicomponent alloys across the Ag-Al-Au-Cu-Ni chemical space that balance visible-light reflectance Rvisible , bulk and shear moduli ( B, G), and the Pugh ratio B/G.Finally, we apply JANUS to defect motif discovery in silicon and diamond using amortized grand-canonical 
+
+μV T models spanning vacancies and dopants from 15 elements. JANUS recovers established defect motifs such as the silicon E centre while identifying previously unexplored pairs and higher-order triplets. Subsequent hybrid-functional density functional theory (DFT) calculations reveal candidate defects for quantum engineering with in-gap charge-transition levels (CTLs) and spin-polarized electronic states, including S-Ti and Ga-Ga-P in silicon and Fe-VAC and B-O-O in diamond. These results establish JANUS as a foundation neural sampler for equilibrium thermodynamics, free energy estimation, conditional steering, inverse design and defect discovery in disordered materials with coupled discrete and continuous degrees of freedom. 
+
+> 2/38
+
+Results a        
+
+> Fully masked prior Type B Mask Vacancy
+> t = 0 : Prior Equivariant GNN Update weights Simulate
+> JANUS
+> Discrete diffusion Continuous diffusion
+> uva
+> Temperature  T
+> Chemical potential ( μB - μA )Type A
+> xt = (at , ut , vt )t = 1: Target ensemble
+> U(x1 ), U(x1 ), ΔUi (x1 )
+> ∆
+> Discrete scores Continuous scores
+
+b Update buffer 1
+
+c<A> = A*    
+
+> αβα+β
+> Phase coexistence
+> xG
+> 2Conditional steering
+> SMC 3Defect motif discovery
+
+Figure 1. Overview of the JANUS framework. a. JANUS couples masked discrete diffusion over atomic identities and vacancies with continuous diffusion over atomic displacements and cell volume, enabling joint sampling of diverse atomic configurations across thermodynamic conditions. Starting from a fully masked prior, the two channels evolve jointly toward the target ensemble. b. Self-bootstrapped training framework of JANUS. Intermediate states xt = ( at , ut , vt ) are generated between the prior ( t = 0) and target ensemble ( t = 1) from stochastic processes, and an E(3)-equivariant graph neural network learns the discrete and continuous scores using the potential energy U(x1), its gradient ∇U(x1) and discrete changes ∆Ui(x1) of the generated structures at t = 1. The training buffer is iteratively updated with newly generated configurations. c. Downstream applications enabled by the trained JANUS sampler, including determination of phase coexistence from thermodynamic free energies, inference-time conditional steering towards target properties and systematic discovery of novel defect motifs. 
+
+Overview of JANUS 
+
+Similar to the goal of previous neural samplers for NV T ensemble in continuous space 25 , our objective is to sample directly from a thermodynamic distribution specified by an energy function U and forces F = −∇U, without requiring pre-generated equilibrium configurations. We focus on lattice-based disordered materials, including substitutional alloys and point defects in crystalline hosts. In these systems, a configuration can be represented as 
+
+(a, x) = ( a, u, v), where a = ( a1, . . . , aN ) contains the chemical identity or occupancy of each lattice site, u contains atomic displacements from prescribed lattice sites as fractional coordinates, and v = log V describes the cell volume 
+
+V . The target ensemble is restricted to the crystalline basin associated with the reference lattice, where atoms may relax around their sites, and long-range chemical rearrangements are represented through changes in a. As the most general case, we consider a μPT ensemble with M reference sites, each carrying one of K possible tokens from an alphabet A = {1, . . . , K}, which may include multiple atomic species and a vacancy token VAC . Defining 
+
+Ns(a) = ∑i 1[ai = s] as the count of atoms in each species, the target distribution can be written as 
+
+ptarget ∝ exp 
+
+"
+
+− 1
+
+kBT U(a, x) + PV − ∑
+
+> s∈A
+
+μsNs(a)
+
+!# 
+
+. (1) Because the total number of lattice sites is fixed, only chemical-potential differences ∆μ are physically relevant, and one species may be chosen as the reference. A more rigorous formulation additionally includes vacancy-dependent 
+
+3/38 volume factors (see Methods). This formulation naturally covers a broad class of lattice-based disordered materials. For alloys, we use the isobaric SGC ( ∆μNPT ) ensemble, in which the total particle number is fixed while the elemental populations and volume fluctuate. For defect calculations, we use the GC ( μV T ) ensemble at fixed volume, treating the vacancy as an additional species with a tunable chemical potential μVAC . In this case, vacancy-dependent volume factors can be absorbed into an effective vacancy chemical potential (see Methods). The same framework therefore applies to multielement alloys and crystalline defect systems by changing only the active token set, chemical-potential differences, and continuous channels. JANUS samples the target (1) with a generative process that treats all degrees of freedom jointly, coupling continuous diffusion over the structural channels with masked discrete diffusion over the species channel (Fig. 1a). Depending on the physical problem, up to three generative channels are active: a rigid-lattice model uses only the species channel a; a fixed-volume GC defect model further adds the displacements 
+
+u; and a flexible-cell alloy in the isobaric SGC ensemble uses all three channels (a, u, v). Over a generation time t ∈ [0, 1], the continuous channels x = ( u, v) evolve by a stochastic differential equation built on stochastic interpolants 26 ,dxct = bc 
+
+> θ
+
++ g2(t) sc
+
+> θ
+
+(at , xt ,t) dt + √2 g(t) dwct , xc 
+
+> 0
+
+∼ μc, c ∈ { u, v}, (2) where bc 
+
+> θ
+
+and sc 
+
+> θ
+
+are learned velocity and score fields evaluated at the full state, g(t) is a prescribed noise schedule, 
+
+wct are Wiener processes, and μc is a simple Gaussian prior whose physics-informed parameterization is described in Methods. These dynamics transport the priors onto the equilibrium distribution of structural and volumetric fluctuations. The species channel starts fully masked, a0 = ( M, . . . , M), and follows absorbing-state discrete diffusion analogous to masked diffusion language models 27, 28 , governed by a reveal schedule αa(t) that increases from 
+
+αa(0) = 0 to αa(1) = 1: the generative process unmasks each site exactly once, at a random time set by αa, drawing its identity from a learned denoising posterior conditioned on the full current state, 
+
+qθ ,i(b | at , xt ) ≈ P a1,i = b at , xt
+
+, (3) and revealed sites never change thereafter. Unlike autoregressive models that admit a fixed order, the generative process can generate in arbitrary order with likelihood still accessible via forward-backward path weight (see Methods). All learned quantities are heads of a single E(3)-equivariant graph neural network evaluated once per generation step on the partially revealed species, the current displacements and the cell volume. Supplying the thermodynamic conditions (T, ∆μ) as additional inputs to the drifts in (2) and the denoising posterior in (3) amortizes a single model over a continuous window of temperatures and chemical potentials. Because equilibrium configurations are unavailable, JANUS is trained by self-consistent fixed-point bootstrapping 29, 30 (Fig. 1b). In each round, the current sampler generates terminal configurations (a1, x1) under randomly selected thermodynamic conditions (T, ∆μ) and the interatomic potential labels each configuration with its energy U(a1, x1), the gradient ∇U with respect to the continuous channels, and the energy changes ∆Ui under single-site substitutions. The model parameters are then updated using these labels at interpolated intermediate states. The continuous heads are updated by least-squares regression akin to flow 31 and score matching 32 , whereas the species head is updated by cross-entropy against soft labels derived from the substitution energies (see Methods). Repeating the iterative cycle shown in Fig. 1b drives JANUS toward a self-consistent generator of the target thermodynamic ensemble, with the underlying physics supplied solely through pointwise evaluations of the energy function rather than pre-generated equilibrium data. The trained sampler supports diverse downstream applications, with three representative categories illustrated in Fig. 1c. First, following the path weight from forward and backward stochastic processes, every generated sample can be importance-weighted, turning generation into estimates of free energies and thermodynamic observables, from which phase coexistence and phase diagrams follow. Second, through reward tilting we can steer the ensemble toward prescribed structural or functional properties, either by fine-tuning the model or at inference time by sequential Monte Carlo 33, 34 ; coupled with an evolutionary LLM agent, this further enables multi-objective inverse design over composition space. Third, amortized sampling across chemical space enables systematic exploration of structural 
+
+> 4/38
+
+motifs, including semiconductor defect complexes as candidates for quantum engineering. These capabilities are demonstrated in the following sections, with algorithmic details, training procedures and parameter settings provided in Methods. N = 108 (Trained) N = 256 (Inference)       
+
+> 0.6 0.8 1.0
+> Δμ (eV) 600 800 1000 1200 T (K) 0.6 0.8 1.0
+> Δμ (eV)
+> 0.0 0.5 1.0
+> ⟨xCu ⟩
+
+Reference JANUS Reference JANUS 
+
+CuxNi1-x                    
+
+> 0.0 2.5 5.0 gCu-Cu
+> 2.0 2.5 3.0 3.5 4.0 4.5 5.0 r (Å) 05gNi-Ni
+> ⟨xCu ⟩= 0.23
+> ⟨xCu ⟩= 0.52
+> ⟨xCu ⟩= 0.75
+> Reference
+> -0.4 -0.02 00.02 0.4
+> Δμ (J) 1.5 2.0 2.5 3.0 kBT/J
+> -0.4 -0.02 00.02 0.4
+> Δμ (J)
+> 0.0 0.5 1.0
+> ⟨x ⟩↑
+
+ab dec             
+
+> 0.15 0.20 0.25
+> ⟨|u| ⟩ (Å)
+> 0.0 0.2 0.4 0.6 0.8 1.0
+> ⟨xCu ⟩−60 −40 −20
+> 0Gmix/N (meV)
+> 0.0 0.2 0.4 0.6 0.8 1.0
+> ⟨xCu ⟩−40 −20
+> 0Gmix/N (meV)
+> 600 K 900 K 1200 K
+> Reference 600 K 900 K 1200 K
+> Reference kBT/J = 1.5 kBT/J = 2.27 kBT/J = 3.2 1.5 2.0 2.5 3.0 kBT/J 0.0 0.2 0.4 0.6 0.8 1.0
+> ⟨|m| ⟩
+> Reference JANUS
+
+Tc       
+
+> 0.6 0.7 0.8 0.9 1.0 1.1
+> Δμ (eV) 11.0 11.5 12.0 12.5
+> ⟨V⟩ (Å 3/atom)
+
+Figure 2. Validation of JANUS across discrete and multimodal sampling. a. Comparison between reference and JANUS sampling for the two-dimensional ferromagnetic Ising model on a 16 × 16 lattice. Left: mean fraction of spin-up sites ⟨x↑⟩ is shown across temperature T and external field ∆μ = μ↑ − μ↓. Right: absolute magnetization 
+
+⟨| m|⟩ at ∆μ = 0 as a function of temperature, with representative spin configurations shown at temperatures below, near and above Tc ≃ 2.27 J/kB. b. Validation on fcc Cu-Ni alloys with all three JANUS channels active. Average Cu concentration ⟨xCu ⟩ as a function of temperature and chemical-potential difference ∆μ = μCu − μNi , comparing reference and JANUS sampling. The dashed lines denote ⟨xCu ⟩ = 0.5. c. Mean atomic displacement ⟨| u|⟩ and atomic volume ⟨V ⟩ obtained by JANUS at 600, 900 and 1200 K, with reference results shown by dashed lines. d. 
+
+Cu-Cu and Ni-Ni pair distribution functions g(r) at T = 800 K with representative alloy compositions, compared with reference ensembles. e. System-size extrapolation from N = 108 systems used during training to N = 256 systems at inference, demonstrated by the composition-dependent mixing free energy Gmix /N at 600, 900 and 1200 K. JANUS predictions are compared with reference values shown as dashed lines. 
+
+5/38 Validation across discrete and multimodal sampling 
+
+We first validate the newly introduced discrete channel of JANUS in isolation using the prototypical two-dimensional ferromagnetic Ising model on a 16 × 16 lattice (Fig. 2a). In this setting, each lattice site carries only a discrete spin variable {+1, −1}, while ∆μ plays the role of the external magnetic field and no continuous degrees of freedom are present. This provides a clean benchmark of the discrete diffusion process before coupling it to atomic and cell degrees of freedom. Rather than training an independent sampler at each thermodynamic state, we condition a single JANUS model jointly on temperature T and chemical-potential difference ∆μ, and train it over the full two-dimensional (T, ∆μ) domain. Once this one-time training cost is amortized, the same model can directly generate equilibrium configurations at arbitrary thermodynamic conditions within the training range without state-specific retraining. Across this domain, JANUS closely reproduces the reference magnetization landscape. In particular, at 
+
+∆μ = 0, the model captures the paramagnetic-to-ferromagnetic transition near the critical temperature kBTc/J ≃ 2.27, including the rapid emergence of finite magnetization below Tc. Representative spin configurations below, near and above Tc further illustrate the evolution from long-range ferromagnetic order to disordered spins. We next turn to the more realistic fcc Cu-Ni alloy, where all three JANUS channels, chemical identities a, atomic displacements u and cell volume v, are simultaneously active. As in the Ising benchmark, a single JANUS model is trained on a 3 × 3 × 3 fcc supercell with 108 atoms, and amortized over the full (T, ∆μ) space. All results below are subsequently generated from this amortized model. JANUS reproduces the reference composition response, 
+
+⟨xCu ⟩, over a broad range of temperatures from 600 to 1200 K and chemical-potential differences (Fig. 2b), including the temperature-dependent shift and broadening of the composition crossover. Beyond chemical occupations, the generated ensembles also recover the corresponding structural and volumetric relaxation. As shown in Fig. 2c, the mean atomic displacement ⟨| u|⟩ and equilibrium atomic volume ⟨V ⟩ remain in close agreement with reference calculations across chemical potential and temperature. In parallel, we further examine the local atomic structure of Cu-Ni alloys across different Cu concentrations xCu using the pair distribution functions gCu −Cu (r) and gNi −Ni (r). As shown in Fig. 2d, the JANUS predictions closely follow the reference ensembles across representative compositions, indicating that the sampler accurately preserves composition-dependent local coordination and structural correlations. Finally, we test whether our model trained at one system size can be transferred directly to larger cells, using the mixed Gibbs free energy as a stringent thermodynamic benchmark, as is shown in Fig. 2e. For the N = 108 system used during training, JANUS accurately reproduces the reference composition-dependent Gmix across temperatures. More importantly, without retraining, the same model can be directly evaluated at N = 256, where chemical disorder is better represented, and continues to reproduce Gmix across composition and temperature, demonstrating reliable system-size extrapolation. These benchmarks on alloys demonstrate that JANUS can accurately couple chemical, structural and volumetric fluctuations, amortize multimodal sampling across thermodynamic conditions, and transfer across system size. More importantly, this accuracy is obtained with about 1700-fold fewer energy evaluations than traditional MCMC approaches for comparable equilibrium sampling accuracy, as quantified and further discussed in Fig. 3c. 
+
+Thermodynamic sampling and inverse design of alloys 
+
+Having established the accuracy of JANUS for coupled discrete, structural and volumetric sampling, we next demonstrate its versatile application across a broader range of alloy problems, from thermodynamic phase equilibria to conditional generation and property-driven inverse design, as is shown in Fig. 3. We first consider phase coexistence and boundaries of Cu-Ag alloys, which exhibit a pronounced fcc miscibility gap, and Ni-Cr alloys, where the Ni-rich fcc and Cr-rich bcc phases compete over a broad composition and temperature range, as is shown in Fig. 3a,b. From structures generated by the trained JANUS models, we reconstruct the composition-dependent Gibbs free energy G(x) and determine the corresponding coexistence boundaries. For Cu-Ag, JANUS reproduces the free energy landscape associated with separation into Cu-rich and Ag-rich phases, and the resulting miscibility gap across temperature (Fig. 3a). For Ni-Cr, separate sampling of the fcc and bcc branches recovers their relative free energies and competition across composition, yielding phase boundaries in close agreement with the reference calculations (Fig. 3b). Importantly, these evaluations do not require a separate model for every composition or thermodynamic condition. For each lattice family, a single JANUS model is amortized over the complete range     
+
+> 6/38 0.0 0.1 0.2 600 800 1000 1200 T (K)
+> 0.6 0.8 1.0
+> ⟨xCr ⟩
+
+de
+
+a                                                     
+
+> 160 170 180 190 200 210 220 230 Bulk modulus B (GPa) Weighted density
+> Base Tweedie Tweedie+guidance
+> Ag Al Au Cu Ni 0.0 0.2 0.4 0.6 0.8 1.0 Atomic fraction 0.00 0.05 0.10 0.15 0.20 0.25 Mean atomic fraction in Pareto set Ni Ag Cu Au Al 44% 53% 36% 50% 70%
+> 020 40 60 80 100 120 # Oracle evaluations Dominated hypervolume LLM-EA phase Dominated hypervolume Pareto-front size 020 40 60 80 Pareto-front size 20 40 60 80 G (GPa) 0.6 0.7 0.8 0.9 Rvisible Seed Pareto front
+> 100 125 150 175 200 B (GPa)
+> −0.2 −0.1 0.0 0.1 Warren-Cowley αCrCo Target  →
+> Base α=−0.01
+> α* =−0.02
+> α* =−0.04
+> α* =−0.06
+> α* =−0.08
+> α* =−0.10
+> −0.2 −0.1 0.0 0.1 0.2 Warren-Cowley αCrCr Target  →
+> Base α= +0.02
+> α* = +0.04
+> α* = +0.06
+> α* = +0.08
+> α* = +0.10
+> 010 20 30 Gmix (meV/atom)
+
+T = 600 K fcc     
+
+> 0.00 0.05 0.10 500 600 700 800 900 T (K)
+> 0.90 0.95 1.00
+> ⟨xAg ⟩
+
+fcc Miscibility gap 
+
+> JANUS
+> Reference
+
+fcc bcc fcc + bcc 
+
+b      
+
+> 10 410 510 610 710 810 910 10 # Energy evaluations CuNi CuAg NiCr (fcc) NiCr (bcc)
+
+c JANUS 
+
+> Reference
+
+Cu1-xAgx 
+
+> −20
+> 020 40 60 (meV/atom)  JANUS (fcc) JANUS (bcc)
+> Reference
+
+Ni1-xCrx 
+
+> Gmix
+
+T = 1200 K Figure 3. Thermodynamic sampling, conditional generation and inverse design of alloys. a. Thermodynamic sampling of fcc Cu-Ag alloys. Composition-dependent mixed Gibbs free energy Gmix (x) at T = 600 K and the resulting fcc miscibility-gap boundaries are shown from JANUS and reference calculations. b. Thermodynamic sampling of Ni-Cr alloys in fcc and bcc phases. Gmix (x) at T = 1200 K and the resulting phase boundaries between Ni-rich fcc and Cr-rich bcc phases are shown for JANUS and reference calculations. For each lattice family, a single JANUS model is amortized across the thermodynamic conditions considered. c. Comparison of the number of target-energy evaluations between JANUS and reference sampling for Cu-Ni (Fig. 2), Cu-Ag and Ni-Cr alloys. d. 
+
+Conditional steering in fcc CrCoNi alloys. Targeted distributions of the Warren-Cowley parameters αCrCr and αCrCo 
+
+are obtained by reward tilting of the base JANUS sampler. Representative sampled supercells are shown (αCrCr = 0.10 and αCrCo = −0.10, respectively). Reward tilting on the bulk modulus B is also shown, using Tweedie-style reward estimates with or without gradient guidance. e. Multi-objective inverse design over Ag-Al-Au-Cu-Ni alloys containing up to three elements using an LLM-driven evolutionary framework coupled to JANUS. The search jointly optimizes the bulk modulus B, shear modulus G, Pugh ratio B/G and visible-range optical reflectance Rvisible . Shown are the Pareto front evaluated in the ( Rvisible –G) subspace, the evolution of dominated hypervolume and Pareto-front size, and the elemental fractions and occurrence statistics within the final Pareto set. of sampled conditions on the same lattice basis, and only the structurally distinct fcc and bcc phases of Ni-Cr require separate lattice-specific models. This amortization substantially reduces the cost of mapping extended 
+
+7/38 thermodynamic spaces, which is quantified in Fig. 3c. Across Cu-Ag, Ni-Cr and the Cu-Ni benchmark introduced in Fig. 2, JANUS reaches comparable thermodynamic estimates using more than three orders-of-magnitude fewer energy evaluations than the corresponding reference samplers. Beyond equilibrium sampling, JANUS can also be steered at inference time towards ensembles with prescribed material characteristics, as demonstrated for medium-entropy fcc CrCoNi at T = 800 K in Fig. 3d. We first focus on chemical short-range order (SRO), which plays an important role in governing the local chemical environment and resulting functional properties of alloys. SRO is characterized here by the Warren-Cowley parameter αi j , which quantifies the tendency of atomic species i and j to associate or avoid one another relative to a random alloy. Without additional steering, the ensemble sampled from pretrained JANUS estimates positive αCrCr = 0.02 and negative 
+
+αCrCo = −0.01, already reproducing the characteristic Cr–Cr avoidance observed experimentally and the Cr–Cr avoidance and Cr–Co affinity predicted by first-principles calculations 35, 36 . To generate ensembles with controlled SRO, we tilt the learned distribution pbase (a, x) using a reward r(a, x),
+
+pη (a, x) ∝ pbase (a, x) exp [ηr(a, x)] , (4) where η > 0 controls the tilting strength, and r(a, x) = −[αi j (a, x) − α∗
+
+> i j
+
+]2 penalizes deviations of a Warren-Cowley SRO parameter from a prescribed target value. We implement this tilting using sequential Monte Carlo (SMC), evaluating the reward either directly on the evolving configuration or through a Tweedie estimate of the terminal configuration. When the reward is differentiable, its gradient on the continuous variables u, v can additionally be incorporated as guidance during generation (Methods). As shown in Fig. 3d, the resulting distributions shift systematically towards the prescribed SRO targets, reaching αCrCr = + 0.10 from a base value of +0.02 and 
+
+αCrCo = −0.10 from −0.01. The same strategy also generalizes beyond structural observables to mechanical properties. Using a linear reward in the bulk modulus B, r(a, x) = B(a, x), the SMC procedure shifts the generated ensemble towards larger B, with both reward-only and gradient-guided variants efficiently enriching configurations with high bulk modulus. Finally, we combine JANUS with an LLM-driven evolutionary algorithm (LLM-EA) framework for multi-objective inverse design across composition space (Fig. 3e). The search explores fcc alloys drawn from Ag, Al, Au, Cu and Ni using a single JANUS model pretrained at T = 900 K across chemical-potential differences ∆μ
+
+among all five elements. At each iteration, the LLM agent proposes chemical-potential conditions for an isobaric SGC ensemble, and JANUS samples the corresponding equilibrium alloy. The resulting equilibrium composition and evaluated properties are then returned to the agent to guide subsequent proposals. We jointly optimize the bulk modulus B, shear modulus G, Pugh ratio B/G, a commonly used proxy for ductility, and the visible-range-averaged optical reflectance Rvisible . The mechanical moduli can be evaluated relatively efficiently using universal machine learning interatomic potentials (MLIPs) such as MACE-MPA-0, whereas Rvisible requires substantially more expensive first-principles calculations. We therefore first construct a database of optical properties for alloys spanning the target chemical space using DFT, and train a surrogate GNN to predict Rvisible . This surrogate is then used to efficiently evaluate optical response across JANUS-generated ensembles. Further details of the LLM protocol and property proxy models are provided in Methods. As shown in Fig. 3e, LLM-EA rapidly expands the non-dominated region of property space, with the dominated hypervolume approaching saturation within only 120 ensemble evaluations across chemical-potential conditions. The resulting candidates form a broad Pareto front that balances mechanical stiffness, ductility and optical response without collapsing onto a single composition family. The elemental statistics further reveal systematic chemical preferences across the Pareto front. Al appears most frequently and contributes the largest mean fraction, primarily occupying the high-reflectance region, while Au also contributes prominently despite occurring in fewer candidates. Ni favors the high-stiffness region, Ag contributes to both reflectance and ductility, and Cu populates more intermediate trade-off regions. The rapidly identified Pareto front provides practical design rules for balancing mechanical and optical properties and can be readily extended to other multi-objective optimization problems, given suitable property proxies. 
+
+> 8/38
+
+Diamond Fe-VAC Silicon      
+
+> EF above VBM (eV) 012345−4 −2 0Formation energy (eV)
+> q = +1 q = 0 q = −1
+
+B-[O]-O 
+
+a
+
+Silicon 
+
+Pretrained JANUS 
+
+Pretrained MLIPs Generalized in chemical space 
+
+... 
+
+Sample Count defect pairs & triplets 
+
+... 
+
+Preferred over random mixing? (Pobs > Prand )YDFT evaluation 
+
+> GGA structure optimization Hybrid-xc defect energy levels Finite-size correction
+
+Quantum engineering candidates 
+
+bc     
+
+> 0.00 0.25 0.50 0.75 1.00 1.25 EF above VBM (eV) −3.0 −2.5 −2.0 −1.5 Formation energy (eV)
+> q = +1 q = 0 q = −1
+
+Ga-[Ga]-P           
+
+> 012345EF above VBM (eV) 246810 Formation energy (eV)
+> q = +1 q = 0 q = −1 Al–VAC Ga–VAC As–VAC P–VAC Cr–VAC Sb–VAC Ge–VAC Al–P Cu–P P–Ti As–Cu Fe–P 10 02 × 10 03 × 10 0Dopant Pobs/Prand
+> As–VAC Ge–VAC O–Ti Al–VAC Ni–VAC Mn–VAC Mg–O Fe–VAC VAC–VAC 10 02 × 10 03 × 10 0Dopant Pobs/Prand
+> P–[P]–VAC S–Ti Ni–S Ga–VAC Ga–[Ga]–P As–VAC P–VAC As–[VAC]–VAC Sb–VAC S–[Al]–S VAC–[As]–VAC Al–VAC 0.00 0.25 0.50 0.75 1.00 1.25 1.50 Level above VBM (eV) VBM CBM ε(+/0) donor ε(0/ − ) acceptor
+> Ge–VAC Fe–VAC B–[Mn]–Mn B–[O]–O As–VAC Al–VAC N–[N]–P 0123456Level above VBM (eV) VBM CBM ε(+/0) donor ε(0/ − ) acceptor 0.00 0.25 0.50 0.75 1.00 1.25 EF above VBM (eV) 1.5 2.0 2.5 Formation energy (eV)
+> q = +1 q = 0 q = −1
+
+S-Ti Figure 4. Generative discovery of defect candidates for quantum engineering. a. Schematic of the discovery workflow. An amortized JANUS sampler generates substitutional dopants, vacancies and multi-defect configurations across chemical space, under a pretrained machine learning interatomic potential (MLIP). Nearest-neighbour pairs and connected triplets are extracted from the generated ensemble and compared with composition-matched random mixing ( Pobs > Prand ). Enriched motifs are subsequently evaluated using density functional theory (DFT) to identify potential quantum-engineering candidates. b. Discovery of quantum defects in diamond. Top, enrichment of selected defect motifs Pobs /Prand . The dashed line denotes random mixing, and bar colors distinguish vacancy-dopant complexes, co-doped pairs and divacancy motifs. Bottom, calculated in-gap electronic states relative to the valence-band maximum (VBM) and conduction-band minimum (CBM), with the occupied HOMO shown by a solid black line and the unoccupied LUMO by a dashed grey line. The total spin of the neutral ground state is indicated alongside. Thermodynamic charge-transition levels (CTLs), ε(+ /0) and ε(0/−), are denoted by orange and blue triangles, respectively. Right, formation energies of the q = + 1, 0, −1 charge states w.r.t. Fermi level ( EF ) for the highlighted Fe-VAC and B-[O]-O candidates, together with illustrations of their defect structures. Vertical dotted lines mark the CTLs. c. Discovery of quantum defects in silicon, highlighting the S-Ti and Ga-[Ga]-P candidates. In the notation for defect triplets, the bracketed species denotes the central atom bonded to the two terminal defect atoms. 
+
+Discovery of defect candidates for quantum engineering 
+
+Point defects provide a rich platform for quantum sensing, communication and computation, but identifying useful quantum defects requires searching a combinatorial space of elemental substitutions, vacancies and multi-site 
+
+9/38 complexes 37–40 . We therefore use JANUS as a generative discovery engine to directly explore this chemical space of defects, as is shown in Fig. 4a. Starting from a pretrained MLIP MACE-MPA-0 41, 42 , a single amortized grand-canonical sampler is trained to jointly generate chemical occupations and local atomic relaxations across a broad defect alphabet at temperature T = 800 K. Because each lattice site is unmasked independently during generation, JANUS imposes no predefined ordering on defect formation and can simultaneously sample isolated substitutions, vacancy complexes and higher-order multi-defect motifs, allowing favourable local chemical correlations to emerge directly from the target ensemble. We apply this strategy to diamond and silicon, two prototypical semiconductors for quantum technology applications. Large ensembles generated by JANUS on supercells are mapped onto their nearest-neighbour defect graphs and decomposed into defect motifs, with a particular focus on pairs and connected triplets. To distinguish genuine chemical association from random co-occurrence, we compared the observed frequency of each pair or triplet motif ( Pobs ), with its expected frequency under composition-matched random mixing ( Prand ). The resulting enrichment ratio Pobs /Prand is used to screen and rank defect motifs for subsequent DFT validation. More details on the training and evaluation procedure are shown in Methods. The top-ranked enriched defect pairs for diamond and silicon are shown in Fig. 4b,c. In diamond, JANUS reveals pronounced enrichment of several vacancy-dopant complexes (Fig. 4b). For example, the most enriched As-VAC occurs approximately threefold more frequently than expected from random mixing, while several additional vacancy complexes and heteroatomic co-doping motifs are also preferentially formed. Notably, this unbiased search recovers the Ge-VAC centre, an experimentally established colour centre in diamond with optically addressable spin states 43, 44 . Similarly, in silicon, JANUS retrieves several canonical vacancy-dopant complexes, including the P-VAC E centre and the experimentally identified As-VAC and Sb-VAC centres 45, 46 . The spontaneous recovery of these established defects validates that enrichment in the generated ensemble captures physically meaningful defect association, while simultaneously proposing novel defect motifs, including pairs and even less explored triplets, for subsequent quantum-defect screening. We then evaluate the enriched motifs in bulk silicon or diamond supercells using DFT, with structural relaxation followed by hybrid-functional single-point electronic-structure calculations, including screening on charged states, spin states and finite-size corrections 47 (see full details in Methods). We aim to identify neutral defects with an open-shell neutral ground state ( S > 0), thermodynamic CTLs defining a finite neutral charge-state stability window within the band gap, and an occupied in-gap defect state. The top candidates satisfying these screening criteria are summarized for diamond and silicon in Fig. 4b,c. For each motif, the thermodynamic neutral-state window is bounded by the ε(+ /0) and ε(0/−) CTLs, shown by blue and orange triangles between the valence-band maximum (VBM) and conduction-band minimum (CBM) for the pristine bulk, while the highest occupied and lowest unoccupied in-gap Kohn-Sham states (HOMO/LUMO) are shown as solid and dashed black/grey lines, respectively, along with the total spin of the ground state ( S = 1/2 or S = 1). The resulting candidates span a remarkably broad chemical and structural space, including dopant-vacancy pairs, co-doped substitutional pairs, vacancy-containing triplets and purely substitutional three-site motifs, with elements drawn from groups III and V as well as transition metals. From these screened motifs, we highlight four representative candidates together with their charge-state formation energies in the rightmost column of Fig. 4b,c. In diamond, Fe-VAC ( S = 1) represents a transition-metal–vacancy centre. Its neutral ( q = 0) state is thermodynamically stable over a finite Fermi-level interval bounded by CTLs, while the associated occupied defect state lies inside the band gap, albeit closer to the VBM. By contrast, B-[O]-O ( S = 1/2) is a substitutional three-site complex and exhibits a substantially deeper neutral stability window, with both CTLs and the occupied deep in-gap state displaced further from the band edges. This more isolated electronic structure is particularly attractive for suppressing hybridization with bulk states and motivates further optical characterization. Similarly in silicon, candidates such as S-Ti ( S = 1) and Ga-[Ga]-P ( S = 1/2) exhibit stable neutral charge states and in-gap defect energy levels despite arising from chemically and structurally distinct motifs. We note that our DFT calculations do not by themselves establish these motifs as definitive quantum-engineering candidates. Further validation would require calculating excited-state properties, such as zero-phonon-line energies for optical addressability, Huang-Rhys factors for electron-phonon coupling, and spin-relaxation for long-lived spin control. Nevertheless, the JANUS discovery protocol provides a high-confidence first-principles shortlist at a fraction 
+
+> 10/38
+
+of the cost of exhaustive enumeration. By coupling grand-canonical generation, statistical motif discovery and electronic-structure validation, JANUS enables broad chemical-space defect discovery and systematically uncovers unconventional clustered-defect motifs. 
+
+Discussion 
+
+In this work, we have introduced JANUS, a multimodal neural sampler that jointly treats discrete chemical identities and occupancies with continuous atomic displacements and cell-volume fluctuations, trained directly on the target interatomic potential without relying on precomputed reference data. This coupling enables direct sampling in isobaric semi-grand-canonical ∆μNPT and grand-canonical μV T ensembles, extending neural sampling beyond previous approaches restricted to either continuous NV T ensembles or purely discrete configurations. To our knowledge, joint discrete-continuous thermodynamic sampling has not previously been realized by machine learning models. JANUS unifies these coupled degrees of freedom within a single amortized generative framework, enabling thermodynamic sampling, free energy and phase-equilibrium calculations, conditional steering, inverse design and structural motif discovery across alloys and crystalline defects. Its sampling efficiency substantially reduces the number of energy evaluations required, making direct thermodynamic sampling with computationally demanding universal MLIPs practical. A notable demonstration is the discovery of promising quantum-engineering defect candidates, including Fe-VAC and B-[O]-O in diamond and S-Ti and Ga-[Ga]-P in silicon. These capabilities in JANUS mark a crucial step towards efficient sampling, characterization and discovery of realistic disordered materials. Nevertheless, two major challenges remain before universal thermodynamic neural sampling can be achieved. First, the present JANUS model is demonstrated on moderate lattice sizes, and the free energy and phase-equilibrium demonstrations are primarily limited to binary alloys. Improving its scalability and accuracy, particularly in the discrete diffusion channel, will be important for resolving sharper first-order transitions and quantitatively precise phase boundaries in more complex systems. This will also be necessary to extend free energy and phase-equilibrium calculations from binary alloys to ternary and higher-order compositions. Second, JANUS is presently restricted to lattice-based solid phases with cubic simulation cells and therefore does not capture melting, liquid states or general non-cubic lattices. Extending the framework to flexible cell shapes and beyond crystalline basins would enable treatment of a broader range of crystal phases and complete solid-liquid phase diagrams, which are central to understanding experimental alloy synthesis, processing and phase selection 48 . More generally, allowing particle insertion and deletion without predefined lattice sites would enable general off-lattice grand-canonical neural sampling, unlocking sampling scenarios such as gas adsorption, surface reactions and solid-liquid interfaces. Reaching this level of flexibility requires extending lattice-anchored displacements to fully off-lattice atomic coordinates, while jointly handling chemical identity, particle number, cell geometry and dynamically changing atomic coordination. Ultimately, a universal neural sampler spanning these degrees of freedom and thermodynamic ensembles is the most desirable goal, which would require both methodological advances and larger-scale training. Despite these limitations, JANUS provides a versatile foundation for substantially broader applications in disordered materials. Flexible thermodynamic sampling with JANUS, combined with conditional generation through inference-time reward tilting, could enable both structure determination and inverse design across diverse disordered materials. For alloys and defects, where local atomic arrangements can be difficult to resolve experimentally 49, 50 ,experimental diffraction and spectroscopic signals could be incorporated as constraints on a generative prior to solve the inverse problem and infer compatible structural ensembles. In parallel, rewards defined on structural, mechanical, electrical, magnetic, optical or chemical properties could steer the same pretrained sampler towards targeted functional materials without retraining for each objective. Moreover, combined with the previous continuous-space sampler 25 for amorphous materials, JANUS suggests a path towards systems in which chemical and structural disorder coexist across phases and length scales, including oxide glasses, disordered ceramics, solid electrolytes and solid-liquid interfaces. At even larger length scales, transferable local neural samplers could be deployed around extended defects such as grain boundaries, dislocations and heterogeneous interfaces, where chemical segregation, local reconstruction and strain are strongly coupled. By unifying multimodal discrete-continuous thermodynamic 
+
+> 11/38
+
+sampling, JANUS paves the way towards general neural sampling of disordered condensed matter. 
+
+Methods 
+
+Stochastic interpolants on continuous and discrete domains 
+
+As in the Overview, a configuration (a, x) = ( a, u, v) combines the discrete species channel a ∈ A N , with A =
+
+{1, . . . , K} the token alphabet, and the continuous channels x = ( u, v)—the fractional displacements u ∈ RN×3
+
+and the log-volume v ∈ R. In this subsection we fix a single thermodynamic state (T, ∆μ), where ∆μ collects the chemical-potential differences of the active tokens, and write π1 for the target density of Eq. (1); the amortized, conditional version is described below. JANUS constructs a generative process that transports a simple initial law π0
+
+at time t = 0 onto π1 at t = 1, treating all three channels jointly: the continuous channels start from a product prior 
+
+π0,c(x) = π0,u(u) π0,v(v), while the species channel starts from a fully masked state, in which every site carries an auxiliary absorbing symbol M /∈ A and acquires its species label only during generation. For the continuous channels, 
+
+π0,u and π0,v are Gaussians: since we study crystal structures on a lattice below the melting point, atoms vibrate around their reference sites and the cell fluctuates narrowly around its equilibrium volume, so Gaussian laws centred on the reference lattice leave only a short prior-to-target transport for the network to learn; the physics-informed parameter choices used in practice are specified later. The construction extends stochastic interpolants 26 to a mixed continuous–discrete state space.  
+
+> Continuous channels.
+
+For each continuous channel c ∈ { u, v}, writing xc for the corresponding component of x,a prior draw xc 
+
+> 0
+
+and a terminal configuration xc 
+
+> 1
+
+are connected by the deterministic interpolant 
+
+xct = ( 1 − α(t)) xc 
+
+> 0
+
++ α(t) xc
+
+> 1
+
+, (5) where α(t) increases monotonically from α(0) = 0 to α(1) = 1, pinning xct to the prior draw at t = 0 and to the terminal at t = 1. The interpolant defines time-dependent marginals pt that connect π0 and π1; because the prior is Gaussian, pt has a smooth density at every intermediate time even though no noise is injected along the path. The stochastic dynamics realizing these marginals are built from two fields per channel: a velocity bc and a score 
+
+sc = ∇xc log pt . Both are conditional expectations over the interpolant. The velocity is 
+
+bc(a, x,t) = E ˙α(t) ( xc 
+
+> 1
+
+− xc
+
+> 0
+
+) (at , xt ) = ( a, x), (6) where the conditioning is on the full state (at , xt ), and the score satisfies the target score identity 32 
+
+sc(a, x,t) = E
+
+h 1 
+
+> α(t)
+
+∇xc 
+
+> 1
+
+log π1(a1, x1) (at , xt ) = ( a, x)
+
+i
+
+. (7) Hence, wherever an interpolant path visits, the target score evaluated at the path’s endpoint provides an unbiased estimate of the marginal score there, so the physics enters the model directly through derivatives of the target density rather than through reference data.  
+
+> Discrete channel.
+
+The species channel is transported by an absorbing-mask interpolant 27, 51 : given the terminal symbol a1,i, each site is drawn independently from 
+
+P at,i = b′ a1,i = b = αa(t) 1{b′ = b} +  1 − αa(t) 1{b′ = M}, (8) where the reveal schedule αa(t) increases monotonically from αa(0) = 0 to αa(1) = 1 (we use αa(t) = t): at time 
+
+t a site shows its terminal symbol with probability αa(t) and the mask otherwise, and no site ever shows a wrong 
+
+symbol. The endpoints are again pinned—the all-mask state at t = 0, the terminal at t = 1. The generative dynamics realizing these marginals is a pure reveal process: each site is unmasked exactly once, at a random time governed by 
+
+αa, and never re-masked. A single learned object controls this process, the denoising posterior 
+
+qθ ,i(b | a, x) ≈ P a1,i = b (at , xt ) = ( a, x), (9) 
+
+> 12/38
+
+the conditional law of site i’s terminal symbol given the current partially revealed state—one categorical network head per site. For a revealed site this posterior is a point mass at the shown symbol; for a masked site it is the model’s completion law given everything revealed so far, and the exact posterior is independent of t given the revealed set, since the mask carries no information beyond which sites are hidden 52 . Whenever the schedule reveals a masked site during generation, its symbol is drawn from qθ ,i evaluated at the current state.  
+
+> Numerical integration.
+
+Samples are generated by integrating the coupled dynamics from a prior draw (a0, x0), the all-mask state paired with x0 ∼ π0, to t = 1 on a shared grid tn = nh with step h = 1/M. The continuous channels follow the generative stochastic differential equation (2) discretized with the Euler–Maruyama scheme, 
+
+xcn+1 = xcn + bc 
+
+> θ
+
++ g2(tn) sc
+
+> θ
+
+(an, xn,tn) h +
+
+q
+
+2g2(tn)h ξ cn , ξ cn ∼ N (0, I), (10) where bc 
+
+> θ
+
+and sc 
+
+> θ
+
+denote the network approximations of the velocity (6) and score (7) (their training is described in the next subsection), and the diffusion strength g(t) ≥ 0 is a free parameter: the score-corrected drift leaves the marginals pt unchanged for every g, and g = 0 recovers the deterministic probability-flow integrator. The species channel follows an absorbing-mask process with the linear reveal schedule αa(t) = t. During 
+
+[tn,tn+1], every still-masked site is independently revealed with probability 
+
+pn = αa(tn+1) − αa(tn)
+
+1 − αa(tn) . (11) If site i is revealed, its symbol is drawn from an+1,i ∼ qθ ,i (· | an, xn,tn, c), and revealed sites remain fixed thereafter. This is a tau-leap discretization: throughout one interval, all reveals use the posterior evaluated at the interval’s left-end state and are conditionally independent. Consequently, several sites may be revealed simultaneously. As h → 0, simultaneous reveals vanish in probability and the construction approaches sequential autoregressive unmasking, with each reveal conditioned on the previously revealed symbols and the contemporaneous continuous state. Both channel updates use the same network evaluation at (an, xn,tn); the evaluation at the resulting state is then reused for the next step. 
+
+Data-free fixed-point training 
+
+All learned fields of JANUS are the conditional expectations introduced in the previous subsection: the velocity (6) and score (7) are conditional expectations over the interpolant, and the denoising posterior (9) is the conditional law of a site’s terminal symbol. Estimating any of them requires terminal configurations (a1, x1) ∼ π1—precisely what a sampler is meant to produce and what is unavailable a priori. JANUS resolves this, without using any reference configurations, by a data-free fixed-point iteration in the spirit of bridge-matching samplers 29 and related fixed-point diffusion samplers 30, 53, 54 : the unavailable terminals in the training targets are replaced by the model’s own samples, and the physics enters solely through the labels attached to these self-generated configurations—forces, cell-rescaling derivatives, and single-site heat-bath conditionals, all pointwise evaluations of the interatomic potential. We first specify the regression objectives evaluated on such terminals, then the iteration itself.  
+
+> Regression objective.
+
+Because the continuous fields (6) and (7) are conditional expectations, they can be learned by least-squares regression onto unbiased single-sample estimates. With a prior draw (x0,t) and a terminal (a1, x1)
+
+sampled, and the intermediate state (at , xt ) formed via (5) and (8), the per-sample targets are ˆsc = 1
+
+α(t) ∇xc 
+
+> 1
+
+log π1(a1, x1), ˆbc = ˙α(t) ( xc 
+
+> 1
+
+− xc
+
+> 0
+
+), (12) and the continuous loss is 
+
+Lcont (θ ) = ∑
+
+> c∈{ u,v}
+
+E
+
+h
+
+bc 
+
+> θ
+
+(at , xt ,t) − ˆbc 2 + sc 
+
+> θ
+
+(at , xt ,t) − ˆsc 2i
+
+, (13) whose minimizers are exactly (6) and (7). In practice, the variance of ˆ sc can be further reduced; see Section 1.3.  
+
+> 13/38 Soft cross-entropy objective.
+
+The species head is trained via an analogous fixed-point strategy, but based on a cross-entropy objective. This masked cross-entropy objective mirrors the one from masked discrete diffusion models 27, 28, 51, 52 , but instead of relying on one-hot labels encoding the ground-truth terminal symbol, the target marginal density (soft label) for each site is the conditional Boltzmann distribution of this site given the terminal symbols at all other sites. Namely, if we construct at by masking each symbol in a1 with probability 1 − αa(t)
+
+independently, the soft cross-entropy loss reads 
+
+Ldisc (θ ) = − E
+
+"
+
+# ∑ 
+
+> i:at,i=M
+
+# ∑
+
+> b∈A
+
+ℓi(b) log qθ ,i(b | at , xt )
+
+#
+
+, ℓi(b) = ρi(b | a1,−i, x1), (14) where ρi( · | a1,−i, x1) is the target’s single-site (heat-bath) conditional at the terminal, 
+
+ρi
+
+ b a1,−i, x1
+
+ = exp   μb −U(a(i→b) 
+
+> 1
+
+, x1)/kBT 
+
+∑b′∈A exp   μb′ −U(a(i→b′) 
+
+> 1
+
+, x1)/kBT  , (15) where a(i→b) 
+
+> 1
+
+denotes the terminal species configuration with site i set to b; every factor of the target (1) that does not depend on a1,i cancels between numerator and denominator, and evaluating the K single-site substitution energies requires one batched call to the potential. For a binary alphabet, (15) reduces to a sigmoid of the flip log-ratio 
+
+(∆μ ∆NB − ∆Ui)/kBT , where ∆Ui is the change in potential energy under the flip at site i. The label ℓi does not depend on the terminal symbol a1,i actually stored—the conditional is a function of the other sites only—and this invariance is precisely what makes it a genuine conditional: at the Boltzmann fixed point, averaging ℓi over the posterior of the remaining terminal sites given (at , xt ) reproduces the exact denoising posterior, so the minimizer of (14) is (9). Notably, the energy enters only through the bounded factor ρi ∈ (0, 1), rather than appearing directly in the loss.  
+
+> Fixed-point iteration.
+
+The sampler is additionally amortized over thermodynamic conditions 25, 55 : all fields are heads of one site-equivariant message-passing network that receives (T, ∆μ) as additional inputs (Supplementary Information), so a single model represents the whole family of ensembles π1(T, ∆μ) over a prescribed window rather than a single state point. Each training round consists of four steps (Fig. S1). (i) Generate : draw per-chain conditions (T, ∆μ) ∼ p(T, ∆μ)—the construction of the conditioning distribution p is described in the Supplementary Information—and integrate (10)–(11) under these conditions to produce terminal configurations. (ii) Label : evaluate at each terminal the quantities entering the targets—the continuous scores (12) and the single-site heat-bath conditionals (15)—and store them, together with the conditions, in a replay buffer. (iii) Interpolate : draw fresh (x0,t) for the continuous channels and form intermediate states (at , xt ) toward buffered terminals via (5), masking each buffered species site independently with probability 1 − αa(t) per (8). (iv) Regress : minimize the conditional objective 
+
+L (θ ) = E(T,∆μ)∼p
+
+h
+
+Lcont (θ ; T, ∆μ) + λ Ldisc (θ ; T, ∆μ)
+
+i
+
+, (16) where both losses are those introduced above, with all fields and targets evaluated at the stored per-sample conditions, and λ > 0 balances the channels. Under idealized population training, the family of Boltzmann ensembles is a fixed point of this iteration: if the model samples every π1(T, ∆μ) exactly and the learned heads bc 
+
+> θ
+
+, sc 
+
+> θ
+
+and qθ match the conditional expectations of the regression and cross-entropy targets, training is stationary. For the continuous channels this self-consistency result is inherited from fixed-point diffusion samplers 29 ; for the discrete channel, the corresponding iteration—fitting the denoising posterior by cross-entropy against heat-bath labels evaluated at self-generated terminals—is, to our knowledge, new and hence not studied before. In the Supplementary Information we formalize the discrete iteration and show that the Boltzmann ensemble is indeed a fixed point of it, with the heat-bath conditionals of the target acting as the anchor (Section 1.2). Whether the Boltzmann ensemble is the unique fixed point of the iteration is a stronger question that we defer to future work. Intuitively, the force and heat-bath labels should be the guiding mechanisms toward this fixed point, since each self-generated configuration, however far from equilibrium, is labeled with the true local direction of increasing target probability.  
+
+> 14/38 Physics-informed priors.
+
+The masked species channel starts from the all-mask state, so the prior is a design choice for the continuous channels only. Both continuous priors are Gaussians conditioned on (T, ∆μ) through a composition estimate c0 built from an inexpensive linear estimate of the phase-transition line: the volume prior is centered on a conditioned per-atom volume and the displacement prior follows the harmonic ⟨u2⟩ ∝ T width. All prior parameters are derived from the interatomic potential alone, so no reference data enters training; the full construction and the parameter fits are given in the Supplementary Information (Section 2.2). 
+
+Semi-grand partition function estimation and observable reweighting 
+
+The trained sampler gives direct access to the semi-grand partition function Ξ(T, ∆μ, P)—the normalization of the target ensemble (1)—by importance sampling 56 ; the semi-grand potential follows as Φ = −kBT log Ξ. The two types of channel contribute weights of different character. The species channel’s contribution is exact and needs no path-space construction. Conditionally on the reveal times—whose law is fixed by the schedule αa and is independent of both the network and the realized symbols—the masked sampler is an autoregressive model in a random order 52 : each site draws its symbol, at the moment it is revealed, from the head evaluated at the then-current state. The probability of the generated species configuration is therefore available in closed form along the trajectory, log qdisc =
+
+> N
+
+# ∑
+
+> i=1
+
+log qθ ,i
+
+ a1,i ani , xni
+
+, (17) where ni is the step at which site i was revealed; the schedule-only reveal-time factors cancel exactly against the time-reversed (re-masking) kernel, which is built from the same factors and no learned quantity. The continuous channels do require path space. The generative SDE (2) admits a time reversal 57 built from the same learned fields, in which the drift subtracts rather than adds the score term, dxct = bc 
+
+> θ
+
+− g2(t) sc
+
+> θ
+
+(at , xt ,t) dt + √2 g(t) d ¯ wct , (18) integrated backward from t = 1 to t = 0 with a reversed-time Wiener process ¯wct : forward and backward dy-namics share the same marginals and differ only in the sign of the score term. Discretizing either direction with the Euler–Maruyama scheme of (10) renders every one-step transition Gaussian, i.e., N  xcn+1; xcn + bc 
+
+> θ
+
++
+
+g2(tn) sc
+
+> θ
+
+(an, xn,tn) h, 2g2(tn)h, so the forward–backward path weight of the continuous channels is a product of closed-form Gaussian density ratios. Each generated trajectory (a0: M , x0: M ) then carries the log weight log W = log π1(aM , xM ) − log π0(x0) − log qdisc +
+
+> M−1
+
+# ∑
+
+> n=0
+
+∆uv n , (19) where the conditioned prior density π0 is available in closed form (the species channel starts from a point mass at the all-mask state and contributes no prior term), and ∆uv n is the forward–backward path weight of the step [tn,tn+1]: the log-ratio of the backward and forward Gaussian transition densities, with the backward drift of (18) evaluated at the arrival state, 
+
+∆uv n = ∑
+
+> c∈{ u,v}
+
+log N  xcn; xcn+1 + bc 
+
+> θ
+
+− g2(tn+1) sc
+
+> θ
+
+(an+1, xn+1,tn+1) h, 2g2(tn)h
+
+N  xcn+1; xcn + bc 
+
+> θ
+
++ g2(tn) sc
+
+> θ
+
+(an, xn,tn) h, 2g2(tn)h . (20) The exact configuration-space density for a and the Gaussian path-space ratio for (u, v) are accumulated along a single trajectory and multiply into one importance weight—the free energy estimator is hybrid in the same sense as the sampler itself. The split matters quantitatively: the species term (17) is a sum of N realized log-probabilities whose fluctuations reflect the model’s error in configuration space, not a sum of M × N per-step flip log-ratios, so the discrete part of the weight does not degrade as the integration grid is refined. Over ntraj independent trajectories, the weights give an asymptotically unbiased estimate of the partition function 58 ,
+
+Ξ = Eelog W , log bΞ = logsumexp 
+
+> j≤ntraj
+
+log W ( j) − log ntraj . (21) 
+
+> 15/38
+
+Because one amortized model covers the whole (T, ∆μ) window, Eq. (21) directly yields partition-function ratios— and hence semi-grand-potential differences—across thermodynamic conditions from a single training run. The same weights also serve for reweighting: for any observable O of the terminal configuration, the self-normalized estimator 
+
+d⟨O⟩π1 = ∑ j elog W ( j)
+
+O a( j) 
+
+> M
+
+, x( j)
+
+> M
+
+
+
+∑ j elog W ( j) (22) converges to the exact ensemble average ⟨O⟩π1 , so it remains asymptotically unbiased under model imperfection— residual model error is traded for weight variance rather than bias. 
+
+Mixing free energy and binodal estimation 
+
+Phase equilibria follow from resolving the semi-grand ensemble by composition. Writing n = NB and x = n/N,the semi-grand partition function Ξ(T, ∆μ, P) decomposes into canonical (fixed-composition) isothermal–isobaric partition functions Zn,
+
+Ξ(T, ∆μ, P) = 
+
+> N
+
+# ∑
+
+> n=0
+
+e∆μ n/kBT Zn(T, P), Zn(T, P) = ∑ 
+
+> a:NB(a)= n
+> Z
+
+du dv e −[U(a,u,v)+ PV ]/kBT , (23) and the composition-resolved Gibbs free energy is G(n) = −kBT log Zn, defined up to an n-independent constant. The free energy of mixing per atom subtracts the chord between the pure phases, 
+
+Gmix (x) = 1
+
+N
+
+h
+
+G(xN ) − (1 − x) G(0) − x G (N)
+
+i
+
+, (24) which cancels every term linear in n, so Gmix is invariant both under that constant and under any ∆μ tilt of the ensemble in which G was measured. Phase coexistence is encoded in G through the common-tangent construction: at coexistence the two phases share the exchange chemical potential and the tangent, 
+
+G′(nα ) = G′(nβ ) = ∆μ∗(T ), G(nβ ) − G(nα ) = ∆μ∗(T ) ( nβ − nα ), (25) so the coexisting compositions xα (T ), xβ (T ) are the tangency points of the double tangent and its slope is the coexistence potential ∆μ∗(T ); repeating the construction along isotherms traces the binodal, with convex G signaling complete miscibility. Two complementary routes lead from the sampler to G(n), distinguished by which part of the curve they can reach.  
+
+> Legendre-Fenchel transform.
+
+The semi-grand potential Φ(T, ∆μ) = −kBT log Ξ is the Legendre–Fenchel trans-form of G in the conjugate pair (n, ∆μ), and the inverse transform 
+
+Ghull (n) = sup 
+
+> ∆μ
+
+∆μ n + Φ(T, ∆μ) (26) recovers the lower convex envelope of G from the grand potential alone. Because one amortized model covers the whole (T, ∆μ) window, evaluating Eq. (21) on a grid of chemical potentials and applying Eq. (26) yields Ghull at inference cost. Wherever G is convex (outside a miscibility gap, and at every composition in a fully miscible system) the envelope is the curve, and this route determines Gmix completely. The Cu–Ni results of Fig. 2 are computed through this route, where the envelope agrees with the reference curve to within a few meV/atom.  
+
+> Fixed composition sampling.
+
+Inside a miscibility gap the envelope replaces the curve and the same suppression degrades importance-weighted read-outs of a ∆μ-conditioned model at strongly two-phase compositions. Both problems are addressed by training the sampler at fixed composition. During the self-bootstrapped iteration the rollouts are generated by fixed composition sampling: the reveal steps of the species channel are restricted so that exactly n sites carry species B, with the conditioning features set to the rung composition c0 = n/N; the continuous channels, the replay buffer and the training labels are unchanged. One amortized model thereby learns the canonical 
+
+> 16/38
+
+(fixed-composition) ensembles of every rung n = 0, . . . , N across the temperature window and generates any rung ensemble at inference cost. The free energy follows from the same path-weight machinery as Ξ: applied to a constrained rollout, whose terminal law is the canonical rung ensemble, the forward–backward weight of Eq. (19) normalizes to Zn instead of Ξ (up to the known tilt e∆μ n/kBT ), so Eq. (21) evaluates G(n) = −kBT log Zn rung by rung from the model’s own trajectories. In practice we sharpen this read by joining the generated ensembles of neighboring rungs through exact single-site substitution energies, at the cost of two additional batched energy evaluations per draw; the estimator is detailed in the Supplementary Information, Section 1.5, alongside the canonical Monte Carlo composition ladder that supplies the reference values (Section 1.4). Beyond reaching inside the gap, the ladder is what makes the phase-diagram read self-contained : applying Eq. (25) to the model’s own G(n) delivers the coexistence potential ∆μ∗(T ) together with the coexisting compositions. All Cu–Ag and Ni–Cr free energies and binodals in this work are computed through this route.  
+
+> Frenkel-Ladd absolute free energies
+
+The free-energy methods described above determine mixing and relative free energies within a given crystal phase. To compare competing phases with different crystal structures, as required for the fcc-bcc phase competition in Ni-Cr, their free energies must additionally be placed on a common absolute scale. We obtain these absolute references from the pure-element Ni-fcc, Cr-fcc, Ni-bcc and Cr-bcc crystals using the Frenkel-Ladd method 59 . In this approach, each crystal is coupled to an Einstein reference in which every atom is harmonically tethered to its corresponding lattice site, 
+
+Uspring = 12 k ∑
+
+> i
+
+ri − r0 
+
+> i
+> 2
+
+. (27) where ri are the absolute coordinates of atoms. The Einstein reference and target system are connected through 
+
+U(λ ) = ( 1 − λ )Uspring + λUtarget , where Utarget denotes the target interatomic potential. Thermodynamic integration then gives the classical Helmholtz free energy per atom as 
+
+ftarget = fEinstein + 1
+
+N 
+
+> Z10
+
+Utarget −Uspring λ dλ , (28) with 
+
+fEinstein = 3kBT ln 
+
+ ℏωE
+
+kBT
+
+
+
+, ωE =
+
+r km . (29) The spring constant is chosen as the mean Cartesian force constant, k = tr (H)/(3N), obtained from the Hessian 
+
+H of the perfect crystal. Canonical averages at each coupling parameter are evaluated using Langevin molecular dynamics, with the cell volume independently relaxed at each temperature under zero external pressure, such that the resulting equilibrium Helmholtz free energy is equivalent to the Gibbs free energy per atom at P = 0. The resulting pure-element absolute free energies provide the reference offsets required to place the fcc and bcc free-energy curves on the same scale and directly determine their relative thermodynamic stability. 
+
+Inference-time steering to tilted ensembles 
+
+It is often desirable to sample not the learned ensemble itself but a tilted version of it, 
+
+pη (a, x) ∝ pbase (a, x) eη r(a,x), (30) where pbase is the terminal distribution of the trained sampler, r is a reward defined on terminal configurations and 
+
+η controls the strength of the tilt. When many different tilts of the same base model are needed, one can tilt at inference time, without retraining. Here we use the Radon-Nikodym estimator 33 : a population of weighted particles is propagated by a proposal version of the hybrid dynamics and continuously reweighted so that the terminal population approximates pη . The construction has two free ingredients, neither of which affects correctness. The first is an intermediate reward rt with the boundary conditions r0 ≡ 0 and r1 = ηr: the first condition keeps the 
+
+> 17/38
+
+initialization from the prior exact, the second makes the terminal target the desired tilt, and between the endpoints 
+
+rt sets how gradually the tilt is introduced along the rollout. The second is the proposal dynamics that actually propagates the particles. It mirrors the pretrained integrator (10)–(11): the species channel is propagated by the pretrained kernel itself—reveal times and revealed symbols are drawn exactly as in (11)—while each continuous channel advances with an arbitrary proposal drift ac with transition density N  xcn + ac(an, xn,tn) h, 2g2(tn)h. After each step the log-weight of a particle is updated by the reward increment plus the mismatch between the pretrained and the proposal dynamics; the species factors are shared and cancel, so only a ratio of Gaussian transition densities for the continuous channels remains, 
+
+∆ log wn = rtn+1 (an+1, xn+1) − rtn (an, xn)+ ∑
+
+> c∈{ u,v}
+
+log N  xcn+1; xcn + bc 
+
+> θ
+
++ g2(tn) sc
+
+> θ
+
+(an, xn,tn) h, 2g2(tn)h
+
+N  xcn+1; xcn + ac(an, xn,tn) h, 2g2(tn)h , (31) so every factor is available in closed form along the trajectory. The weights compensate exactly for any choice of ac—the proposal may, but need not, be biased toward the reward—and particles are resampled whenever the effective sample size drops below a threshold. A natural choice biases the proposal toward the reward: we take the pretrained drift plus a guidance term, 
+
+ac = bc 
+
+> θ
+
++ g2(t) sc 
+
+> θ
+
++ λc(t) ∇xc rt , (32) which pushes particles toward higher intermediate reward when rt is differentiable; the reward itself need not be differentiable, as its gradient enters only through this optional term. With λc = 0 the proposal coincides with the pretrained sampler, the density ratio in (31) vanishes, and the scheme reduces to pure reweighting of the unmodified sampler. The reward tilt itself thus acts on all three channels through the weights and the resampling, while guidance biases only the continuous channels; a more general construction that additionally biases the species proposal toward the reward ( tilted decoding ) is treated in the Supplementary Information (Section 1.6). The weights are exact for any guidance strengths and any intermediate reward respecting the boundary conditions, so these choices control only the variance. For the intermediate reward we use two constructions. When r is meaningful on partially generated states the annealed reward rt = αr(t) η r(at , xt ) scores the current state directly under a ramp αr. When r is defined only on clean terminal structures, we score the posterior-mean (Tweedie) estimate 60 of the terminal state instead: the continuous channels admit the closed-form posterior mean ˆ xc 
+
+> 1
+
+= xc + 1−α(t) 
+
+> ˙α(t)
+
+bc 
+
+> θ
+
+(a, x,t), and for the species channel the head qθ ,i of Eq. (9) is the posterior over the terminal identity. The derivation of the weights and a comparison of reward and guidance choices are provided in the Supplementary Information Sections 1.7,1.8. 
+
+Model architecture and size-transfer 
+
+The velocities and scores of the two continuous channels and the species posterior are heads of a single equivariant message-passing network with a shared PaiNN backbone 61 adapted to the three channels. Nodes are lattice sites carrying invariant scalar and equivariant vector features; messages are exchanged on a graph rebuilt from the live configuration at every evaluation, with pairwise minimum-image displacements measured in physical units at the current box length L = ev/3, so the connectivity follows the fluctuating cell. Pair features expand the interatomic distance in a Gaussian radial basis under a smooth polynomial cutoff envelope, with the cutoff radius matched to the interaction range of the potential (5 .0–5 .3 Å for the alloys studied here). Because every learnable parameter is size-intrinsic—per-site embeddings, per-edge messages confined to a fixed physical cutoff, per-site heads, and intensive pooled read-outs—the same weights define a sampler for any supercell: a model trained on a cell of N lattice sites is instantiated on a cell of N′ sites by replacing only the reference lattice. The channels then transform according to their physical scaling: per-site quantities (species logits, displacement fields in physical units) carry over unchanged, while the collective log-volume channel is emitted as an intensive field and converted with the instantiated cell’s √N′—its equilibrium fluctuations shrink as 1 /√N′ and its score grows as √N′—with the prior widths of Eqs. (S33)–(S34) rescaled by the same factors. Under these conventions the network 
+
+> 18/38
+
+is by construction exactly equivariant under periodic tiling of the simulation cell—per-site outputs are unchanged and the volume outputs rescale by pN/N′—provided the cutoff respects the minimum-image bound rcut ≤ L/2. A model trained on a moderate cell can therefore be evaluated directly on substantially larger cells without retraining 62 .
+
+Target systems, interatomic potentials and property evaluation 
+
+The binary Cu-Ni, Cu-Ag, Ni-Cr alloys and ternary Cr-Co-Ni alloys are described using the embedded-atom method (EAM) potentials available in the NIST Interatomic Potentials Repository 63–65 . Alloys containing up to three elements selected from the Ag-Al-Au-Cu-Ni chemical space, together with all systems with defects, are described using the universal MACE-MPA-0 MLIP. Unless otherwise stated, fcc alloys are represented by 3 × 3 × 3conventional supercells containing 108 sites, bcc alloys by 4 × 4 × 4 conventional supercells containing 128 sites, and diamond-cubic defect systems by 3 × 3 × 3 supercells containing 216 sites. All isobaric SGC calculations are performed at zero external pressure, P = 0, appropriate for ambient-pressure solids where atmospheric pressure is negligible relative to characteristic internal elastic stresses. Regarding property evaluation, chemical SRO is quantified using the Warren-Cowley parameter αi j = 1 − Pi j /c j,where Pi j is the probability that a nearest neighbour of species i is species j and c j is its global concentration. Nearest-neighbour shells are defined using the first minimum of the corresponding radial distribution function. Mechanical properties are evaluated following the procedure used in ATLAS 25 . Generated structures are first fully relaxed using MACE-MPA-0, after which the bulk modulus B is obtained from an isotropic Birch-Murnaghan equation-of-state fit and the shear modulus G from orthorhombic and monoclinic volume-conserving deformations combined using the Voigt-Reuss-Hill average. For optical-property prediction, a reference dataset of frequency-dependent dielectric responses for 2,048 alloy structures is first generated using DFT calculations. GNNOpt 66 , an equivariant GNN using ensemble atomic embeddings, is then trained to predict the optical spectrum from atomic structures, from which the frequency-dependent reflectance and visible-range-averaged reflectance Rvisible are obtained. For point defects, JANUS is used only for structural-motif screening, and the resulting candidates are subsequently evaluated individually using DFT for defect formation energies, CTLs and in-gap electronic states as described below. The full details of DFT calculations are shown in “First-principles DFT calculations”. Multi-objective inverse design follows the LLM-EA approach introduced in ATLAS 25, 67 . The LLM proposes chemical-potential differences ∆μ between chemical elements, for which JANUS generates an ensemble of 512 configurations to evaluate the corresponding equilibrium composition and target properties as ensemble averages. Evaluations are managed asynchronously across up to 16 concurrent jobs, with new proposals launched as compu-tational slots become available. The resulting ∆μ, composition and property tuples are accumulated in the search history. For each proposal, 10 previous evaluations are sampled as LLM context: 3 high-performing candidates ranked using randomly weighted normalized objectives, 4 sampled from the current Pareto set, and 3 randomly sam-pled dominated candidates for exploration. These examples are then used to condition subsequent chemical-potential proposals. 
+
+Grand-canonical sampling and identification of defect motifs 
+
+Defects in diamond and silicon are sampled using JANUS in the fixed-volume grand-canonical ( μV T ) ensemble. We use 216-site 3 × 3 × 3 diamond-cubic supercells at T = 800 K, and the simulation-cell volume is fixed at the pristine-host supercell volume throughout. Each lattice site carries a discrete token corresponding to the host atom, one of 15 dopants or a vacancy, together with a continuous displacement ui from its ideal lattice position. For silicon, the 17-token alphabet contains Si (host), B, Al, Ga, C, Ge, P, As, Sb, S, Ti, Cr, Fe, Co, Ni, Cu and VAC; for diamond, it contains C (host), B, Al, N, P, As, O, S, Si, Ge, Mg, Ti, Cr, Mn, Fe, Ni and VAC. The unnormalized target distribution is log π1(a, u) = β
+
+"
+
+# ∑
+
+> i
+
+μai −U(a, u) −Vcap (a)
+
+#
+
++ ∑
+
+> i:ai=VAC
+
+log ρg (ui) , (33) where ρg is a normalized site-local Gaussian distribution assigned to the auxiliary coordinates of vacancy sites to retain a fixed-dimensional representation. Vacancy sites are removed from the MACE interaction graph, such that 
+
+> 19/38
+
+these auxiliary coordinates do not contribute to the physical energy. Here, U is evaluated using MACE-MPA-0 with around 9M parameters 41, 42 and Vcap confines sampling to the dilute-defect regime. At fixed T and V , the configurational measure for an occupied site of species a contributes a factor V /Λ3
+
+> a
+
+, where Λa = h/√2πmakBT is the thermal de Broglie wavelength. Replacing an atom of species a by a vacancy removes one such factor, so each vacancy contributes − log 
+
+ V
+
+> Λ3
+> a
+
+
+
+to log π1. Because T and V are fixed in the μV T defect ensemble, this contribution is constant per vacancy and can therefore be absorbed into an effective vacancy chemical potential, 
+
+μeff VAC = μVAC − kBT log 
+
+ V
+
+Λ3
+
+> a
+
+
+
+. (34) Here, a denotes the atomic species relative to which the vacancy is defined, for example the Si host in silicon or C host in diamond. More generally, if vacancies are exchanged with multiple atomic species, the species dependence through Λa can equivalently be absorbed into the corresponding atomic chemical potentials. Although the number of lattice sites M is fixed, the number of physical atoms fluctuates as Natom = M − NVAC .Since 
+
+# ∑
+
+> a
+
+μaNa + μVAC NVAC = μVAC M + ∑
+
+> a
+
+(μa − μVAC )Na, (35) the constant first term can be dropped when converting back to Boltzmann density. Thus, treating VAC as a lattice token is equivalent to coupling the physical atomic populations to reservoirs through chemical-potential differences, corresponding to a lattice grand-canonical μV T ensemble. We fix the chemical-potential gauge by setting μhost = 0 (host is either Si for silicon or C for diamond). The chemical potential of each defect species X is initialized independently according to 
+
+μX = ∆EX + kBT log 
+
+ cX
+
+chost 
+
+
+
+, (36) where ∆EX is the energy change upon replacing a single host site by species X without structural relaxation. For vacancies, this corresponds to replacing the host atom by the vacancy token. We use cX = 0.01 and chost = 0.99, corresponding to a nominal 1% dilute concentration for each independently calibrated defect species. This calibration is used only to place different defect species within an accessible chemical-potential range and is not intended to reproduce experimental equilibrium concentrations. An unconstrained grand-canonical solid could leave the dilute-defect basin through vacancy aggregation or excessive substitution, therefore we introduce differentiable concentration penalties, 
+
+Vcap = kcap softplus (NVAC − Nmax VAC ) + kcap ∑
+
+> X∈Adopant
+
+softplus (NX − Nmax  
+
+> X
+
+) , (37) where kcap = 8 eV, softplus (x) = 1 
+
+> s
+
+log (1 + esx ) and s = 4, and Adopant denotes the set of dopant species. We set 
+
+Nmax VAC = 4, corresponding to approximately 2% vacancies, and Nmax  
+
+> X
+
+= 6, corresponding to approximately 3% of each active dopant species in the 216-site cell. The chemical potentials therefore control the propensity of individual defects to occur, whereas the concentration caps prevent sampling from escaping into highly defective, alloyed or void-like configurations outside the intended dilute regime. To amortize sampling across chemical space, each configuration is conditioned on the host together with a randomly selected subset of up to three active defect species (including vacancy). For each selected species, the chemical potential is independently sampled from a uniform window [μX − 0.20 eV , μX + 0.20 eV ] to further amortize over local variations in defect chemical potential. All remaining species are suppressed by setting their chemical potentials to −12 eV. The active-set sizes, including the host, are sampled from 2, 3 and 4 with probabilities 0.2, 0 .4 and 0 .4, respectively. After training, 8,000 configurations are generated for each host and mapped onto nearest-neighbour defect graphs. We extract nearest-neighbour pairs and connected three-site motifs; for a triplet A-[B]-C, the bracketed species denotes the central site bonded to both terminal defects. For each pair or triplet motif, 
+
+> 20/38
+
+we compute the occurrence probability Pobs from the generated ensemble and compare it with the corresponding probability Prand expected from random mixing at the sampled compositions. The enrichment ratio Pobs /Prand 
+
+quantifies preferential motif association, with values above unity indicating enrichment relative to random mixing. Enriched motifs are subsequently evaluated using DFT to identify candidates for quantum-engineering applications. 
+
+First-principles DFT calculations 
+
+First-principles DFT calculations are performed using GPAW 68 with a plane-wave cutoff of 500 eV. For optical calculations, 2,048 fcc binary and ternary alloy structures containing up to 64 atoms are generated as special quasirandom structures (SQSs) 69 from the Cu-Ag-Au-Al-Ni chemical space. An 800 K configuration is generated for each structure by NVT MD simulation and subsequently evaluated using the Perdew-Burke-Ernzerhof (PBE) functional 70 with a 3 × 3 × 3 k-point mesh. The frequency-dependent dielectric response is calculated within the random-phase approximation (RPA) 71 . Optical spectra are evaluated over photon energies of 0-6 eV using a spectral broadening of 0.10 eV, and the visible-range reflectance is averaged over 1.65-3.10 eV. For evaluation of defects for quantum engineering, selected defect motifs are evaluated in 216-site 3 × 3 × 3diamond-cubic supercells for both silicon and diamond hosts. Each motif is evaluated in charge states q = + 1, 0, −1. Structures are first relaxed using PBE with Γ-point sampling until the maximum residual force is below 0.03 eV · ˚A−1. To identify low-energy magnetic configurations, multiple total magnetic-moment sectors compatible with the electron count are independently relaxed for each charge state, with higher-spin sectors additionally considered for motifs containing transition metals. The lowest-energy magnetic configuration is retained for subsequent electronic-structure calculations. Electronic energies and defect states are then recomputed on the PBE-relaxed structures using the fully self-consistent Heyd-Scuseria-Ernzerhof (HSE06) screened hybrid functional 72 to describe localized defect states and their positions relative to the host band edges. The pristine-host energies, valence- and conduction-band edges, and elemental reference chemical potentials entering the defect energetics are consistently evaluated at the HSE06 level. Charged-defect total energies are corrected for interactions between periodic images and the compensating background using the Freysoldt-Neugebauer-Van de Walle correction 47 , with static dielectric constants of 11.7 and 5.7 used for silicon and diamond, respectively. Finally, the formation energy of defect D in charge state q is evaluated as 
+
+Ef[Dq] = E[Dq] − Ebulk − ∑
+
+> i
+
+niμi + q(EVBM + EF) + Eq
+
+> corr
+
+, (38) where E[Dq] and Ebulk are the defect and pristine-host HSE06 energies, ni denotes the change in the number of atoms of species i, such that ni < 0 corresponds to atoms removed from the supercell and ni > 0 to atoms added to form the defect, and μi is the corresponding atomic chemical potential, EF is measured from the aligned VBM, and 
+
+Eq 
+
+> corr
+
+is the finite-size correction. Thermodynamic CTLs between charge states q1 and q2 are obtained from crossings of the corresponding formation energies, 
+
+ε(q1/q2) = E[Dq1 ] + Eq1 
+
+> corr
+
+− E[Dq2 ] − Eq2
+
+> corr
+
+q2 − q1
+
+− EVBM . (39) 
+
+Acknowledgments 
+
+The authors thank Juno Nam for helpful discussions. D.B. acknowledges support by funding from a Google PhD fellowship in Machine Learning and ML Foundations. M.S. acknowledges the financial support from Deutsche Forschungsgemeinschaft (DFG) through Grant No. CRC 1114, “Scaling Cascades in Complex Systems” (Project No. 235221301), Project No. B08, “Multiscale Boltzmann Generators”. The Flatiron Institute is a division of the Simons Foundation. 
+
+> 21/38
+
+# JANUS: A Multi-modal Foundation Neural Sampler for Disordered Materials: Supplementary Information 
+
+Denis Blessing 1,2,∗,#, Mouyang Cheng 1,3,4,∗,#, Maximilian Schebek 5, Jutta Rogal 6, Mingda Li 3,7,Carles Domingo-Enrich 1,†, and Yuanqi Du 1,†
+
+> 1
+
+Microsoft Research New England, Cambridge, MA 02142, USA 
+
+> 2
+
+Karlsruhe Institute of Technology, 76131 Karlsruhe, Germany 
+
+> 3
+
+Center for Computational Science and Engineering, MIT, Cambridge, MA 02139, USA 
+
+> 4
+
+Department of Materials Science and Engineering, MIT, Cambridge, MA 02139, USA 
+
+> 5
+
+Department of Physics, Freie Universität Berlin, 14195 Berlin, Germany 
+
+> 6
+
+Initiative for Computational Catalysis, Flatiron Institute, New York, NY 10010, USA 
+
+> 7
+
+Department of Nuclear Science and Engineering, MIT, Cambridge, MA 02139, USA 
+
+> ∗
+
+These authors contributed equally. 
+
+> #
+
+Work done during internship at Microsoft Research. 
+
+> †
+
+Correspondence. Email: carlesd@microsoft.com, yuanqidu@microsoft.com 
+
+Contents 
+
+1 Method details 22 
+
+1.1 Algorithmic description of training and inference . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22 1.2 The discrete masked sampler and its Boltzmann fixed point . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 23 1.3 Generalized target score matching . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 25 1.4 Reference data generation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26 1.5 Free energies along the composition ladder . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27 1.6 General proposals and tilted inference . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29 1.7 Derivation of the inference-time steering weights . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30 1.8 Choices of intermediate reward and guidance . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31 
+
+2 Experimental setup 31 
+
+2.1 Systems and reference data . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31 2.2 Architecture and training details . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32 
+
+References 35 
+
+1 Method details 
+
+1.1 Algorithmic description of training and inference 
+
+Algorithms 1 and 2 describe the amortized training loop of the Methods section and the free-energy inference with forward–backward path weights. Two structural properties deserve emphasis. First, every evaluation of the interatomic potential happens in the label step: each terminal configuration is stored together with its labels—the continuous scores (12), i.e. forces and virial (the derivative of the energy with respect to the isotropic log-volume), and the heat-bath conditionals (15) of all N sites, obtained from a single batched evaluation—so the inner gradient steps replay this oracle information many times, and the number of energy and force evaluations is set by the generation cadence alone, independently of the number of gradient steps. Second, both loops are conditional throughout: every chain carries its own (T, ∆μ) which is stored in the buffer alongside the labels, and a replayed terminal is interpolated, targeted and regressed at exactly its stored condition, so a single network amortizes the whole conditioning window. The diffusion strength is chosen per channel and scales with temperature as 
+
+gc(t; T ) = gc(t) ( T /Tref )1/2, matching the scaling of the thermal fluctuations that the prior widths (S34) already follow. At inference (Algorithm 2), one rollout produces a sample and its log-weight simultaneously: the continuous channels accumulate the forward–backward Gaussian log-ratio (20) step by step, the species channel accumulates 
+
+22/38 1 Generate           
+
+> all-mask lattice prior x1∼pθ(· | T, ∆μ)(T, ∆μ)∼p
+> dxc=
+
+[bcθ + g2scθ
+
+] dt + √2 g dW ; reveal ai ∼ qθ,i (· | xt)                                             
+
+> 2Label
+> forces F, virial, flips ρi
+> ρi
+> replay buffer store F, virial, ρi
+> with (T, ∆μ)
+> (only oracle calls)
+> 3Interpolate
+> fresh x0xtbuffered x1
+> xct= (1 −α(t)) xc
+> 0+α(t)xc
+> 1;re-mask a1,i w.p. 1−αa(t)
+> 4Regress
+> equivariant network
+> xt
+> tT, ∆μ
+> bθsθqθ
+> force-informed regression + soft-label cross-entropy
+> min θLcont (θ) + λLdisc (θ)
+> samples x1
+> buffered x1+ labels targets ˆb, ˆs, labels ρi
+> updated (bθ, s θ, q θ)family of Boltzmann ensembles
+> π1(T, ∆μ) = fixed point
+
+Figure S1. Self-consistent fixed-point training of JANUS. At each round, the current model generates terminal configurations by integrating the coupled dynamics—the discretized stochastic differential equation (10) for displacements and log-volume, monotone unmasking (11) for the species—from the all-mask lattice prior, under conditions (T, ∆μ) drawn freshly per chain ( generate ); the interatomic potential labels each terminal with the forces, the virial, and the heat-bath conditionals ρi of Eq. (15), which are stored in a replay buffer together with the condition ( label ); intermediate states (at , xt ) are formed by interpolating the continuous channels between fresh prior draws and buffered terminals while re-masking the buffered species site-wise ( interpolate ); and the network heads—the velocities and scores (bθ , sθ ) of the continuous channels and the species posterior qθ —are updated by force-informed regression and soft-label cross-entropy ( regress ). The family of Boltzmann ensembles π1(T, ∆μ) is a fixed point of this cycle. the exact configuration-space log-probability (17) at the reveal moments, and the target enters once, at the terminal, through log π1(xM ) in Eq. (19). 
+
+1.2 The discrete masked sampler and its Boltzmann fixed point 
+
+This section formalizes the discrete part of the fixed-point iteration of the Methods section and shows that the Boltzmann ensemble is a fixed point of it. Throughout we freeze the continuous channels and the thermodynamic conditions and write π1(a) for the target’s conditional law of the species vector a ∈ A N ; for the binary alloy 
+
+A = {0, 1}, but nothing below depends on the alphabet size, so vacancies and multi-component systems are covered verbatim. The heat-bath conditionals of the target are 
+
+ρi(b | a−i) = π1
+
+ ai = b a−i
+
+, (S1) cf. Eq. (15) of the Methods section. A partially revealed state is a vector x ∈ (A ∪ { M})N ; we write R(x) and M (x)
+
+for its revealed and masked sites and say that a terminal state a is consistent with x, written a ▷ x, if ai = xi for all 
+
+i ∈ R(x).
+
+The sampler. A model is a family of heads q = {qi(· | x)}, one categorical law per masked site of every partially revealed state. The reveal process draws i.i.d. reveal times τi with P(τi ≤ t) = αa(t) and, at its reveal time, site i
+
+23/38 Algorithm 1 JANUS amortized fixed-point training  
+
+> 1:
+
+input: interatomic potential U (forces, virial, single-site substitution energies); pressure P; condition distribution 
+
+p(T, ∆μ); schedules α(t), αa(t); diffusion strengths gc(t); prior parameters of Eqs. (S33)–(S34); loss weight λ 
+
+> 2:
+
+initialize the network θ with heads (bu 
+
+> θ
+
+, su 
+
+> θ
+
+, bv 
+
+> θ
+
+, sv 
+
+> θ
+
+, qθ ) (scalar heads at zero)  
+
+> 3:
+
+fill the replay buffer B with conditioned prior draws  
+
+> 4:
+
+for a fixed number of outer rounds do  
+
+> 5:
+
+// generate  
+
+> 6:
+
+draw per-chain conditions (T, ∆μ) ∼ p 
+
+> 7:
+
+draw x0 = ( a0, u0, v0): all-mask species, (u0, v0) from Eqs. (S33)–(S34)  
+
+> 8:
+
+integrate Eqs. (10)–(11) for M steps under (T, ∆μ) to obtain terminals x1 = ( a1, u1, v1) 
+
+> 9:
+
+// label  
+
+> 10:
+
+evaluate the continuous scores (12) and the heat-bath conditionals ρi of Eq. (15) for all sites  
+
+> 11:
+
+push  x1, labels , (T, ∆μ) onto B 
+
+> 12:
+
+for a fixed number of inner steps do  
+
+> 13:
+
+draw  x1, labels , (T, ∆μ) ∼ B; fresh (u0, v0) at the stored condition; t ∼ U [0, 1] 
+
+> 14:
+
+// interpolate  
+
+> 15:
+
+xct ← (1 − α(t)) xc 
+
+> 0
+
++ α(t) xc 
+
+> 1
+
+for c ∈ { u, v}; mask each site of a1 independently w.p. 1 − αa(t) 
+
+> 16:
+
+ˆbc ← ˙α(t) ( xc 
+
+> 1
+
+− xc
+
+> 0
+
+); ˆsc ← combination of stored target score and prior score, Eqs. (S6)–(S7)  
+
+> 17:
+
+ℓi ← ρi of Eq. (15) at the masked sites  
+
+> 18:
+
+// regress  
+
+> 19:
+
+take a gradient step on Lcont + λ Ldisc [Eqs. (13) and (14)] at the stored condition  
+
+> 20:
+
+end for  
+
+> 21:
+
+end for  
+
+> 22:
+
+return θ
+
+draws its symbol from qi(· | x) evaluated at the then-current state; we analyze the exact sequential process (one reveal at a time), to which the block integrator of the Methods section converges as the number of reveals per step approaches one. Since the τi are i.i.d., the reveal order is a uniformly random permutation σ of the sites, independent of everything else, and the terminal law of the rollout is 
+
+πq(a) = Eσ
+
+" N
+
+# ∏
+
+> k=1
+
+qσ (k)
+
+ aσ (k) xσ ,a
+
+> k−1
+
+#
+
+, (S2) where xσ ,a 
+
+> k−1
+
+is the state in which sites σ (1), . . . , σ (k − 1) show their values under a and all others are masked. Equation (S2) is the any-order autoregressive representation of the masked sampler 52 . 
+
+> The training map.
+
+One idealized round of the iteration consists of the two maps 
+
+q Λ
+
+−−→ πq Ψ
+
+−−→ q′, (S3) Here, “idealized” means that the model can represent any collection of conditional distributions and that each training round finds the exact population-loss minimizer. We further assume that training uses only terminals generated by the current model, rather than the mixture of current and earlier rollout distributions retained by the practical replay buffer. A model q is a fixed point if Ψ(Λ(q)) = q on all states reachable under its own rollout. 
+
+Proposition 1 (Population minimizer) Fix a buffer law π. For every partially revealed state x with π-positive probability and every i ∈ M (x), the unique minimizer of the population loss (14) is q′
+
+> i
+
+(b | x) = Ea∼π
+
+ρi(b | a−i) a ▷ x. (S4) 
+
+> 24/38
+
+Algorithm 2 JANUS inference with forward–backward path weights  
+
+> 1:
+
+input: trained network θ ; condition (T, ∆μ) at pressure P; grid tn = nh with h = 1/M; number of trajectories 
+
+ntraj  
+
+> 2:
+
+for j = 1, . . . , ntraj do  
+
+> 3:
+
+draw a0 = ( M, . . . , M) and (u0, v0) ∼ π0(· | T, ∆μ) 
+
+> 4:
+
+log W ← − log π0(u0, v0); log qdisc ← 0 
+
+> 5:
+
+for n = 0, . . . , M − 1 do  
+
+> 6:
+
+evaluate the network once at (xn,tn): fields bc 
+
+> θ
+
+, sc 
+
+> θ
+
+and posteriors qθ ,i 
+
+> 7:
+
+advance (u, v) by the Euler–Maruyama step (10)  
+
+> 8:
+
+reveal each still-masked site w.p. pn of Eq. (11) (with pM−1 = 1); a revealed site i draws a1,i ∼ qθ ,i(· | xn) 
+
+> 9:
+
+log qdisc ← log qdisc + ∑i revealed log qθ ,i(a1,i | xn) 
+
+> 10:
+
+log W ← log W + ∆uv n of Eq. (20), with the backward drift of Eq. (18) evaluated at (xn+1,tn+1) 
+
+> 11:
+
+end for  
+
+> 12:
+
+log W ← log W + log π1(xM ) − log qdisc  
+
+> 13:
+
+store  x( j) 
+
+> M
+
+, log W ( j) 
+
+> 14:
+
+end for  
+
+> 15:
+
+semi-grand potential: log bΞ = logsumexp j log W ( j) − log ntraj ; bΦ = −kBT log bΞ ▷ Eq. (21)  
+
+> 16:
+
+observables: ¯w j = elog W ( j)  ∑ j′ elog W ( j′)
+
+; ⟨O⟩ = ∑ j ¯w j O x( j)
+
+> M
+
+ 
+
+> 17:
+
+diagnostic: ESS =   ∑ j elog W ( j) 2 ∑ j e2 log W ( j) 
+
+> 18:
+
+return samples {x( j) 
+
+> M
+
+}, weights { ¯w j}, and estimates (log bΞ, bΦ, ⟨O⟩, ESS )
+
+Proof. The cross-entropy − ∑b ℓ(b) log q(b), averaged over the conditional law of the label ℓ given the input x,is minimized over categorical q uniquely by the conditional mean q = E[ℓ | x]. Because every site is masked independently with a probability that does not depend on its symbol, the mask pattern is independent of a;conditioning on the observed state x is therefore equivalent to conditioning on the event {a ▷ x}, which gives (S4). □
+
+Proposition 2 (The Boltzmann ensemble is a fixed point) Let q π1 denote the exact denoising posteriors of the target, q π1 
+
+> i
+
+(b | x) = π1
+
+ ai = b | aR(x) = xR(x)
+
+, where a R(x), x R(x) denote the sites of a, x where x is unmasked. Then (i) Ψ(π1) = qπ1 , and (ii) Λ(qπ1 ) = π1. Consequently q π1 is a fixed point of the iteration, and its rollout samples the Boltzmann ensemble exactly. Proof. (i) Apply Proposition 1 with π = π1. Since ρi(b | a−i) does not depend on ai, the tower property of conditional expectation gives 
+
+Eπ1
+
+ρi(b | a−i) a ▷ x = ∑ 
+
+> aM(x)\i
+
+π1
+
+ aM (x)\i aR(x) = xR(x)
+
+ π1
+
+ ai = b a−i
+
+ = π1
+
+ ai = b aR(x) = xR(x)
+
+, (S5) which is qπ1 
+
+> i
+
+(b | x). In the first equality of (S5) we rewrote the conditional expectation as a summation and we leveraged that ρi(b | a−i) = π1
+
+ ai = b a−i
+
+ by definition. (ii) Conditional on any reveal order σ , the rollout with heads qπ1 draws aσ (1), . . . , aσ (N) sequentially from the exact conditionals of π1; by the chain rule the resulting joint law is π1 for every σ , hence also after averaging over σ in (S2). □
+
+1.3 Generalized target score matching 
+
+The score target ˆ sc of Eq. (12) is the target-endpoint form of the score identity (7). Its coefficient 1 /α(t) diverges as t → 0, i.e., precisely where no estimate is needed, since p0 = π0,c is known in closed form. Following prior work 29, 32 , we therefore regress on a convex combination of the score identities anchored at the two endpoints of the interpolant, 
+
+sc(a, x,t) = E
+
+h c(t) 
+
+> α(t)
+
+∇xc 
+
+> 1
+
+log π1(a1; x1) + 1−c(t) 
+
+> 1−α(t)
+
+∇xc 
+
+> 0
+
+log π0,c(x0) (at , xt ) = ( a, x)
+
+i
+
+, (S6) 
+
+25/38 which holds for every weight function c(t): conditionally on (at , xt ), both inner terms are unbiased estimates of the marginal score: the first by the target score identity (7), the second by its mirror image with the roles of the endpoints exchanged, in which the integration by parts is carried out against the (Gaussian) prior rather than the target. The choice of c(t) therefore affects only the variance of the per-sample regression target, which is dominated by the squared coefficients c(t)2/α(t)2 and (1 − c(t)) 2/(1 − α(t)) 2. Balancing the two gives 
+
+c(t) = α(t)2
+
+α(t)2 +  1 − α(t)2 , (S7) the variance-minimizing weight when the two endpoint scores carry comparable conditional second moments. With the linear schedule α(t) = t used in this work, c(t) = t2/ t2 + ( 1 − t)2: the regression target moves smoothly from the exact prior score at t = 0 to the pure force label (12) at t = 1, both coefficients remain bounded on all of [0, 1],and no clamping or time cutoff is required. The prior scores are closed-form throughout, ∇u0 log π0,u = −u0/σu(T )2
+
+and ∂v0 log π0,v = −(v0 − ¯v)/σ 2 
+
+> v
+
+from Eqs. (S33)–(S34). 
+
+1.4 Reference data generation 
+
+Two Monte Carlo references cover the alloy systems, matching the two model routes of the Methods section: First, for Cu–Ni, which remains miscible across the studied window, the composition responds smoothly to the exchange potential and chains sampling the semi-grand target (1) directly converge with local moves alone; the reference is a grid of independent (T, ∆μ) states pooled by multistate reweighting. Second, for Cu–Ag and Ni–Cr the miscibility gap makes that route unreliable as semi-grand chains are hysteretic at coexistence. The reference free energies and binodals for these systems are therefore computed with the canonical composition ladder—fixed-composition ensembles at every rung n = 0, . . . , N, connected by the substitution-edge estimator of Section 1.5—which measures log Zn rung by rung and never has to cross the barrier at all.  
+
+> Local moves.
+
+Both reference samplers run the same Metropolis kernel, batched across all states and walkers; only the species move differs. One sweep applies three moves. (i) A collective displacement move u′ = u + σuξ ,
+
+ξ ∼ N (0, I); the proposal is symmetric and leaves (v, a) untouched, so log A = −β ∆U. (ii) A log-volume move 
+
+v′ = v + σvξ , which does carry a Jacobian because v changes, log A = −β  ∆U + P ∆V  + N ∆v; proposing in log V
+
+rather than V turns the V N factor of the target into the harmless additive N∆v and lets a fixed-width Gaussian proposal work across the whole grid. (iii) The species move: the semi-grand chains attempt nflip single-site species flips at uniformly random sites, accepted with log A = β  ∆μ ∆NB − ∆Ui
+
+ while the ladder chains attempt nexch pair exchanges, in which a uniformly drawn A–B site pair trades types with log A = −β ∆U, rearranging the configuration at exactly fixed NB. One sweep costs 2 + nflip (respectively 2 + nexch ) batched potential evaluations. The displacement and volume moves act on the whole configuration at once, so a healthy step size scales as σ ∼ 1/pNβ and cannot be a single constant across several hundred kelvin: steps are initialized per state as σk ∝ pβmin /βk and adapted toward a target acceptance of ≈0.3 during burn-in only. At the first production sweep the steps freeze and all counters reset, so recorded samples come from a fixed, detailed-balanced kernel.  
+
+> The semi-grand grid (Cu–Ni).
+
+A reference run is a two-dimensional grid of (T, ∆μ) states, each with two walkers initialized from the two pure phases (all-Ni and all-Cu), whose agreement after burn-in is the convergence criterion: the two chains approach the stationary composition from opposite sides. The states are statistically independent and no configurations are exchanged between them, so a grid shards freely across devices, and the states are connected only in post-processing, by the multistate reweighting below.  
+
+> Multistate reweighting.
+
+Samples from K semi-grand states {(Tk, ∆μk, Pk)} are combined with the multistate Bennett acceptance ratio (MBAR) 73 . Each pooled configuration x = ( a, u, v) is scored under every state through its reduced potential, 
+
+uk(x) = U(x) + PkV (x) − ∆μk NB(x)
+
+kBTk
+
+, (S8) 
+
+> 26/38
+
+which is − log π1(Tk, ∆μk) up to the Jacobian term Nv ; the latter is state-independent and cancels from all weight ratios. With Nk samples drawn from state k, the reduced free energies ˆ fk = − log Ξk (up to one common constant) solve the self-consistent MBAR equations ˆfk = − log ∑
+
+> x
+
+e−uk(x)
+
+∑k′ Nk′ e ˆfk′ −uk′ (x) , (S9) where the outer sum runs over the pooled samples of all states. Since MBAR assumes decorrelated samples, the pooled chains are thinned by their measured autocorrelation. 
+
+The composition ladder (Cu–Ag and Ni–Cr). We use two walkers per (n, T ) state, one initialized as a random solid solution, the other as a phase-separated slab, and use the residual spread between them as convergence criterion. Within each rung, adjacent temperatures exchange full configurations in disjoint pairs of alternating parity (the deterministic even–odd scheme 74 ). Both exchange partners share NB, so the composition term of the target cancels from the acceptance, log Aswap = ( βk − βl )H (xk) − H (xl ), H = U + PV , (S10) and the volume Jacobian Nv cancels identically because its coefficient is the same N in every replica. 
+
+1.5 Free energies along the composition ladder 
+
+Here, we provide details on the computation of the composition-resolved free energy G(n). Additionally, we present a different estimator that replaces the direct path-weight estimation of Zn outlined in the Methods section and only measures ratios of neighboring rungs, in which the dominant share of the path-weight variance (the absolute free energy of the rung ensemble) cancels. It is the estimator used for all reported ladder results. 
+
+Substitution identity. For a configuration a on rung n, and an A site i, define the forward substitution energy 
+
+∆UA→B 
+
+> i
+
+= U(a(i→B); u, v) −U(a; u, v). (S11) Similarly, for a configuration on rung n + 1 and a B site j, define 
+
+∆UB→A 
+
+> j
+
+= U(a( j→A); u, v) −U(a; u, v). (S12) In both substitutions, the displacements and volume are held fixed. Every configuration on rung n + 1 has exactly 
+
+n + 1 preimages obtained by choosing one of its B sites and retyping it as A. Conversely, every configuration on rung n has N − n possible A-to-B substitutions. Summing over these configuration–site pairs and regrouping by the substituted configuration gives 
+
+Zn+1
+
+Zn
+
+= N − nn + 1
+
+*
+
+1
+
+N − n ∑
+
+> i:ai=A
+
+e−β ∆UA→B
+
+> i
+
++
+
+> n
+
+= N − nn + 1
+
+*
+
+1
+
+n + 1 ∑  
+
+> j:aj=B
+
+e−β ∆UB→A
+
+> j
+
++−1
+
+> n+1
+
+. (S13) 
+
+Proof sketch. Let Ωn = {a : NB(a) = n} denote the set of species configurations on rung n, and write the fixed-composition partition function as 
+
+Zn = ∑
+
+> a∈Ωn
+> Z
+
+dλ (u, v) e−β [U(a;u,v)+ PV (v)] ,
+
+where dλ (u, v) denotes the joint continuous measure. The measure is the same on neighboring rungs because an A–B substitution does not change the total number of atoms. For the forward direction, expanding the rung-n
+
+expectation gives 
+
+*
+
+1
+
+N − n ∑
+
+> i:ai=A
+
+e−β ∆UA→B
+
+> i
+
++
+
+> n
+
+= 1
+
+(N − n)Zn ∑
+
+> a∈Ωn
+
+# ∑
+
+> i:ai=A
+> Z
+
+dλ (u, v) e−β [U(a(i→B);u,v)+ PV (v)] . (S14) 
+
+27/38 Every configuration a′ ∈ Ωn+1 appears exactly n + 1 times in this sum, because any one of its n + 1 B sites can be identified as the site introduced by the substitution. Hence, 
+
+*
+
+1
+
+N − n ∑
+
+> i:ai=A
+
+e−β ∆UA→B
+
+> i
+
++
+
+> n
+
+= n + 1
+
+N − nZn+1
+
+Zn
+
+=⇒ Zn+1
+
+Zn
+
+= N − nn + 1
+
+*
+
+1
+
+N − n ∑
+
+> i:ai=A
+
+e−β ∆UA→B
+
+> i
+
++
+
+> n
+
+.
+
+Similarly, expanding the reverse expectation gives 
+
+*
+
+1
+
+n + 1 ∑  
+
+> j:aj=B
+
+e−β ∆UB→A
+
+> j
+
++
+
+> n+1
+
+= 1
+
+(n + 1)Zn+1 ∑
+
+> a′∈Ωn+1
+
+# ∑ 
+
+> j:a′j=B
+
+Z
+
+dλ (u, v) e−β [U(a′( j→A);u,v)+ PV (v)] . (S15) After regrouping by the resulting configuration in Ωn, every rung-n configuration appears exactly N − n times, once for each of its A sites. Therefore, 
+
+*
+
+1
+
+n + 1 ∑  
+
+> j:aj=B
+
+e−β ∆UB→A
+
+> j
+
++
+
+> n+1
+
+= N − nn + 1
+
+Zn
+
+Zn+1
+
+=⇒ Zn+1
+
+Zn
+
+= N − nn + 1
+
+*
+
+1
+
+n + 1 ∑  
+
+> j:aj=B
+
+e−β ∆UB→A
+
+> j
+
++−1
+
+> n+1
+
+,
+
+which proves both identities in Eq. (S13). □
+
+Equation (S13) provides two one-sided estimators of the same neighboring-rung free-energy difference. We record their discrepancy as an overlap diagnostic, but use Bennett’s acceptance ratio to combine the forward and reverse substitution works into the reported two-sided estimate, as described below. 
+
+Reduced works and Bennett acceptance ratio. To combine the two directions, augment each rung ensemble with a uniformly chosen eligible substitution site. Define the forward-oriented reduced works 
+
+wf,i = β ∆UA→B 
+
+> i
+
+− log N − nn + 1 , on a ∼ πn, wr, j = −β ∆UB→A 
+
+> j
+
+− log N − nn + 1 , on a ∼ πn+1. (S16) Both wf and wr represent the same forward reduced potential difference, but are evaluated using samples from opposite ends of the edge. Let nf and nr denote the numbers of sampled configurations from rungs n and n + 1, respectively, let C =
+
+log (nr/nf), and define σ (z) = ( 1 + ez)−1. The dimensionless edge free energy 
+
+∆n = β G(n + 1) − G(n) = − log Zn+1
+
+Zn
+
+(S17) is the solution of 
+
+> nf
+
+# ∑
+
+> k=1
+
+1
+
+N − n ∑  
+
+> i:a(k)
+> i=A
+
+σ
+
+
+
+w(k) 
+
+> f,i
+
+− ∆n −C
+
+
+
++
+
+> nr
+
+# ∑
+
+> k=1
+
+1
+
+n + 1 ∑  
+
+> j:a(k)
+> j=B
+
+σ
+
+
+
+w(k)  
+
+> r,j
+
+− ∆n −C
+
+
+
+= nr, (S18) This is the standard Bennett acceptance-ratio equation rewritten using σ (−z) = 1 − σ (z). Its left-hand side is monotone in ∆n, so the unique finite root can be obtained robustly by bisection. BAR combines the forward and reverse work distributions and is asymptotically optimal under the standard independent-sampling assumptions. The discrepancy between the two one-sided estimates in Eq. (S13) is additionally reported as an overlap diagnostic. Accumulating the edge differences determines the free-energy curve relative to the pure-A rung, 
+
+G(n) − G(0) = kBT
+
+> n−1
+
+# ∑
+
+> m=0
+
+∆m. (S19) The unknown value G(0) cancels from the mixing free energy in Eq. (24). 
+
+28/38 The neural ladder. The trained sampler generates trajectories at fixed composition. A terminal configuration on rung n supplies the A →B substitution works for the edge n → n + 1 and the B →A substitution works for the edge 
+
+n − 1 → n. All eligible substitutions in each direction are evaluated in one batched call to the potential, in addition to the terminal target-density evaluation required for the forward–backward path weight. Because generated terminals are not assumed to follow the exact rung ensemble, each trajectory is corrected by its forward–backward weight from Eq. (19). For Kn trajectories on rung n, with terminal states x(n) 
+
+> k
+
+and log forward-backward path weights log W (n) 
+
+> k
+
+, the normalized within-rung weights and expectations under the exact rung ensemble read ¯W (n) 
+
+> k
+
+= exp   log W (n)
+
+> k
+
+
+
+∑Kn 
+
+> ℓ=1
+
+exp   log W (n)
+
+> ℓ
+
+ , d⟨O⟩n =
+
+> Kn
+
+# ∑
+
+> k=1
+
+¯W (n) 
+
+> k
+
+O x(n)
+
+> k
+
+. (S20) Thus, the one-sided estimators in Eq. (S13) are evaluated by applying Eq. (S20) to their corresponding site-averaged exponential works. The same correction is applied to BAR. For the edge n → n + 1, let nf = Kn, nr = Kn+1, and C = log (nr/nf). The importance-weighted BAR equation is 
+
+nf
+
+> nf
+
+# ∑
+
+> k=1
+
+¯W (n)
+
+> k
+
+1
+
+N − n ∑  
+
+> i:a(n)
+> k,i=A
+
+σ
+
+
+
+w(k) 
+
+> f,i
+
+− ∆n −C
+
+
+
++ nr
+
+> nr
+
+# ∑
+
+> ℓ=1
+
+¯W (n+1)
+
+> ℓ
+
+1
+
+n + 1 ∑   
+
+> j:a(n+1)
+> ℓ, j=B
+
+σ
+
+
+
+w(ℓ)  
+
+> r,j
+
+− ∆n −C
+
+
+
+= nr. (S21) When all path weights are equal, ¯ W (n) 
+
+> k
+
+= 1/nf and ¯ W (n+1) 
+
+> ℓ
+
+= 1/nr, and Eq. (S21) reduces to the unweighted BAR equation (S18). Any factor in W (n) 
+
+> k
+
+that is constant across a rung cancels upon normalization. In particular, the semi-grand tilt exp (β ∆μn) is common to all trajectories at fixed n and therefore does not alter the target rung averages. The conditioning can nevertheless affect the efficiency of the proposal and hence the variance of the estimator, which we monitor through the within-rung effective sample size ESS n = 1/ ∑Kn
+
+> k=1
+
+  ¯W (n)
+
+> k
+
+2.
+
+1.6 General proposals and tilted inference 
+
+The steering scheme presented in the Methods section biases only the continuous channels of the proposal; the species channel is propagated by the pretrained kernel and steered through the weights and the resampling alone. Here we outline the general construction in which the species proposal is biased toward the reward as well. The proposal again mirrors the pretrained integrator: each continuous channel advances with an arbitrary drift ac with Gaussian transition density N  xcn + ac(an, xn,tn) h, 2g2(tn)h, while the species channel keeps the reveal times of the pretrained sampler and lets a site revealed at step n draw its symbol from an arbitrary categorical qprop  
+
+> n,i
+
+with full support. The log-weight update then acquires, in addition to the reward increment and the Gaussian density ratio, one realized-token ratio per site revealed in that step, 
+
+∆ log wn = rtn+1 (an+1; xn+1) − rtn (an; xn) + ∑
+
+> i∈Rn
+
+log qθ ,i(an+1,i | an, xn)
+
+qprop  
+
+> n,i
+
+(an+1,i)+ ∑
+
+> c∈{ u,v}
+
+log N  xcn+1; xcn + bc 
+
+> θ
+
++ g2(tn) sc
+
+> θ
+
+(an, xn,tn) h, 2g2(tn)h
+
+N  xcn+1; xcn + ac(an, xn,tn) h, 2g2(tn)h ,
+
+(S22) where Rn is the set of sites revealed in step n. A natural species proposal is tilted decoding 33, 75 : a site revealed at step n draws its symbol from the reweighted categorical 
+
+qprop  
+
+> n,i
+
+(b) ∝ qθ ,i(b | an, xn) eλa rtn (a(i→b)  
+
+> n;xn)
+
+, (S23) where a(i→b) 
+
+> n
+
+denotes the species state with site i revealed as symbol b and λa ≥ 0 controls the strength of the discrete guidance. With λa = 0 the token ratios vanish and the construction reduces to the continuous-guidance scheme of the Methods section. 
+
+29/38 1.7 Derivation of the inference-time steering weights 
+
+This section derives the steering weights—the general form (S22) with both channels proposed freely, of which the continuous-guidance weight (31) of the Methods section is the special case qprop  
+
+> n,i
+
+= qθ ,i. The derivation is the discrete-time counterpart, on the hybrid state space, of the continuous-time Radon–Nikodym construction of Ref. 33 .Throughout we write y = ( a, x) for the full state and y0: M for a trajectory on the grid tn = nh , h = 1/M.Conditionally on the current state yn, the implemented sampler advances the continuous channels by independent Gaussian steps and each species site independently, so its one-step transition kernel is the exactly evaluable product 
+
+−→p n(yn+1 | yn) = ∏
+
+> c∈{ u,v}
+
+N
+
+
+
+xcn+1; xcn + bc 
+
+> θ
+
++ g2(tn) sc
+
+> θ
+
+(yn,tn) h, 2g2(tn)h I 
+
+ N
+
+# ∏
+
+> i=1
+
+−→p an,i
+
+ an+1,i | an,i; yn
+
+, (S24) with the per-site species factor determined by the reveal probability pn of Eq. (11) and the head of Eq. (9), 
+
+−→p an,i(b′ | b; yn) = 
+
+
+
+pn qθ ,i(b′ | yn), b = M, b′ ∈ A ,
+
+1 − pn, b = b′ = M,
+
+1{b′ = b}, b ∈ A (revealed sites are frozen) .
+
+(S25) The proposal kernel −→q n has the same form, with an arbitrary drift ac in place of bc 
+
+> θ
+
++ g2sc 
+
+> θ
+
+and an arbitrary full-support categorical qprop  
+
+> n,i
+
+in place of qθ ,i, the reveal probabilities being shared. Let Q(y0: M ) = π0(y0) ∏n −→q n(yn+1 | yn)
+
+be the law of the proposal chain, where π0 is the joint prior. For any unnormalized terminal density ˜ p(y) and any normalized backward kernels ←−c n, the weight 
+
+w(y0: M ) = ˜p(yM )
+
+π0(y0)
+
+> M−1
+
+# ∏
+
+> n=0
+
+←−c n(yn | yn+1)
+
+−→q n(yn+1 | yn) (S26) satisfies EQ
+
+w O (yM ) = R ˜p O dy for any observable O, as the proposal density cancels and y0, . . . , yM−1 integrate out in turn since each ←−c n is normalized. Nothing in this argument refers to the nature of the state space: the integral R dy is the sum over species configurations combined with the Lebesgue integral over the continuous channels, and the successive marginalizations interleave sums and Gaussian integrals, so the identity holds verbatim on the hybrid state space. The choice of ←−c n therefore affects only the variance. The free-energy path weight (19) is the case ˜p = π1, −→q n = −→p n, and ←−c n the time reversal of the learned chain—the backward Gaussian kernels of (20), built from the reversed SDE (18), for the continuous channels and the parameter-free re-masking kernel for the species. For steering, let pθ ,n denote the (intractable) marginals of the pretrained chain, with pθ ,0 = π0 and pθ ,M = pbase .Choosing the tilted model ensemble ˜ p = pbase eηr and the exact time reversal of the pretrained chain, 
+
+←−c n(yn | yn+1) = 
+
+−→p n(yn+1 | yn) pθ ,n(yn)
+
+pθ ,n+1(yn+1) , (S27) which is normalized by construction, the intractable marginals telescope against pbase and the prior, and (S26) reduces to log w(y0: M ) = η r(yM ) + 
+
+> M−1
+
+# ∑
+
+> n=0
+
+log 
+
+−→p n(yn+1 | yn)
+
+−→q n(yn+1 | yn) , (S28) free of intractable quantities. Writing η r(yM ) = ∑n
+
+rtn+1 (yn+1) − rtn (yn), which uses only the boundary conditions 
+
+r0 ≡ 0 and r1 = ηr, yields the incremental update (S22). The intermediate reward hence cancels from the terminal weight; it matters only through resampling, as the population after step n approximates ∝ pθ ,n ertn , so rt controls how gradually the tilt is introduced along the rollout. The weights are exact for any step size h, and any guidance strengths. 
+
+30/38 The kernel ratio splits by channel. Because base and proposal share the reveal probabilities, the pattern factors 
+
+pn, 1 − pn and the frozen-site factors in (S25) cancel between −→p n and −→q n, and because both Gaussian factors share the variance 2 g2(tn)h, their normalizers cancel as well. Writing ucn = [ bc 
+
+> θ
+
++ g2(tn) sc 
+
+> θ
+
+]( yn,tn) for the pretrained drift and acn for the proposal drift, the kernel ratio in (S28) reduces to log 
+
+−→p n
+
+−→q n
+
+= ∑
+
+> c∈{ u,v}
+
+xcn+1 − xcn − acnh 2 − xcn+1 − xcn − ucnh 2
+
+4g2(tn)h + ∑
+
+> i∈Rn
+
+h
+
+log qθ ,i
+
+ an+1,i | yn
+
+−log qprop 
+
+> n,i
+
+ an+1,i
+
+i
+
+, (S29) where Rn is the set of sites revealed in step n and both categoricals are evaluated at the realized symbols; every term is computed along the trajectory the sampler generates anyway, at no additional network cost. Substituting (S29) into (S28) yields exactly the general steering weight (S22) of Section 1.6; propagating the species channel by the pretrained head, qprop  
+
+> n,i
+
+= qθ ,i, cancels the token ratios and recovers the continuous-guidance weight (31) of the Methods section. With λc = λa = 0 the two kernels coincide, the ratio vanishes identically, and the weight update consists of reward increments alone—pure reweighting of the unmodified sampler. 
+
+1.8 Choices of intermediate reward and guidance 
+
+The choices of the intermediate reward and proposal dynamics affect only the weight variance. In this work, we use two different variants outlined below.  
+
+> Annealed reward.
+
+When r is meaningful on partially generated states, the annealed reward 25 rt (x) = αr(t) η r(x)
+
+scores the current state directly under a ramp αr(0) = 0, αr(1) = 1. On the hybrid state this requires a convention for the species argument: revealed sites enter with their committed symbols, and still-masked sites are soft-completed by the head marginals qθ ,i. 
+
+> Tweedie reward.
+
+When r is defined only on clean terminal structures, we score the per-channel posterior means of the terminal state. For a continuous channel, the interpolant (5) is deterministic given its endpoints, so conditioning it and the velocity (6) on xt = x gives two linear equations for the posterior means mck = E[xck | xt = x], namely 
+
+xc = ( 1 − α)mc 
+
+> 0
+
++ αmc 
+
+> 1
+
+and bc 
+
+> θ
+
+= ˙α (mc 
+
+> 1
+
+− mc
+
+> 0
+
+)25 , and hence ˆxc
+
+> 1
+
+(x,t) = xc + 1 − α(t)
+
+˙α(t) bc 
+
+> θ
+
+(x,t), (S30) the posterior-mean estimate available from the velocity head alone 60 . For the species channel no estimate is needed: the head is the posterior over the terminal identity, and the soft species argument ˆρi(b | x,t) = 
+
+(
+
+1{b = ai}, i revealed ,
+
+qθ ,i(b | x), i masked , (S31) is exact on revealed sites, where the terminal symbol is already committed. 
+
+2 Experimental setup 
+
+2.1 Systems and reference data  
+
+> The Ising testbed.
+
+The lattice semi-grand-canonical alloy is the controlled testbed for the species channel: the particles sit permanently on an L × L periodic lattice, so the only degree of freedom is the species label ai ∈ { 0, 1}
+
+and the mode-coverage problem is isolated from the positional one. The Hamiltonian 
+
+H(a) = ∑
+
+> ⟨i j ⟩
+
+ε(ai, a j) − ∆μ NB(a), π1(a) ∝ e−H(a)/kBT , (S32) maps exactly onto the ferromagnetic Ising model through σi = 2ai − 1, with coupling J = ( 2εAB − εAA − εBB )/4 and uniform field h = ∆μ/2. We use εAA = εBB = 0 and εAB = 2, so J = 1 and (kBT /J)c = 2/ ln (1 + √2) = 2.2692. The 
+
+> 31/38
+
+(T, ∆μ) plane is therefore the textbook field–temperature phase diagram: a first-order coexistence line along ∆μ = 0for T < Tc, terminating at the critical point (Tc, 0), and analytic crossover elsewhere. A single amortized model is trained per lattice size and read out over the whole plane; the results of Fig. 2a use L = 16. Ground truth is generated with a ghost-spin Wolff cluster sampler 76 on a grid of 11 temperatures kBT /J ∈ [1.5, 3.2] (containing Tc) and 11 fields ∆μ ∈ [0, 0.4], the ∆μ < 0 half-plane following by particle–hole symmetry; each state runs 24 independent chains of 3 000 cluster steps (600 discarded as burn-in), and the sampler is validated against exact enumeration on 4 × 4 lattices.  
+
+> Alloy systems.
+
+The alloy systems are those considered in the main part: fcc Cu–Ni, Cu–Ag and Ni–Cr on 3 × 3 × 3conventional supercells ( N = 108 sites) and bcc Ni–Cr on a 4 × 4 × 4 supercell ( N = 128), at P = 0, with EAM potentials from the NIST repository 63 —Cu–Ni 64 , Cu–Ag 65 , and a Finnis–Sinclair-type Ni–Co–Cr potential for both Ni–Cr lattices—and interaction cutoffs of 5.0 Å (Cu–Ni, Ni–Cr fcc) and 5.3 Å (Cu–Ag, Ni–Cr bcc). The amortization windows are 600–1200 K (Cu–Ni), 500–1000 K (Cu–Ag) and 600–1500 K (both Ni–Cr lattices) in temperature; the chemical-potential windows are specified below (Table S1).  
+
+> Alloy reference data.
+
+All semi-grand references follow the replica-exchange protocol of Section 1.4, with two walkers per state initialized from the two competing pure phases; their agreement after burn-in is the convergence certificate. Cu–Ni: 15 temperatures (500–1200 K) × 33 chemical potentials ( ∆μ = 0.600–1 .150 eV, 10 meV spacing across the composition crossover and 25 meV in the pinned wings), 40 000 sweeps (2 000 burn-in) with 6 species-flip attempts per sweep; consistent with the diagnostic of Section 1.5, the production Cu–Ni run uses local moves only. The N = 256 size-transfer reference of Fig. 2e uses 7 temperatures × 11 chemical potentials with temperature exchange every other sweep and 24 000 sweeps (12 000 burn-in). Cu–Ag: 11 temperatures (500–1000 K) × 28 chemical potentials (0.50–0.84 eV), deterministic even–odd temperature exchange within each ∆μ column every other sweep, 40 000 sweeps (5 000 burn-in), 27 flip attempts per sweep. Ni–Cr: per lattice, 4 temperatures (600– 1500 K) × 25 chemical potentials spanning the estimated transition line ±0.5 eV, exchange as for Cu–Ag, 40 000 sweeps (8 000 burn-in), 16 flip attempts per sweep. The composition-ladder references of Section 1.5 sample every rung n = 0, . . . , N—at 11 isotherms (500–1000 K) for Cu–Ag and 7 isotherms (600–1500 K) per Ni–Cr lattice—with two walkers per rung initialized from a random solid solution and a phase-separated slab (their spread is the per-edge convergence gate), 30 000 sweeps (5 000 burn-in) of displacement, volume and pair-exchange moves, and temperature replica exchange at fixed composition. 
+
+2.2 Architecture and training details  
+
+> Alloy network.
+
+All heads share one PaiNN-style equivariant message-passing trunk 61 with 4 interaction layers and 64 scalar and 64 vector channels per site (2 .7 × 10 5 parameters); interatomic distances are expanded in 16 Gaussian radial basis functions under a smooth polynomial cutoff envelope, with the cutoff matched to the potential range as above. The per-site input features encode the species state, smooth species-resolved coordination numbers together with a separate count of still-masked neighbours, the displacement magnitude, the normalized log-volume, sinusoidal time features, and the conditioning features of the amortized family—the normalized inverse temperature, the normalized offset ∆μ − c∆μ(T ). The displacement velocity and score are emitted by per-site gated equivariant vector heads, augmented by a learned scalar multiple of the displacement itself—a lattice anchor that breaks exactly the symmetry the reference lattice breaks; the volume fields are read out from mean-pooled invariant features; and the species head emits per-site categorical logits from layer-normalized, gradient-isolated trunk features, so that the 
+
+O(1) cross-entropy (14) is not swamped by the large-scale score regressions. All scalar heads are zero-initialized, so generation starts from the prior transport and the fair-coin completion law.  
+
+> Lattice network.
+
+For the Ising testbed the species head is a periodic fully-convolutional network: 4–6 layers of 3 × 3 convolutions with circular padding and 64–96 channels (0 .2–0 .8 M parameters), with time, the conditions and the spatial mean of every feature channel re-injected at each layer as constant input channels—an intensive global feature that gives the local receptive field access to the lattice-wide order parameter—and a zero-initialized 1 × 1output layer. 
+
+> 32/38
+
+Table S1. Amortization windows and transition-line estimates c∆μ(T ) = a0 + a1T of the alloy models. system T window (K) a0 (eV) a1 (eV/K) narrow half-width (eV) Cu–Ni 600–1200 +0.893 −5.4 × 10 −5 0.06 Cu–Ag 500–1000 +0.690 −7.1 × 10 −5 0.15 Ni–Cr fcc 600–1500 −0.909 −5.4 × 10 −5 0.06 Ni–Cr bcc 600–1500 −1.086 +0.9 × 10 −5 0.06  
+
+> Optimization and budget.
+
+All models train with Adam at learning rate 3 × 10 −3; for the alloys the species loss weight in Eq. (16) is λ = 2 and the two continuous channels are weighted equally (Cu–Ag triples the volume-channel weight). Rollouts use M = 100 integration steps for the alloys and 128 reveal blocks for the lattice models during training. Alloy training runs 100–120 outer rounds, each generating 500 fresh terminals (1 000 for Cu–Ni) into a replay buffer of 2 000–5 000 configurations and taking 500 gradient steps at batch size 64–96. Because rollouts are target-free and the labels are buffered (Section 1.1), the total number of potential evaluations per training run is the initial buffer fill plus rounds × fresh terminals: 5 .5 × 10 4 (Cu–Ag), 6 .2 × 10 4 (per Ni–Cr lattice) and 1.25 × 10 5 (Cu–Ni), each evaluation a single batched energy–force–virial–substitution pass. For the lattice testbed the Hamiltonian is inexpensive and the heat-bath labels are instead recomputed on the fly; training runs several hundred outer rounds with 512 chains per generation.  
+
+> Choice of the conditioning distribution.
+
+Temperature is sampled uniformly in the inverse temperature over the training window; since the target log-density (1) is linear in (kBT )−1, this covers the range of score magnitudes evenly. The chemical potential is sampled relative to an inexpensive linear estimate of the transition line, ∆μ = c∆μ(T ) + δ
+
+with c∆μ(T ) = a0 + a1T , whose anchor a0 is the T = 0 energy difference of the relaxed pure phases and whose slope 
+
+a1 comes from a short pilot run; away from this line the composition is pinned at the pure phases and the target barely changes with ∆μ. The offset δ is drawn from an equal mixture of a wide uniform component ( ±0.30 eV), which covers the composition-pinned wings and the estimation error, and a narrow one ( ±0.06 eV; ±0.15 eV for Cu–Ag), which concentrates the budget where the composition responds most strongly. The estimate needs only to be approximately correct: it determines what the conditioned prior absorbs, and the network corrects the remainder. The per-system windows and line estimates are listed in Table S1.  
+
+> Physics-informed priors.
+
+Both continuous priors are conditioned on (T, ∆μ) through the composition estimate 
+
+c0 = sigmoid  (∆μ − c∆μ(T )) /kBT —the exact isotherm of the non-interacting lattice gas at the inexpensive linear estimate c∆μ(T ) of the phase-transition line: 
+
+v0 ∼ N ( ¯v, σ 2 
+
+> v
+
+), e¯v = N ˆVatom (c0, T ), (S33) 
+
+u0 ∼ N  0, σu(T )2I, σu(T ) = σ ref 
+
+> u
+
+pT /Tref . (S34) The volume prior (S33) centres the cell volume on the per-atom volume ˆVatom (c0, T ) = (1 − c0) ˆVA + c0 ˆVB + ΩV c0(1 − c0)   1 + αV (T − Tref ), (S35) an interpolation between the per-atom volumes ˆ VA, ˆVB of the relaxed pure phases, a regular-solution excess term 
+
+ΩV c0(1 − c0), and a linear thermal-expansion factor. All four parameters are derived from the interatomic potential alone, so no reference data enters training. Two stages generate the fitting data. Statics : on a composition grid 
+
+c ∈ { 0, 14 , 12 , 34 , 1}, displacements and log-volume are relaxed by gradient descent on the energy at P = 0 averaged over random species arrangements; the local relaxation around size-mismatched neighbours is what produces the excess volume, so unrelaxed lattices would spuriously fit ΩV ≈ 0. Finite temperature : short fixed-composition isobaric Metropolis runs on the same energy (displacement and volume moves only, so the composition never changes) over a (c, T ) grid supply the thermal volume surface. The fit exploits that (S35) is nonlinear only through 
+
+> 33/38
+
+the scalar αV : at fixed αV the thermal factor s(T ) = 1 + αV (T − Tref ) is a known number for every data point, so each measured volume contributes one row of the linear model 
+
+v(c, T ) ≈ s(T ) (1 − c), c, c(1 − c) ·   ˆVA, ˆVB, ΩV
+
+⊤, (S36) and the three linear parameters follow from an exact normal-equation least-squares solve. A one-dimensional scan over αV , keeping the solution with the smallest residual, then determines all four parameters. The displacement-prior width σ ref  
+
+> u
+
+is obtained on the same energy-only budget: at each point of a small (c, T )
+
+grid the displacements are relaxed at the conditioned volume ˆ Vatom (c, T ), one Hessian K = ∂ 2U/∂ u2 of the energy is evaluated in fractional coordinates, and the isotropic width of the quasi-harmonic law u0 ∼ N  0, (β K)−1, namely 
+
+σeff (T ) = 
+
+q
+
+tr (β K)−1/3N, is regressed as log σeff (T ) = log σ ref  
+
+> u
+
++ p log (T /Tref ), where σ ref  
+
+> u
+
+and p are the fitting parameters. The entire prior calibration costs only few energy evaluations per system. 
+
+> 34/38
+
+References 
+
+1. Simonov, A. & Goodwin, A. L. Designing disorder into crystalline materials. Nat. Rev. Chem. 4, 657–673 (2020). 
+
+2. Peng, J. & Zhong, P. Atomistic modeling of chemical disorder in materials: Bridging classical methods and ai-assisted approaches. arXiv preprint arXiv:2605.19124 (2026). 
+
+3. Esters, M. et al. Settling the matter of the role of vibrations in the stability of high-entropy carbides. Nat. communications 12 , 5747 (2021). 
+
+4. Esters, M. et al. Qh-pocc: taming tiling entropy in thermal expansion calculations of disordered materials. Acta Materialia 245 , 118594 (2023). 
+
+5. Chen, X. et al. Direct observation of chemical short-range order in a medium-entropy alloy. Nature 592 ,712–716 (2021). 
+
+6. Wu, X. Chemical short-range orders in high-/medium-entropy alloys. J. Mater. Sci. & Technol. 147 , 189–196 (2023). 
+
+7. Song, H. et al. Local lattice distortion in high-entropy alloys. Phys. Rev. Mater. 1, 023404 (2017). 
+
+8. George, E. P., Raabe, D. & Ritchie, R. O. High-entropy alloys. Nat. reviews materials 4, 515–534 (2019). 
+
+9. Oses, C., Toher, C. & Curtarolo, S. High-entropy ceramics. Nat. Rev. Mater. 5, 295–309 (2020). 
+
+10. Zeng, Y. et al. High-entropy mechanism to boost ionic conductivity. Science 378 , 1320–1324 (2022). 
+
+11. Kam, R. L. et al. Crystal structures and phase stability of the li2s–p2s5 system from first principles. Chem. Mater. 35 , 9111 (2023). 
+
+12. Ji, H. et al. Hidden structural and chemical order controls lithium transport in cation-disordered oxides for rechargeable batteries. Nat. communications 10 , 592 (2019). 
+
+13. Mints, V. A. et al. Unraveling the mixing entropy-activity relationship in high entropy alloy catalysts: The more, the better? J. Am. Chem. Soc. 148 , 4815 (2026). 
+
+14. Chen, S. et al. Simultaneously enhancing the ultimate strength and ductility of high-entropy alloys via short-range ordering. Nat. communications 12 , 4953 (2021). 
+
+15. Baldassarri, B. et al. Oxygen vacancy formation energy in metal oxides: High-throughput computational studies and machine-learning predictions. Chem. Mater. 35 , 10619–10634 (2023). 
+
+16. Widom, M. Modeling the structure and thermodynamics of high-entropy alloys. J. Mater. Res. 33 , 2881–2898 (2018). 
+
+17. Sadigh, B. et al. Scalable parallel monte carlo algorithm for atomistic simulations of precipitation in alloys. 
+
+Phys. Rev. B 85 , 184203 (2012). 
+
+18. Widom, M., Huhn, W. P., Maiti, S. & Steurer, W. Hybrid monte carlo/molecular dynamics simulation of a refractory metal high entropy alloy. Metall. Mater. Transactions A 45 , 196–200 (2014). 
+
+19. Wu, D., Wang, L. & Zhang, P. Solving statistical mechanics using variational autoregressive networks. Phys. review letters 122 , 080602 (2019). 
+
+20. Damewood, J., Schwalbe-Koda, D. & Gómez-Bombarelli, R. Sampling lattices in semi-grand canonical ensemble with autoregressive machine learning. npj Comput. Mater. 8, 61 (2022). 
+
+21. Du, X., Nam, J., Liu, S. & Gómez-Bombarelli, R. Scaling autoregressive models for lattice thermodynamics. 
+
+arXiv preprint arXiv:2603.14695 (2026). 
+
+22. Holderrieth, P., Albergo, M. S. & Jaakkola, T. Leaps: A discrete neural sampler via locally equivariant networks. In Forty-second International Conference on Machine Learning (2025). 
+
+> 35/38
+
+23. Zhu, Y. et al. Mdns: Masked diffusion neural sampler via stochastic optimal control. Adv. Neural Inf. Process. Syst. (2025). 
+
+24. Guo, W. et al. Discrete adjoint schrödinger bridge sampler. In Forty-third International Conference on Machine Learning (2026). 
+
+25. Cheng, M. et al. Atlas: A foundation neural sampler for amorphous materials. arXiv preprint arXiv:2607.19198 
+
+(2026). 
+
+26. Albergo, M., Boffi, N. M. & Vanden-Eijnden, E. Stochastic interpolants: A unifying framework for flows and diffusions. J. Mach. Learn. Res. 26 , 1–80 (2025). 
+
+27. Austin, J., Johnson, D. D., Ho, J., Tarlow, D. & Van Den Berg, R. Structured denoising diffusion models in discrete state-spaces. Adv. neural information processing systems 34 , 17981–17993 (2021). 
+
+28. Sahoo, S. S. et al. Simple and effective masked diffusion language models. Adv. Neural Inf. Process. Syst. 37 ,130136–130184 (2024). 
+
+29. Blessing, D., Richter, L., Berner, J., Malitskiy, E. & Neumann, G. Bridge matching sampler: Scalable sampling via generalized fixed-point diffusion matching. In Forty-third International Conference on Machine Learning 
+
+(2026). 
+
+30. Havens, A., Karrer, B. & Shaul, N. Flow sampling: Learning to sample from unnormalized densities via denoising conditional processes. arXiv preprint arXiv:2605.03984 (2026). 
+
+31. Lipman, Y., Chen, R. T., Ben-Hamu, H., Nickel, M. & Le, M. Flow matching for generative modeling. arXiv preprint arXiv:2210.02747 (2022). 
+
+32. De Bortoli, V., Hutchinson, M., Wirnsberger, P. & Doucet, A. Target score matching. arXiv preprint arXiv:2402.08667 (2024). 
+
+33. He, J., Hernández-Lobato, J. M., Du, Y. & Vargas, F. RNE: plug-and-play diffusion inference-time control and energy-based training. In The Fourteenth International Conference on Learning Representations (2026). 
+
+34. Rector-Brooks, J. et al. General multimodal protein design enables dna-encoding of chemistry. arXiv preprint arXiv:2604.05181 (2026). 
+
+35. Zhang, R. et al. Short-range order and its impact on the crconi medium-entropy alloy. Nature 581 , 283–287 (2020). 
+
+36. Sheriff, K., Cao, Y., Smidt, T. & Freitas, R. Quantifying chemical short-range order in metallic alloys. Proc. Natl. Acad. Sci. 121 , e2322962121 (2024). 
+
+37. Wolfowicz, G. et al. Quantum guidelines for solid-state spin defects. Nat. Rev. Mater. 6, 906–925 (2021). 
+
+38. Ping, Y. & Smart, T. J. Computational design of quantum defects in two-dimensional materials. Nat. Comput. Sci. 1, 646–654 (2021). 
+
+39. Thomas, J. C. et al. A substitutional quantum defect in ws2 discovered by high-throughput computational screening and fabricated by site-selective stm manipulation. Nat. communications 15 , 3556 (2024). 
+
+40. Fang, Z. & Yan, Q. Towards the predictive design of quantum defects for next-generation quantum technologies. 
+
+Commun. Mater. 7, 155 (2026). 
+
+41. Batatia, I., Kovacs, D. P., Simm, G., Ortner, C. & Csányi, G. Mace: Higher order equivariant message passing neural networks for fast and accurate force fields. Adv. neural information processing systems 35 , 11423–11436 (2022). 
+
+42. Batatia, I. et al. A foundation model for atomistic materials chemistry. The J. chemical physics 163 (2025). 
+
+43. Iwasaki, T. et al. Germanium-vacancy single color centers in diamond. Sci. reports 5, 12882 (2015). 
+
+44. Siyushev, P. et al. Optical and microwave control of germanium-vacancy center spins in diamond. Phys. Rev. B 
+
+96 , 081201 (2017). 
+
+> 36/38
+
+45. Watkins, G. & Corbett, J. Defects in irradiated silicon: Electron paramagnetic resonance and electron-nuclear double resonance of the si-e center. Phys. Rev. 134 , A1359 (1964). 
+
+46. Elkin, E. L. & Watkins, G. Defects in irradiated silicon: electron paramagnetic resonance and electron-nuclear double resonance of the arsenic-and antimony-vacancy pairs. Phys. Rev. 174 , 881 (1968). 
+
+47. Freysoldt, C. et al. First-principles calculations for point defects in solids. Rev. modern physics 86 , 253–305 (2014). 
+
+48. Kattner, U. R. The calphad method and its role in material and process development. Tecnologia em metalurgia, materiais e mineracao 13 , 3 (2016). 
+
+49. He, M., Davids, W. J., Breen, A. J. & Ringer, S. P. Quantifying short-range order using atom probe tomography. 
+
+Nat. Mater. 23 , 1200–1207 (2024). 
+
+50. Cheng, M. et al. A foundation model for non-destructive defect identification from vibrational spectra. Matter 9
+
+(2026). 
+
+51. Shi, J., Han, K., Wang, Z., Doucet, A. & Titsias, M. K. Simplified and generalized masked diffusion for discrete data. In Advances in Neural Information Processing Systems , vol. 37 (2024). 
+
+52. Ou, J. et al. Your absorbing discrete diffusion secretly models the conditional distributions of clean data. In The Thirteenth International Conference on Learning Representations (2025). 
+
+53. Havens, A. J. et al. Adjoint sampling: Highly scalable diffusion samplers via adjoint matching. In Forty-second International Conference on Machine Learning (2025). 
+
+54. Liu, G.-H., Choi, J., Chen, Y., Miller, B. K. & Chen, R. T. Adjoint schrödinger bridge sampler. Adv. Neural Inf. Process. Syst. 38 , 15673–15708 (2026). 
+
+55. Schebek, M., Invernizzi, M., Noé, F. & Rogal, J. Efficient mapping of phase diagrams with conditional boltzmann generators. Mach. Learn. Sci. Technol. 5, 045045 (2024). 
+
+56. He, J. et al. Free energy estimation on any state space. arXiv preprint arXiv:2605.31063 (2026). 
+
+57. Anderson, B. D. Reverse-time diffusion equation models. Stoch. Process. their Appl. 12 , 313–326 (1982). 
+
+58. Jarzynski, C. Nonequilibrium equality for free energy differences. Phys. Rev. Lett. 78 , 2690–2693 (1997). 
+
+59. Frenkel, D. & Ladd, A. J. New monte carlo method to compute the free energy of arbitrary solids. application to the fcc and hcp phases of hard spheres. The J. chemical physics 81 , 3188–3193 (1984). 
+
+60. Robbins, H. E. An empirical bayes approach to statistics. In Breakthroughs in Statistics: Foundations and basic theory , 388–394 (Springer, 1992). 
+
+61. Schütt, K., Unke, O. & Gastegger, M. Equivariant message passing for the prediction of tensorial properties and molecular spectra. Int. Conf. on Mach. Learn. 9377–9388 (2021). 
+
+62. Schebek, M., Noé, F. & Rogal, J. Scalable boltzmann generators for equilibrium sampling of large-scale materials. Nat. Commun. 17 , 5010 (2026). 
+
+63. Hale, L. M., Trautt, Z. T. & Becker, C. A. Evaluating variability with atomistic simulations: the effect of potential and calculation methodology on the modeling of lattice and elastic constants. Model. Simul. Mater. Sci. Eng. 26 , 055003 (2018). 
+
+64. Fischer, F., Schmitz, G. & Eich, S. A systematic study of grain boundary segregation and grain boundary formation energy using a new copper–nickel embedded-atom potential. Acta Materialia 176 , 220–231 (2019). 
+
+65. Williams, P., Mishin, Y. & Hamilton, J. An embedded-atom potential for the cu–ag system. Model. Simul. Mater. Sci. Eng. 14 , 817–833 (2006). 
+
+66. Hung, N. T., Okabe, R., Chotrattanapituk, A. & Li, M. Universal ensemble-embedding graph neural network for direct prediction of optical spectra from crystal structures. Adv. Mater. 36 , 2409175 (2024). 
+
+> 37/38
+
+67. Wang, H. et al. Efficient evolutionary search over chemical space with large language models. In International Conference on Learning Representations , vol. 2025, 51694–51727 (2025). 
+
+68. Mortensen, J. J. et al. Gpaw: An open python package for electronic structure calculations. The J. Chem. Phys. 
+
+160 (2024). 
+
+69. Zunger, A., Wei, S.-H., Ferreira, L. G. & Bernard, J. E. Special quasirandom structures. Phys. review letters 65 ,353 (1990). 
+
+70. Perdew, J. P., Burke, K. & Ernzerhof, M. Generalized gradient approximation made simple. Phys. review letters 
+
+77 , 3865 (1996). 
+
+71. Yan, J., Mortensen, J. J., Jacobsen, K. W. & Thygesen, K. S. Linear density response function in the projector augmented wave method: Applications to solids, surfaces, and interfaces. Phys. Rev. B 83 , 245122 (2011). 
+
+72. Krukau, A. V., Vydrov, O. A., Izmaylov, A. F. & Scuseria, G. E. Influence of the exchange screening parameter on the performance of screened hybrid functionals. The J. chemical physics 125 (2006). 
+
+73. Shirts, M. R. & Chodera, J. D. Statistically optimal analysis of samples from multiple equilibrium states. The J. Chem. Phys. 129 , 124105 (2008). 
+
+74. Syed, S., Bouchard-Côté, A., Deligiannidis, G. & Doucet, A. Non-reversible parallel tempering: a scalable highly parallel MCMC scheme. J. Royal Stat. Soc. Ser. B: Stat. Methodol. 84 , 321–350 (2022). 
+
+75. Hasan, M. et al. Discrete feynman-kac correctors. arXiv preprint arXiv:2601.10403 (2026). 
+
+76. Wolff, U. Collective Monte Carlo updating for spin systems. Phys. Rev. Lett. 62 , 361–364 (1989).

@@ -1,0 +1,94 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-08-23T19:45:38.978860+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 2,
+    "quick_skim_target": 11,
+    "quick_selected": 2
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2608.20039v1",
+      "source": "arxiv",
+      "title": "Anomalous behavior of native point defects in C2-ordered antiferromagnet $α$-MnO$_2$",
+      "abstract": "$α$-MnO$_2$ is an emerging material for electronic, optoelectronic, and energy applications, owing to its structural flexibility and defect-driven functionality. During synthesis of $α$-MnO$_2$, native oxygen vacancies readily form and are typically compensated by foreign dopants. A thorough understanding of intrinsic defects is therefore essential for enabling controlled extrinsic doping and optimizing material performance. Using density functional approach, we investigate the structural, electronic, magnetic, and optical properties of the ground state C2-type antiferromagnetic $α$-MnO$_2$ in the presence of native point defects, including interstitials, vacancies, and antisites. We compute their thermodynamic stability, incorporating electrostatic corrections to eliminate spurious long-range interactions. Mn interstitial (Mn$_\\text{i}$) and Mn antisite O (Mn$_\\text{O}$) introduce shallow donor levels, whereas O-vacancy (V$_\\text{O}$) exhibit amphoteric behavior and act as compensating centers. The calculated defect formation energies reveal pronounced competition between donor- and acceptor-type native defects, leading to strong intrinsic defect compensation under both Mn-rich and O-rich growth conditions. Mn vacancy (V$_\\text{Mn}$) remains ionized across the band gap and behaves as a shallow acceptor, suggesting its potential role under suitable non-equilibrium growth conditions, whereas O antisite Mn (O$_\\text{Mn}$) forms deep acceptor levels. BSE@G$_0$$W_0$ calculations reveal a strongly anisotropic optical response in stoichiometric $α$-MnO$_2$, while native point defects introduce pronounced sub-gap excitations and enhanced dielectric screening, with vacancies producing the largest effect.",
+      "authors": [
+        "Archana Sharma",
+        "Brahmananda Chakraborty"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ],
+      "published": "2026-08-20T13:44:59+00:00",
+      "link": "https://arxiv.org/pdf/2608.20039v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Investigates native point defects including interstitials, vacancies, and antisites in a crystalline material using DFT, providing methodology transferable to radiation-induced defect studies.",
+      "llm_evidence_cn": "利用DFT研究晶体中本征点缺陷（间隙、空位、反位）的稳定性，可为辐照诱导缺陷研究提供可迁移方法。",
+      "llm_evidence": "利用DFT研究晶体中本征点缺陷（间隙、空位、反位）的稳定性，可为辐照诱导缺陷研究提供可迁移方法。",
+      "canonical_evidence": "利用DFT研究晶体中本征点缺陷（间隙、空位、反位）的稳定性，可为辐照诱导缺陷研究提供可迁移方法。",
+      "llm_tldr_en": "This paper calculates native point defects in alpha-MnO2 by DFT, including vacancies, interstitials, and antisites, and their thermodynamic stability, offering transferable methods for irradiation defect studies.",
+      "llm_tldr_cn": "论文针对α-MnO2中的本征点缺陷（空位、间隙原子和反位）开展密度泛函计算，系统考察其结构、电子、磁性、光学性质及热力学稳定性，并讨论缺陷间的竞争关系。该方法可迁移到辐照损伤材料中点缺陷行为的研究，为理解辐照诱导点缺陷的形成、聚集与演化提供可靠的计算框架。",
+      "llm_tldr": "论文针对α-MnO2中的本征点缺陷（空位、间隙原子和反位）开展密度泛函计算，系统考察其结构、电子、磁性、光学性质及热力学稳定性，并讨论缺陷间的竞争关系。该方法可迁移到辐照损伤材料中点缺陷行为的研究，为理解辐照诱导点缺陷的形成、聚集与演化提供可靠的计算框架。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation-induced point defects and clusters",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.19116v1",
+      "source": "arxiv",
+      "title": "JANUS: A Multi-modal Foundation Neural Sampler for Disordered Materials",
+      "abstract": "Many problems in disordered materials require sampling beyond fixed composition and volume, where coupled changes in atomic identities and structure create a prohibitively expensive discrete-continuous sampling problem. Here we introduce JANUS, a multimodal neural sampler that couples continuous and masked discrete diffusion through an equivariant graph neural network trained directly from energy evaluations, without pre-generated equilibrium data. In benchmark Ising and isobaric $ΔμNPT$ alloy systems, JANUS reproduces reference Monte Carlo equilibrium observables and recovers free energies and phase behavior with more than three orders of magnitude fewer energy evaluations. In multicomponent alloys, JANUS enables conditional steering toward prescribed chemical short-range order and enhanced bulk modulus and, when coupled to a large language model evolutionary agent, performs efficient inverse design for balanced optical and mechanical properties. In semiconductors like silicon and diamond, JANUS explores vacancies and dopants spanning 15 elements in grand-canonical $μVT$ ensembles, recovers established defects including the silicon $E$ centre, and identifies new candidate defect pairs and triplets for quantum engineering, including S-Ti in silicon and B-O-O in diamond, with deep in-gap states validated by hybrid-functional density functional theory. By unifying discrete site identities with continuous structural and volumetric relaxation, JANUS provides a foundation for thermodynamic sampling, characterization and inverse design of chemically disordered materials.",
+      "authors": [
+        "Denis Blessing",
+        "Mouyang Cheng",
+        "Maximilian Schebek",
+        "Jutta Rogal",
+        "Mingda Li",
+        "Carles Domingo-Enrich",
+        "Yuanqi Du"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ],
+      "published": "2026-08-19T17:11:03+00:00",
+      "link": "https://arxiv.org/pdf/2608.19116v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Neural sampler for disordered alloys enabling efficient equilibration and phase behavior simulations, applicable to radiation-induced defect/precipitate evolution",
+      "llm_evidence_cn": "面向无序合金的神经采样方法，可高效模拟平衡相行为，对辐照缺陷与析出演化建模具有方法学价值",
+      "llm_evidence": "面向无序合金的神经采样方法，可高效模拟平衡相行为，对辐照缺陷与析出演化建模具有方法学价值",
+      "canonical_evidence": "面向无序合金的神经采样方法，可高效模拟平衡相行为，对辐照缺陷与析出演化建模具有方法学价值",
+      "llm_tldr_en": "JANUS is a multimodal neural sampler trained from energy evaluations that couples continuous and masked discrete diffusion, reproducing equilibrium phase behavior in alloys with three orders of magnitude fewer energy evaluations.",
+      "llm_tldr_cn": "无序材料的许多问题需要在固定组成和体积之外采样，原子身份与结构耦合变化形成离散-连续采样难题。为此提出JANUS多模态神经采样器，通过等变图神经网络耦合连续扩散与掩码离散扩散，并直接从能量评估训练。在基准Ising和等压ΔμNPT合金体系中，JANUS以少于参考方法三个数量级的能量评估复现蒙特卡洛平衡观测值，并恢复自由能与相行为。该方法还能在多元合金中按目标条件引导采样，为无序材料的高效平衡模拟提供新途径。",
+      "llm_tldr": "无序材料的许多问题需要在固定组成和体积之外采样，原子身份与结构耦合变化形成离散-连续采样难题。为此提出JANUS多模态神经采样器，通过等变图神经网络耦合连续扩散与掩码离散扩散，并直接从能量评估训练。在基准Ising和等压ΔμNPT合金体系中，JANUS以少于参考方法三个数量级的能量评估复现蒙特卡洛平衡观测值，并恢复自由能与相行为。该方法还能在多元合金中按目标条件引导采样，为无序材料的高效平衡模拟提供新途径。",
+      "llm_tags": [
+        "query:rad-damage:composite"
+      ],
+      "matched_query_tag": "query:rad-damage:composite",
+      "matched_query_text": "Papers central to 辐照损伤FeCr合金B2相增强相关论文检索, especially work that connects or combines: radiation damage mechanisms in structural materials; radiation-induced point defects and clusters; B2 phase strengthening in irradiated alloys; precipitation hardening in irradiated FeCr alloys; dislocation loop formation in irradiated FeCr; radiation induced defect evolution and microstructure changes; Studies on radiation damage in FeCr alloys with B2 phase strengthening; Microstructure evolution of B2 phase in FeCr alloys under irradiation.",
+      "matched_requirement_id": "req-composite-rad-damage",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
