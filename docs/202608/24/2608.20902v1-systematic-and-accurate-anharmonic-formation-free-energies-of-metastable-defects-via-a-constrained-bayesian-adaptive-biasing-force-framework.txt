@@ -1,0 +1,949 @@
+Title: Systematic and accurate anharmonic formation free energies of metastable defects via a constrained Bayesian Adaptive Biasing Force framework
+
+URL Source: https://arxiv.org/pdf/2608.20902v1
+
+Published Time: Mon, 24 Aug 2026 00:44:11 GMT
+
+Number of Pages: 21
+
+Markdown Content:
+# Systematic and accurate anharmonic formation free energies of metastable defects via a constrained Bayesian Adaptive Biasing Force framework 
+
+Clovis Lapointe, ∗ Anruo Zhong, Manuel Ath` enes, and Mihai-Cosmin Marinica †
+
+Universit´ e Paris-Saclay, CEA, Service de recherche en Corrosion et Comportement des Mat´ eriaux, SRMP, 91191, Gif-sur-Yvette, France 
+
+(Dated: August 24, 2026) Computing the formation free energies of metastable defects at finite temperature remains challenging due to anharmonicity, the multiplicity of basins and the frequent occurrence of migration events. Using the previously introduced constrained Bayesian Adaptive Biasing Force method (BABFc) [1], we establish a practical thermodynamic integration framework for computing restricted anharmonic formation free energies associated with individual metastable defect basins. We demonstrate that BABFc can be exploited as a robust, systematic and numerically efficient tool for addressing a long standing bottleneck in atomistic materials science: the finite temperature thermodynamic characterization of metastable defects in complex, highly anharmonic energy landscapes. The proposed workflow requires only a reference local minimum and a confinement strategy and does not rely on defect specific collective variables. It therefore provides a general route to assign well-defined free energies to individual metastable basins, even when these basins are separated by low barriers and embedded in a dense landscape of competing configurations. In this setting, BABFc enables stable, bias corrected free energy estimates with statistical accuracies at the meV/atom level and a very low failure rate, including for systems containing approximately one thousand atoms. We demonstrate this capability through thousands of independent free energy calculations covering hundreds of four-interstitial and four-vacancy configurations in bcc α-Fe over a broad temperature range, using both a traditional empirical potential and a data driven force field. To our knowledge, the resulting library of thousands of independent, basin resolved anharmonic free energy calculations, covering hundreds of distinct metastable configurations, two classes of force fields and a broad temperature range, constitutes the most extensive dataset of this type reported so far. The study also highlights the critical role of energy landscape regularity in defect thermodynamics. This approach has many powerful applications, ranging from building extensive databases of free energies for data-driven force fields to enabling fully automated workflows for characterizing defects in materials at finite temperatures. 
+
+> Keywords: Free energy, thermodynamic integration, anharmonicity, point defects
+
+I. INTRODUCTION 
+
+Defects play a crucial role in complex materials, particularly under extreme conditions such as irradiation, high temperatures, and deformation. They determine many of the material’s properties, including atomic transport and microstructure evolution. An central task for computer simulations at the atomic scale is to calculate the relevant thermodynamic quantities, such as the free energy associated with the formation and migration of defects. The ability to effectively achieve this shapes made the concrete pledge of atomistic simulations to connect to larger multiscale models and experiments. Although configurations can easily be obtained from molecular dynamics or atomic Monte Carlo simulations, reliably assigning a free energy to a given defect remains challenging. This is not primarily a matter of computational power; rather, it reflects the absence of a systematic and general framework capable of accurately mapping complex free energy landscapes. The equilibrium concentration of   
+
+> ∗clovis.lapointe@cea.fr
+> †mihai-cosmin.marinica@cea.fr
+
+atomistic defects relates to the free energy of formation of the defect, i.e. , the difference in free energy between a defective system and its defect-free reference (pure bulk/phases). The thermodynamic characterization of defects requires robust and accurate sampling schemes for both pure and defective systems. Most conventional approaches are formulated for defect-free systems and typically assume a parabolic free-energy landscape which is appropriate for describing stable or metastable phases, grain boundaries, or immobile defects. Within this framework, the free-energy differences are evaluated between a specified target state and a suitably chosen, simple reference state. These methods primarily target relative phase stability and require accurate free energy evaluation; i.e. , they demand per-atom free energies to be converged within a few meV/atom at any given temperature and pressure. Because these cases involve nearly vanishing free energy differences[2–6], achieving extremely strict convergence is essential. This has driven the development of sampling schemes such as thermodynamic integration (TI)[7–9], free energy perturbation (FEP)[3, 10–12], and adiabatic switching (AS)[6, 13–16] and more recently, descriptor based Density-of-states (D-DOS) [17, 18]. While powerful, these methods (perhaps except D-DOS [17, 18]) are computationally intensive, often requiring 10 7−8 force arXiv:2608.20902v1 [cond-mat.mtrl-sci] 21 Aug 2026 2evaluations per temperature to reach the required 
+
+O(1meV)/atom accuracy. Beyond integration based schemes, efficient effective model approaches explicitly account for anharmonicity without requiring thermodynamic integration. Prominent examples are the temperature dependent effective potential (TDEP) method [19], in which an effective harmonic model is regressed from finite temperature sampling data and the piecewise polynomial potential partitioning (P4) method [20], which has been successfully applied to dynamically stabilized phases such as bcc titanium. These approaches are widely used and computationally efficient for bulk phases, including mechanically unstable ones. However, they infer the free energy from configurations generated by unconstrained sampling of the target state: for metastable defect basins surrounded by barriers of only a few meV, such sampling rapidly escapes the prescribed basin and the resulting effective model no longer describes the intended metastable configuration. As discussed below, the difficulty addressed in the present work is therefore not primarily the anharmonicity of a well-defined phase, but the preservation of basin identity during the sampling of metastable defects. For defective systems, the relevant free energy basins are often highly anharmonic, metastable and weakly connected, making standard approaches difficult to apply reliably. Let us give an example concerning metastability related to a basic defect in materials science under extreme conditions: the mono self-interstitial (SIA) dumbbell in metals. The mono SIA in α-Fe has five configurations [21–23] of which two are the most important: (i) the most stable ⟨110 ⟩ configuration, which is surrounded by barriers of at least 0.35 eV (preventing migration at low temperatures) and (ii) the 1 /2⟨111 ⟩ or crowdion self-interstitial configuration, which is metastable (about 0.75 eV higher in energy than the first) and highly mobile; its lowest migration barrier is on the order of a few meV [23]. The first configuration, corresponding to the ⟨110 ⟩ orientation, can be sampled with relative ease within quasi-harmonic and more advanced frameworks [24, 25]. In contrast, the crowdion has so far been treated exclusively within the harmonic approximation [24, 26]. Owing to its migration barrier of only a few meV, unconstrained finite temperature sampling rapidly leaves the selected basin, so that the computed free energy no longer corresponds to the prescribed metastable state. This is therefore not merely an efficiency issue, but a basin identity problem. BABFc addresses it by confining the dynamics to the selected basin while correcting the resulting bias, thereby providing a systematic route to restricted anharmonic free energies for mobile, low barrier defects [1, 27]. For larger interstitial clusters, the energy landscape becomes extraordinarily complex. Furthermore, for 4 interstitial atoms embedded in a bcc matrix of the same atomic species, thousands of distinct metastable bound configurations exist [23, 28]. Except for the most stable or a few immobile configurations (sometimes called sessile due to their large lowest barriers to escape), it is essentially impossible to sample the free energy of all others for the reasons discussed above. These issues occur in most atomistic systems containing defects and are not specific to α-Fe. Consequently, in most cases of the methods cited above, with few exceptions, their accuracy and robustness are often insufficient for defect thermodynamics. To date, anharmonic formation free energies have mainly been reported for selected defects whose basins remain sufficiently stable during sampling or for which a problem specific treatment can be constructed. Existing approaches are largely restricted to a few selected cases, such as monovacancies, small vacancy clusters or straight dislocation lines where specific geometrical or symmetry features can be exploited to simplify sampling: in TI [1, 2, 27, 29–32], FEP [30, 33], or AS [6, 16], path sampling based on Jarzynski’s non-equilibrium work identity [14, 34, 35]. What remains missing is a demonstrated, systematic workflow capable of assigning restricted free energies to large libraries of general metastable defect morphologies, including mobile configurations surrounded by low barriers. The present work does not introduce the BABFc formalism itself, which was developed previously [1, 27]. Instead, it establishes and extensively tests its use as such a basin resolved workflow, including bias correction, uncertainty quantification, overlap diagnostics and large scale application across hundreds of distinct defect minima. This is the main outcome of the present paper: we propose such a systematic and accurate solution to explore the energy basins associated with the different types of point defects. Our approach therefore builds on the previously introduced Bayesian Adaptive Biasing Force formalism [1, 27, 36], which enables robust and efficient sampling of configuration space while providing direct access to temperature dependent anharmonic contributions to the vibrational free energy. Crucially, the Bayesian formulation allows individual metastable states to be explored and characterized separately on the free energy landscape, a distinctive capability that sets this approach apart from most existing free energy methods. For example, this method, reformulated in the constrained form [1], was used to explore metastable configurations of the di-vacancy in W and Mo up to the melting point [27]. Its super ergodic nature and ease of parallelisation enable fast evaluations, making it useful even in the context of numerically expensive machine learning (ML) interatomic potential frameworks. BABF offers a powerful approach to direct free energy estimation, combining rapid convergence with statistical rigor. This study reveals that the constrained BABF (BABFc) method can sample metastable defect configurations with great power and robustness, and remarkable accuracy. 3From a broader research perspective, the ability to perform accurate, and systematic sampling of free energy landscapes at high speeds across a spectrum of systematic defect morphologies opens new possibilities. This enables the precise calibration of multiscale models, such as cluster dynamics, kinetic Monte Carlo and continuum elastic theories, particularly at high temperatures where anharmonic effects dominate. This study aims to assess the performance of the BABFc approach and deliver concrete solutions for systematically testing its robustness, accuracy and uncertainty estimates across thousands of defect free-energy calculations. The main lines of the workflow are described in Fig. 1. We leverage the ARTn point defect database of bcc α-Fe [23, 37], which contains a rich variety of metastable configurations generated by a systematic exploration of the energy landscape. In this work, we focus on the particularly challenging subset of four interstitials clusters, denoted I4, for which the number of distinct metastable basins and the expected anharmonicity are exceptionally large. However, some configurations of vacancies are also selected. We first characterize the database using harmonic normal mode calculations ( PHONDY/LAMMPS [37, 38]), yielding formation energies and harmonic formation entropies at a reference temperature. We then perform systematic finite temperature free energy calculations for hundreds of selected I4 (and for the ML comparison, additional V4) configurations using constrained Bayesian adaptive biasing force thermodynamic integration (BABFc) implemented in 
+
+FEAR/LAMMPS [1, 27, 36, 39]. This workflow enables the construction of a large scale database of formation free energies for complex metastable defect basins in α-Fe, and allows a direct comparison between a traditional EAM potential and a smoother linear machine learning potential [1, 27, 40–42]. Beyond benchmarking force fields, the resulting free energy database provides apractical route to free energy–aware ML calibration and more broadly, paves the way toward systematic finite temperature predictions for complex defect landscapes. Here, we compare two representative classes of interatomic models: a traditional embedded-atom method (EAM) [43–45] potential and a commonly used machine-learning (ML) potential based on the bispectrum-SO(4) (BSO4) descriptor [46–49]. EAM force fields remain widely employed due to their computational efficiency and long-standing use in defect simulations, but their functional form is intrinsically limited to low-order many-body interactions and can produce overly stiff or irregular energy landscapes. In contrast, descriptor based ML potentials incorporate higher order correlations in a systematic manner and generally provide smoother and more transferable representations of the potential energy surface. Recent studies have reported qualitative differences between these two approaches in the description of vibrational spectra, defect energetics and finite-temperature thermodynamics, including anomalous phonon modes and negative vibrational entropies in some EAM models, as well as improved stability and smoother free-energy landscapes for ML potentials [27, 36, 40, 42]. These observations motivate a direct and systematic comparison of the two classes of models within the same free-energy framework. By applying the same BABFc methodology to both potentials, we aim to disentangle methodological effects from genuine physical differences and to assess how the regularity of the underlying energy landscape impacts the robustness and efficiency of anharmonic free-energy calculations. The remainder of the paper is organized as follows. In Sec.II, we first introduce the defect database and provide a harmonic characterization of its energetic and vibrational diversity which serves as a qualitative indicator of basin complexity and sampling difficulty. Then, in II B, we detail the BABFc workflow and the numerical protocol used to perform large scale anharmonic free energy calculations for hundreds of metastable configurations with both EAM and machine learning potentials. This section presents the computed formation free energies and a systematic diagnostic assessment of statistical uncertainties, phase space overlap and constraint-induced biases in Sec. II B 2. The physical distinctions between the two classes of interatomic models are subsequently examined in Sec. II B 3. In Sec.III, we discuss the broader implications of these results for defect thermodynamics, force field regularity and the scalability of basin resolved free energy methods/ We outline perspectives toward descriptor based approaches such as the descriptor density of states (DDOS). Finally, the methodological details of the harmonic calculations and of the constrained BABFc formulation are summarized in the Methods sections IV.     
+
+> II. RESULTS A. ARTn point defect database in α-iron
+
+The α-Fe database contains small point defects embedded into a (8 a0)3 supercell (a0 being the equilibrium lattice parameter of the cubic cell of α-Fe, which has 1024 ± n atoms). The associated atomic configurations of various defects have yet to be used to characterize the energy landscape of small irradiation defects (up to n = 4 self-interstitial atoms or vacancies) in bcc iron [23, 28], as well as to establish the ground truth of the surrogate machine learning model for harmonic vibrational formation entropy for [37, 38]. The configurations were generated using the Activation-Relaxation Technique nouveau (ARTn )method [50–53], following the methodology described in [23]. This database contains a rich morphology of small point defects, each of which is geometrically unique 4
+
+FIG. 1: Comparison between traditional ABF sampling (top) and BABFc sampling (bot). For the both sampling method we described the updating procedure for: (i) the estimators and (ii) coordinates. Using the traditional ABF procedure, trajectories can escape the original basin because of (i) low energy barriers or (ii) topology of the energy landscape. Switching the system into an other basin, roughly bias the free energy estimator which can not recover convergence in a reasonable wall time. In BABFc method, constrained forces allows to ensure that the system staying in its original basin. Then, coordinates sampling is driven by a Bayesian skim without dynamics on external parameter λ.[23, 37]. This database, initially developed in [23] and then extended under some deformation in [37], includes more than 36,000 self-interstitial and vacancy defects in 
+
+α-Fe. It will be referred to as DB ARTn . However, for this work, we chose to consider only a subset. This choice was motivated by the fact that the evaluation of free energy for O(10 5) distinct configurations is numerically too expensive. To the best of our knowledge, there is currently no free energy method reported in the literature that can accurately estimate on the order of ∼ 10 5 metastable configurations at a reasonable numerical cost. Consequently, we selected two subsets of the original database that are of particular relevance: (i) DB (I4) and (ii) DB (V4). These subsets comprise defect configurations embedded in a crystalline matrix, for which the total system volume was constrained to 1028 equilibrium atomic volumes [37]. The DB (I4)subset comprises configurations of self interstitial clusters of 4 atoms (I4), which represent the most diverse component of the database. The DB (V4) subset comprises configurations of 4 vacancy clusters ( V4). The choice of vacancies and interstitials was driven by the diversity of the vibrational spectra of these two classes of defects: interstitial clusters explore interatomic distances much shorter than those of nearest neighbours (about 2.0 ˚ A) due to the extra atoms present in the lattice, while vacancies probe configurations with missing atoms. Both scenarios are challenging: in the first, metastable basins are separated by low barriers, while in the second, the atoms are embedded in an extended vacuum region which provides more space around the basins. Even so, there are too many configurations to systematically compute the free energy because in the case of anharmonic contributions we would need to perform calculations at three or four different temperatures. In this respect, we randomly select configurations from DB (I4) and DB (V4); from DB (I4), we selected 660 configurations out of the original 1280 and from DB (V4), we selected 290 configurations out of the original 1701. This final selection will be called 
+
+DB EAM,ML (I4) or DB EAM,ML (V4). The force field index is relevant because the geometries of the configurations differ slightly between the two approaches used in this study: the Ackland–Mendelev EAM potential [54] and the ML potential [40]. Each configuration from the final selection was geometrically optimized to reach a local 5minimum (maximum force at 10 −3 eV/˚ A). The initial 
+
+DB ARTn is based on the EAM potential. Consequently, the configurations in DB EAM (I4, V4) remain unchanged, whereas the corresponding configurations in DB ML (I4, V4)can relax toward different minima (mechanically unstable configurations may collapse into other minima). To summarize, the free energy database employing EAM will be called DB EAM (F) and contains only the selected 
+
+I4 configurations, i.e ., DB EAM (I4). The free energy calculations using ML interatomic potential will be called as DB ML (F) contains DB ML (I4) ∪ DB ML (V4).  
+
+> 1. Databases statistics and its representation employing harmonic vibrational entropy
+
+In order to provide an initial characterization of the database, we performed harmonic vibrational entropy calculations on DB EAM ,ML (I4) and DB ML (V4). The details of the calculation are provided in Methods IV C. Harmonic vibrational entropy enables fast free energy estimations and offers a qualitative overview of the vibrational properties associated with a given configuration. We represent in Figure 2 the distribution for the 
+
+DB EAM (I4) database of the formation energies ( a) and the harmonic formation entropies (at T = 1000 K) ( b). The Kernel Density Estimator (KDE) for each distribution is plotted as a dashed line. Point defect configurations from 
+
+DB EAM (I4) database show a tight ”pseudo log-normal” distribution for formation energy. Harmonic vibrational formation entropy distribution is largely spread, with a total range of 15 kB. The original DB (I4) database displays intricate vibrational characteristics that are emblematic of the complex morphology of point defects in α-iron, such as C15 clusters [28, 55]. These defects act as precursors to nanoscale phase transformations [28, 56– 59], which are driven by vibrational anomalies that are generally associated with pronounced anharmonic effects [37, 60]. Figure 3 shows, for the DB ML (F) database, the distributions of formation energies ( a, c) and harmonic formation entropies at T = 1000 K (b, d). The KDE for each distribution, shown as a dashed line, serves as a qualitative approximation of the corresponding DB ML (F) database distributions. The energetic and entropic distributions associated with the DB ML (I4) database differ substantially from those characterizing the DB EAM (I4) database. The energy histogram obtained with the EAM potential exhibits a higher amplitude in the high energy region, indicating that the EAM database retains a larger fraction of distinct high energy metastable configurations after relaxation. A similar behavior appears to be observed in the ML database for vacancy defects (DB ML (V4)) but not for interstitial defects (DB ML (I4)). This discrepancy suggests that interstitial configurations that correspond to high energies within the EAM framework are mapped to lower energy configurations when evaluated with the ML-based force fields. An intriguing behavior can be observed in the histograms of formation entropies. Specifically, the entropic distributions associated with the DB ML (F) database exhibit three distinct peaks for both defect subsets, whereas the corresponding EAM-based distribution for interstitials appears to be unimodal. This observation suggests that the EAM force field generates a rougher underlying energy landscape, leading to a larger number of distinguishable configurations and, consequently, ahigher configurational entropy than that produced by the ML based interaction. This observation is consistent with previous studies, which report that harmonic EAM descriptions of screw dislocation defects yield a larger contribution to vibrational entropy than that predicted by ML force fields [42]. In order to give a visual represensation of the studied defective structure, we perform a MCD anaylsis (See Sec. IV B for technical details). MCD analysis provide a hierarchical visualisation of defective atoms in given reference structure [61]. In fact, small vacancies / self-interstitial clusters are generally difficult to distinguish from the bulk atoms. Then Fig.4, allows to illustrate the rich zoology of I4 energy landscape. Complex and oriented defect clusters are found. The preferential orientation of these cluster is the [111] direction where the impact of low frequency vibrations modes is dominant and where the migration barrier could be very low [27, 55]. This challenging energy landscape to sample is an ideal benchmark for BABFc method. The outcomes of the MCD analysis are shown in figure 4 for asubset of representative configurations from the DB ML (I4)database. Atoms are color-coded according to their local MCD distance (from blue to yellow with increasing MCD distance), whereas atoms displayed in gray correspond to environments that are close to the bulk structure.  
+
+> B. Anharmonic free energy of point defects using BABFc
+
+In this section, we present the quantitative results obtained by applying the BABFc procedure to the 
+
+DB EAM (F) and DB ML (F) databases. Two primary objectives are pursued. We present: (i) the numerical protocol employed to evaluate the robustness of the free energy sampling, (ii) a quantitative characterization of the bias induced by the blocking potentials, together with the associated uncertainty analysis for the free energy estimates and (iii) an examination of the physical differences between the free energy distributions 611.2 11.4 11.6 11.8 12.0 
+
+Formation energy Ef (eV) 
+
+010 20 30 
+
+> Count
+
+# a DB (I4) I4
+
+2.5 5.0 7.5 10.0 12.5 15.0 17.5 
+
+Harmonic formation entropy Sh,f (kB)
+
+010 20 30 40 50 60 b DB (I4) I4
+
+FIG. 2: The evaluation of formation energies and the corresponding entropy distribution using the EAM [54] potential. Formation energy distribution ( a) and harmonic formation entropy distribution at T = 1000 K ( b) for the 
+
+DB (I4) database, which consists of 660 distinct I4 configurations. For each distribution, a kernel density estimation (KDE) curve is represented by a dashed line to provide a qualitative approximation of the underlying distributions corresponding to the ARTn database. obtained with the EAM potential [54] and with the ML potential [40]. In BABFc, the anharmonic free energy for each configuration is obtained via thermodynamic integration from a suitable reference system with a known analytical free energy expression to the target system with ab interatomic potential, EAM or ML [36] (see Sec. IV D 1 and [36] for a full description of numerical protocol). In this work, we use an Einstein harmonic crystal as the reference system, where each oscillator has a tunable frequency (for a given inverse temperature β)set to ωEins (β) (see Sec. II A 1). The theoretical framework of the Bayesian ABF method, which accelerates the thermodynamic integration scheme, is detailed in Sec. IV D 2, while the constrained variant adapted to the treatment of defects is presented in Sec. IV D 3. The incorporation of error analysis and the assessment of sampling relevance, two major methodological advances enabled by this study, are presented in Secs. IV D 4 and IV E, respectively. The free energy computations are carried out using the FEAR/LAMMPS package [36, 39]. The statistical accuracy of the underlying BABF and BABFc estimators was established in previous studies: the adiabatic reweighting estimator was benchmarked against standard thermodynamic integration and reference data [36, 39], while the constrained formulation was validated for defect formation free energies in W and Mo, where the computed free energies were shown to be consistent with independent reference calculations and with experimental observations of vacancy clustering and self-diffusion [1, 27]. The present work therefore does not aim to revalidate the estimator itself, but focuses on its large scale deployment, complemented by per-calculation diagnostics based on the statistical error estimator and the overlap metric introduced below.  
+
+> 1. Robustness of BABFc sampling across database
+
+Under constant volume conditions, with the volume fixed at the equilibrium value of the EAM potential [54], we computed the anharmonic free energies of defects from 
+
+DB EAM (F) at temperatures of {200 K , 500 K , 800 K }.Under the same thermodynamic constraints, we evaluated the same quantity for DB ML (F) employing the linear machine learning potential [40] at temperatures of {300 K , 600 K , 900 K , 1200 K }. As mentioned in Sec. II A, we performed energy minimization of the original DB (I4) database using the ML potential [40]. Following this geometry optimization, the morphology of the defective configurations can undergo substantial changes, which may lead to a significant reduction in the configurational diversity of the database. The BABFc method described in Sec. IV D 3 is implemented via sampling based on overdamped 711.5 12.0 12.5 010 20 30 40 
+
+> Count
+
+# a DB ML (I4) I4      
+
+> -15.0 -10.0 -5.0 0.0 5.0 10.0 010 20 30 40 50 60 70
+
+# b DB ML (I4) I4 
+
+> 8.0 8.5
+
+Formation energy Ef (eV) 
+
+> 010 20 30 40
+> Count
+
+# c DB ML (V4) V4    
+
+> -5.0 0.0 5.0 10.0 15.0
+
+Harmonic formation entropy Sh,f (kB)
+
+> 010 20 30 40 50 60 70 80 90
+
+# d DB ML (V4) V4
+
+FIG. 3: The evaluation of formation energies and the corresponding entropy distribution using the ML [61] potential. Formation energies ( a–c ) and harmonic formation entropies at T = 1000 K ( b–d ) for the DB ML (F)database. The same KDE (as in Fig. 2) for each distribution is shown. Langevin dynamics. Its super-ergodic behaviour enables the generation of short trajectories that share the same mean force. The only requirement is the use of adifferent random seed on each CPU, combined with a gather procedure to ensure that all parallel replicas are constrained to the same mean-force value (see further details in [1]). We employed the following settings for the stochastic dynamics simulations: (i) 256 independent random seeds with trajectories of 70,000 integration steps to sample the free energy at each temperature for each configuration using the EAM potential [54]; (ii) 50 independent random seeds with trajectories of 40,000 integration steps were used to sample the free energy at each temperature for each configuration using the ML potential [40]. Convergence with respect to the trajectory length was carefully assessed. For the constrained BABF calculations, we adopted the restoring force parameters specified by Zhong et al. [1]. Across all defects in DB EAM, ML (F), we performed 720 (EAM) and 3760 (ML) independent free energy calculations at the temperatures listed above. Out of this entire set of demanding calculations, only 5 (EAM) and 15 (ML) runs failed. This exceptionally low failure rate of the BABFc procedure highlights its strong robustness, even in a highly complex free energy landscape. 
+
+2. Constraining bias and error analysis 
+
+The BABFc method provides a free energy estimator which corrects the sampling bias caused by the external potential constraining the stochastic dynamics within the targeted metastable basin. Unlike alternative free energy approaches, this is achieved without the need for post-processing. The two probabilities to be sampled, Π Ac and 
+
+PAc 
+
+> ⋆
+
+, are respectively the marginals associated with the constrained and the unconstrained probability measures. During the BABFc procedure, ergodic sampling is carried out with respect to ΠAc , whereas, to estimate the free energy, sampling would ideally be performed with respect to PAc 
+
+> ⋆
+
+. The two-estimator approach described in Sec. IV D 3 and Sec. IV E is mathematically well-defined if and only if Π Ac and PAc 
+
+> ⋆
+
+are sufficiently close in distribution. This similarity is mathematically quantified by the ratio PAc   
+
+> ⋆(β;q)ΠAc(β;q)
+
+. Consequently, the BABFc procedure is mathematically well-defined provided that this ratio is close to one almost everywhere . The bias-correcting procedure is applicable if and only if the probability ratio PAc   
+
+> ⋆(β;q)ΠAc(β;q)
+
+from Eq. (18) is well defined almost everywhere ; that is, if the supports of 
+
+PAc 
+
+> ⋆
+
+(q) and Π Ac (q) exhibit sufficient overlap. Due to the high dimensionality of their supports, we choose 8
+
+FIG. 4: Vizualization of the most ”defective” atoms as outliers from MCD based analysis of configurations in few configurations from DB ML (I4) subset. We performed MCD analysis with a contamination score of 0 .05. Non-defective atoms are plotted in gray, while the range of color from green to yellow corresponds to an increase in the distortion score. to draw out another property to evaluate the relevance of the computed free energy estimator. We show that the subsequent quantity allows us to define a metric difference between non-normalized measures PAc 
+
+> ⋆
+
+(β; q)and Π Ac (β; q) (see Sec. IV E): Overlap( P, Π) = EΠAc (β;q)
+
+"
+
+log ˜PAc (β; q)˜ΠAc⋆ (β; q)
+
+!# 
+
+(1) Overlap( P, Π) ≤ β| ˆF (β) − ˆF c(β)|.
+
+where EΠAc (q) is the empirical expectation operator on ΠAc measure. The present overlap metric is equal to 0 if PAc 
+
+> ⋆
+
+(β; q) and Π Ac (β; q) are equal almost everywhere .
+
+Overlap metric is plotted for our EAM / ML free energy calculations in Fig. 5. Distribution colors depend on : (i) temperature ; (ii) point defects morphology. For both empirical potentials Overlap( P, Π) ≪ 1, the significant overlap between the two distributions is confirmed. Overlap metric increases with the sampling temperature. In fact, the escape probability from the sampled metastable state is greater with temperature, and consequently, the integrated work of the blocking potentials increases. We find that, at a given temperature, the overlap metric Overlap( P, Π) for V4 configurations spans a much broader range than that for I4 configurations (in the ML calculations). This stark contrast reveals a fundamental topological difference between the phase spaces accessible to vacancies and interstitials. Interstitial configurations are tightly constrained: their local environments are compact, so the accessible phase space is narrowly confined. Vacancies, by contrast, open up large, low-density regions of configuration space. As consequence the differences in the overlap metric can be interpreted as a consequence of the larger accessible region of phase space associated with vacancy configurations, which facilitates escape from metastable basins. In the presence of vacancies, atoms in the surrounding environment can explore a wider range of real space volume, leading to a broader effective slice of phase space. In contrast, self-interstitial configurations are more strongly constrained by the surrounding lattice, resulting in a narrower accessible phase space region, even though their formation energies are significantly higher. 90.000 0.002 0.004 0.006 0.008 0.010   
+
+> Overlap( P, Π) (arb. unit)
+> 010 20 30 40 50 60
+> Count
+
+a DB EAM (F)            
+
+> 200 400 600 800 1000 1200
+> Temperature (K) 0.000 0.002 0.004 0.006 0.008 0.010
+> Overlap( P, Π) (arb. unit)
+> 020 40 60 80
+> Count
+
+b DB ML (I4)       
+
+> 0.000 0.002 0.004 0.006 0.008 0.010
+> Overlap( P, Π) (arb. unit)
+> 0510 15 20 25
+> Count
+
+c DB ML (V4)        
+
+> 400 600 800 1000 1200
+> Temperature (K)
+> 400 600 800 1000 1200
+> Temperature (K)
+
+FIG. 5: Comparison of Overlap metric between 
+
+DB EAM (F) database ( a), DB ML (I4) ( b) and DB ML (V4)(c) databases. Associated temperatures are drawn with specific colormap depending on kind of point defect. For both empirical potential Overlap( P, Π) ≪ 1 that is ensured free energy estimator is well defined with constrained sampling. At any temperature, overlap metric is spreader for vacancies clusters than for interstitials. This behavior illustrates a large topological difference in accessible phase space between V4 and I4
+
+configurations Moreover, within the BABFc framework, we can also provide an uncertainty quantification for the sampling error. Further details are presented in Sec. IV D 4, where the theoretical foundation for the quantitative comparison between the true error and the error estimator of the mean force is developed. Based on the integrated error estimator given in equation (23), we compute the error estimator ˜ σ(T ) for ML potential calculations: ˜σ(T ) = 
+
+sZ 10
+
+V [A′(T ; λ′)] dλ ′. (2) Error estimation distributions for the ML free energy calculations are presented in Figure 6 as functions of temperature and the two point defect species. Over the entire temperature interval investigated, the predicted uncertainty in the free energy remains below O(1 meV) per atom, i.e. , well within the range typically associated with chemical accuracy. This analysis indicates that the BABFc approach enables quantitatively reliable determination of the free energy for metastable systems comprising more than 1000 atoms. To the best of our knowledge, an accurate determination of the free energy for a system of this complexity and size has not previously been reported. 
+
+3. Comparison between EAM and ML: free energy distribution analysis 
+
+Figure 7 shows the formation free energy distributions obtained from the DB EAM (F) and DB ML (F) databases. Formation free energy distributions show markedly different behaviors depending on the interatomic potential used. For ML potentials, the free energy distributions for V4 and I4 defects remain essentially unchanged as temperature increases. In contrast, in EAM calculations, the formation free energy distributions broaden rapidly with rising temperature. To quantitatively compare the formation free energy distributions obtained from EAM and ML, we evaluate the following empirical average of the formation free energy for a given DB j (F) database: 
+
+EDB j (F) [Ff] ( T ) = 1Card( DB j (F)) 
+
+X 
+
+> i∈DB j(F)
+
+F i 
+
+> f
+
+(T ), (3) where Card( DB j(F)) is the number of distinct configurations in the DB j (F) database. The results of this average analysis are given in Figure 8. Based on low temperature data, we provide an estimation 10 0.005 0.010 0.015 0.020 0.025 0.030 0.035 
+
+Free energy error ˜σ(T ) (eV) 
+
+> 050 100 150 200 250
+> Count
+
+a DB ML (I4)     
+
+> 0.005 0.010 0.015 0.020 0.025 0.030
+
+Free energy error ˜σ(T ) (eV) 
+
+> 050 100 150 200
+> Count
+
+b DB ML (V4)        
+
+> 400 600 800 1000 1200
+> Temperature (K)
+> 400 600 800 1000 1200
+> Temperature (K)
+
+FIG. 6: Error estimation distributions for free energies computed on DB ML (F) are shown. The subsets corresponding to interstitials, DB ML (I4), and vacancies, 
+
+DB ML (V4), are displayed in subfigures ( a) and ( b), respectively. For both categories of point defects ( I4
+
+and V4), the calculations yield very small errors when using stochastic sampling on “large systems” (on the order of ∼ 1000 atoms). Across all of our calculations, the largest error is 0.034 eV for the high temperature interstitial, implying that the resulting free energy uncertainty remains below 0.034 meV per atom. of EDB j (F) [Ef] / EDB j (F) [Sh,f ] for j ∈ {EAM , ML }
+
+databases. ML and EAM potentials display markedly different vibrational behaviors. For both types of point defects, I4 and V4, the vibrational entropies obtained with the ML potential are generally positive (about 4–5 kB per defect), while those calculated with the EAM potential are negative. Negative vibrational entropies linked to EAM potentials have previously been documented in the literature [24, 25, 62, 63]. At 0 K, these negative values arise from anomalous magnitudes of normal modes in the bcc matrix induced by SIA atoms [24]. The bulk frequencies associated with the frustrated rotations of SIAs are significantly overestimated by many EAM potentials (exceeding 15 THz), whereas the bulk upper limit is 11 THz and DFT predictions 9.5 10.0 10.5 11.0 11.5 12.0 12.5 13.0 13.5 14.0 14.5 
+
+Formation free energy Ff(T ) (eV) 
+
+> 0.00.20.40.60.81.01.2
+> Density (arb. unit)
+
+a DB EAM (F)               
+
+> 200 400 600 800 1000 1200
+> Temperature (K) 9.5 10.0 10.5 11.0 11.5 12.0 12.5 13.0 13.5 14.0 14.5
+
+Formation free energy Ff(T ) (eV) 
+
+> 0.00.51.01.52.02.53.0
+> Density (arb. unit)
+
+b DB ML (I4)       
+
+> 5.0 5.5 6.0 6.5 7.0 7.5 8.0 8.5
+
+Formation free energy Ff(T ) (eV) 
+
+> 0.00.51.01.52.02.53.0
+> Density (arb. unit)
+
+c DB ML (V4)        
+
+> 400 600 800 1000 1200
+> Temperature (K)
+> 400 600 800 1000 1200
+> Temperature (K)
+
+FIG. 7: Comparison of the Ff(T ) distributions for the 
+
+DB EAM (F) ( a) and DB ML (F) ( b–c) databases. The subsets of the ML database, DB ML (I4) and DB ML (V4), are shown in subfigures (b) and (c), respectively. The KDE estimate of each distribution is indicated by a solid line. For I4 configurations, formation free energies obtained from EAM potentials display a systematically broader spread than those from ML models. For both types of point defects ( I4 and V4), the ML based distributions become increasingly narrow as temperature rises. 11 are around 12 THz [24, 26]. These hindered modes are accurately reproduced by the ML potential [40]. These irregularities in the phonon frequencies result in very small absolute entropies for SIA clusters, which can even become negative [63]. At finite temperature, there in the EAM potential can also be another source of negative effective entropy arising from anomalous thermal expansion, which can lead to negative effective entropies in constrained systems [62, 63]. ML potentials are not subject to this limitation. The formation free energy distributions obtained with EAM potential broaden rapidly with temperature, whereas the corresponding distributions computed with the linear ML potential remain comparatively narrow over the explored range. This qualitative contrast can originate also from two distinct sources that should be discussed separately. First, it may reflect genuine physical differences in the predicted defect thermodynamics, i.e. , differences in anharmonic stabilization and in the temperature dependence of vibrational contributions across defect morphologies. These differences can be systematically identified when investigated in EAM versus ML as [40] for the mono-vacancy free energy, SIAs clusters [37, 38], larger vacancy clusters [1, 27] or in the case of the screw dislocations in Fe and W [40, 42]. The main difference arises from the fact that the present ML approach includes at least 4-body interactions, while the EAM force fields account for many-body order only by mixing 2-body pair interactions without any explicit 3- or 4-body terms [61, 64, 65]. For example, in [42], it is shown that the EAM force fields tend to strongly exaggerate the soft modes induced by screw dislocation compared to ML potentials. Second, it may also reflect differences in the topology and regularity of the underlying potential energy surface. In particular, negative (or unusually small) vibrational formation entropies have been reported for several EAM descriptions of self-interstitial configurations [23, 24, 37, 38, 40, 61–63] and are often associated with spectral anomalies and unusually stiff localized modes above the bulk frequency limit. Such high frequency artifacts can distort both harmonic indicators and finite temperature sampling and they are consistent with the notion that some EAM landscapes are comparatively rough at the microscopic scale (in some cases this roughness may be amplified by spline based parametrizations [37, 38]). In contrast, the ML potential considered here yields smoother energy variations around metastable basins, which naturally leads to narrower distributions of formation free energies and improved sampling robustness. In Figure 8, we additionally depict, using shaded regions, the estimated standard deviation of the formation free energies as a function of temperature. Consistent with the qualitative behavior seen in Figure 7, the standard deviation of the free energy remains nearly constant over the entire temperature range. We calibrate a standard deviation model for the harmonic formation free energy using low temperature data and then report the predicted harmonic standard deviation as a function of temperature, including associated standard deviation bars. Even within this harmonic framework, the standard deviation of the formation free energy remains substantially larger for the EAM data than for the ML data. This statistical discrepancy highlights a pronounced distinction between the energy landscapes generated by EAM potentials and those produced by ML potentials. Based on this database comparison, ML potentials generally exhibit smoother and more straightforward energy landscape topologies. 200.0 300.0 400.0 500.0 600.0 700.0 800.0 900.0 1000.0 1100.0 1200.0          
+
+> Temperature (K)
+> 6.0 7.0 8.0 9.0 10.0 11.0 12.0 13.0
+> EDB
+> [Ff
+> ] (T ) (eV)
+> EDB EAM (I4)
+> [Ef
+> ]= 11.65 eV, EDB EAM (I4)
+> [
+> Sh,f
+> ]
+> = -9.17 kB
+> EDB ML (I4)
+> [Ef
+> ]= 12.34 eV, EDB ML (I4)
+> [
+> Sh,f
+> ]
+> = 19.90 kB
+> EDB ML (V4)
+> [Ef
+> ]= 8.43 eV, EDB ML (V4)
+> [
+> Sh,f
+> ]
+> = 16.04 kB
+
+FIG. 8: Comparison of the formation free energy distributions obtained with the EAM [54] and ML [40] potentials as a function of temperature. The insets report the mean formation energies EDB j (F) [Ef] and harmonic entropies EDB j (F) [Sh,f ], while the corresponding harmonic free energies are represented by dashed lines. The shaded regions indicate the estimated standard deviation of the formation free energies, 
+
+σDB j (F)[Ff]( T ). ”Error” bars additionally show an estimate of the standard deviation of the harmonic free energy distribution, derived from low temperature data. 
+
+4. Correlation between harmonic and anharmonic free energy 
+
+Plotting the vibrational harmonic component of the formation free energy, Ff,h , against the purely anharmonic contribution, Ff − Ff,h , in Fig. 9 reveals a particularly noteworthy trend. Both quantities exhibit a strong correlation over a broad range of values for all temperatures and for all defect types considered. This observation suggests that the magnitude of anharmonicity is largely conditioned by, and therefore predictable from, its harmonic 12 -1.0 -0.5 0.0 0.5 1.0 1.5 -4.0 -3.0 -2.0 -1.0 0.0 1.0                   
+
+> Delta formation free energy  Ff (T ) − Fh,f (T ) (eV)  aDB ML (I4)
+> -1.5 -1.0 -0.5 0.0 0.5
+> Harmonic formation free energy Fh,f(T)(eV)
+> -4.5 -4.0 -3.5 -3.0 -2.5 -2.0 -1.5 -1.0 -0.5
+> Delta formation free energy  Ff (T ) − Fh,f (T ) (eV)  bDB ML (V4)
+> 400 600 800 1000 1200
+> Temperature (K)
+> 400 600 800 1000 1200
+> Temperature (K)
+
+FIG. 9: Comparison between harmonic formation free energy and delta formation free energy (difference between anharmonic formation free energy and harmonic formation free energy) depending on temperature. Subsets corresponding to DB ML (I4) and 
+
+DB ML (V4) are drawn in subfigure a and b respectively. Linear fits, at each temperature, between the two quantities are plotted in dashed lines. For the two subsets and at any temperature, delta formation energy and harmonic formation energy are correlated. counterpart. This observation leads to two important consequences /perspectives. First, it indicates the feasibility of constructing a surrogate model that maps the harmonic contribution onto the corresponding anharmonic correction within the descriptor space, in a manner analogous to previously proposed surrogate vibrational models [37, 38]. Second, the weak temperature dependence of the relative point distribution in Fig. 9 indicates that temperature primarily rescales fluctuations without qualitatively altering the ordering of basins, highlighting an effective low dimensional structure of the free energy landscape. In Fig. 9, we observe that the temperature acts as a scaling factor in the distribution of points. This suggests the possibility of employing recently developed anharmonic free energy methods based on the descriptor density of states (DDOS) framework [17, 18]. In particular, the proximity of the harmonic free energy surface in descriptor space to the fully anharmonic surface implies that DDOS sampling for point defects can be carried out efficiently, as the harmonic landscape already provides a near optimal reference for exploring the true anharmonic contribution. Consequently, DDOS sampling for point defects is expected to be both efficient and statistically stable. The application of DDOS methods to defect thermodynamics will be explored in future work. 
+
+III. DISCUSSIONS AND CONCLUSION 
+
+This work addresses the key issue arising from the lack of a general and robust framework for computing the anharmonic formation free energies of metastable defect configurations embedded in crystalline materials. While modern atomistic simulations can easily generate large databases of defect structures, reliably assigning finite temperature free energies to these configurations has remained a major bottleneck, especially when defects are metastable, weakly confined, or separated by low energy barriers. In this paper, we show that the constrained Bayesian Adaptive Biasing Force method provides apractical and systematic solution to this problem: given a metastable minimum and a confinement strategy that prevents basin escape, BABFc enables the accurate and bias-corrected estimation of restricted formation free energies, even for highly complex defect morphologies. Across a large variety of defects, the failure rate remains very low, attesting to the robustness of the present BABFc approach. However, it should be well defined the scope and the limits of the present ”systematic solution” meaning. In this work, “systematic” does not mean that we can automatically enumerate all relevant defect free energy basins, nor that we recover a global equilibrium free energy for a defect type. Rather, the systematic aspect means that given a metastable basin BABFc provides a general and robust route to compute the associated restricted formation free energy with controlled diagnostics, such as variance and overlap. Concretely, the workflow only requires two ingredients: (i) an initial configuration that is a local minimum (or can be relaxed into one) and (ii) a constraint that prevents basin escape during the stochastic sampling, followed by a bias-correcting procedure. In this sense, the method is agnostic to the detailed defect geometry: it does not require identifying a vacancy core, a crowdion line, or a cluster topology 
+
+a priori . The “object” whose free energy is computed is the metastable basin itself, defined by the reference minimum and by the confinement condition, not by a human chosen defect label. This viewpoint clarifies both the strengths and limitations. The strength is that the basin definition is purely topological (“stay near this minimum”) and therefore portable across morphologies (vacancy clusters, 13 interstitial clusters, mixed defects) without redesigning defect specific collective variables. The limitation is that two aspects remain non-systematic in the broader discovery sense. Firstly, identifying basins and deciding which minima are relevant at finite temperature is an open problem in general (and it becomes acute for molecular systems or chemically complex materials where basin multiplicity is enormous). In our study, this upstream step is delegated to the ARTn database construction and to the subsequent selection strategy (harmonic screening, MCD outliers, random subsampling etc). Secondly, representativity is not guaranteed by the free energy estimator itself: the conclusions about “typical” behavior depend on the selected subset (e.g., 240 EAM configurations versus 630 /290 ML configurations) and on how this subset samples the underlying morphology/entropy distribution. This unique ability of the BABFc method to handle metastable configurations, together with its very low failure rate, is directly related to the use of constrained dynamics, which prevent unwanted migrations that would otherwise contaminate the sampling campaign. It is therefore also important to discuss the practical limitations of the approach, in particular how to handle situations involving frequent basin escapes. BABFc can, in principle, handle confinement by increasing the constraint strength or reducing the basin radius (see Eq.(7) in [1]), but this changes the effective accessible region and can degrade overlap, producing broad reweighting factor distributions dominated by rare events. In such regimes, the method remains well defined but becomes statistically harder: one must either (i) refine the basin definition, e.g., a smaller tube around the minimum, alternative distance metrics, etc., (ii) increase sampling (more seeds/longer trajectories) or (iii) accept that the computed quantity corresponds to a narrower restricted basin free energy. This is precisely why monitoring overlap metric , Eq. 1 is essential: it provides an operational criterion to distinguish easy basins (robust overlap, stable reweighting) from basins that require additional constraint work or are intrinsically ill-suited to restricted-basin thermodynamics at the chosen temperature. For this purpose, the choice of the Einstein reference and its ad hoc frequency is crucial Other, more sophisticated, reference choices are also possible, such as a fully harmonic one [1, 36] or even more advanced schemes [30, 66]. BABFc method doesn’t integrate the U (λ, q) at a given λ: instead, there are sampled configurations 
+
+q ∼ ΠAc (the biased constrained distribution) and for each configuration, we evaluate the λ integrated weight. Thus, the issue is not fluctuations along a λ trajectory but fluctuations of the integrand over configuration space. Although the Bayesian formulation integrates out the coupling parameter λ and does not rely on sampling at fixed λ, the variance of the free energy estimator remains sensitive to the roughness of the target potential energy surface. In particular, for rough landscapes such as those produced by the EAM potential, small configuration space displacements can induce large fluctuations in the energy difference, which directly translate into broader distributions of the λ integrated reweighting factor. In contrast, the smoother energy landscapes obtained with machine learning potentials lead to narrower weight distributions and improved statistical overlap, as reflected in the smaller dispersion of formation free energies. This interpretation is consistent with the behavior of the overlap metric from Fig. 5, which shows systematically broader distributions for EAM than for ML potentials, especially at elevated temperatures. For this perspective, a practical implication is that BABFc can be viewed as a stress test for interatomic potentials: rougher landscapes tend to require more frequent and/or stronger constraint actions to prevent basin escape, thereby increasing the variability of the reweighting factors. This manifests as broader overlap metric distributions, especially at elevated temperatures, and may amplify estimator variance and finite sampling sensitivity. In this sense, comparing the temperature dependence of free energy dispersion together with overlap diagnostics provides a complementary way to benchmark not only the predicted thermodynamics but also the effective regularity of the potential energy landscape in metastable defect basins. In practice, overlap degradation is expected in regimes where the constraint potential performs substantial work, notably at high temperatures, for shallow basins separated by low barriers and for vacancy clusters where the local free volume increases the amplitude of accessible atomic rearrangements. In such situations, the reweighting factors become broadly distributed and the free energy estimator can become dominated by rare events, leading to increased statistical variance and, at finite sampling, a higher risk of apparent bias. Monitoring the overlap metric, therefore, provides apractical diagnostic of reliability and identifies regimes where longer trajectories, stronger basin definitions or alternative constraints may be required. From this perspective, insufficient overlap directly undermines the validity of the reweighting procedure and free energy estimates obtained in such regimes must therefore be interpreted with caution. A natural question concerns the transferability and generality of the proposed approach beyond the specific case of I4 and V4 clusters in specific material α-Fe. Importantly, BABFc does not rely on any defect specific collective variables or geometrical identification of the defect core. The only required input is a metastable reference configuration, which defines the basin of interest through the constraint. This makes the approach, in principle, portable to a wide range of defect types, including extended defects such as dislocation cores, jogs, kinks, or grain-boundary structural units, provided a meaningful basin definition can be constructed. Similarly, the method is not 14 tied to a specific material class and can be applied to other crystalline systems, alloys, or multicomponent materials [67]. From the perspective of interatomic interactions, BABFc is agnostic to the underlying force field representation: it can be combined with traditional empirical potentials, linear or nonlinear machine learning potentials, and, in the future, more expressive foundation model force fields. In this sense, the method addresses a methodological gap that becomes increasingly important as force fields improve and the limiting factor shifts from energy/force accuracy to the resolution of complex free energy landscapes. Another key aspect highlighted by this work is the scalability of the BABFc framework. As mentioned in [1], the numerical form of the BABFc method is embarrassingly parallel concerning independent stochastic trajectories (random seeds), which makes it well suited for modern high performance computing environments. This parallelism allows one to trade wall-clock time for statistical accuracy in a controlled manner. As demonstrated here, BABFc remains robust for systems containing on the order of 10 3 atoms and for hundreds to thousands of distinct metastable basins. In practice, the main limitations of this type of parallelism are the long correlation times within a basin, degradation of overlap between constrained and unconstrained measures and frequent basin escape events at high temperatures or for shallow basins. These effects do not invalidate the method, but they define its practical operating regime, motivating the systematic use of overlap diagnostics and error estimators to assess reliability. Together, these considerations position BABFc as a scalable and versatile tool for large scale, basin resolved free energy calculations in complex materials systems. The present implementation of BABFc is formulated in the canonical ensemble and the formation free energies reported here should therefore be interpreted as restricted Helmholtz formation free energies at fixed volume. For applications in which defect stability is controlled by imposed pressure and temperature, the relevant thermodynamic potential is the Gibbs formation free energy. A natural extension of the present framework would be to compute the restricted Helmholtz free energy of each metastable basin over a grid of volumes, for both the defective system and the corresponding bulk reference, and then perform the Legendre transformation Gbasin (T, p ) =min V [Fbasin (T, V ) + pV ]. This route is closely related to volume dependent thermodynamic integration strategies used to obtain constant pressure thermodynamics [30, 68], but with the important distinction that the anharmonic contribution to Fbasin (T, V ) would be evaluated explicitly by BABFc. Another possible route would be a direct NPT formulation of BABFc, in which the biased and constrained sampling is extended to include cell degrees of freedom, as in recent developments of NPT thermodynamic integration [69]. Intermediate strategies based on sequences of NVT simulations to approximate NPT behavior may also be considered [70]. These extensions require careful control of basin identity under volume fluctuations, pressure induced changes of metastable basins, and overlap between biased and target measures, and will be the subject of future work. Amid renewed interest in interatomic interactions driven by data driven force fields, this work opens broad new perspectives. As interatomic potentials become more accurate and efficient, the main challenge is shifting from building force fields to developing robust methods for resolving complex, high dimensional free energy landscapes. In this context, constrained approaches such as BABFc complement the existing family of anharmonic free energy methods by providing systematic, accurate and scalable access to the restricted free energies of metastable configurations, a regime in which unconstrained sampling strategies are not applicable and thus contribute to the predictive finite temperature modeling of defects in complex materials.   
+
+> IV. METHOD A. Formation observables for atomic defects
+
+To quantify the impact of a defect on the thermodynamic properties of pure elements, it is convenient to introduce a formation observable. For any extensive observable O, the corresponding formation observable at a given temperature T , denoted Of ,between a defective system containing Nb ± Nd atoms (Nb bulk atoms and Nd defect-related atoms) and its associated bulk reference system containing Nb atoms is defined as 
+
+Of (T, N b, N d) = Od(T, N b ± Nd) − Nb ± Nd
+
+Nb
+
+Ob(T, N b),
+
+(4) where Od and Ob denote, respectively, the observable evaluated for the defective and the bulk systems.  
+
+> B. MCD analsyis for defects visualisation
+
+To obtain a visual representation of the diversity encoded in DB ML (I4), we additionally carried out adistortion score based defect characterization in the form of minimum covariance determinant (MCD) analysis [58, 61] constructed on a high-dimensional representation of the local atomic environments. In this analysis, we employed the bispectrum SO(4) descriptor [47, 61], configured with the following parameter values: (i) a maximum angular momentum quantum number of jmax = 5.0, and (ii) a radial cutoff distance of rcut = 6.0 ˚A. The analysis employing the MCD distortion score framework necessitates the availability of appropriate reference configurations to compute 15 statistical distances [58, 61]. These data were generated by performing canonical ensemble (NVT) molecular dynamics simulations of bcc Fe using the EAM potential [54] at a temperature of T =500 K. The MCD envelope was then trained assuming a contamination proportion of 0.05. The outcomes of the MCD analysis are shown in figure 4 for a subset of representative configurations from the DB ML (I4) database. Atoms are color-coded according to their local MCD distance (from blue to yellow with increasing MCD distance), whereas atoms displayed in gray correspond to environments that are close to the bulk structure.   
+
+> C. Harmonic vibrational entropy calculation and
+> ad hoc Einstein frequencies
+
+Harmonic vibrational entropies were calculated with the PHONDY/LAMMPS package [24, 37, 38, 71–73] by explicitly building the dynamical matrix of the system and subsequently performing its full diagonalization. From this diagonalization process, we obtain the set of non translational normal mode frequencies 
+
+{ων }1≤ν≤3N −3, where N denotes the total number of atoms in the system. The harmonic vibrational entropy is subsequently evaluated using the classical expression, which is valid for temperatures T exceeding the Debye temperature of the crystal [74, 75]: 
+
+Sh(T, N ) = kB3N −3X
+
+> ν=1
+
+
+
+ln 
+
+ kBT
+
+ℏων
+
+
+
++ 1 
+
+
+
+, (5) where kB and ℏ denote the Boltzmann constant and the reduced Planck constant, respectively. For each configuration in DB (ARTn), we followed the procedure below to determine its formation energy and harmonic formation entropy. We first carried out an energy minimization using the LAMMPS software [76]. Next, we employed the PHONDY/LAMMPS package [24, 37, 38, 71–73] to compute the dynamical matrix from 6 N
+
+force evaluations, using the standard finite difference scheme with atomic displacements of 10 −3 ˚A. Each configuration was verified to correspond to an energy minimum by ensuring that 3N − 3 normal mode frequencies are real. For all harmonic calculations, we retained only the value of Sh,f (T, N b, N d) at T = 1000 K. At this temperature, the classical Sh,f coincides with its quantized value. All simulations were performed at constant volume, employing a cubic bcc simulation cell of side length 8 a0, containing 1028 ± Nd atoms. The lattice parameter a0 was fixed to the equilibrium bulk value determined at T = 0 K. In order to define an ad hoc Einstein reference for a given couple (defective configuration, temperature) we impose that the harmonic free energy of the system is equal to harmonic free energy of the ”effective” Einstein crystal:  
+
+> 3N−3
+
+X
+
+> ν=0
+
+ln 
+
+ ℏων
+
+kB T
+
+
+
+= (3 N − 3) ln 
+
+ ℏωEins( β)
+
+kB T
+
+
+
+, (6) where the left hand sum is computed over the real frequency ων associated to the defective system.   
+
+> D. Robust thermodynamic integration method
+> 1. Thermodynamic integration
+
+In the BABF method, thermodynamic integration is performed using a general potential energy U (λ, q) that linearly mixes the potential energy of the target system (here we use EAM or ML potentials) U (q) and the potential energy of the reference system (here we use the Einstein approximation; other options, such as the harmonic approximation [36], can also be used) U ref (q)through a coupling parameter λ:
+
+U (λ, q) = (1 − λ)U ref (q) + λU (q), (7) where q is the set of positions of N atoms defined in the 3 N dimensional torus T3N ⊂ R3N (the configuration space with periodic boundary conditions). Using the definition of the extended Landau free energy A(β; λ) = 
+
+−β−1 ln  R  
+
+> T3N
+
+exp [ −βU (λ, q)] dq where β = 1 
+
+> kBT
+
+, we can express the free energy derivative with respect to 
+
+λ parameter: 
+
+A′(β; λ) = 
+
+R 
+
+> T3N
+
+∂λU (λ, q) exp [ −βU (λ, q)] dq
+
+R 
+
+> T3N
+
+exp [ −βU (λ, q)] dq . (8)  
+
+> 2. Bayesian Adaptive Biasing Force method
+
+Like other ABF methods, BABFc is based on the following extended potential: 
+
+UA⋆ (β; λ, q) = U (λ, q) − A⋆(β; λ), (9) We denote by PA⋆ (β; λ, q) the joint probability of the state (λ, q) at the temperature β in the extended ensemble with biasing potential A⋆. This joint probability is given by: 
+
+PA⋆ (β; λ, q) = exp [ −βU A⋆ (β; λ, q)] 
+
+RR   
+
+> T3N×[0 ,1]
+
+exp [ −βU A⋆ (β; λ′, q′)] dq′dλ ′ .
+
+(10) The mean force A′(β; λ) from Eq. (8) can be written in the extended ensemble associated with the biasing potential UA⋆ (β; λ, q): 
+
+A′(β; λ) = 
+
+R 
+
+> T3N
+
+∂λU (λ, q) exp[ −βU A⋆ (β; λ, q)] dq
+
+R 
+
+> T3N
+
+exp[ −βU A⋆ (β; λ, q)] dq
+
+=
+
+R 
+
+> T3N
+
+∂λU (λ, q)PA⋆ (β; λ, q)dq
+
+R 
+
+> T3N
+
+PA⋆ (β; λ, q)dq , (11) 16 where PA⋆ (β; λ) = R 
+
+> T3N
+
+PA⋆ (β; λ, q)dq and 
+
+PA⋆ (β; q) = R 10 PA⋆ (β; λ, q)dλ are the marginal probabilities associated with λ and q, respectively. By introducing the conditional probabilities 
+
+pA⋆ (β; λ|q) = PA⋆ (β; λ, q)/P A⋆ (β; q) and pA⋆ (β; q|λ) = 
+
+PA⋆ (β; λ, q)/P A⋆ (β; λ), we can lead [36, 39] (applying the Bayes theorem) to the new equivalent form for mean force expression (11): 
+
+A′(β; λ) = 
+
+Z
+
+> T3N
+
+∂λU (λ, q)pA⋆ (β; q|λ)dq
+
+=
+
+R 
+
+> T3N
+
+∂λU (λ, q)pA⋆ (β; λ|q)PA⋆ (β; q)dq
+
+R 
+
+> T3N
+
+pA⋆ (β; λ|q)PA⋆ (β; q)dq .(12) The present average can be accurately estimated by ergodic sampling of PA⋆ (β; q) distribution. Given a sequence of N points {qs}1≤s≤N sampled from the probability distribution PA⋆ (β; q), the mean force is estimated as: 
+
+A′(β; λ) = 
+
+PNs=1 ∂λU (λ, qs)pA⋆ (β; λ|qs)
+
+PNs=1 pA⋆ (β; λ|qs) . (13) The conditional probability of λ given the sampled subset 
+
+{qs}1≤s≤N can be directly estimated from the following expression: 
+
+pA⋆ (β; λ|q) = exp [ −βU A⋆ (β; λ, q)] 
+
+R 10 exp[ −βU A⋆ (β; λ′, q)] dλ ′ . (14) 
+
+3. Constrained Bayesian Adaptive Biasing Force method 
+
+Even if the free energy definition involves the totality of the phase space, the computation of thermodynamic properties of interest requires computing a restriction of free energy for a given basin of the energy landscape. For these complex situations, thermodynamic integration can face convergence issues due to the sampling process. In fact, the system can leave the basin of interest during the sampling process because of its low attractiveness. Hence, the characteristic sampling time to eliminate the bias in free energy estimation induced by changes in the attraction basin in the energy landscape is so large that it is more efficient to completely restart the sampling procedure. The energy landscape of point defects in α-iron [23] – where basins are often separated by small energy barriers ( ∼ 100 meV) is a case study for this problem. In the constrained Bayesian Adaptive Biasing Force (BABFc) method, we propose to modify the energy landscape by adding a constraint potential energy denoted as Ec which satisfies Fc(q) = − dE c(q) 
+
+> dq
+
+. Fc(q) is the force field associated with the Ec constraint potential. The total extended potential of the system takes this form: 
+
+U c(λ, q) = (1 − λ)U ref (q) + λ [U (q) + Ec(q)] . (15) Constraint potential allows the system to stay confined in the originally sampled basin. Nevertheless, direct thermodynamic integration using this modified potential will introduce a bias in free energy estimation. In the next paragraph, we show that it is possible to propose a de-biasing procedure to estimate the restriction of the free energy for a given basin. Based on mean force estimation formula given in Eq. (12), we can estimate the constrained mean force 
+
+Ac′
+
+(β; λ) in the constrained extended ensemble: 
+
+Ac′(β; λ) = 
+
+R 
+
+> T3N
+
+∂λU c(λ, q)πAc (β; λ|q)Π Ac (β; q)dq
+
+R 
+
+> T3N
+
+πAc (β; λ|q)Π Ac (β; q)dq ,
+
+(16) where Π Ac (β; q) is the marginal probability associated with ( β; q) in the constrained attraction basin. This marginal probability will be directly sampled by the BABFc procedure involving the constrained potential. This expression Eq. (16) also involves the following conditional probability: 
+
+πAc (β; λ|q) = exp [ β(Ac(β; λ) − U c(λ, q))] 
+
+R 10 exp [ β(Ac(β; λ′) − U c(λ′, q))] dλ ′ ,
+
+(17) Mean force estimation proposed in Eq. (16) can be computed using the standard BABF method. However, this mean force is biased by the constrained potential. We are interested in the estimation of the de-biased mean force given in equation (12). This estimation can be rewritten as an almost sure expectation on Π Ac (q)distribution support in a constrained extended ensemble: 
+
+A′(β; λ) =
+
+R 
+
+> T3N
+
+∂λU (λ, q)pAc 
+
+> ⋆
+
+(β; λ|q)PAc 
+
+> ⋆
+
+(β; q)dq
+
+R 
+
+> T3N
+
+pAc 
+
+> ⋆
+
+(β; λ|q)PAc 
+
+> ⋆
+
+(β; q)dq
+
+=
+
+R 
+
+> T3N
+
+∂λU (λ, q)pAc 
+
+> ⋆
+
+(β; λ|q) PAc   
+
+> ⋆(β;q)ΠAc(β;q)
+
+ΠAc (β; q)dq
+
+R 
+
+> T3N
+
+pAc 
+
+> ⋆
+
+(β; λ|q) PAc   
+
+> ⋆(β;q)ΠAc(β;q)
+
+ΠAc (β; q)dq
+
+, (18) where pAc 
+
+> ⋆
+
+(β; λ|q) ∝ exp [ β(Ac(β; λ) − U (λ, q))] is the conditional probability associated with the unbiased 17 system in the constrained extended ensemble, and 
+
+PAc 
+
+> ⋆
+
+(β; q) is the de-biased marginal probability of q in the constrained ensemble. Then, to simplify the notation, we chose to denote by pAc (β; λ|q) = pAc 
+
+> ⋆
+
+(β; λ|q) PAc   
+
+> ⋆(β;q)ΠAc(β;q)
+
+the conditional unbiased probability of λ for the constrained bias q distribution. This conditional probability can be estimated in the extended constrained ensemble and lead to the present formulation: 
+
+pAc (β; λ|q) = pAc 
+
+> ⋆
+
+(β; λ|q) PAc⋆ (β; q)ΠAc (β; q)= exp [ β(Ac(β; λ) − U (λ, q))] 
+
+R 10 exp [ β(Ac(β; λ′) − U c(λ′, q))] dλ ′ .(19) The new two estimations for free energy calculations allow for constrained metastable states corresponding to U c(λ, q) extended potential. An estimation of constrained biased free energy based on mean force integration Eq. (16) allows us to calculate an unbiased mean force based on the importance sampling formula given in equation (18). The thermodynamic integration of this unbiased mean force allows us to recover the unbiased free energy associated with the metastable basin. Then free energy estimators can be computed for a given β with thermodynamic integration. The two subsequent free energy estimators are given by: ˆF c(β) = 
+
+Z 10
+
+Ac′(β; λ′)dλ ′ + Fref (β), (20) ˆF (β) = 
+
+Z 10
+
+A′(β; λ′)dλ ′ + Fref (β). (21) 
+
+4. Error estimation on BABF method 
+
+Here, we provide insights into the error estimation of the free energy. For any observable O(λ) in the extended ensemble U(λ, q) the variance of the observable can be expressed as: 
+
+V [O(β; λ)] = 
+
+R 
+
+> T3N
+
+O2(β; λ, q) exp [ −βU (λ, q)] dq
+
+R 
+
+> T3N
+
+exp [ −βU (λ, q)] dq −
+
+ R  
+
+> T3N
+
+O(β; λ, q) exp [ −βU (λ, q)] dq
+
+R 
+
+> T3N
+
+exp [ −βU (λ, q)] dq
+
+2
+
+. (22) Based on the previous work [77] for conditional expectations and considering independent and identically distributed random variables, we can estimate the mean force variance. Then, A′(λ) variance is expressed as: 
+
+V A′(β; λ) =
+
+PMs=1 [∂λU (λ, qs) − A′(β; λ)] 2 [pA⋆ (β; λ|qs)] 2
+
+hPMs=1 pA⋆ (β; λ|qs)
+
+i2 .
+
+(23) 
+
+In the end, we are interest on the central quantity 
+
+V [A(β; λ)]. Because of the ”history” dependence of the mean force (computed on the PA⋆ ensemble), we cannot use the results given by Carlson et al. [78] for a constant bias. In our case, we will provide an upper bound of V [A(β; λ)] using our previous estimator V [A′(β; λ)]. Starting with the variance definition and the midpoint estimation for integral quadrature, we have: 
+
+V [A(β; λ)] = V
+
+Z λ
+
+> 0
+
+A′(β; λ′)dλ ′
+
+
+
+(24) = lim  
+
+> Λ→+∞
+
+V
+
+"
+
+12 (Λ − 1) 
+
+> Λ−1
+
+X
+
+> k=1
+
+ A′(β; λk+1 ) + A′(β; λk )#
+
+,
+
+if we set B′(β; λk) = 12 (A′(β; λk+1 ) + A′(β; λk)). We made the following decay assumption on covariance ∀k, k ′
+
+:
+
+Cov B′(β; λk ), B ′(β; λk′ ) ≤
+
+( V [B′(β; λk )] if k = k′
+
+> V
+
+[B′(β;λk )] 
+
+> |k−k′|α
+
+if k̸ = k′ | α > 0(25) 
+
+Using covariance and integral properties, one can arrive at the following inequalities involving the γ(Λ) function defined as follows: 
+
+γ(Λ) = 
+
+
+
+1 + 2 ln (Λ) if α = 1 1 + 2(Λ −1) 1−α 
+
+> 1−α
+
+if α < 11 + 31−α if α > 1(26) Variance estimator for the free energy can be bounded as follows: 
+
+V [A(β; λ)] ≤ lim 
+
+> Λ→+∞
+
+γ (Λ) Λ − 1
+
+Z λ
+
+> 0
+
+V [B′(β; λ′)] dλ ′. (27) Then, using the definition of B′(λ′), we can provide the following upper bound for the free energy variance by integrating along the alchemical parameter: 
+
+V [A(β; λ)] ≤
+
+Z λ
+
+> 0
+
+V [A′(β; λ′)] dλ ′. (28) This formulation allows the estimation of the variance (or uncertainty) in the free energy as a cumulative effect of the uncertainties at each point along the integration path. 
+
+E. Bounding for overlap metric 
+
+We introduce the two non-normalized marginals: ˜P (β; q) = exp( −βU (q)) and ˜Π( β; q) = exp( −β[U (q) + 18 
+
+Ec(q)]), where ∀q ∈ T3N , Ec(q) ≥ 0. We first write the partition function associated with ˜P and we suppose ˜Πto be strictly positive almost everywhere :
+
+Z ˜P (β) =
+
+Z
+
+> T3N
+
+˜P (β; q)dq =
+
+Z
+
+> T3N
+
+˜P (β; q)˜Π1/2(β; q)˜Π1/2(β; q)dq.
+
+(29) Using the Cauchy-Schwarz inequality in Eq. (29), we get: 
+
+Z2˜P (β) ≤
+
+Z
+
+> T3N
+
+˜P (β; q)˜Π( β; q)˜P (β; q)dq
+
+! Z 
+
+> T3N
+
+˜Π( β; q)dq
+
+
+
+,Z ˜P (β)
+
+Z˜Π(β) ≤
+
+Z
+
+> T3N
+
+˜P (β; q)˜Π( β; q)˜P (β; q)
+
+R 
+
+> T3N
+
+˜P (β; q′)dq′ dq
+
+Z ˜P (β)
+
+Z˜Π(β) ≤ EP (β;q)
+
+" ˜P (β; q)˜Π( β; q)
+
+#
+
+. (30) From the preceding hypothesis, one can identify ˜P and ˜Πthat attain the equality case in eq. (30). Consequently, the equality in eq. (30) holds if and only if there exists a function α(β) ∈ R+∗ such that: ˜P (β; q)˜Π1/2(β; q) = α(β) ˜Π1/2(β; q). (31) From the definition of Ec, equation (31) holds if and only if Ec(q) = − β−1 log  α(β) 1q∈B , where 
+
+B ⊂ T3N denotes the blocking domain on which 
+
+Ec is applied. Consequently, the equality is satisfied when a constant external blocking energy is imposed adiabatically throughout the constrained sampling procedure. To derive an upper bound for the overlap metric estimator, we exploit fundamental properties of the Kullback–Leibler (KL) divergence. In particular, invoking the non-negativity of the KL divergence, we obtain: 
+
+Z
+
+> T3N
+
+log 
+
+ Π( β; q)
+
+P (β; q)
+
+
+
+Π( β; q)dq ≥0, (32) 
+
+EΠ( β;q)
+
+"
+
+log ˜Π( β; q)˜P (β; q)
+
+!# 
+
++ log 
+
+ Z ˜P (β)
+
+Z˜Π(β)
+
+
+
+≥ 0. (33) Here, Z ˜P (β) and Z˜Π(β) denote the partition functions associated with the unconstrained and constrained systems, respectively. From Eq. (33), we obtain the following upper bound for the overlap metric :
+
+EΠ( β;q)
+
+"
+
+log ˜P (β; q)˜Π( β; q)
+
+!# 
+
+≤ log 
+
+ Z ˜P (β)
+
+Z˜Π(β)
+
+
+
+. (34) 
+
+ACKNOWLEDGEMENTS 
+
+This work has been carried out within the framework of the EUROfusion Consortium, funded by the European Union via the Euratom Research and Training Programme (Grant Agreement No 101052200— EUROfusion). The views and opinions expressed herein do not necessarily reflect those of the European Commission. The authors acknowledge the support from GENCI - (CINES/CCRT) computer center under Grant No. A0190906973. 
+
+AUTHOR CONTRIBUTIONS 
+
+C.L. and M.C.M. designed the study. All authors discussed the results, and provided comments and revisions to the manuscript. 
+
+DATA AVAILABILITY 
+
+The MiLaDy package is open source software distributed under the ASL license [36, 37, 40, 79]. The database defects are available after the acceptance of the paper. FEAR/LAMMPS [27, 36, 60] and PHONDY/LAMMPS 
+
+package [24, 37, 38, 71–73] is software under the ASL license distributed upon request. The FEAR/PHONDY 
+
+packages are available on Github and as part of the 
+
+EXTRA-FIX package of the LAMMPS [76, 80] software. 
+
+[1] A. Zhong, C. Lapointe, A. M. Goryaeva, K. Arakawa, M. Ath` enes, and M.-C. Marinica, Unraveling Temperature-Induced Vacancy Clustering in Tungsten: From Direct Microscopy to Atomistic Insights via Data-Driven Bayesian Sampling, PRX Energy 4, 013008 (2025). [2] L.-F. Zhu, B. Grabowski, and J. Neugebauer, Efficient approach to compute melting properties fully from ab initio with application to cu, Phys. Rev. B 96 , 224202 (2017). [3] B. Grabowski, Y. Ikeda, P. Srinivasan, F. K¨ ormann, C. Freysoldt, A. I. Duff, A. Shapeev, and J. Neugebauer, Ab initio vibrational free energies including anharmonicity for multicomponent alloys, npj Comput. Mater. 5, 1 (2019). 19 
+
+[4] A. Zhong, C. Lapointe, A. M. Goryaeva, J. Baima, M. Ath` enes, and M.-C. Marinica, Anharmonic thermo-elasticity of tungsten from accelerated bayesian adaptive biasing force calculations with data-driven force fields, Phys. Rev. Mater. 7, 023802 (2023). [5] L.-F. Zhu, F. K¨ ormann, Q. Chen, M. Selleby, J. Neugebauer, and B. Grabowski, Accelerating ab initio melting property calculations with machine learning: application to the high entropy alloy tavcrw, npj Comput. Mater. 10 , 274 (2024). [6] S. Menon, Y. Lysogorskiy, A. L. Knoll, N. Leimeroth, M. Poul, M. Qamar, J. Janssen, M. Mrovec, J. Rohrer, K. Albe, et al. , From electrons to phase diagrams with machine learning potentials using pyiron based automated workflows, npj Comput. Mater. 10 , 261 (2024). [7] J. G. Kirkwood, Statistical mechanics of fluid mixtures, J. Chem. Phys. 3, 300 (1935). [8] D. Frenkel and B. Smit, Understanding molecular simulations: from algorithms to applications, Academic, San Diego (1996). [9] J. Rickman and R. LeSar, Free-energy calculations in materials research, Annu. Rev. Mater. Res. 32 , 195 (2002). [10] R. W. Zwanzig, High-Temperature Equation of State by a Perturbation Method. I. Nonpolar Gases, J. Chem. Phys. 22 , 1420 (1954). [11] T. Leli` evre, G. Stoltz, and M. Rousset, Free energy computations: a mathematical perspective (World Scientific, 2010). [12] A. Castellano, F. Bottin, J. Bouchet, A. Levitt, and G. Stoltz, A b initio canonical sampling based on variational inference, Phys. Rev. B 106 , L161110 (2022). [13] C. Jarzynski, Nonequilibrium equality for free energy differences, Phys. Rev. Lett. 78 , 2690 (1997). [14] G. Adjanor, M. Ath` enes, and F. Calvo, Free energy land-scape from path-sampling: application to thestructural transition in LJ38, Eur. Phys. J. B 53 , 47 (2006). [15] M. de Koning, A. Antonelli, and S. Yip, Optimized free-energy evaluation using a single reversible-scaling simulation, Phys. Rev. Lett. 83 , 3973 (1999). [16] R. Freitas, M. Asta, and M. De Koning, Nonequilibrium free-energy calculation of solids using lammps, Comput. Mater. Sci. 112 , 333 (2016). [17] T. D. Swinburne, C. Lapointe, and M.-C. Marinica, Score matching the descriptor density of states for model-agnostic free energy estimation, Nat. Comm. 17 , 248 (2026). [18] T. D. Swinburne, C. Lapointe, and M.-C. Marinica, Differentiable, model-agnostic free energy calculation, in AI for Accelerated Materials Design-NeurIPS 2025 
+
+(2025). [19] O. Hellman, I. A. Abrikosov, and S. I. Simak, Lattice dynamics of anharmonic solids from first principles, Phys. Rev. B 84 , 180301(R) (2011). [20] S. Kadkhodaei, Q.-J. Hong, and A. van de Walle, Free energy calculation of mechanically unstable but dynamically stabilized bcc titanium, Phys. Rev. B 95 ,064101 (2017). [21] C.-C. Fu, F. Willaime, and P. Ordej´ on, Stability and mobility of mono- and di-interstitials in α-fe, Phys. Rev. Lett. 92 , 175503 (2004). [22] C.-C. Fu, J. Torre, F. Willaime, J.-L. Bocquet, and A. Barbu, Multiscale modelling of defect kinetics in irradiated iron, Nat. Mater. 4, 68 (2005). [23] M.-C. Marinica, F. Willaime, and N. Mousseau, Energy landscape of small clusters of self-interstitial dumbbells in iron, Phys. Rev. B 83 , 094119 (2011). [24] M.-C. Marinica and F. Willaime, Orientation of Interstitials in Clusters in $\alpha $-Fe: A Comparison between Empirical Potentials, Solid State Phenomena 
+
+129 , 67 (2007). [25] S. Chiesa, P. M. Derlet, and S. L. Dudarev, Free energy of a 110 dumbbell interstitial defect in bcc Fe: Harmonic and anharmonic contributions, Phys. Rev. B 
+
+79 , 10.1103/PhysRevB.79.214109 (2009). [26] G. Lucas and R. Sch¨ aublin, Helium effects on displacement cascades in α-iron, J. Phys.: Cond. Mater. 
+
+20 , 415206 (2008). [27] C. Lapointe, A. Zhong, T. D. Swinburne, F. Bruneval, M. Ath` enes, and M.-C. Marinica, Anomalous self-diffusion in tungsten and molybdenum: Exonerating the di-vacancy contribution and the key role of interatomic interaction, Phys. Rev. Mater. 9, 093801 (2025). [28] M.-C. Marinica, F. Willaime, and J.-P. Crocombette, Irradiation-induced formation of nanocrystallites with c 15 laves phase structure in bcc iron, Phys. Rev. Lett. 
+
+108 , 025501 (2012). [29] B. Grabowski, L. Ismer, T. Hickel, and J. Neugebauer, Ab initio up to the melting point: Anharmonicity and vacancies in aluminum, Phys. Rev. B 79 , 134106 (2009). [30] B. Grabowski, Y. Ikeda, P. Srinivasan, F. K¨ ormann, C. Freysoldt, A. I. Duff, A. Shapeev, and J. Neugebauer, Ab initio vibrational free energies including anharmonicity for multicomponent alloys, Npj Comput. Mater. 5, 1 (2019). [31] L.-F. Zhu, P. Srinivasan, Y. Gong, T. Hickel, B. Grabowski, F. K¨ ormann, and J. Neugebauer, Melting properties of the refractory metals V and W and the binary VW alloy fully from first principles, Phys. Rev. B 109 , 094110 (2024). [32] X. Zhang, S. V. Divinski, and B. Grabowski, Ab initio machine-learning unveils strong anharmonicity in non-Arrhenius self-diffusion of tungsten, Nat. Comm. 16 , 394 (2025). [33] A. Castellano, R. B´ ejaud, P. Richard, O. Nadeau, C. Duval, G. Geneste, G. Antonius, J. Bouchet, A. Levitt, G. Stoltz, and F. Bottin, (2024), arXiv:2412.15370. [34] M. Ath` enes and M.-C. Marinica, Free energy reconstruction from steered dynamics without post-processing, J. Comput. Phys. 229 , 7129 (2010). [35] M. Ath` enes, M.-C. Marinica, and T. Jourdan, Estimating time-correlation functions by sampling and unbiasing dynamically activated events, J. Chem. Phys. 137 (2012). [36] A. Zhong, C. Lapointe, A. M. Goryaeva, J. Baima, M. Ath` enes, and M.-C. Marinica, Anharmonic thermo-elasticity of tungsten from accelerated bayesian adaptive biasing force calculations with data-driven force fields, Phys. Rev. Mater. 7, 023802 (2023). [37] C. Lapointe, T. D. Swinburne, L. Thiry, S. Mallat, L. Proville, C. S. Becquart, and M.-C. Marinica, Machine learning surrogate models for prediction of point defect vibrational entropy, Phys. Rev. Mat. 4, 063802 (2020). [38] C. Lapointe, T. D. Swinburne, L. Proville, C. S. Becquart, N. Mousseau, and M.-C. Marinica, Machine learning surrogate models for strain-dependent vibrational properties and migration rates of point 20 
+
+defects, Phys. Rev. Mater. 6, 113803 (2022). [39] L. Cao, G. Stoltz, T. Leli` vre, M.-C. Marinica, and M. Ath` enes, Free energy calculations from adaptive molecular dynamics simulations with adiabatic reweighting, J. Chem. Phys. 140 , 104108 (2014). [40] A. M. Goryaeva, J. D´ er` es, C. Lapointe, P. Grigorev, T. D. Swinburne, J. R. Kermode, L. Ventelon, J. Baima, and M.-C. Marinica, Efficient and transferable machine learning potentials for the simulation of crystal defects in bcc fe and w, Phys. Rev. Mater. 5, 103803 (2021). [41] A. D´ ezaphie, C. Lapointe, A. M. Goryaeva, J. Creuze, and M.-C. Marinica, Designing hybrid descriptors for improved machine learning models in atomistic materials science simulations, Comput. Mater. Sci. 246 , 113459 (2025). [42] A. Allera, T. D. Swinburne, A. M. Goryaeva, B. Bienvenu, F. Ribeiro, M. Perez, M.-C. Marinica, and D. Rodney, Activation entropy of dislocation glide in body-centered cubic metals from atomistic simulations, Nat. Comm. 231 , 8367 (2025). [43] A. P. Sutton and J. Chen, Phil. Mag. Lett. 61 , 139 (1984). [44] M. S. Daw and M. J. Baskes, Phys. Rev. B 29 , 6443 (1987). [45] R. P. Gupta, Phys. Rev. B 23 , 6265 (1981). [46] A. P. Bart´ ok, Gaussian Approximation Potential :an interatomic potential derived from first principles Quantum Mechanics , Ph.D. thesis, University of Cambridge, Cambridge (2009). [47] A. P. Bart´ ok, R. Kondor, and G. Cs´ anyi, On representing chemical environments, Phys. Rev. B 87 , 184115 (2013). [48] A. P. Thompson, L. P. Swiler, C. R. Trott, S. M. Foiles, and G. J. Tucker, Spectral neighbor analysis method for automated generation of quantum-accurate interatomic potentials, J. Comp. Phys. 285 , 316 (2015). [49] A. M. Goryaeva, J.-B. Maillet, and M.-C. Marinica, Towards better efficiency of interatomic linear machine learning potentials, Comput. Mater. Sci. 166 , 200 (2019). [50] G. T. Barkema and N. Mousseau, Event-based relaxation of continuous disordered systems, Phys. Rev. Lett. 77 ,4358 (1996). [51] R. Malek and N. Mousseau, Dynamics of lennard-jones clusters: A characterization of the activation-relaxation technique, Phys. Rev. E 62 , 7723–7728 (2000). [52] E. Canc` es, F. Legoll, M.-C. Marinica, K. Minoukadeh, and F. Willaime, Some improvements of the activation-relaxation technique method for finding transition pathways on potential energy surfaces, J. Chem. Phys. 
+
+130 , 114711 (2009). [53] E. Machado-Charry, L. K. B´ eland, D. Caliste, L. Genovese, T. Deutsch, N. Mousseau, and P. Pochet, Optimized energy landscape exploration using the ab initio based activation-relaxation technique, Journal of Chemical Physics 135 , 034102 (2011). [54] G. J. Ackland, M. I. Mendelev, D. J. Srolovitz, S. Han, and A. V. Barashev, Development of an interatomic potential for phosphorus impurities in agr-iron, J. Condens. Matter Phys. 16 , S2629 (2004). [55] L. D´ ezerald, M.-C. Marinica, L. Ventelon, D. Rodney, and F. Willaime, Stability of self-interstitial clusters with c15 laves phase structure in iron, J. Nuc. Mater. 449 , 219 (2014). [56] R. Alexander, M.-C. Marinica, F. Willaime, M. R. Gilbert, and S. L. Dudarev, Ab initio scaling laws for the formation energy of nanosized interstitial defect clusters in iron, tungsten, and vanadium, Phys. Rev. B 94 ,024103 (2016). [57] J. Byggm¨ astar, F. Granberg, A. E. Sand, A. Pirttikoski, R. Alexander, M.-C. Marinica, and K. Nordlund, Colli-sion cascades overlapping with self-interstitial defect clus-ters in Fe and W, J. Condens. Matter Phys. 31 , 245402 (2019). [58] A. M. Goryaeva, C. Domain, A. Chartier, A. D´ ezaphie, T. D. Swinburne, K. Ma, M. Loyer-Prost, J. Creuze, and M.-C. Marinica, Compact a15 frank-kasper nano-phases at the origin of dislocation loops in face-centred cubic metals, Nat. Commun. 14 , 3003 (2023). [59] T. Jourdan, A. Goryaeva, and M.-C. Marinica, Preferential nucleation of dislocation loops under stress explained by a15 frank-kasper nanophases in aluminum, Phys. Rev. Lett. 132 , 226101 (2024). [60] C. Lapointe, Mod´ elisation multi-´ echelles des d´ efauts d’irradiation dans les m´ etaux cubiques centr´ es , Theses, Centrale Lille Institut (2022). [61] A. M. Goryaeva, C. Lapointe, C. Dai, J. D´ er` es, J.-B. Maillet, and M.-C. Marinica, Reinforcing materials modelling by encoding the structures of defects in crystalline solids into distortion scores, Nat. Commun. 
+
+11 , 1 (2020). [62] D. A. Terentyev, T. P. C. Klaver, P. Olsson, M.-C. Marinica, F. Willaime, C. Domain, and L. Malerba, Self-trapped interstitial-type defects in iron, Phys. Rev. Lett. 
+
+100 , 145503 (2008). [63] L. Malerba, M.-C. Marinica, L. Proville, F. Willaime, G. J. Ackland, F. Berthier, S. L. Dudarev, M. R. Gilbert, C. Domain, P. Olsson, et al. , Ab initio calculations and interatomic potentials for iron and iron alloys: Achievements within the perfect project, J. Nuc. Mater. 
+
+406 , 7 (2010). [64] R. Drautz, Atomic cluster expansion for accurate and transferable interatomic potentials, Phys. Rev. B 99 ,014104 (2019). [65] R. Drautz, Atomic cluster expansion of scalar, vectorial, and tensorial properties including magnetism and charge transfer, Phys. Rev. B 102 , 024104 (2020). [66] D. Alf` e, G. Price, and M. Gillan, Thermodynamics of hexagonal-close-packed iron under earth’s core conditions, Phys. Rev. B 64 , 045123 (2001). [67] J. S. Wr´ obel, A. Zhong, A. M. Goryaeva, D. Nguyen-Manh, A. E. Poisvert, M. Ath` enes, and M.-C. Marinica, Data-driven prediction of thermoelastic and defect properties of ti-v-ta-w high-entropy alloys up to the melting point, Phys. Rev. B 112 , 224110 (2025). [68] B. Grabowski, T. Hickel, and J. Neugebauer, Formation energies of point defects at finite temperatures, Phys. Status Solidi B 248 , 1295 (2011). [69] K. L. K. D. Witte, T. Braeckevelt, M. Bocus, S. Vandenhaute, and V. V. Speybroeck, A novel npt thermodynamic integration scheme to derive rigorous gibbs free energies for crystalline solids (2026), arXiv:2602.20738 [physics.comp-ph]. [70] B. Cheng and M. Ceriotti, Computing the absolute gibbs free energy in atomistic simulations: Applications to defects in solids, Phys. Rev. B 97 , 054102 (2018). [71] M. C. Marinica and et al , Phondy - Phonons Dynamics 
+
+(CEA, Saclay, 2007-present). [72] A. Souli´ e, F. Bruneval, M.-C. Marinica, S. Murphy, and J.-P. Crocombette, Influence of vibrational entropy 21 
+
+on the concentrations of oxygen interstitial clusters and uranium vacancies in nonstoichiometric uo 2, Phys. Rev. Mat. 2, 083607 (2018). [73] F. Berthier, J. Creuze, T. Gabard, B. Legrand, M.-C. Marinica, and C. Mottet, Order-disorder or phase-separation transition: Analysis of the Au-Pd system by the effective site energy model, Phys. Rev. B 99 , 014108 (2019). [74] N. W. Ashcroft and N. D. Mermin, Solid state physics ,Holt-Saunders International Editions: Science : Physics (Holt, Rinehart and Winston, 1976). [75] K. S. P. H. Dederichs, R. Zeller, Point Defects in Metals II, Dynamical Properties and Diffusion Controlled Reactions (Springer Tracts in Modern Physics, Berlin, 1980). [76] S. Plimpton, Fast parallel algorithms for short-range molecular dynamics, J. Comput. Phys. 117 , 1 (1995). [77] M. Ath` enes and P. Terrier, Estimating thermodynamic expectations and free energies in expanded ensemble simulations: Systematic variance reduction through conditioning, J. Chem. Phys. 146 , 194101 (2017). [78] D. Carlson, P. Stinson, A. Pakman, and L. Paninski, Partition functions from rao-blackwellized tempered sampling (2016), arXiv:1603.01912 [stat.ML]. [79] M.-C. Marinica, A. M. Goryaeva, A. Zhong, C. Lapointe, and T. Swinburne, Machine learning dynamics, https: //ai-atoms.github.io/milady/ (2016-2025). [80] A. P. Thompson, H. M. Aktulga, R. Berger, D. S. Bolintineanu, W. M. Brown, P. S. Crozier, P. J. in ’t Veld, A. Kohlmeyer, S. G. Moore, T. D. Nguyen, R. Shan, M. J. Stevens, J. Tranchida, C. Trott, and S. J. Plimpton, Lammps - a flexible simulation tool for particle-based materials modeling at the atomic, meso, and continuum scales, Comput. Phys. Comm. 271 , 108171 (2022).

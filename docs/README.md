@@ -6,27 +6,28 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-08-23
-- 运行时间：2026-08-23 19:47:14 UTC
+- 最新运行日期：2026-08-24
+- 运行时间：2026-08-24 19:53:16 UTC
 - 运行状态：成功
 - 本次总论文数：2
-- 精读区：0
-- 速读区：2
+- 精读区：1
+- 速读区：1
 
 ### 今日简报（AI）
-今日速读2篇论文，聚焦无序材料与缺陷行为。最值得关注α-MnO₂中本征点缺陷的异常特性（7.0分），及面向无序材料的多模态神经采样器JANUS（6.0分）。建议后续优先深读高分解读，并尝试理解采样器如何应用于其他无序体系。
-- 详情：[/202608/23/README](/202608/23/README)
+今日精读1篇、速读1篇，聚焦亚稳态缺陷形成自由能与电池材料EBSD成像效率。  
+最值得关注的是精读论文提出约束贝叶斯自适应偏置力框架，可系统准确计算亚稳态缺陷非谐形成自由能（8.0分）。  
+建议优先阅读该精读文章；若关注电池材料表征，可速读超分辨GAN增强EBSD通量的工作（6.0分）。
+- 详情：[/202608/24/README](/202608/24/README)
 
 ### 精读区论文标签
-- 本次无精读推荐。
+1. [Systematic and accurate anharmonic formation free energies of metastable defects via a constrained Bayesian Adaptive Biasing Force framework](/202608/24/2608.20902v1-systematic-and-accurate-anharmonic-formation-free-energies-of-metastable-defects-via-a-constrained-bayesian-adaptive-biasing-force-framework)  
+   标签：评分：8.0/10、query:rad-damage
+   evidence：计算亚稳态缺陷的非谐形成自由能，可应用于辐照诱导的点缺陷与团簇
 
 ### 速读区论文标签
-1. [Anomalous behavior of native point defects in C2-ordered antiferromagnet $α$-MnO$_2$](/202608/23/2608.20039v1-anomalous-behavior-of-native-point-defects-in-c2-ordered-antiferromagnet--mno2)  
-   标签：评分：7.0/10、query:rad-damage
-   evidence：利用DFT研究晶体中本征点缺陷（间隙、空位、反位）的稳定性，可为辐照诱导缺陷研究提供可迁移方法。
-2. [JANUS: A Multi-modal Foundation Neural Sampler for Disordered Materials](/202608/23/2608.19116v1-janus-a-multi-modal-foundation-neural-sampler-for-disordered-materials)  
+1. [Enhancing EBSD throughput of battery electrode materials using super-resolution generative adversarial networks](/202608/24/2608.19117v1-enhancing-ebsd-throughput-of-battery-electrode-materials-using-super-resolution-generative-adversarial-networks)  
    标签：评分：6.0/10、query:rad-damage
-   evidence：面向无序合金的神经采样方法，可高效模拟平衡相行为，对辐照缺陷与析出演化建模具有方法学价值
+   evidence：用超分辨率GAN加速EBSD微观结构表征，方法可迁移至其他材料
 
 
 <div class="dpr-home-promo-card">

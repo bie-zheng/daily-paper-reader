@@ -1,0 +1,39 @@
+{
+  "label": "2026-08-24",
+  "date": "2026-08-24",
+  "generated_at": "2026-08-24T19:53:22",
+  "count": 2,
+  "papers": [
+    {
+      "paper_id": "202608/24/2608.20902v1-systematic-and-accurate-anharmonic-formation-free-energies-of-metastable-defects-via-a-constrained-bayesian-adaptive-biasing-force-framework",
+      "section": "deep",
+      "title_en": "Systematic and accurate anharmonic formation free energies of metastable defects via a constrained Bayesian Adaptive Biasing Force framework",
+      "authors": "Clovis Lapointe, Anruo Zhong, Manuel Athènes, Mihai-Cosmin Marinica",
+      "date": "2026-08-21",
+      "pdf": "https://arxiv.org/pdf/2608.20902v1",
+      "score": "8.0",
+      "evidence": "计算亚稳态缺陷的非谐形成自由能，可应用于辐照诱导的点缺陷与团簇",
+      "tldr": "计算亚稳态缺陷的有限温度形成自由能长期受非谐性、多势垒盆地和迁移事件困扰。本文基于约束贝叶斯自适应偏置力（BABFc）构建热力学积分框架，只需参考局部极小值和约束策略，无需缺陷特定集体变量。该方法在复杂高非谐能量景观中实现稳定且偏差校正的自由能估计，统计精度达meV/原子水平，失败率极低，可处理约千原子体系。通过对α-Fe中数百种四间隙与四空位构型的数千次独立计算，验证了其系统性、通用性和数值效率。",
+      "tags": "query:rad-damage",
+      "abstract_en": "Computing the formation free energies of metastable defects at finite temperature remains challenging due to anharmonicity, the multiplicity of basins and the frequent occurrence of migration events. Using the previously introduced constrained Bayesian Adaptive Biasing Force method (BABFc), we establish a practical thermodynamic integration framework for computing restricted anharmonic formation free energies associated with individual metastable defect basins. We demonstrate that BABFc can be exploited as a robust, systematic and numerically efficient tool for addressing a long standing bottleneck in atomistic materials science: the finite temperature thermodynamic characterization of metastable defects in complex, highly anharmonic energy landscapes. The proposed workflow requires only a reference local minimum and a confinement strategy and does not rely on defect specific collective variables. It therefore provides a general route to assign well-defined free energies to individual metastable basins, even when these basins are separated by low barriers and embedded in a dense landscape of competing configurations. In this setting, BABFc enables stable, bias corrected free energy estimates with statistical accuracies at the meV/atom level and a very low failure rate, including for systems containing approximately one thousand atoms. We demonstrate this capability through thousands of independent free energy calculations covering hundreds of four-interstitial and four-vacancy configurations in bcc $α$-Fe over a broad temperature range, using both a traditional empirical potential and a data driven force field.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202608/24/2608.19117v1-enhancing-ebsd-throughput-of-battery-electrode-materials-using-super-resolution-generative-adversarial-networks",
+      "section": "quick",
+      "title_en": "Enhancing EBSD throughput of battery electrode materials using super-resolution generative adversarial networks",
+      "authors": "John Mangum, Andrew Glaws, Francois Usseglio-Viretta, Steven Spurgeon, Donal Finegan",
+      "date": "2026-08-19",
+      "pdf": "https://arxiv.org/pdf/2608.19117v1",
+      "score": "6.0",
+      "evidence": "用超分辨率GAN加速EBSD微观结构表征，方法可迁移至其他材料",
+      "tldr": "EBSD表征电池电极材料虽关键但采集缓慢，限制统计代表性的微结构分析。本文采用生成对抗网络SRGAN对低分辨率EBSD数据进行超分辨率重建，并与传统插值法对比。在2至12倍放大下，SRGAN在保留小晶粒和晶界方面更优；5倍放大（对应25倍采集加速或视场扩大）时晶粒尺寸等关键指标误差低于10%。该工作将EBSD转变为高通量表征工具，助力材料与工艺开发。",
+      "tags": "query:rad-damage",
+      "abstract_en": "Quantitative microstructural characterization of Li-ion battery electrode materials using electron backscatter diffraction (EBSD) has been proven as a critical method for optimizing cell performance. However, the inherently slow nature of EBSD can hinder the throughput of analyses needed for statistical representation of a material microstructure being developed. This work demonstrates a machine learning super-resolution framework using a generative adversarial network (SRGAN) to significantly increase EBSD throughput. The SRGAN model was trained on EBSD data of LiNixMnyCozO2 (NMC) cathode particles to computationally enhance low-resolution datasets and its performance is compared against classical interpolation methods across various upscaling factors (2x to 12x). Both qualitative image metrics and quantitative microstructural analysis verified that the SRGAN systematically outperformed classical methods, particularly in preserving small grains and maintaining realistic grain boundaries. We demonstrate that a 5x upscaling factor, corresponding to a 25x speed-up in acquisition time or a 25x larger field of view, is practical while maintaining acceptable accuracy in key metrics like grain size and shape. For instance, at 5x upscaling, relative errors were +5.7%, +8.2%, and -14.6% on grain area-equivalent diameter, grain maximum sphere-inscribed diameter, and grain boundary length, respectively. The SRGAN methodology developed in this work significantly enhances the efficiency of EBSD acquisition for more statistically robust microstructural dataset, enabling EBSD as a high-throughput characterization tool for materials research and industrial process development.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
