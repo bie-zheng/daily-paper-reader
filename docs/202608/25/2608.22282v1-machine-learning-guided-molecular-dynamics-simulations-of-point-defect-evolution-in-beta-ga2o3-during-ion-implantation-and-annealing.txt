@@ -1,0 +1,541 @@
+Title: 2608.22282v1.pdf
+
+URL Source: https://arxiv.org/pdf/2608.22282v1
+
+Published Time: Tue, 25 Aug 2026 01:01:26 GMT
+
+Number of Pages: 47
+
+Markdown Content:
+Machine-learning-guided molecular dynamics simulations of point defect evolution in β‑Ga 2O3 during ion implantation and annealing 
+
+Huawen Li 1, Men gzhi Yan 2, Zongwei Xu 1, * , Junlei Zhao 3, Jiale Wang 1
+
+> 1
+
+State Key Laboratory of Precision Measuring Technology and Instruments, Laboratory of Micro/Nano Manufacturing Technology (MNMT), Tianjin University, Tianjin 300072, China 
+
+> 2
+
+Centre of Micro/Nano Manufacturing Technology (MNMT-Dublin), School of Mechanical and Materials Engineering, University College Dublin, Belfield, Dublin 4, D04 V1W8, Ireland 
+
+> 3
+
+The Hong Kong Microelectronics Research and Development Institute, Hong Kong, 999077, China 
+
+> *
+
+Corresponding Author: zongweixu@tju.edu.cn 
+
+ABSTRACT 
+
+In beta-gallium oxide ( β-Ga 2O3), Ga-ion implantation and subsequent annealing induce abundant point defects, including interstitials and vacancies. To overcome the limitations of conventional Wigner-Seitz (WS) defect analysis, a defect identification algorithm based on similarity matching and spatial clustering via density-based spatial clustering of applications with noise (DBSCAN) is developed specifically for β-Ga 2O3.This algorithm accurately distinguishes lattice atoms from point defects under thermal perturbations and at high defect concentrations, and further identifies eight configurations of Ga interstitials (Ga ia to Ga ih ) by analyzing atomic coordination environments. Simulations comparing Stopping and Range of Ions in Matter (SRIM) and molecular dynamics (MD) data, along with single-ion implantation analysis, highlight the significance of electronic stopping effects: neglecting electronic stopping leads to overestimated ion range, defect concentration, and temperature rise. Across five implantation fluences (1 to 5 × 10 14 cm -2 ) and corresponding annealing processes, 1373 K is identified as the optimal recovery temperature. Multiscale analyses based on hydrostatic stress, partial radial distribution function (PRDF), and defect concentration reveal the evolution and spatial distribution of point defects. The results demonstrate that Ga interstitials (Ga i) tend to occupy tetrahedral and octahedral interstitial sites, and - 1 -
+
+the accumulation and recombination of point defects drive a defect-mediated phase transition from β- to γ-Ga 2O3. With increasing fluences followed by annealing, β-phase recovery declines while γ-phase transformation rises, leading to an irreversible phase transition. In contrast, the migration of oxygen interstitials (O i) is more sensitive to annealing temperature, and appropriate annealing temperature significantly enhances recrystallization of the O-sublattice. 
+
+Keywords: β-Ga 2O3; Ion implantation; Point defects; Defect identification algorithm; Annealing 
+
+1. Introduction 
+
+Gallium oxide (Ga 2O3) is an emerging ultrawide-bandgap semiconductor whose most notable characteristics are an exceptionally large bandgap of approximately 4.8 eV and a high theoretical breakdown electric field of up to 8 MV/cm. These properties render it a promising candidate for high-power electronic devices and solar-blind ultraviolet photodetectors [1,2]. Among its five polymorphs, beta-gallium oxide (β-Ga 2O3) is the thermodynamically most stable phase [3] and exhibits superior irradiation tolerance. This resilience is attributed to its ability to form metastable crystalline gamma phase ( γ-Ga 2O3) upon ion implantation. The associated structural phase transition accommodates lattice damage rather than accumulating disorder, thereby effectively suppressing amorphization [4–6]. Ion implantation is a key technology for tailoring the electrical properties of β-Ga 2O3, enabling precise doping required for device applications. Notably, a growing number of studies using atomically-resolved scanning transmission electron microscopy (STEM) have experimentally confirmed that ion implantation induces a phase transformation from the β-phase to the γ-phase in β-Ga 2O3 [4–9]. 
+
+Within β-Ga 2O3, a variety of complex defect types exist. Johnson et al. [10] were the first to directly observe point defect complexes exhibiting a split configuration using STEM. Theoretically, numerous first-principles calculation studies have confirmed the existence of multiple defect complexes [11,12]. These split-vacancies or split-interstitials significantly reduce their formation energy by sharing lattice sites and act as compensation centers, constituting key factors influencing material diffusion behavior, irradiation response, and electrical properties [13,14]. They are directly linked to the irradiation tolerance, dopant diffusion, and device degradation behavior of β-Ga 2O3 [15,16]. 
+
+Recently, there has been a rapidly growing interest in classical molecular dynamics (MD) simulations of β-Ga 2O3, with a focus on the threshold displacement energy (TDE) - 2 -
+
+of primary knock-on atoms (PKA) to elucidate defect diffusion mechanisms [17–19], while relatively few studies have been reported on ion implantation and annealing under high-fluence conditions. To unveil the dynamic evolution mechanisms of point defects at the atomic scale, precise defect identification serves as a fundamental prerequisite. The Wigner-Seitz (WS) method, widely employed for point defect analysis in MD simulations, relies on spatial partitioning via Voronoi polyhedra. However, as noted by Yan et al. [20], the WS method exhibits limitations when applied to low-symmetry crystal structures such as β-Ga 2O3. Furthermore, lattice thermal vibrations and the disturbance of the local atomic environment by high-concentration defects during ion implantation constitute the primary sources of error in defect identification. 
+
+In this study, a defect identification algorithm based on density-based spatial clustering of applications with noise (DBSCAN) clustering and similarity matching [21,22] was developed, specifically designed for the complex defect environment in β-Ga 2O3. This algorithm effectively distinguishes point defects (interstitial atoms and vacancies) from lattice atoms under conditions of thermal perturbation and high defect concentration through dimensionality reduction projection and pattern recognition, successfully identifying eight types of Ga interstitial sites (from Ga ia to Ga ih ). Using MD simulations with a 2 keV Ga-ion source, the influence of electronic stopping power on ion implantation range, temperature, and defect concentration was preliminarily investigated. By analyzing five implantation fluences (1 to 5 × 10 14 cm -2 ) and utilizing metrics such as hydrostatic stress, partial radial distribution function (PRDF), and defect morphology, the evolution mechanisms of various point defects during ion implantation and annealing were systematically elucidated. The results reveal a key mechanism wherein the migration of Ga i into the eight interstitial sites induces the phase transformation from the β-phase to the metastable γ-phase. These atomic-scale insights provide a foundation for a deeper understanding of irradiation damage and recovery behavior in β-Ga 2O3, while also offering a theoretical framework for optimizing ion implantation processes in power electronic devices. 
+
+2. Methods 
+
+2.1 Simulation Parameters Setup 
+
+All MD simulations in this work were performed using the Large-scale Atomic/Molecular Massively Parallel Simulator (LAMMPS) [23]. Visualization and post-processing were conducted with Open Visualization Tool (OVITO) [24] and Python. As illustrated in Fig. 1, the initial simulation model had dimensions of 9.6856 - 3 -
+
+× 9.8743 × 18.814 nm 3 and contained 163,840 atoms, with the z-axis oriented along the [001] direction and the y-axis along the [010] direction (a detailed schematic of the crystallographic orientations is provided in the supplementary material Figure S2). The model was partitioned into three distinct regions: Boundary, Thermostat, and Newtonian layers [25]. The atoms in the Boundary layer at the bottom of the model were fixed in place to mimic a bulk substrate. The Thermostat layer utilized the Berendsen [26] thermostat to efficiently dissipate heat generated during implantation, while atoms in the Newtonian layer evolved according to Newton's equations of motion under the microcanonical ensemble ( NVE ). A 6 × 6 nm 2 area was designated as the implantation zone (the area of this region was utilized to calculate the ion fluence), with Ga ions being randomly generated 20 Å above this region. Ga ions were then injected toward the (001) surface with an incident energy of 2 keV. To minimize channeling effects, the incident beam was tilted by 7° [27] away from the (001) plane normal towards the [0-10] direction. 
+
+Fig. 1. Atomic model for Ga ion implantation into β-Ga 2O3, containing 163,840 atoms with fix bottom Boundary ( z in 0–1.5 nm), Thermostat ( z in 1.5–3 nm), and Newtonian ( z > 3 nm) layers along the z-axis. The ion implantation is in the pink square region of the size of 6 nm × 6 nm 
+
+The ion implantation and annealing simulations were conducted using the machine-learned tabGAP interatomic potential developed by Zhao et al. [28], which has been demonstrated to accurately and efficiently describe atomic interactions in Ga 2O3 [4,17,29]. Prior to ion implantation, the model first underwent energy - 4 -
+
+minimization followed by a 10 ps isothermal-isobaric ensemble ( NPT ) relaxation under 0 bar and 293K. During the implantation stage, the electronic stopping power and adaptive time steps were incorporated to enhance simulation accuracy [30–33]. Owing to the low thermal conductivity of β-Ga 2O3, a relaxation period of 200 ps was applied after each ion impact to allow the system to dissipate the thermal-spike [34] and return to 293 K before introducing the subsequent ion. During the annealing stage, the entire system was subjected to heat treatment under the NPT ensemble using a Nosé-Hoover thermostat [35], with pressure control applied along the x- and y-directions. The temperature was increased from 293 K to the target annealing temperature (the reported temperatures refer to the global system temperature. Due to the inclusion of stationary atoms in the Boundary layers, which contribute to the thermal averaging, the actual temperature of the Newtonian layer is approximately 120 K higher than the prescribed system temperature) at a rate of 0.02 K/fs [36], followed by a 1 ns isothermal hold, and then cooled back to 293 K at the same rate. A final 5 ps relaxation was performed under the canonical ensemble (NVT ). Simulations were carried out for five different implantation fluences, each followed by an annealing process at 1373 K. The corresponding parameters are summarized in Table 1. 
+
+Table 1 
+
+Simulation parameters of ion implantation and annealing. 
+
+Condition  Parameters 
+
+Work material  β-Ga 2O3 (001) 
+
+Boundary conditions  Periodic (X) Periodic (Y) Fixed (Z) [37] 
+
+Ensemble  NVE (implantation), NPT (annealing) 
+
+Dimensions  9.6856 nm × 9.8743 nm × 18.814 nm 
+
+Timestep  Adaptive timestep (implantation), 
+
+0.5 fs (annealing) [38] 
+
+Thermostatic setup  Berendsen (293 K) [26] 
+
+Implantation region  6 nm × 6 nm 
+
+Incident angle  7° (away from the plane (001)) [27] 
+
+Ion implantation energy  2 keV 
+
+Ion implantation fluence (Number of projectiles) 
+
+1 × 10 14 cm -2 (36), 2 × 10 14 cm -2 (72), 3 × 10 14 cm -2 (108), 4 × 10 14 cm -2 (144), 5 × 10 14 cm -2 (180) 
+
+Annealing temperatures  1373K - 5 -
+
+2.2 Defect identification 
+
+In the monoclinic crystal system of β-Ga 2O3, there are two inequivalent Ga atoms: Ga1 occupying tetrahedral sites (coordination number = 4) and Ga2 residing in octahedral sites (coordination number = 6). Additionally, three distinct O atoms are present: O1, O2 (both with coordination = 3), and O3 (coordination = 4). A detailed view of the local structure projected along the (010) plane, as illustrated in Fig 2(a), reveals the atomic arrangement and bonding configurations at the five lattice sites. The Ga and O atoms are periodically arranged along the [010] direction, forming distinct atomic columns. The bonding between Ga and O creates channels extending parallel to the [010] direction, which are categorized as Channel 1 to Channel 4 according to their structural characteristics. In β-Ga 2O3, interstitial atoms are typically situated within these channels, while vacancies tend to be located inside the atomic columns. 
+
+Currently, a common method for identifying point defects is the WS defect analysis. This approach involves partitioning the reference model into Voronoi cells. By comparing the defective model with the reference model, an occupancy of one atom per cell corresponds to a regular lattice atom (Occupancy = 1), multiple atoms in one cell indicate an interstitial defect (Occupancy > 1), and an empty cell signifies a vacancy (Occupancy = 0). However, due to the low-symmetry of the β-Ga 2O3 crystal structure, when observed along the (010) plane (Fig. 2(b)), the Voronoi cells assigned to each atom vary significantly in volume, and the cell boundaries frequently lie within the channels. The interstitial atoms are likely located near these boundaries, resulting in misidentification by the WS method. To address this limitation, we have developed a Python-based algorithm specifically designed for identifying point defects in β-Ga 2O3.- 6 -
+
+Fig. 2. Limitations of the WS Method in Identifying Interstitial Atoms in Non‑centrosymmetric β‑Ga 2O3. (a) Atomic-scale structure of β-Ga 2O3 viewed from the (010) plane, showing the five crystallographic sites (Ga1, Ga2, O1, O2, O3) and the channel structures indicated by arrows of four different colors. (b) Voronoi cells associated with each atom, colored by cell volume (8–13 Å³), showing the prevalent location of cell boundaries within the structural channels. The dashed box indicates that the interstitial atoms are likely located at the Voronoi cell boundaries (indicated by blue planes). 
+
+Our point defect identification algorithm, implemented in Python, processes OVITO-readable data files containing atomic IDs, types, and x-, y- and z-coordinates. The x- and z-coordinates are utilized for DBSCAN clustering and similarity matching to distinguish between interstitial and lattice atoms, while the y-coordinate is employed to assess vacancy formation within clustered atomic groups. The algorithm outputs an OVITO-compatible data file, where visualization of interstitial and lattice atoms is achieved by modifying the atomic types in the input file. Vacancies are represented by creating new "atomic" entries with unique IDs, types, and coordinates. The workflow of the algorithm is shown in the supplementary material Figure S1. 
+
+Due to the arrangement of atoms in β-Ga 2O3 forming atomic columns along the [010] direction, a dimensionality reduction approach was employed by projecting all - 7 -
+
+atomic coordinates onto the xz -plane (corresponding to the (010) crystallographic plane). The DBSCAN algorithm was then applied to cluster closely neighboring atoms into the same group (i.e., belonging to the same atomic column), while filtering out interstitial atoms. Ga and O atoms were subjected to clustering analysis separately. To account for the influence of lattice thermal vibrations, the neighborhood radius (ε) was set as the maximum 2D Euclidean distance in the xz -plane between any two atoms within the same atomic column during the relaxation process (ε Ga = 0.494 Å, ε O = 0.386 Å; parameters are detailed in the supplementary material Figure S3). The minimum number of samples was set to three atoms (a configuration with very few atoms is likely an interstitial cluster, while cases with more interstitial atoms forming a column were further screened by subsequent similarity matching). Noise points identified by the algorithm were regarded as interstitial atoms. This method preliminarily achieved the distinction between lattice site atoms and interstitial atoms. 
+
+DBSCAN clustering was applied to both the relaxed perfect model (Fig. 3(a)) and the ion-implanted defective model (Fig. 3(b)). The cluster center for each atomic column was defined as the average position of the atomic coordinates within the xz -plane (represented by pentagrams for Ga centers and circles for O centers in Fig. 3(c) and (d), respectively; see the supplementary material Figure S3 for further details). Subsequent pattern recognition was performed based on these cluster centers in the xz -plane. Ga and O clusters that coordinate with each other are considered neighboring clusters (dashed lines in Fig. 3(c) and (d) indicate neighboring relationships). As shown in the enlarged views in Fig. 3(c) and (d), the perfect model exhibits a clear neighbor structure. Without interference from defects, clusters at five crystallographic sites can be accurately identified based on their neighbor configurations: Ga1 clusters have three neighbors, Ga2 clusters have four neighbors, and both O1 and O2 clusters have two neighbors. O1 clusters are distinguished by neighbor vectors tilted toward the z-axis, while O2 clusters are identified by vectors tilted toward the x-axis; O3 clusters with three neighbors are also present. 
+
+To achieve reliable identification under high defect density, it is necessary to screen for cases where multiple interstitial atoms are arranged in atomic columns based on the structural similarity between clusters. For the defective model, each cluster center obtained from clustering was compared with its counterpart in the perfect model. The comparison was based on the angular difference ( Δθ ) in the distribution of neighbor clusters relative to the central cluster, along with the number of coordinating atoms ( N). Based on these parameters, Formula 1 employs a sigmoid function to compute the - 8 -
+
+similarity between clusters from the two models, which is subsequently used to match the cluster sites. This procedure established a unique one-to-one correspondence between the cluster sites of the two models: 
+
+𝑆 = 11 + exp (− 1𝑀 ∑𝑀 𝑖=1 [cos(Δ𝜃 𝑖 ) × 𝑁 defect,𝑖 
+
+𝑁 perfect,𝑖 ]) , (1) 
+
+where, S represents the structural similarity score between spatially proximate cluster centers in the defective model and the perfect model, M denotes the number of neighboring clusters in the defect model, Δθ i represents the angular difference between the i-th neighboring cluster in the defect model and its angularly closest counterpart in the perfect model, measured relative to the central cluster; Ndefect,i and Nperfect,i 
+
+correspond to the coordination numbers (Cutoff = 2.5 Å, the cutoff distance was chosen near the valley between the first and second peaks in the Ga-O RDF [28],) of the i-th neighboring cluster in the defect and perfect models, respectively. The similarity score increases as the angular distribution and coordination numbers of the neighboring clusters in the defect model more closely approximate those in the perfect model. 
+
+The results (Fig. 3(e) and (f)) show that the algorithm successfully distinguishes defect atoms from lattice-site atoms, identifies the crystal structure, and recognizes the five crystallographic sites. Finally, by tracking the immutable atomic IDs throughout the simulation and reassigning the atom types accordingly, we generated a data file for visualization in OVITO. 
+
+Fig. 3. (a) The relaxed perfect model at 293 K. (b) Defect model after ion implantation with a fluence of 3 × 10 14 cm -2 . (c) Magnified view of the perfect model, - 9 -
+
+where green stars indicate Ga cluster centers, green circles denote O cluster centers (the centers represent the average coordinate positions of atoms clustered in the same group in the xz -plane. See the supplementary material Figure S3 for details), green dashed lines represent neighboring structures between clusters, and black dashed lines show the vectors formed by connecting O1/2 neighboring clusters. (d) Magnified view of the defect model, where blue-green gradient stars mark Ga cluster positions overlapping with the perfect model, blue circles indicate O cluster centers in the defect model, blue dashed lines depict neighboring structures between clusters, and compared to the perfect model, Δθ represents the angular difference in neighbor positions, and N denotes the number of coordinating atoms between two clusters. (e,f) DBSCAN clustering results for the perfect and defect models, respectively. Symbols represent atom types and cluster centers, with outer circles indicating the clustering radius (ε). 
+
+To avoid misjudgments caused by lattice thermal vibrations, a comparison was performed at 0 K using single-ion implantation between the WS method and the DBSCAN method. The WS method (Fig. 4(a)) exhibited clear misclassifications, incorrectly assigning interstitial atoms as lattice-site atoms (occupancy = 1), the supplementary material Figure S11(a) also reveals the limitation of the WS method in identifying low-symmetry lattice, leading to an underestimation of lattice damage. In contrast, DBSCAN method (Fig. 4(b)) effectively corrected these errors, successfully identifying interstitial atoms and distinguishing atoms occupying different lattice sites (the method proves effective even in the presence of significant atomic thermal vibrations and a high defect density, with supporting test results provided in the supplementary material Figures S4 and S5). Vacancy identification was accomplished by analyzing the distances between adjacent atoms along the [010] direction within each atomic column; details are provided in the supplementary material Figure S3. Fig. 4(c) illustrates five distinct vacancy configurations (V Ga1 , V Ga2 , V O1 , V O2 , V O3 ), as well as eight interstitial sites identified in Ga i (designated Ga ia to Ga ih , following the nomenclature in Ref. [13]). Based on the approach described in Ref. [17] with appropriate modifications, the specific type of each interstitial site was determined by analyzing the coordination environment of each Ga i with nearby O atoms or vacancies (O1, O2, O3) and its relative position within the (010) plane. This was achieved using multiple cutoff radii ranging from 2.2 Å to 2.6 Å (a range sufficient to include all coordinating O atoms around Ga i) with a step size of 0.05 Å; the final site type was defined as the interstitial type most frequently identified across this cutoff-radius range. Detailed atomic configurations and the identification methodology of the eight Ga i sites - 10 -
+
+are provided in the supplementary material Figure S6. In particular, Ga i located at these interstitial sites often exists in the form of composite defect structures with adjacent VGa . When bonds are created using a cutoff radius of 2.5 Å, these Ga i spontaneously form bonds with nearby V Ga (composite structures are shown in the dashed boxes in the supplementary material Figure S6; all bonds connected to vacancies are not real chemical bonds and are used solely to represent the composite configurations). 
+
+Fig. 4. (a) WS method identification: lattice atoms (green, Occupancy = 1) and interstitial atoms (red, Occupancy ≥ 2). Red circles highlight representative misidentified atoms. (b) DBSCAN method identification: Ga1/2 in dark and light blue; O1/2/3 in dark to light yellow; Ga i in pink; O i in green. Blue circles indicate representative corrected identifications. (c) Identifiable defect configurations: Five types of vacancy configurations (V Ga1 , V Ga2 , V O1 , V O2 , V O3 ) identified by the spacing between adjacent atom pairs along the [010] direction within an atomic column (Methodology for vacancy detection is detailed in supplementary material Figure S3), and eight interstitial sites (Ga ia to Ga ih ) for Ga i, which form composite configurations with surrounding vacancies (the bonds to vacancies are not real chemical bonds, but are used solely to represent the composite structure; detailed detection methods and structures of Ga i are provided in Figure S6), as determined by the coordination environment (values in parentheses indicate the numbers of O1, O2, O3 atoms, or vacancies). - 11 -
+
+3. Results and discussion 
+
+3.1 The effect of electronic stopping 
+
+During ion implantation, the energy loss resulting from collision cascades primarily consists of nuclear energy loss and electronic energy loss. Both the velocity and penetration depth of the implanted ions are influenced by electronic stopping. This section compares Stopping and Range of Ions in Matter (SRIM) [39] and MD simulation results to investigate the effect of electronic stopping during ion implantation, with the aim of improving the accuracy of subsequent simulations. 
+
+First, SRIM simulations were performed to study Ga and O ion implantation into Ga 2O3 at various energies (the substrate was configured with a Ga-to-O atomic ratio of 2:3 and a mass density of 5.88 g/cm³ to approximate the properties of the β-phase.), as shown in Fig. 5(a). For heavy Ga ions, nuclear stopping is dominant. As energy increases, the rate of nuclear energy loss growth slows, while electronic energy loss increases more rapidly. For light O ions, nuclear stopping predominates at low energies, but electronic energy loss surpasses nuclear energy loss as energy increases. Both cases indicate that the influence of electronic stopping becomes more pronounced with increasing implantation energy. Therefore, the electronic stopping powers of O and Ga ions relative to Ga ions at different energies, as calculated by SRIM, were incorporated into the MD simulations. 
+
+Additionally, SRIM was used to simulate 1 million 2 keV Ga ions implanted into Ga 2O3 (the SRIM simulation is based on the Monte Carlo method, and a larger ion count yields more accurate results. In this work, the ion beam was set at a tilt angle of 7°, and the displacement threshold energies for Ga and O were defined as 25 eV and 28 eV, respectively). The resulting ion concentration (per unit length) distribution was compared with that from an MD simulation using a fluence equivalent to 1 × 10 14 cm -2 
+
+(corresponding to 36 Ga ions in the simulated system), as shown in Fig. 5(b). When electronic stopping is neglected, the implanted ion range distribution is more dispersed. In contrast, when electronic stopping is considered, the distribution becomes more concentrated and aligns more closely with the SRIM results, primarily distributed between 25–35 Å in depth. The trajectory line indicates that a Ga ion reaches a range of approximately 150 Å due to the channeling effect. - 12 -
+
+Fig. 5. (a) SRIM-simulated energy loss of Ga and O ions versus implantation energy. (b) Comparison of implanted ion concentration (per unit length) from SRIM and MD simulations, the inset shows the implanted ion trapped at a depth of approximately 150 Å due to the channeling effect, and the blue line represents the trajectory of the incident ion. 
+
+The influence of electronic stopping on ion ranges further affects the simulated temperature and defect generation. Therefore, we analyzed single-ion implantation at 0 K (to avoid the effects of lattice thermal vibrations) in our MD simulations (see the supplementary Videos 1 and 2 for dynamic trajectory comparisons). As shown in Fig. 6(a), upon interaction with the substrate, the implanted ion transfers a large amount of kinetic energy to the substrate, inducing a temperature rise in the Newtonian layer over an extremely short timescale (thermal-spike concept). The collision cascade stage occurs within approximately 2.5 ps. During this stage, the temperature in the Newtonian layer rises, while the concentrations of the four point defects (Ga i, O i, V Ga and V O,detected using the DBSCAN method) increase rapidly initially, then decrease quickly due to the self-annealing effect induced by the localized high temperature (Fig. 6(b)). After 2.5 ps, as the kinetic energy of the implanted ion is largely dissipated, the system enters a cooling stage: the temperature decreases gradually, and the overall temperature of the Newtonian layer is higher when electronic stopping is neglected (see the local temperature contour maps in the supplementary material Figure S7). The changes in defect concentrations also become relatively slow. For all four types of point defects, the evolution curves obtained without considering electronic stopping are shifted upward compared to those obtained with electronic stopping included, indicating that neglecting electronic stopping leads to an overestimation of defect production. Given the cumulative nature of ion implantation, this overestimation would be amplified with increasing fluence, thus introducing significant errors in the evaluation of lattice damage levels in β-Ga 2O3 and the threshold of γ-phase transformation induced by ion implantation. Therefore, it is reasonable and necessary to account for electronic - 13 -
+
+stopping in simulations of ion implantation processes. 
+
+Fig. 6. Effect of electronic stopping in MD simulations of single-ion implantation at 0 K. (a) Newtonian layer temperature evolution, and the inset presents the temperature evolution within 2.5 ps. (b) Point defects evolution. 
+
+3.2 Ion Implantation and Annealing 
+
+This section focuses on the evolution mechanisms of various defects in β-Ga 2O3
+
+under ion implantation and subsequent annealing. Interstitial atoms (including all atoms displaced from the β-phase lattice), as the primary defects resulting from lattice damage produced in implantation-induced collision cascades, are investigated first. To avoid errors induced by surface damage from high-fluence ion implantation, the analysis of point defect evolution was confined to the crystal interior. The average point defect concentration was calculated for layers starting at depths of 0, 2, 4, 6, 8, and 10 Å and extending into the crystal interior. Fig. 7(a) shows the variation in the concentrations of different types of interstitials as a function of implantation fluence. The concentrations of Ga i and O i were recorded after the relaxation of each implantation step. Both Ga i and Oi exhibit an increasing trend with fluence, though the rate of increase slows at higher fluences, suggesting the approach toward a saturation level. Notably, while single-ion implantation at 0 K resulted in a lower concentration of Ga-related defects than O-related defects (Fig. 6(b)), the opposite trend is observed at 293 K. Moreover, the concentration curve of O i shows greater fluctuation compared to that of Ga i. This behavior may be attributed to the higher mobility of O i at elevated temperatures, facilitating their migration back to lattice sites. Subsequently, the distribution of Ga i
+
+among the eight interstitial sites (from Ga ia to Ga ih ,which may be associated with the phase transition, will be further discussed in subsequent sections) is analyzed, as shown in Fig. 7(b). Ga if is the most frequently occupied interstitial site during implantation. The concentrations of Ga ia , Ga ib , and Ga ic are comparable, ranking second only to Ga if ,- 14 -
+
+while Ga ie , Ga ig , and Ga ih are the least occupied sites. The evolution of vacancies can be found in the supplementary material Figure S8. 
+
+Fig. 7. (a) Evolution of Ga i and O i as a function of implantation fluence. (b) Evolution of Ga ia to Ga ih (sub-sites of Ga i) as a function of implantation fluence. Error bars show standard deviations. 
+
+Annealing effectively repairs lattice damage induced by ion implantation. Based on an implantation fluence of 2 × 10 14 cm -2 , annealing simulations were performed at three different temperatures: 1273 K, 1373 K, and 1473 K. The optimal annealing temperature was determined to be 1373 K, which is consistent with the experimental annealing temperatures reported in Refs. [7,8]. The results are summarized in Fig. 8. Significant defect recovery was observed after annealing at both 1273 K and 1373 K, as evidenced by a pronounced reduction in the concentration of interstitial atoms. The Ga i concentration reached its minimum after annealing at 1373 K. Furthermore, the O i
+
+concentration decreased remarkably at these two temperatures, further confirming that O-related defects exhibit higher sensitivity to temperature and can more readily migrate back to lattice sites at elevated temperatures, thereby promoting the recrystallization of the O-sublattice. In contrast, annealing at 1473 K introduced a substantial number of surface defects, leading to surface amorphization, which failed to achieve the annealing objectives. The concentration profile of vacancies during the annealing tests can be found in the supplementary material Figure S9. - 15 -
+
+Fig. 8. Annealing temperature test at 2 × 10 14 cm -2 . (a) Ga i concentration profile before and after annealing. (b) O i concentration profile before and after annealing. 
+
+To further analyze the defect evolution during ion implantation and annealing, Fig. 9 presents the concentration profiles of Ga i and O i after ion implantation at five different fluences followed by annealing at 1373 K (the vacancy concentration profile corresponding to this stage can be found in the supplementary material Figure S10). The results indicate that high-fluence ion implantation induces lattice damage near the surface, as evidenced by the accumulation of interstitial atoms in the near-surface region. Compared with Ga i, O i exhibits a stronger tendency to accumulate at the surface. However, the O-sublattice shows superior recovery after annealing. In contrast, a significant concentration of Ga i remains after annealing. Moreover, the three-dimensional distribution of interstitials (the supplementary material Figure S13) reveals that Ga i become orderly arranged after annealing, suggesting that most of the residual Ga i migrate to relatively stable interstitial sites (within the range Ga ia to Ga ih )during annealing, rather than remaining in disordered configurations. Based on the concentration profiles, the depth region of 10–50 Å was defined as the high-defect zone within the crystal, where PRDF analysis was performed. Due to lattice damage induced by implantation, the atomic arrangement inside the crystal becomes more disordered with increasing fluence, manifested as a decrease in PRDF peak intensity. Annealing partially repairs the damage. Specifically, the O-O PRDF indicates pronounced recovery of the O-sublattice, suggesting that the O-sublattice possesses relatively high rigidity [40]. 
+
+In contrast, the Ga-Ga PRDF reveals a phase transformation from the β-phase to the γ-phase during implantation and annealing (the β-phase Ga-Ga PRDF shows a characteristic peak near 4.6 Å, while the γ-phase exhibits a monotonic increase between 4.6 and 5.2 Å [4]). With increasing implantation fluence, the γ-phase features become more pronounced. Although annealing promotes partial recovery of the β-phase, the - 16 -
+
+Ga-Ga PRDF curves still retain enhanced γ-phase characteristics after high-fluence annealing, indicating that the Ga-sublattice is more prone to phase transformation during ion implantation and subsequent annealing. In the supplementary material Appendix F, the lattice damage and the phase transition threshold are discussed in detail using displacements per atom (DPA) and the Pearson correlation coefficient (Pr) [4]. The Ga-sublattice undergoes β-phase lattice damage and γ-phase formation during ion implantation, while the annealing process facilitates β-phase recovery while also promoting γ-phase formation. Consequently, an irreversible phase transition threshold corresponding to the β→γ transformation in the Ga-sublattice is established. 
+
+Fig. 9. (a–d) As-implanted state and (e–h) after annealing at 1373 K. (a, e) Ga i
+
+concentration profile. (b, f) O i concentration profile. (c, g) Ga-Ga PRDF profiles. (d, h) O-O PRDF profiles. 
+
+Subsequently, hydrostatic stress [41] and the distribution of Ga i at the Ga ia to Ga ih 
+
+sites were characterized within regions with depths less than 50 Å along the (010) plane after implantation and annealing at five different fluences, as shown in Fig. 10 (first and third rows). The stress contour maps reveal that the implanted system is predominantly under tensile stress, and this tensile stress distribution becomes more pronounced after annealing. This can be attributed to the fact that after implantation, a fraction of Ga i
+
+atoms occupy the Ga ia to Ga ih sites. These Ga i, together with neighboring V Ga , form composite defect configurations, thereby inducing tensile stress (stress > 0). In contrast, Oi are distributed in a disordered state, causing lattice distortion and resulting in compressive stress (stress < 0), as detailed in the atomic stress analysis provided in the supplementary material Figure S14. After annealing, most O i migrate back to the O-sublattice, while Ga i predominantly relocate to the Ga ia to Ga ih sites, as illustrated in Fig. 10 (second and fourth rows). The spatial distribution of these Ga i closely correlates with the regions of tensile stress, which explains the enhanced tensile stress after annealing (in the supplementary material Figure S16 presents a detailed analysis of the - 17 -
+
+system pressure and Ga i stress following annealing at a fluence of 5 × 10 14 cm -2 ). These findings highlight the irradiation resistance of β-Ga 2O3: although O i tends to exist in a disordered state after implantation, annealing effectively promotes its recovery. In comparison, Ga i preferentially migrate to the Ga ia to Ga ih sites, which are associated with the formation of the γ-phase. 
+
+Fig. 10. Hydrostatic stress contour maps (rows 1 & 3) and corresponding Ga i
+
+defect morphology (rows 2 & 4) under five different implantation fluences. The dashed line separates the as-implanted state (top) from the state after annealing at 1373 K (bottom). The hydrostatic stress color bar ranges from -2 to 2 GPa. In the morphology plots, only Ga i at interstitial sites (Ga ia to Ga ih ) are shown and colored according to their type, alongside lattice atoms for reference. 
+
+To further investigate the defect structures in β-Ga 2O3, a cross-sectional slice 20 Å thick was extracted from the central region of the (010) plane of the model annealed at a fluence of 5 × 10 14 cm -2 . For clarity, only Ga i and V Ga are displayed, as shown in Fig. 11(a). The results demonstrate that Ga-related defects primarily exist in the form of Ga i-V Ga complexes. Among these, the most frequently observed configuration in β-Ga 2O3 is a split-vacancy chain arranged as V Ga1 -Ga ib -V Ga1 -Ga ic -V Ga1 (V ibc Ga )[13] which is marked by a red dashed box in Fig. 11(a). To explore the correlation between the Ga ia 
+
+to Ga ih sites and the phase transformation, Fig. 11(b) presents a magnified view of the area within the black dashed box in Fig. 10, revealing numerous γ-phase regions characterized by the (110) planes of the spinel structure [8,42,43]. After annealing, as shown in the four representative spinel structures selected in Figs. 11(c–e), the phase transformation is driven by defect accumulation through four distinct modes. Furthermore, The supplementary material Figure S14 indicates that the proportions of - 18 -
+
+both V Ga and the Ga i sites (from Ga ia to Ga ih ) after annealing gradually increase with rising implantation fluence. The complexing and accumulation of V Ga and Ga i further promote the initiation of the phase transformation. 
+
+Since Ga i occupy different tetrahedral and octahedral interstitial sites (the supplementary material Figure S6), they are classified based on their coordination polyhedra: Ga ia , Ga id , Ga ie , and Ga ig belong to the Ga i1 type (occupying tetrahedral interstitial sites), while Ga ib , Ga ic , and Ga if are categorized as Ga i2 (occupying octahedral interstitial sites). By tracking atomic IDs, the migration behavior of Ga i after annealing at different fluences was analyzed. The results show that most Ga i migrate to lattice sites (Ga1 and Ga2 are associated with the recovery of the β-phase) or interstitial sites (Ga i1 and Ga i2 are associated with the formation of the γ-phase.) after annealing, with only a small fraction remaining in their original metastable Ga i state (amorphous interstitial sites resulting from lattice damage). Compared to tetrahedral lattice and interstitial sites (Ga1, Ga i1), Ga i exhibits a stronger tendency to migrate to octahedral sites (Ga2, Ga i2). As the implantation fluence increases, the proportion of Ga i migrating to interstitial sites rises, while the proportion occupying lattice sites decreases. These findings provide further insight into the atomic-scale mechanism of the β-to-γ phase transformation in β-Ga 2O3 after annealing and suggest that the irreversibility of the transformation is progressively enhanced with increasing fluence. Finally, the substitution rate of the implanted Ga ions after annealing at each fluence was quantified, as shown in Fig. 11(h), the migration behavior of Ga i is in high agreement with the phase transition mechanism illustrated in the supplementary material Figure S12(b), both demonstrating an annealing‑irreversible phase transition threshold at a fluence of 4 × 10 14 cm -2 : with increasing fluence, the occupancy of interstitial sites increases, the occupancy of lattice sites declines, and the fraction remaining in the Ga i state becomes negligible. This phenomenon further confirms that two trends exist during the annealing of β-Ga 2O3: recovery of the β-phase and transformation to the γ-phase. At low fluence, annealing is dominated by the recovery of the β-phase, whereas with increasing fluence, the γ-phase transformation becomes predominant, thereby leading to the irreversibility of the phase transition. The migration behavior of Ga i provides a theoretical basis for the residual γ-phase observed in experiments [8] after high-fluence implantation and annealing. - 19 -
+
+Fig. 11. (a) Cross-sectional view (20 Å thick) of the sample annealed at a fluence of 5 × 10 14 cm -2 , showing Ga i-V Ga complex structures. The red dashed line indicates a representative defect complex. (b) Magnified view of the annealed model at 5 × 10 14 
+
+cm -2 , where solid boxes in different colors highlight the (110) planes of the spinel structure formed by different Ga i configurations (c–f). (g) Migration behavior of Ga i
+
+after annealing at five different implantation fluences. (h) Substitution rate of implanted Ga ions after annealing at each of the five fluences. Error bars show standard deviations. 
+
+4.Conclusion 
+
+In this study, a similarity-matching algorithm based on DBSCAN clustering was developed. This method effectively distinguishes point defects (interstitials and vacancies) from lattice atoms, enabling accurate identification even under thermal perturbations and at high defect densities. 
+
+Subsequently, by comparing SRIM simulations with MD simulations and performing single-ion implantation in MD, the influence of electronic stopping on the ion range was investigated. It was found that neglecting electronic stopping significantly overestimates the ion range, system temperature, and the concentrations of various defects. 
+
+Using MD simulations, a comprehensive atomic-scale analysis of the defect evolution mechanism during Ga ion implantation and subsequent annealing in β-Ga 2O3
+
+was performed. The results reveal that Ga i tends to occupy eight interstitial sites (from - 20 -
+
+Ga ia to Ga ih ) during implantation and annealing, forming complex structures with adjacent V Ga that introduce tensile stress. These interstitial configurations are identified as the primary factors inducing the β-to-γ phase transition in β-Ga 2O3. Furthermore, the migration behavior of Ga i that with increasing fluences, the tendency for the γ-phase transformation in post-annealed β-Ga 2O3 rises continuously, accompanied by acorresponding decrease in the trend of β-phase recovery, ultimately leading to an irreversible phase transition. In contrast, O i exhibits temperature-dependent migration behavior, and the O-sublattice demonstrates relatively high rigidity. 
+
+CRediT authorship contribution statement 
+
+Huawen Li: Conceptualization, Data curation, Formal analysis, Investigation, Software, Methodology, Visualization, Writing–original draft. Mengzhi Yan: 
+
+Conceptualization, Methodology, Software, Resources, Validation, Writing - review & editing. Zongwei Xu: Funding acquisition, Project administration, Resources, Supervision.  Junlei Zhao:  Conceptualization, Supervision, Writing - review & editing. 
+
+Jia le Wang:  Investigation, Validation. 
+
+Declaration of competing interests 
+
+The authors declare that they have no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper. 
+
+Acknowledgments 
+
+This work was supported by the National Key Research and Development Program Project (2024YFF0726104). 
+
+Supplementary materials 
+
+Supplementary material related to this article can be found online at xxx. 
+
+Reference 
+
+[1] J. Zhang, J. Shi, D.C. Qi, L. Chen, K.H.L. Zhang, Recent progress on the electronic structure, defect, and doping properties of Ga 2O3, APL Mater 8 (2020). https://doi.org/10.1063/1.5142999. 
+
+[2] J.Y. Tsao, S. Chowdhury, M.A. Hollis, D. Jena, N.M. Johnson, K.A. J ones, R.J. Kaplar, S. Rajan, C.G. Van de Walle, E. Bellotti, C.L. Chua, R. Collazo, M.E. Coltrin, J.A. Cooper, K.R. Evans, S. Graham, T.A. Grotjohn, E.R. Heller, M. Higashiwaki, M.S. Islam, P.W. Juodawlkis, - 21 -
+
+M.A. Khan, A.D. Koehler, J.H. Leach, U.K. Mishra, R.J. Nemanich, R. C.N. Pilawa-Podgurski, J.B. Shealy, Z. Sitar, M.J. Tadjer, A.F. Witulsk i, M. Wraback, J.A. Simmons, Ultrawide-Bandgap Semiconductors: Re search Opportunities and Challenges, Adv Electron Mater 4 (2018). htt ps://doi.org/10.1002/aelm.201600501. 
+
+[3] S. Yoshioka, H. Hayashi, A. Kuwabara, F. Oba, K. Matsunaga, I. Tana ka, Structures and energetics of Ga 2O3 polymorphs, Journal of Physics Condensed Matter 19 (2007). https://doi.org/10.1088/0953-8984/19/34/3 46211. 
+
+[4] A. Azarov, J.G. Fernández, J. Zhao, F. Djurabekova, H. He, R. He, Ø. Prytz, L. Vines, U. Bektas, P. Chekhonin, N. Klingner, G. Hlawacek, A. Kuznetsov, Universal radiation tolerant semiconductor, Nat Commu n 14 (2023). https://doi.org/10.1038/s41467-023-40588-0. 
+
+[5] A. Petkov, D. Cherns, W.Y. Chen, J. Liu, J. Blevins, V. Gambin, M. L i, D. Liu, M. Kuball, Structural stability of β-Ga 2O3 under ion irradiati on, Appl Phys Lett 121 (2022). https://doi.org/10.1063/5.0120089. 
+
+[6] J. Zhao, J.G. Fernández, A. Azarov, R. He, Ø. Prytz, K. Nordlund, M. Hua, F. Djurabekova, A. Kuznetsov, Crystallization Instead of Amorp hization in Collision Cascades in Gallium Oxide, Phys Rev Lett 134 (2025). https://doi.org/10.1103/PhysRevLett.134.126101. 
+
+[7] T. Yoo, X. Xia, F. Ren, A. Jacobs, M.J. Tadjer, S. Pearton, H. Kim, A tomic-scale characterization of structural damage and recovery in Sn io n-implanted β-Ga 2O3, Appl Phys Lett 121 (2022). https://doi.org/10.106 3/5.0099915. 
+
+[8] H.L. Huang, C. Chae, J.M. Johnson, A. Senckowski, S. Sharma, U. Si ngisetti, M.H. Wong, J. Hwang, Atomic scale defect formation and ph ase transformation in Si implanted β-Ga 2O3, APL Mater 11 (2023). htt ps://doi.org/10.1063/5.0134467. 
+
+[9] J. García-Fernández, S.B. Kjeldby, P.D. Nguyen, O.B. Karlsen, L. Vine s, Prytz, Formation of γ-Ga 2O3 by ion implantation: Polymorphic phas e transformation of β-Ga 2O3, Appl Phys Lett 121 (2022). https://doi.or g/10.1063/5.0120103. 
+
+[10] J.M. Johnson, Z. Chen, J.B. Varley, C.M. Jackson, E. Farzana, Z. Zha ng, A.R. Arehart, H.L. Huang, A. Genc, S.A. Ringel, C.G. Van De W alle, D.A. Muller, J. Hwang, Unusual Formation of Point-Defect Comp - 22 -
+
+lexes in the Ultrawide-Band-Gap Semiconductor β-Ga 2O3, Phys Rev X 9 (2019). https://doi.org/10.1103/PhysRevX.9.041027. 
+
+[11] M.D. McCluskey, Point defects in Ga 2O3, J Appl Phys 127 (2020). htt ps://doi.org/10.1063/1.5142195. 
+
+[12] H.L. Huang, C. Chae, J. Hwang, Perspective on atomic scale investiga tion of point and extended defects in gallium oxide, J Appl Phys 131 (2022). https://doi.org/10.1063/5.0087053. 
+
+[13] Y.K. Frodason, J.B. Varley, K.M.H. Johansen, L. Vines, C.G. Van De Walle, Migration of Ga vacancies and interstitials in β-Ga 2O3, Phys Re v B 107 (2023). https://doi.org/10.1103/PhysRevB.107.024109. 
+
+[14] C. Lee, M.A. Scarpulla, E. Ertekin, Investigation of Ga interstitial and vacancy diffusion in β-Ga 2O3 via split defects: A direct approach via master diffusion equations, Phys Rev Mater 8 (2024). https://doi.org/10. 1103/PhysRevMaterials.8.054603. 
+
+[15] F. Tuomisto, Ga vacancies in β-Ga 2O3: split or not?, Jpn J Appl Phys 62 (2023). https://doi.org/10.35848/1347-4065/acc7b1. 
+
+[16] L. Dong, R. Jia, B. Xin, B. Peng, Y. Zhang, Effects of oxygen vacanc ies on the structural and optical properties of β-Ga 2O3, Sci Rep 7 (201 7). https://doi.org/10.1038/srep40160. 
+
+[17] H. He, J. Zhao, J. Byggmästar, R. He, K. Nordlund, C. He, F. Djurabe kova, Threshold displacement energy map of Frenkel pair generation i n β-Ga 2O3 from machine-learning-driven molecular dynamics simulatio ns, Acta Mater 276 (2024). https://doi.org/10.1016/j.actamat.2024.12008 7. 
+
+[18] Y. Zuo, T. Liu, J. Feng, J. Zhao, Z. Zhou, R. Cao, X. Huang, Y. Yue, S. Huang, Y. Guo, S. Liu, Z. Zhang, Radiation resistance and defect e volution in bulk β-Ga 2O3: a molecular dynamics study, J Phys D Appl Phys 58 (2025). https://doi.org/10.1088/1361-6463/adbbfe. 
+
+[19] T. Liu, Z. Li, J. Zhao, X. Fei, J. Feng, Y. Zuo, M. Hua, Y. Guo, S. Li u, Z. Zhang, Orientation-dependent surface radiation damage in β-Ga 2
+
+O3 explored by atomistic simulations, Acta Mater 300 (2025). https://d oi.org/10.1016/j.actamat.2025.121484. 
+
+[20] M. Yan, J. Zhao, J. Byggmästar, F. Djurabekova, Z. Xu, A Radial Dist ribution Function Based Recognition Algorithm of Point Defects in La rge-Scale β-Ga 2O3 Systems, n.d. https://doi.org/10.1021/acs.jpclett.4c02 - 23 -
+
+469. 
+
+[21] M. Ester, H.-P. Kriegel, J. Sander, X. Xu, A Density-Based Algorithm for Discovering Clusters in Large Spatial Databases with Noise, 1996. www.aaai.org. 
+
+[22] E. Schubert, J. Sander, M. Ester, H.P. Kriegel, X. Xu, DBSCAN revisi ted, revisited: Why and how you should (still) use DBSCAN, ACM Tr ansactions on Database Systems 42 (2017). https://doi.org/10.1145/3068 335. 
+
+[23] A.P. Thompson, H.M. Aktulga, R. Berger, D.S. Bolintineanu, W.M. Br own, P. S. Crozier, P.J. in’t Veld, A. Kohlmeyer, S.G. Moore, T.D. Ng uyen, R. Shan, M. J. Stevens, J. Tranchida, C. Trott, S.J. Plimpton, L AMMPS - a flexible simulation tool for particle-based materials model ing at the atomic, meso, and continuum scales, Comput. Phys. Commu n. 271 (2022) 108171. https://doi.org/10.1016/j.cpc.2021.108171 
+
+[24] A. Stukowski, Visualization and analysis of atomistic simulation data with OVITO-the Open Visualization Tool, Model Simul Mat Sci Eng 1 8 (2010). https://doi.org/10.1088/0965-0393/18/1/015012. 
+
+[25] L. Zhao, J. Zhang, J. Zhang, A. Hartmaier, Atomistic investigation of machinability of monocrystalline 3C–SiC in elliptical vibration-assisted diamond cutting, Ceram Int 47 (2021) 2358–2366. https://doi.org/10.10 16/j.ceramint.2020.09.078. 
+
+[26] S. Queyroy, I. Fukuda, H. Nakamura, A Robust, Symmetric Operator-Composition Integrator for the Berendsen Temperature-Control Molecul ar Dynamics Equation, J Physical Soc Japan 2020 (n.d.). https://doi.org /10.7566/JPSJ.89.064004ï. 
+
+[27] K. Nordlund, F. Djurabekova, G. Hobler, Large fraction of crystal dire ctions leads to ion channeling, Phys Rev B 94 (2016) 214109. https:// doi.org/10.1103/PhysRevB.94.214109. 
+
+[28] J. Zhao, J. Byggmästar, H. He, K. Nordlund, F. Djurabekova, M. Hua, Complex Ga 2O3 polymorphs explored by accurate and general-purpose machine-learning interatomic potentials, NPJ Comput Mater 9 (2023). https://doi.org/10.1038/s41524-023-01117-1. 
+
+[29] A. Azarov, J.G. Fernández, J. Zhao, R. He, J.H. Park, D.W. Jeon, Ø. Prytz, F. Djurabekova, A. Kuznetsov, Phase glides and self-organizatio n of atomically abrupt interfaces out of stochastic disorder in α-Ga 2O3,- 24 -
+
+Nature Communications 16 (2025). https://doi.org/10.1038/s41467-025 -58516-9. 
+
+[30] Y. Fan, Y. Song, Z. Xu, J. Wu, R. Zhu, Q. Li, F. Fang, Numerical stu dy of silicon vacancy color centers in silicon carbide by helium ion i mplantation and subsequent annealing, Nanotechnology 33 (2022). http s://doi.org/10.1088/1361-6528/ac40c1. 
+
+[31] T. Sun, Z. Xu, J. Wu, Y. Fan, F. Ren, Y. Song, L. Yang, P. Tan, Diva cancy and silicon vacancy color centers in 4H-SiC fabricated by hydro gen and dual ions implantation and annealing, Ceram Int 49 (2023) 74 52–7465. https://doi.org/10.1016/j.ceramint.2022.10.219. 
+
+[32] Y. Fan, Y. Song, Z. Xu, B. Dong, J. Wu, M. Rommel, K. Zhang, J. Z hao, R. Zhu, B. Li, Q. Li, F. Fang, Molecular dynamics simulation of color centers in silicon carbide by helium and dual ion implantation an d subsequent annealing, Ceram Int 47 (2021) 24534–24544. https://doi. org/10.1016/j.ceramint.2021.05.172. 
+
+[33] E. Zarkadoula, G. Samolyuk, Y. Zhang, W.J. Weber, Electronic stoppin g in molecular dynamics simulations of cascades in 3C–SiC, Journal o f Nuclear Materials 540 (2020) 152371. https://doi.org/10.1016/j.jnucm at.2020.152371. 
+
+[34] A. Miotello, R. Kelly, Revisiting the thermal-spike concept in ion-surfa ce interactions, 1997. https://doi.org/10.1016/S0168-583X(96)00665-9. 
+
+[35] W.G. Hoover, Canonical dynamics: Equilibrium phase-space distributio ns, Phys Rev A (Coll Park) 31 (1985) 1695–1697. https://doi.org/10.1 103/PhysRevA.31.1695. 
+
+[36] J. Wu, Z. Xu, L. Liu, A. Hartmaier, M. Rommel, K. Nordlund, T. Wa ng, R. Janisch, J. Zhao, MD simulation study on defect evolution and doping efficiency of p-type doping of 3C-SiC by Al ion implantation with subsequent annealing, J Mater Chem C Mater 9 (2021) 2258–227 5. https://doi.org/10.1039/d0tc05374k. 
+
+[37] W. Tong, Luo, Molecular dynamic simulation of low-energy FIB irradi ation induced damage in diamond, 2015. http://eprints.hud.ac.uk/id/epri nt/24811/. 
+
+[38] X. Fu, Z. Xu, Z. He, A. Hartmaier, F. Fang, Molecular dynamics simu lation of silicon ion implantation into diamond and subsequent anneali ng, Nucl Instrum Methods Phys Res B 450 (2019) 51–55. https://doi.o - 25 -
+
+rg/10.1016/j.nimb.2018.04.027. 
+
+[39] J.F. Ziegler, M.D. Ziegler, J.P. Biersack, SRIM - The stopping and ran ge of ions in matter (2010), Nucl Instrum Methods Phys Res B 268 (2 010) 1818–1823. https://doi.org/10.1016/j.nimb.2010.02.091. 
+
+[40] R. He, J. Zhao, J. Byggmästar, H. He, F. Djurabekova, Ultrahigh Stabi lity of O-Sublattice in β-Ga 2O3, (2024). https://doi.org/10.1103/PhysRev Materials.8.084601. 
+
+[41] M.W. Ullah, A. Kuronen, A. Stukowski, F. Djurabekova, K. Nordlund, Atomistic simulation of Er irradiation induced defects in GaN nanowi res, J Appl Phys 116 (2014). https://doi.org/10.1063/1.4896787. 
+
+[42] C. Lee, M.A. Scarpulla, J.B. Varley, E. Ertekin, Unraveling the transfo rmation pathway of the β to γ phase transition in Ga 2O3 from atomisti c simulations, Phys Rev Mater 9 (2025). https://doi.org/10.1103/PhysRe vMaterials.9.014601. 
+
+[43] Q.S. Huang, C.N. Li, M.S. Hao, H.P. Liang, X. Cai, Y. Yue, A. Kuzne tsov, X. Zhang, S.H. Wei, Nature of Disordering in γ-Ga 2O3, Phys Rev Lett 133 (2024). https://doi.org/10.1103/PhysRevLett.133.226101. - 1 -
+
+# Supplementary Material: Machine-learning-guided molecular dynamics simulations of point defect evolution in 
+
+# β‑Ga 2O3 during ion implantation and annealing 
+
+Huawen Li 1, Men gzhi Yan 2, Zongwei Xu 1, * , Junlei Zhao 3, Jia le Wang 1
+
+> 1
+
+State Key Laboratory of Precision Measuring Technology and Instruments, Laboratory of Micro/Nano Manufacturing Technology (MNMT), Tianjin University, Tianjin 300072, China 
+
+> 2
+
+Centre of Micro/Nano Manufacturing Technology (MNMT-Dublin), School of Mechanical and Materials Engineering, University College Dublin, Belfield, Dublin 4, D04 V1W8, Ireland 
+
+> 3
+
+The Hong Kong Microelectronics Research and Development Institute, Hong Kong, 999077, China 
+
+> *
+
+Corresponding Author: zongweixu@tju.edu.cn 
+
+CONTENTS 
+
+Appendix A: Introduction to defect identification parameters .......................................... - 2 -
+
+Appendix B: Assessing the robustness of the DBSCAN identification method to thermal vibrations and high defect densities. ................................................................................. - 6 -
+
+Appendix C: Atomic configurations of eight Ga i sites ...................................................... - 8 -
+
+Appendix D: The effect of electronic stopping power on local temperature .................. - 10 -
+
+Appendix E: Vacancy evolution and distribution analysis .............................................. - 11 -
+
+Appendix F: Lattice damage and phase transformation .................................................. - 13 -
+
+Appendix G: Defect comparison before and after annealing under different ion implantation fluences............................................................................................................................ - 16 -
+
+Appendix H: Distribution of hydrostatic stress for Ga and O during ion implantation and annealing. ........................................................................................................................ - 18 -
+
+Supplementary References .............................................................................................. - 21 -- 2 -
+
+Appendix A: Introduction to defect identification parameters 
+
+The workflow of our point defect identification algorithm is illustrated in Figure S1. The input files can be data files exported from OVITO, which should include five columns of data: atom ID, atom type, and x-, y-, z- coordinates. Atom types must be specified as Ga and O, corresponding to type 1 and type 2, respectively. The Python script requires two inputs: a perfect reference model file (i.e., a relaxed structure only) and one or more defective model files after processing (e.g., ion implantation, laser modification, nano-machining, etc.). Multiple defective files can be provided with filenames ordered by an asterisk * followed by natural numbers in increasing order; the program will process them sequentially from the smallest to the largest number. 
+
+The program first applies periodic boundary handling to both the perfect and defect models, replicating atoms within 2.5 Å of the boundary to the opposite side of the simulation box. These replicated atoms serve only as auxiliary particles to complete the neighbor environment near the boundary and are not included in the final output. After DBSCAN clustering, atoms in the perfect model that are crystallographically close are grouped together. Neighbor analysis is then performed to determine the atom types within each group, generating a model containing Ga1/2 and O1/2/3 sites, which provides a reference lattice for the defect model. For the defect model, DBSCAN clustering is applied, and initially identified noise points are used to preliminarily screen irregularly arranged interstitial atoms. During neighbor analysis, these preliminarily identified interstitials are filtered out to obtain a relatively clean atomic environment for similarity matching with the perfect model. After matching, lattice atoms and interstitial atoms are further distinguished. Subsequently, vacancies are created within the retained lattice atom groups. The program outputs data files compatible with OVITO visualization, containing different types of vacancies, interstitials, and lattice atoms, distinguished by atom types in the data file.The identification of eight interstitial sites from Ga ia to Ga ih is performed by another Python script that further processes the output.*.data files . Complete documentation and resources of the identification algorithm are open-source on GitHub at: https://github.com/L-H-W/A-DBSCAN-and-Similarity-Based-Algorithm-for--Ga2O3-Point-Defect-Identification.git. - 3 -
+
+Figure S1. Workflow of the point defect identification algorithm, with color-coded arrows indicating the processed models. 
+
+β-Ga 2O3 exhibits a monoclinic crystal structure belonging to the space group C2/m. As shown in Figure S2(a), the primitive unit cell features an angle of 103.8° between the [001] and [100] directions [1]. By rotating the primitive cell clockwise with the [010] axis as the rotation axis, the [001] direction is aligned with the z-axis, yielding an orthogonalized unit cell (Figure S2(b)). In the orthogonalized configuration, the z-axis corresponds to the [001] direction, the y-axis aligns with [010], and the x-axis deviates from [100] by 13.8° (a non-conventional orientation). Figures S2(c–e) present different views of the orthogonalized cell. The left view shows the projection onto the yz -plane, where Ga and O atoms at different crystallographic sites are projected to closely overlapping positions, complicating discrimination. In the top view ( yz -plane), the projected coordinates of O1 and O3 atoms are nearly coincident. Consequently, performing atom clustering and type-grouping on these two planes is highly inefficient and challenging. In contrast, the front view ( xz -plane) reveals a well-ordered periodic arrangement of atoms along the [010] direction, with a uniform inter-atomic spacing of 3.08572 Å between adjacent Ga/O atoms along [010], which facilitates the analysis of vacancy formation. Moreover, atoms belonging to the same crystallographic site exhibit closely clustered projections in the xz -plane, while those from different sites are well separated. This structural feature greatly favors effective clustering and atomic grouping. Therefore, our point-defect identification algorithm is developed based on the (010)-plane projection. - 4 -
+
+Figure S2. (a) Primitive unit cell of β-Ga 2O3, with axes indicating its crystallographic directions. (b) Orthogonalized unit cell, the labeled distance corresponds to the spacing between adjacent Ga/O atoms arranged along the [010] direction. (d–e) Different viewing directions of the orthogonalized unit cell, in which atoms are labeled according to their crystallographic sites for Ga and O. 
+
+As shown in Figure S3, lattice thermal vibrations are present in β-Ga 2O3 during MD simulations, leading to fluctuations in atomic positions after relaxation. However, the motion of atoms within the crystal does not deviate from the atomic columns along the [010] direction, and the primary fluctuations occur within the (010) crystallographic plane (i.e., the xz -plane). Therefore, to accurately cluster lattice atoms belonging to the same atomic column into one group, we adopted an approach where the maximum two-dimensional Euclidean distance between any two atoms within all atomic columns during the relaxation process is set as the clustering radius (the selection for Ga atoms is illustrated in Supplementary Figure S3(d), and similarly for O atoms). The currently obtained parameters (ε Ga = 0.494 Å, ε O = 0.386 Å) enable effective atomic identification at 293 K. The center of each cluster (represented by the red pentagram for the Ga center in Supplementary Figure S3(d), and similarly for the O center) is determined by averaging the coordinates of all atoms within the atomic column in the xz -plane. This center point is subsequently used for similarity matching judgments. 
+
+Regarding the vacancy formation mechanism illustrated in Figures S3(e) and (f), due to the relatively minor variation in the interatomic distance (dy) along the [010] direction on the yz -plane after relaxation, when vacancies are generated in an atomic column owing to the loss of atoms, the distance between the two remaining adjacent atoms in that column will approximate n × dy if n−1 atoms are missing (n ≥ 2). Therefore, after filtering out interstitial atoms, vacancy identification is performed for each cluster (corresponding to retained lattice atomic columns) obtained via DBSCAN classification. The average distance between adjacent atoms along the [010] direction across all atomic columns over the entire relaxation process (3.085 Å) is adopted as the criterion for vacancy generation. Atoms within the atomic column are sorted according - 5 -
+
+to their y-coordinates. If the difference in y‑coordinates between two neighboring atoms approaches n × dy, n−1 vacancies are uniformly distributed between the two atoms by linear interpolation, with the vacancy type determined by the atomic species within the cluster. It should be noted that the clustering radius and vacancy generation parameters are not fixed and can be adjusted according to different relaxation conditions and specific requirements. 
+
+Figure S3. (a, b) Local structure of β-Ga 2O3 before and after relaxation; (c, d) Atomic projections on the xz -plane before and after relaxation; (e, f) Atomic projections on the 
+
+yz -plane before and after relaxation (region marked by the dashed box in (a, b)). - 6 -
+
+Appendix B: Assessing the robustness of the DBSCAN identification method to thermal vibrations and high defect densities. 
+
+To evaluate the robustness of the DBSCAN method against thermal disturbances, as shown in Figure S4, we compared the identification results of the WS and DBSCAN algorithms after 10,000 relaxation steps following single-ion implantation at three different temperatures. At a lower temperature (293 K), the WS method misidentified interstitial atoms as lattice atoms due to unit-cell partitioning. In contrast, at a higher temperature (873 K), pronounced lattice thermal vibrations frequently caused the WS method to misclassify lattice atoms as interstitials. In comparison, the DBSCAN method determines the clustering radius according to the specific relaxation temperature and system, enabling more effective differentiation between lattice atoms and interstitial atoms within the β-Ga 2O3 crystal. 
+
+Figure S4. Comparison of detection results between the DBSCAN and WS methods after single-ion implantation at different temperatures. In the DBSCAN results (a–c), pink and green atoms represent Ga i and O i, respectively, while the remaining atoms correspond to lattice sites. In the WS results (d–f), red atoms denote interstitials and green atoms represent lattice sites. 
+
+To evaluate the performance of the DBSCAN method under high-density defect conditions, as shown in Figure S5, we present the detection results after implantation at three different fluences (1, 3, 5 × 10 14 cm -2 ). To assess the effective discrimination between interstitial and lattice atoms, interstitial atoms were subsequently removed. The results show that the crystal structure of β-Ga 2O3 on the (010) plane retains a high degree of integrity, with only a small number of lattice sites missing. These missing sites correspond to atomic columns that were completely damaged (i.e., contained fewer atoms than the minimum cluster-size threshold). - 7 -
+
+Figure S5. Detection results of the DBSCAN method at different implantation fluences. 
+
+(a–c) Interstitial atom distributions at varying implantation fluences. (d–f) The remaining lattice after removal of interstitials. - 8 -
+
+Appendix C: Atomic configurations of eight Ga i sites 
+
+Figure S6 illustrates eight commonly observed Ga i sites identified during the simulations. Among these, Ga ia , Ga id , Ga ie , Ga ig , and Ga ih are located at tetrahedral centers, whereas Ga ib , Ga ic , and Ga if reside at octahedral centers. As indicated by the dashed boxes, these interstitial atoms frequently form composite structures with adjacent vacancies. When bonds are created using a cutoff radius of 2.5 Å, these Ga i
+
+spontaneously form connections with nearby V Ga (these atom–vacancy links represent composite configurations and are not actual chemical bonds; to avoid confusion, bonds between Ga i and V Ga are shown only when the visualization is restricted to Ga i and V Ga ). Among them, Ga id , Ga ie , Ga ig , and Ga ih often adopt y-shaped composite arrangements with neighboring vacancies, while the remaining Ga i sites typically form V Ga -Ga i-V Ga 
+
+split-vacancy. 
+
+To improve the identification accuracy of the eight Ga i sites, after analyzing the coordination of each Ga i with surrounding O atoms or vacancies, the spatial distribution of the relative positions of the coordinating atoms around the Ga i center in the xz -plane was further examined. Taking the circular regions in Figure S6 as an example, two categories of local coordinate systems (including the mirrored cases after 180° rotation) were defined according to the type of coordination polyhedron in which the Ga i resides. A Ga i is assigned a specific interstitial type only when the number of O atoms or vacancies in each designated region satisfies the requirement for that site type (an error of one missing O atom or vacancy is allowed in regions where the expected number is two). 
+
+Figure S6. The atomic configurations of the eight Ga i sites. The circular regions illustrate the distribution and number of surrounding O atoms or vacancies in the xz -plane centered on each Ga i site, where the gradient from dark to light yellow represents O1, O2, and O3 atoms, respectively. The blue polyhedra denote the coordination polyhedron of each Ga i site. The dashed boxes highlight the composite structures - 9 -
+
+formed by Ga i and neighboring V Ga .- 10 -
+
+Appendix D: The effect of electronic stopping power on local temperature 
+
+The local temperature is computed from the atomic velocities within a 10 Å-radius volume element centered on a given atom, as given in formula (S1): 
+
+𝑇 𝑖 = 1𝐷𝑖𝑚𝑁 𝑖 𝐾 𝐵 
+
+[∑ 
+
+> 𝑁 𝑖
+> 𝑖=1
+
+(m 𝑖 v𝑖 2)] , (S1) 
+
+where, mi represents the mass of a volume element, vi denotes its velocity, Ti is the temperature of the i-th volume element, Dim is the simulation dimensionality (for a three-dimensional system, the value of Dim is 3), and Ni is the number of atoms within the i-th volume element, KB is the Boltzmann constant. 
+
+Temperature analysis was conducted for single-ion implantation events at 0 K. Upon interaction with the substrate, the implanted ion transfers substantial kinetic energy to the substrate, resulting in localized high temperature near the implantation site. After approximately 2.5 ps, the substrate entered a heat dissipation phase. As shown in Figure S7, cross-sectional (010) views at 2.5, 5, 7.5, and 10 ps after implantation were analyzed. Heat diffuses radially outward from the source. Over time, the high-temperature region (red area in the Figure S7) was observed to evolve differently under two conditions: with and without electronic stopping. Comparatively, when electronic stopping was included, the high-temperature region was significantly smaller than that when electronic stopping was omitted. Moreover, the high-temperature region shrank more rapidly over time when electronic stopping was taken into account, indicating that neglecting electronic stopping leads to an overestimation of temperature. 
+
+Figure S7. Cross-sectional (010) views of the temperature contour maps at (a) 2.5 ps, (b) 5 ps, (c) 7.5 ps, and (d) 10 ps after implantation. The first row and the second row correspond to the cases without and with electronic stopping, respectively. The color bar represents the temperature scale. - 11 -
+
+Appendix E: Vacancy evolution and distribution analysis 
+
+As shown in Figure S8, the vacancies within the crystal after each ion implantation and relaxation cycle were statistically analyzed. The evolution of vacancies, similar to that of interstitials, also increases with the ion fluence. For V Ga , the V Ga1 located at the tetrahedral center is significantly more prone to formation than V Ga2 at the octahedral center. As for V O, V O1 , V O2 , and V O3 exhibit nearly identical evolutionary trends. 
+
+Figure S8. (a) Evolution of V Ga1 and V Ga2 as a function of implantation fluence. (b) Evolution of V O1 , V O2 and V O3 as a function of implantation fluence. Error bars show standard deviations. 
+
+Following the analysis of vacancy concentration profiles, we examined the distributions after annealing at three different temperatures, as shown in Figure S9. For VGa , a higher annealing temperature resulted in a lower concentration of V Ga within the crystal. Regarding V O, annealing at 1237 K and 1373 K yielded comparable effects, whereas annealing at 1473 K may disrupt the O-sublattice, leading to an increase in V O
+
+concentration. Additionally, annealing at 1473 K induced surface amorphization, evidenced by an increased population of interstitial atoms near the surface. Therefore, 1373 K was selected as the optimal annealing temperature. 
+
+Figure S9. Annealing temperature test at 2 × 10 14 cm -2 . (a) V Ga concentration profile before and after annealing. (b) V O concentration profile before and after annealing. 
+
+Finally, as shown in Figure S10, we present the vacancy concentration profiles - 12 -
+
+after implantation and subsequent annealing at different fluences. The distribution of VGa extends to greater depths and covers a broader region within the crystal, whereas VO tends to accumulate closer to the surface. The aggregation of V Ga exhibits multiple peak-like features, similar to the distribution of Ga atoms in a perfect model, indicating that the Ga-sublattice sustains relatively minor damage upon implantation. In contrast, VO aggregation lacks such distinct peaks, suggesting that the O-sublattice tends to become amorphized after implantation. After annealing, the peak-like distribution of VGa becomes more pronounced, implying a certain degree of recovery in the Ga-sublattice near the surface, although a considerable amount of V Ga still remains. Meanwhile, the concentration of V O decreases significantly after annealing, further demonstrating the relatively high rigidity of the O-sublattice, which facilitates recrystallization during the annealing process. 
+
+Figure S10. (a, b) As-implanted state and (c, d) after annealing at 1373 K. (a, c) V Ga 
+
+concentration profile. (b, d) V O concentration profile. - 13 -
+
+Appendix F: Lattice damage and phase transformation 
+
+To evaluate lattice damage and phase transitions, we analyzed a high-defect region (located at a depth of 10–50 Å) of the same size as the implanted area (6 × 6 nm 2, which was uniformly damaged by ion implantation). The lattice damage was assessed using DPA (calculated as the ratio of interstitials to all atoms, and for sublattice DPA, the calculation was restricted to the sublattice). Phase transitions were evaluated using the method of Azarov et al . [2], in which the similarity between the Ga–Ga PRDF in the range of 4–5.2 Å and those of the standard β- and γ-phases was quantified via the Pearson correlation coefficient (Pr). The calculation of Pr follows formula (S2): 
+
+𝑃𝑟 = ∑𝑛 𝑖=1 (𝑋 𝑖 − 𝑋)(𝑌 𝑖 − 𝑌) √∑ 𝑛 𝑖=1 (𝑋 𝑖 − 𝑋̅) 2 ∑𝑛 𝑖=1 (𝑌 𝑖 − 𝑌̅) 2
+
+, (S2) 
+
+where, Xi and Yi represent the values of the two datasets being compared (e.g., the calculated Ga–Ga PRDF and the reference PRDF of a standard β- or γ-phase) at the i-th radial distance, X̄ and Ȳ denote their respective mean values, and n is the total number of data points within the evaluated radial range (e.g., 4–5.2 Å). 
+
+Figure S11(a) shows the damage levels identified by the DBSCAN and WS methods during the ion implantation stage. The damage level increases with increasing fluence. Due to the highly symmetric face-centered cubic (FCC) arrangement of O atoms in the O-sublattice, the WS method performs well for such an ordered structure, yielding results similar to those of DBSCAN. In contrast, for the Ga-sublattice with its low-symmetry in atomic arrangement, the damage levels identified by the WS method are generally lower than those obtained with DBSCAN. This leads to an overall underestimation of lattice damage in β-Ga 2O3. Figure S11(b) displays the phase transformation of the crystal. As the fluence increases, the similarity of the Ga–Ga PRDF to that of the β phase decreases, while its similarity to the γ phase increases. The phase transition threshold occurs within the fluence range of approximately 1.65 to 2 × 10 14 cm -2 (light gray shaded area), which corresponds to a damage level of about 0.25–0.3 dpa as identified by the DBSCAN method. - 14 -
+
+Figure S11. (a) Evolution of damage levels identified by DBSCAN and WS methods as a function of ion implantation fluence. (b) Evolution of Ga–Ga PRDF in the radial range 4–5.2 Å and the Pr with respect to the perfect β- and γ-phases as a function of ion implantation fluence. The light-gray shaded area indicates the phase-transition threshold region (1.65 to 2 × 10 14 cm -2 ). 
+
+Next, we evaluated the damage and phase transformation of the crystals after ion implantation with five fluence levels (1 to 5 × 10 14 cm -2 ) followed by annealing at 1373 K, as shown in the first rows of Figures S12(a) and (b). Below a fluence of 2 × 10 14 cm -2, damage accumulated rapidly. Above this fluence—corresponding to the phase transformation threshold discussed in Figure S11—the fraction of the γ-phase Pr exceeded that of the β-phase, the damage accumulation rate slowed, and the tendency for phase transformation increased. The second rows of Figures S12(a) and (b) reveal that after annealing, the O-sublattice recovered significantly, while the Ga-sublattice showed only partial recovery; the residual damage level still increased with fluence. As indicated by the Pr values, annealing mainly promoted the recovery of the β-phase at fluences below 4 × 10 14 cm -2 , whereas above this fluence, the extent of transformation to the γ-phase surpassed the lattice recovery toward the β-phase. The irreversible phase transformation threshold after annealing is approximately 0.4 dpa, which is lower than the experimental value (0.65–0.85 dpa). This discrepancy can be attributed to factors such as defect recombination and repetitive atom displacement in actual material systems, which consume part of the damage and thus require a higher disorder level to achieve the observed transformation [3]. - 15 -
+
+Figure S12. (a) Damage level and (b) Ga–Ga PRDF versus the Pr of the perfect γ- and 
+
+β-phases under five ion implantation fluences (1 to 5 × 10 14 cm -2 ). The first row corresponds to the as-implanted state, and the second row to the stage after annealing at 1373 K. - 16 -
+
+Appendix G: Defect comparison before and after annealing under different ion implantation fluences. 
+
+As shown in Figure S13, lattice damage is generated during the implantation stage, with Ga i and O i arranged in a disordered state. The defective region expands as the implantation fluence increases, and the surface topological structure exhibits slight swelling. After 1373K annealing, the majority of O i within the bulk vanish, with most remaining O i distributed near the surface. The primary defects retained internally are Ga i, which are arranged in an ordered configuration. Moreover, the area of this ordered structure increases with higher implantation fluences. 
+
+Figure. S13. Three-dimensional distributions of interstitials after ion implantation and subsequent annealing under five different fluences ((a–e) correspond to 1 to 5 × 10 14 
+
+cm -2 , respectively). The first row shows the as-implanted state, and the second row shows the state after annealing at 1373 K. 
+
+To further investigate the point defects in β-Ga 2O3, the ratios of point defect quantities after annealing to those before annealing were analyzed, as shown in Figure S14. The results reveal that V Ga1 is retained more readily than V Ga2 after annealing, indirectly indicating that interstitial atoms migrate more easily to the Ga 2 lattice site at the octahedral center compared to the Ga 1 site at the tetrahedral center. Meanwhile, the proportion of V O decreases significantly, demonstrating that annealing substantially promotes the recrystallization of the O-sublattice. Moreover, the proportions of V Ga and the eight interstitial Ga i sites (from Ga ia to Ga ih )—whose ratios even exceed the pre-annealing levels—also increase with higher implantation fluences followed by annealing. This suggests that the accumulation of these point defects is associated with the phase transition from β- to γ-Ga 2O3, where defect accumulation likely drives the phase transformation. It also indicates that the phase change becomes irreversible after annealing under high-fluence implantation. - 17 -
+
+Figure S14. The fraction of point defects after annealing at different fluences relative to that before annealing: (a) vacancies; (b) eight Ga i sites: from Ga ia to Ga ih . Error bars show standard deviations. - 18 -
+
+Appendix H: Distribution of hydrostatic stress for Ga and O during ion implantation and annealing. 
+
+It is crucial to analyze the stress distribution and its evolution in the model during ion implantation and annealing processes. For discrete atomic systems, the virial stress is widely applied. Consequently, the stress state of an individual atom is computed using the virial stress. The Virial stress of an atom can be obtained as the superposition of a kinetic component associated with the velocities of its neighboring atoms and a potential component related to the relative positions between atoms (in this work, a volume element with a radius of 10 Å is adopted). The stress of individual atoms can be estimated using formula (S3): 
+
+𝜎 𝛼𝛽 (𝑖) = 1𝑁 (𝑚 𝑖 𝜈 𝑖 𝛼 𝜈 𝑖 𝛽 
+
+𝑉 𝑖 
+
++ 12𝑉 𝑖 
+
+∑𝑓 𝑖𝑗 𝛼 𝑟 𝑖𝑗 𝛽 ) , (S3) 
+
+where, mi denotes the mass of atom i, Vi is the volume of space associated with atom i,and N is the number of atoms within this volume. The terms vαi and vβi represent the velocity components of atom i in the α- and β-directions, respectively, while fαij and rβij 
+
+are the force component on atom i from atom j in the α-direction and their separation in the β-direction, respectively. After the stress tensor for each central atom is computed, the average hydrostatic stress is obtained via formula (S4), which is used to characterize the overall stress state in the model: 
+
+𝜎 ℎ𝑦𝑑𝑟𝑜 = 𝜎 𝑥𝑥 + 𝜎 𝑦𝑦 + 𝜎 𝑧𝑧 
+
+3 . (S4) 
+
+As shown in Figure S15, hydrostatic stress analysis was performed for all Ga and O atoms within a depth of 50 Å. After ion implantation, Ga atoms tend to exhibit tensile stress (stress > 0), while O atoms tend to exhibit compressive stress (stress < 0). After annealing at higher fluences, Ga atoms show a shift toward higher tensile stress, suggesting that a phase transformation ( β-to-γ) may occur in the Ga-sublattice after annealing. In contrast, the stress distribution of O atoms after annealing at different fluences is generally concentrated near zero stress, indicating that the O-sublattice possesses relatively high rigidity and can be easily restored after annealing. - 19 -
+
+Figure S15. Histograms showing the distribution of atomic hydrostatic stress: (a, b) the ion implantation stage. (c, d) the annealing stage at 1373 K. (a, c) Ga stress. (b, d) O stress. The red reference line indicates zero stress. 
+
+For the 5 × 10 14 cm -2 ion implantation model, further investigation was conducted on the effect of annealing at 1373 K on the stress in β-Ga 2O3. As shown in Figure S16(a), the temperature and the pressure evolution of the system boundaries ( x- and y-directions) during annealing in the NPT ensemble (0 bar) are presented. During the holding stage (54–1054 ps), the pressure fluctuates near 0 GPa. In contrast, larger pressure fluctuations occur during the heating (before 54 ps) and cooling (after 1054 ps) stages, which can be attributed to vigorous atomic motion and crystal-volume variations. The stress migration resulting from stable defect structures is mainly concentrated in the cooling stage. As demonstrated in video 3, which displays the stress evolution during cooling, tensile stress accumulates in regions with high defect density when the temperature drops to approximately 293 K. This phenomenon is primarily attributed to the formation of stable defect-complex structures (Ga ia to Ga if ) as seen in Figure S6. The association of surrounding V Ga with Ga i leads to an increase in the Ga–Ga interatomic distance in this region. The Ga i are in an equilibrium state “stretched” by the surrounding Ga atoms (which can also be interpreted as Ga i being “pulled” by neighboring VGa ), thereby manifesting as tensile stress. Figure. S16(b) further - 20 -
+
+illustrates this behavior by statistically analyzing the stress distribution of Ga i that migrate into interstitial sites within the Ga ia -to-Ga if range after annealing (the atoms were identified by tracking their atomic IDs). Before annealing, a small fraction of Ga i
+
+already resides in the Ga ia -to-Ga if region; however, most Ga i generated by ion-implantation-induced lattice damage remain at disordered positions, resulting in relatively low tensile stress. After annealing, these Ga i migrate to and stabilize in the Ga ia -to-Ga if sites, causing the overall tensile stress to shift toward positive values, with an average stress increase of about 1 GPa. The behavior of Ga i further reveals the occurrence of phase transformation. The local map displays the stress distribution after annealing, showing that tensile stress is concentrated in high-defect regions, while compressive stress appears at the boundaries of these regions. 
+
+Figure S16. (a) Evolution of system temperature and boundary pressure for 5 × 10 14 cm -2 fluence model annealed at 1373 K. (b) Stress distribution of Ga i (from Ga ia to Ga if after annealing) before and after annealing, with inset showing hydrostatic stress distribution contours in substrate post-annealing - 21 -
+
+Supplementary References 
+
+[1] J. Zhao, J. Byggmästar, H. He, K. Nordlund, F. Djurabekova, M. Hua, Complex Ga 2O3 polymorphs explored by accurate and general-purpose machine-learning interatomic potentials, NPJ Comput. Mater. 9 (2023). 
+
+[2] A. Azarov, J.G. Fernández, J. Zhao, F. Djurabekova, H. He, R. He, Ø. Prytz, L. Vines, U. Bektas, P. Chekhonin, N. Klingner, G. Hlawacek, A. Kuznetsov, Universal radiation tolerant semiconductor, Nat. Commun. 14 (2023). 
+
+[3] J. Zhao, J.G. Fernández, A. Azarov, R. He, Ø. Prytz, K. Nordlund, M. Hua, F. Djurabekova, A. Kuznetsov, Crystallization Instead of Amorphization in Collision Cascades in Gallium Oxide, Phys. Rev. Lett. 134 (2025).

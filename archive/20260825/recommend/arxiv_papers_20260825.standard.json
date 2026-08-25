@@ -1,0 +1,140 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-08-25T20:54:15.107720+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 1,
+    "deep_cap": 6,
+    "deep_selected": 1,
+    "quick_candidates": 2,
+    "quick_skim_target": 11,
+    "quick_selected": 2
+  },
+  "deep_dive": [
+    {
+      "id": "2608.22282v1",
+      "source": "arxiv",
+      "title": "Machine-learning-guided molecular dynamics simulations of point defect evolution in beta-Ga2O3 during ion implantation and annealing",
+      "abstract": "In beta-gallium oxide (beta-Ga2O3), Ga-ion implantation and annealing induce abundant point defects. To overcome conventional Wigner-Seitz (WS) defect analysis limitations, a defect identification algorithm based on similarity matching and DBSCAN clustering is developed for beta-Ga2O3. It distinguishes lattice atoms from defects at high concentrations and identifies eight Ga interstitial configurations (Gaia to Gaih). Comparing SRIM and MD data highlights electronic stopping effects: neglecting them overestimates ion range and defect concentration. Across five fluences (1 to 5 x 10^14 cm-2), 1373 K is the optimal recovery temperature. Multiscale analyses using hydrostatic stress, PRDF, and defect concentration reveal defect evolution. Ga interstitials (Gai) occupy tetrahedral and octahedral sites, driving a defect-mediated phase transition from beta- to gamma-Ga2O3. Increasing fluences reduce beta-phase recovery and increase gamma-phase transformation irreversibly. Oxygen interstitial (Oi) migration is sensitive to annealing temperature, which enhances O-sublattice recrystallization.",
+      "authors": [
+        "Huawen Li",
+        "Mengzhi Yan",
+        "Zongwei Xu",
+        "Junlei Zhao",
+        "Jiale Wang"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ],
+      "published": "2026-08-23T08:20:38+00:00",
+      "link": "https://arxiv.org/pdf/2608.22282v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "ML-guided MD simulations of point defect evolution during ion implantation, directly related to radiation-induced point defects and clusters.",
+      "llm_evidence_cn": "利用机器学习分子动力学模拟离子注入和退火中β-Ga2O3点缺陷演化，与辐照诱导点缺陷和团簇直接相关。",
+      "llm_evidence": "利用机器学习分子动力学模拟离子注入和退火中β-Ga2O3点缺陷演化，与辐照诱导点缺陷和团簇直接相关。",
+      "canonical_evidence": "利用机器学习分子动力学模拟离子注入和退火中β-Ga2O3点缺陷演化，与辐照诱导点缺陷和团簇直接相关。",
+      "llm_tldr_en": "ML-guided MD simulations of ion-implanted beta-Ga2O3 quantify point defect evolution, introducing a DBSCAN-based defect identifier, revealing electronic stopping effects, and identifying 1373 K as optimal recovery temperature.",
+      "llm_tldr_cn": "针对β-Ga2O3在镓离子注入和退火中产生大量点缺陷的问题，本文提出基于相似性匹配与DBSCAN聚类的缺陷识别算法，克服了传统Wigner-Seitz分析在高浓度下的局限，可区分晶格原子与缺陷并识别八种镓间隙构型。通过SRIM与MD数据对比揭示电子阻止效应的重要性，并确定1373 K为最优恢复温度。研究为离子辐照材料中点缺陷演化提供了可迁移的机器学习与多尺度分析方法。",
+      "llm_tldr": "针对β-Ga2O3在镓离子注入和退火中产生大量点缺陷的问题，本文提出基于相似性匹配与DBSCAN聚类的缺陷识别算法，克服了传统Wigner-Seitz分析在高浓度下的局限，可区分晶格原子与缺陷并识别八种镓间隙构型。通过SRIM与MD数据对比揭示电子阻止效应的重要性，并确定1373 K为最优恢复温度。研究为离子辐照材料中点缺陷演化提供了可迁移的机器学习与多尺度分析方法。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation-induced point defects and clusters",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2608.22074v1",
+      "source": "arxiv",
+      "title": "Cross-Temperature Defect Identification in Atomistic Simulations via Multi-Level Domain Alignment",
+      "abstract": "Identifying atomic defects at elevated temperature is difficult because thermal fluctuations blur the local symmetry that both geometric heuristics and supervised classifiers rely on: trustworthy labels exist in low-temperature reference configurations, while the high-temperature regime where robust analysis matters most is effectively unlabeled. We cast this as a cross-temperature domain-shift problem and align the two domains at three levels: an equivariant denoiser at the input level, cross-temperature contrastive learning at the representation level, and a morphology-aware regularizer that steers predictions toward the compact geometry of physical defect structures. Because no atom-wise truth exists at temperature, we further introduce a label-free evaluation suite that scores predicted defect structures along five spatial and physics-based axes, enabling model assessment and selection without high-temperature labels. Near the melting point, the framework identifies vacancies and self-interstitial atoms across face-centered-cubic, body-centered-cubic, and hexagonal-close-packed iron systems with every interstitial localized and zero false detections in every vacancy system against Wigner-Seitz ground truth, with no high-temperature labels used in training. It sustains this fidelity on a million-atom, 2.5 ns trajectory, resolving single vacancy hops and complete Frenkel-pair recombination, and captures grain-boundary phase transformations in aluminum bicrystals, distinguishing two nucleation modes. Multi-level domain alignment thus offers a practical, label-efficient route to temperature-robust structural analysis of large-scale molecular dynamics.",
+      "authors": [
+        "Yating Fang",
+        "Jungmin Kim",
+        "Qian Qian Zhao",
+        "Pallavi Biswas",
+        "Joshua M. Gonjon",
+        "Ryan B. Sills",
+        "Ahmed Aziz Ezzat"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci",
+        "cs.LG",
+        "physics.comp-ph"
+      ],
+      "published": "2026-08-22T18:35:05+00:00",
+      "link": "https://arxiv.org/pdf/2608.22074v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Introduces cross-temperature defect identification for atomistic simulations, a reusable method to track radiation-induced defect evolution and microstructure changes.",
+      "llm_evidence_cn": "提出跨温度缺陷识别方法，可应用于辐照诱导缺陷演化与微观结构变化分析。",
+      "llm_evidence": "提出跨温度缺陷识别方法，可应用于辐照诱导缺陷演化与微观结构变化分析。",
+      "canonical_evidence": "提出跨温度缺陷识别方法，可应用于辐照诱导缺陷演化与微观结构变化分析。",
+      "llm_tldr_en": "A multi-level domain alignment method identifies atomic defects at elevated temperature in atomistic simulations, using equivariant denoising, cross-temperature contrastive learning, and morphology-aware regularization to address missing high-temperature labels and enable defect evolution tracking.",
+      "llm_tldr_cn": "针对高温原子模拟中缺陷识别困难、缺少真值标签的问题，本文将跨温度缺陷识别视为域偏移问题，提出等变去噪、跨温度对比学习与形态学感知正则化的多层次对齐框架。该方法在高温下也能准确识别紧凑的物理缺陷构型。这一框架为辐照等非平衡态条件下微观结构演化的原子模拟提供了可靠的分析工具。",
+      "llm_tldr": "针对高温原子模拟中缺陷识别困难、缺少真值标签的问题，本文将跨温度缺陷识别视为域偏移问题，提出等变去噪、跨温度对比学习与形态学感知正则化的多层次对齐框架。该方法在高温下也能准确识别紧凑的物理缺陷构型。这一框架为辐照等非平衡态条件下微观结构演化的原子模拟提供了可靠的分析工具。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation induced defect evolution and microstructure changes",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.19116v1",
+      "source": "arxiv",
+      "title": "JANUS: A Multi-modal Foundation Neural Sampler for Disordered Materials",
+      "abstract": "Many problems in disordered materials require sampling beyond fixed composition and volume, where coupled changes in atomic identities and structure create a prohibitively expensive discrete-continuous sampling problem. Here we introduce JANUS, a multimodal neural sampler that couples continuous and masked discrete diffusion through an equivariant graph neural network trained directly from energy evaluations, without pre-generated equilibrium data. In benchmark Ising and isobaric $ΔμNPT$ alloy systems, JANUS reproduces reference Monte Carlo equilibrium observables and recovers free energies and phase behavior with more than three orders of magnitude fewer energy evaluations. In multicomponent alloys, JANUS enables conditional steering toward prescribed chemical short-range order and enhanced bulk modulus and, when coupled to a large language model evolutionary agent, performs efficient inverse design for balanced optical and mechanical properties. In semiconductors like silicon and diamond, JANUS explores vacancies and dopants spanning 15 elements in grand-canonical $μVT$ ensembles, recovers established defects including the silicon $E$ centre, and identifies new candidate defect pairs and triplets for quantum engineering, including S-Ti in silicon and B-O-O in diamond, with deep in-gap states validated by hybrid-functional density functional theory. By unifying discrete site identities with continuous structural and volumetric relaxation, JANUS provides a foundation for thermodynamic sampling, characterization and inverse design of chemically disordered materials.",
+      "authors": [
+        "Denis Blessing",
+        "Mouyang Cheng",
+        "Maximilian Schebek",
+        "Jutta Rogal",
+        "Mingda Li",
+        "Carles Domingo-Enrich",
+        "Yuanqi Du"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ],
+      "published": "2026-08-19T17:11:03+00:00",
+      "link": "https://arxiv.org/pdf/2608.19116v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Efficient neural sampler for disordered alloys, enabling free energy and phase behavior calculations relevant to FeCr alloy microstructure modeling.",
+      "llm_evidence_cn": "用于无序合金的高效神经采样器，可支撑FeCr合金微观组织与相行为计算。",
+      "llm_evidence": "用于无序合金的高效神经采样器，可支撑FeCr合金微观组织与相行为计算。",
+      "canonical_evidence": "用于无序合金的高效神经采样器，可支撑FeCr合金微观组织与相行为计算。",
+      "llm_tldr_en": "JANUS couples continuous and masked discrete diffusion with an equivariant graph neural network, trained directly on energy evaluations, to sample disordered materials and recover free energies and phase behavior with orders of magnitude fewer energy evaluations, enabling efficient alloy simulation.",
+      "llm_tldr_cn": "针对无序材料中需要同时改变原子种类与结构的复杂采样难题，本文提出多模态神经采样器JANUS，将连续扩散与掩码离散扩散结合到等变图神经网络中，并直接从能量评估训练，无需预生成平衡数据。在Ising和等压ΔμNPT合金体系中，JANUS以少于三个数量级的能量评估再现了参考蒙特卡洛平衡观测量，恢复自由能和相行为，并可在多组分合金中按目标条件进行定向采样。该方法为FeCr等合金的微观组织与相稳定性模拟提供了高效的通用工具。",
+      "llm_tldr": "针对无序材料中需要同时改变原子种类与结构的复杂采样难题，本文提出多模态神经采样器JANUS，将连续扩散与掩码离散扩散结合到等变图神经网络中，并直接从能量评估训练，无需预生成平衡数据。在Ising和等压ΔμNPT合金体系中，JANUS以少于三个数量级的能量评估再现了参考蒙特卡洛平衡观测量，恢复自由能和相行为，并可在多组分合金中按目标条件进行定向采样。该方法为FeCr等合金的微观组织与相稳定性模拟提供了高效的通用工具。",
+      "llm_tags": [
+        "query:rad-damage:composite"
+      ],
+      "matched_query_tag": "query:rad-damage:composite",
+      "matched_query_text": "Papers central to 辐照损伤FeCr合金B2相增强相关论文检索, especially work that connects or combines: radiation damage mechanisms in structural materials; radiation-induced point defects and clusters; B2 phase strengthening in irradiated alloys; precipitation hardening in irradiated FeCr alloys; dislocation loop formation in irradiated FeCr; radiation induced defect evolution and microstructure changes; Studies on radiation damage in FeCr alloys with B2 phase strengthening; Microstructure evolution of B2 phase in FeCr alloys under irradiation.",
+      "matched_requirement_id": "req-composite-rad-damage",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

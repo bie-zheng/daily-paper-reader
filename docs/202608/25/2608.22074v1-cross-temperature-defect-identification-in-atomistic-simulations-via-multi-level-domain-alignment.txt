@@ -1,0 +1,1013 @@
+Title: Cross-Temperature Defect Identification in Atomistic Simulations via Multi-Level Domain Alignment
+
+URL Source: https://arxiv.org/pdf/2608.22074v1
+
+Published Time: Tue, 25 Aug 2026 00:56:55 GMT
+
+Number of Pages: 46
+
+Markdown Content:
+# Cross-Temperature Defect Identification in Atomistic Simulations via Multi-Level Domain Alignment 
+
+## Yating Fang 1* , Jungmin Kim 2, Qian Qian Zhao 3, Pallavi Biswas 3,Joshua M. Gonjon 3, Ryan B. Sills 3, Ahmed Aziz Ezzat 2
+
+> 1*
+
+Rutgers Artificial Intelligence and Data Science (RAD) Collaboratory, Rutgers University, Piscataway, 08854, NJ, USA. 
+
+> 2
+
+Department of Industrial and Systems Engineering, Rutgers University, Piscataway, 08854, NJ, USA. 
+
+> 3
+
+Department of Materials Science and Engineering, Rutgers University, Piscataway, 08854, NJ, USA. *Corresponding author(s). E-mail(s): yating.fang@rutgers.edu; Contributing authors: ryan.sills@rutgers.edu; aa2085@rutgers.edu; 
+
+Abstract 
+
+Crystalline defects control how materials deform, transport mass, and accumu-late radiation damage, yet near the melting point, where these processes are most active, thermal fluctuations distort local atomic environments until established structure-identification tools degrade sharply. We present a machine-learning framework that identifies point defects reliably up to the melting temperature. Scored against exhaustive Wigner–Seitz ground truth on vacancy- and self-interstitial-containing face-centered-cubic, body-centered-cubic, and hexagonal-close-packed iron systems, it localizes every interstitial and makes zero false detections in every vacancy system, with no high-temperature labels used in training. Deployed on a million-atom, 2.5 ns trajectory, it sustains that fidelity at scale, resolving single vacancy hops and complete Frenkel-pair recombination, and applied to aluminum bicrystals it captures grain-boundary phase transfor-mations in progress, distinguishing two nucleation modes. The framework works by treating the temperature gap as a label-transfer problem: trustworthy labels exist only in low-temperature reference structures, so it aligns the two regimes at three levels, denoising input coordinates, matching learned representations across temperature, and steering predictions toward the compact morphology 
+
+1arXiv:2608.22074v1 [cond-mat.mtrl-sci] 22 Aug 2026 of physical defect structures. Because no atom-wise truth exists at the tar-get temperature, a label-free evaluation suite enables model assessment where ground truth cannot be constructed, completing a practical, label-efficient route to temperature-robust analysis of large-scale molecular dynamics.  
+
+> Keywords: Atomic structure identification, defect classification, denoising, domain adaptation, molecular dynamics
+
+# 1 Introduction 
+
+Atomistic simulations are increasingly used to study a wide range of phenomena, including biological systems [1, 2], crystal nucleation [3], ionic systems [4], and crystalline solids [5, 6], to name a few examples. With the rapid adoption of machine-learning interatomic potentials [7–10] and highly scalable molecular dynamics (MD) codes [11–13], multi-million-atom simulations are now routine. In many settings, the dominant bottleneck is no longer generating atomic trajectories but rather extracting reliable structural information from them. One example, which is the focus here, is the analysis and identification of crystalline defects, such as vacancies, self-interstitial atoms (SIAs), and grain boundaries (GBs), which are often difficult to differentiate from thermally distorted but otherwise intact lattice motifs. These defects control much of a material’s behavior (strength and plasticity, mass transport, and the accu-mulation of radiation damage [5, 14]), so the fidelity of downstream materials insight rests on identifying them reliably. At low temperatures (far below the melting point), defect identification is often reliable because local neighborhoods remain close to ideal reference geometries. Clas-sical approaches such as common-neighbor analysis (CNA) [15, 16], centrosymmetry analysis [17], Steinhardt-type bond-order parameters [18], and polyhedral template matching (PTM) can then separate crystal classes with relatively simple thresholds or template comparisons [19, 20]. At elevated temperatures, however, thermal motion continuously perturbs atomic positions and erodes class boundaries in descriptor space: the same local environment may shift from “easy” to “ambiguous” without any topological change in the underlying defect state. Methods that are reliable at low temperatures therefore degrade sharply near melting. A second challenge is that training data are distributed unevenly across temper-atures. Low-temperature structures can be labeled confidently using geometry-based tools [19–21], Wigner–Seitz analysis [14], or controlled defect construction. High-temperature structures are precisely where robust analysis is most needed, yet they are the regime in which labels are least trustworthy. For example, even if atoms are clearly labeled when an atomic structure is initialized (e.g., constructed by hand), at high temperatures it is commonplace for atoms to rearrange and structures to migrate, thereby rendering the labels unreliable. This creates a practically important domain-shift problem [22]: can structural knowledge learned from well-defined low-temperature configurations be transferred to thermally perturbed configurations without labels at 2the target temperature? Additionally, how can the accuracy of the identified structures be tested if no labeled data exist at elevated temperatures? Two recent lines of work bracket this question without resolving it. Chung et al. [23] demonstrated that supervised, neural-network-based classifiers trained on syn-thetically perturbed reference structures outperform geometric heuristics for crystal-structure identification at high temperature; however, their setting is in-sample, with reliable labels assumed at the target temperature, and defect environments are treated as outliers rather than as a class of interest. Furthermore, a similar study showed that classification performance with synthetically perturbed liquid structures was quite poor [24], a problematic observation given that many defective states are relatively “disordered” in comparison to perfect crystal structures. Hsu et al. [25] introduced a score-based denoiser that suppresses thermal vibrations and allows standard tools such as CNA and PTM to operate near the melting point; in that pipeline, defects appear only as the residual “other” category after structure identification, and the analy-sis remains tied to the template inventory of classical tools. Related descriptor- and graph-based classifiers improve robustness within the thermal regime covered by train-ing [26–29], and learned denoisers have been used for downstream structure recovery more broadly [30–32]. In most existing workflows, however, denoising and classification are treated as separate steps, and the central issue of label transfer across temperature is left implicit. Local structure identification in atomistic simulation has a long history. Widely used methods such as CNA [15, 16], centrosymmetry analysis [17], bond-angle anal-ysis [33], and PTM compare local neighborhoods to ideal crystal motifs or evaluate symmetry-sensitive descriptors [19, 20]. These approaches are computationally effi-cient and interpretable, but they are inherently sensitive to thermal motion, elastic strain, and local disorder because they depend on fixed tolerances or template sim-ilarity. Near melting, the distinction between true defects and temporarily distorted crystal neighborhoods becomes especially unclear. More robust feature constructions have been proposed, including bond-order spec-tra [18, 34], SOAP-like representations [35], and supervised combinations of invariant descriptors [23, 26]. These improve robustness but remain, in essence, in-sample meth-ods: they work best when the training distribution resembles the inference distribution. The data-centric framework of Chung et al. [23] is the closest supervised antecedent to our work: it shows that multi-layer perceptron (MLP) classifiers can outperform heuristics at high temperature, but it assumes labeled high-temperature data and does not treat defects as an explicit class. Our framework is, in this sense, its natural cross-temperature, defect-aware extension. While Chung et al. employed an ad hoc set of atomic descriptors, we employ the atomic cluster expansion (ACE) descriptors [36] because of their completeness property in describing atomic environments and their performance in machine learning interatomic potentials [10]. Machine-learning approaches replace hand-tuned thresholds with learned decision boundaries. Descriptor-based classifiers use SOAP [35], ACE [36], or radial/angular descriptors [7] as inputs to kernel models, multilayer perceptrons, or tree ensembles; graph neural networks and equivariant architectures learn directly from atomic graphs 3while preserving Euclidean symmetries [9, 10, 27, 28]. These advances have signifi-cantly improved phase and structure classification in noisy settings [26, 29, 37], and class-incremental formulations further allow the catalog of structure classes to grow over time without retraining on all previously seen classes [38]. A complementary line targets defects with unsupervised learning. Becker et al. [29] identify atomic structures without labels via topological learning, and Del Fr´ e et al. [39] demonstrate an unsupervised SOAP+autoencoder pipeline for defect detection in displacement cascades. K´ yvala et al. [40] likewise identify phases and point defects by unsupervised dimensionality reduction of per-atom descriptors, mitigating thermal noise by time-averaging the descriptors rather than by aligning temperature domains. Such methods are attractive when no labels exist at all, but they do not exploit the rich structural information that is available at low temperature. Our setting is differ-ent: low-temperature labels exist and are reliable, and the question is how to transfer them to regimes where labeling fails. In supervised settings, most published structure classifiers still assume representative labeled data across the conditions of interest; when labels are trustworthy only at low temperature, naive supervised learning invites overconfident extrapolation, compounded for defects by severe class imbalance. Score-based and diffusion-inspired models offer a complementary strategy: rather than making the classifier invariant to thermal noise, one first learns a denoising oper-ator that removes perturbations while preserving meaningful structure [25, 31], an approach that extends to structural completion and related generative tasks [30, 32]. Denoisers are naturally trained in a self-supervised manner on synthetically per-turbed reference structures [31]. The most closely related work is the score-based denoising framework of Hsu et al. [25], which showed that iterative denoising dra-matically improves downstream CNA/PTM classification near melting and has since been extended to other structure-classification settings such as ice-phase identifica-tion [41]. That work provides the input-level component of our pipeline. The point of departure is that, in their setting, defect identification is left to the downstream structure-identification tool, which restricts the analysis to the templates that tool supports and treats defects as the residual “other” bin. We instead make defects an explicit learned class and use cross-temperature alignment to transfer reliable low-temperature labels into the regime where labels are least available. Furthermore, as we shown in Appendix C, rather than using a pre-trained denoiser, we show that a custom denoiser for each defect class is required to ensure robust denoising without artifacts. In this work, we make crystalline defects a class of interest in their own right, and pursue a data-driven classification framework which is reliable up to the melting point. In this task, three key challenges arise: (1) how to cope with the highly heteroge-neous local atomic environments of defects (in comparison to relatively homogeneous crystal structures)? (2) how to train a classifier when reliable labeled data at near-melting temperatures are unavailable? and (3) how to test the performance of the classifier without labeled data? We demonstrate that a robust classification framework can be built by leveraging score-based denoising [25] as the input-level component, in conjunction with morphological regularization and cross-temperature alignment 4during training. Crucially, we show that denoising alone cannot attain robust perfor-mance up to melting. Instead, morphological regularization is necessary to discourage fragmented, geometrically implausible predicted defect structures, thereby resolving challenge (1) above. To address challenge (2), cross-temperature alignment using con-trastive learning encourages latent representations of true high-temperature MD data and synthetically perturbed data to be well aligned. In contrastive learning, a model is trained to pull different but related data (true MD and synthetically noised data in our case) closer together in a latent feature space, while pushing unrelated data further apart [42]. Hence, this scheme involves domain alignment at three distinct levels: input-level alignment is achieved through use of score-based denoising, representation-level alignment is attained with cross-temperature contrastive learning, and prediction-level alignment is enforced through morphological regularization. Finally, to address challenge (3) relating to testing without labeled data, we have developed a label-free, reference-relative evaluation suite that scores a predicted structure along five complementary axes (spatial coherence, fragmentation, geometric compactness, boundary consistency, and consistency with an independent physics-based reference signal), normalized to a common scale. No single axis is decisive; jointly they triangulate what a physically credible atomic structure must look like, enabling model assessment and selection without high-temperature ground truth. Where exhaustive ground truth is available (for point defects on a known parent lat-tice, via atom-tracked Wigner–Seitz occupancy analysis), we score the pipeline against it outright, from 4000-atom benchmark cells to a million-atom trajectory, and use the agreement between the two evaluations to demonstrate the merit of the label-free suite where no truth can be constructed. Relative to prior work, this paper makes five contributions. First , we treat defects as an explicit class of interest and reframe high-temperature defect identification as a cross-temperature alignment problem, distinguishing it from in-sample structure classification [23] and from denoising-plus-template pipelines in which defects are residuals [25]. Second , we combine a learned denoiser (adopted from Ref. [25], but retrained for each structure of inter-est), cross-temperature representation alignment, and supervised defect classification into a single end-to-end framework, instead of using denoising as a loosely coupled pre-processing step. Third , we introduce a morphology-aware regularization strategy that acts directly on target-domain predictions, encouraging spatially coherent and compact atomic structures while also improving cross-domain alignment through the shared representation; the specific priors used here are one instantiation of a user-customizable family. Fourth , we contribute a label-free, reference-relative evaluation suite for predicted defect structures (five complementary spatial and physics-based metrics with a triangulation rationale), applicable whenever target-domain labels are unavailable, and validated here by its agreement with exhaustive Wigner–Seitz ground truth wherever both evaluations can be computed. Fifth , we demonstrate the framework across face-centered cubic (FCC), body-centered cubic (BCC), and hexagonal close-packed (HCP) systems containing vacancies and SIAs near melting, scored against Wigner–Seitz ground truth at the defect level; on a million-atom, 2.5 ns trajectory; and on grain-boundary phase/complexion transformations in alu-minum bicrystals, where per-atom classification reveals two distinct nucleation modes. 5Altogether, these contributions provide significant steps toward a general-purpose atomic-structure classification pipeline. The Results section is organized around these demonstrations: near-melting point defect identification across six defect–lattice systems, the contribution of each align-ment level, ground-truth validation at scale, the extension to extended-defect phases (GBs), and a label-free evaluation that spans them. Details of the learning objec-tives, datasets, baselines, evaluation metrics, and training protocol are provided in the Methods section. 
+
+# 2 Results 
+
+We evaluate the framework on three parent crystal classes (FCC, BCC, and HCP, using Fe as our element of choice), each in pristine form and containing point defects (vacancies and SIAs), with the central challenge being performance near the melting temperature, where thermal perturbations obscure defect topology in the raw coor-dinates. The evaluation proceeds in five settings of increasing reach. First, we assess defect identification near melting across all six defect–lattice systems, scored against Wigner–Seitz ground truth at the defect level. Second, we dissect the contribution of each alignment level across temperature under the same ground truth. Third, we deploy the pipeline on a million-atom trajectory, extending the ground-truth valida-tion across three orders of magnitude in scale and time. Fourth, we move beyond point defects to GB phase/complexion transformations, probing generality across defect tax-onomy and morphology. Finally, we introduce a label-free evaluation suite, show that it reproduces the ground-truth verdicts where both can be computed, and apply it to the GBs where no ground truth exists. 
+
+## 2.1 Defect identification near melting 
+
+Figure 1 shows the full model’s predictions for representative near-melting snapshots of all six systems: vacancy-containing and SIA-containing FCC, BCC, and HCP crystals. Working directly from raw thermal coordinates, the deployed pipeline flags a single compact cluster of atoms at the true defect site in every system, with no scattered false detections elsewhere in the box. The visual signature of each defect type is preserved: vacancy predictions form roughly isotropic clusters around the missing-atom site, while the elongated SIA clusters reflect the dumbbell geometry of the defect. This is the qualitative behavior that matters for downstream analysis: defect atomic structures that read as localized physical objects rather than diffuse probability clouds. For the point-defect systems, this qualitative impression can be tested against exhaustive ground truth. Because each system derives from a known parent lattice, atom-tracked Wigner–Seitz occupancy analysis on the denoised coordinates yields a complete registry of true vacancy and interstitial sites even at the melting temperature (Methods), a truth signal used for evaluation only, never for training, so the cross-temperature setting is preserved: the model learns exclusively from low-temperature labels. Detection is scored at the level of whole defects rather than individual atoms (the defect-object level ): each predicted defect object (a connected cluster of flagged 6vacancy    
+
+> FCC BCC HCP
+> interstitial (SIA) Fig. 1 Defect detection by the full model (MLP with the contrastive and morphology terms) across all six systems at the melting temperature. Each panel shows one representative test snapshot (raw thermal positions); colored atoms are those the deployed pipeline flags as defective, gray atoms are a subsample of the remaining bulk. Top row: vacancy-containing systems; bottom row: self-interstitial-atom-containing systems. In every system the flagged atoms form a single compact cluster at the defect site, with no scattered false detections elsewhere in the box; the elongated shape of the interstitial clusters reflects the dumbbell geometry of the defect. Quantitative per-system results are given in Table 1.
+
+atoms) either matches a true defect site or it does not, and we report object recall, precision, F1, and the number of false objects per snapshot. Table 1 reports this evaluation for the deployed pipeline. Three features stand out. First, pristine crystals are read perfectly (Panel A): no defect objects are reported where none exist, and held-out pristine atoms are classified without error—the pipeline does not hallucinate structure under thermal noise. Second, vacancy detection is essen-tially solved near melting (Panel B): perfect object-level detection in FCC and HCP, F1 of 0.90 in BCC, and zero false objects across all three lattices, so every reported vacancy is real; the residual imperfection is a recall dip in BCC, an occasional missed defect rather than an invented one. Third, SIAs show the complementary profile (Panel C): the pipeline localizes every interstitial (object recall of 1.00 in all three lattices), and the F1 of 0.92 reflects an occasional small spurious cluster away from the defect site, at most a quarter of a false object per snapshot on average. The full model’s errors are thus rare and defect-type-specific in a useful way: for vacancies it never fabricates and occasionally misses (BCC), while for SIAs it never misses and 7Table 1 Ground-truth evaluation of the deployed pipeline at the melting temperature. Detection is scored at the defect level against atom-tracked Wigner–Seitz occupancy labels: predicted defect objects (connected clusters of flagged atoms) are matched one-to-one to true defect sites by center-of-mass proximity (Methods), and we report object-level recall, precision, F1, and false objects per snapshot (FP). Entries are mean ± standard deviation across independent runs; ground truth is used for evaluation only, never for training. Ladder comparisons appear in Table 2. System Recall Precision F1 FP 
+
+Panel A: Pristine crystals 
+
+Perfect FCC 1.00 ± 0.00 1.00 ± 0.00 1.00 ± 0.00 0.00 ± 0.00 Perfect BCC 1.00 ± 0.00 1.00 ± 0.00 1.00 ± 0.00 0.00 ± 0.00 Perfect HCP 1.00 ± 0.00 1.00 ± 0.00 1.00 ± 0.00 0.00 ± 0.00 
+
+Panel B: Vacancy systems 
+
+FCC + vacancy 1.00 ± 0.00 1.00 ± 0.00 1.00 ± 0.00 0.00 ± 0.00 BCC + vacancy 0.87 ± 0.27 1.00 ± 0.00 0.90 ± 0.20 0.00 ± 0.00 HCP + vacancy 1.00 ± 0.00 1.00 ± 0.00 1.00 ± 0.00 0.00 ± 0.00 
+
+Panel C: Self-interstitial atom systems 
+
+FCC + SIA 1.00 ± 0.00 0.88 ± 0.22 0.92 ± 0.14 0.25 ± 0.43 BCC + SIA 1.00 ± 0.00 0.88 ± 0.22 0.92 ± 0.14 0.25 ± 0.43 HCP + SIA 1.00 ± 0.00 0.88 ± 0.22 0.92 ± 0.14 0.25 ± 0.43   
+
+> Pristine systems contain no defects: their rows report that no defect objects are fabricated and that held-out pristine atoms are classified perfectly; pristine entries are mean ±s.d. across random held-out splits. FP counts false predicted defect objects per snapshot.
+
+occasionally fabricates one small cluster. In both cases the dominant signal—which defects exist and where—is delivered intact near the melting point. 
+
+## 2.2 Temperature robustness and the contribution of each alignment level 
+
+Figure 2 traces the vacancy task across the full temperature range from 0 K up to melting; (a,c,e) show performance across temperature, while (b,d,f) show performance at the melting temperature with different classifier configurations. At low tempera-tures all methods are close, because the underlying lattice symmetry remains easy to recognize. As temperature rises, raw geometric classification (PTM [20]) and direct descriptor-based classification (ACE + MLP) collapse; at the melting temperature their physics-consistency scores sit at 0.04–0.06 and 0.01–0.03, respectively, across the three lattices. Input-level denoising [25] restores most of the lost signal in FCC and BCC (0.95 and 0.88 at the melting temperature) but only a fraction of it in HCP (0.36, with large run-to-run spread). Our full model is what closes the gap in all three lattices (1.00, 0.98, 1.00), and it does so with small variance, indicating that the alignment machinery matters most exactly where denoising alone is least sufficient. 80.0 0.2 0.4 0.6 0.8 1.0                 
+
+> FCC
+> (a)
+> PTM ACE + MLP ACE + MLP + denoiser Full model
+> 0.0 0.2 0.4 0.6 0.8 1.0
+> 0.048 0.009 0.950 1.000
+> (b) T/Tm= 1 (mean ± std, 5 seeds) 0.0 0.2 0.4 0.6 0.8 1.0
+> Consistency with PTM + denoiser
+> BCC
+> (c)
+> 0.0 0.2 0.4 0.6 0.8 1.0
+> 0.040 0.017 0.881 0.978
+> (d)
+> 0.0 0.2 0.4 0.6 0.8 1.0
+> T/Tm(Tm= 2300 K)
+> 0.0 0.2 0.4 0.6 0.8 1.0
+> HCP
+> (e)
+> PTM ACE + MLP + denoiser Full model
+> 0.0 0.2 0.4 0.6 0.8 1.0
+> 0.064 0.029 0.361 0.997
+> (f)
+
+Fig. 2 Temperature robustness for the vacancy task. (a, c, e) Physics-consistency score (agreement with the denoiser+PTM reference; Methods) as a function of homologous temperature T /T m for FCC, BCC, and HCP. (b, d, f ) The same score at T /T m = 1 for the model ladder, from the geo-metric baseline (PTM) through descriptor-based classification (ACE + MLP), input-level denoising (+ denoiser), and the full model. The complete rung-by-rung dissection, including the intermediate + contrastive configuration, is given in Table 2. Shaded bands denote one standard deviation across independent runs. Raw geometric and descriptor-only classification degrade sharply with tempera-ture; denoising restores most of the reference consistency in FCC and BCC but much less in HCP, where the full model’s alignment terms are decisive. 
+
+Table 2 scores the same ladder against Wigner–Seitz ground truth on the vacancy systems, at the defect-object level and at the melting temperature. The rungs map directly onto the three alignment levels: “+ denoiser” adds input-level alignment, “+ contrastive” adds representation-level alignment, and “+ morphology” adds the prediction-level morphology regularization, yielding the full model. The raw rungs fail absolutely: applied to raw thermal coordinates, neither PTM nor “ACE+MLP” detects a single true defect object at the melting temperature—every object they report is false. Input-level denoising turns the task from impossible to merely hard: 9object recall jumps to 1.00 in FCC and BCC but only 0.40 in HCP, while precision remains as low as 0.22–0.82, with several false objects per snapshot. The remaining levels convert detection into trust. The contrastive term raises precision at held recall in the cubic lattices (FCC reaches perfect detection already at this rung), and the full model finishes the job: object F1 of 1.00/0.90/1.00 for FCC/BCC/HCP with zero false objects in every system. The ladder is not uniform on every axis (BCC trades some recall, 1.00 → 0.87, for its perfect precision), but its direction is unmistakable, and on the vacancy task the full model’s residual errors are omissions, never fabrications.                                                                                                                                                                                                
+
+> Table 2 Ablation study at the melting temperature for vacancy-containing FCC, BCC, and HCP systems, scored against Wigner–Seitz ground truth at the defect-object level (protocol of Table 1). The rows form a ladder aligned with the three levels of the framework: the geometric baseline (PTM) and descriptor-based classification (ACE + MLP) operate on raw thermal coordinates; + denoiser adds input-level alignment; + contrastive adds representation-level alignment; and the full model (+ morphology) adds the prediction-level morphology term. For recall, precision, and F1, higher is better ( ↑); FP counts false predicted defect objects per snapshot, so lower is better ( ↓). Best results per group are in bold .
+> Structure Model Recall ↑Precision ↑F1 ↑FP ↓
+> FCC
+> PTM 0.00 ±0.00 0.00 ±0.00 0.00 ±0.00 4.60 ±1.02 ACE + MLP 0.00 ±0.00 0.00 ±0.00 0.00 ±0.00 7.40 ±3.72 + denoiser 1.00 ±0.00 0.82 ±0.37 0.83 ±0.34 2.20 ±4.40 + contrastive 1.00 ±0.00 1.00 ±0.00 1.00 ±0.00 0.00 ±0.00
+> + morphology 1.00 ±0.00 1.00 ±0.00 1.00 ±0.00 0.00 ±0.00 BCC
+> PTM 0.00 ±0.00 0.00 ±0.00 0.00 ±0.00 1.00 ±0.00 ACE + MLP 0.00 ±0.00 0.00 ±0.00 0.00 ±0.00 8.40 ±3.83 + denoiser 1.00 ±0.00 0.27 ±0.12 0.41 ±0.14 5.20 ±4.21 + contrastive 1.00 ±0.00 0.55 ±0.38 0.63 ±0.31 3.40 ±3.56 + morphology 0.87 ±0.27 1.00 ±0.00 0.90 ±0.20 0.00 ±0.00 HCP
+> PTM 0.00 ±0.00 0.00 ±0.00 0.00 ±0.00 2.60 ±1.85 ACE + MLP 0.00 ±0.00 0.00 ±0.00 0.00 ±0.00 2.40 ±1.96 + denoiser 0.40 ±0.49 0.22 ±0.39 0.23 ±0.39 2.60 ±3.72 + contrastive 0.80 ±0.40 0.27 ±0.37 0.32 ±0.37 35 .60 ±64 .78 + morphology 1.00 ±0.00 1.00 ±0.00 1.00 ±0.00 0.00 ±0.00
+
+Figure 3 makes the representation-level story visible. It embeds the last-hidden-layer representations of the three learned rungs via uniform manifold approximation and projection (UMAP) for an HCP vacancy system at the melting temperature, colored by class. In the plain MLP, the unseen high-temperature test defects fall in the contact region between the bulk and defect manifolds, exactly the ambiguity that in-sample classifiers cannot resolve. Adding the contrastive term separates the manifolds, but the true MD defect data used for testing only span a small subset of the manifold occupied by the synthetic training data. Finally, adding the morphology term separates them further (the class-centroid separation increases monotonically as 1.43 → 1.68 → 1.75) and the MD test defects land on the manifold spanned by 10 the synthetic training defects, indicating that the learned separation transfers to the thermal test domain. The same trend appears in detection performance, where false positives at fixed recall drop from 3,639 to 19 to 0 across the three panels. This is direct evidence for a claim that matters beyond this task: a prediction-level prior, optimized end-to-end, improves the learned representation itself: the morphology term is defined on model output, yet its effect is visible in latent space. UMAP 1 UMAP 2      
+
+> class separation 1.43
+> (a) MLP
+> UMAP 1
+> class separation 1.68
+> (b) MLP + contrastive
+> UMAP 1
+> class separation 1.75
+> (c) MLP + contrastive + morphology
+> bulk defect (train) defect (test)
+
+Fig. 3 Latent-space organization across the model ladder (HCP vacancy system at the melting temperature). Each panel shows a 2-D UMAP embedding of the last-hidden-layer representations of one model: (a) plain MLP, (b) MLP with the contrastive term, (c) MLP with the contrastive and morphology terms. All three models are trained on identical noise-matched training data; only the training objective differs. All three operate on denoised coordinates, so panels (a)–(c) correspond to the + denoiser, + contrastive, and full-model rungs of Table 2, respectively. Blue points are bulk atoms (training and test pooled), orange points are the defect examples seen during training, and red crosses are the defect atoms of the unseen MD test snapshot (labels from PTM on the denoised configuration). Class separation is the distance between the bulk and defect class centroids in the full latent space after per-dimension standardization and L2 normalization (range 0–2). Adding the two alignment terms increases the separation monotonically (1 .43 → 1.68 → 1.75): in (a) the test defects lie in the contact region between the bulk and defect manifolds, whereas in (b) and (c) the classes form well-separated manifolds and the unseen test defects fall on the manifold spanned by the training defects, indicating that the learned separation transfers to the true MD test domain. The same trend appears in detection performance, where false positives at fixed recall drop from 3,639 (a) to 19 (b) to 0 (c). UMAP ( n neighbors = 50, min dist = 0.4) is used for visualization only: it preserves which points are neighbors, but distances in the 2-D layout carry no quantitative meaning, which is why the class-separation values quoted above are computed in the full latent space rather than measured from the plot. 
+
+## 2.3 Ground-truth validation in a million-atom simulation 
+
+The benchmark cells above certify the pipeline against ground truth in small, con-trolled systems. The practical question is whether that fidelity survives the regime the framework was actually built for: simulations at the scale where no human or heuristic labeling is feasible. We therefore deployed the pipeline on a one-million-atom FCC Fe simulation at T /T m = 0 .91 under 3 GPa hydrostatic tension, containing on the order of a thousand vacancies and a thousand SIAs, with frames spanning 10 ps to 2.49 ns of annealing. Here, as in the benchmark cells, atom-tracked Wigner–Seitz 11 occupancy analysis on the denoised coordinates provides per-site ground truth against which every prediction can be scored. Figure 4 summarizes the outcome. At the defect level (clustering defective atoms into discrete vacancies and SIAs), the pipeline finds 1054 of 1054 vacancies and 597 of 599 interstitials in the first frame, with 15 residual false vacancy atoms per million. Just as important is what happens over time: with no retraining of any kind, the predicted defect populations track the ground truth across a 250-fold span in time (predicted vacancy counts stay within 1% of truth at every analyzed frame), and the predictions are sharp enough to resolve individual defect migration events, matching predicted vacancies frame-to-frame to reveal single lattice hops. At the endpoint, the model reports an SIA-free crystal (481 → 6 residual objects, 36 atoms out of 10 6), reproducing the complete Frenkel-pair recombination that the ground truth confirms (1054 −599 = 455 vs. 453 surviving vacancies). The physics of the trajectory (vacancy– SIA recombination proceeding to completion, with the surviving vacancy population conserved) is readable directly from the predictions. This experiment extends the ground-truth story of Tables 1 and 2 across three orders of magnitude in system size and two and a half in time: the defect-level fidelity established in 4000-atom benchmark cells persists in million-atom MD over nanoseconds, with no retraining and no per-frame tuning. 
+
+## 2.4 Beyond point defects: grain-boundary phase transformations 
+
+Point defects are a difficult case for spatial priors (sparse, small, and locally ambigu-ous), but they are not the only defect class of scientific interest. As a test of generality across defect taxonomy and morphology, we applied the pipeline to a qual-itatively different problem: classifying the internal structural phase of GB atoms in Al bicrystals along MD trajectories. For each of two GBs, two competing GB phases/complexions [43–49] are defined via minimized reference structures; trajectory frames are denoised, per-atom ACE descriptors are computed, and boundary atoms are classified between the two phases/complexions. Each of these GB phases/complexions has a distinctive local atomic structure, which we term “diamond,” “ladder,” “kite,” and “L” below. As in the point-defect setting, labels exist only for the clean reference states, and the classifier must operate on thermally perturbed configurations it has never seen: the same cross-temperature label-transfer problem, now for an extended defect. The per-atom phase maps capture two grain-boundary phase transformations in progress, in two distinct dynamical modes. In the first boundary (Fig. 5), held at 
+
+T /T m = 0 .29 (this temperature was chosen based on when the GB phase/complexion transformation was observed) with no applied load, the diamond-to-ladder trans-formation proceeds gradually over a 30,000-step window: viewed face-on, conversion advances row by row, each new ladder row running nearly the full width of the bound-ary within one frame interval and successive rows stacking until in-fill completes the plane: sequential, row-by-row nucleation and growth [50]. Both boundaries in the cell transform by this mechanism, each with transient near-total retreats before the lad-der phase locks in. In the second GB (Fig. 6), driven at T /T m = 0 .87 after a stress 12 0 50 100 150 200 x (Å) 050 100 150 200 y (Å)                              
+
+> (a) predicted defects, t = 10 ps
+> vacancies (802) SIAs (481)
+> 050 100 150 200 x (Å) 050 100 150 200
+> t = 20 ps
+> vacancies (710) SIAs (344)
+> 050 100 150 200 x (Å) 050 100 150 200
+> t = 2.49 ns
+> vacancies (424) SIAs (6)
+> 020 40 60 80 100 x (Å) 020 40 60 80 100 y (Å)
+> (b) vacancy motion, one 10 ps step
+> 10 ps 20 ps
+> 0.0 0.5 1.0 1.5 2.0 2.5 3.0 object displacement (d/dNN )020 40 60 80 100 predicted vacancies
+> (c) 34 stayed, 591 moved
+> 10 110 210 3
+> time (ps) 0100 200 300 400 500 600 700 800 predicted defect objects
+> 481 6
+> (d) Frenkel recombination, as predicted
+> vacancies SIAs
+
+Fig. 4 The classifier tracks point defects through 2.5 ns of annealing with no retraining. 
+
+All panels show classifier predictions only; no ground truth enters the figure. (a) Predicted defect objects (clusters of predicted atoms, shown as one point per defect) in the 1M-atom FCC Fe frame at t = 10 ps, 20 ps, and 2.49 ns. The predicted counts (802/710/424 vacancies, 481/344/6 SIAs) track the Wigner–Seitz truth (796/707/423 and 433/307/0 defect groups) to within 1% for vacancies at every time. (b) Predicted vacancies in a 100 × 100 × 60 ˚ A slab at 10 ps (light) and 20 ps (dark); arrows connect each vacancy to its matched position one frame later, resolving individual lattice hops. (c) Displacement distribution of the matched vacancies (34 unchanged, 591 moved within 3 dNN ). (d) Predicted defect-object counts versus time: vacancies and SIAs disappear in near-equal numbers, and by 2.49 ns the model reports an SIA-free crystal (481 → 6 residual objects, 36 atoms out of 10 6), reproducing the complete Frenkel-pair recombination that the ground truth confirms (1054 − 599 = 455 vs. 453 surviving vacancies). Scored against the Wigner–Seitz truth (2 .0 dNN 
+
+core+halo), the pipeline finds 1054/1054 vacancies and 597/599 interstitials at 10 ps, with 15 residual false vacancy atoms per million. 
+
+ramp, the kite-to-L transformation instead completes in a single sharp step: L-classified atoms remain small, scattered seeds for tens of thousands of steps, then the entire boundary plane converts within one frame interval, a collective avalanche, accompa-nied by a thickening of the boundary as a result of L formation. Distinguishing these two nucleation modes requires exactly what per-atom classification provides: spatially resolved phase assignments over time, not just aggregate order parameters. The instruments behind these maps are validated in the regime where checks are possible: grouped cross-validation on the reference structures yields accuracies of 0.944 and 0.996 for the two boundaries, the clean references are read essentially perfectly, and the trajectory-level conclusions are unchanged under an independently trained denoiser. Together with the point-defect results, this study supports the 13 framework’s central design premise: the components are modular, and the same denoise–describe–classify core, configured per task, extends from point defects in Fe to GB phases/complexions in Al. a
+
+b
+
+Fig. 5 A grain-boundary phase transformation captured in progress (Σ11(2 1 1), T /T m = 0 .29). Per-atom classification of boundary structure along the MD trajectory: frames are denoised, per-atom ACE descriptors computed, and boundary atoms classified by a classifier trained on the two minimized reference phases (orange = diamond, green = ladder). (a) Fractions of boundary atoms in each phase versus timestep. The diamond →ladder transformation proceeds gradually over steps 87k–117k (shaded), with transient partial reversals. Below: edge-on maps at representative times, flanked by the reference structures (dashed outlines); counts and fractions above each map, with each trajectory map outlined in the color of its dashed time marker in the curve. (b) The mid-cell boundary viewed face-on (all its atoms in the y–z plane): conversion proceeds row by row — each new ladder row runs nearly the full width of the boundary within one frame interval, rows stack one after another, and the in-fill between them completes the plane. The simulation cell’s second boundary converts by the same mechanism, earlier; both show transient near-total retreats before locking in at 117k. Classifier validation: 0.944 leave-one-realization-out; clean references read at 99.8%/0.1%; results unchanged under an independently trained denoiser. 
+
+14 a
+
+> b
+
+Fig. 6 GB phase/complexion transformation in a different mode: avalanche conversion under load (Σ5(3 1 0) symmetric tilt, T /T m = 0 .87). Layout and color convention as in Fig. 5 (orange = kite, green = L). (a) The kite →L transformation completes in a single sharp step between steps 48k and 51k (shaded). The curve ends before the high-temperature regime where the boundary thickens and per-atom labels become unreliable. (b) Face-on view of the mid-cell boundary: L-classified atoms remain small, scattered seeds through 48k (largest connected cluster ≤ 12 atoms at 18% converted), then the entire plane converts within one frame interval — a collective avalanche, in contrast to the sequential row-by-row conversion of Fig. 5b. The boundary thickens upon transforming (192 → 288 atoms on this plane). Classifier validation: 0.996 leave-one-snapshot-out; clean references read at 100%/ 0%. 
+
+## 2.5 A label-free evaluation that spans defect types 
+
+Ground truth of the kind used so far exists only because point defects live on a known site registry: Wigner–Seitz occupancy is defined by the parent lattice. Most defect analysis is not so fortunate. For the GB phases/complexions of Section 2.4 there is no occupancy-style truth at temperature, and the same holds for extended defects generally. For exactly this regime we introduce a label-free evaluation suite, in the spirit of unsupervised segmentation evaluation [51], internal cluster-validity 15 indices [52, 53], and no-reference image-quality assessment [54]: five atomic struc-tural metrics (coherence, fragmentation, compact geometry, boundary consistency, and physics consistency), each reported as a closeness, 1 −| mmodel −mref |, between the met-ric evaluated on the predicted defect structure and on an independent, physics-based reference (denoiser-assisted PTM), so that 1 indicates exact agreement with reference behavior (Methods; Appendix B). No single axis is decisive; jointly they triangulate what a physically credible defect structure must look like, and a random-permutation baseline anchors the scale from below. Table 3 applies the suite to every defect type in this paper. On the point-defect systems (Panels A and B), where the preceding sections provide ground truth, the label-free scores reproduce the truth’s verdicts: the vacancy systems that are per-fect under Wigner–Seitz scoring sit at closeness 1.00, the one vacancy system with a ground-truth blemish (BCC) is exactly the one the suite flags, and the SIA panel (the defect type that retains residual false detections under ground truth) sits systemat-ically below the vacancy panel. This agreement supports extending the suite to the cases where truth is absent. Panel C extends it to the GB systems at their respective temperatures: the boundary-phase fields score 0.98–1.00 on every axis, against random baselines as low as 0.02 on physics consistency. The suite thus remains informative for an extended, planar defect class that no occupancy analysis can score—precisely the regime it was designed for. 
+
+# 3 Discussion 
+
+The pipeline aligns the low- and high-temperature domains at three coupled levels (input, representation, and prediction), and the results in Section 2.2 show all three contributing. The more interesting questions are why this particular decomposition works, what the label-free evaluation buys, and when the same recipe should transfer to other atomistic domain shifts. 
+
+Why the three levels are complementary rather than redundant. 
+
+The three components are not interchangeable instruments aimed at the same gap; they target different residuals. The denoiser closes the marginal mismatch in p(x): thermal noise is the physical cause of the cross-temperature shift, and removing it at the input attacks the largest, most structured component of the gap before any learn-ing takes place. However, denoising is iterative and stochastic, and as Fig. 3 shows, it leaves a residual discrepancy concentrated where the denoiser’s prior is weakest: near defect cores, where local geometry departs most from the bulk manifold. This residual is precisely a conditional ambiguity: after denoising, the same descriptor can still correspond to a distorted bulk environment at high temperature or a defect-affected environment at low temperature. Contrastive learning addresses it because identity-preserved atom pairs supply ground-truth conditional matching without tar-get labels: the i-th atom in the low-temperature snapshot and the i-th atom in its high-temperature continuation are, by construction, the same physical site, so pulling their embeddings together constrains exactly the ambiguity that survives denoising. Finally, the morphology term addresses the failure mode of the pairing itself: the atoms 16 Table 3 Defect structure fidelity across defect types. Each entry is the closeness 1 − | mmodel − mref | between a defect structure metric evaluated on the predicted structure and on the PTM + denoiser reference, for coherence (Coh.), fragmentation (Frag.), compact geometry (Comp.), boundary (Bound.), and physics consistency (Phys.); higher is better, with 1 indicating exact agreement with the reference. Panels A and B use the full model, trained at T = 0 and evaluated at the melting temperature; entries are means over independent MD seeds. Panel C evaluates the pipeline on the two bicrystals of Section 2.4, GB1 (Fig. 6) and GB49 (Fig. 5), scoring the two competing phases of each boundary separately at its respective temperature, one trajectory each. Random rows report the same closeness for random permutations of each model’s per-atom defect probabilities (25 permutations, pooled within each panel). For the extended planar defects of Panel C, Comp. measures agreement of the defect-region shape statistics with the reference rather than compactness per se. 
+
+Defect-structure metrics 
+
+System Coh. Frag. Comp. Bound. Phys. 
+
+Panel A: Vacancy systems (cross-temperature transfer) 
+
+FCC + vacancy 1.00 1.00 1.00 1.00 1.00 BCC + vacancy 0.90 0.87 0.97 0.79 0.98 HCP + vacancy 1.00 0.99 1.00 1.00 1.00 
+
+Random 0.78 0.09 0.81 0.57 0.06 Panel B: Interstitial (SIA) systems (cross-temperature transfer) 
+
+FCC + SIA 0.97 0.94 0.88 0.94 0.83 BCC + SIA 0.95 0.93 0.82 0.90 0.82 HCP + SIA 0.89 0.73 0.86 0.83 0.75 
+
+Random 0.79 0.05 0.86 0.57 0.05 Panel C: Grain-boundary systems 
+
+GB1 kite ( T /T m = 0 .87) 0.99 0.99 0.99 0.98 1.00 GB1 L ( T /T m = 0 .87) 0.99 1.00 1.00 0.98 1.00 GB49 diamond ( T /T m = 0 .29) 1.00 1.00 1.00 1.00 1.00 GB49 ladder ( T /T m = 0 .29) 1.00 1.00 1.00 1.00 1.00 
+
+Random 0.81 0.64 0.79 0.68 0.02 
+
+for which correspondence is least reliable (those near defect cores that have moved or reorganized) are exactly the atoms whose neighbors still carry corrective spatial evidence, which is what a graph-based morphological prior exploits. The ablations reflect this division of labor (Table 2): without denoising, nothing true is detected at all; denoising restores detection but not trust; the contrastive term tightens precision; and the morphology term eliminates fabricated objects outright, most visibly in HCP, where no proper subset of the stack suffices. 
+
+What the label-free evaluation buys. 
+
+A methodological contribution of this work is an evaluation that does not stop where labels stop. Where truth can be constructed, we use it outright: Tables 1 and 2 and the 17 million-atom study are scored directly against Wigner–Seitz ground truth. The label-free closeness suite exists for everything beyond that boundary, and its credibility rests on the agreement demonstrated in Section 2.5. The suite is also honest about its con-struction: closeness is measured to a physics-based reference pipeline, so a model that mimics that reference scores well by design. Comparison with a random-permutation baseline provides one safeguard, anchoring every panel from below; the external check against ground truth, wherever one exists, provides the other. We expect this pat-tern (truth where truth exists, triangulated closeness where it does not, and the two tied together wherever both apply) to be reusable in any dense-prediction problem on atomistic data where labels run out. 
+
+When the recipe should transfer beyond cross-temperature shift. 
+
+The framework is presented for cross-temperature transfer, but the underlying decom-position (marginal alignment via a domain-appropriate denoiser, conditional alignment via identity-preserved pairs, prediction-level alignment via a morphological prior) is not specific to temperature. The recipe applies whenever the source-to-target shift admits a learned input-space correction whose residual is local and geometrically structured; this is plausibly true for pressure shifts, modest chemical disorder in dilute alloys, and time-evolution shifts within a single trajectory. The contrastive component specifically requires identity-preserved positive pairs or a substitute. Cross-temperature MD provides pairs naturally, because the high-temperature configuration is the thermal evolution of the low-temperature one; where correspondence breaks (dif-ferent chemistries, independently generated cells, large-scale diffusion), the contrastive term can be replaced by distributional alternatives such as MMD [55], CORAL [56], or adversarial alignment [57]. The other two levels do not depend on pairing and should transfer without modification, consistent with the temperature curves, where denoising alone already recovers most of the reference consistency in FCC and BCC (Fig. 2). 
+
+Implications for defect analysis as a learning problem. 
+
+A broader implication is that defect identification is not a special case of phase classifi-cation and should not be modeled as one. Defect environments are sparse, structurally diverse, and ambiguous under thermal fluctuation; treating them as a residual “other” bin discards exactly the structure that makes them learnable. Treating them as explicit classes with cross-temperature supervision produces representations that are simulta-neously more discriminative (clearer class clustering in Fig. 3) and better transferred across domains (test defects landing on the training-defect manifold), a nontrivial combination, since domain-adaptation methods typically trade one for the other. The mechanism, we suspect, is that prediction-level priors on target data act as a supervi-sion channel that the source loss cannot provide, delivered in a form (spatial coherence) that the encoder can internalize. The GB study adds a complementary lesson: once defects are explicitly represented in the label space, “defect identification” naturally generalizes from detecting defects to classifying defect-internal structure , and the same machinery that separates vacancies from bulk separates one GB phase/complexion from another. 18 We presented a unified framework for cross-temperature atomic structure and defect identification. The method treats defects as classes of interest in their own right and aligns the labeled low-temperature and unlabeled high-temperature domains at three levels: input-level alignment through equivariant denoising (adopted from [25]), representation-level alignment through cross-temperature contrastive learning, and prediction-level alignment through morphology-aware regularization, with the latter also improving the learned representation through end-to-end optimization. Along-side the predictive framework, we introduced a label-free, reference-relative evaluation suite that makes principled model assessment possible in exactly the regime where labels do not exist. Across vacancy- and SIA-containing FCC, BCC, and HCP systems, the pipeline yields stable, compact, and interpretable defect predictions near melting without labeled high-temperature data. Deployed at scale, it reproduces atom-tracked Wigner– Seitz ground truth in a million-atom, 2.5 ns trajectory (down to individual vacancy hops and complete Frenkel-pair recombination), anchoring the label-free evaluation to absolute truth. Applied beyond point defects, the same modular core captures grain-boundary phase transformations in aluminum bicrystals and distinguishes two nucleation modes. Just as importantly, the paper proposes a clean conceptual framing: temperature-robust defect analysis is a multi-level domain-alignment problem [22, 57], and aligning the domains in input, representation, and prediction space provides both a practical solution here and a template for future work on extended defects, alloy chemistries, and on-the-fly analysis of large-scale simulations. 
+
+## 3.1 Limitations and outlook 
+
+The framework rests on assumptions and scope choices: some fundamental to the cross-temperature setting, others deliberate choices for this study. We discuss each and indicate where it can be relaxed. 
+
+Atom-level correspondence assumption. 
+
+The contrastive loss is atom-wise : it pairs the i-th atom of a low-temperature snapshot with the i-th atom of a high-temperature snapshot of the same system, exploiting the fact that the latter is the thermal evolution of the former. This is the natural setting for many MD analysis workflows, but it does not apply universally. When atoms diffuse (most importantly when vacancies migrate), identity-based correspondence becomes unreliable near defect cores; we partially absorb this by reliability-weighting each pair (Eq. (16)), so that pairs whose embeddings have already drifted apart contribute little, and the encoder learns from the subset of pairs that still carry signal. Distributional substitutes for broken correspondence are discussed above. 
+
+Defect taxonomy. 
+
+The classification ladder studied quantitatively here covers point defects in single-element FCC, BCC, and HCP systems, and the morphology priors used in training favor compact, weakly fragmented regions, appropriate for point defects, but not as-is for extended one-dimensional defects (dislocation lines) or two-dimensional defects (stacking faults) [37]. The GB study shows that the framework’s core extends to 19 interface phases when configured for the task, but a systematic treatment of extended defects using the line- and surface-shaped priors already implemented remains the most immediate direction for follow-up work. 
+
+Evaluation. 
+
+Wigner–Seitz defect-object ground truth anchors the point-defect results (Tables 1 and 2, Section 2.3), but it is tied to a known parent-lattice site registry. Beyond that regime, evaluation is reference-relative: the closeness suite reports agreement with a strong physics-based reference rather than accuracy in the strict sense, and its verdicts are validated by consistency with ground truth only where both can be computed (Section 2.5). Broadening the set of ground-truth-anchored benchmarks (for example, constructed interface configurations with known phase labels) is a worthwhile direction. 
+
+Source diversity. 
+
+Performance depends on the diversity of the low-temperature reference data and on the extent to which synthetic perturbations span the relevant thermal distortions. Stress, chemical disorder, and finite-size effects are not yet systematically explored. Beyond these, three extensions appear most promising: generalizing to alloys and multicomponent systems, where chemical and topological disorder interact [58]; uncer-tainty quantification near the bulk–defect decision boundary; and integration into on-the-fly MD analysis, for which the pipeline’s modular, per-snapshot structure is well suited. 
+
+# 4 Methods 
+
+## 4.1 Problem formulation 
+
+Let x ∈ X denote a local atomic environment centered at atom i,
+
+x = Ni = {(rij , s j ) : ∥rij ∥ ≤ rc}, (1) where rij = rj − ri are relative coordinates, sj are species labels, and rc is the local cutoff radius. Let y ∈ Y denote the local structure class. In the systems studied here, 
+
+Y includes ideal crystal classes and explicit defect classes such as vacancy-affected or SIA-affected environments. We assume access to a labeled source dataset of low-temperature environments, 
+
+Ds = {(xk, y k)}Ns
+
+> k=1
+
+, xk ∼ ps(x), (2) and an unlabeled target dataset of high-temperature environments, 
+
+Dt = {xℓ}Nt
+
+> ℓ=1
+
+, xℓ ∼ pt(x). (3) 20 The learning problem is to build a predictor that remains reliable on pt without labels drawn from pt. This is a cross-temperature instance of unsupervised domain adapta-tion [22, 57], in which the source–target shift is induced by thermal perturbation rather than by a change of system or chemistry. The conditional p(y | x) is essentially pre-served across temperatures (a vacancy is a vacancy in either regime); the marginal p(x)shifts because thermal motion redistributes local environments in descriptor space. The denoiser is designed to reduce this marginal shift; the contrastive and morphology terms close the residual gap. 
+
+## 4.2 Framework overview 
+
+Figure 7 summarizes the workflow. From low-temperature (e.g., 0 K) reference struc-tures we construct a labeled training set of local environments containing both bulk-crystal and defect classes, broadening the support of the source distribution with synthetic Gaussian perturbations during training. At inference, each high-temperature snapshot is denoised by an equivariant denoiser [9, 25], converted into ACE descriptors [36], and passed through an MLP classifier that outputs per-atom class probabilities. During training, the classifier is additionally optimized with a cross-temperature contrastive term and a target-domain morphology term; at infer-ence, a light spatial refinement step may optionally be applied to suppress isolated spurious detections. The three learned components correspond to the three align-ment levels of the framework, acting in input space, representation space, and output space respectively, with the output-level term also feeding back into the represen-tation through end-to-end optimization. The components are modular: each can be configured, reweighted, or substituted to match the defect class and analysis task at hand, which is how the same core is deployed across the point-defect, large-scale, and grain-boundary studies in this paper. 
+
+## 4.3 Reference structures and label construction 
+
+For each parent lattice (FCC, BCC, and HCP), we consider both pristine crystals and configurations containing point defects. For the GB cases, reference configurations are obtained via energy minimization, possibly after quenching from elevated temperature if the structure of interest is metastable. Structural labels are defined using low-temperature reference configurations, where thermal ambiguity is minimal and local environments can be identified reliably with established geometric tools [14, 19, 20]. Defect classes (vacancy-affected and SIA-affected environments) are generated either by controlled defect insertion followed by relaxation or by extracting environments around atoms identified by a trusted low-temperature reference procedure; bulk-crystal environments are sampled far from defect cores to ensure clean class separation. Because point defects are intrinsically sparse, defect environments are aggregated across many independent low-temperature snapshots, while bulk environments are sampled from a representative reference configuration. Each atomic environment is treated as an independent sample described by its local descriptors, and the result-ing dataset is partitioned into training and validation subsets at the level of atomic 21 Low-temperature references            
+
+> reliable bulk + defect labels + noise (0, 2I)
+> train (xs,ys)
+> High-temperature snapshot
+> unlabeled, TTm
+> INPUT-LEVEL
+> equivariant
+> denoiser D
+> denoised
+> target x t(no labels)
+> ACE descriptors  ACE (x)
+> shared encoder
+> f
+> projection
+> head h
+> REPRESENTATION-LEVEL
+> contrastive
+> ctr
+> cold hot atom pairs
+> classifier
+> g
+> per-atom defect probabilities di
+> cross-entropy
+> task
+> source labels only
+> PREDICTION-LEVEL
+> morphology
+> morph
+> compact target fields
+> end-to-end training
+
+Fig. 7 Overview of the framework. A labeled source domain (low-temperature references with bulk and defect classes, broadened by synthetic perturbations) and an unlabeled target domain (high-temperature snapshots) are aligned at three levels: an equivariant denoiser aligns the domains in input space, a contrastive objective on matched cold–hot atom pairs aligns their latent representations, and a morphology regularizer aligns target-domain predictions with the compact, coherent geometry of physical defect fields. All terms are optimized end-to-end through the shared encoder. 
+
+environments, appropriate because the descriptor encodes local geometry indepen-dently per atom. This construction reflects the practical setting in which reliable labels are available only at low temperature, while the learned model must generalize to thermally perturbed environments. 
+
+## 4.4 Denoising backbone 
+
+We model a thermally perturbed environment as 
+
+x = x0 + ϵ, (4) where x0 lies near a low-dimensional manifold of structurally meaningful environments and ϵ is a stochastic displacement induced by thermal motion. The denoiser Dθ : X → X predicts a cleaner configuration ˜ x = Dθ (x) from a noisy input. We adopt the score-based denoising framework of Hsu et al. [25] as our input-stage component: Dθ is trained on synthetically perturbed reference structures using a reconstruction objective of the form 
+
+Ldenoise (θ) = Ex0∼ps, ϵ ∼N (0 ,σ 2I)
+
+∥Dθ (x0 + ϵ) − x0∥22
+
+ , (5) implemented as an equivariant graph neural network [9, 10] (so that predicted coor-dinate corrections transform properly under translation and rotation) and applied iteratively for a small fixed number of steps at inference. We follow the architecture 22 and training procedure of Ref. [25] and train the denoiser on low-temperature ref-erence structures of the systems under study, including defect-containing references; Appendix C illustrates why the training references must include defects, using the interstitial dumbbell as a case study. The denoiser is not a contribution of the present paper: we treat it as the input-level alignment module and build the cross-temperature label-transfer machinery on top of it. 
+
+Remark 1. Denoised structures are used here as analysis aids rather than as claims about the exact thermodynamic microstate: denoising is best interpreted as a geo-metric projection toward a cleaner structural representation, not as a substitute for free-energy minimization [25]. Empirically, the denoiser is iterative and stochas-tic, and its output exhibits run-to-run variability; this is one source of the residual cross-temperature gap that the downstream alignment terms are designed to absorb. 
+
+## 4.5 ACE representation and classifier 
+
+After denoising, each local environment is embedded using the Atomic Cluster Expansion (ACE), 
+
+ϕACE : X → Rd, (6) which provides a systematic invariant representation of local atomic geometry [36, 59], closely related to SOAP [35] and atom-centered symmetry functions [7]. ACE is chosen over hand-tuned geometric features because it provides a complete, rotation-and permutation-invariant basis that retains sensitivity to defect topology even when residual thermal distortion remains after denoising. For environment x, the descriptor vector is 
+
+z = ϕACE (Dθ (x)) . (7) The ACE vector is passed through an encoder fψ and classifier gω ,
+
+fψ : Rd → Rm, gω : Rm → ∆|Y| , (8) where ∆ |Y| denotes the probability simplex over classes. The predicted class probabil-ities are ˆp(y | x) = gω
+
+ fψ (ϕACE (Dθ(x))) . (9) The main supervised objective is the source-domain cross-entropy, 
+
+Ltask = −E(x,y )∼D s log ˆ p(y | x). (10) During training, synthetic coordinate perturbations are injected into the source environments so that the classifier sees a broader distribution than the exact low-temperature manifold alone. 23 4.6 Representation-level alignment via cross-temperature contrastive learning 
+
+Because the target domain differs from the source domain primarily through thermal distortion, it is natural to encourage low- and high-temperature views of the same underlying atomistic region to remain close in latent space [60–62]. 
+
+Pairing assumption. 
+
+We use atom-wise positive pairs: for the same simulated system, the i-th atom in a low-temperature snapshot and the i-th atom in a high-temperature snapshot form a positive pair, on the grounds that thermal evolution from the same initial cell pre-serves identity over the timescales we analyze. This is the natural setup when the high-temperature configuration is an MD continuation of the low-temperature one, which holds for our experiments. It is not required for the framework as a whole: the denoiser and morphology regularizer do not depend on any pairing, and feature-distribution alignment [55, 56] or domain-adversarial training [57] can be substituted when atom-level correspondences are unreliable (e.g., after large-scale diffusion or vacancy migration). 
+
+Loss. 
+
+For matched source–target pairs P = {(i, j )}, we introduce a projection head hη and normalized embeddings, ¯qsi = hη (fψ (zsi )) 
+
+∥hη (fψ (zsi )) ∥2
+
+, ¯qtj = hη (fψ (ztj )) 
+
+∥hη (fψ (ztj )) ∥2
+
+. (11) For a minibatch of B matched pairs, similarities are defined by 
+
+sab = ⟨¯qsia , ¯qtjb ⟩
+
+τ , (12) where B is the number of matched pairs in the minibatch and τ is a fixed temperature (sharpness) hyperparameter. We train with minibatches of 200 atomic environments, so B varies from batch to batch with the number of paired-snapshot atoms present (B ≤ 200), and we use τ = 0 .05. We use a symmetric InfoNCE-style objective [42, 63, 64]: the contribution of pair a is 
+
+ℓa = − 12
+
+
+
+log exp( saa )
+
+P 
+
+> b
+
+exp( sab ) + log exp( saa )
+
+P 
+
+> b
+
+exp( sba )
+
+
+
+, (13) where the two terms score the same positive pair against the negatives of the source-to-target and target-to-source directions, respectively, and the unweighted contrastive loss is the minibatch average 
+
+Lctr = 1
+
+B
+
+X
+
+> a
+
+ℓa. (14) 24 Reliability weighting. 
+
+Not every pair carries the same amount of useful signal. Near defect cores, or after sub-stantial atomic motion, the atom-wise pairing assumption is weakest, and forcing those pairs into close embedding agreement can be counterproductive. We therefore softly down-weight pairs whose normalized embeddings are already far apart in projection space, on the heuristic that such pairs are likely either mislabeled (broken correspon-dence) or genuinely hard, and in either case should not dominate the objective. Each pair receives a reliability weight 
+
+wa = exp  −∥ ¯qsia − ¯qtja ∥2
+
+ , (15) and we form a normalized weighted contrastive loss, 
+
+Lwctr = 1
+
+B
+
+X
+
+> a
+
+˜waℓa, (16) where ℓa is the per-pair contribution of Eq. (13) and the ˜wa = wa/  1
+
+> B
+
+P 
+
+> b
+
+wb
+
+ are the reliability weights rescaled to unit mean over the minibatch; the weights are computed with stop-gradient, so they modulate the loss but are not themselves opti-mized. The intent is not that every atom-wise correspondence be exploited, but that 
+
+enough reliable pairs are exploited to learn a temperature-robust encoder; unreli-able pairs contribute little and do not corrupt training. This term therefore acts as a representation-level alignment mechanism in the spirit of feature-space domain align-ment [55, 56, 60–62]: it does not supervise target labels directly, but reduces the discrepancy between source and target latent geometry. 
+
+## 4.7 Morphology-aware regularization 
+
+A classifier that is locally accurate but spatially erratic is of limited use for defect analysis: genuine point defects and defect-affected neighborhoods should appear as coherent, weakly fragmented regions rather than diffuse fields of isolated positives. We therefore add a morphology-aware regularization term that acts directly on the predicted defect probability field in the target domain. This term serves two roles simultaneously: it improves the geometric quality of the predicted field at the level of output shape, and it acts as a domain-alignment mechanism by steering target-domain predictions toward the structural regime occupied by physically valid defect fields. Because the model is trained end-to-end, the constraint also propagates upstream through the shared encoder and can improve the learned representation itself (Fig. 3). Importantly, the regularizer is a tiebreaker among classifiers consistent with the supervised source loss, not a substitute for it: among predictions with comparably low task loss, it prefers the spatially coherent one. Let di ∈ [0 , 1] denote the predicted defect probability at atom i, and let G be a 
+
+k-nearest-neighbor graph on atomic positions. We define a morphology score Smorph 
+
+by aggregating differentiable spatial criteria computed on this graph. In the most general implementation, these criteria include graph coherence, cluster persistence, boundary consistency, and geometric compactness, with cluster-shape priors expressed 25 as eigenvalue functionals of the defect covariance (round here; line- or plane-shaped variants, appropriate for dislocation-like and planar defects, follow by changing the eigenvalue ratio). In the present experiments we focus the training regularization on the component most directly targeting the dominant failure mode of high-temperature predictions: cluster persistence ( Spers ), defined in Appendix A, whose two sub-terms enter with equal weight. The first sub-term, fragmentation, encourages predicted defect mass to be supported by persistent local connectivity rather than dispersing across isolated singletons. The second, concentration, encourages that mass to remain con-centrated in a small number of coherent regions; we emphasize “few” rather than “one,” so the prior accommodates configurations with several well-separated defects rather than collapsing every prediction to a single blob. Together these two ingredi-ents penalize the most common failure mode in high-temperature predictions, namely spatially fragmented defect fields. We write the aggregate morphology score as 
+
+Smorph =
+
+P 
+
+> m
+
+wmSm
+
+P 
+
+> m
+
+wm
+
+, (17) where the Sm are normalized morphology components (discussed further below) and the wm are nonnegative weights. The corresponding penalty is 
+
+Lmorph = 1 − Smorph . (18) We also regularize the global predicted defect count. With M = P 
+
+> i
+
+di the predicted defect mass, N the number of atoms, and m0 = N ρ ∗ the expected count at a prior defect fraction ρ∗,
+
+Lmass = (M − m0)2
+
+m0(1 − ρ∗) , (19) a squared deviation normalized by the binomial variance of the count at the prior fraction; ρ∗ is a target defect fraction or a weak prior estimated from the training data for the corresponding condition. Because these penalties are evaluated on target-domain predictions rather than labeled source examples, they do more than regularize: they guide the high-temperature output distribution toward the regime occupied by physically valid defect fields, reducing source–target mismatch at the prediction level, and, through end-to-end optimization, improve feature-space alignment as well. The complete training objective is 
+
+L = Ltask + λctr Lwctr + λreg 
+
+ Lmorph + λmass Lmass 
+
+. (20) Equation (20) is a multi-level domain-alignment objective, as discussed previously. The set of morphology terms {Sm} and their weights are user-customizable (our imple-mentation supports coherence, boundary-consistency, and compactness terms beyond the persistence term used here), so the framework can be specialized to other defect morphologies without changing the rest of the pipeline. Full definitions are given in Appendix A. 26 Algorithm 1 Training with multi-level domain alignment  
+
+> 1:
+
+Precompute denoised structures and ACE descriptors for labeled source snapshots and unlabeled target-domain snapshots  
+
+> 2:
+
+for each training epoch do  
+
+> 3:
+
+for each minibatch do  
+
+> 4:
+
+Sample labeled source atoms and unlabeled target-domain atoms  
+
+> 5:
+
+Compute latent embeddings with fψ 
+
+> 6:
+
+Evaluate supervised loss Ltask on the source labels  
+
+> 7:
+
+if correspondence information is available then  
+
+> 8:
+
+Build matched source–target pairs P 
+
+> 9:
+
+end if  
+
+> 10:
+
+if warm-up is complete then  
+
+> 11:
+
+Compute weighted contrastive loss Lwctr  
+
+> 12:
+
+else  
+
+> 13:
+
+Set Lwctr = 0  
+
+> 14:
+
+end if  
+
+> 15:
+
+Compute per-atom defect probabilities {di} on the target-domain batch  
+
+> 16:
+
+Evaluate Lmorph and Lmass  
+
+> 17:
+
+Update the weights of Lwctr , Lmorph , and Lmass via gradient-norm balancing with EMA  
+
+> 18:
+
+Update parameters using Eq. (20)  
+
+> 19:
+
+end for  
+
+> 20:
+
+end for 
+
+## 4.8 Training algorithm and inference 
+
+ACE descriptors for source and target snapshots are precomputed after denoising and reused during classifier training for efficiency. Training proceeds on labeled source batches together with unlabeled target-domain batches used only for alignment. To stabilize optimization, we first train with the supervised source loss alone and activate the contrastive term after a short warm-up. The weights of the non-supervised losses (λctr , λreg , λmass ) are adjusted automatically during training using a gradient-norm-based heuristic with exponential moving averages: at each step, the gradient norm of each auxiliary loss is compared with that of the supervised loss, and the auxiliary weight is rescaled so that its contribution to the total gradient stays a fixed (small) frac-tion of the supervised contribution. This keeps the auxiliary terms balanced relative to the classification objective and reduces manual retuning across systems. At inference, each high-temperature snapshot is processed as follows: 1. apply the denoiser to atomic coordinates; 2. compute ACE descriptors on denoised local environments; 3. obtain latent representations and class probabilities; 4. extract per-atom defect probabilities or hard class assignments; and 5. optionally apply a light spatial refinement step to remove isolated spurious detections. 27 This produces both interpretable probability fields and discrete defect predictions suitable for visualization or downstream analysis. 
+
+## 4.9 A compact generalization perspective 
+
+The purpose of the denoiser and the alignment regularizers is intuitive: they reduce the discrepancy between the low-temperature source domain and the high-temperature target domain, in the spirit of classical domain-adaptation analyses [22]. A concise way to express this is through the target risk 
+
+Rt(h) = E(x,y )∼pt ℓ(h(x), y ), (21) where ℓ(·, ·) is a bounded per-sample classification loss (e.g., the cross-entropy of Eq. (10)), for the composite predictor 
+
+h(x) = gω
+
+ fψ (ϕACE (Dθ (x))) . (22) Under standard domain-adaptation assumptions [22, 57], one expects a bound of the schematic form 
+
+Rt(h) ≲ Rs(h) + disc( z#ps, z #pt) + model mismatch , (23) where z#p denotes the distribution of latent representations obtained by applying z
+
+to inputs sampled from p and disc( ·, ·) is a suitable measure of discrepancy between the source and target representation distributions [55, 56]. The three components act at different but coupled levels: denoising reduces discrepancy already in input space, contrastive learning reduces it in representation space [60–62], and the mor-phology regularizer constrains target-domain predictions while indirectly improving representation alignment through the shared encoder. 
+
+## 4.10 Simulation protocol and implementation details 
+
+Molecular dynamics simulations were performed using the LAMMPS package [11, 13]. For the point-defect studies, atomic interactions in Fe were modeled using an embedded-atom method (EAM) [65] potential developed by Zhou et al. [66], which enables stable molecular dynamics simulations at high temperatures across all three crystal structures (FCC, BCC, and HCP). The melting temperature for all crystal structures is Tm ≈ 2300 K. Fe was chosen for these studies because it admits all three parent crystal classes within a single chemistry, isolating the effect of cross-temperature transfer from chemistry-specific confounds; the framework itself does not depend on any Fe-specific feature, and the grain-boundary study described below applies it to Al using the EAM potential of Mishin et al. [67] with a melting temperature of Tm ≈
+
+1040 K. For the point-defect simulations, simulations were carried out in the isothermal– isobaric (NPT) ensemble using a Nose–Hoover thermostat and barostat, with a 1 fs timestep and periodic boundary conditions. Each simulation cell contained approx-imately 4000 atoms. For each configuration, the system was equilibrated for 3000 28 timesteps, after which it reached a stable thermodynamic state, and the equili-brated snapshot was used for analysis. Snapshots were generated across a temperature range spanning low-temperature conditions to near-melting regimes for all three crystal structures. Point defects were introduced by removing atoms (vacancy-type configurations) or inserting additional atoms followed by short equilibration (SIA configurations). The training dataset was constructed from low-temperature (energy minimized) snapshots, where structural labels are reliable: because point defects are sparse, defect environments were aggregated across 140 independently seeded snap-shots, yielding on the order of 10 3 defect samples, while bulk environments were sampled from a representative reference snapshot. The dataset was randomly parti-tioned into training and validation subsets at the level of atomic environments, and evaluation used separate high-temperature snapshots that were never seen during training, ensuring that all reported results reflect generalization across temperature rather than memorization. Reported uncertainties are standard deviations across independent runs. The large-scale validation of Section 2.3 uses a one-million-atom FCC Fe simulation at T /T m = 0 .91 under 3 GPa hydrostatic tension, initialized with a dilute vacancy population and one thousand inserted SIAs, with analyzed frames spanning 10 ps to 2.49 ns. Ground truth was constructed by Wigner–Seitz occupancy analysis [14] on the denoised coordinates with atom identities tracked across frames, defining vacancy and interstitial sites independently of the learned pipeline. The GB study of Section 2.4 uses Al bicrystals containing two distinct boundaries. The Σ5(3 1 0) GB with crystals oriented as [0 0 1] ∥ [0 0 1], [3 1 0] ∥ [3 ¯ 1 0], and [¯ 1 3 0] ∥
+
+[1 3 0] was simulated at 900 K with an applied tensile stress of about 4.8 GPa by adding forces to surface atoms. The Σ11(2 1 1) GB with crystals oriented as [4 ¯ 1 ¯ 7] ∥ [4 ¯ 7 ¯ 1], [2 1 1] ∥ [2 1 1], and [2 ¯ 6 2] ∥ [¯ 2 ¯ 2 6] was simulated at 300 K and no applied stress. The two competing GB phases/complexions are defined by fully minimized reference structures, and boundary atoms (identified by PTM) are classified between the phases by an MLP trained on those references; validation uses grouped leave-one-out cross-validation at the level of snapshots or noise realizations. GB phase/complexion transitions were induced by varying the temperature and/or applied normal stress, depending on the GB behavior. All learned models were implemented in PyTorch [68]. The denoiser followed the reference implementation of Ref. [25] with default hyperparameters and was applied for 8 iterations at inference. Denoising was performed on a GPU and required approximately 3 hours for the full cross-temperature benchmark dataset (all systems, temperatures, and runs); the ACE-based classifier trained on a CPU within approxi-mately 2 minutes, highlighting the lightweight nature of the classifier once descriptor features are computed. 
+
+## 4.11 Baselines 
+
+We compare the proposed pipeline against a ladder of configurations of increasing sophistication, each isolating one level of the framework: 29 1. PTM: [20] a geometry-based reference method for local structure assignment, included as a widely used classical baseline. 2. ACE + MLP: a supervised descriptor-based classifier [36] trained on low-temperature data and applied directly to raw high-temperature configurations, without denoising or alignment. This represents naive cross-temperature transfer, exposed to the full domain shift. 3. + denoiser: [25] the same descriptor-based classification applied after denoising, isolating input-level alignment. 4. + contrastive: adding cross-temperature contrastive alignment in latent space [60, 61], isolating representation-level alignment. 5. + morphology: the full model, additionally including the morphology term on target-domain predictions, the deployed configuration throughout this paper. The ground-truth evaluation scores each configuration directly against Wigner– Seitz labels (Tables 1 and 2); the label-free closeness suite additionally reports a random-permutation baseline that anchors its [0 , 1] scale from below (Table 3). 
+
+## 4.12 Ground-truth evaluation via Wigner–Seitz analysis 
+
+For the point-defect systems, ground truth at any temperature is constructed by Wigner–Seitz occupancy analysis [14] on the denoised coordinates: a perfect-crystal site template is registered to the frame (including a fitted global offset), each atom is assigned to its nearest site, and vacancies and interstitials are read off as empty and doubly occupied sites, respectively. Per-atom defect labels follow a core-plus-halo con-struction with a per-lattice radius calibrated on the cold training snapshots, where the resulting labels reproduce the clean geometric labels exactly. These labels are used for evaluation only: training never sees them, nor any other high-temperature label, so the cross-temperature setting is preserved. Detection is scored at the defect level. True defect objects are defined as Wigner–Seitz site clusters of at least five atoms (smaller fragments are halo fringe), and predicted defect objects (connected clusters of flagged atoms) are matched to them one-to-one, greedily, by periodic-boundary-aware centroid distance within the clustering cutoff. Position-based matching is deliberately chosen over overlap-based rules: the Wigner–Seitz core sites pin each defect’s position exactly, whereas the spatial extent of a truth object depends on the halo radius, so centroid matching is insensitive to that radius (its verdicts are stable under halo-radius per-turbation, where overlap-based matching flips). Percolating clusters have no defined center and are ineligible, so degenerate flag-everything predictions can never match; in practice, matched pairs sit within about 1.5 ˚ A of the true center, while the nearest rejected pair lies at 4.2 ˚ A. We report object-level recall, precision, F1, and the count of unmatched (false) predicted objects per snapshot. The same construction, with atom identities tracked across frames, provides the ground truth for the large-scale study of Section 2.3. 30 4.13 Label-free evaluation metrics 
+
+Wigner–Seitz ground truth is available only when defects live on a known site registry; for defect classes without one (GB phases, and extended defects generally), no atom-wise truth exists at temperature, and evaluation needs a different foundation. Rather than scoring predictions against a single (unavailable) truth, we adopt a triangula-tion strategy borrowed from segmentation evaluation [51]: predictions are scored along five complementary axes that a good defect structure should jointly satisfy: spatial smoothness, cluster structure, geometric compactness, boundary quality, and consis-tency with a strong physics-based reference signal (denoiser-assisted PTM [20, 25]). Each axis is reported as a closeness, 1 − | mmodel − mref |, to the reference behavior (Table 3). We treat denoiser+PTM not as a gold standard but as one triangulating signal among five: it is an independent, physics-based pipeline whose predictions are reason-able near melting, and the fifth axis reports how close a prediction is to this external reference. A model that systematically resembles denoiser+PTM will score well on that axis by construction; this is why the suite couples it with four label-free spatial axes that denoiser+PTM does not define, and why we anchor the entire evaluation against exhaustive Wigner–Seitz ground truth where it can be constructed (Tables 1 and 2, Sections 2.3 and 2.5). All metrics are normalized to lie in [0 , 1], with higher values indicating bet-ter agreement with reference behavior. We report five scalar metrics: Coherence ,
+
+Fragmentation , Compact geometry , Boundary , and Physics .
+
+Coherence. 
+
+Coherence measures the spatial smoothness of the predicted defect probability field using a graph-based criterion analogous to normalized total variation [69, 70], com-bined with a local averaging consistency term in the spirit of spatial-autocorrelation statistics [71]. High coherence indicates that neighboring atoms receive consistent predictions. 
+
+Fragmentation. 
+
+Fragmentation evaluates whether predicted defects are concentrated into a small num-ber of connected components rather than dispersed across many isolated regions, incorporating a concentration term that favors dominant clusters over evenly dis-tributed small clusters. Tracking components across linking scales follows the logic of zero-dimensional persistence in topological data analysis [72, 73], and the concentra-tion term is an inverse participation ratio [74], equivalent to the Simpson concentration index [75]. 
+
+Compact geometry. 
+
+Compact geometry measures whether predicted defect clusters are spatially localized and approximately isotropic, computed from cluster shape statistics such as the radius of gyration and covariance eigenvalues, standard shape descriptors from gyration-tensor analysis of molecular conformations [76]. 31 Boundary. 
+
+Boundary consistency evaluates whether predicted defect regions form contiguous domains with well-defined interfaces, based on the fraction of neighboring atoms that disagree with the predicted defect label, analogous to boundary-quality measures in image segmentation [77]. 
+
+Physics. 
+
+Physics consistency measures agreement with the physically motivated reference signal derived from denoiser-assisted PTM analysis [20, 25], combining an effect-size mea-sure [78] with a ranking metric (the area under the receiver operating characteristic curve, AUC [79]) to quantify separation between defect and non-defect regions. 
+
+Reference-relative scoring. 
+
+To facilitate comparison across heterogeneous criteria, all values are reported relative to a reference atomic structure and normalized to [0 , 1]. We additionally report a random baseline, obtained by scoring random permutations of each model’s per-atom defect probabilities in the manner of permutation null models [80], which corresponds to spatially unstructured predictions and highlights that meaningful defect structures exhibit non-random spatial organization. These metrics correspond directly to the formal definitions of GCS, MCPS, MCGS, BCS, and PCS in Appendix B. 
+
+Data availability. The data supporting the findings of this study are available from the corresponding author upon reasonable request. Upon publication, the authors intend to release the curated benchmark splits, trained model checkpoints, and scripts necessary to reproduce the main figures, subject to repository and institutional constraints. 
+
+Code availability. Code for denoising, descriptor extraction, classifier training, and evaluation will be made available upon publication or can be shared by the corresponding author upon reasonable request during review. 
+
+Acknowledgements. This material is based upon work supported by the National Science Foundation under Grant No. 2409835. YF gratefully acknowledges sup-port from the Rutgers AI and Data Science Collaboratory. The authors thank Dr. Alexander Stukowski and Dr. Daniel Utt for helpful discussions. 
+
+# Declarations 
+
+Funding National Science Foundation under Grant No. 2409835 
+
+Conflict of interest/Competing interests RBS is Editor-in-Chief of the Journal of Materials Science: Materials Theory, a Springer Nature journal. 
+
+Ethics approval and consent to participate Not applicable. 
+
+Consent for publication Not applicable. 
+
+Materials availability Not applicable. 
+
+Author contributions YF: conceptualization, data curation, formal analysis, investigation, methodology, software, validation, visualization, writing - original draft; 32 JK: formal analysis, methodology, writing - review & editing; QQZ: conceptual-ization, data curation, formal analysis, methodology, software, writing - review & editing; PB: formal analysis, investigation, methodology, writing - review & editing; JMG: data curation, investigation, writing - review & editing; RBS: conceptualization, funding acquisition, investigation, methodology, project administration, supervision, writing - review & editing; AAE: conceptualization, funding acquisition, investigation, methodology, project administration, supervision, writing - review & editing 
+
+# Appendix A Spatial morphology metrics 
+
+This appendix defines the morphology components Sm entering the aggregate score of Eq. (17), each a differentiable functional of the predicted defect-probability field evaluated on a spatial graph. The implementation is intentionally modular: compo-nents can be used individually or in combination, depending on the task. In the present experiments, the training regularizer uses the cluster-persistence component 
+
+Spers , with its two sub-terms equally weighted, while the broader family is retained for diagnostics and future extensions. These training-time components are the differ-entiable counterparts of the discrete evaluation metrics of Appendix B ( Scoh ↔ GCS, 
+
+Spers ↔ MCPS). 
+
+## A.1 Spatial graph construction 
+
+Let xi ∈ R3 denote atomic coordinates. For each neighborhood size k, we construct a mutual k-nearest-neighbor graph [81]. For an edge ( i, j ) with Euclidean distance 
+
+rij = ∥xi − xj ∥, we define a Gaussian edge weight 
+
+w(k) 
+
+> ij
+
+= exp 
+
+"
+
+−
+
+ rij 
+
+σk
+
+2#
+
+, (A1) where σk is set to the median, over atoms, of the distance to the k-th nearest neighbor. To incorporate multiple spatial scales, we also define softened thresholded weights ˜w(k,t ) 
+
+> ij
+
+= sigmoid 
+
+
+
+α
+
+
+
+t − rij 
+
+σk
+
+ 
+
+w(k) 
+
+> ij
+
+, (A2) where t is a scale parameter and α controls the transition sharpness. 
+
+## A.2 Coherence component Scoh 
+
+The coherence component measures smoothness of the defect probability field, in the spirit of (nonlocal) total-variation regularization [69, 70]. Let di ∈ [0 , 1] denote the predicted defect probability at node i. We define the normalized total variation TV k =
+
+P 
+
+> (i,j )
+
+w(k) 
+
+> ij
+
+|di − dj |
+
+P 
+
+> (i,j )
+
+w(k)
+
+> ij
+
+, (A3) 33 and the neighbor-averaged field ¯di =
+
+P 
+
+> j
+
+w(k) 
+
+> ij
+
+dj
+
+P 
+
+> j
+
+w(k)
+
+> ij
+
+, (A4) i.e., ¯di is the weighted average of the defect probabilities over the graph neighbors of atom i. The coherence component at neighborhood size k is 
+
+S(k)coh = 12
+
+
+
+1 − TV k + 1 −
+
+P 
+
+> i
+
+|di − ¯di|
+
+P
+
+> i
+
+(di + ¯di)
+
+
+
+, (A5) with ¯di given by Eq. (A4). High values of S(k)coh indicate that neighboring atoms receive mutually compatible defect probabilities. 
+
+## A.3 Cluster-persistence component Spers 
+
+To quantify whether predicted defects form coherent connected regions that persist across spatial scales (a soft analogue of tracking connected components through a scale filtration [72]), we define the soft edge affinity 
+
+a(k,t ) 
+
+> ij
+
+= ˜ w(k,t ) 
+
+> ij
+
+didj , (A6) and the corresponding node support 
+
+Ai = X
+
+> j
+
+a(k,t ) 
+
+> ij
+
+. (A7) A fragmentation-sensitive term is then 
+
+S(k,t )pers ,frag =
+
+P
+
+> i
+
+(1 − e−Ai )di
+
+P 
+
+> i
+
+di
+
+, (A8) which increases when defect probability mass is supported by persistent local connectivity. To complement this, we define a concentration term. Let ci be the result of a small fixed number of damped, degree-normalized diffusion steps of the defect prob-abilities d over the soft thresholded graph (in the spirit of label propagation [82]), so that c represents defect mass redistributed along persistent connections, and let 
+
+M = P 
+
+> i
+
+di denote the total defect mass. The concentration term is the mass-scaled inverse participation ratio [74] 
+
+Spers ,conc = min 
+
+(
+
+1, M 
+
+P 
+
+> i
+
+c2
+
+> i
+
+(P 
+
+> i
+
+ci)2
+
+)
+
+. (A9) 34 Intuitively, this term is large when the predicted defect mass remains concentrated on a small number of coherent regions and falls as mass diffuses across many weakly connected islands. The resulting cluster-persistence component is 
+
+Spers = 12 (Spers ,frag + Spers ,conc ) . (A10) 
+
+## A.4 Additional implemented components 
+
+For completeness, the implementation also supports additional morphology compo-nents Sm beyond the two emphasized during training in the present experiments. 
+
+Boundary-consistency component. 
+
+A boundary-consistency component measures whether predicted defect regions are surrounded by compatible local neighborhoods rather than dominated by isolated boundary points. 
+
+Geometric-compactness component. 
+
+A geometric-compactness component evaluates whether the predicted defect field remains spatially localized, using differentiable surrogates for compactness and shape regularity. 
+
+Shape priors via eigenvalue functionals. 
+
+Cluster-shape priors enter only through an eigenvalue functional of the (differentiable) defect covariance. The present experiments use the isotropic ratio λmin /λ max , which favors round clusters; line- and plane-shaped priors (appropriate for dislocation-like and planar defects) correspond to different eigenvalue ratios of the same covariance, with all other machinery unchanged. 
+
+## A.5 Aggregation across scales 
+
+For each morphology component Sm, values are computed across multiple neigh-borhood sizes k and, where applicable, multiple scale parameters t. The component entering Eq. (17) is obtained by averaging or weighted averaging over the selected val-ues of k and t (e.g., Scoh averages S(k)coh over k). This multi-scale aggregation reduces sensitivity to a single neighborhood choice and improves robustness in practice. 
+
+# Appendix B Detailed definition of evaluation metrics 
+
+This appendix defines the five evaluation metrics (GCS, MCPS, MCGS, BCS, PCS) reported in the main text. They are discrete, evaluation-time counterparts of the dif-ferentiable training components of Appendix A. Let G = ( V, E ) denote the mutual 
+
+k-nearest-neighbor graph on atomic positions, with interatomic distances rij com-puted under the periodic minimum-image convention and Gaussian edge weights 35 wij = exp[ −(rij /σ k)2], where σk is the median of all k-nearest-neighbor distances in the frame. Let di ∈ [0 , 1] denote the predicted defect probability at node i.
+
+## B.1 Defect set construction 
+
+Because the predicted defect field is probabilistic, we define a discrete defect set by selecting a number of atoms consistent with the predicted total defect mass. Specifically, let 
+
+m = max 
+
+(
+
+1, round X
+
+> i
+
+di
+
+!) 
+
+. (B11) The defect set D is then defined as the set of the top-m atoms ranked by di. This construction yields a consistent defect fraction across predictions without requiring an externally fixed threshold. 
+
+## B.2 Spatial coherence 
+
+We quantify smoothness using an edge-weighted normalized total variation [69, 70]: TV( d) = 
+
+P 
+
+> (i,j )∈E
+
+wij |di − dj |
+
+P 
+
+> (i,j )∈E
+
+wij 
+
+. (B12) We also compute a local averaging consistency term, BC( d) = 1 −
+
+P 
+
+> i
+
+|di − ¯di|
+
+P
+
+> i
+
+ di + ¯di
+
+ , (B13) where ¯di is the weighted neighbor average of Eq. (A4). The global coherence score is GCS = 12 (1 − TV( d) + BC( d)) ; (B14) it is the evaluation-time counterpart of Scoh , computed with the same functional form on the same weighted graph. 
+
+## B.3 Boundary consistency 
+
+For the defect set D, we define for each defect atom the edge-weighted fraction of its graph neighbors lying outside D:
+
+bi =
+
+P  
+
+> j∈N (i), j / ∈D
+
+wij 
+
+P  
+
+> j∈N (i)
+
+wij 
+
+, (B15) with the convention bi = 1 for defect atoms with no graph neighbors, so that isolated predictions cannot raise the score. The boundary consistency score is BCS = 1 − 1
+
+|D|
+
+X
+
+> i∈D
+
+bi. (B16) 36 B.4 Cluster structure 
+
+Let {C1, . . . , C K } denote the connected components of the thresholded defect sub-graph, whose vertices are the atoms of D and whose edges are the graph edges between them with rij ≤ t σ k, where t is a cluster-linking scale swept as described below; counting components across this sweep follows the logic of zero-dimensional persistence [72, 73]. We define fragmentation as Fragmentation = 1 − K − 1
+
+|D| − 1 , (B17) and concentration as the Simpson–participation index [74, 75] of the component-size distribution, Concentration = 
+
+> K
+
+X
+
+> i=1
+
+ |Ci||D|
+
+2
+
+. (B18) These are combined into a cluster structure score: MCPS = 12 (Fragmentation + Concentration) . (B19) 
+
+## B.5 Geometric compactness 
+
+For each cluster C, let ΣC = 1
+
+|C|
+
+X
+
+> i∈C
+
+(xi − ¯xC )( xi − ¯xC )⊤ (B20) denote the covariance matrix of the atomic positions in the cluster, where ¯ xC is the cluster centroid. Compactness compares the cluster’s radius of gyration rg = √tr Σ C
+
+with that of an ideally close-packed cluster of the same size at the local atomic spacing, 
+
+rideal  
+
+> g
+
+= 0 .43 σk |C|1/3:compactness( C) = min 
+
+(
+
+1, rideal 
+
+> g
+
+rg
+
+)
+
+. (B21) Sphericity is the ratio of the smallest to largest eigenvalue of Σ C (a standard gyration-tensor shape descriptor [76]), computed for clusters of at least five atoms and set to zero otherwise. Cluster scores are averaged with weights |C|/|D| (each cluster’s share of the defect set), and the two axes combine as MCGS = 12 (compactness + sphericity) . (B22) 
+
+## B.6 Physics consistency 
+
+Let si denote a physically motivated reference signal derived from denoiser-assisted PTM analysis [20, 25]. We compute the absolute standardized mean difference 37 (Cohen’s d [78]) between the defect set and its complement, 
+
+E = E[si | i ∈ D] − E[si | i ∈ ¯D]
+
+sp
+
+, (B23) where sp is the pooled standard deviation of the two groups, together with an orientation-independent ranking score A = max(AUC , 1 − AUC), where AUC is the area under the receiver operating characteristic curve [79] for separating D from ¯D by 
+
+s, computed via its rank-sum (Mann–Whitney) equivalence [83]. The resulting physics consistency score, PCS = 12 (tanh( E) + (2 A − 1)) , (B24) lies in [0 , 1] by construction. 
+
+## B.7 Multi-scale aggregation 
+
+All graph-based metrics are computed for each neighborhood size k ∈{8, 10 , 12 , 14 , 16 }. The component-based scores (fragmentation, concentration, com-pactness, sphericity) are additionally computed over the cluster-linking sweep t ∈{1.1, 1.2, 1.3, 1.4} (in units of σk) and averaged across t within each k. Each score is then summarized by its median across the five neighborhood sizes, with sub-scores aggregated before pairwise combination (e.g., MCPS is the mean of the median-aggregated fragmentation and concentration scores). The median across neighborhood sizes reduces sensitivity to any single graph-construction choice. 
+
+## B.8 Reference-relative normalization 
+
+For each metric M ∈ { GCS , MCPS , MCGS , BCS , PCS }, let mref denote its value com-puted on the reference defect structure and mmodel its value computed on the model prediction. We report the closeness Score( M ) = 1 − | mmodel − mref |, (B25) matching the notation of the main text and mapping heterogeneous metrics to a common [0 , 1] scale for side-by-side comparison. 
+
+# Appendix C Collapse of SIA by denoiser 
+
+When testing the pre-trained denoiser developed by Hsu et al. [25], we observed unphysical collapse of SIAs, as shown in Figure C1. This is because the pre-trained denoiser was only trained on perfect crystals, and attempted to locate all atoms onto lattice sites. This is manifestly unphysical in the case of SIAs. This observation motivates training structure-specific denoisers for all atomic structures of interest. 38 0.0 0.2 0.4 0.6 0.8 1.0 interstitial dumbbell separation (d / dNN )020 40 60 80 100 120 140 160 # interstitial pairs collapsed          
+
+> training (0.84)
+> (a) dumbbell separations, same 598 interstitial pairs
+> raw 2100 K (mean 0.87) bulk-trained denoiser (mean 0.24) defect-trained denoiser (mean 0.83)
+> (b) bulk-trained denoiser: collapsed (d= 0.11 dNN )
+> interstitial pair FCC lattice
+> (c) defect-trained denoiser: preserved (d= 0.82 dNN )
+
+Fig. C1 A denoiser trained only on perfect crystals erases interstitials; retraining it with defect examples fixes this. (a) Separation d of the two atoms forming each interstitial dumbbell, in units of the nearest-neighbor distance dNN , for the same 598 interstitial pairs identified by Wigner– Seitz analysis of the 1M-atom FCC Fe test frame ( T /T m = 0 .91, 3 GPa). In the raw MD frame the pairs sit near d = 0 .87 dNN (green), matching the low-temperature training geometry (dashed line, 0.84). The crystal-trained denoiser reads the two-atoms-on-one-site compression as noise and merges each pair: the distribution collapses to a mean of 0 .24 dNN (orange), largely below 0 .3 dNN (shaded), where the pair is effectively a single atom on a normal lattice site. The defect-trained denoiser restores the physical geometry (blue, mean 0 .83 dNN ). (b, c) One representative pair (raw separation 0.83 dNN ) after each denoiser, with the surrounding FCC lattice in gray. The crystal-trained model fuses the two atoms into what appears to be one (b, d = 0 .11 dNN ); the defect-trained model preserves the dumbbell (c, d = 0 .82 dNN ). The collapse in (b) is what made SIAs invisible to the downstream classifier; all classification results in this work use the defect-trained denoiser. 
+
+# References 
+
+[1] Hospital, A., Go˜ ni, R., Orozco, M. & Gelpi, J. Molecular dynamics simulations: Advances and applications. Advances and Applications in Bioinformatics and Chemistry 37 (2015). [2] Venable, R. M., Kr¨ amer, A. & Pastor, R. W. Molecular Dynamics Simulations of Membrane Permeability. Chemical Reviews 119 , 5954–5997 (2019). 39 [3] Sosso, G. C. et al. Crystal Nucleation in Liquids: Open Questions and Future Challenges in Molecular Dynamics Simulations. Chemical Reviews 116 , 7078– 7116 (2016). [4] Bedrov, D. et al. Molecular Dynamics Simulations of Ionic Liquids and Elec-trolytes Using Polarizable Force Fields. Chemical Reviews 119 , 7940–7995 (2019). [5] Zepeda-Ruiz, L. A., Stukowski, A., Oppelstrup, T. & Bulatov, V. V. Probing the limits of metal plasticity with molecular dynamics simulations. Nature 550 ,492–495 (2017). [6] Cygan, R. T., Greathouse, J. A. & Kalinichev, A. G. Advances in Clayff Molecular Simulation of Layered and Nanoporous Materials and Their Aqueous Interfaces. 
+
+The Journal of Physical Chemistry C 125 , 17573–17589 (2021). [7] Behler, J. & Parrinello, M. Generalized neural-network representation of high-dimensional potential-energy surfaces. Physical Review Letters 98 , 146401 (2007). [8] Deringer, V. L., Caro, M. A. & Cs´ anyi, G. Machine learning interatomic potentials as emerging tools for materials science. Advanced Materials 31 , 1902765 (2019). [9] Batzner, S. et al. E(3)-equivariant graph neural networks for data-efficient and accurate interatomic potentials. Nature Communications 13 , 2453 (2022). [10] Batatia, I., Kov´ acs, D. P., Simm, G. N. C., Ortner, C. & Cs´ anyi, G. MACE: Higher order equivariant message passing neural networks for fast and accurate force fields . Advances in Neural Information Processing Systems (NeurIPS) , Vol. 35, 11423–11436 (Curran Associates, Inc., 2022). [11] Plimpton, S. Fast parallel algorithms for short-range molecular dynamics. Journal of Computational Physics 117 , 1–19 (1995). [12] Abraham, M. J. et al. GROMACS: High performance molecular simulations through multi-level parallelism from laptops to supercomputers. SoftwareX 1–2 ,19–25 (2015). [13] Thompson, A. P. et al. LAMMPS – a flexible simulation tool for particle-based materials modeling at the atomic, meso, and continuum scales. Computer Physics Communications 271 , 108171 (2022). [14] Nordlund, K. et al. Defect production in collision cascades in elemental semiconductors and fcc metals. Physical Review B 57 , 7556–7570 (1998). [15] Honeycutt, J. D. & Andersen, H. C. Molecular dynamics study of melting and freezing of small Lennard-Jones clusters. The Journal of Physical Chemistry 91 ,4950–4963 (1987). 40 [16] Faken, D. & J´ onsson, H. Systematic analysis of local atomic structure combined with 3D computer graphics. Computational Materials Science 2, 279–286 (1994). [17] Kelchner, C. L., Plimpton, S. J. & Hamilton, J. C. Dislocation nucleation and defect structure during surface indentation. Physical Review B 58 , 11085–11088 (1998). [18] Steinhardt, P. J., Nelson, D. R. & Ronchetti, M. Bond-orientational order in liquids and glasses. Physical Review B 28 , 784–805 (1983). [19] Stukowski, A. Structure identification methods for atomistic simulations of crys-talline materials. Modelling and Simulation in Materials Science and Engineering 
+
+20 , 045021 (2012). [20] Larsen, P. M., Schmidt, S. & Schiøtz, J. Robust structural identification via polyhedral template matching. Modelling and Simulation in Materials Science and Engineering 24 , 055007 (2016). [21] Stukowski, A. Visualization and analysis of atomistic simulation data with OVITO–the Open Visualization Tool. Modelling and Simulation in Materials Science and Engineering 18 , 015012 (2010). [22] Ben-David, S. et al. A theory of learning from different domains. Machine Learning 79 , 151–175 (2010). [23] Chung, H. W., Freitas, R., Cheon, G. & Reed, E. J. Data-centric framework for crystal structure identification in atomistic simulations using machine learning. 
+
+Physical Review Materials 6, 043801 (2022). [24] Erhard, L. C., Utt, D., Klomp, A. J. & Albe, K. Crystal structure identifi-cation with 3D convolutional neural networks with application to high-pressure phase transitions in SiO 2. Modelling and Simulation in Materials Science and Engineering 32 , 065029 (2024). [25] Hsu, T. et al. Score-based denoising for atomic structure identification. npj Computational Materials 10 , 155 (2024). [26] Leitherer, A., Ziletti, A. & Ghiringhelli, L. M. Robust recognition and exploratory analysis of crystal structures via bayesian deep learning. Nature communications 
+
+12 , 6234 (2021). [27] Swanson, K., Trivedi, S., Lequieu, J., Swanson, K. & Kondor, R. Deep learning for automated classification and characterization of amorphous materials. Soft matter 16 , 435–446 (2020). [28] Doi, H., Takahashi, K. Z. & Aoyagi, T. Mining of effective local order parame-ters for classifying crystal structures: A machine learning study. The Journal of 
+
+41 chemical physics 152 , 214501 (2020). [29] Becker, S., Devijver, E., Molinier, R. & Jakse, N. Unsupervised topological learning for identification of atomic structures. Physical Review E 105 , 045304 (2022). [30] Dai, X., Zhong, P., Deng, B., Chen, Y. & Ceder, G. Inpainting crystal struc-ture generations with score-based denoising (2024). ICML 2024 AI for Science Workshop. [31] Zaidi, S. et al. Pre-training via denoising for molecular property prediction .
+
+International Conference on Learning Representations (ICLR) (OpenReview, 2023). [32] Yang, K. & Schwalbe-Koda, D. A generative diffusion model for amorphous materials. npj Computational Materials 12 , 29 (2026). [33] Ackland, G. J. & Jones, A. P. Applications of local crystal structure measures in experiment and simulation. Physical Review B 73 , 054104 (2006). [34] Lechner, W. & Dellago, C. Accurate determination of crystal structures based on averaged local bond order parameters. The Journal of chemical physics 129 ,114707 (2008). [35] Bart´ ok, A. P., Kondor, R. & Cs´ anyi, G. On representing chemical environments. 
+
+Physical Review B 87 , 184115 (2013). [36] Drautz, R. Atomic cluster expansion for accurate and transferable interatomic potentials. Physical Review B 99 , 014104 (2019). [37] Islam, M., Sheriff, K. & Freitas, R. Dislocation-mediated short-range order evolution during thermomechanical processing. Acta Materialia 306 , 121838 (2026). [38] Kim, J., Fang, Y., Zhao, Q. Q., Sills, R. B. & Ezzat, A. A. A generative-discriminative method for class-incremental learning (2026). Manuscript in review. [39] Del Fr´ e, S., De Backer, A., Domain, C., Thuinet, L. & Becquart, C. S. Unsupervised machine-learning pipeline for data-driven defect detection and char-acterisation: Application to displacement cascades. Computational Materials Science 268 , 114653 (2026). [40] K´ yvala, L., Montero de Hijes, P. & Dellago, C. Unsupervised identification of crystal defects from atomistic potential descriptors. npj Computational Materials 
+
+11 , 50 (2025). 42 [41] Sun, H. et al. Ice phase classification made easy with score-based denoising. 
+
+Journal of Chemical Information and Modeling 64 , 6369–6376 (2024). [42] Khosla, P. et al. Supervised contrastive learning . Advances in Neural Information Processing Systems (NeurIPS) , Vol. 33, 18661–18673 (Curran Associates, Inc., 2020). [43] Frolov, T., Olmsted, D. L., Asta, M. & Mishin, Y. Structural phase trans-formations in metallic grain boundaries. Nature Communications 4, 1899 (2013). [44] Cantwell, P. R. et al. Grain boundary complexions. Acta Materialia 62 , 1–48 (2014). [45] Zhu, Q., Samanta, A., Li, B., Rudd, R. E. & Frolov, T. Predicting phase behav-ior of grain boundaries with evolutionary search and machine learning. Nature Communications 9, 467 (2018). [46] Meiners, T., Frolov, T., Rudd, R. E., Dehm, G. & Liebscher, C. H. Observations of grain-boundary phase transformations in an elemental metal. Nature 579 ,375–378 (2020). [47] Langenohl, L. et al. Dual phase patterning during a congruent grain boundary phase transition in elemental copper. Nature Communications 13 , 3331 (2022). [48] Brink, T., Langenohl, L., Bishara, H. & Dehm, G. Universality of grain bound-ary phases in fcc metals: Case study on high-angle [111] symmetric tilt grain boundaries. Physical Review B 107 , 054103 (2023). [49] Choi, Y. & Brink, T. Faceting transition in aluminum as a grain boundary phase transition. Physical Review Materials 9, 083607 (2025). [50] Winter, I. S., Rudd, R. E., Oppelstrup, T. & Frolov, T. Nucleation of grain boundary phases. Physical Review Letters 128 , 035701 (2022). [51] Zhang, H., Fritts, J. E. & Goldman, S. A. Image segmentation evaluation: A survey of unsupervised methods. Computer Vision and Image Understanding 
+
+110 , 260–280 (2008). [52] Rousseeuw, P. J. Silhouettes: a graphical aid to the interpretation and validation of cluster analysis. Journal of Computational and Applied Mathematics 20 , 53–65 (1987). [53] Davies, D. L. & Bouldin, D. W. A cluster separation measure. IEEE Transactions on Pattern Analysis and Machine Intelligence PAMI-1 , 224–227 (1979). [54] Mittal, A., Soundararajan, R. & Bovik, A. C. Making a “completely blind” image quality analyzer. IEEE Signal Processing Letters 20 , 209–212 (2013). 43 [55] Long, M., Cao, Y., Wang, J. & Jordan, M. I. Learning transferable features with deep adaptation networks . Proceedings of the 32nd International Conference on Machine Learning (ICML) , Vol. 37, 97–105 (PMLR, 2015). [56] Sun, B. & Saenko, K. Deep coral: Correlation alignment for deep domain adapta-tion . European Conference on Computer Vision (ECCV) Workshops , Vol. 9915 of Lecture Notes in Computer Science , 443–450 (Springer, 2016). [57] Ganin, Y. & Lempitsky, V. Unsupervised domain adaptation by backpropagation .
+
+Proceedings of the 32nd International Conference on Machine Learning (ICML) ,Vol. 37, 1180–1189 (PMLR, 2015). [58] Sheriff, K., Cao, Y., Smidt, T. & Freitas, R. Quantifying chemical short-range order in metallic alloys. Proceedings of the National Academy of Sciences 121 ,e2322962121 (2024). [59] Drautz, R. Erratum: Atomic cluster expansion for accurate and transferable interatomic potentials [phys. rev. b 99, 014104 (2019)]. Physical Review B 100 ,249901 (2019). [60] Kang, G., Jiang, L., Yang, Y. & Hauptmann, A. G. Contrastive adaptation network for unsupervised domain adaptation . Proceedings of the IEEE/CVF Con-ference on Computer Vision and Pattern Recognition (CVPR) , 4893–4902 (IEEE, 2019). [61] Park, C., Lee, J., Yoo, J., Hur, M. & Yoon, S. Joint contrastive learning for unsupervised domain adaptation. arXiv preprint arXiv:2006.10297 (2020). [62] Shen, K. et al. Connect, not collapse: Explaining contrastive learning for unsu-pervised domain adaptation . Proceedings of the 39th International Conference on Machine Learning (ICML) , Vol. 162, 19847–19878 (PMLR, 2022). [63] van den Oord, A., Li, Y. & Vinyals, O. Representation learning with contrastive predictive coding. arXiv preprint arXiv:1807.03748 (2018). [64] Chen, T., Kornblith, S., Norouzi, M. & Hinton, G. A simple framework for con-trastive learning of visual representations . Proceedings of the 37th International Conference on Machine Learning (ICML) , Vol. 119, 1597–1607 (PMLR, 2020). [65] Daw, M. S. & Baskes, M. I. Embedded-atom method: Derivation and application to impurities, surfaces, and other defects in metals. Physical Review B 29 , 6443– 6453 (1984). [66] Zhou, X. W., Foster, M. E. & Sills, R. B. An fe-ni-cr embedded atom method potential for austenitic and ferritic systems. Journal of computational chemistry 
+
+39 , 2420–2431 (2018). 44 [67] Mishin, Y., Farkas, D., Mehl, M. J. & Papaconstantopoulos, D. A. Inter-atomic potentials for monoatomic metals from experimental data and ab initio calculations. Physical Review B 59 , 3393–3407 (1999). [68] Paszke, A. et al. PyTorch: An imperative style, high-performance deep learning library . Advances in Neural Information Processing Systems (NeurIPS) , Vol. 32, 8024–8035 (Curran Associates, Inc., 2019). [69] Rudin, L. I., Osher, S. & Fatemi, E. Nonlinear total variation based noise removal algorithms. Physica D: Nonlinear Phenomena 60 , 259–268 (1992). [70] Gilboa, G. & Osher, S. Nonlocal operators with applications to image processing. 
+
+Multiscale Modeling & Simulation 7, 1005–1028 (2008). [71] Moran, P. A. P. Notes on continuous stochastic phenomena. Biometrika 37 ,17–23 (1950). [72] Carlsson, G. Topology and data. Bulletin of the American Mathematical Society 
+
+46 , 255–308 (2009). [73] Edelsbrunner, H. & Harer, J. Computational Topology: An Introduction (Ameri-can Mathematical Society, 2010). [74] Thouless, D. J. Electrons in disordered systems and the theory of localization. 
+
+Physics Reports 13 , 93–142 (1974). [75] Simpson, E. H. Measurement of diversity. Nature 163 , 688 (1949). [76] Theodorou, D. N. & Suter, U. W. Shape of unperturbed linear polymers: polypropylene. Macromolecules 18 , 1206–1214 (1985). [77] Martin, D. R., Fowlkes, C. C. & Malik, J. Learning to detect natural image boundaries using local brightness, color, and texture cues. IEEE Transactions on Pattern Analysis and Machine Intelligence 26 , 530–549 (2004). [78] Cohen, J. Statistical Power Analysis for the Behavioral Sciences 2nd edn (Lawrence Erlbaum Associates, 1988). [79] Hanley, J. A. & McNeil, B. J. The meaning and use of the area under a receiver operating characteristic (ROC) curve. Radiology 143 , 29–36 (1982). [80] Good, P. I. Permutation Tests: A Practical Guide to Resampling Methods for Testing Hypotheses 2nd edn (Springer, 2000). [81] von Luxburg, U. A tutorial on spectral clustering. Statistics and Computing 17 ,395–416 (2007). 45 [82] Zhu, X., Ghahramani, Z. & Lafferty, J. Semi-supervised learning using Gaussian fields and harmonic functions . Proceedings of the 20th International Conference on Machine Learning (ICML) , 912–919 (2003). [83] Mann, H. B. & Whitney, D. R. On a test of whether one of two random variables is stochastically larger than the other. Annals of Mathematical Statistics 18 ,50–60 (1947). 46

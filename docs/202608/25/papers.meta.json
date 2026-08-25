@@ -1,0 +1,54 @@
+{
+  "label": "2026-08-25",
+  "date": "2026-08-25",
+  "generated_at": "2026-08-25T20:58:09",
+  "count": 3,
+  "papers": [
+    {
+      "paper_id": "202608/25/2608.22282v1-machine-learning-guided-molecular-dynamics-simulations-of-point-defect-evolution-in-beta-ga2o3-during-ion-implantation-and-annealing",
+      "section": "deep",
+      "title_en": "Machine-learning-guided molecular dynamics simulations of point defect evolution in beta-Ga2O3 during ion implantation and annealing",
+      "authors": "Huawen Li, Mengzhi Yan, Zongwei Xu, Junlei Zhao, Jiale Wang",
+      "date": "2026-08-23",
+      "pdf": "https://arxiv.org/pdf/2608.22282v1",
+      "score": "8.0",
+      "evidence": "利用机器学习分子动力学模拟离子注入和退火中β-Ga2O3点缺陷演化，与辐照诱导点缺陷和团簇直接相关。",
+      "tldr": "针对beta-Ga2O3离子注入退火中的缺陷分析，提出基于相似匹配和DBSCAN聚类的缺陷识别算法，可区分高浓度下晶格原子与缺陷，识别8种Ga间隙构型。比较SRIM和MD显示忽略电子阻止会高估离子射程和缺陷浓度。研究发现1373K为最佳恢复温度，Ga间隙占据四面体和八面体位点驱动beta到gamma相变，且随注量增加不可逆。",
+      "tags": "query:rad-damage",
+      "abstract_en": "In beta-gallium oxide (beta-Ga2O3), Ga-ion implantation and annealing induce abundant point defects. To overcome conventional Wigner-Seitz (WS) defect analysis limitations, a defect identification algorithm based on similarity matching and DBSCAN clustering is developed for beta-Ga2O3. It distinguishes lattice atoms from defects at high concentrations and identifies eight Ga interstitial configurations (Gaia to Gaih). Comparing SRIM and MD data highlights electronic stopping effects: neglecting them overestimates ion range and defect concentration. Across five fluences (1 to 5 x 10^14 cm-2), 1373 K is the optimal recovery temperature. Multiscale analyses using hydrostatic stress, PRDF, and defect concentration reveal defect evolution. Ga interstitials (Gai) occupy tetrahedral and octahedral sites, driving a defect-mediated phase transition from beta- to gamma-Ga2O3. Increasing fluences reduce beta-phase recovery and increase gamma-phase transformation irreversibly. Oxygen interstitial (Oi) migration is sensitive to annealing temperature, which enhances O-sublattice recrystallization.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202608/25/2608.22074v1-cross-temperature-defect-identification-in-atomistic-simulations-via-multi-level-domain-alignment",
+      "section": "quick",
+      "title_en": "Cross-Temperature Defect Identification in Atomistic Simulations via Multi-Level Domain Alignment",
+      "authors": "Yating Fang, Jungmin Kim, Qian Qian Zhao, Pallavi Biswas, Joshua M. Gonjon, Ryan B. Sills, Ahmed Aziz Ezzat",
+      "date": "2026-08-22",
+      "pdf": "https://arxiv.org/pdf/2608.22074v1",
+      "score": "7.0",
+      "evidence": "提出跨温度缺陷识别方法，可应用于辐照诱导缺陷演化与微观结构变化分析。",
+      "tldr": "高温下原子热扰动模糊局部对称性，使缺陷识别困难，而可靠标签仅存在于低温构型。提出跨温度多层级域对齐框架：输入层用等变去噪器、表示层用跨温度对比学习、预测层用形貌正则化，将低温知识迁移至高温。无需高温标签即可在近熔点识别多种铁体系空位和间隙原子，并在百万原子轨迹及铝双晶界相变中保持高保真。",
+      "tags": "query:rad-damage",
+      "abstract_en": "Identifying atomic defects at elevated temperature is difficult because thermal fluctuations blur the local symmetry that both geometric heuristics and supervised classifiers rely on: trustworthy labels exist in low-temperature reference configurations, while the high-temperature regime where robust analysis matters most is effectively unlabeled. We cast this as a cross-temperature domain-shift problem and align the two domains at three levels: an equivariant denoiser at the input level, cross-temperature contrastive learning at the representation level, and a morphology-aware regularizer that steers predictions toward the compact geometry of physical defect structures. Because no atom-wise truth exists at temperature, we further introduce a label-free evaluation suite that scores predicted defect structures along five spatial and physics-based axes, enabling model assessment and selection without high-temperature labels. Near the melting point, the framework identifies vacancies and self-interstitial atoms across face-centered-cubic, body-centered-cubic, and hexagonal-close-packed iron systems with every interstitial localized and zero false detections in every vacancy system against Wigner-Seitz ground truth, with no high-temperature labels used in training. It sustains this fidelity on a million-atom, 2.5 ns trajectory, resolving single vacancy hops and complete Frenkel-pair recombination, and captures grain-boundary phase transformations in aluminum bicrystals, distinguishing two nucleation modes. Multi-level domain alignment thus offers a practical, label-efficient route to temperature-robust structural analysis of large-scale molecular dynamics.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202608/25/2608.19116v1-janus-a-multi-modal-foundation-neural-sampler-for-disordered-materials",
+      "section": "quick",
+      "title_en": "JANUS: A Multi-modal Foundation Neural Sampler for Disordered Materials",
+      "authors": "Denis Blessing, Mouyang Cheng, Maximilian Schebek, Jutta Rogal, Mingda Li, Carles Domingo-Enrich, Yuanqi Du",
+      "date": "2026-08-19",
+      "pdf": "https://arxiv.org/pdf/2608.19116v1",
+      "score": "6.0",
+      "evidence": "用于无序合金的高效神经采样器，可支撑FeCr合金微观组织与相行为计算。",
+      "tldr": "无序材料需同时改变原子种类与结构，造成离散-连续采样成本极高。JANUS提出多模态神经采样器，用等变图神经网络耦合连续与掩蔽离散扩散，直接从能量评估学习。在合金与半导体中，JANUS以低于三个数量级的能量评估重现蒙特卡洛平衡性质，恢复自由能，并能定向调控化学短程有序、发现新缺陷对。该框架统一了位点身份与结构弛豫，为无序材料热力学采样和逆设计奠定基础。",
+      "tags": "query:rad-damage",
+      "abstract_en": "Many problems in disordered materials require sampling beyond fixed composition and volume, where coupled changes in atomic identities and structure create a prohibitively expensive discrete-continuous sampling problem. Here we introduce JANUS, a multimodal neural sampler that couples continuous and masked discrete diffusion through an equivariant graph neural network trained directly from energy evaluations, without pre-generated equilibrium data. In benchmark Ising and isobaric $ΔμNPT$ alloy systems, JANUS reproduces reference Monte Carlo equilibrium observables and recovers free energies and phase behavior with more than three orders of magnitude fewer energy evaluations. In multicomponent alloys, JANUS enables conditional steering toward prescribed chemical short-range order and enhanced bulk modulus and, when coupled to a large language model evolutionary agent, performs efficient inverse design for balanced optical and mechanical properties. In semiconductors like silicon and diamond, JANUS explores vacancies and dopants spanning 15 elements in grand-canonical $μVT$ ensembles, recovers established defects including the silicon $E$ centre, and identifies new candidate defect pairs and triplets for quantum engineering, including S-Ti in silicon and B-O-O in diamond, with deep in-gap states validated by hybrid-functional density functional theory. By unifying discrete site identities with continuous structural and volumetric relaxation, JANUS provides a foundation for thermodynamic sampling, characterization and inverse design of chemically disordered materials.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
