@@ -6,31 +6,28 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-08-25
-- 运行时间：2026-08-25 20:58:03 UTC
+- 最新运行日期：2026-08-26
+- 运行时间：2026-08-26 22:14:06 UTC
 - 运行状态：成功
-- 本次总论文数：3
-- 精读区：1
-- 速读区：2
+- 本次总论文数：1
+- 精读区：0
+- 速读区：1
 
 ### 今日简报（AI）
-今日聚焦机器学习驱动分子动力学，精读β-Ga2O3离子注入退火点缺陷演化，速读缺陷识别与无序材料采样新方法。  
-最值得精读的是8.0分高作，它用ML加速模拟揭示退火过程中缺陷演变机制，而跨温度识别与JANUS采样器可作为技术补充。  
-建议优先浏览精读结论，再按需翻阅速读，理解“ML+材料模拟”如何提升缺陷预测效率。
-- 详情：[/202608/25/README](/202608/25/README)
+今日仅速读1篇论文，聚焦Au-Ni合金模拟Kikuchi图案的演化规律。
+
+值得关注的方向：合金成分与原子有序度如何改变Kikuchi图案特征，对材料微区表征有参考价值。
+
+下一步建议：若需深入理解，可精读该文并对照实验数据验证模拟结果。
+- 详情：[/202608/26/README](/202608/26/README)
 
 ### 精读区论文标签
-1. [Machine-learning-guided molecular dynamics simulations of point defect evolution in beta-Ga2O3 during ion implantation and annealing](/202608/25/2608.22282v1-machine-learning-guided-molecular-dynamics-simulations-of-point-defect-evolution-in-beta-ga2o3-during-ion-implantation-and-annealing)  
-   标签：评分：8.0/10、query:rad-damage
-   evidence：利用机器学习分子动力学模拟离子注入和退火中β-Ga2O3点缺陷演化，与辐照诱导点缺陷和团簇直接相关。
+- 本次无精读推荐。
 
 ### 速读区论文标签
-1. [Cross-Temperature Defect Identification in Atomistic Simulations via Multi-Level Domain Alignment](/202608/25/2608.22074v1-cross-temperature-defect-identification-in-atomistic-simulations-via-multi-level-domain-alignment)  
-   标签：评分：7.0/10、query:rad-damage
-   evidence：提出跨温度缺陷识别方法，可应用于辐照诱导缺陷演化与微观结构变化分析。
-2. [JANUS: A Multi-modal Foundation Neural Sampler for Disordered Materials](/202608/25/2608.19116v1-janus-a-multi-modal-foundation-neural-sampler-for-disordered-materials)  
+1. [Composition- and Ordering-Dependent Evolution of Simulated Kikuchi Patterns of Au-Ni Alloys](/202608/26/2608.22931v1-composition--and-ordering-dependent-evolution-of-simulated-kikuchi-patterns-of-au-ni-alloys)  
    标签：评分：6.0/10、query:rad-damage
-   evidence：用于无序合金的高效神经采样器，可支撑FeCr合金微观组织与相行为计算。
+   evidence：研究有序化和成分对Kikuchi图谱的影响，可用于检测合金中B2有序相和缺陷偏聚
 
 
 <div class="dpr-home-promo-card">

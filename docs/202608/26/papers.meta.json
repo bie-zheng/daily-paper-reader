@@ -1,0 +1,24 @@
+{
+  "label": "2026-08-26",
+  "date": "2026-08-26",
+  "generated_at": "2026-08-26T22:14:11",
+  "count": 1,
+  "papers": [
+    {
+      "paper_id": "202608/26/2608.22931v1-composition--and-ordering-dependent-evolution-of-simulated-kikuchi-patterns-of-au-ni-alloys",
+      "section": "quick",
+      "title_en": "Composition- and Ordering-Dependent Evolution of Simulated Kikuchi Patterns of Au-Ni Alloys",
+      "authors": "Camila A. Teixeira, Lukas Berners, Sandra Korte-Kerzel, Ulrich Kerzel",
+      "date": "2026-08-24",
+      "pdf": "https://arxiv.org/pdf/2608.22931v1",
+      "score": "6.0",
+      "evidence": "研究有序化和成分对Kikuchi图谱的影响，可用于检测合金中B2有序相和缺陷偏聚",
+      "tldr": "针对机器学习索引方法在复杂结构与化学相上的局限性，系统分析了Au-Ni二元合金从纯镍到纯金全成分范围及假设L1_2有序Au3Ni结构的模拟Kikuchi图案，并优化参数与实验对比。结果显示金含量增加导致平均强度与显著反射数增加，化学组成主导这一趋势，而引入L1_2有序化会增强强度并沿{111}和{200}带重新分布。归一化强度分布与带宽是区分图案的关键特征，可支撑未来表示学习索引方法。",
+      "tags": "query:rad-damage",
+      "abstract_en": "Understanding how Kikuchi patterns behave with subtle material variations is essential for developing machine learning (ML) based indexing methods for structurally and chemically complex cases, such as phases with potential sub-lattice order or (meta)stable defects with segregation (defect phases). Simulated Kikuchi patterns of the binary Au-Ni system were systematically analysed to investigate the effects of lattice parameter, chemical composition, partial site occupancy and ordering. The full compositional range from pure nickel to pure gold was considered, including a hypothetical ordered L$1_2$ Au$_3$Ni structure. Simulation parameters were optimised by comparison with experimental patterns. Normalized cross correlation showed limited sensibility to subtle differences between patterns. EMsoft simulation results revealed a systematic increase in mean intensity and more reflections contribute significantly as gold content increases. A surprising four-fold increase in mean intensity from 99 % gold to the pure gold sample highlighted limitations of partial site occupancy simulation by EMsoft. Difference maps showed enhanced normalised intensity along the {111} and {200} bands for the sample with 20 % gold compared to higher gold compositions. By isolating lattice parameter and chemical composition effects, chemical composition contributes predominantly to the mean intensity and strong reflections count, although the normalised intensity distribution was affected by both. Introducing L$1_2$ ordering increased the number of strong reflections and mean intensity, and redistributed normalised intensity along {111} and {200} bands and selected zone axis. Normalised intensity distribution and band width, are key descriptions to distinguish the Kikuchi patterns, which can be incorporated in future representation learning based indexing methods.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
