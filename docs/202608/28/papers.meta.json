@@ -1,0 +1,24 @@
+{
+  "label": "2026-08-28",
+  "date": "2026-08-28",
+  "generated_at": "2026-08-28T03:47:42",
+  "count": 1,
+  "papers": [
+    {
+      "paper_id": "202608/28/2608.21540v1-automated-analysis-to-reveal-grain-boundary-phase-microstructures",
+      "section": "quick",
+      "title_en": "Automated Analysis to Reveal Grain Boundary Phase Microstructures",
+      "authors": "R. Daniel Moore, Ian S. Winter, Robert E. Rudd, Fadi Abdeljawad, Timofey Frolov",
+      "date": "2026-08-21",
+      "pdf": "https://arxiv.org/pdf/2608.21540v1",
+      "score": "6.0",
+      "evidence": "自动分析晶界相微观结构与位错线缺陷的方法",
+      "tldr": "晶界可呈现多种界面相并发生相变，共存时形成由位错相结分隔的微观结构，但现有方法无法自动定量表征。为此，我们提出一种自动化映射工具，针对平面重合位点阵晶界，识别晶界相的空间分布、量化各相过剩性质并估计相结的Burgers含量。利用三个典型案例验证，包括扩散控制相变中的质量传输、空位与间隙环导致的结构不可分相以及含相核的微观结构。该框架为晶界演化过程如调幅分解与粗化的定量研究奠定基础，对理解变形、蠕变和迁移具有重要意义。",
+      "tags": "query:rad-damage",
+      "abstract_en": "We develop a method for analyzing grain boundary (GB) microstructures that identifies distinct interfacial phases and the dislocation line defects separating them. Similar to bulk materials, GBs can adopt multiple distinct interfacial phases and undergo first-order phase transitions. When these phases coexist, their spatial arrangement and phase junctions constitute a GB microstructure, characterized by variations in excess properties and line defects with associated dislocation content. Despite this intrinsic heterogeneity, our ability to quantitatively characterize GB microstructures remains limited, as it requires identification of individual GB phases, phase-resolved excess properties, and the Burgers content of phase junctions, capabilities not available in existing automated methods. Here, we present an automated tool that performs interfacial microstructure mapping for planar coincidence site lattice GBs. The method identifies the spatial distribution of GB phases, quantifies phase-specific excess properties, and estimates the Burgers content of GB phase junctions. We demonstrate the approach using three representative cases: (i) quantification of mass transport during diffusion-limited GB phase transformations; (ii) identification of structurally indistinguishable phases formed by vacancy and interstitial loops; and (iii) characterization of GB microstructures containing phase nuclei. More broadly, this framework enables quantitative studies of GB evolution processes, including spinodal decomposition and coarsening with direct implications for GB deformation, creep, and migration.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

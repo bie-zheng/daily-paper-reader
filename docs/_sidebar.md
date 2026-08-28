@@ -1,6 +1,9 @@
 * <a class="dpr-sidebar-root-link" href="#/">首页</a>
 * <a class="dpr-sidebar-root-link dpr-sidebar-noactive-link" href="javascript:void(0)" data-dpr-hash="#/tutorial/README">使用教程</a>
 * Daily Papers
+  * 2026-08-28 <!--dpr-date:20260828-->
+    * 速读区
+      * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202608/28/2608.21540v1-automated-analysis-to-reveal-grain-boundary-phase-microstructures" data-sidebar-item="{&quot;title&quot;: &quot;Automated Analysis to Reveal Grain Boundary Phase Microstructures&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2608.21540v1-automated-analysis-to-reveal-grain-boundary-phase-microstructures&quot;, &quot;score&quot;: &quot;6.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;rad-damage&quot;}], &quot;evidence&quot;: &quot;自动分析晶界相微观结构与位错线缺陷的方法&quot;}">Automated Analysis to Reveal Grain Boundary Phase Microstructures</a>
   * 2026-08-26 <!--dpr-date:20260826-->
     * 速读区
       * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202608/26/2608.22931v1-composition--and-ordering-dependent-evolution-of-simulated-kikuchi-patterns-of-au-ni-alloys" data-sidebar-item="{&quot;title&quot;: &quot;Composition- and Ordering-Dependent Evolution of Simulated Kikuchi Patterns of Au-Ni Alloys&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2608.22931v1-composition--and-ordering-dependent-evolution-of-simulated-kikuchi-patterns-of-au-ni-alloys&quot;, &quot;score&quot;: &quot;6.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;rad-damage&quot;}], &quot;evidence&quot;: &quot;研究有序化和成分对Kikuchi图谱的影响，可用于检测合金中B2有序相和缺陷偏聚&quot;}">Composition- and Ordering-Dependent Evolution of Simulated Kikuchi Patterns of Au-Ni Alloys</a>
