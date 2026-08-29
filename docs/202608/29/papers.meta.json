@@ -1,0 +1,39 @@
+{
+  "label": "2026-08-29",
+  "date": "2026-08-29",
+  "generated_at": "2026-08-29T02:14:53",
+  "count": 2,
+  "papers": [
+    {
+      "paper_id": "202608/29/2608.26048v1-experimental-characterization-of-additively-manufactured-metallic-alloys-for-electric-propulsion-applications",
+      "section": "quick",
+      "title_en": "Experimental Characterization of Additively Manufactured Metallic Alloys for Electric Propulsion Applications",
+      "authors": "J. Chamberlain, A. Shashurin",
+      "date": "2026-08-26",
+      "pdf": "https://arxiv.org/pdf/2608.26048v1",
+      "score": "6.0",
+      "evidence": "增材制造316L不锈钢在离子束辐照下的溅射行为",
+      "tldr": "电推进栅极离子源中，增材制造（AM）材料的耐溅射性能尚需验证。本文用KDC-40离子源对AM 316L不锈钢样品在400、600、800 eV下各辐照1小时，通过光学轮廓仪测量溅射产额。结果显示产额随能量从0.2增至2 atoms/ion，与传统材料无显著差异，与理论模型基本一致。研究证实AM材料在离子源应用中的可行性，并进一步展示了AM钨铼栅极的适用性。",
+      "tags": "query:rad-damage",
+      "abstract_en": "This work explores the sputtering of additively manufactured (AM) materials for use in gridded ion source applications. The first part of the paper uses 316L stainless steel as an example to demonstrate that additively manufactured material does not exhibit adverse sputtering behavior, such as higher sputter yield, compared with conventionally manufactured material. To this end, three additively manufactured 316L stainless steel samples were exposed to the beam of a KDC-40 electrostatic gridded ion source at three distinct energy levels of 400, 600, and 800 eV on each side of the sample for a duration of one hour. The samples were masked to create a distinct boundary between treated and untreated regions, identifiable using profilometry, and were biased to -18V for testing. Samples were then examined using a Bruker optical profilometer and further processed using the open-source software Gwyddion to evaluate the sputtering yield. The sputter yield varied in the range 0.2-2 atoms/ion for 400-800 eV ions and increased with ion energy. The measured sputtering yield was fairly consistent with predictions from analytical models developed in prior literature, while exhibiting some variations potentially due to added effects of increased temperature and oxide layers. The second part of the paper demonstrates feasibility of using an additively manufactured tungsten-rhenium grids in existing KDC-40 electrostatic gridded ion source.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202608/29/2608.27314v1-grain-boundary-phase-transitions-enable-diffusionless-climb-of-disconnections",
+      "section": "quick",
+      "title_en": "Grain Boundary Phase Transitions Enable Diffusionless Climb of Disconnections",
+      "authors": "Md Sharier Nazim, Giacomo Po, Nikhil Chandra Admal",
+      "date": "2026-08-27",
+      "pdf": "https://arxiv.org/pdf/2608.27314v1",
+      "score": "6.0",
+      "evidence": "位错环在晶界处的吸收及无扩散攀移，与缺陷演化相关",
+      "tldr": "位错与晶界的相互作用决定多晶材料力学性能。传统认为位错攀移需依赖长程体扩散提供点缺陷，但晶界自身结构自由度可能提供新路径。本文通过双晶学分析与分子动力学模拟，研究铝[1 1 0](-5 5 14)对称倾斜晶界与剪切位错环的相互作用。结果发现位错吸收生成可动的外禀位错，其攀移分量沿界面保守传播，伴随晶界局部相变和原子协同重排，无需体扩散。该工作建立位错与晶界相演化耦合，揭示一种与空位介导攀移根本不同的保守机制。",
+      "tags": "query:rad-damage",
+      "abstract_en": "Dislocation-grain boundary (GB) interactions govern the mechanical response of polycrystalline materials by controlling dislocation absorption, transmission, and interfacial plasticity. While disconnection climb is conventionally understood to require the absorption or emission of point defects supplied through long range bulk diffusion, GBs possess intrinsic configurational degrees of freedom associated with their atomic structure, or microstate, that may provide an alternative mechanism. Here, using bicrystallography and molecular dynamics simulations, we investigate the interaction of shear dislocation loops with the [1 1 0](-5 5 14) symmetric tilt grain boundary in Al. We show that dislocation absorption generates a mobile extrinsic disconnection with a nonzero climb component that propagates conservatively along the interface without long-range bulk point-defect transport. Its motion is accompanied by a localized GB phase transformation mediated by cooperative atomic rearrangements within the GB core, producing successive metastable GB microstates. These findings establish a direct coupling between lattice dislocations and GB phase evolution and reveal a conservative mechanism for disconnection climb fundamentally distinct from conventional vacancy-mediated climb.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
