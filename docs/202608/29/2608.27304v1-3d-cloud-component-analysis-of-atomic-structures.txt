@@ -1,0 +1,648 @@
+Title: 3D Cloud Component Analysis of Atomic Structures
+
+URL Source: https://arxiv.org/pdf/2608.27304v1
+
+Published Time: Fri, 28 Aug 2026 01:18:42 GMT
+
+Number of Pages: 21
+
+Markdown Content:
+# 3D Cloud Component Analysis of Atomic Structures 
+
+## Pai Li 
+
+State Key Laboratory of Materials for Integrated Circuits, Shanghai Institute of Microsystem and Information Technology, Chinese Academy of Sciences, 865 Changning Road, Shanghai 200050, China 
+
+lipai@mail.sim.ac.cn 
+
+## August 2026 
+
+Abstract 
+
+We present a method for decomposing atomic structures into physically meaningful com-ponents by converting discrete atomic coordinates into continuous three-dimensional density fields. Each element is represented by a Gaussian-smeared density map with values ranging from 0 to 1, computed efficiently through a bin-then-blur approach with periodic bound-ary conditions. The sum of all element densities, truncated at unity, defines the material region; its complement defines the vacuum. Every voxel is first assigned a chemical for-mula from the set of elements present above a threshold; the resulting formula map is then cleaned so that only regions with a genuine bulk interior—measured by the Euclidean dis-tance to their own boundary—survive as components. Thin surface terminations (e.g., a Ga monolayer on GaAs) and one-to-two-voxel boundary layers between two crystals are ab-sorbed by the neighboring stable region, so the decomposition contains exactly the bulk-like chemical-formula components and the vacuum, with no surface or interface components. For each component we determine the crystal phase with a neural prototype classifier: one phase if the trusted interior atoms vote unanimously, two phases (e.g., crystalline and amor-phous Si) if they split into two confident groups, in which case the component is divided into two. Interfaces and surfaces are then derived as boundaries—material–material and material–vacuum—and every atom is labeled bulk, surface, interface, or vertex, with vertex reserved for geometric corners of a component. Inside crystalline components, inner defects are detected from coordination-number and local-density deviations. We demonstrate the approach on Si/GaAs and Si/SiO 2 heterojunctions, crystalline/amorphous silicon junctions, vacancy-containing crystals, and bulk crystals. 
+
+# 1 Introduction 
+
+## 1.1 Motivation 
+
+Atomic structures in computational materials science are conventionally represented as discrete point sets: each atom is a coordinate triple associated with an element symbol and a lattice vector. This representation is exact for input to density functional theory (DFT) and molecular dynamics codes, but it is poorly suited for answering compositional questions that humans naturally ask about a structure: Where does the silicon end and the silicon dioxide begin? What is the chemical composition of the interface region? Is there a continuous path of vacuum through this porous material? Which atoms are on the surface, and which are buried in the bulk? 
+
+Answering such questions requires a representation that makes spatial extent and chemical mixing explicit. A discrete atom list does not directly encode the region that an atom occupies— 1arXiv:2608.27304v1 [cond-mat.mtrl-sci] 27 Aug 2026 3D Cloud Component Analysis of Atomic Structures 2its sphere of influence, the volume it contributes to a phase, or the degree to which it mixes with neighboring atoms of different elements. The need for such compositional analysis is sharpened by the rise of language-model-driven materials workflows, which generate structures from natural-language descriptions via multi-agent pipelines [1, 2, 3]. These pipelines produce structures at scale—heterojunctions, coated particles, doped supercells—that must be checked against the requested composition before any downstream simulation, yet the check is exactly the step a discrete atom list makes tedious. We address this by converting discrete atomic coordinates into continuous three-dimensional density fields via Gaussian smearing. Each atom is replaced by a normalized Gaussian centered at its position, producing a smooth density function ρe(r) for each element e. The sum of element densities (clipped to [0 , 1] ) defines where material exists; its complement defines vacuum. Overlapping element densities naturally reveal chemical mixing at interfaces, grain boundaries, and disordered regions. Connected-component analysis of this field partitions the structure into physically meaningful regions. 
+
+## 1.2 Relation to Prior Work 
+
+Our approach draws on two traditions. The first is Gaussian density representations used in machine learning interatomic potentials [4, 5], where atomic environments are encoded as sums of Gaussian or polynomial basis functions for symmetry-function construction. We adopt the Gaussian smearing machinery but repurpose it for spatial segmentation rather than energy prediction. The second is voxel-based materials analysis , exemplified by tools such as Zeo++ [6] for pore characterization and PoreBlazer [7] for porosity analysis. These tools operate on void spaces in zeolites and metal-organic frameworks. Our method is more general: it simultaneously characterizes both material and vacuum regions, handles multi-element systems with compound interface detection, and provides per-atom spatial classification. Existing general-purpose tools occupy different niches: the Atomic Simulation Environ-ment [8] provides programmatic structure manipulation but no spatial segmentation; OVITO [9] and VESTA [10] excel at visualization and manual inspection, with per-atom classification lim-ited to coordination and bond-order quantities; Atomsk [11] is a structure builder and converter. None of these answers the compositional questions above—where a phase begins and ends, what the interface chemistry is, whether a void percolates—in a machine-consumable form. The method is implemented in a modular Python package ( cloud_comp ) with a Dash-based web interface following the architecture of the ATLAS framework [12], supporting CIF, POSCAR/VASP, and XYZ input formats via pymatgen [13]. 
+
+# 2 Algorithm 
+
+## 2.1 Pipeline Overview 
+
+The analysis proceeds in seven stages: 
+
+S1 . Structure Loading : Parse atomic structure (CIF, POSCAR/VASP, XYZ) via pymatgen, extracting lattice matrix L ∈ R3×3, fractional coordinates fi, and element types. 
+
+S2 . 3D Density Grid : For each element, bin atoms onto a uniform nz × ny × nx grid spanning one unit cell, then apply 3D Gaussian blur with periodic boundary conditions. Preserve both raw (unclipped) and clipped ( [0 , 1] ) density maps. 
+
+S3 . Chemical-Formula Map : Classify each grid voxel as vacuum, pure element, or compound from the set of elements above the density threshold. This is a formula map, not a compo-3D Cloud Component Analysis of Atomic Structures 3nent map: a Ga-terminated GaAs surface and the GaAs bulk share the same crystal but appear as different voxel classes. 
+
+S4 . Formula-Region Cleaning : Measure the Euclidean depth of every connected class region; regions without a bulk interior (surface monolayers, one-to-two-voxel boundary layers, noise) are absorbed into the neighboring stable region. The cleaned map contains only bulk-like chemical-formula regions plus vacuum—there are no surface or interface components. 
+
+S5 . Connected Component Labeling : Partition the cleaned formula map into connected components with periodic boundary awareness via union-find merging. 
+
+S6 . Phase Analysis : For each component, classify its trusted interior atoms with a neural prototype classifier. A component with a single confident prototype keeps that phase; a component whose trusted votes split into two confident groups (e.g., crystalline and amor-phous Si) is divided into two components, one per phase. 
+
+S7 . Characterization : Compute component properties (volume, stoichiometry, shape descrip-tors, cavity/tunnel counts), derive interfaces and surfaces as boundaries between compo-nents, classify every atom as bulk/surface/interface/vertex, index surface facets and inter-faces with Miller indices recovered from the component lattice (Section 2.10), and flag inner defects from coordination-number and local-density deviations. Surfaces and interfaces are therefore relations between components , never components them-selves: a surface is the boundary between a material component and the vacuum component, and an interface is the boundary between two material components. This separation keeps the component list physically interpretable—each entry is a region of one chemical formula and one crystal phase—while the derived boundary information supplies the per-atom labels needed for device and interface analysis. 
+
+## 2.2 3D Gaussian Density Grid 
+
+2.2.1 Grid Construction 
+
+A uniform Cartesian grid is constructed over the unit cell. Given a target spacing ∆ (default 0.25 Å), the grid dimensions are: 
+
+nx =
+
+ |a|
+
+∆
+
+
+
+, ny =
+
+ |b|
+
+∆
+
+
+
+, nz =
+
+ |c|
+
+∆
+
+
+
+(1) capped at nmax = 300 per dimension ( 200 MB total memory for all density arrays). Grid centers are at: 
+
+xi =  i + 12
+
+ |a|
+
+nx
+
+, yj =  j + 12
+
+ |b|
+
+ny
+
+, zk =  k + 12
+
+ |c|
+
+nz
+
+(2) Orthogonal cells are handled directly with mode=‘wrap’ in the Gaussian filter. Non-orthogonal (triclinic) cells are handled by a fallback path: atoms are replicated into neighboring cells in an expanded grid, the Gaussian filter is applied with mode=‘constant’ , and the central unit cell is extracted. This costs a constant factor in memory and time but supports arbitrary lattice geometries. 
+
+2.2.2 Bin-then-Blur Algorithm 
+
+The naive approach—evaluating exp( −| r − ri|2/2σ2) at every grid point for every atom—has complexity O(Natoms × nxnynz ), which is prohibitive for large structures. We instead use a two-stage “bin-then-blur” approach with complexity O(Natoms + nxnynz ):3D Cloud Component Analysis of Atomic Structures 4
+
+Algorithm 1 Compute Element Density Grid 
+
+Require: Atoms of element e at Cartesian positions {ri}Ne
+
+> i=1
+
+, grid dimensions (nz , n y, n x), Gaus-sian width σ, cell extents (Lx, L y, L z )
+
+Ensure: Density grid ρe ∈ [0 , 1] nz ×ny ×nx (clipped), ρraw  
+
+> e
+
+∈ Rnz ×ny ×nx 
+
+> ≥0
+
+(unclipped)  
+
+> 1:
+
+G ← 0nz ×ny ×nx 
+
+> 2:
+
+for each atom position ri = ( xi, y i, z i) do  
+
+> 3:
+
+ix ← ⌊ xi/L x · nx⌋ mod nx 
+
+> 4:
+
+iy ← ⌊ yi/L y · ny⌋ mod ny 
+
+> 5:
+
+iz ← ⌊ zi/L z · nz ⌋ mod nz 
+
+> 6:
+
+G[iz, iy, ix ] ← G[iz, iy, ix ] + 1 .0 ▷ Bin  
+
+> 7:
+
+end for  
+
+> 8:
+
+ρraw  
+
+> e
+
+← GaussianFilter3D (G, σ = ( σ/ ∆z , σ/ ∆y, σ/ ∆x), mode = ‘wrap’ ) ▷ Blur  
+
+> 9:
+
+ρe ← clip (ρraw  
+
+> e
+
+, 0, 1) ▷ Clip The GaussianFilter3D is implemented via scipy.ndimage.gaussian_filter with mode=‘wrap’ .The wrap mode causes the Gaussian kernel to sample from the opposite side of the grid when it extends beyond a boundary, which is physically exact for periodic systems: density from an atom near one cell face correctly spills across to the opposite face. The pixel-unit sigmas are 
+
+σ/ ∆x, σ/ ∆y, σ/ ∆z .
+
+2.2.3 Dual Representation 
+
+We maintain two copies of each element’s density map: • Raw ρraw  
+
+> e
+
+: The unclipped output of the Gaussian filter. Preserves the true integral of Gaussian contributions, which is essential for stoichiometry computation (Section 2.6.1). • Clipped ρe = min(1 , ρraw  
+
+> e
+
+): Values constrained to [0 , 1] . Used for all shape-related com-putations: vacuum detection, voxel classification, and component boundary definition. The total material density and vacuum density are computed from clipped maps: 
+
+ρtotal [i, j, k ] = min 1, X
+
+> e
+
+ρe[i, j, k ]
+
+!
+
+(3) 
+
+ρvacuum [i, j, k ] = 1 − ρtotal [i, j, k ] (4) By construction, ρtotal + ρvacuum = 1 everywhere, and vacuum dominates precisely where material is absent. 
+
+## 2.3 Chemical-Formula Map 
+
+Each voxel is assigned a chemical formula from the set of elements present in its density profile: class [i, j, k ] = 
+
+
+
+0 (vacuum) if ρvacuum [i, j, k ] > θ vac 
+
+element e if |{ e : ρe[i, j, k ] > θ elem }| = 1 and {e} = {X}
+
+compound {e1, . . . , e m} if |{ e : ρe[i, j, k ] > θ elem }| ≥ 2
+
+(5) where θvac = 0 .5 is the vacuum threshold and θelem = 0 .3 is the element presence threshold. A voxel with no element above θelem but vacuum density below θvac is an edge case classified as vacuum. 3D Cloud Component Analysis of Atomic Structures 5Class IDs are assigned as follows: 0 for vacuum, 1–99 for pure elements (dynamically mapped per structure), and 100+ for compounds (hashed from the sorted tuple of constituent element symbols). The result is a voxel-level formula map : two adjacent voxels carry the same label only if the same set of elements is present. The element threshold θelem = 0 .3 is chosen to balance two competing requirements: (i) it must be high enough to avoid classifying random noise tails as compound regions, and (ii) it must be low enough to detect genuine interface overlap where both elements contribute at roughly 30% of their peak density. For a Gaussian of width σ = 1 .5 Å, two atoms at a typical bond distance of ∼2 Å each contribute exp( −12/(2 · 1.52)) ≈ 0.8 at the midpoint—both well above 0.3—so the interface is correctly identified as a compound. 
+
+2.3.1 Why the raw formula map is not the component map 
+
+The threshold classification is intentionally local and does not yet know what is a material and what is merely a boundary. Three artifacts follow for compound crystals: • Surface terminations : on a zincblende (100) or (110) surface the outermost atomic layer is a single element. In the density field this layer is a thin shell whose formula differs from the bulk (pure Ga or pure As on GaAs), even though it belongs to the same crystal. • Boundary layers : between two materials the two density fields overlap over one to two voxels, producing mixed-formula shells (e.g., GaSi or GaAsSi between Si and GaAs). • Noise : isolated one-voxel regions appear wherever two density tails cross the threshold independently. If these shells were labeled as components, the result would contain spurious “pure Ga”, “pure As” and “interface” components, and atoms at genuine free surfaces would appear to touch a second material. We remove the artifacts at the voxel level instead. 
+
+2.3.2 Stable regions 
+
+A connected region of one formula is stable if it has a genuine bulk interior. We measure the interior with the Euclidean distance transform of the region’s own mask, EDT (M): the value at each voxel is the distance (in Å) to the nearest voxel not in the region. The region’s interior depth is 
+
+h(R) = max  
+
+> (i,j,k )∈R
+
+EDT (MR)[ i, j, k ], (6) and the region is stable if h(R) ≥ τstab with τstab = 2 .0 Å by default. For σ = 1 .5 Å and 
+
+∆ = 0 .3 Å this cleanly separates 10 Å thick crystals ( h ≈ 10 Å) from surface and boundary shells ( h ≈ 1.0–1.5 Å). A genuine thin film thicker than τstab retains its own formula and becomes its own component. 
+
+2.3.3 Absorption of unstable regions 
+
+Every unstable region is absorbed into the neighboring stable region with which it shares the largest face-contact area. Because an absorbed region inherits the stable region’s formula, chains of shells (e.g., a GaSi layer touching both a Si and a GaAsSi shell) are resolved iteratively until no unstable region remains. The assignment is purely geometric and uses only the formula map; no classifier output is involved. After cleaning, the formula map contains exactly the bulk-like chemical-formula regions plus vacuum. A surface monolayer on GaAs is absorbed by GaAs; a one-voxel boundary layer between 3D Cloud Component Analysis of Atomic Structures 6Si and GaAs is absorbed by whichever side it touches most. There are consequently no surface components and no interface components in the final decomposition: surfaces and interfaces are boundaries between the surviving components (Section 2.6.4). 
+
+## 2.4 Connected Component Labeling with PBC 
+
+Standard 3D connected-component algorithms (e.g., scipy.ndimage.label ) do not account for periodic boundary conditions. A component that spans a cell boundary—such as a bulk crystal that wraps around in all three directions—would be incorrectly split into separate pieces. We solve this through a two-stage approach: 
+
+Stage 1: Standard Labeling. Run scipy.ndimage.label with a 6-connectivity (face-sharing) structure on the classification array. All non-zero (material) voxels are treated as foreground. This produces Ntemp provisional labels. The 6-connectivity is preferred over 26-connectivity because corner-touching voxels in a density-based segmentation typically correspond to physically distinct regions connected only by a thin bridge; face-sharing connectivity produces more physically meaningful components. 
+
+Stage 2: PBC Merging via Union-Find. For each periodic axis, examine opposing face pairs: • z-faces: compare L[0 , :, :] with L[nz − 1, :, :] 
+
+• y-faces: compare L[: , 0, :] with L[: , n y − 1, :] 
+
+• x-faces: compare L[: , :, 0] with L[: , :, n x − 1] 
+
+For each pair of opposing voxels (i, j, k ) and (i′, j ′, k ′) on opposite faces, if both are foreground and have different provisional labels la̸ = lb, we record a union operation UF .union (la, l b). Edge pairs (intersections of two periodic faces, e.g., the lines at x = 0 , z = 0 vs. x = nx −1, z = nz −1)are also checked; corner pairs are handled transitively by the union-find data structure. After processing all periodic faces, each provisional label is replaced by its union-find root, producing the final component labels. This approach avoids the 27 × memory cost of tiling a 
+
+3 × 3 × 3 supercell. 
+
+## 2.5 Phase Analysis 
+
+The formula decomposition identifies what elements are present, but not which crystal phase they form: diamond Si and amorphous Si produce nearly identical density fields, and so do quartz and amorphous SiO 2. Phase identity is supplied by a neural prototype classifier trained on element-mapped, rotation-invariant local descriptors (Section 4) with 271 AFLOW prototypes plus an amorphous class. The classifier is invoked once per structure and returns, for every atom, a prototype label, a softmax confidence, an amorphous probability, and a per-atom nearest-neighbor distance d0 that defines the descriptor window R = 3 d0 (≈ 7 Å for Si and GaAs). 
+
+2.5.1 Trusted interior atoms 
+
+The classifier was trained on complete bulk environments. An atom whose window is trun-cated by a surface or interface—or corrupted by a periodic-seam artifact—produces a confident but wrong prototype (surface GaAs atoms are typically predicted “amorphous” or a random hexagonal prototype). Each atom is therefore tested for a complete local environment :1. its full window 3 d0 lies inside its component: the Euclidean distance from the atom’s voxel to the component boundary is at least 3 d0 (computed with the same distance transform used for region stability, Section 2.3.2); 3D Cloud Component Analysis of Atomic Structures 72. no short contacts: neither center–neighbor nor neighbor–neighbor distances fall below 
+
+0.6 d0 (this catches wrapped slabs whose faces interpenetrate at the periodic seam). Atoms passing both tests are trusted ; only their predictions are allowed to vote. 
+
+2.5.2 One phase or two 
+
+For each component we count the prototype votes of its trusted atoms. Three outcomes are possible: • One phase : a single prototype dominates. The component keeps that prototype (e.g., 
+
+A4_C_diamond for crystalline Si, B3_ZnS_zincblende for GaAs, amorphous for disordered material). Amorphous is a first-class phase: a formula component whose trusted interior votes are confidently amorphous is labeled amorphous, not crystalline. • Two phases : the trusted votes split into two groups, each supported by at least ϕsplit =20% of the votes, at least Nsplit = 10 atoms, and a mean top-class confidence of at least 
+
+csplit = 0 .6. This is exactly the situation of coexisting crystalline and amorphous Si. The component is divided into two components of the same formula, one per phase; every atom joins the group of its nearest trusted atom of either phase. The confidence gate prevents scattered low-confidence votes in genuinely amorphous material from creating spurious prototype components. • No phase claim : a component without trusted atoms (a slab thinner than the classifier window, a small cluster) has no reliable vote. Its phase is reported as unknown rather than a noisy majority. The final prototype of every atom of a component—inner, surface, interface, or vertex— is the component’s phase, so classifier noise on individual boundary atoms is never used as a final label. Per-atom raw predictions and confidence are retained as metadata ( phase_trusted ,
+
+phase_confidence ). 
+
+## 2.6 Component Properties 
+
+2.6.1 Stoichiometry from Raw Density 
+
+Clipping element densities to [0 , 1] destroys the information needed to determine chemical for-mulas. In a SiO 2 region, both Si and O densities may saturate at 1.0, suggesting an incorrect 1:1 ratio. The solution is to integrate the raw (unclipped) density maps over the component: 
+
+Ae = X
+
+> (i,j,k )∈C
+
+ρraw  
+
+> e
+
+[i, j, k ] (7) where C is the set of voxel indices belonging to the component. Since the Gaussian width σ is identical for all elements, each atom contributes exactly the same total integral R exp( −r2/2σ2) d3r =(2 πσ 2)3/2 to its element’s raw density map. Therefore the ratio Ae1 : Ae2 : · · · directly gives the atom count ratio: 
+
+Ne1
+
+Ne2
+
+= Ae1
+
+Ae2
+
+(8) Atoms near the component boundary have their Gaussian tails truncated, but because σ
+
+is element-independent, the truncation fraction is identical for all elements and the ratio is preserved. As a cross-validation, we also count atoms directly by assigning each atom to the component whose region contains its center position (Section 2.7). 3D Cloud Component Analysis of Atomic Structures 8The estimated formula string is derived by normalizing the stoichiometric fractions, scaling to make the smallest fraction equal to 1, rounding to the nearest integer, and simplifying by the greatest common divisor. 
+
+2.6.2 Shape Classification 
+
+Shape characterization proceeds at three levels of detail: 
+
+Level 1: Dimensionality. For each of the three lattice directions, we determine whether the component is “periodic” (connected across the cell boundary) using absolute rather than frac-tional thresholds to avoid the scale-dependence problem. A component is periodic in direction 
+
+d if: 1. Gap check : The largest gap between sorted voxel positions along direction d (including the wrap-around gap) does not exceed δgap = 4 .0 Å. This threshold corresponds to ap-proximately twice a typical covalent bond length—any gap larger than this is physically meaningful. 2. Boundary check : The component touches both cell boundaries in direction d (minimum coordinate ≤ δboundary = 2 .0 Å and maximum coordinate ≥ Ld − δboundary ). Using absolute thresholds avoids the pitfall of fractional thresholds, where a 20 Å vacuum gap in a 100 Å cell (20% of the cell) would be missed by a 30% threshold. The dimensionality is the count of periodic directions: Periodic Directions Shape Type Example 3 bulk Embedded crystal, dense polycrystal 2 slab Surface layer, heterojunction stack 1 wire Nanowire, nanotube, GAA channel 0 nanoparticle Isolated cluster, fullerene, quantum dot 
+
+Level 2: Shape Descriptors. Five quantitative descriptors are computed: • Aspect ratios : Rxy = Lbbox  
+
+> x
+
+/L bbox  
+
+> y
+
+, Rxz = Lbbox  
+
+> x
+
+/L bbox  
+
+> z
+
+from the bounding box extents. • Compactness : γ = V /V bbox , the fraction of the bounding box occupied by the compo-nent. γ → 1 for a compact block; γ ≪ 1 for a sparse or irregular shape. • Sphericity : ψ = π1/3(6 V )2/3/A , where A is the surface area estimated from surface voxel count. ψ = 1 for a perfect sphere; lower values indicate deviation from sphericity. • Moment of inertia ratios : The eigenvalues λ1 ≥ λ2 ≥ λ3 of the inertia tensor I =P
+
+> i
+
+(ri − ¯r)( ri − ¯r)⊤. The ratios λ2/λ 1 and λ3/λ 1 characterize elongation: both → 1 for a sphere, λ2/λ 1 → 1, λ 3/λ 1 → 0 for a disk, λ2/λ 1 → 0, λ 3/λ 1 → 0 for a rod. 
+
+Level 3: Topological Features. We detect cavities (fully enclosed vacuum pockets) and tunnels (vacuum channels that percolate through the component): A cavity is a connected vacuum component that does not touch any cell boundary but is adjacent to the material component (i.e., fully enclosed by it). A tunnel is a vacuum component that touches two opposite cell faces and passes through the component’s bounding box extent. 
+
+Level 4: Detailed Shape Label. Based on dimensionality, cavity/tunnel counts, and geometric descriptors, a human-readable label is assigned: 3D Cloud Component Analysis of Atomic Structures 9
+
+Algorithm 2 Detect Cavities and Tunnels 
+
+Require: Component mask M, full component labels L, density grid 
+
+Ensure: Cavity count ncav , tunnel count ntun , cavity volumes  
+
+> 1:
+
+V ← (L = 0) ▷ All vacuum voxels  
+
+> 2:
+
+Vlabels , N V ← Label (V) ▷ Connected vacuum components  
+
+> 3:
+
+B ← { ℓ : vacuum component ℓ touches any cell boundary } 
+
+> 4:
+
+ncav ← 0 
+
+> 5:
+
+for ℓ = 1 to NV do  
+
+> 6:
+
+if ℓ / ∈ B and Vℓ adjacent to M then  
+
+> 7:
+
+ncav ← ncav + 1 ▷ Enclosed cavity  
+
+> 8:
+
+end if  
+
+> 9:
+
+end for  
+
+> 10:
+
+for ℓ ∈ B do  
+
+> 11:
+
+if Vℓ adjacent to M and touches opposite cell faces then  
+
+> 12:
+
+ntun ← ntun + 1 ▷ Tunnel  
+
+> 13:
+
+end if  
+
+> 14:
+
+end for 
+
+Dimensionality Features Label 3 (bulk) No cavities, ψ > 0.9 spherical_bulk 
+
+≥ 2 tunnel directions bicontinuous 1 tunnel direction tunneled_bulk 
+
+≥ 1 cavity porous_bulk / hollow_bulk / foam 
+
+λ3/λ 1 < 0.3 layered_bulk otherwise compact_bulk 2 (slab) Has tunnels perforated_slab Aspect ratio > 5 ribbon 
+
+ψ < 0.3 flat_plate 1 (wire) Has cavities hollow_wire (nanotube-like) Aspect ratio > 8 nanowire otherwise rod / column 0 (particle) Has cavities, ψ > 0.8 hollow_sphere Has cavities porous_particle 
+
+ψ > 0.9 sphere 
+
+ψ > 0.7 spheroid Aspect ratio > 3 nanorod / disk 
+
+2.6.3 Vacuum Shape 
+
+For components classified as vacuum, we characterize their morphology in terms of connectivity to the cell boundary. Let nfaces be the number of cell faces (out of 6) touched by the vacuum component, and nopp be the number of opposite-face pairs among them: 
+
+nfaces nopp Label Physical Meaning 0 0 pore Enclosed void, isolated from boundaries 1 0 surface_vacuum Vacuum bounding one side of a slab 2 0 corner_vacuum Vacuum at a cell corner 2 1 channel Tunnel through the material in one direction 
+
+≥ 3 ≥ 2 bicontinuous Percolating in multiple directions 3D Cloud Component Analysis of Atomic Structures 10 
+
+2.6.4 Per-Voxel Environment 
+
+Every voxel in each component is classified by examining its 26 neighbors in the component label map: • bulk : All 26 neighbors belong to the same component. • surface : At least one neighbor is vacuum (component 0). • interface : At least one neighbor belongs to a different material component. • vertex : A geometric corner: three or more of the six axis directions lead through the component’s own density tail into open vacuum (Section 2.7). Interface takes priority over surface and vertex: a voxel that touches vacuum and an-other material is an interface voxel. Vertex is a property of a single component’s geometry (where three surface facets meet) and is never an interface voxel. Surfaces and interfaces are therefore boundaries of the component—material–vacuum and material–material—and the per-component counts of surface, interface and vertex voxels feed the surface-area and interface-area estimates. 
+
+## 2.7 Atom Classification 
+
+Each atom in the original structure is mapped to a component and classified by its local envi-ronment. 
+
+2.7.1 Component Assignment 
+
+For atom i at fractional coordinates (fa, f b, f c), the grid index is: 
+
+ix = ⌊fa · nx⌋ mod nx, iy = ⌊fb · ny⌋ mod ny, iz = ⌊fc · nz ⌋ mod nz (9) The atom is assigned to component_labels [iz, iy, ix ]. This is an O(1) lookup per atom. 
+
+2.7.2 Local Environment Classification 
+
+A spherical neighborhood of radius rclass = 3 .0 Å (configurable) is sampled around the atom in the component label map. Let nsame be the count of voxels in the same component, nvac the count in vacuum, and Sother the set of distinct other material component IDs: classification =
+
+
+
+bulk if nvac = 0 and |S other | = 0 
+
+interface if |S other | > 0 (priority) surface if nvac > 0
+
+vertex otherwise, if ≥ 3 free surface directions (10) Interface takes priority over surface and vertex, matching the per-voxel rule: an atom that reaches both vacuum and a second material is an interface atom. Vertex is a geometric property of the atom’s own component, never an interface state. A surface atom is a vertex when at least three of the six axis directions lead from its voxel through the component’s own density tail (typically one to two voxels) into at least κdepth = 3 voxels of open vacuum; such an atom sits where three surface facets meet. Face atoms (one free direction) and edge atoms (two free directions) remain surface . Sampling a short vacuum ray rather than a single neighbor avoids classifying a gently curved surface as a corner. All grid index lookups use periodic wrapping. This classification is the 3D analog of AT-LAS’s multi-view surface scoring [12], but operates directly on the density-derived component 3D Cloud Component Analysis of Atomic Structures 11 map rather than requiring multiple 2D projections. Because the formula map was cleaned (Sec-tion 2.3.2), the only “other components” an atom can touch are genuine formula components, so surface atoms are never promoted to vertex by surface-termination shells. 
+
+## 2.8 Inner Defect Detection 
+
+Defects inside a component—vacancies, interstitials, and their immediate surroundings—are detected from local structure, not from the phase classifier. Two scalar descriptors are computed for every atom: • Coordination number CN i: the number of neighbors within 1.4 d(i)0 , where d(i)0 is the atom’s nearest-neighbor distance (4 for diamond/zincblende, 12 for close-packed metals). • Local density ρ(4)  
+
+> i
+
+: the number of neighbors within a fixed 4.0 Å radius (16 for diamond Si, 16 for zincblende GaAs). For each crystalline component (a component whose phase is a concrete prototype, not 
+
+amorphous or unknown ) we take the modal values CN ⋆ and ρ⋆ over its trusted interior atoms. A 
+
+bulk trusted atom is a defect when 
+
+CN i̸ = CN ⋆ or ρ(4)  
+
+> i
+
+− ρ⋆ > ε ρ ρ⋆, (11) with ερ = 0 .15 by default. The defect type is low_cn , high_cn , low_density , or high_density ,depending on the dominant deviation. Four constraints keep the criterion physical: 1. only bulk atoms are tested—surface atoms have naturally truncated coordination; 2. only trusted atoms are tested—an atom whose window is not complete cannot be compared to the bulk reference; 3. only crystalline components are tested—amorphous material intrinsically spreads over several coordination numbers, so the modal reference is not meaningful; 4. the modal coordination must dominate the reference set (at least 70% of trusted atoms): a disordered component without a sharp reference is skipped. With these rules a perfect diamond-Si crystal reports zero defects, and removing one atom flags exactly its four nearest neighbors as low_cn (CN 3, local density 15 vs. the bulk 16). 
+
+## 2.9 Periodic Boundary Conditions 
+
+PBC handling is distributed across four levels of the pipeline: Level Method Module Gaussian smearing gaussian_filter(mode=‘wrap’) density.py 
+
+Component labeling ndimage.label + union-find on boundary faces components.py 
+
+Shape/centroid Circular mean in fractional coordinates pbc.py 
+
+Neighbor lookups Modular arithmetic on grid indices pbc.py 
+
+The minimum image convention for distances between two Cartesian points r1, r2 in a lattice 
+
+L is: 3D Cloud Component Analysis of Atomic Structures 12 
+
+∆f = L−1(r2 − r1) (12) 
+
+∆f ← ∆f − round (∆ f ) (wrap to [−0.5, 0.5]) (13) 
+
+dMI = |L∆f | (14) The circular mean for PBC-aware centroid computation of fractional coordinates {fi}Ni=1 :
+
+¯f = 12π arctan2 1
+
+N
+
+X
+
+> i
+
+sin(2 πfi), 1
+
+N
+
+X
+
+> i
+
+cos(2 πfi)
+
+!
+
+(15) with the result mapped to [0 , 1) for negative values. This avoids the pathological case where the arithmetic mean of {0.01 , 0.99 } would be 0.50 instead of the correct 0.00 .
+
+## 2.10 Lattice Recovery and Miller Indexing 
+
+Surface facets of a component and the material–material interfaces between components are reported with Miller indices: the free surface of a close-packed slab is indexed (111) or (0001) , an interface between two crystals is described by the two contacting planes, and epitaxial alignment is detected when the in-plane directions of the two sides agree. Indices are only meaningful when the component’s Bravais lattice is known, so the primitive lattice of every crystalline component is first recovered from its atom positions alone —no prototype classifier, no assumed cell. 
+
+2.10.1 Recovering the primitive lattice from atom positions 
+
+For a component with atom positions {ri} in the simulation cell L, the primitive lattice is recovered as follows. 
+
+L1 . Observed vectors : all distinct minimum-image pair differences shorter than 2 d1 + 0 .3 Å, where d1 is the shortest pair distance. Along non-periodic axes (vacuum gaps) the raw separation is used, so a gap never produces ghost pairs. Thermal scatter clouds are merged to their running mean so the recovered lattice is not distorted by rounding. 
+
+L2 . Candidates : the unique directions shorter than 1.8 d1, sorted by length (at most 200). 
+
+L3 . In-plane pairs : every pair (t1, t 2) that passes the 2D density test 
+
+|t1 × t2| = k a per atom , aper atom = vatom /d, (16) where k is the number of residue classes of the in-plane observed vectors modulo the pair, 
+
+d the smallest out-of-plane projection (the interlayer spacing), and vatom the volume per atom. 
+
+L4 . 3D scan : for each kept pair, every candidate t3 whose triple determinant | det T | = |t3 ·
+
+ˆn| | t1 × t2| falls into a density band 
+
+| det T − k v atom | ≤ τdens vatom , τdens = 0 .40 (17) (for a component volume that carries the Gaussian-tail error) is tested for consistency. 
+
+L5 . Consistency : a basis T = ( t1, t 2, t 3) is consistent iff (i) every short lattice vector of T is an observed difference and (ii) the residue-class count k of the observed vectors modulo T sat-isfies the density equation. Test (i) rejects basis-offset sublattices such as HCP’s interlayer cell, whose lattice contains 2 tinter , a vector that is not an observed crystal translation. 3D Cloud Component Analysis of Atomic Structures 13 
+
+L6 . Min-det race : among consistent bases the true primitive lattice has the smallest | det T | (a sublattice with index m carries m extra residue classes and hence an m-fold determinant), so the winner is the consistent basis with the smallest (max i |ti|, | det T |).The density-based volume per atom carries the Gaussian-tail error of the component volume (10–40% for thin slabs), so the raw value is scanned first—exact for bulk crystals—and only if no basis passes are the volumes implied by each in-plane pair, 
+
+vcorr = |t1 × t2|
+
+k d, (18) tried nearest-first (bounded to six candidates, deduplicated to 0.5 Å 3). For the true surface plane this is exactly area-per-atom × layer spacing, i.e. the true volume; skew lattice planes imply overestimates and are rejected. Three guards keep the search fast and bounded. Memoization : the expensive consistency tests depend only on the basis, not on the volume candidate, so each basis is tested once and its result is checked against every volume with cheap determinant arithmetic—a per-volume rerun cost a single mixed-metal recovery ∼70,000 consistency tests. Per-species recovery : when a component contains several elements (e.g. an interface whose two metals’ densities merge into one component), the lattice is recovered from each species’ sublattice, majority first. Every species of a crystal shares the same translation lattice, so this is exact for compounds (GaAs) and interfaces alike; a search for one lattice of two incommensurate lattices is both slow and ill-posed. Budget guard : recovery aborts after 50,000 consistency tests and the component is reported without indices (“?”) rather than with a spurious lattice. 
+
+2.10.2 Reciprocal convention and facet normals 
+
+Miller indices use the reciprocal basis, the dual of the conventional cell C (rows = lattice vectors): the plane normal of (h, k, l ) is g = ( h, k, l ) inv( C)T, so the indices of a facet with outward normal 
+
+n are (h, k, l ) ∼ n C T. The un-transposed forms n C / (h, k, l ) inv( C) are only coincidentally correct for axis-aligned orthogonal cells and silently mis-index non-symmetric ones—hexagonal cells by ≈ 26 ◦ (Mg (10¯ 11) ) and rotated-cubic cells by ≈ 12 ◦ (a (111) -oriented cube), the frame the slab cutter produces. Facet normals come from the atom geometry rather than the density gradient. On a close-packed surface the class map is corrugated—the Gaussian threshold leaves sub-resolution troughs between the top-layer atoms—so the density/EDT gradient points sideways. The outward nor-mal of a surface atom is instead the negative of the mean direction to its neighbours, taken over a PBC-aware ball of the component’s full atom set: the in-plane ring cancels exactly and the mean points inward, the exact facet normal of any crystal facet. Symmetric environments (the layer below a facet) get no normal. Facets are clustered at a tight 10 ◦ tolerance so that atoms at the edge of a partial surface layer (whose sums are biased) do not tilt the clusters. 
+
+2.10.3 Orthogonal cell redefinition 
+
+Model building often needs an orthogonal (or nearly orthogonal) simulation box even when the input lattice is crooked—a graphene primitive cell has a 120 ◦ angle, but the natural simulation box is rectangular with one axis along the zigzag and the other along the armchair lines. Given a recovered primitive lattice, orthogonal_cell enumerates the integer combinations of the primitive vectors (coefficients in [−3, 3] ) and returns the smallest cell whose axes are mutually orthogonal (within 5◦) and whose volume is an integer multiple of the primitive cell (at most 
+
+8×). Graphene’s 120 ◦ primitive cell becomes the rectangular zigzag × armchair cell ( a × √3 a, 4 atoms); hexagonal crystals become the ortho-hex cell ( a, √3 a, c ); fcc and diamond become the 3D Cloud Component Analysis of Atomic Structures 14 
+
+a/ √2 × a/ √2 × a tetragonal cell. redefine_lattice re-expresses every atom in the new cell— each atom’s images are the | det T | coset shifts m inv( T ) mod 1 , deduplicated by a minimum-image tolerance—and keeps the box height along the sheet normal for 2D sheets (a graphene cell of a × √3a × h). 
+
+# 3 Parameters and Defaults 
+
+Parameter Symbol Default Range Gaussian width σ 1.5 Å 0.5–3.0 Å Grid spacing ∆ 0.25 Å 0.1–0.5 Å Element threshold θelem 0.3 0.2–0.5 Vacuum threshold θvac 0.5 0.3–0.7 Connectivity – 6 6, 18, 26 Gap threshold (shape) δgap 4.0 Å 2.0–8.0 Å Boundary tolerance δboundary 2.0 Å 1.0–4.0 Å Atom classify radius rclass 3.0 Å 2.0–5.0 Å Min component volume Vmin 10.0 Å 3 –Max grid dimension nmax 300 100–500 Stable region thickness τstab 2.0 Å 1.0–4.0 Å Min region voxels Nreg 4 –Phase split fraction ϕsplit 0.20 0.10–0.40 Phase split min votes Nsplit 10 –Phase split confidence csplit 0.60 0.50–0.80 Local density radius rρ 4.0 Å 3.0–5.0 Å Local density tolerance ερ 0.15 0.05–0.30 Vertex vacuum depth κdepth 3 voxels 2–5 The stable-region thickness τstab sets the minimum physical thickness of a chemical-formula component. Below it, a region is treated as a surface or boundary shell and absorbed by the neighboring stable region; above it (a genuine film, e.g., a few-nanometer oxide), the region keeps its own formula and becomes a component. The phase-split parameters govern when a component is declared two-phase: both candidate prototypes must be supported by ϕsplit of the trusted votes, at least Nsplit atoms, and a mean confidence of at least csplit .The Gaussian width σ controls the scale of analysis: • σ = 0 .5–1.0 Å: Atomic resolution—individual atoms remain as separate density peaks. • σ = 1 .0–2.0 Å (default 1.5): Chemical bonding scale—covalently bonded atoms merge into continuous regions; interfaces show compound character. • σ = 2 .0–3.0 Å: Morphological scale—only large phase regions are resolved; fine structure is averaged out. The grid spacing ∆ = 0 .25 Å is chosen to satisfy the Nyquist criterion for the Gaussian: the full width at half maximum is FWHM = 2 √2 ln 2 σ ≈ 2.355 σ, and ∼6 samples per FWHM require ∆ ≲ 0.4σ ≈ 0.6 Å for σ = 1 .5 Å. 
+
+# 4 Implementation 
+
+The package is structured as a modular Python library with a Dash-based web interface: 3D Cloud Component Analysis of Atomic Structures 15 
+
+src/cloud_comp/ io.py Structure loading (CIF/POSCAR/XYZ) via pymatgen, extended-XYZ lattice restored pbc.py Periodic boundary utilities density.py 3D Gaussian density grid (bin-then-blur, dual raw/clipped) classify.py Chemical-formula map + stable-region cleaning components.py PBC-aware connected component labeling (union-find) properties.py Component property computation (vectorized) shape.py Rich shape characterization (cavities, tunnels, moments) atoms.py Atom-to-component mapping, boundary/role classification phase.py Neural prototype classification, trusted-interior test, coordination numbers, local density serialize.py JSON-serializable document (model/labels/components/summary) api.py Unified analyze() entry point visualize.py Plotly 3D isosurface/slice visualization web/ app.py Dash web interface (upload, label chips, highlight, progress bar, model/component panels) ctk_scene.py Crystal Toolkit scene builder (per-atom spheres, bonds) 
+
+The hot loops—voxel classification, formula-region cleaning, connected-component relabel-ing, surface/interface counting, and atom sphere sampling—are vectorized with NumPy/SciPy; the 1536-atom Si/GaAs heterojunction analyzes in ∼7 s on one CPU core including the neural classifier. The phase classifier is consumed from the partner project crystal_structure_database_descriptor 
+
+(element-mapped rotation-invariant descriptors, R_cut = 3 d0, 271 prototypes + amorphous). It is called once per structure and its per-atom arrays are sliced per component, so the classifier cost does not scale with the number of components. When the model is unavailable, the pipeline falls back to Steinhardt/CNA/bond-angle descriptors and spglib. Dependencies: NumPy, SciPy, pymatgen ( ≥ 2024.1), scikit-image (marching cubes), Plotly, Torch (CPU inference), Dash ( ≥ 3.4) + dash-bootstrap-components + diskcache (background callbacks with a live progress bar), and the Materials Project Crystal Toolkit ( crystal-toolkit ,
+
+dash-mp-components ) for 3D structure rendering in the web interface. The web interface accepts CIF/POSCAR/XYZ uploads, runs the analysis as a background callback with per-stage progress, and lists every label category—chemical formula, element, prototype, inner/surface/interface, component, coordination number, defect, amorphous—as clickable chips. Selecting a chip highlights the matching atoms in the Crystal Toolkit viewer, and the right panel shows whole-model information and the geometry of every component. Beyond the interactive interface, the same pipeline is exposed as a machine-consumable API designed for other projects: analyze_to_dict() and analyze_to_json() (serialize.py ) take a whole structure and return a single JSON document with four sections— model (formula, lat-tice, grid, parameters, space group), labels (per-atom component, role, phase, coordination number, defects), components (per-component formula, volume, shape, phase, interface areas), and summary (aggregate counts). Only plain JSON types are emitted, so json.dumps always suc-ceeds. This document is the primary integration surface with the ATLAS framework [12], whose structure analyzer consumes it directly for compositional validation of generated structures. 3D Cloud Component Analysis of Atomic Structures 16 
+
+# 5 Applications 
+
+## 5.1 Heterojunction Analysis 
+
+For a Si(111)/a-SiO 2 heterojunction (e.g., Si111_aSiO2.cif , 94 atoms, orthorhombic cell 3.85 ×
+
+3.85 × 53 .75 Å3), the analysis with σ = 1 .5 Å produces: • One Si component and one O-Si (SiO 2) component: the boundary layers between them are absorbed by the stable regions, so no interface component exists; • Phase analysis labels the O-Si component amorphous (its trusted interior votes are confi-dently amorphous, and the scattered low-confidence votes do not trigger a spurious split) and the Si component by its prototype; • The interface between Si and SiO 2 is a boundary: atoms of either component within the sampling radius of the other are labeled interface , with the partner phases recorded per atom; • Vacuum components bound the slab on both sides, and the material–vacuum boundaries define the surface atoms. For the Si|GaAs heterojunction (1536 atoms, two 4 × 4 × 6 slabs), the same pipeline yields exactly two material components—Si ( A4_C_diamond ) and As-Ga ( B3_ZnS_zincblende )—plus vacuum. The pure Ga/As surface terminations and the GaSi/AsGaSi boundary shells are ab-sorbed during formula-region cleaning; GaAs free-surface atoms are labeled surface ; atoms at the Si–GaAs boundary are labeled interface ; and the ten slab corners are labeled vertex .
+
+## 5.2 Crystalline/Amorphous Phase Separation 
+
+For a Si(100)/a-Si junction ( Si100_aSi.cif , 108 atoms), the density field is a single connected Si region, so the formula map contains one Si component. The trusted-interior votes split into two confident groups—a crystalline prototype and amorphous , each above the fraction and confidence gates—so the component is divided into two Si components, one per phase. This demonstrates the two-phase check: one chemical formula can host two phases, and the component is divided accordingly. 
+
+## 5.3 Gate-All-Around Nanowire 
+
+For a GAA Si/SiO 2/HfO 2 nanowire cross-section ( GAA_Si_SiO2_HfO2.cif , ∼1872 atoms, 24 ×
+
+24 × 15 Å3), the analysis reveals concentric formula components: • Si core (wire, 1D)—the conducting channel, with its crystalline phase • SiO 2 interlayer (wire, 1D), with the interface to the Si core derived as a boundary • HfO 2 outer shell (wire, 1D)—the high-κ dielectric • Vacuum surrounding the nanowire (channel, connecting in 2 directions) The interlayer boundary layers are absorbed by the neighboring stable regions, so the com-ponent list contains only the three formula layers plus vacuum, and the two material–material boundaries are reported as interface areas between them. 3D Cloud Component Analysis of Atomic Structures 17 
+
+## 5.4 Defect Detection 
+
+Removing a single atom from a 3 × 3 × 3 diamond-Si supercell (215 atoms) flags exactly the four nearest neighbors of the vacancy as low_cn defects (coordination 3 instead of 4, local density 15 instead of 16); the perfect supercell reports zero defects. Because detection is restricted to trusted bulk atoms of crystalline components, surface atoms with naturally truncated coordination and atoms in amorphous material are not falsely flagged. 
+
+## 5.5 Porosity Analysis 
+
+For structures with internal voids, the cavity and tunnel detection identifies: • Enclosed pores (cavities not touching the cell boundary) • Through-channels (vacuum connecting opposite cell faces) • Bicontinuous structures (interpenetrating material and vacuum networks) 
+
+## 5.6 Limitations 
+
+The density-based segmentation and the neural phase classifier have complementary limitations: • Thin films : regions thinner than the stable-region thickness τstab are absorbed into their neighbor and do not appear as components. A sub-2 Å surface oxide is therefore reported as part of the substrate rather than as a separate material. • Small components : components without trusted atoms (slabs thinner than the classifier window of ∼14 Å, small clusters) receive no phase claim ( unknown ) rather than a possibly wrong prototype. • Classifier reliability : the phase label inherits the prototype classifier’s accuracy for bulk environments. Interface-adjacent atoms are excluded from the vote, but a component whose trusted interior is genuinely defective or strained may be assigned a neighboring prototype. • Amorphous versus defective : atoms in amorphous material are not flagged as defects, by construction; a disordered-but-crystalline region with a wide coordination spread is like-wise skipped. Distinguishing a defective crystal from a poorly crystallized phase remains a physical judgment encoded in the modal-coordination dominance test. • Periodic seams : formula-region cleaning and distance transforms assume the cell is large enough that the periodic seam does not cut through the density tails; for cells with sub-nanometer vacuum gaps the seam can alias a surface shell into the neighboring cell. 
+
+# 6 Recent Developments and Roadmap 
+
+This section records the current development state: what was recently done, what was learned from an external reference implementation, and what is planned. 
+
+## 6.1 What we did: bounding the lattice-recovery search 
+
+Profiling the test suite (401 s for 103 tests, pytest –durations ) showed that lattice recovery dominated the runtime: an Au |Al interface analysis spent 137 s and a jittered-crystal recovery 79 s—together more than half of the suite time, and both were lattice-recovery tests. Four root causes were identified: 3D Cloud Component Analysis of Atomic Structures 18 
+
+R1 . the expensive basis-consistency tests were rerun for every volume candidate although they depend only on the basis; 
+
+R2 . the observed-vectors test scanned the full observed-vector set per candidate combination (343 combinations × O(m) comparisons per call); 
+
+R3 . the in-plane pairs were scanned coarsest-first, so the most likely-to-fail cells were tried before the true surface plane; 
+
+R4 . recovery ran on the full atom set of mixed components (an Au |Al interface whose two metal densities merge into one component), where no single lattice exists—an ill-posed search that exhausts every pair/volume combination. The adopted fixes are described in Section 2.10: memoized basis tests across volume candi-dates, KDTree-pruned consistency checks (an O(m) scan per candidate replaced by an O(log m)
+
+query plus an exact componentwise verification), error-ordered in-plane pairs, per-species recov-ery for mixed components, and a 50,000-test budget guard. Measured on the same machine after the fixes: the full suite runs 401 s → 234 s (103 passed, 1 skipped); the graphene/Mg/Si facet tests remain under 4 s each. Intermediate measurements of ∼10 s for both the Au |Al and the jittered recoveries came from an L2-relative tolerance variant that was abandoned: it silently accepted borderline-invalid bases (an Mg(0001) slab recovered a rotated hcp cell classified as cubic). The shipped semantics are an exact componentwise (L ∞, 0.1 Å) verification behind a loose KDTree prune; with the correct semantics the Au |Al interface analyze is 33–43 s (88,000 consistency-test calls, traced) and the jittered-crystal recovery 29.5 s—still a 3–4 × improvement over the original 137 s / 79 s, and now bounded by the budget guard. The crystallography kernel (lattice recovery, Miller indexing, cell orthogonalization, 2D-sheet classification) has since been moved to the partner project crystal_structure_database_descriptor 
+
+as src/crystallography.py , copied byte-identical and declared frozen; the two projects are sib-ling checkouts, with the rule that one may read the other but never modify it. cloud_comp loads the kernel through a path-loader shim that re-exports its public names, so the pipeline code is untouched. One ordering-insensitivity fix lives in the shim: pymatgen 2026.x make_supercell 
+
+orders atoms lexicographically, which produces pair sets carrying only one sign per direction that fail the kernel’s ± check (six kernel tests failed in the partner checkout); the shim sign-canonicalizes the observed set before the check—a no-op for sign-balanced inputs—and the upstream either-sign patch has been proposed to the partner (their open item #23). 
+
+## 6.2 What we did: comparing with VASPKIT’s heterostructure builder 
+
+To sanity-check the complexity of the recovery search, we investigated how VASPKIT [14] builds heterostructures. VASPKIT’s builder (option 804, not 921—921 centers a 2D material along z)takes two slab POSCARs, a mismatch tolerance (officially recommended 1–5%), a layer distance, and a vacuum thickness; it then enumerates common superlattices of the two layers’ 2D lattices— integer supercell transformations of each layer’s known primitive cell—evaluates the strain and in-plane rotation of every candidate, writes a ranked list, and caps the enumeration at ∼5000 candidate structures. The key contrast is that VASPKIT trusts the input lattices : the search runs on two known 2D bases with cheap vector algebra (milliseconds), whereas our analysis must recover each component’s lattice from atom positions—a harder inverse problem—and previously did so with an unbounded search on mixed components. The comparison validated the direction of the optimization (a bounded, per-species search) and motivates the planned builder below. 3D Cloud Component Analysis of Atomic Structures 19 
+
+## 6.3 What we plan: a heterostructure builder 
+
+We plan a VASPKIT-style build_heterostructure() API as a first-class component of cloud_comp ,following the same lattice-matching family as VASPKIT 804 and the Zur–McGill algorithm [15] (as implemented, e.g., in pymatgen’s substrate analyzer): 
+
+B1 . Input : two slabs (or two bulks plus Miller indices, cut with the same slab machinery used in the tests), a mismatch tolerance (default 3%), a layer distance (default 3.5 Å), a vacuum thickness (default 12 Å), and an optional in-plane rotation of the top layer. 
+
+B2 . In-plane bases : each layer is reduced to its 2D in-plane basis (recovered by the lattice-recovery machinery of Section 2.10 with the two in-plane axes periodic). 
+
+B3 . Superlattice matching : enumerate the integer 2 × 2 transformations of each layer’s basis with | det | ≤ 8; for every pair of supercells compute the strain as the maximum relative mismatch of the two cells’ singular values (lengths and angle in one metric); keep pairs with strain ≤ mismatch tolerance; rank by (strain, atom count); cap the candidate list at 
+
+∼5000, as VASPKIT does. 
+
+B4 . Assembly : re-express each layer in its matched supercell (the same coset-shift machinery as redefine_lattice ), stack them at the layer distance in the shared (slightly strained) frame, add the vacuum, and return the structure together with the ranked candidate list (strain, supercell sizes, atom counts)—the analogue of VASPKIT’s SUPERLATTICE_LIST .
+
+B5 . Orthogonalization : the final box is re-orthogonalized with redefine_lattice (Sec-tion 2.10). Since both layers share the matched in-plane lattice, a common orthogonal supercell is valid for both—an orthogonal simulation box, which VASPKIT does not pro-vide, and the user requirement that motivated redefine_lattice .The builder turns the ad-hoc slab stacking currently used in the interface tests into a public API, and its matched-supercell output can be fed directly back through analyze() for compo-sitional validation. 
+
+## 6.4 Remaining work 
+
+(i) the full-suite regression verification of the recovery restructure is complete (103 passed, 1 skipped, 234 s); deterministic call-count regression tests are moot now that the kernel is frozen in the partner project, and its cost is bounded by the 50,000-test budget guard; (ii) profile the remaining ∼23 s of the GAA-nanowire analysis (a large-cell pipeline cost, not lattice recovery); (iii) implement the heterostructure builder of Section 6.3 with tests (matched-supercell strain 
+
+≤ tolerance, (111) -family preservation after re-analysis, orthogonal output box); (iv) decide with the partner project whether to adopt the proposed either-sign patch (closing their open item #23) and the per-combo early-out performance refinement; (v) extend the figure and quantitative-validation plan of the implementation notes. 
+
+# 7 Conclusion 
+
+We have presented a method for decomposing atomic structures into physically meaningful components through 3D Gaussian density field analysis. The key innovations are: (i) dual raw/clipped density representation that preserves stoichiometric information despite trunca-tion; (ii) efficient bin-then-blur computation with periodic boundary handling via Gaussian wrap mode; (iii) a chemical-formula map cleaned by a stable-region criterion, so that the de-composition contains exactly the bulk-like formula components plus vacuum, with no surface or interface components; (iv) per-component phase analysis with a neural prototype classifier, 3D Cloud Component Analysis of Atomic Structures 20 including a trusted-interior test, a one-phase/two-phase decision, and the separation of coex-isting crystalline and amorphous phases of the same formula; (v) union-find PBC merging for connected component labeling without supercell tiling; (vi) absolute-threshold shape classifica-tion and topological cavity/tunnel detection; (vii) boundaries-as-relations, in which surfaces and interfaces are derived from the component map and every atom is labeled bulk, surface, inter-face, or vertex, with vertex reserved for geometric corners; and (viii) inner-defect detection from coordination-number and local-density deviations restricted to trusted bulk atoms of crystalline components. The method is implemented as an open-source Python package with a web interface built on the Materials Project Crystal Toolkit: upload a CIF/POSCAR/XYZ structure, run the analysis with a live progress bar, and explore every label category—chemical formula, phase, inner/surface/interface, coordination number, defect—by clicking chips that highlight the match-ing atoms in the 3D viewer. It is designed for heterojunction characterization, interface analysis, porosity quantification, phase identification, and defect screening in multi-material atomic struc-tures. 
+
+# References 
+
+[1] Multi-agentic framework for atomistic simulation pipelines , 2025. [2] LLM-generated crystal structures , 2024. [3] GenMS: Generative models for crystal structures from natural language , 2024. [4] J. Behler, “Atom-centered symmetry functions for constructing high-dimensional neural network potentials,” Journal of Chemical Physics , vol. 134, 074106, 2011. [5] A. V. Shapeev, “Moment tensor potentials: A class of systematically improvable interatomic potentials,” Multiscale Modeling & Simulation , vol. 14, pp. 1153–1173, 2016. [6] T. F. Willems et al. , “Algorithms and tools for high-throughput geometry-based analysis of crystalline porous materials,” Microporous and Mesoporous Materials , vol. 149, pp. 134–141, 2012. [7] L. Sarkisov et al. , “PoreBlazer: A tool for automated computational characterization of crystalline porous materials,” Molecular Simulation , vol. 43, pp. 139–151, 2017. [8] A. H. Larsen et al. , “The atomic simulation environment—a Python library for working with atoms,” Journal of Physics: Condensed Matter , vol. 29, 273002, 2017. [9] A. Stukowski, “Visualization and analysis of atomistic simulation data with OVITO—the Open Visualization Tool,” Modelling and Simulation in Materials Science and Engineering ,vol. 18, 015012, 2010. [10] K. Momma and F. Izumi, “ VESTA 3 for three-dimensional visualization of crystal, volu-metric and morphology data,” Journal of Applied Crystallography , vol. 44, pp. 1272–1276, 2011. [11] P. Hirel, “Atomsk: A tool for manipulating and converting atomic data files,” Computer Physics Communications , vol. 197, pp. 212–219, 2015. [12] P. Li, “ATLAS: Atomic Translation & Language for Automated Structures,” manuscript, Shanghai Institute of Microsystem and Information Technology, 2026. [13] S. P. Ong et al. , “Python Materials Genomics (pymatgen): A robust, open-source python library for materials analysis,” Computational Materials Science , vol. 68, pp. 314–319, 2013. 3D Cloud Component Analysis of Atomic Structures 21 [14] V. Wang, N. Xu, J.-C. Liu, G. Tang, and W.-T. Geng, “VASPKIT: A user-friendly interface facilitating high-throughput computing and analysis using VASP code,” Computer Physics Communications , vol. 267, 108033, 2021. [15] A. Zur and T. C. McGill, “Lattice match: An application to heteroepitaxy,” Journal of Applied Physics , vol. 55, pp. 378–386, 1984.

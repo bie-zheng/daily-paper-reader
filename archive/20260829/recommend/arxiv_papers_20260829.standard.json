@@ -1,6 +1,6 @@
 {
   "mode": "standard",
-  "generated_at": "2026-08-29T02:13:43.267938+00:00",
+  "generated_at": "2026-08-29T21:53:18.893825+00:00",
   "stats": {
     "mode": "standard",
     "tag_count": 1,
@@ -14,76 +14,74 @@
   "deep_dive": [],
   "quick_skim": [
     {
-      "id": "2608.26048v1",
+      "id": "2608.24234v1",
       "source": "arxiv",
-      "title": "Experimental Characterization of Additively Manufactured Metallic Alloys for Electric Propulsion Applications",
-      "abstract": "This work explores the sputtering of additively manufactured (AM) materials for use in gridded ion source applications. The first part of the paper uses 316L stainless steel as an example to demonstrate that additively manufactured material does not exhibit adverse sputtering behavior, such as higher sputter yield, compared with conventionally manufactured material. To this end, three additively manufactured 316L stainless steel samples were exposed to the beam of a KDC-40 electrostatic gridded ion source at three distinct energy levels of 400, 600, and 800 eV on each side of the sample for a duration of one hour. The samples were masked to create a distinct boundary between treated and untreated regions, identifiable using profilometry, and were biased to -18V for testing. Samples were then examined using a Bruker optical profilometer and further processed using the open-source software Gwyddion to evaluate the sputtering yield. The sputter yield varied in the range 0.2-2 atoms/ion for 400-800 eV ions and increased with ion energy. The measured sputtering yield was fairly consistent with predictions from analytical models developed in prior literature, while exhibiting some variations potentially due to added effects of increased temperature and oxide layers. The second part of the paper demonstrates feasibility of using an additively manufactured tungsten-rhenium grids in existing KDC-40 electrostatic gridded ion source.",
+      "title": "Influence of Interface Energy Anisotropy on the Solid-state Instability in Ni-based Superalloy: A Multiscale Study",
+      "abstract": "The microstructural stability of nickel-based superalloys critically depends on the morphology and evolution of $γ'$-precipitates, which is governed by elastic and interfacial anisotropies at the atomic scale. Here, we present a novel quantitative multiscale framework that, for the first time, directly incorporates atomistically computed interface energy anisotropy into mesoscale phase-field simulations to elucidate morphological selection and instability in the Ni--Al system. We employ density functional theory (DFT) to accurately predict the orientation-dependent $γ/γ'$ interface energies for key crystallographic planes. A rigorous analytic mapping is then developed to systematically reduce the three-dimensional (3D) interface anisotropy landscape to the two-dimensional (2D) simulation plane. This enables quantitative transfer of DFT-informed anisotropy parameters into a continuum phase-field model that also accounts for elastic inhomogeneity and eigenstrain. Our simulations demonstrate that the explicit inclusion of DFT-based interface energy anisotropy fundamentally alters precipitate morphological evolution, robustly suppressing instability and faceting phenomena otherwise promoted by supersaturation and elastic effects. The framework bridges atomic- to mesoscale modeling, enabling predictive control of precipitate shapes and providing new insights into the interplay of elastic and interfacial contributions in Ni-based superalloys. This approach paves the way for quantitative microstructural design in advanced high-temperature alloys via first-principles-guided multiscale simulation.",
       "authors": [
-        "J. Chamberlain",
-        "A. Shashurin"
-      ],
-      "primary_category": "physics.plasm-ph",
-      "categories": [
-        "physics.plasm-ph",
-        "cond-mat.mtrl-sci"
-      ],
-      "published": "2026-08-26T17:23:44+00:00",
-      "link": "https://arxiv.org/pdf/2608.26048v1",
-      "tags": [
-        "keyword:rad-damage",
-        "query:rad-damage"
-      ],
-      "llm_score": 6.0,
-      "llm_evidence_en": "Sputtering behavior of additively manufactured 316L stainless steel under ion beam irradiation",
-      "llm_evidence_cn": "增材制造316L不锈钢在离子束辐照下的溅射行为",
-      "llm_evidence": "增材制造316L不锈钢在离子束辐照下的溅射行为",
-      "canonical_evidence": "增材制造316L不锈钢在离子束辐照下的溅射行为",
-      "llm_tldr_en": "This work experimentally compares the sputtering of additively manufactured and conventional 316L stainless steel under ion beam irradiation at 400-800 eV, finding no adverse sputter yield for AM material, supporting its use in electric propulsion.",
-      "llm_tldr_cn": "该工作针对增材制造金属在电推进离子源中的应用需求，选取316L不锈钢为对象，系统对比了增材制造与常规制造样品在400、600和800 eV离子束轰击下的溅射行为。通过掩膜划分受照与未受照区域，实验测量了不同能量的溅射产额。结果表明增材制造材料未表现出更高的溅射产额，说明其作为电推进部件材料是可行的。这为增材制造结构材料在辐照环境下的应用提供了实验支撑。",
-      "llm_tldr": "该工作针对增材制造金属在电推进离子源中的应用需求，选取316L不锈钢为对象，系统对比了增材制造与常规制造样品在400、600和800 eV离子束轰击下的溅射行为。通过掩膜划分受照与未受照区域，实验测量了不同能量的溅射产额。结果表明增材制造材料未表现出更高的溅射产额，说明其作为电推进部件材料是可行的。这为增材制造结构材料在辐照环境下的应用提供了实验支撑。",
-      "llm_tags": [
-        "query:rad-damage"
-      ],
-      "matched_query_tag": "query:rad-damage",
-      "matched_query_text": "radiation damage mechanisms in structural materials",
-      "matched_requirement_id": "req-1",
-      "selection_source": "fresh_fetch",
-      "quick_tier": "6"
-    },
-    {
-      "id": "2608.27314v1",
-      "source": "arxiv",
-      "title": "Grain Boundary Phase Transitions Enable Diffusionless Climb of Disconnections",
-      "abstract": "Dislocation-grain boundary (GB) interactions govern the mechanical response of polycrystalline materials by controlling dislocation absorption, transmission, and interfacial plasticity. While disconnection climb is conventionally understood to require the absorption or emission of point defects supplied through long range bulk diffusion, GBs possess intrinsic configurational degrees of freedom associated with their atomic structure, or microstate, that may provide an alternative mechanism. Here, using bicrystallography and molecular dynamics simulations, we investigate the interaction of shear dislocation loops with the [1 1 0](-5 5 14) symmetric tilt grain boundary in Al. We show that dislocation absorption generates a mobile extrinsic disconnection with a nonzero climb component that propagates conservatively along the interface without long-range bulk point-defect transport. Its motion is accompanied by a localized GB phase transformation mediated by cooperative atomic rearrangements within the GB core, producing successive metastable GB microstates. These findings establish a direct coupling between lattice dislocations and GB phase evolution and reveal a conservative mechanism for disconnection climb fundamentally distinct from conventional vacancy-mediated climb.",
-      "authors": [
-        "Md Sharier Nazim",
-        "Giacomo Po",
-        "Nikhil Chandra Admal"
+        "Sourav Ghosh",
+        "Christian Brandl",
+        "Rajdip Mukherjee"
       ],
       "primary_category": "cond-mat.mtrl-sci",
       "categories": [
         "cond-mat.mtrl-sci"
       ],
-      "published": "2026-08-27T16:17:03+00:00",
-      "link": "https://arxiv.org/pdf/2608.27314v1",
+      "published": "2026-08-25T08:37:16+00:00",
+      "link": "https://arxiv.org/pdf/2608.24234v1",
       "tags": [
         "keyword:rad-damage",
         "query:rad-damage"
       ],
       "llm_score": 6.0,
-      "llm_evidence_en": "dislocation loop absorption at GBs and diffusionless climb, relevant to defect evolution",
-      "llm_evidence_cn": "位错环在晶界处的吸收及无扩散攀移，与缺陷演化相关",
-      "llm_evidence": "位错环在晶界处的吸收及无扩散攀移，与缺陷演化相关",
-      "canonical_evidence": "位错环在晶界处的吸收及无扩散攀移，与缺陷演化相关",
-      "llm_tldr_en": "Using bicrystallography and MD, this paper shows grain-boundary phase transitions allow diffusionless climb of absorbed dislocation loops, providing a defect-sink mechanism with direct relevance to irradiated microstructure evolution.",
-      "llm_tldr_cn": "该工作通过双晶学分析和分子动力学模拟，研究了Al中剪切位错环与[1 1 0](-5 5 14)对称倾侧晶界的相互作用。传统观点认为位错攀移必须依赖长程体扩散提供点缺陷，但本研究发现晶界本身的原子结构微态可提供替代机制，使吸收位错形成可移动的外在位错、通过晶界相变实现无扩散攀移。该机制对辐照条件下位错环在晶界处的吸收与湮灭具有重要意义，为缺陷团簇演化与微观结构变化提供了新见解。",
-      "llm_tldr": "该工作通过双晶学分析和分子动力学模拟，研究了Al中剪切位错环与[1 1 0](-5 5 14)对称倾侧晶界的相互作用。传统观点认为位错攀移必须依赖长程体扩散提供点缺陷，但本研究发现晶界本身的原子结构微态可提供替代机制，使吸收位错形成可移动的外在位错、通过晶界相变实现无扩散攀移。该机制对辐照条件下位错环在晶界处的吸收与湮灭具有重要意义，为缺陷团簇演化与微观结构变化提供了新见解。",
+      "llm_evidence_en": "Multiscale framework for precipitate morphology evolution applicable to modeling precipitation hardening in irradiated FeCr alloys",
+      "llm_evidence_cn": "多尺度框架用于析出物形貌演化，可应用于辐照FeCr合金析出硬化建模",
+      "llm_evidence": "多尺度框架用于析出物形貌演化，可应用于辐照FeCr合金析出硬化建模",
+      "canonical_evidence": "多尺度框架用于析出物形貌演化，可应用于辐照FeCr合金析出硬化建模",
+      "llm_tldr_en": "Develops a multiscale framework coupling DFT-calculated interface energies with phase-field modeling to predict precipitate morphology and instability in Ni-Al alloys. Provides a transferable simulation approach for precipitation evolution that could be adapted to irradiated FeCr alloys.",
+      "llm_tldr_cn": "镍基高温合金中γ'析出相的形貌与稳定性受弹性和界面各向异性控制。本文提出一种多尺度框架，将DFT计算的界面能各向异性直接嵌入介观相场模拟，首次系统研究Ni-Al体系中析出相的形态选择与失稳行为。结果表明界面能各向异性对析出物形态和固溶失稳具有关键影响，为合金析出演化模拟提供了可迁移的方法。该方法有望扩展至辐照条件下FeCr合金析出硬化与微观结构演化研究。",
+      "llm_tldr": "镍基高温合金中γ'析出相的形貌与稳定性受弹性和界面各向异性控制。本文提出一种多尺度框架，将DFT计算的界面能各向异性直接嵌入介观相场模拟，首次系统研究Ni-Al体系中析出相的形态选择与失稳行为。结果表明界面能各向异性对析出物形态和固溶失稳具有关键影响，为合金析出演化模拟提供了可迁移的方法。该方法有望扩展至辐照条件下FeCr合金析出硬化与微观结构演化研究。",
       "llm_tags": [
         "query:rad-damage"
       ],
       "matched_query_tag": "query:rad-damage",
-      "matched_query_text": "radiation induced defect evolution and microstructure changes",
-      "matched_requirement_id": "req-6",
+      "matched_query_text": "precipitation hardening in irradiated FeCr alloys",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.27304v1",
+      "source": "arxiv",
+      "title": "3D Cloud Component Analysis of Atomic Structures",
+      "abstract": "We present a method for decomposing atomic structures into physically meaningful components by converting discrete atomic coordinates into continuous three-dimensional density fields. Each element is represented by a Gaussian-smeared density map with values ranging from 0 to 1, computed efficiently through a bin-then-blur approach with periodic boundary conditions. The sum of all element densities, truncated at unity, defines the material region; its complement defines the vacuum. Every voxel is first assigned a chemical formula from the set of elements present above a threshold; the resulting formula map is then cleaned so that only regions with a genuine bulk interior-measured by the Euclidean distance to their own boundary-survive as components. Thin surface terminations (e.g., a Ga monolayer on GaAs) and one-to-two-voxel boundary layers between two crystals are absorbed by the neighboring stable region, so the decomposition contains exactly the bulk-like chemical-formula components and the vacuum, with no surface or interface components. For each component we determine the crystal phase with a neural prototype classifier: one phase if the trusted interior atoms vote unanimously, two phases (e.g., crystalline and amorphous Si) if they split into two confident groups, in which case the component is divided into two. Interfaces and surfaces are then derived as boundaries-material-material and material-vacuum-and every atom is labeled bulk, surface, interface, or vertex, with vertex reserved for geometric corners of a component. Inside crystalline components, inner defects are detected from coordination-number and local-density deviations. We demonstrate the approach on Si/GaAs and Si/SiO2 heterojunctions, crystalline/amorphous silicon junctions, vacancy-containing crystals, and bulk crystals.",
+      "authors": [
+        "Pai Li"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ],
+      "published": "2026-08-27T16:07:01+00:00",
+      "link": "https://arxiv.org/pdf/2608.27304v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "A density-based component analysis of atomic structures can identify and separate defect clusters and phases, directly applicable to radiation-induced defect analysis",
+      "llm_evidence_cn": "基于三维密度场的原子结构组分分析方法，可分解并识别缺陷团簇和相区域，适用于辐照诱导缺陷分析",
+      "llm_evidence": "基于三维密度场的原子结构组分分析方法，可分解并识别缺陷团簇和相区域，适用于辐照诱导缺陷分析",
+      "canonical_evidence": "基于三维密度场的原子结构组分分析方法，可分解并识别缺陷团簇和相区域，适用于辐照诱导缺陷分析",
+      "llm_tldr_en": "A density-field decomposition method segments atomic structures into physically meaningful components, labeling bulk, surface, and vacuum via Gaussian smearing and formula maps. It enables efficient identification of distinct phases and defect clusters, applicable to analyzing radiation damage microstructures.",
+      "llm_tldr_cn": "针对原子尺度模拟结果中缺陷团簇和相成分难以自动分割的问题，本文提出将离散原子坐标转换为高斯模糊的三维密度场，并按元素组成映射为不同化学组分的区域。通过体相内部距离判断仅保留真实体相区域，从而高效区分基体、表面和空位等组分。这一方法可直接用于辐照材料中缺陷团簇和析出相的识别，为辐照损伤微观组织定量分析提供了通用工具。",
+      "llm_tldr": "针对原子尺度模拟结果中缺陷团簇和相成分难以自动分割的问题，本文提出将离散原子坐标转换为高斯模糊的三维密度场，并按元素组成映射为不同化学组分的区域。通过体相内部距离判断仅保留真实体相区域，从而高效区分基体、表面和空位等组分。这一方法可直接用于辐照材料中缺陷团簇和析出相的识别，为辐照损伤微观组织定量分析提供了通用工具。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation-induced point defects and clusters",
+      "matched_requirement_id": "req-2",
       "selection_source": "fresh_fetch",
       "quick_tier": "6"
     }
