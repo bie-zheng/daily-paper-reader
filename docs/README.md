@@ -6,31 +6,30 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-08-29
-- 运行时间：2026-08-29 21:54:42 UTC
+- 最新运行日期：2026-08-30
+- 运行时间：2026-08-30 22:45:17 UTC
 - 运行状态：成功
-- 本次总论文数：2
+- 本次总论文数：3
 - 精读区：0
-- 速读区：2
+- 速读区：3
 
 ### 今日简报（AI）
-今日扫读2篇论文，均聚焦材料微观结构模拟，但暂无精读重点。
-
-值得关注的方向：镍基超合金界面能各向异性对固态失稳的影响（6.0分），以及原子结构的三维云团分析（6.0分）。
-
-下一步可优先精读“界面能各向异性”一文，理解多尺度方法如何关联原子行为与宏观缺陷。
-- 详情：[/202608/29/README](/202608/29/README)
+今日速读3篇材料模拟论文，聚焦合金衍射图案演化、团簇成核动力学与晶界相变机制；三篇均获6分，值得关注晶界扩散滑移与多壳团簇成核的动力学调控方向；建议普通读者从晶界相变对材料性能的影响入手延伸阅读。
+- 详情：[/202608/30/README](/202608/30/README)
 
 ### 精读区论文标签
 - 本次无精读推荐。
 
 ### 速读区论文标签
-1. [Influence of Interface Energy Anisotropy on the Solid-state Instability in Ni-based Superalloy: A Multiscale Study](/202608/29/2608.24234v1-influence-of-interface-energy-anisotropy-on-the-solid-state-instability-in-ni-based-superalloy-a-multiscale-study)  
+1. [Composition- and Ordering-Dependent Evolution of Simulated Kikuchi Patterns of Au-Ni Alloys](/202608/30/2608.22931v1-composition--and-ordering-dependent-evolution-of-simulated-kikuchi-patterns-of-au-ni-alloys)  
    标签：评分：6.0/10、query:rad-damage
-   evidence：多尺度框架用于析出物形貌演化，可应用于辐照FeCr合金析出硬化建模
-2. [3D Cloud Component Analysis of Atomic Structures](/202608/29/2608.27304v1-3d-cloud-component-analysis-of-atomic-structures)  
+   evidence：模拟有序合金相与缺陷偏聚的菊池花样，可用于辐照合金中B2有序相的表征
+2. [Kinetic Turnover in the Early-Stage Nucleation of Multi-Shell Condensed Clusters](/202608/30/2608.24792v1-kinetic-turnover-in-the-early-stage-nucleation-of-multi-shell-condensed-clusters)  
    标签：评分：6.0/10、query:rad-damage
-   evidence：基于三维密度场的原子结构组分分析方法，可分解并识别缺陷团簇和相区域，适用于辐照诱导缺陷分析
+   evidence：研究团簇早期形核中结构重排动力学，可迁移至辐照诱导点缺陷团簇形成
+3. [Grain Boundary Phase Transitions Enable Diffusionless Climb of Disconnections](/202608/30/2608.27314v1-grain-boundary-phase-transitions-enable-diffusionless-climb-of-disconnections)  
+   标签：评分：6.0/10、query:rad-damage
+   evidence：分子动力学模拟位错环-晶界相互作用及点缺陷介导攀移
 
 
 <div class="dpr-home-promo-card">

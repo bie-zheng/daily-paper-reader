@@ -1,0 +1,509 @@
+Title: 2608.24792v1.pdf
+
+URL Source: https://arxiv.org/pdf/2608.24792v1
+
+Published Time: Wed, 26 Aug 2026 01:25:38 GMT
+
+Number of Pages: 15
+
+Markdown Content:
+1
+
+# Kinetic Turnover in the Early-Stage Nucleation of Multi-Shell Condensed Clusters 
+
+Kaicheng Zhu 1,2 and Haibin Su 1,2 * 
+
+> 1
+
+Department of Chemistry, The Hong Kong University of Science and Technology, Hong Kong  
+
+> 2
+
+IAS Center for AI for Scientific Discoveries, The Hong Kong University of Science and Technology, Hong Kong 
+
+* To whom correspondence should be addressed. Email:  haibinsu@ust.hk 
+
+Keywords: nucleation, non-equilibrium process, stochastic dynamics, first-passage time, shell model 
+
+Abstract: Nucleation is a key rate-limiting process in phase transition and phase separation. Recent studies highlight a significant discrepancy between experimentally measured nucleation rates and theoretical predictions, particularly when dynamic structural reordering occurs along multi-step pathways. To bridge this gap, we develop a multi-shell model with a space-time-dependent order-parameter field to describe the reordering-nucleation process, where structural reorganization couples with the early growth of condensed clusters. Through stochastic simulations, we track the time-resolved evolution of heterogeneous structural order inside growing clusters. Path analysis of the first-passage problem in early-stage nucleation demonstrates that shifting the reordering rate alters the nucleation rate by several orders of magnitude. Furthermore, as the coupling strength increases, the relationship between the mean first-passage time and reordering susceptibility shifts from monotonic to non-monotonic, exhibiting a turnover effect. We quantitatively rationalize these behaviors with an effective nucleation barrier that accounts for non-equilibrium properties. Our findings elucidate the mechanisms behind multi-step nucleation and offer a predictive framework for future studies. 
+
+Teaser: Coupling structural reordering with surface growth induces a non-monotonic turnover in nucleation kinetics. 2
+
+INTRODUCTION 
+
+Understanding nucleation dynamics during non-equilibrium phase transition and phase separation is a crucial objective in physical science, particularly given the recent advances in nanocrystallization and biomolecular condensation( 1–6). The nucleation process acts as the primary rate-limiting step in the early-stage development of finite-size phase domains, typically characterized by particle aggregation and the emergence of condensed clusters from a dilute background. The evolution of these condensed clusters traverses a series of unstable states before reaching a critical configuration where the net nucleation-driving force transitions from negative to positive. In the classical nucleation theory, the free energy difference between this critical state and the initial state is used to quantify the nucleation barrier and estimate the nucleation rate and flux( 7–9). While non-classical nucleation theories have extended this paradigm by incorporating multi-step mechanisms( 10 –18 ), recent empirical studies have revealed substantial discrepancies between experimentally measured nucleation rates and theoretical predictions( 19 –21 ). Furthermore, although the coevolution of cluster size and structural motifs within the condensed phase has been widely observed, its precise impact on the dynamic properties of the nucleation process remains poorly understood( 22 –29 ). 
+
+High-resolution measurements have exposed three prominent features of structural order within condensed clusters. First, the internal structure of an individual cluster evolves dynamically across distinct states while its size changes over time. With single-particle resolution, researchers have observed structural transitions between states of different symmetries during liquid-solid phase separation in various colloidal systems( 26 ). Second, structural motifs within a single cluster are inherently heterogeneous, exhibiting a non-uniform gradient from the cluster core to the interface. Using time-resolved atomic-resolution imaging, studies have shown that the structural-order gradient in nanocrystal is smooth near the center but steep near the interface, varying systematically with the cluster radius, aphenomenon also corroborated by recent molecular dynamics simulations( 27 –30 ). Third, the local structure at the interface directly dictates the cluster growth rate. Full-atom simulations have demonstrated a difference of over three orders of magnitude in the instantaneous growth rate depending on the interfacial structure, a consequence of altered activation barriers for surface adsorption( 31 ). Although experimental limitations historically restricted these observations to the late, (meta-)stable growth stage, these structural features play a significant role during early-stage nucleation as well. 
+
+In this study, we develop a multi-shell model to describe the stochastic dynamics governing the coupled reordering-nucleation process (Fig. 1). The spatiotemporal structural order within a single condensed cluster is phenomenologically quantified by a non-conserved order-parameter field  𝜙(x, t)  ,constructed over a discretized multi-shell domain. The potential energy is formulated to account for both local intra-shell interaction and inter-shell coupling between adjacent shell layers. In contrast to existing theoretical frameworks( 32 –36 ), our model explicitly couples two distinct reaction mechanisms: intra-phase structural reordering and inter-phase surface adsorption. The underlying reaction probabilities are determined from transition-state barriers via Marcus theory( 37 –39 ), while transport timescales are absorbed into the waiting times between successive adsorption events. Through this mathematical formulation, we extend the conventional isolated critical point in the classical nucleation theory to a high-dimensional hypersurface, termed the critical nucleation regime. We investigate the global stochastic dynamics and the associated first-passage problem using numerical simulations and path analysis, utilizing the mean first-passage time to characterize the nucleation kinetics. Our findings reveal that the characteristic nucleation time varies by several orders of magnitude as the reordering susceptibility changes, a non-equilibrium phenomenon that escapes previous theoretical explanations. Additionally, under strong coupling conditions, the system exhibits a distinct turnover effect, where the relationship between the nucleation time and reordering susceptibility becomes fundamentally non-monotonic. 
+
+MODEL 
+
+The concept of the reordering-nucleation process is extended from the classical nucleation theory and the two-step nucleation model in a multi-step fashion (Fig. 1a). The reordering-nucleation pathways span a large phase-space region of multiple degrees of freedom. The shifts along nucleation coordinates characterize the condensation steps driven by spatial transportation in the dilute background and adsorption reaction at the interface. The changes of structure coordinates reflect the fine-tuning of the spatial patterns of particles in the condensed phase, which are often measured with structural factors. Inspired by non-equilibrium statistical mechanics, we designed a field-theoretic formulation of the reordering-nucleation dynamics 3
+
+with two fields( 40 –42 ): the conserved density field 
+
+𝜌(𝑥, 𝑡)  and the non-conserved structural order-parameter field  𝜙(𝑥, 𝑡)  . To perform an explicit analysis of the early nucleation dynamics, we invent the multi-shell model in this paper. 
+
+There are two key factors that motivate the construction of the multi-shell model for the reordering-nucleation process. First, the early growth of a cluster is mainly achieved through surface adsorption events, which dates back to Ostwald’s 
+
+ripening( 43 , 44 ). At this stage, most of the particles are dissolved in the dilute background, and the number of condensed clusters is small. Thus, collisions between clusters are extremely rare compared to those between a cluster and dissolved particles. Based on this property, we neglect the cluster-cluster coalescence during early nucleation and absorb the diffusion-limited collision waiting time into the overall waiting time of adsorption  𝜏 𝑟  . Second, the interfacial interaction is strong when a cluster is small due to the large surface-to-volume ratio. This restricts the shape of a cluster to be approximately spherical. Moreover, the spatial pattern of structure motifs inside a single cluster also roughly preserves the rotational symmetry( 24 , 27 , 28 , 30 ). 
+
+Figure 1. Overview of the reordering-nucleation process within the multi-shell model. (a) Schematic of the reordering-nucleation pathways projected onto the nucleation and structural coordinates. (b) Representation of the multi-shell model, providing a reduced spatial description of a single condensed cluster where the continuous space domain of the order-parameter field  𝜙(𝑥, 𝑡)  is discretized by shell thickness  𝑙  and the cluster radius  𝑟 . (c) Reaction mechanisms governing adsorption (horizontal) and reordering (vertical) events. (d) Multiscale dynamics coupling discrete adsorption and continuous reordering events. Adsorption steps occur discretely, separated by a characteristic waiting time  𝜏 𝑟 , with reaction probabilities determined by the transition-state barrier. In contrast, structural reordering evolves continuously over finite relaxation timescales. 4
+
+Figure 2. Overview of the reaction mechanics. (a) Schematic illustration of the  𝐸 -energy landscape projected onto the (𝑟, 𝜙)  phase space. (b) The  (𝑟, 𝜙) -dependent reordering-driving force  𝐹 𝜙  acting at the interface when  𝜙(𝑟 − 𝑙) = (𝜙 𝑆 + 𝜙 𝐶 )/2 . (c) The  (𝑟, 𝜙) -dependent nucleation-driving force  𝐹 𝑟  when  𝜙(𝑟 − 𝑙) = (𝜙 𝑆 + 𝜙 𝐶 )/2 . (d) The critical nucleation regime ( 𝐹 𝑟 = 0 ) represented within the three-dimensional [𝑟, 𝜙(𝑟), 𝜙(𝑟 − 𝑙)]  phase space.  𝑘 𝐻  = 0.36 for panels (b), (c), and (d). (e) Size-dependent full-reordered states as a function of cluster radius. (f) Comparison between pro-nucleation states (blue) and full-reordered states (orange); the up triangles denote the corresponding  𝜙(𝑟 − 𝑙)  and the down triangles denote the corresponding  𝜙(𝑟) .
+
+We build a multi-shell model to reduce  𝜌(𝑥, 𝑡)  to a scalar variable  𝑟(𝑡)  and nest  𝜙(𝑥, 𝑡)  in a discrete spatial domain (Fig. 1b). The order-parameter field is reformulated in a discrete fashion as  𝜙(𝑥 𝑖 , 𝑡) , where 
+
+𝑥 𝑖  is the radial coordinate of the shell indexed by  𝑖 ∈ ℤ+. All shells have the same thickness  𝑙 , so  𝑥 = 𝑖𝑙  and 
+
+𝑟 = 𝑖 𝑚𝑎𝑥 𝑙 . The spatial unit is normalized with respect to  𝑙 , i.e.,  𝑙 = 1 . In a short-hand form,  𝑥 = 𝑖  and  𝑟 = 𝑖 𝑚𝑎𝑥  . Because the radius changes with time,  𝑟  is a time-dependent variable that labels the outermost shell at the interface. With this construction, we define the potential energy of a single cluster as follows: 
+
+𝐸(𝜙) = ∫ 𝑣 𝑆 (𝜙) 𝑑𝐴 + ∫ 𝑣 𝐶 (𝜙) 𝑑𝑉 , (1) 
+
+where the first integral on RHS is taken over the interfacial area and the second over the bulk domain inside the entire cluster.  𝑣 𝑆,𝐶 (𝜙)  are the corresponding potential energy densities, whose specific expressions are written as below: 
+
+𝑣 𝑆 (𝜙) = 𝑒 𝑆 + 𝑘 𝑆 |𝜙 − 𝜙 𝑆 |2, (2a) 
+
+𝑣 𝐶 (𝜙) = 𝑒 𝐶 + 𝑘 𝐶 |𝜙 − 𝜙 𝐶 |2 + 𝑘 𝐻 |∇𝜙| 2, (2b) 
+
+where  𝑒 𝑆,𝐶  are bare local energy densities,  𝜙 𝑆,𝐶  are local order parameters for bare ground states ( 𝜙 𝑆  = 0, and  𝜙 𝐶  = 1),  𝑘 𝑆,𝐶  are local coupling strengths, with the subscripts  𝑆  and  𝐶  denoting the interfacial and condensed regions, and  𝑘 𝐻  is the shell-shell coupling strength.  ∇𝜙  is the relative difference of adjacent-shell configurations (Methods). The coupling-induced energy shifts are schematically illustrated in Fig. 2a. 
+
+Two reaction mechanisms are considered: the intra-phase structural reordering and the inter-phase adsorption, combined into a composite stochastic process (Fig. 1c). In an elementary reordering event, the structural order in the condensed cluster changes while the radius is fixed. In a continuous fashion, this can be expressed as  𝜙 → 𝜙 + 𝑑𝜙  . Since  𝜙  is aphenomenological characterization of the structural order at mesoscale, and there is no preserved structure in the dilute region, we set the background order parameter to the constant  𝜙 𝑆 , the same as the initial condition of a minimal cluster of  𝑟 = 1 , and do not treat the dilute-phase reordering explicitly. The mechanism of adsorption is quite different from 5
+
+reordering. In a forward adsorption step where  𝑟 → 𝑟 + 𝑙 , the order-parameter values over existing shells are fixed, but it is extended by an additional component  𝜙(𝑟 + 𝑙) = 𝜙 𝑆 , as the cluster gains a new outermost shell. In a backward adsorption step where 
+
+𝑟 → 𝑟 − 𝑙 , the order-parameter field is truncated at the interface and loses its component at  𝑟  , while other components remain fixed. Thus, the set of shell indices is changed to {1,2, … , 𝑟 − 𝑙} . The change of the order-parameter field during adsorption resembles the procedure of direct sum, so we use the symbolic notation  𝜙 → 𝜙 ⊕ Δ𝜙  for convenience. Because both 
+
+𝑟  and  𝜙  always change together during adsorption, they are not independent variables in classical statistical mechanics( 40 ). We call this hidden connection between  𝑟  and  𝜙  as implicit coupling and express this relation as  Δ𝜙 = 𝛾Δ𝑟  , where  𝛾  is the implicit coupling coefficient. Consequently, if no reordering occurs,  𝜙(𝑥) = 𝜙 𝑆  at all sites. 
+
+The reaction mechanisms involve distinct characteristic timescales (Fig. 1d). The reordering events describe local structural reorganization inside the condensed phase, and their waiting time  𝜏 𝜙  is much shorter than adsorption waiting time  𝜏 𝑟 , due to the diffusion-limited transportation in the dilute phase. Therefore,  𝜏 𝜙 ≪ 𝜏 𝑟  . Besides, the duration of an elementary reaction step is negligible compared with the waiting times. Since the overall nucleation kinetics are measured on the timescale much longer than that of a single adsorption event  𝜏 𝑟  , the change of  𝜙 
+
+induced by reordering can be formulated in acontinuous manner as follows( 39 , 45 –47 ): 
+
+𝑑𝜙 = 𝜒𝐹 𝜙 𝑑𝑡 + 𝑑𝐵 , (3) 
+
+with the reordering-driving force 
+
+𝐹 𝜙 = − 𝛿𝐸 𝛿𝜙 . (4) 
+
+𝑑𝐵  denotes a Wiener process,  𝜒  is the reordering susceptibility as a rate parameter for the dynamic response of  𝜙  to  𝐹 𝜙  . The reordering-driving force is derived from a functional derivative via the variational principle( 48 ). From Eqs. (1-2),  𝐹 𝜙  is given as a linear form of  𝜙  . Its (𝑟, 𝜙)  dependence is captured by calculating the local values of  𝐹 𝜙  at  𝑥 = 𝑟  under different  𝑟  and  𝜙(𝑟)  conditions while  𝜙(𝑟 − 𝑙)  is fixed as (𝜙 𝑆 + 𝜙 𝐶 )/2  (Fig.2b). 
+
+Different from reordering, the adsorption events are sparsely distributed along the timeline, due to its longer waiting time  𝜏 𝑟  compared to  𝜏 𝜙  (Fig. 1d). In an elementary adsorption step, the reaction probability is restricted by the transition-state barrier  Δ𝐸 ∗:
+
+𝑃 ± = 𝑃 0 exp (− Δ𝐸 ±∗
+
+> 𝑘 𝐵 𝑇
+
+), (5) 
+
+where subscripts  ± denote specific types of adsorption events as forward or backward.  𝑃 0 is a normalization factor,  𝑘 𝐵  is the Boltzmann constant and  𝑇  is temperature. Since the microscopic mechanism of adsorption is non-adiabatic particle transfer between the dilute and condensed domains, we apply the Marcus theory for the transition-state barrier( 36 –38 ): 
+
+Δ𝐸 ±∗ = 𝜆 4 (1 + Δ𝐸 ± 
+
+> 𝜆
+
+)2
+
+, (6) 
+
+where  𝜆  is the reorganization energy, and  Δ𝐸 ± is the energy gap between the product and reactant states in forward and backward adsorptions. We assume that 
+
+𝜆 ≫ Δ𝐸 ± in all relevant adsorption events, so that the nucleation dynamics can be formulated as follows: 
+
+Δ𝑟 = 𝜇𝑒 − 𝜆 4𝑘 𝐵 𝑇 𝐹 𝑟 Δ𝑡 + Δ 𝜉 𝑟 , (7) 
+
+where  𝜇  is the mobility,  𝐹 𝑟  is the nucleation-driving force, and  Δ𝜉 𝑟  denotes the random fluctuations in adsorption. Because the spatial domain is discretized with the shell thickness  𝑙 , the nucleation-driving force is taken as follows: 
+
+𝐹 𝑟 = − Δ𝐸 +−Δ𝐸 − 
+
+> 2𝑙
+
+. (8) 
+
+In contrast to  𝐹 𝜙  which is a space-dependent function that can be represented in a vector form,  𝐹 𝑟  is a scalar. As adsorption steps are only relevant with the interface and near-interface regions, only local values of  𝜙  at the outermost and penultimate shells are involved in the nucleation-driving force. We examine the (𝑟, 𝜙) 
+
+dependence of  𝐹 𝑟  by fixing the value of  𝜙(𝑟 − 𝑙)  as 
+
+(𝜙 𝑆 + 𝜙 𝐶 )/2  while tuning  𝑟  and  𝜙(𝑟)  (Fig. 2c). When  𝑟  is small,  𝐹 𝑟  is mostly negative. There is a special regime where  𝐹 𝑟  approaches zero, and if  𝑟 
+
+keeps increasing over this regime,  𝐹 𝑟  turns positive. This picture indicates a generalization of the classical nucleation theory: this regime where  𝐹 𝑟 = 0  is an extension of the critical point in previous theories. Therefore, we call it the critical nucleation regime. Since there are only three relevant scalar components in the nucleation-driving force:  𝑟 , 𝜙(𝑟) , and  𝜙(𝑟 − 𝑙) ,we project the critical nucleation regime onto the three-dimensional phase space of [𝑟, 𝜙(𝑟), 𝜙(𝑟 − 𝑙)] .This regime is a hypersurface in the multi-dimensional phase space (Fig. 2d). There exists an infimum radius below which  𝐹 𝑟  is strictly negative, and this behavior correctly reflected the dynamic nature of early 6
+
+nucleation where the growth of condensed domains is driven by fluctuations rather than the net driving force. 
+
+We analyze two important types of states: full-reordered states  𝜙 𝐹𝑅 (𝑥; 𝑟) ≡ 𝜙| 𝐹 𝜙=0  , and pro-nucleation states  𝜙 𝑃𝑁 (𝑥; 𝑟) ≡ 𝜙| 𝛿𝐹 𝑟 /𝛿𝜙=0  . A full-reordered state is a state of vanishing reordering-driving force and is also the expected state when  𝜒 → ∞. The gradients of full-reordered states depend on the shell-shell coupling strength  𝑘 𝐻  , as it contributes to the heterogeneous part in the potential energy (Eq. 2b). The local order-parameter values of full-reordered states increase monotonically with radius (Fig. 2e), because surface-to-volume ratio decreases and  𝜙 𝐶  is set larger than  𝜙 𝑆 . Two spatial features of  𝜙 𝐹𝑅  show good agreement with recent experiments( 27 , 28 ): first, 
+
+𝜙 𝐹𝑅  generally approach  𝜙 𝐶  (which is set to 1) as radius increases; second, the local gradients are smaller in the near-center region than in the near-interface region. 
+
+The pro-nucleation states are termed as they maximize the nucleation-driving force  𝐹 𝑟 . Because  𝐹 𝑟 
+
+is determined by the outmost- and penultimate-shell states, the relevant components of  𝜙 𝑃𝑁  are those at the positions  𝑥 = 𝑟  and  𝑥 = 𝑟 − 𝑙 , i.e., only  𝜙 𝑃𝑁 (𝑟)  and 
+
+𝜙 𝑃𝑁 (𝑥 − 𝑙)  are relevant (Fig. 2f). The relative differences between  𝜙 𝐹𝑅  and  𝜙 𝑃𝑁  depend on the shell-shell coupling strength  𝑘 𝐻 . In the weak-coupling case,  𝜙 𝑃𝑁 > 𝜙 𝐹𝑅  , but in the strong-coupling case, 
+
+𝜙 𝑃𝑁  are smaller than  𝜙 𝐹𝑅  after a threshold of radius. As  𝜙(𝑥) = 𝜙 𝑆  without reordering,  𝐹 𝜙  continuously drives the  𝜙  field from  𝜙 𝑆  (which is set to 0) to  𝜙 𝐹𝑅 ,so when  𝜙 𝑃𝑁  lies between  𝜙 𝑆  and  𝜙 𝐹𝑅  at strong coupling, reordering would not monotonically favor the nucleation-driving force. This interesting property would further lead to a kinetic turnover of the first-passage time in early nucleation. 
+
+EARLY NUCLEATION 
+
+The study of early nucleation focuses on the non-equilibrium evolution of a single cluster from the initial state to beyond the critical nucleation regime. Since this process covers the timescale much larger than the waiting times of reordering and adsorption events (  𝜏 𝜙  and  𝜏 𝑟  ), symbolically assembling the derivations and neglecting the intrinsic fluctuations in reordering give the stochastic equations of motion in a continuous-time fashion:  
+
+> 𝑑𝑟 𝑑𝑡
+
+= 𝜇𝑒 − 𝜆 4𝑘 𝐵 𝑇 𝐹 𝑟 + 𝜉 𝑟 , (9a)  
+
+> 𝑑𝜙 𝑑𝑡
+
+= 𝜒𝐹 𝜙 ⊕ 𝛾 𝑑𝑟 𝑑𝑡 , (9b) 
+
+where  𝜉 𝑟  is a Gaussian white noise and  𝛾  is the implicit-coupling coefficient that addresses the co-change of  𝑟  and  𝜙  during adsorption.  ⊕ indicates the appending or removing of components of the  𝜙 
+
+function at  𝑥 = 𝑟 .
+
+We conducted the stochastic simulations of this reordering-nucleation dynamics under different parameter conditions (Methods). For every condition, total  𝑁  = 1000 clusters were simulated. To ensure trajectories covered the complete early-stage nucleation, we examined,  𝑁 [𝐹 𝑟 <0] , the number of sub-critical clusters whose nucleation-driving forces were negative.  𝑁 [𝐹 𝑟 <0]  consistently decayed from  𝑁  to zero as time shifted from the beginning to the end. 
+
+With the simulation data, we performed the statistical analysis at separate times. The time-dependent radius distributions are shown in Fig. 3a. In early-stage nucleation, enlargement of the condensed clusters is characterized by the extension of distribution functions at the large-radius tails, while most clusters stay small. It implies that this process is unstable. As time goes on, rare and large clusters reach and pass the critical nucleation regime to enter the stable-growth regime where the nucleation-driving force is positive. Since  𝐹 𝑟  is positive and it further increases with radius, the clusters would not return to the small-radius states once in the stable-growth regime. This leads to an irreversible transition from the early-stage nucleation to the late-stage growth. During this dynamic transition, the distribution functions dramatically change with the rising of a second peak at the large-radius regime, indicating the emergence of stable large clusters( 35 , 36 ). 7
+
+Figure 3. Overview of early-stage nucleation dynamics. (a) Cluster radius  𝑟  distributions at weak ( 𝑘 𝐻  = 0.36) and strong ( 𝑘 𝐻  = 1.6) couplings, captured at  𝑡  = 50 and 200, respectively. The color scheme indicates the spatially averaged order parameters 〈𝜙̅〉 𝑟  corresponding to distinct radius groups. (b) Representative morphological configurations of the condensed clusters, projected onto 2D planes. (c) Time-resolved evolution of the ensemble-averaged order parameters (spatial average 〈𝜙̅〉  and interfacial value 〈𝜙(𝑟)〉 ). (d) Time-resolved evolution of the ensemble-averaged spatial gradients (spatial average 〈| ∇𝜙| 2̅̅̅̅̅̅̅ 〉 and interfacial value 〈| ∇𝜙| 2(𝑟)〉 ). Here, overlines and angle brackets denote spatial and ensemble averages, respectively. All data presented are obtained from simulations with the reordering susceptibility  𝜒  = 1. 
+
+The color scheme in Fig. 3a denotes the space-averaged order parameters associated with different radius groups: 〈𝜙̅〉 𝑟 = 〈 3𝑟 3 ∫ 𝜙| 𝑟 𝑥 2𝑑𝑥〉 𝑟 , where  𝜙| 𝑟 
+
+denotes the order-parameter fields with the radius  𝑟 ,the bar notation stands for space average, and the labeled angle brackets indicate that the group average is evaluated among the related subset of the ensemble. This color scheme helps to illustrate the coupling between the radius and order parameters, consistent with the radius-dependent properties of the reordering-driving force. It is likely to see a larger cluster with a higher space-averaged order parameter than a smaller cluster. For clarity, we demonstrate the 2D projections of representative samples in Fig. 3b. The colored rings denote the shell layers with different local order parameters projected onto 2D space. The presented clusters are selected to stand for the largest ones in the corresponding ensembles at the same times as in Fig. 3a. The correlation between the cluster size and the internal structural order is vividly manifested: the large clusters tend to have higher order parameters, and vice versa. The non-uniform gradients of order-parameter fields extending from the centers to the interfaces are observed, and the gradients get steeper in the near-interface regions than the central regions. The amplitudes of the gradients generally decrease in large clusters. This feature is in good agreement with recent experiments and cannot be described by previous theories( 27 , 28 ). 8
+
+We computed the local values of  𝜙  and |∇𝜙| 2 at the interface, with their spatial averages  𝜙̅  and |∇𝜙| 2̅̅̅̅̅̅̅  , and exhibited the time-resolved ensemble-averaged results (Fig. 3c and Fig. 3d). The ensemble averages are calculated from all clusters within the same simulation conditions, in contrast to the group averages calculated from radius-specific subsets (Fig. 3a). The evolution of order parameters is featured by the adaptation-like behaviors when the radii change, which is favored by the reordering-driving force. Compared with 〈𝜙̅〉  ,
+
+〈𝜙(𝑟)〉  are closer to  𝜙 𝑆 , due to the local interaction at interface. This behavior is enhanced at weak coupling, because the interfacial state gets less affected by the internal states via shell-shell interaction. The interfacial gradients of order-parameter fields rise sharply as time increases, while the overall space-averaged gradients remain relatively small. In other words, the  𝜙  fields are more homogeneous inside and more heterogeneous outside, characterized by the increase of gradients from centers to interfaces. Also, the gradients tend to be higher with a smaller coupling strength  𝑘 𝐻 .
+
+Figure 4. Overview of the first-passage problem in early-stage nucleation. (a) Scheme of the first-passage paths within the (𝑟, 𝜙)  phase space. The solid curves represent the first-passage trajectories from the initial state to the critical nucleation regime, superimposed on a background color map indicating the nucleation-driving force  𝐹 𝑟 . (b) 
+
+Joint statistical distributions of the interfacial order parameters  𝜙(𝑟)  and cluster radii  𝑟  at the onset of the first critical nucleation events with the reordering susceptibility  𝜒  = 0.01 (blue), 0.3 (orange), and 10 (green), respectively. Black lines serve as a guide to the eye. (c –d) Distributions of the first-passage times resolved under different conditions. The projected curves on the back planes denote the fitted exponential distributions. 9
+
+FIRST-PASSAGE PROBLEM 
+
+The methods developed in the study of the first-passage problems are of great importance in non-equilibrium statistical mechanics( 49 –52 ). Previous theories have mostly used the equilibrium thermodynamics to estimate the nucleation rates and fluxes from the critical free energy( 9–11 ). On the contrary, the first-passage methods address the non-equilibrium behaviors. The first-passage paths in early nucleation are the evolution courses of condensed clusters from the beginning to the very first times that they reach the critical nucleation regime (Fig. 4a). This is motivated by two factors: first, the dynamic transition from the early-nucleation to late-growth stages is highly irreversible; second, after the clusters enter the late-growth stage, the dominant mechanism of further condensation is no longer surface adsorption but cluster-cluster coalescence( 18 , 23 , 53 , 54 ). 
+
+In the stochastic simulations, every complete trajectory covers the full process of a single cluster from its initial condition to the late stable-growth regime. We extracted the first-passage paths from individual evolution trajectories and conducted statistical analysis of the path-dependent properties. Among all the tracked properties, the interfacial order, radius, and time at the ends of first-passage paths are the most important, as they depict the states and times at the first critical nucleation events of targeted clusters. We use the short-form symbols  𝜙 𝐹𝑁 (𝑟) , 𝑟 𝐹𝑁  ,and  𝑡 𝐹𝑁  to denote them. Note these quantities do not have direct space-time dependence. 
+
+The statistical distributions of the correlated  𝜙 𝐹𝑁 (𝑟) 
+
+and  𝑟 𝐹𝑁  under different conditions are projected onto the [𝑟, 𝜙(𝑟)]  planes (Fig. 4b). As  𝜒  increases from 0.01 to 10,  𝜙 𝐹𝑁 (𝑟)  increase monotonically. This is a consequence of the enhanced response of the order-parameter field to the reordering-driving force that pushes  𝜙  from the non-reordered limit  𝜙 𝑆  towards the full-reordered states  𝜙 𝐹𝑅  which strictly satisfy the condition that  𝜙 𝐹𝑅 > 𝜙 𝑆  . This situation is different when it comes to  𝑟 𝐹𝑁  . With the increase of  𝜒 , 𝑟 𝐹𝑁  drop monotonically at weak coupling, but  𝑟 𝐹𝑁  first drop then rise at strong coupling, manifesting the turnover effect caused by the relative shifts of the critical nucleation regime and the pro-nucleation states  𝜙 𝑃𝑁 
+
+with regards to the full-reordered states when the coupling strength  𝑘 𝐻  is enhanced (Fig. 2f). When  𝑘 𝐻 
+
+is small,  𝜙 𝑃𝑁  are generally higher than  𝜙 𝐹𝑅 . Thus, the nucleation-driving force changes monotonically as  𝜒 
+
+increases from zero to  ∞. However, when  𝑘 𝐻  is large, 
+
+𝜙 𝑃𝑁  are lower than  𝜙 𝐹𝑅  as the critical nucleation regime is approached, so  𝜙 𝑃𝑁  , indicating the turning point of the nucleation-driving force, become intermediate states between the non-reordered limit (𝜒 = 0  and  𝜙 = 𝜙 𝑆 ) and the full-reordering limit ( 𝜒 = ∞ and  𝜙 = 𝜙 𝐹𝑅 ). 
+
+In a linear-scale histogram, the distribution of  𝑡 𝐹𝑁 
+
+can be described by an exponential function; whereas, in a log-scale histogram, a minor shift at the small-𝑡 𝐹𝑁 
+
+region is captured, indicating a transient incubation time within which no critical nucleation event occurs. The distributions under various conditions are presented in Fig. 4c and Fig. 4d. As  𝜒  increases from 0.01 to 10,  𝑡 𝐹𝑁  drop monotonically at weak coupling, but they first drop then rise at strong coupling. 
+
+To further quantify these non-equilibrium features, we investigated the path averages of the relative shifts of  𝜙 𝐹𝑁 (𝑟)  and  𝑟 𝐹𝑁  , as well as  𝑡 𝐹𝑁  , and applied symbolic definitions as below: 
+
+〈𝜙 𝐹𝑁 ∘ (𝑟)〉 𝑃 = 1𝑁 ∫ 𝒟𝜙 𝜙 𝐹𝑁 (𝑟)−𝜙 𝑆 
+
+> 𝜙 𝐹𝑅|𝑟 𝐹𝑁 (𝑟)−𝜙 𝑆
+
+,
+
+〈𝑟 𝐹𝑁 〉𝑃 = 1𝑁 ∫ 𝒟𝜙 𝑟 𝐹𝑁  ,
+
+〈𝑡 𝐹𝑁 〉𝑃 = 1𝑁 ∫ 𝒟𝜙 𝑡 𝐹𝑁  ,
+
+where ∫ 𝒟𝜙  stand for the summations of all first-passage paths following the spirit of the path integral in field-theoretic methods. The subscripts  𝑃  on the LHS highlight the path-averaged strategy in contrast to the ensemble-averaged where the summations are taken with all the systems sampled at the same time. Since 〈𝑡 𝐹𝑁 〉𝑃  reflects the expected time cost of critical nucleation, it is used to delineate the nucleation time. The results under various parameter conditions are shown in Fig. 5. When  𝜒  approaches zero, reordering is unlikely to be seen in the observed timescale. In this non-reordered limit, the degrees of freedom of the order-parameter field are reduced and the nucleation process of a single cluster is a 1D heterogeneous random walk along the axis of the radius( 36 ). In the opposite limit when  𝜒  approaches infinity, all the observable states are the full-reordered states, hence each evolution trajectory is a minimal-energy path. In these cases, there is no variance or standard deviation in  𝜙 𝐹𝑁 (𝑟)  and  𝑟 𝐹𝑁  (Fig. 5a and Fig. 5b), but only in 
+
+𝑡 𝐹𝑁  (Fig. 5c). When the value of  𝜒  is intermediate, the observed  𝜙 𝐹𝑁 (𝑟)  denote amorphous states between 
+
+𝜙 𝑆  and  𝜙 𝐶  . We also computed the path-averaged energy at the first critical nucleation events, denoted by  𝐸 𝐶  (inset of Fig. 5c). It is clear that  𝐸 𝐶  cannot characterize 〈𝑡 𝐹𝑁 〉𝑃  as an effective barrier, indicating the breakdown of previous theories. 
+
+These path-averaged results from stochastic simulations are compared with a mean-field model where the degrees of freedom associated with the order-parameter field are reduced via a two-step procedure. First, the spatial domain of a multi-shell structure is coarse-grained into a two-component core-shell structure. Second, it is assumed that the effective 10 
+
+order parameter on core does not directly contribute to the nucleation dynamics, while the local order parameter on shell is governed by the following equation: 
+
+𝜙(𝑟, 𝑡) = [𝜙 𝐹𝑅 (𝑟) − 𝜙 𝑆 ]𝜑 ∘ + 𝜙 𝑆 , (10) 
+
+with the dynamic factor 
+
+𝜑 ∘ = 1 − 𝑒 −𝑘 𝜑 𝜒 , (11) 
+
+where  𝑘 𝜑  is a relaxation parameter without space-time dependence. Here  𝜑 ∘ stands for 〈𝜙 𝐹𝑁 ∘ (𝑟)〉 𝑃  in a mean-field way. The proposal of this relation is inspired by the reordering dynamics where  𝐹 𝜙  is a linear function of  𝜙 . Since  𝜙 𝐹𝑅 (𝑟)  is determined once  𝑟  is known and 
+
+𝜙(𝑟, 𝑡)  is a scalar variable, a short-form notation is applied as  𝜑(𝑟) ≡ 𝜙(𝑟, 𝑡)  where the time dependence is implicitly absorbed into the radius as  𝑟 = 𝑟(𝑡) . Thus, the degrees of freedom of the  𝜙  function are removed, and  𝑟(𝑡)  is the only relevant time-dependent variable. The mean-field nucleation-driving force is denoted by 
+
+𝐹 𝑟 𝜑 (𝑟) , and the critical nucleation regime is reduced to a critical point  𝑟 = 𝑟 𝑐 𝜑  on the axis of radius that fulfills 
+
+𝐹 𝑟 𝜑 (𝑟 𝑐 𝜑 ) = 0 . The mean-field model gives the solution for the mean first-passage time  𝑡 𝐹𝑁 𝜑  in a simple form: 
+
+𝑡 𝐹𝑁 𝜑 = 1𝜇𝑘 𝐵 𝑇 ∫ ∫ 𝑒  
+
+> 𝐺(𝑟)−𝐺(𝑟 ′)𝑘 𝐵 𝑇
+
+𝑑𝑟 ′𝑟 0 𝑑𝑟  
+
+> 𝑟 𝑐 𝜑
+> 0
+
+, (12) 
+
+with  𝜇  the mobility coefficient, and  𝐺  the effective nucleation energy: 
+
+𝐺(𝑟) = − ∫ 𝐹 𝑟 𝜑 (𝑟 ′)𝑑𝑟 ′𝑟 0 . (13) 
+
+Note that when  𝜒 → 0 , 𝑡 𝐹𝑁 𝜑  converges toward a  𝑘 𝐻  -independent constant  𝑡 0, which corresponds to a non-reordered limit where  𝜙 = 𝜙 𝑆  . The mean-field solutions agree with the simulation results (Fig. 5). 
+
+We calculated the effective nucleation energy when the critical nucleation condition is met:  𝐺 𝐶 ≡ 𝐺(𝑟 𝑐 𝜑 ).It gives a good characterization for 〈𝑡 𝐹𝑁 〉𝑃  in contrast to  𝐸 𝐶  (Fig. 5c). Therefore, we propose the closed-form approximate solution of 〈𝑡 𝐹𝑁 〉𝑃  as follows: 
+
+〈𝑡 𝐹𝑁 〉𝑃 = 𝑡 0 exp ( 𝐺 𝐶 −𝐺 0 
+
+> 𝑘 𝐵 𝑇
+
+), (14) 
+
+where  𝐺 0 = 𝐺 𝐶|𝜒=0 . It is worth emphasizing that  𝐺  is physically different from  𝐸 , though both are energy functions producing driving forces. Since a single cluster is an open system and adsorption is not governed by a conservative force,  𝐺  is not a function of state by its physical nature but a path-dependent nucleation energy expressed in a mean-field manner. However,  𝐸  functions as a potential energy generating a conservative force  𝐹 𝜙  when the system boundary is fixed. As a result,  𝐺 𝐶  is an effective nucleation barrier remarkably different from those in previous works, as it considers the non-equilibrium properties with the explicit dependence on  𝜒 . In this way, this nucleation energy provides a new insight into the evaluation of nucleation barrier. 
+
+Figure 5. First-passage properties evaluated across a wide parameter range. The path-averaged (a) 
+
+relative interfacial order 〈𝜙 𝐹𝑁 ∘ (𝑟)〉 𝑃 , (b) cluster radius 11 
+
+〈𝑟 𝐹𝑁 〉𝑃 , and (c) transition time 〈𝑡 𝐹𝑁 〉𝑃 , with the critical potential energy  𝐸 𝑐  in the inset, captured at the onset of the first critical nucleation events as  𝜒  varies, with coupling strengths  𝑘 𝐻  = 0.36 (blue), and 1.6 (Orange). Markers and error bars represent the mean values and standard deviations evaluated from simulations. Curves denote the analytical mean-field solutions. The dashed curves in (c) represent the effective nucleation barrier  𝐺 𝑐  , corresponding to the right vertical axis sharing an identical scale with the left axis. 
+
+DISCUSSION 
+
+The multi-shell model developed herein is designed to capture the stochastic reordering-nucleation dynamics of early-stage nucleation. However, its current formulation is not intended for the late-stage growth stage, where cluster-cluster coalescence and diffusion-limited mechanisms become the dominant drivers of domain enlargement( 18 , 23 , 53 –55 ). Furthermore, as the reaction dynamics for reordering and adsorption are derived in an over-damped limit, the model would require the introduction of asymplectic structure to be applicable to under-damped systems( 56 , 57 ). We also assume standard transport mechanism; should anomalous diffusion or active motion prove essential to a specific system( 58 –61 ), so if the complexity in transportation is essential, the waiting time between adsorption events should be modified accordingly. 
+
+The quantitative relation between the nucleation time and the reordering susceptibility highlights the key role of reordering in mediating nucleation kinetics. This connection offers a potential resolution to the discrepancies between contemporary experiments and previous theoretical predictions( 19 –21 ). Particularly, our model provides a physical principle for the multi-step nucleation pathways observed in nanocrystallization: when the coupling strength  𝑘 𝐻  is high, pathways characterized by high structural order are effectively prohibited because their associated nucleation times exceed the observable timescale. Consequently, nucleation is restricted to pathways with low structural order, which accurately depicts the multi-step process where intermediate amorphous structures persist throughout the early stage( 15 –18 ). 
+
+The predicted turnover offers a compelling target for future experimental verification. While tuning reordering susceptibility is challenging in nanocrystallization, an equivalent shift can be achieved by manipulating the environment. Since all temporal and rate values are normalized to the adsorption waiting time  𝜏 𝑟 , one can effectively shift  𝜒 
+
+by controlling concentrations or diffusional properties. In biomolecular systems, direct control of the reordering rate is even more feasible through the modulation of enzymatic activities via chemical or biological approaches( 62 –64 ). 
+
+Finally, while our phenomenological formulation using the order-parameter field  𝜙  is a standard statistical-mechanics treatment in condensed matter physics( 40 , 41 ), its application to complex biological systems, which often lack microscopic symmetry, presents a quantification challenge. Nevertheless, rapid advancements in machine-learning techniques provide promising tools( 31 , 65 –67 ). When the reordering-nucleation process is modeled with atomistic resolution, the machine-learning-based collective variables can serve as a bridge, capturing the microscopic structural changes that underpin our phenomenological description. 
+
+METHODS 
+
+Vectorization : The state of a condensed cluster is described by (𝑟, 𝜙)  where  𝑟(𝑡)  is the time-dependent radius and  𝜙(𝑥, 𝑡)  is the space-time-dependent order-parameter field. In the multi-shell model, the spatial domain is reduced to discrete layers of shells, so that the order-parameter field is vectorized in the following manner: 
+
+𝜙(𝑥) = [𝜙(𝑥 1), 𝜙(𝑥 2), … , 𝜙(𝑟)] ,
+
+where  𝑥 𝑖  is the radial coordinate of the outer surface of the  𝑖 -th shell,  𝑟  is the radius of the cluster, and we omit the temporal coordinate for simplicity. Each shell is set to have the same thickness  𝑙  which is the unit length, hence  𝑥 𝑖 = 𝑖  and  𝑟 = 𝑖 𝑚𝑎𝑥  . By this means, the gradient is expressed in a discrete fashion as follows: 
+
+∇𝜙(𝑥 𝑖 ) = 𝜙(𝑥 𝑖+1 ) − 𝜙(𝑥 𝑖 ),
+
+for  𝑥 𝑖 < 𝑟 , and 
+
+∇𝜙(𝑥 𝑖 ) = 𝜙(𝑥 𝑖 ) − 𝜙(𝑥 𝑖−1 ),
+
+for  𝑥 𝑖 = 𝑟  . Different from the continuous-space formalism,  𝛿/𝛿𝜙| 𝑥=𝑥 𝑖 = 𝜕/𝜕𝜙(𝑥 𝑖 ) in the multi-shell model. 
+
+Since the reordering dynamics is modeled as a continuous-time process, the related shift of the order-parameter field is denoted by  𝑑𝜙  , whose vector representation is expressed as below: 
+
+𝑑𝜙 = [𝑑𝜙(𝑥 1), 𝑑𝜙(𝑥 2), … , 𝑑𝜙(𝑟)] .
+
+On the other hand, the change of  𝜙  induced by adsorption is realized by adding an extra component or removing the last component, in a fashion like the 12 
+
+direct sum of vectors in algebra. This is symbolically written as follows: 
+
+𝜙 ⊕ Δ𝜙 = [𝜙(𝑥 1), 𝜙(𝑥 2), … , 𝜙(𝑟), 𝜙(𝑟 + 𝑙)] ,
+
+in a forward adsorption event where  𝑟 → 𝑟 + 𝑙 , and 
+
+𝜙 ⊖ Δ𝜙 = [𝜙(𝑥 1), 𝜙(𝑥 2), … , 𝜙(𝑟 − 𝑙)] ,
+
+in a backward adsorption event where  𝑟 → 𝑟 − 𝑙  .Based on the specific adsorption mechanism studied in this paper,  𝜙(𝑟 + 𝑙)  is always equal to  𝜙 𝑆  in a forward adsorption step. 
+
+Stochastic simulation : With the vector representation of the state, the reordering-nucleation dynamics of a single condensed cluster was simulated in finite-difference methods. The elementary timestep was set to  𝜏 𝜙 , and the state was updated per step based on reordering. The raw values of  𝜏 𝑟  were set as multiples of  𝜏 𝜙 , and whether and how the state was updated by adsorption after every  𝜏 𝑟  were determined through a stochastic method. The final timescales were normalized in relation to  𝜏 𝑟 .
+
+In this study, we inspected the different coupling conditions when  𝑘 𝐻  equals 0.36 (weak) and 1.6 (strong). For each coupling case, eleven dynamic conditions were analyzed by tuning  𝜒  , 𝜏 𝜙  , and  𝜏 𝑟  ,while other parameters were kept constant. With each set of parameters, we ran 1000 parallel simulations for the individual clusters. The initial conditions were set as  𝑟(𝑡 = 0) = 1  , and  𝜙(𝑥 = 1, 𝑡 = 0) = 𝜙 𝑆  . Every simulation was terminated when  𝑟  reached 50. After the simulations finished, we examined the last times and ensured that all clusters entered the post-critical regime where the nucleation-driving force was positive. 
+
+ACKNOWLEDGMENTS 
+
+The authors acknowledge support from the HKUST Central High Performance Computing Cluster. This work was funded by RGC grants C2001-23Y and C6004-22Y. 
+
+COMPETING INTERESTS 
+
+The authors declare no competing interests. 
+
+REFERENCES 
+
+1. Q. Chen, J. M. Yuk, M. R. Hauwiller, J. Park, K. S. Dae, J. S. Kim, A. P. Alivisatos, Nucleation, growth, and superlattice formation of nanocrystals observed in liquid cell transmission electron microscopy. MRS Bull. 45 , 713 –726 (2020). 
+
+2. K.-J. Wu, E. C. M. Tse, C. Shang, Z. Guo, Nucleation and growth in solution synthesis of nanostructures – From fundamentals to advanced applications. Prog. Mater. Sci. 123 ,100821 (2022). 
+
+3. S. F. Shimobayashi, P. Ronceray, D. W. Sanders, M. P. Haataja, C. P. Brangwynne, Nucleation landscape of biomolecular condensates. Nature . 599 , 503 –506 (2021). 
+
+4. H.-X. Zhou, D. Kota, S. Qin, R. Prasad, Fundamental Aspects of Phase-Separated Biomolecular Condensates. Chem. Rev. 124 ,8550 –8595 (2024). 
+
+5. S. Alberti, P. Arosio, R. B. Best, S. Boeynaems, D. Cai, R. Collepardo-Guevara, G. L. Dignon, R. Dimova, S. Elbaum-Garfinkle, N. L. Fawzi, M. Fuxreiter, A. S. Gladfelter, A. Honigmann, A. Jain, J. A. Joseph, T. P. J. Knowles, K. Lasker, E. A. Lemke, K. Lindorff-Larsen, R. Lipowsky, J. Mittal, S. Mukhopadhyay, S. Myong, R. V Pappu, K. Rippe, T. A. Shelkovnikova, A. G. Vecchiarelli, S. Wegmann, H. Zhang, M. Zhang, C. Zubieta, M. Zweckstetter, D. Dormann, T. Mittag, Current practices in the study of biomolecular condensates: acommunity comment. Nat. Commun. 16 , 7730 (2025). 
+
+6. C. Chin Sang, S. Upadhyay, M. L. Nosella, J. D. Forman-Kay, H. O. Lee, The dynamic and heterogeneous composition of biomolecular condensates and its functional relevance. Nat. Rev. Mol. Cell Biol. 27 , 278 –296 (2026). 
+
+7. H. W. Wilson, On the velocity of solidification and viscosity of super-cooled liquids. London, Edinburgh, Dublin Philos. Mag. J. Sci. 50 ,238 –250 (1900). 
+
+8. J. Frenkel, Note on a relation between the speed of crystallization and viscosity. Phisik. Zeit. Sowjetunion . 1, 498 –510 (1932). 
+
+9. N. T. K. Thanh, N. Maclean, S. Mahiddine, Mechanisms of Nucleation and Growth of Nanoparticles in Solution. Chem. Rev. 114 ,7610 –7630 (2014). 
+
+10. S. Karthika, T. K. Radhakrishnan, P. Kalaichelvi, A Review of Classical and Nonclassical Nucleation Theories. Cryst. Growth Des. 16 , 6663 –6681 (2016). 
+
+11. Y.-S. Jun, Y. Zhu, Y. Wang, D. Ghim, X. Wu, D. Kim, H. Jung, Classical and Nonclassical 13 
+
+Nucleation and Growth Mechanisms for Nanoparticle Formation. Annu. Rev. Phys. Chem. 73 , 453 –477 (2022). 
+
+12. A. M. Streets, S. R. Quake, Ostwald Ripening of Clusters during Protein Crystallization. 
+
+Phys. Rev. Lett. 104 , 178102 (2010). 
+
+13. W. Pan, A. B. Kolomeisky, P. G. Vekilov, Nucleation of ordered solid phases of proteins via a disordered high-density state: Phenomenological approach. J. Chem. Phys. 
+
+122 , 174905 (2005). 
+
+14. P. G. Vekilov, The two-step mechanism of nucleation of crystals in solution. Nanoscale .
+
+2, 2346 –2357 (2010). 
+
+15. Y. Peng, F. Wang, Z. Wang, A. M. Alsayed, Z. Zhang, A. G. Yodh, Y. Han, Two-step nucleation mechanism in solid –solid phase transitions. Nat. Mater. 14 , 101 –108 (2015). 
+
+16. N. D. Loh, S. Sen, M. Bosman, S. F. Tan, J. Zhong, C. A. Nijhuis, P. Král, P. Matsudaira, U. Mirsaidov, Multistep nucleation of nanocrystals in aqueous solution. Nat. Chem. 
+
+9, 77 –82 (2017). 
+
+17. X. Liu, S. W. Chee, S. Raj, M. Sawczyk, P. Král, U. Mirsaidov, Three-step nucleation of metal –organic framework nanocrystals. Proc. Natl. Acad. Sci. 118 , e2008880118 (2021). 
+
+18. J.-H. Kim, J. Kim, B. H. Kim, S. Song, J. Kang, J. Rhee, D. Kim, H. Chun, H. Choi, H. Cho, Y. Kim, J. W. Jung, Y. Son, J. Jung, K. Park, S. Jeon, M. Lee, B. Han, W. C. Lee, D. Kim, T. Hyeon, J. Sung, J. Park, Multiphasic size-dependent growth dynamics of nanoparticle ensembles. Proc. Natl. Acad. Sci. 122 ,e2424950122 (2025). 
+
+19. J. Merikanto, E. Zapadinsky, A. Lauri, H. Vehkamäki, Origin of the Failure of Classical Nucleation Theory: Incorrect Description of the Smallest Clusters. Phys. Rev. Lett. 98 ,145702 (2007). 
+
+20. J. Möller, A. Schottelius, M. Caresana, U. Boesenberg, C. Kim, F. Dallari, T. A. Ezquerra, J. M. Fernández, L. Gelisio, A. Glaesener, C. Goy, J. Hallmann, A. Kalinin, R. P. Kurta, D. Lapkin, F. Lehmkühler, F. Mambretti, M. Scholz, R. Shayduk, F. Trinter, I. A. Vartaniants, A. Zozulya, D. E. Galli, G. Grübel, A. Madsen, F. Caupin, R. E. Grisenti, Crystal Nucleation in Supercooled Atomic Liquids. Phys. Rev. Lett. 132 , 206102 (2024). 
+
+21. C. Beneduce, D. E. P. Pinto, L. Rovigatti, F. 
+
+Romano, P. Šulc, F. Sciortino, J. Russo, 
+
+Falsifiability Test for Classical Nucleation Theory. Phys. Rev. Lett. 134 , 148201 (2025). 
+
+22. J. S. Kim, T. LaGrange, B. W. Reed, M. L. Taheri, M. R. Armstrong, W. E. King, N. D. Browning, G. H. Campbell, Imaging of Transient Structures Using Nanosecond in Situ TEM. Science . 321 , 1472 –1475 (2008). 
+
+23. A. F. Wallace, L. O. Hedges, A. Fernandez-Martinez, P. Raiteri, J. D. Gale, G. A. Waychunas, S. Whitelam, J. F. Banfield, J. J. De Yoreo, Microscopic Evidence for Liquid-Liquid Separation in Supersaturated CaCO3 Solutions. Science . 341 , 885 –889 (2013). 
+
+24. B. Jin, Y. Chen, H. Pyles, M. D. Baer, B. A. Legg, Z. Wang, N. M. Washton, K. T. Mueller, D. Baker, G. K. Schenter, C. J. Mundy, J. J. De Yoreo, Formation, chemical evolution and solidification of the dense liquid phase of calcium (bi)carbonate. Nat. Mater. 24 , 125 –
+
+132 (2025). 
+
+25. X. Xu, C. L. Ting, I. Kusaka, Z.-G. Wang, Nucleation in Polymers and Soft Matter. Annu. Rev. Phys. Chem. 65 , 449 –475 (2014). 
+
+26. P. Tan, N. Xu, L. Xu, Visualizing kinetic pathways of homogeneous nucleation in colloidal crystallization. Nat. Phys. 10 , 73 –79 (2014). 
+
+27. J. Zhou, Y. Yang, Y. Yang, D. S. Kim, A. Yuan, X. Tian, C. Ophus, F. Sun, A. K. Schmid, M. Nathanson, H. Heinz, Q. An, H. Zeng, P. Ercius, J. Miao, Observing crystal nucleation in four dimensions using atomic electron tomography. Nature . 570 , 500 –503 (2019). 
+
+28. F.-R. Chen, D. Van Dyck, C. Kisielowski, L. P. Hansen, B. Barton, S. Helveg, Probing atom dynamics of excited Co-Mo-S nanocrystals in 3D. Nat. Commun. 12 , 5007 (2021). 
+
+29. S. Kang, J. Kim, S. Kim, H. Chun, J. Heo, C. F. Reboul, R. Meana-Pañeda, C. T. S. Van, H. Choi, Y. Lee, J. Rhee, M. Lee, D. Kang, B. H. Kim, T. Hyeon, B. Han, P. Ercius, W. C. Lee, H. Elmlund, J. Park, Time-resolved Brownian tomography of single nanocrystals in liquid during oxidative etching. Nat. Commun. 16 ,1158 (2025). 
+
+30. F. Chen, Z. Nussinov, K. F. Kelton, Crystal nucleation and growth in liquids: Cooperative atom attachment and detachment. Phys. Rev. B. 108 , 64205 (2023). 
+
+31. R. Freitas, E. J. Reed, Uncovering the effects of interface-induced ordering of liquid on crystal growth using machine learning. Nat. Commun. 11 , 3260 (2020). 
+
+32. I. M. Lifshitz, V. V Slyozov, The kinetics of precipitation from supersaturated solid solutions. J. Phys. Chem. Solids . 19 , 35 –50 (1961). 
+
+33. C. L. Wagner, Theorie der Alterung von 
+
+Niederschlägen durch Umlösen (Ostwald‐ 14 
+
+Reifung). Z. Elektrochem. 65 , 581 –591 (1961). 
+
+34. J. J. L. Velázquez, The Becker –Döring Equations and the Lifshitz –Slyozov Theory of Coarsening. J. Stat. Phys. 92 , 195 –236 (1998). 
+
+35. J. Y. Rempel, M. G. Bawendi, K. F. Jensen, Insights into the Kinetics of Semiconductor Nanocrystal Nucleation and Growth. J. Am. Chem. Soc. 131 , 4479 –4489 (2009). 
+
+36. K. Zhu, H. Su, Traversing the nucleation-growth landscape through heterogeneous random walks. Phys. Rev. E. 107 , 64110 (2023). 
+
+37. R. A. Marcus, On the Theory of Oxidation‐ 
+
+Reduction Reactions Involving Electron Transfer. I. J. Chem. Phys. 24 , 966 –978 (1956). 
+
+38. R. A. Marcus, Electron transfer reactions in chemistry. Theory and experiment. Rev. Mod. Phys. 65 , 599 –610 (1993). 
+
+39. K. Zhu, H. Su, Illuminating non-equilibrium multi-step reaction dynamics with stochastic Marcus state model. J. Chem. Phys. 163 ,194113 (2025). 
+
+40. M. Kardar, Statistical Physics of Fields 
+
+(Cambridge University Press, Cambridge, 2007). 
+
+41. J. Russo, H. Tanaka, Crystal nucleation as the ordering of multiple order parameters. J. Chem. Phys. 145 , 211801 (2016). 
+
+42. J. F. Lutsko, How crystals form: A theory of nucleation pathways. Sci. Adv. 5, eaav7399 (2019). 
+
+43. P. W. Voorhees, The theory of Ostwald ripening. J. Stat. Phys. 38 , 231 –252 (1985). 
+
+44. P. W. Voorhees, Ostwald Ripening of Two-Phase Mixtures. Annu. Rev. Mater. Res. 22 ,197 –215 (1992). 
+
+45. B. Øksendal, Stochastic Differential Equations: An Introduction with Applications 
+
+(Springer Berlin Heidelberg, 2010), 
+
+Universitext .
+
+46. H. Risken, The Fokker-Planck Equation: Methods of Solution and Applications (Berlin, 
+
+Heidelberg : Springer Berlin Heidelberg, 
+
+Berlin, Heidelberg, Second Edi., 1996). 
+
+47. A. Nitzan, Chemical Dynamics in Condensed Phases: Relaxation, Transfer and Reactions in Condensed Molecular Systems (Oxford University Press, 2006). 
+
+48. R. Courant, D. Hilbert, Methods of Mathematical Physics, Volume 1 (Wiley, 2024). 
+
+49. S. Redner, in A Guide to First-Passage Processes , S. Redner, Ed. (Cambridge University Press, Cambridge, 2001), pp. 1 –37. 
+
+50. A. Godec, R. Metzler, First passage time distribution in heterogeneity controlled kinetics: going beyond the mean first passage time. Sci. Rep. 6, 20349 (2016). 
+
+51. G. Vaccario, C. Antoine, J. Talbot, First-Passage Times in d-Dimensional Heterogeneous Media. Phys. Rev. Lett. 115 ,240601 (2015). 
+
+52. S. Redner, A first look at first-passage processes. Phys. A Stat. Mech. its Appl. 631 ,128545 (2023). 
+
+53. H. Zheng, R. K. Smith, Y. Jun, C. Kisielowski, U. Dahmen, A. P. Alivisatos, Observation of Single Colloidal Platinum Nanocrystal Growth Trajectories. Science . 324 , 1309 –1312 (2009). 
+
+54. R. Mashiach, H. Weissman, L. Avram, L. Houben, O. Brontvein, A. Lavie, V. Arunachalam, M. Leskes, B. Rybtchinski, A. Bar-Shir, In situ NMR reveals real-time nanocrystal growth evolution via monomer-attachment or particle-coalescence. Nat. Commun. 12 , 229 (2021). 
+
+55. T. A. Witten, L. M. Sander, Diffusion-Limited Aggregation, a Kinetic Critical Phenomenon. 
+
+Phys. Rev. Lett. 47 , 1400 –1403 (1981). 
+
+56. V. I. Arnold, V. I. Arnold, Ed. (Springer New York, New York, NY, 1989), pp. 201 –232. 
+
+57. K. Zhu, H. Su, Unraveling Dynamic Transitions in Time-Resolved Biomolecular Motions by A Dressed Diffusion Model. J. Phys. Chem. A . 124 , 613 –617 (2020). 
+
+58. J.-H. Jeon, H. M.-S. Monne, M. Javanainen, R. Metzler, Anomalous Diffusion of Phospholipids and Cholesterols in a Lipid Bilayer and its Origins. Phys. Rev. Lett. 109 ,188103 (2012). 
+
+59. Y. Meroz, I. M. Sokolov, A toolbox for determining subdiffusive mechanisms. Phys. Rep. 573 , 1 –29 (2015). 
+
+60. S. Saha, J. Agudo-Canalejo, R. Golestanian, Scalar Active Mixtures: The Nonreciprocal Cahn-Hilliard Model. Phys. Rev. X . 10 , 41009 (2020). 
+
+61. A. Dinelli, J. O’Byrne, A. Curatolo, Y. Zhao, 
+
+P. Sollich, J. Tailleur, Non-reciprocity across scales in active mixtures. Nat. Commun. 14 ,7035 (2023). 
+
+62. Y. Zhang, J. Ge, Z. Liu, Enhanced Activity of Immobilized or Chemically Modified Enzymes. ACS Catal. 5, 4503 –4513 (2015). 
+
+63. H. Ooka, Y. Chiba, R. Nakamura, Thermodynamic principle to enhance enzymatic activity using the substrate affinity. 
+
+Nat. Commun. 14 , 4860 (2023). 
+
+64. F. Stoffel, M. Papp, M. Gil-Garcia, A. M. Küffner, A. I. Benítez-Mateos, R. P. B. 15 
+
+Jacquat, N. Galvanetto, L. Faltova, P. Arosio, Enhancement of enzymatic activity by biomolecular condensates through pH buffering. Nat. Commun. 16 , 6368 (2025). 
+
+65. M. Aykol, A. Merchant, S. Batzner, J. N. Wei, E. D. Cubuk, Predicting emergence of crystals from amorphous precursors with deep learning potentials. Nat. Comput. Sci. 5, 105 –
+
+111 (2025). 
+
+66. S. von Bülow, G. Tesei, K. Lindorff-Larsen, Machine learning methods to study sequence –
+
+ensemble –function relationships in disordered proteins. Curr. Opin. Struct. Biol. 92 , 103028 (2025). 
+
+67. R. K. Krueger, M. P. Brenner, K. Shrinivas, Generalized design of sequence –ensemble –
+
+function relationships for intrinsically disordered proteins. Nat. Comput. Sci. (2025), doi:10.1038/s43588-025-00881-y.

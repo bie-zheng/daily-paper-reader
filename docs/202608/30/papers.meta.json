@@ -1,0 +1,54 @@
+{
+  "label": "2026-08-30",
+  "date": "2026-08-30",
+  "generated_at": "2026-08-30T22:45:20",
+  "count": 3,
+  "papers": [
+    {
+      "paper_id": "202608/30/2608.22931v1-composition--and-ordering-dependent-evolution-of-simulated-kikuchi-patterns-of-au-ni-alloys",
+      "section": "quick",
+      "title_en": "Composition- and Ordering-Dependent Evolution of Simulated Kikuchi Patterns of Au-Ni Alloys",
+      "authors": "Camila A. Teixeira, Lukas Berners, Sandra Korte-Kerzel, Ulrich Kerzel",
+      "date": "2026-08-24",
+      "pdf": "https://arxiv.org/pdf/2608.22931v1",
+      "score": "6.0",
+      "evidence": "模拟有序合金相与缺陷偏聚的菊池花样，可用于辐照合金中B2有序相的表征",
+      "tldr": "基于机器学习索引复杂结构需理解Kikuchi花样随材料细微变化的规律。模拟分析了Au-Ni全成分范围的Kikuchi花样，考察晶格参数、化学组成、部分占位及L12有序化的影响。发现化学组成主导平均强度与强反射数，L12有序化改变强度分布，而标准互相关难以区分细微差异。归一化强度分布与带宽可作为关键特征，为未来表示学习索引提供方向。",
+      "tags": "query:rad-damage",
+      "abstract_en": "Understanding how Kikuchi patterns behave with subtle material variations is essential for developing machine learning (ML) based indexing methods for structurally and chemically complex cases, such as phases with potential sub-lattice order or (meta)stable defects with segregation (defect phases). Simulated Kikuchi patterns of the binary Au-Ni system were systematically analysed to investigate the effects of lattice parameter, chemical composition, partial site occupancy and ordering. The full compositional range from pure nickel to pure gold was considered, including a hypothetical ordered L$1_2$ Au$_3$Ni structure. Simulation parameters were optimised by comparison with experimental patterns. Normalized cross correlation showed limited sensibility to subtle differences between patterns. EMsoft simulation results revealed a systematic increase in mean intensity and more reflections contribute significantly as gold content increases. A surprising four-fold increase in mean intensity from 99 % gold to the pure gold sample highlighted limitations of partial site occupancy simulation by EMsoft. Difference maps showed enhanced normalised intensity along the {111} and {200} bands for the sample with 20 % gold compared to higher gold compositions. By isolating lattice parameter and chemical composition effects, chemical composition contributes predominantly to the mean intensity and strong reflections count, although the normalised intensity distribution was affected by both. Introducing L$1_2$ ordering increased the number of strong reflections and mean intensity, and redistributed normalised intensity along {111} and {200} bands and selected zone axis. Normalised intensity distribution and band width, are key descriptions to distinguish the Kikuchi patterns, which can be incorporated in future representation learning based indexing methods.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202608/30/2608.24792v1-kinetic-turnover-in-the-early-stage-nucleation-of-multi-shell-condensed-clusters",
+      "section": "quick",
+      "title_en": "Kinetic Turnover in the Early-Stage Nucleation of Multi-Shell Condensed Clusters",
+      "authors": "Kaicheng Zhu, Haibin Su",
+      "date": "2026-08-25",
+      "pdf": "https://arxiv.org/pdf/2608.24792v1",
+      "score": "6.0",
+      "evidence": "研究团簇早期形核中结构重排动力学，可迁移至辐照诱导点缺陷团簇形成",
+      "tldr": "成核速率在实验与理论间常存在量级偏差，尤其涉及多步路径中的动态结构重排。本文发展多壳层模型，引入时空依赖序参量刻画结构重组与团簇早期生长的耦合。随机模拟与首通路径分析表明，重排速率改变可使成核速率变化数个量级，且耦合增强时平均首通时间与重排敏感性由单调转为非单调，出现翻转效应。有效成核势垒定量解释上述行为，为多步成核提供预测框架。",
+      "tags": "query:rad-damage",
+      "abstract_en": "Nucleation is a key rate-limiting process in phase transition and phase separation. Recent studies highlight a significant discrepancy between experimentally measured nucleation rates and theoretical predictions, particularly when dynamic structural reordering occurs along multi-step pathways. To bridge this gap, we develop a multi-shell model with a space-time-dependent order-parameter field to describe the reordering-nucleation process, where structural reorganization couples with the early growth of condensed clusters. Through stochastic simulations, we track the time-resolved evolution of heterogeneous structural order inside growing clusters. Path analysis of the first-passage problem in early-stage nucleation demonstrates that shifting the reordering rate alters the nucleation rate by several orders of magnitude. Furthermore, as the coupling strength increases, the relationship between the mean first-passage time and reordering susceptibility shifts from monotonic to non-monotonic, exhibiting a turnover effect. We quantitatively rationalize these behaviors with an effective nucleation barrier that accounts for non-equilibrium properties. Our findings elucidate the mechanisms behind multi-step nucleation and offer a predictive framework for future studies.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202608/30/2608.27314v1-grain-boundary-phase-transitions-enable-diffusionless-climb-of-disconnections",
+      "section": "quick",
+      "title_en": "Grain Boundary Phase Transitions Enable Diffusionless Climb of Disconnections",
+      "authors": "Md Sharier Nazim, Giacomo Po, Nikhil Chandra Admal",
+      "date": "2026-08-27",
+      "pdf": "https://arxiv.org/pdf/2608.27314v1",
+      "score": "6.0",
+      "evidence": "分子动力学模拟位错环-晶界相互作用及点缺陷介导攀移",
+      "tldr": "传统理论认为位错攀移必须依赖体扩散输送点缺陷。本研究利用双晶学与分子动力学模拟，考察Al中剪切位错环与倾斜晶界的相互作用。发现位错吸收可产生具有非零攀移分量的错配位错，但其沿界面保守传播，无需长程体扩散。运动由晶界核心协同重排诱发的局部相变驱动，建立了位错与晶界相演化的直接耦合。",
+      "tags": "query:rad-damage",
+      "abstract_en": "Dislocation-grain boundary (GB) interactions govern the mechanical response of polycrystalline materials by controlling dislocation absorption, transmission, and interfacial plasticity. While disconnection climb is conventionally understood to require the absorption or emission of point defects supplied through long range bulk diffusion, GBs possess intrinsic configurational degrees of freedom associated with their atomic structure, or microstate, that may provide an alternative mechanism. Here, using bicrystallography and molecular dynamics simulations, we investigate the interaction of shear dislocation loops with the [1 1 0](-5 5 14) symmetric tilt grain boundary in Al. We show that dislocation absorption generates a mobile extrinsic disconnection with a nonzero climb component that propagates conservatively along the interface without long-range bulk point-defect transport. Its motion is accompanied by a localized GB phase transformation mediated by cooperative atomic rearrangements within the GB core, producing successive metastable GB microstates. These findings establish a direct coupling between lattice dislocations and GB phase evolution and reveal a conservative mechanism for disconnection climb fundamentally distinct from conventional vacancy-mediated climb.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,129 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-08-30T22:44:21.467126+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 3,
+    "quick_skim_target": 11,
+    "quick_selected": 3
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2608.22931v1",
+      "source": "arxiv",
+      "title": "Composition- and Ordering-Dependent Evolution of Simulated Kikuchi Patterns of Au-Ni Alloys",
+      "abstract": "Understanding how Kikuchi patterns behave with subtle material variations is essential for developing machine learning (ML) based indexing methods for structurally and chemically complex cases, such as phases with potential sub-lattice order or (meta)stable defects with segregation (defect phases). Simulated Kikuchi patterns of the binary Au-Ni system were systematically analysed to investigate the effects of lattice parameter, chemical composition, partial site occupancy and ordering. The full compositional range from pure nickel to pure gold was considered, including a hypothetical ordered L$1_2$ Au$_3$Ni structure. Simulation parameters were optimised by comparison with experimental patterns. Normalized cross correlation showed limited sensibility to subtle differences between patterns. EMsoft simulation results revealed a systematic increase in mean intensity and more reflections contribute significantly as gold content increases. A surprising four-fold increase in mean intensity from 99 % gold to the pure gold sample highlighted limitations of partial site occupancy simulation by EMsoft. Difference maps showed enhanced normalised intensity along the {111} and {200} bands for the sample with 20 % gold compared to higher gold compositions. By isolating lattice parameter and chemical composition effects, chemical composition contributes predominantly to the mean intensity and strong reflections count, although the normalised intensity distribution was affected by both. Introducing L$1_2$ ordering increased the number of strong reflections and mean intensity, and redistributed normalised intensity along {111} and {200} bands and selected zone axis. Normalised intensity distribution and band width, are key descriptions to distinguish the Kikuchi patterns, which can be incorporated in future representation learning based indexing methods.",
+      "authors": [
+        "Camila A. Teixeira",
+        "Lukas Berners",
+        "Sandra Korte-Kerzel",
+        "Ulrich Kerzel"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ],
+      "published": "2026-08-24T08:06:16+00:00",
+      "link": "https://arxiv.org/pdf/2608.22931v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Simulated Kikuchi patterns for ordered alloy phases and defect segregation, applicable to characterizing ordered B2 phases in irradiated alloys",
+      "llm_evidence_cn": "模拟有序合金相与缺陷偏聚的菊池花样，可用于辐照合金中B2有序相的表征",
+      "llm_evidence": "模拟有序合金相与缺陷偏聚的菊池花样，可用于辐照合金中B2有序相的表征",
+      "canonical_evidence": "模拟有序合金相与缺陷偏聚的菊池花样，可用于辐照合金中B2有序相的表征",
+      "llm_tldr_en": "This paper systematically simulates Kikuchi patterns for Au-Ni alloys with varying composition and ordering, including an ordered L12 structure, to support ML-based indexing of chemically complex and defect-containing phases.",
+      "llm_tldr_cn": "该论文针对机器学习索引在复杂有序合金和缺陷偏聚相中面临的挑战，系统模拟了Au-Ni二元合金不同成分、晶格参数和有序度下的菊池花样，并纳入假设的有序L12 Au3Ni结构。通过优化模拟参数并与实验花样对比，揭示了有序参数对衍射花样的影响规律。该方法有望推广到其他有序相（如B2相）的微观结构表征，为辐照FeCr合金中的相演化研究提供分析工具。",
+      "llm_tldr": "该论文针对机器学习索引在复杂有序合金和缺陷偏聚相中面临的挑战，系统模拟了Au-Ni二元合金不同成分、晶格参数和有序度下的菊池花样，并纳入假设的有序L12 Au3Ni结构。通过优化模拟参数并与实验花样对比，揭示了有序参数对衍射花样的影响规律。该方法有望推广到其他有序相（如B2相）的微观结构表征，为辐照FeCr合金中的相演化研究提供分析工具。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "Microstructure evolution of B2 phase in FeCr alloys under irradiation",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.24792v1",
+      "source": "arxiv",
+      "title": "Kinetic Turnover in the Early-Stage Nucleation of Multi-Shell Condensed Clusters",
+      "abstract": "Nucleation is a key rate-limiting process in phase transition and phase separation. Recent studies highlight a significant discrepancy between experimentally measured nucleation rates and theoretical predictions, particularly when dynamic structural reordering occurs along multi-step pathways. To bridge this gap, we develop a multi-shell model with a space-time-dependent order-parameter field to describe the reordering-nucleation process, where structural reorganization couples with the early growth of condensed clusters. Through stochastic simulations, we track the time-resolved evolution of heterogeneous structural order inside growing clusters. Path analysis of the first-passage problem in early-stage nucleation demonstrates that shifting the reordering rate alters the nucleation rate by several orders of magnitude. Furthermore, as the coupling strength increases, the relationship between the mean first-passage time and reordering susceptibility shifts from monotonic to non-monotonic, exhibiting a turnover effect. We quantitatively rationalize these behaviors with an effective nucleation barrier that accounts for non-equilibrium properties. Our findings elucidate the mechanisms behind multi-step nucleation and offer a predictive framework for future studies.",
+      "authors": [
+        "Kaicheng Zhu",
+        "Haibin Su"
+      ],
+      "primary_category": "cond-mat.stat-mech",
+      "categories": [
+        "cond-mat.stat-mech",
+        "physics.chem-ph"
+      ],
+      "published": "2026-08-25T16:37:49+00:00",
+      "link": "https://arxiv.org/pdf/2608.24792v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "multi-shell model for early-stage nucleation of clusters, applicable to radiation-induced cluster formation",
+      "llm_evidence_cn": "研究团簇早期形核中结构重排动力学，可迁移至辐照诱导点缺陷团簇形成",
+      "llm_evidence": "研究团簇早期形核中结构重排动力学，可迁移至辐照诱导点缺陷团簇形成",
+      "canonical_evidence": "研究团簇早期形核中结构重排动力学，可迁移至辐照诱导点缺陷团簇形成",
+      "llm_tldr_en": "Develops a multi-shell nucleation model with space-time order parameter and stochastic simulations, revealing kinetic turnover in early-stage cluster formation; method is transferable to modelling radiation-induced defect clusters.",
+      "llm_tldr_cn": "该工作针对实验测量成核速率与理论预测不一致的问题，发展了一个具有时空依赖序参量场的多壳层模型，用以描述结构重排与早期凝聚团簇生长相互耦合的成核过程。通过随机模拟追踪团簇内部异质结构有序度的时间演化，并结合首达路径分析，首次阐明了早期成核阶段动力学转变的来源。研究发现结构重排对成核动力学有显著影响，为理解辐照条件下点缺陷团簇和析出相的形核机制提供了可借鉴的多尺度模拟框架。",
+      "llm_tldr": "该工作针对实验测量成核速率与理论预测不一致的问题，发展了一个具有时空依赖序参量场的多壳层模型，用以描述结构重排与早期凝聚团簇生长相互耦合的成核过程。通过随机模拟追踪团簇内部异质结构有序度的时间演化，并结合首达路径分析，首次阐明了早期成核阶段动力学转变的来源。研究发现结构重排对成核动力学有显著影响，为理解辐照条件下点缺陷团簇和析出相的形核机制提供了可借鉴的多尺度模拟框架。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation-induced point defects and clusters",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.27314v1",
+      "source": "arxiv",
+      "title": "Grain Boundary Phase Transitions Enable Diffusionless Climb of Disconnections",
+      "abstract": "Dislocation-grain boundary (GB) interactions govern the mechanical response of polycrystalline materials by controlling dislocation absorption, transmission, and interfacial plasticity. While disconnection climb is conventionally understood to require the absorption or emission of point defects supplied through long range bulk diffusion, GBs possess intrinsic configurational degrees of freedom associated with their atomic structure, or microstate, that may provide an alternative mechanism. Here, using bicrystallography and molecular dynamics simulations, we investigate the interaction of shear dislocation loops with the [1 1 0](-5 5 14) symmetric tilt grain boundary in Al. We show that dislocation absorption generates a mobile extrinsic disconnection with a nonzero climb component that propagates conservatively along the interface without long-range bulk point-defect transport. Its motion is accompanied by a localized GB phase transformation mediated by cooperative atomic rearrangements within the GB core, producing successive metastable GB microstates. These findings establish a direct coupling between lattice dislocations and GB phase evolution and reveal a conservative mechanism for disconnection climb fundamentally distinct from conventional vacancy-mediated climb.",
+      "authors": [
+        "Md Sharier Nazim",
+        "Giacomo Po",
+        "Nikhil Chandra Admal"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ],
+      "published": "2026-08-27T16:17:03+00:00",
+      "link": "https://arxiv.org/pdf/2608.27314v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Molecular dynamics simulation of dislocation loop-grain boundary interaction and point-defect-mediated climb",
+      "llm_evidence_cn": "分子动力学模拟位错环-晶界相互作用及点缺陷介导攀移",
+      "llm_evidence": "分子动力学模拟位错环-晶界相互作用及点缺陷介导攀移",
+      "canonical_evidence": "分子动力学模拟位错环-晶界相互作用及点缺陷介导攀移",
+      "llm_tldr_en": "This paper uses molecular dynamics to show that grain boundary phase transitions enable diffusionless climb of disconnections, revealing a mechanism for dislocation absorption and interfacial plasticity relevant to defect evolution.",
+      "llm_tldr_cn": "该论文针对位错-晶界相互作用中位错攀移通常依赖长程体扩散的问题，提出晶界自身的构型自由度可提供无扩散攀移途径。作者利用双晶学分析和分子动力学模拟，研究铝中剪切位错环与对称倾转晶界的相互作用，发现位错吸收可产生可移动的外在断阶，从而影响界面塑性。这一机制对理解辐照材料中缺陷演化与微观结构变化具有参考价值。",
+      "llm_tldr": "该论文针对位错-晶界相互作用中位错攀移通常依赖长程体扩散的问题，提出晶界自身的构型自由度可提供无扩散攀移途径。作者利用双晶学分析和分子动力学模拟，研究铝中剪切位错环与对称倾转晶界的相互作用，发现位错吸收可产生可移动的外在断阶，从而影响界面塑性。这一机制对理解辐照材料中缺陷演化与微观结构变化具有参考价值。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation induced defect evolution and microstructure changes",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
