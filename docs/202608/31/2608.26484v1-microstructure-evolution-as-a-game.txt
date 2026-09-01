@@ -1,0 +1,2014 @@
+Title: Microstructure evolution as a game
+
+URL Source: https://arxiv.org/pdf/2608.26484v1
+
+Published Time: Fri, 28 Aug 2026 00:21:21 GMT
+
+Number of Pages: 36
+
+Markdown Content:
+MICROSTRUCTURE EVOLUTION AS A GAME 
+
+M. ORTIZ 
+
+Abstract. We develop a whole-trajectory relaxation framework for dissipative evolutions with non-convex, state- and history-dependent kinetics. The framework arises naturally from a game-theoretical formulation of energy–dissipation evolution. State–rate consistency is eliminated by causal Volterra reconstruction, reducing the problem to a diagonal equilibrium condition on com-plete rate trajectories. We establish a direct method based on vanishing-defect approximability, compactness, and complementary semicontinuity. The relaxation mechanism is computed exactly for a reduced simple-shear model with a non-convex kinetic potential and a local memory vari-able. The enriched state is a Young measure on complete local histories. We identify explicitly the sequential lower-semicontinuous envelope of the pure diagonal defect, characterize its zero set, construct pure recovery sequences for every relaxed zero, and prove existence through a frozen-best-response time discretization. The resulting coexistence of distinct rate populations with distinct memories provides a reduced mechanism for kinetic shear banding and connects naturally with neg-ative strain-rate sensitivity and dynamic strain aging such as underlie the Portevin–Le Châtelier effect. 
+
+Contents 
+
+1. Introduction 12. Formal derivation of the evolution game 52.1. The classical rate problem 52.2. Game-theoretical interpretation 62.3. Integral form of the game 62.4. Diagonal reduction 73. A game-theoretical direct method 84. Examples of attainment 11 4.1. Superlinear-growth energy–dissipation systems 11 4.2. Linear-growth energy–dissipation systems in measure form 13 5. A game-theoretical relaxation method 22 6. Example of exact relaxation: Non-convex kinetics with local memory 25 6.1. Simple-shear reduction and local-memory kinetics 25 6.2. The pure diagonal game and its defect 26 6.3. Relaxed local histories and the enriched space 27 6.4. Exact relaxation of the diagonal defect 29 6.5. Existence from frozen best responses 30 7. Summary and concluding remarks 33 Acknowledgements 34 References 34 
+
+Keywords. Energy–dissipation evolution; non-convex kinetics; evolutionary relaxation; diag-onal equilibrium; history-dependent microstructure; Young measures; recovery sequences; rate-dependent plasticity; kinetic shear banding. 
+
+2020 Mathematics Subject Classification. 49J45 (primary); 47J35, 74D10 (secondary). 1. Introduction 
+
+Microstructure can be a manifestation of non-convex energy minimization, as in martensitic phase transformations and shape-memory alloys [30]. The calculus of variations then provides a natural language of weak convergence, lower-semicontinuous envelopes, and recovery sequences. In many dissipative materials, however, non-convexity enters not only through the stored energy but through the kinetics themselves. Fine-scale patterns may therefore be selected dynamically rather than by a sequence of static energy minimizations. Representative examples include, to mention a few:  
+
+> 1arXiv:2608.26484v1 [math.CA] 27 Aug 2026 2M. ORTIZ
+
+i) single-crystal plasticity with latent hardening, where competition among slip systems pro-duces non-convex and state/branch-dependent incremental problems, slip laminates, and dislocation microstructures [19, 20, 21]; ii) jerky flow associated with dynamic strain aging, including the Portevin–Le Châtelier phe-nomena, where negative strain-rate sensitivity drives propagating localization bands [25]; iii) shear-banding complex fluids, where non-monotone kinetics support coexisting bands with different shear rates and internal structures [26]; iv) adiabatic shear localization in dynamically loaded metals, where hardening competes with microstructural or thermal softening [27]; and v) driven electrochemical systems, where electro-autocatalytic reaction kinetics can suppress or induce heterogeneous insertion patterns under nonequilibrium operation [28, 29]. A particularly transparent manifestation of history-dependent kinetic microstructure is furnished by dynamic strain aging and the Portevin–Le Châtelier effect [25, 23, 24]. In the instability regime, plastic flow localizes into deformation bands and the constitutive response may exhibit negative strain-rate sensitivity. Internal variables describing aging, pinning, or solute–dislocation interac-tions carry local memory, so populations that have experienced different rate histories need not have the same subsequent kinetic response even when their present macroscopic strain is the same. This gives a direct version of the restart obstruction: an instantaneous convexification of the rate law does not record which microscopic population acquired which internal history. The complete trajectory, rather than only the current relaxed rate, is therefore the natural object to compactify. This distinction exposes a basic difficulty with incremental relaxation. Classical evolution theories provide several powerful but structurally different principles. Monotone-operator and variational-inequality methods treat coercive nonlinear responses [8, 2, 3]. Minimizing movements and curves of maximal slope construct gradient evolutions from time-incremental minimization [31, 32, 11, 33]. Energetic and Balanced-Viscosity formulations describe rate-independent evo-lutions, including jumps [15, 16, 17]. Parametrized quasi-static evolutions provide a related trajectory-level description in terms of stationarity and energy balance, together with constructive approximation and evolutionary Γ-convergence results; see, in particular, Negri [42]. Trajectory-based minimum principles provide another route for dissipative systems [22, 39, 40]. Whole-trajectory variational formulations are therefore not new in themselves, but the relax-ation mechanism used here is different. In their classical form, the Brézis–Ekeland principle and the related Nayroles minimum principles characterize convex dissipative evolutions by minimizing a nonnegative space–time functional built from a potential and its Fenchel conjugate [12, 13]; convex duality is thus built into the construction. The weighted dissipation–energy family of Mielke and Ortiz [39], and the related weighted energy–dissipation formulation [40], likewise act on complete trajectories. In the Mielke–Ortiz construction, however, the direct Γ-limit as the regularization parameter tends to zero is highly degenerate and does not itself furnish a nontrivial relaxed tra-jectory functional; limiting rate-independent trajectories are instead identified through parameter-independent estimates and compactness. Conti and Ortiz [22] derived rigorous relaxations for two specific energy–dissipation functionals, but those model calculations do not supply a general closure principle for anomalous, state/branch-dependent kinetics. The difficulty addressed here is precisely that such kinetics may fail to admit stable pure incre-mental minimizers. The endpoint of a time step may then be represented only by a minimizing sequence or generalized microstructure, so there is no pure state from which to start the next step; moreover, different microscopic realizations with the same relaxed endpoint can have different costs of subsequent rearrangement. This restart problem [22] shows that the issue is not merely to compactify individual states or rates: one must compactify the entire state–rate evolution while retaining the initial condition, causal history, work, and dissipation. The present construction there-fore relaxes the whole-path equilibrium principle itself: the pure competitor class is retained, while MICROSTRUCTURE EVOLUTION AS A GAME 3
+
+relaxed solutions are generated as enriched-space limits of pure almost equilibria whose complete diagonal defects vanish. The organizing idea of this paper is to make that whole-trajectory structure explicit as a game. At the heuristic level, each time t may be regarded as a player choosing an instantaneous rate, with later players seeing the state accumulated from earlier choices. Passing from pointwise-in-time comparisons to an integral comparison produces a path-level game between state and rate histories: the state path enforces the consistency relation ˙ u = v, while the rate path minimizes the energy–dissipation cost. For the class considered here, the decisive simplification is that the state player has a unique finite response and can be eliminated exactly through the Volterra operator: (1.1) Rv := u0 + Kv, J(w; v) := G(w; Rv ),
+
+where G(v; u) is an energy–dissipation functional that encodes the physics of the system. The first argument is the trial rate, while the second, written after the semicolon, generates the state. The evolution is then treated directly as a diagonal equilibrium (1.2) J(v; v) ≤ J(w; v), ∀w. 
+
+If the competitor section is proper, convex, and lower semicontinuous, the same condition can be written (1.3) 0 ∈ L(v), L(v) := ∂1J(v; v).
+
+This reduced formulation is closely related to variational inequalities, noncooperative dynamic games, and equilibrium problems [6, 7, 9, 10], but its characteristic feature is the diagonal de-pendence induced by causal reconstruction. The exact Volterra reconstruction also explains why the game structure becomes comparatively unobtrusive in the examples treated below: the state player’s best response is single-valued, explicit, and can be solved out. For more general causal constraints the state response may be available only implicitly, or exact elimination may be ana-lytically undesirable; in that setting the unreduced state–rate game remains a substantive part of the formulation. The continuity equation in mass transport, discussed in the concluding remarks, is a prototype in which the causal coupling is a PDE constraint rather than an elementary Volterra operator. Keeping the full diagonal response is essential. In a quadratic Hilbert-space setting it produces the generally nonsymmetric bilinear form obtained after substituting u = Rv . If S ∈ L (H) is time independent, self-adjoint, and positive semidefinite, then the Volterra contribution satisfies (1.4) 
+
+ˆ T
+
+> 0
+
+(SKv (t), v (t)) H dt = 12 (SKv (T ), Kv (T )) H ≥ 0.
+
+Indeed, ( Kv )′ = v and self-adjointness gives ddt  
+
+> 12
+
+(SKv, Kv )H = ( SKv, v )H . This favorable causal term is lost if the state force is replaced by an arbitrary external perturbation. More generally, the two occurrences of the rate variable play different analytical roles: the first is the competitor and the second generates the state. Separating them reveals the complementary compactness and semicontinuity properties needed to pass to the diagonal limit. The resulting direct method is naturally organized by the diagonal defect 
+
+(1.5) I(v) := sup 
+
+> w∈Y
+> {
+
+J(v; v) − J(w; v)}.
+
+Zeros of I are diagonal equilibria, while sequences with I(vh) → 0 are almost equilibria of the complete path problem. The abstract existence theory developed below separates three logically distinct ingredients: vanishing-defect approximability, compactness of the corresponding almost equilibria, and lower/upper semicontinuity for the diagonal and competitor terms, respectively. The approximability requirement is substantive rather than cosmetic: coercivity and semicontinuity alone do not force the minimum defect to vanish. This formulation is close in spirit to the direct 4 M. ORTIZ 
+
+method for variational problems and to existence mechanisms for variational inequalities and convex integral functionals [1, 2, 3, 4, 5, 35, 36], but here the direct method acts on a causal diagonal. Two attainment results show how this architecture works in different growth regimes. For a representative superlinear dissipation model, the natural rate space is reflexive; the Volterra term supplies a favorable monotonicity contribution, the defect is coercive and weakly lower semicontin-uous, and a temporal Galerkin construction converges strongly to the unique equilibrium. For a representative linear-growth model, by contrast, the natural ambient rate variable is a vector-valued Radon measure and the reconstructed state is a right-continuous BV path. The work term then requires the centered state representative at atoms: this choice is singled out by the exact quadratic chain rule, so jumps need no ad hoc energy correction. Energy balance yields a data-dependent total-variation bound and hence weak-star compactness. Viscous regularization provides an L2 core, temporal measure-approximation spaces approximate entire trajectories, and the limiting measure equilibrium is unique; under the W 1,1 loading hypothesis used here, the compactness passage fur-ther shows that the equilibrium rate is absolutely continuous. Thus, measure-valued rates are not introduced merely as a formal relaxation but as the correct compact ambient variables at linear growth. The same viewpoint also provides a direct relaxation method when exact equilibria are lost because the pure path space is not compact or the defect is not lower semicontinuous. Rather than postulating a new pointwise game on an enlarged space, we embed the pure problem in an enriched topology and define relaxed equilibria as limits of pure paths whose diagonal defects vanish. Equivalently, they are zeros of the sequential lower-semicontinuous envelope of the pure defect. This distinction matters: the enriched variables are chosen to retain the observables and costs that survive along recovery sequences, but the infinite extensions used to embed the pure payoff do not by themselves define meaningful best responses at genuinely relaxed points. The relaxation is therefore a closure of the evolutionary equilibrium principle , not simply a pointwise convexification of its state variables. The simple-shear model of Section 6 makes this mechanism concrete in a setting where the relaxation can be solved completely. A non-convex kinetic potential permits coexistence of distinct local shear rates at a common stress, while a local internal variable evolves causally with the rate and therefore gives different bands different memories. The enriched variable is a Young measure on complete local histories. For this example the relaxed diagonal defect is computed exactly, every relaxed zero is generated by pure almost equilibria, and vanishing-defect approximability follows from an explicit frozen-best-response construction. The example also shows why replacing the kinetic potential by its pointwise convex envelope is generally insufficient when the internal-variable evolution depends nonlinearly on the microscopic rate. The present paper develops these ideas in six steps: i) derive the integral evolution game and eliminate state–rate consistency through the reduced payoff J(w; v) = G(w; Rv ); ii) establish abstract direct existence criteria based on vanishing-defect approximability, com-pactness, and complementary semicontinuity; iii) prove existence, uniqueness, and temporal Galerkin convergence for a superlinear-growth energy–dissipation system; iv) treat linear growth in vector-measure form, including the centered BV reconstruction, energy-derived weak-star compactness, viscous regularization, and temporal measure ap-proximation; v) define relaxed diagonal equilibria as enriched-space limits of pure almost equilibria and characterize them as zeros of the relaxed defect; and vi) solve exactly the relaxation of an simple-shear kinetic shear-banding model with local mem-ory, identifying the history-space relaxed defect, proving pure recovery and existence, and relating two-rate coexistence to negative strain-rate sensitivity and dynamic strain aging. MICROSTRUCTURE EVOLUTION AS A GAME 5
+
+Section 2 derives the game and its diagonal reduction. Section 3 develops the abstract direct method and the diagonal-defect criteria. Section 4 verifies the theory in superlinear- and linear-growth settings, including the pathwise and measure-valued approximation constructions. Section 5 develops the enriched-space relaxation as the sequential closure of vanishing-defect pure paths. Section 6 applies the construction to simple-shear kinetic shear banding with local memory and computes the sequential relaxation of the complete diagonal defect exactly. The concluding section summarizes the main results, connections with other work, computational implications, and possible extensions to more general causal evolution problems. 2. Formal derivation of the evolution game 
+
+This section makes the transition from the familiar instantaneous rate problem to the complete reduced payoff used throughout the paper. The game terminology makes explicit that the optimal rate at one time depends on the accumulated actions at earlier times. In the Volterra setting treated here, the unique state response can be eliminated exactly, so the analytical object after reduction is a diagonal variational relation on a path space rather than a continuum-player game in an abstract economic sense. This collapse is specific to the explicit reconstruction used below; for more general causal constraints it may be preferable or necessary to retain the coupled state–rate game. The formulation allows weak convergence and relaxation to act on the entire evolution at once. Throughout this section the derivation is formal; the spaces and hypotheses used in the rigorous results are specified in subsequent sections as needed. 2.1. The classical rate problem. We first recall the local rate formulation and isolate the causal consistency relation that will later be eliminated. Let U be an affine space with translation vector space V . By an evolution we mean a map u : [0 , T ] → U . We consider rate problems characterized by timewise minimization together with consistency: 
+
+v(t) ∈ argmin Φ( ·; u(t), t ), t ∈ (0 , T ),(2.1a) 
+
+u(t) = u0 +
+
+ˆ t
+
+> 0
+
+v(s) ds, t ∈ [0 , T ].(2.1b) Here u0 ∈ U is the initial condition and Φ : V × U × (0 , T ) → (−∞ , +∞] is an extended-real-valued stage cost. At this formal stage we assume that all operations are meaningful. A common energy–dissipation form is (2.2) Φ( v; u, t ) = Ψ( v; u) − ⟨ f (u, t ), v ⟩,
+
+where Ψ : V × U → (−∞ , +∞] is a possibly state-dependent kinetic potential and f : U × (0 , T ) →
+
+V ∗ is the driving force. If the force is conservative, there is an energy E : U × (0 , T ) → R,differentiable in the state variable, such that f (u, t ) = −D1E(u, t ). Here and throughout, D1
+
+denotes differentiation with respect to the state variable. Then, the energy-dissipation functional (2.3) Φ( v; u, t ) = Ψ( v; u) + ⟨D1E(u, t ), v ⟩
+
+encodes the instantaneous competition between dissipation and energy. For convex Ψ( ·; u), the rate condition may be written as a subdifferential inclusion and treated by monotone-operator or variational-inequality methods [8, 2, 3]. Gradient-flow and minimizing-movement formulations provide complementary constructions [11, 33], while rate-independent sys-tems replace superlinear dissipation by a one-homogeneous potential and an energy–dissipation balance [15, 16]. The difficulty addressed here begins when the kinetic potential is non-convex in the rate and state/branch-dependent: pointwise minimizers may fail to exist and the missing compactness may involve both the rate and the state generated by it. 6 M. ORTIZ 
+
+2.2. Game-theoretical interpretation. The family of minimizations in (2.1) is indexed by time, but the choices are not independent. A rate selected at time s changes the state seen by every later time t > s . This suggests the following heuristic game: i) the players are the times t ∈ (0 , T ); ii) the action of player t is an instantaneous rate v(t) ∈ V ;iii) the state profile is the accumulated path u(t) = u0 + ´ t 
+
+> 0
+
+v(s) ds ; and iv) the stage cost of player t is Φ( v(t); u(t), t ). The dependence on preceding actions has a leader–follower flavor reminiscent of dynamic Stackel-berg games [6, 7]. No continuum-player existence theorem is invoked here; the interpretation serves to expose causality and the best-response structure. Formally, a pure equilibrium is a path satisfying (2.4) Φ( ˙ u(t); u(t), t ) ≤ Φ( v; u(t), t ), ∀v ∈ V, t ∈ (0 , T ).
+
+The consistency constraint couples all players and is part of the Euler–Lagrange structure. Since the quantities in (2.4) are generally defined only almost everywhere, we proceed to replace the pointwise comparison (2.4) by an integral one. 2.3. Integral form of the game. We now aggregate the timewise comparisons (2.4) without losing their local content. Let X be a state-path affine space and Y a rate-path vector space, and restrict temporarily to paths u ∈ X whose derivative belongs to Y . For every state ξ ∈ U and time 
+
+t, suppose, for the sake of the argument, that (2.5) −∞ < m (ξ, t ) = inf  
+
+> η∈V
+
+Φ( η; ξ, t ) < +∞.
+
+For finite-cost pairs, further assume measurability and integrability of Φ( v(t); u(t), t ) − m(u(t), t ) ≥
+
+0. For a measurable set A ⊂ (0 , T ), define (2.6) G(v; u, A ) := 
+
+ˆ
+
+> A
+> (
+
+Φ( v(t); u(t), t ) − m(u(t), t )
+
+> )
+
+dt. 
+
+The normalization by m makes G(v; u, ·) a nonnegative absolutely continuous measure. However, since m is independent of the competitor rate, the normalization is optional and does not affect any best-response or diagonal comparison. In particular, subsequent applications allow competitor sections that, unlike (2.5), are unbounded below. The integral equilibrium condition is the measure domination (2.7) G( ˙ u; u, A ) ≤ G(v; u, A ), ∀v ∈ Y, A ∈ A (0 , T ),
+
+where A(0 , T ) is the class of open subsets of (0 , T ). Assume that Y is stable under pasting: for every v, z ∈ Y and A ∈ A (0 , T ), (2.8) wA(t) := 
+
+> {
+
+v(t), t ∈ A, z(t), t / ∈ A
+
+belongs to Y . If the whole-interval comparison holds for every competitor, we can compare ˙ u with 
+
+wA and cancel the identical contribution on (0 , T ) \ A to obtain the comparison on A. The converse follows by choosing A = (0 , T ). Consequently, (2.9) (2.7) ⇐⇒ G( ˙ u; u, (0 , T )) ≤ G(v; u, (0 , T )) , ∀v ∈ Y. 
+
+This measure comparison retains local information Lebesgue almost-everywhere. If, in addition, 
+
+Y contains the admissible measurable selections of pointwise competitors, it is equivalent to the almost-everywhere pointwise condition (2.4). MICROSTRUCTURE EVOLUTION AS A GAME 7
+
+For the remainder of the paper we abbreviate G(v; u, (0 , T )) as (2.10) G(v; u) := 
+
+ˆ T
+
+> 0
+> (
+
+Φ( v(t); u(t), t ) − m(u(t), t )
+
+> )
+
+dt. 
+
+At the path level, consistency can be represented as the indicator payoff (2.11) F (u; v) = IΓ(u; v), Γ = {(Rv, v ) : v ∈ Y } ⊂ X × Y
+
+where the reconstruction operator R : Y → X and the Volterra operator K : Y → X are defined as (2.12) Rv (t) := u0 + Kv (t), Kv (t) := 
+
+ˆ t
+
+> 0
+
+v(s) ds, 
+
+respectively. For economy of notation, operator application is understood before time evaluation: Rv (t) := (Rv )( t) and Kv (t) := ( Kv )( t), and similarly for the other operators used below. The collective Nash conditions are therefore 
+
+F (u∗; v∗) ≤ F (u; v∗), ∀u ∈ X, (2.13a) 
+
+G(v∗; u∗) ≤ G(v; u∗), ∀v ∈ Y. (2.13b) Fig. 1 illustrates this two-player best-response structure in a simple finite-dimensional setting. However, in the present setting the first condition (2.13a) has a unique finite response, namely 
+
+u∗ = Rv ∗. Hence, the state player can be eliminated exactly rather than handled as a part of a generic two-player best-response system. 
+
+Figure 1. Two-player best-response picture before the consistency reduction, for 
+
+X = Y = R, F (x; y) = 12 (x − 1) 2 + 12 y2, and G(y; x) = 12 x2 + 12 (y − 1) 2. The best responses intersect at ( x∗, y ∗). In the evolution problem the state response is the graph u = Rv ; eliminating it produces the diagonal reduced relation studied below. 2.4. Diagonal reduction. For v, w ∈ Y , set (2.14) J(w; v) := G(w; Rv ).
+
+The first argument is the competitor rate; the second, written after the semicolon, is the rate that generates the state. Conditions (2.13) are equivalent to the single diagonal comparison principle (2.15) J(v∗; v∗) ≤ J(w; v∗), ∀w ∈ Y. 8 M. ORTIZ 
+
+If w 7 → J(w; v) is proper, convex, and lower-semicontinuous, then (2.15) is equivalent to the inclu-sion problem (2.16) 0 ∈ L(v∗), L(v) := ∂1J(v; v)where L(v) is the complete diagonal response and, for v, w ∈ Y ,(2.17) ∂1J(w; v) := {f ∈ Y ∗ : J(z; v) ≥ J(w; v) + ⟨f, z − w⟩Y ∗,Y , ∀z ∈ Y }
+
+is the convex subdifferential of the section J(·; v) at w. Crucially, both approaches test dissipation and energy together. 3. A game-theoretical direct method 
+
+The diagonal reduction of Section 2 turns the equilibrium problem into the problem of making a nonnegative diagonal defect vanish. The direct method can then be applied provided that ap-proximate diagonal equilibria exist, the corresponding defect is coercive, and the two occurrences of the rate variable have the complementary semicontinuity properties required to pass to the limit. This compactness–semicontinuity architecture is the familiar one behind direct variational and monotonicity methods, adapted here to a causal diagonal relation; compare [1, 2, 3, 4, 5]. The approximability condition is essential: coercivity and semicontinuity alone do not force the diagonal defect to have vanishing infimum. The first result keeps the two arguments of J separate. An almost-equilibrium sequence supplies the approximants, compactness produces a candidate limit, and the lower/upper semicontinuity assumptions pass the diagonal and competitor sides in opposite directions. This argument is anal-ogous in spirit to standard equilibrium and variational-inequality existence arguments, see, e.g., [9, 10]. 
+
+Proposition 3.1 (Direct existence of a diagonal equilibrium) . Let (Y, d ) be a metric space, and let J : Y × Y → (−∞ , +∞] satisfy J(v; v) < +∞ for every v ∈ Y . Suppose, in addition, that the following conditions hold: 
+
+(i) Approximate diagonal equilibria: For every ε > 0, there exists vε ∈ Y such that 
+
+(3.1) J(vε; vε) ≤ J(w; vε) + ε, ∀w ∈ Y. 
+
+(ii) Sequential compactness: There exists a > 0 such that the set 
+
+(3.2) Ka := {v ∈ Y : J(v; v) ≤ J(w; v) + a, ∀w ∈ Y }
+
+is sequentially compact in Y .
+
+(iii) Diagonal sequential lower semicontinuity: For every sequence (vh) ⊂ Ka such that vh → v
+
+in Y ,
+
+(3.3) J(v; v) ≤ lim inf  
+
+> h→∞
+
+J(vh; vh).
+
+(iv) Sequential upper semicontinuity in the second argument: For every w ∈ Y and every sequence (vh) ⊂ Ka such that vh → v in Y ,
+
+(3.4) lim sup 
+
+> h→∞
+
+J(w; vh) ≤ J(w; v).
+
+Then, there exists v∗ ∈ Y such that 
+
+(3.5) J(v∗; v∗) ≤ J(w; v∗), ∀w ∈ Y. 
+
+Thus, v∗ is a diagonal equilibrium. MICROSTRUCTURE EVOLUTION AS A GAME 9
+
+Proof. Let εh ↓ 0. By assumption (i), for every h there exists vh ∈ Y such that (3.6) J(vh; vh) ≤ J(w; vh) + εh, ∀w ∈ Y. 
+
+Since εh ≤ a for all sufficiently large h, after discarding finitely many terms we have vh ∈ Ka.Assumption (ii) therefore yields a subsequence, not relabeled, and a point v∗ ∈ Ka such that 
+
+vh → v∗ in Y . Fix w ∈ Y . By assumptions (iii) and (iv), (3.7) J(v∗; v∗) ≤ lim inf  
+
+> h→∞
+
+J(vh; vh) ≤ lim sup 
+
+> h→∞
+> (
+
+J(w; vh) + εh 
+
+> )
+
+= lim sup 
+
+> h→∞
+
+J(w; vh) ≤ J(w; v∗).
+
+Since w ∈ Y is arbitrary, v∗ is a diagonal equilibrium. □
+
+An alternative characterization of existence can be based on the diagonal defect function . Define the best-response value (3.8) m(v) := inf  
+
+> w∈Y
+
+J(w; v), v ∈ Y, 
+
+and the diagonal defect (3.9) I(v) := 
+
+> {
+
+J(v; v) − m(v), m(v) > −∞ ,
+
++∞, m(v) = −∞ .
+
+Alternatively, (3.10) I(v) := sup 
+
+> w∈Y
+> {
+
+J(v; v) − J(w; v)}.
+
+Since J(v; v) < +∞, one has m(v) ∈ [−∞ , R] and I(v) ∈ [0 , +∞]. Moreover, (3.11) I(v) = 0 ⇐⇒ J(v; v) ≤ J(w; v), ∀w ∈ Y. 
+
+Thus, zeros of I are precisely the diagonal equilibria of (2.15). We denote by (3.12) M (J) := {v ∈ Y : I(v) = 0 }
+
+the set of diagonal equilibria. No attainment of m(v) is required. The extended-value convention also covers competitor sections that are unbounded below. The scalar defect packages the best-response comparison into a single nonnegative functional. Once this reduction has been made, the existence argument takes the classical direct-method form: construct a minimizing sequence with value tending to zero, extract a convergent subsequence, and use lower semicontinuity to retain the zero value in the limit. 
+
+Proposition 3.2 (Direct existence from the diagonal defect) . Let (Y, d ) be a metric space, and let 
+
+I : Y → [0 , +∞]. Suppose that the following conditions hold: 
+
+(i) Approximability: (3.13) inf  
+
+> v∈Y
+
+I(v) = 0 .
+
+(ii) Sequential compactness: There exists a > 0 such that the sublevel set 
+
+(3.14) Ka := {v ∈ Y : I(v) ≤ a}
+
+is sequentially compact in Y .
+
+(iii) Sequential lower semicontinuity: For every sequence (vh) ⊂ Ka such that vh → v in Y ,
+
+(3.15) I(v) ≤ lim inf  
+
+> h→∞
+
+I(vh).
+
+Then, there exists v∗ ∈ Ka such that 
+
+(3.16) I(v∗) = 0 .
+
+In particular, I attains its minimum on Y .10 M. ORTIZ 
+
+Proof. By assumption (i), choose a sequence ( vh) ⊂ Y such that I(vh) → 0. Since a > 0, af-ter discarding finitely many terms we have vh ∈ Ka. Assumption (ii) therefore yields a subse-quence, not relabeled, and v∗ ∈ Ka such that vh → v∗ in Y . Assumption (iii) gives 0 ≤ I(v∗) ≤
+
+lim inf h→∞ I(vh) = 0, hence I(v∗) = 0. □
+
+The two formulations are not independent. The next corollary shows that the complementary semicontinuity assumptions on J automatically supply lower semicontinuity of the induced defect 
+
+I, so Proposition 3.2 recovers the preceding J-based criterion. 
+
+Corollary 3.3 (The J-criterion implies the I-criterion) . Let (Y, d ) and J : Y × Y → (−∞ , +∞]
+
+satisfy the assumptions of Proposition 3.1. Then, I : Y → [0 , +∞] and, for every ε ≥ 0,
+
+(3.17) I(v) ≤ ε ⇐⇒ J(v; v) ≤ J(w; v) + ε, ∀w ∈ Y. 
+
+Moreover, I satisfies the assumptions of Proposition 3.2. Consequently, there exists v∗ ∈ Y such that I(v∗) = 0 , or, equivalently, 
+
+(3.18) J(v∗; v∗) ≤ J(w; v∗), ∀w ∈ Y. 
+
+Proof. Since w = v is admissible in the definition of I, one has I(v) ≥ J(v; v) − J(v; v) = 0, and hence I : Y → [0 , +∞]. Moreover, by the definition of the supremum, I(v) ≤ ε if and only if 
+
+J(v; v) − J(w; v) ≤ ε for every w ∈ Y , which proves the stated equivalence. The approximability assumption of Proposition 3.1 therefore gives, for every ε > 0, some vε ∈ Y
+
+with I(vε) ≤ ε, and hence inf v∈Y I(v) = 0. Likewise, for the a > 0 in Proposition 3.1, the sublevel set {v ∈ Y : I(v) ≤ a} coincides with the corresponding almost-equilibrium set Ka and is therefore sequentially compact. It remains to prove sequential lower semicontinuity on Ka. Let ( vh) ⊂ Ka with vh → v in 
+
+Y . For every fixed w ∈ Y , I(vh) ≥ J(vh; vh) − J(w; vh), and the semicontinuity assumptions of Proposition 3.1 give (3.19) lim inf  
+
+> h→∞
+
+I(vh) ≥ lim inf  
+
+> h→∞
+
+J(vh; vh) − lim sup 
+
+> h→∞
+
+J(w; vh) ≥ J(v; v) − J(w; v).
+
+Taking the supremum over w ∈ Y yields lim inf h→∞ I(vh) ≥ I(v). Thus I satisfies all the assump-tions of Proposition 3.2, which gives v∗ ∈ Y such that I(v∗) = 0. By the stated equivalence with 
+
+ε = 0, this is equivalent to J(v∗; v∗) ≤ J(w; v∗) for every w ∈ Y . □
+
+Remark 3.4 (Reflexive Banach spaces) . The preceding argument applies equally with weak conver-gence on a reflexive Banach space Y . If inf v∈Y I(v) = 0, I is coercive, and I is weakly sequentially lower semicontinuous on the relevant defect sublevel, then coercivity and reflexivity give the weak sequential compactness required in Proposition 3.2, and hence a diagonal equilibrium exists. By Corollary 3.3, the corresponding weak sequential assumptions on J give the same conclusion. No metrizability of the weak topology is required. □
+
+Remark 3.5 (Necessity of approximability) . The condition inf v∈Y I(v) = 0 is not a consequence of coercivity and semicontinuity. For example, let Y = R and define (3.20) f (v) := v − √
+
+v2 + 1 , J(w; v) := ( w − f (v)) 2.
+
+Then, (3.21) m(v) = 0 , I(v) = J(v; v) = v2 + 1 .
+
+The defect I is continuous and coercive, and J is continuous in both variables, but inf v∈Y I(v) = 1. A diagonal equilibrium would require v = f (v), which is impossible. Hence the zero-defect approximability assumption is indispensable for the direct argument above. □MICROSTRUCTURE EVOLUTION AS A GAME 11 
+
+4. Examples of attainment 
+
+The abstract criteria of Section 3 separate three issues: the existence of vanishing-defect com-petitors, compactness of the resulting almost equilibria, and semicontinuity of the two occurrences of the rate. The next two examples show how these ingredients arise in two different settings. Section 4.1 uses weak compactness in a reflexive Bochner space. Section 4.2 is formulated from the outset on H-valued Radon measures and right-continuous BV states. A centered state rep-resentative gives the exact quadratic chain rule at atoms, while the energy identity supplies a data-dependent total-variation bound and hence weak-star compactness. The W 1,1 regularity of the loading is used only afterward to prove that the limiting equilibrium measure is absolutely continuous. 4.1. Superlinear-growth energy–dissipation systems. We begin with an example that illus-trates existence of equilibria in a reflexive Banach space setting. Let H be a real Hilbert space, let α > 0, and let 1 < p ≤ 2, with conjugate exponent p′ = p/ (p−1). Set X := W 1,p (0 , T ; H) and Y := Lp(0 , T ; H). Fix u0 ∈ H. The reconstruction operator R in (2.12) maps Y continuously into X, with Rv (0) = u0 and ˙Rv = v almost everywhere. Let S ∈ L (H) be self-adjoint and positive semidefinite, and let h ∈ Lp′
+
+(0 , T ; H). Consider the dissipation and energy functions (4.1) Ψ( η) := α∥η∥pH , E(ξ, t ) := 12 (Sξ, ξ )H − (h(t), ξ )H ,
+
+respectively. The corresponding complete payoff is (4.2) J(w; v) := 
+
+ˆ T
+
+> 0
+> (
+
+α∥w(t)∥pH + (SRv (t) − h(t), w (t))
+
+> H
+> )
+
+dt. 
+
+The section J(·; v) is proper, coercive, weakly lower semicontinuous, and strictly convex on Y .These are the standard convex-analytic properties used in monotone-operator and convex integral-functional theory [1, 4, 35, 36]. The point specific to the present formulation is that the Volterra contribution remains inside the diagonal defect and supplies the nonnegative term used below. The next proposition verifies the abstract architecture and, at the same time, produces a con-structive pathwise approximation. 
+
+Proposition 4.1 (Direct existence, uniqueness, and temporal Galerkin approximation) . Under the preceding assumptions, there exists a unique pair (u∗, v ∗) ∈ X × Y such that u∗(0) = u0, u∗ = Rv ∗,and 
+
+(4.3) J(v∗; v∗) ≤ J(w; v∗), ∀w ∈ Y. 
+
+Equivalently, u∗ is the unique state path in X satisfying u∗(0) = u0 and 
+
+(4.4) αp ∥ ˙u∗(t)∥p−2 
+
+> H
+
+˙u∗(t) + Su ∗(t) − h(t) = 0 , for a.e. t ∈ (0 , T ),
+
+where the first term is understood to be zero when ˙u∗(t) = 0 . Moreover, there is a sequence vn → v∗
+
+strongly in Y , such that I(vn) → I(v∗) = 0 .Proof. We begin by examining the diagonal defect and its basic properties. Define (4.5) ∆( v) := α∥v∥pLp , ∆∗(q) := α′∥q∥p′ 
+
+> Lp′
+
+, α′ := 1
+
+p′ (αp )−1/(p−1) ,
+
+and set gv := SRv −h and A := SK . For every z ∈ Y , self-adjointness and positive semidefiniteness of S give (4.6) ⟨Az, z ⟩ =
+
+ˆ T
+
+> 0
+
+(SKz (t), z (t)) H dt = 12 (SKz (T ), Kz (T )) H ≥ 0.12 M. ORTIZ 
+
+Consequently, (4.7) J(v; v) = α∥v∥pLp + 12 (SKv (T ), Kv (T )) H +
+
+ˆ T
+
+> 0
+
+(Su 0 − h(t), v (t)) H dt. 
+
+Convex duality for integral functionals [35, 36] gives (4.8) inf  
+
+> w∈Y
+
+J(w; v) = −∆∗(−gv) = −α′∥gv∥p′ 
+
+> Lp′
+
+.
+
+Therefore, (4.9) I(v) = α∥v∥pLp + 12 (SKv (T ), Kv (T )) H +
+
+ˆ T
+
+> 0
+
+(Su 0 − h(t), v (t)) H dt + α′∥SRv − h∥p′ 
+
+> Lp′
+
+.
+
+Because 1 < p ≤ 2, the Volterra operator is bounded from Lp(0 , T ; H) to Lp′
+
+(0 , T ; H). It follows from (4.9) that I is finite and strongly continuous on Y . The same representation shows that I is strictly convex and weakly sequentially lower semicontinuous. Moreover, (4.10) I(v) ≥ J(v; v) ≥ α∥v∥pLp − ∥ Su 0 − h∥Lp′ ∥v∥Lp ,
+
+and I is coercive. Next, we introduce temporal Galerkin rate-path subspaces and corresponding minimizers. For 
+
+n ∈ N, let (4.11) 0 = tn 
+
+> 0
+
+< t n 
+
+> 1
+
+< · · · < t n 
+
+> 2n
+
+= T, τn := T
+
+2n , Ini := ( tni−1, t ni ), Yn := 
+
+{ 2n
+
+∑
+
+> i=1
+
+ηiχIni : ηi ∈ H
+
+}
+
+.
+
+The spaces Yn are nested closed subspaces of Y , and their union is strongly dense in Y . The approximation is Galerkin only in the time variable: the coefficients ηi remain arbitrary elements of H, so Yn need not be finite-dimensional when H is infinite-dimensional. We use the term temporal Galerkin in this sense. Let Pn denote interval averaging, (4.12) (Pnf )( t) := 1
+
+τn
+
+ˆ
+
+> Ini
+
+f (s) ds for t ∈ Ini .
+
+Then, Pn is a contraction on Lq(0 , T ; H) for every 1 ≤ q < ∞, and Pnf → f strongly in Lq(0 , T ; H). Since Yn is weakly closed, the direct method applied to I|Yn gives a unique minimizer vn. We proceed to show that the sequence ( vn) has a weak limit. Because 0 ∈ Yn, I(vn) ≤ I(0), and coercivity shows that ( vn) is bounded in Y . By reflexivity, along a subsequence, not relabeled, 
+
+vn ⇀ ¯v in Y . Fix w ∈ Y . Since Pnw ∈ Yn, minimality, weak lower semicontinuity of I, and strong continuity of I give (4.13) I(¯ v) ≤ lim inf  
+
+> n→∞
+
+I(vn) ≤ lim sup 
+
+> n→∞
+
+I(vn) ≤ lim  
+
+> n→∞
+
+I(Pnw) = I(w).
+
+Thus, ¯ v is the unique global minimizer of I.It remains to show that the minimum value is zero. For v ∈ Y , let b(v) := D∆∗(−gv). Then, 
+
+b(v) is the unique minimizer of J(·; v) and satisfies D∆( b(v)) + gv = 0. The defect is Fréchet differentiable, with (4.14) DI (v)[ z] = ⟨D∆( v) + gv, z ⟩ + ⟨Az, v − b(v)⟩, ∀z ∈ Y. 
+
+Set z := ¯ v − b(¯ v). Since DI (¯ v) = 0, (4.15) 0 = ⟨D∆(¯ v) − D∆( b(¯ v)) , z ⟩ + ⟨Az, z ⟩.
+
+The first term is nonnegative by strict monotonicity of D∆ and vanishes only when z = 0; the second is nonnegative by (4.6). Hence ¯ v = b(¯ v), so D∆(¯ v) + g¯v = 0 and I(¯ v) = 0. Set v∗ := ¯ v.Since J(·; v∗) is strictly convex, the first equality is equivalent to (4.3), and it gives the equilibrium equation (4.16) αp ∥v∗(t)∥p−2 
+
+> H
+
+v∗(t) + SRv ∗(t) − h(t) = 0 , for a.e. t ∈ (0 , T ).MICROSTRUCTURE EVOLUTION AS A GAME 13 
+
+Every diagonal equilibrium is a zero of I, and the strict convexity of I makes v∗ its unique zero, which establishes the uniqueness of the equilibrium. Setting u∗ := Rv ∗ gives (4.4) and uniqueness of the pair. Finally, we investigate further the convergence properties of the temporal Galerkin approxima-tions. The preceding compactness argument applies to every subsequence of ( vn). Since every weak cluster point is the unique minimizer v∗, it follows that vn ⇀ v ∗ in Y . Furthermore, Pnv∗ ∈ Yn,and (4.17) 0 ≤ I(vn) ≤ I(Pnv∗) → I(v∗) = 0 .
+
+This proves I(vn) → I(v∗) = 0. The linear term in (4.9) converges under weak convergence. Hence, (4.18) 
+
+α∥vn∥pLp + 12 (SKv n(T ), Kv n(T )) H + α′∥SRv n − h∥p′
+
+> Lp′
+
+→ α∥v∗∥pLp + 12 (SKv ∗(T ), Kv ∗(T )) H + α′∥SRv ∗ − h∥p′ 
+
+> Lp′
+
+.
+
+Each term is weakly lower semicontinuous. A standard liminf argument therefore yields ∥vn∥Lp →∥v∗∥Lp . Since Y = Lp(0 , T ; H) is uniformly convex, vn → v∗ strongly in Y . □
+
+Remark 4.2 (Relation with the abstract criteria) . The proof verifies the hypotheses of Propo-sitions 3.1 and 3.2. Indeed, the temporal Galerkin sequence satisfies I(vn) → 0; coercivity and reflexivity give weak sequential compactness of the relevant defect and almost-equilibrium sets; and (4.7–4.9) provide the required weak lower semicontinuity of the diagonal terms and weak con-tinuity of v 7 → J(w; v) for fixed w. Thus, Proposition 4.1 provides a concrete realization of both abstract direct methods. □
+
+Remark 4.3 (Alternative constructions of approximate equilibria) . The temporal Galerkin mini-mizers vn above minimize the diagonal defect over Yn, but are not, in general, exact equilibria of the restricted game: differentiating I|Yn produces an additional adjoint term from the state dependence. Exact restricted equilibria can instead be obtained by an interval-wise causal construction. Other possibilities include Picard iteration or vanishing temporal or monotone regularization, followed by compactness and strong convergence to obtain vanishing unregularized defect. The pathwise de-fect minimization used here is particularly convenient because it combines directly with the strong density of Yn and the weak lower semicontinuity of I. □
+
+4.2. Linear-growth energy–dissipation systems in measure form. We continue with an example that illustrates existence of equilibria in a metric space setting. The metric structure follows from the metrizability of weak-star convergence of measures in bounded sets, the bound being supplied by energy balance. At linear growth, the rate path is naturally a measure and the state path is naturally a function of bounded variation. We therefore take these as the ambient spaces from the outset. Absolutely continuous rate paths enter only as a regularizing and temporal approximation class; they are not built into the solution concept. A central point is that the work term must use the centered representative of the reconstructed state, see, e.g., [14, 37]. This convention accounts exactly for the quadratic energy carried by atoms of the rate measure and gives a well-defined diagonal payoff for arbitrary measure-valued evolutions. Let H be a separable real Hilbert space, fix u0 ∈ H, let α > 0, and set (4.19) X := {u ∈ BV ([0 , T ]; H) : u right-continuous and u(0 −) = u0 
+
+> }
+
+, Y := M([0 , T ]; H).
+
+Here M([0 , T ]; H) denotes the space of finite H-valued Radon measures of bounded variation. Since H∗ = H is reflexive and therefore has the Radon–Nikodym property, the vector-valued Riesz representation identifies Y isometrically with C([0 , T ]; H)∗ [18] through the pairing: (4.20) ⟨ν, φ ⟩ := 
+
+ˆ 
+
+> [0 ,T ]
+
+(φ(t), dν (t)) H .14 M. ORTIZ 
+
+Because H is separable, C([0 , T ]; H) is separable. Banach–Alaoglu and metrizability of weak-star compact subsets of the dual of a separable Banach space therefore imply that every total-variation-bounded subset of Y is weak-star sequentially compact; see, e.g., [38, Theorem 3.28]. Throughout this subsection, Du denotes the H-valued Lebesgue–Stieltjes measure associated with a right-continuous u ∈ BV ([0 , T ]; H) and its prescribed left trace u(0 −) = u0, characterized by (4.21) Du ([0 , t ]) = u(t) − u(0 −), Du (( s, t ]) = u(t) − u(s), 0 ≤ s < t ≤ T. 
+
+This convention retains possible atoms at both endpoints. Correspondingly, Var H (u; [0 , T ]) is un-derstood relative to the prescribed left trace, so that it includes the initial jump ∥u(0) − u(0 −)∥H .For ν ∈ Y , define the reconstruction operator as (4.22) Rν (t) := u0 + ν([0 , t ]) , Rν (0 −) := u0.
+
+Then, Rν ∈ X ,(4.23) DRν = ν, Var H (Rν ; [0 , T ]) = |ν|([0 , T ]) .
+
+We recall that, since ν ∈ M ([0 , T ]; H) has finite total variation, it can have at most countably many atoms, see, e.g., [18, Chapter I]. At an atom, ν({t}) is the jump Rν (t) − Rν (t−). We use the centered representative (4.24) ̂ Rν (t) := 12
+
+> (
+
+Rν (t−) + Rν (t)) = u0 + ν([0 , t )) + 12 ν({t}),
+
+which defines a bounded Borel map on [0 , T ]. Let S ∈ L (H) be self-adjoint and uniformly positive: there exists λ > 0 such that (4.25) (Sξ, ξ )H ≥ λ∥ξ∥2 
+
+> H
+
+, ∀ξ ∈ H. 
+
+Let h ∈ W 1,1(0 , T ; H) and use its continuous representative on [0 , T ]. The stored energy and the measure dissipation are then (4.26) E(ξ, t ) := 12 (Sξ, ξ )H − (h(t), ξ )H , D(μ; [0 , t ]) := α|μ|([0 , t ]) .
+
+We impose the initial stability condition (4.27) ∥Su 0 − h(0) ∥H ≤ α. 
+
+For μ, ν ∈ Y , set gμ(t) := Ŝ Rμ (t) − h(t) and define the complete measure payoff (4.28) J (ν; μ) := α|ν|([0 , T ]) + 
+
+ˆ 
+
+> [0 ,T ]
+
+(gμ(t), dν (t)) H ,
+
+see [34]. Specifically, the last term means (4.29) 
+
+ˆ 
+
+> [0 ,T ]
+
+(gμ, dν )H := 
+
+ˆ 
+
+> [0 ,T ]
+
+(gμ(t), p ν (t)) H d|ν|(t),
+
+where ν = pν |ν| is the polar decomposition of ν. Thus, (4.28) is finite for every pair of finite measures. For A ∈ B ([0 , T ]), the Borel σ-algebra on [0 , T ], JA denotes the same expression with both measure terms restricted to A.If u = Rμ , then for every t ∈ [0 , T ], (4.30) 
+
+ˆ
+
+> [0 ,t ]
+
+(Ŝ u(s), dμ (s)) H = 12 (Su (t), u (t)) H − 12 (Su 0, u 0)H ,
+
+which shows that the centered representative (4.24) is not merely a convenient convention: it is uniquely selected among all representatives of the form (1 − θ)u(t−) + θu (t) by requiring the exact MICROSTRUCTURE EVOLUTION AS A GAME 15 
+
+quadratic chain rule at every atom. This identity is the quadratic specialization of the general chain-rule calculus for BV maps and distributional derivatives [14, 37]. Integration by parts against the absolutely continuous loading further gives (4.31) 
+
+ˆ
+
+> [0 ,t ]
+
+(h(s), dμ (s)) H = ( h(t), u (t)) H − (h(0) , u 0)H −
+
+ˆ t
+
+> 0
+
+( ˙h(s), u (s)) H ds. 
+
+Consequently, the localized diagonal payoff is exactly the energy residual (4.32) J[0 ,t ](μ; μ) = E(u(t), t ) − E (u0, 0) + α|μ|([0 , t ]) + 
+
+ˆ t
+
+> 0
+
+( ˙h(s), u (s)) H ds. 
+
+In particular, atoms require no separate jump correction: their full quadratic contribution is already contained in (4.30). For subsequent use, we define the safe-stress violation and the bounded-competitor residual as (4.33) Q(μ) := sup  
+
+> t∈[0 ,T ]
+
+(∥gμ(t)∥H − α)
+
+> +
+
+,
+
+and (4.34) IM (μ) := sup  
+
+> ν∈Y |ν|([0 ,T ]) ≤M
+
+{J (μ; μ) − J (ν; μ)}, M > 0,
+
+respectively. Point-mass competitors and the polar decomposition give (4.35) inf  
+
+> ν∈Y |ν|([0 ,T ]) ≤M
+
+J (ν; μ) = −M Q(μ), IM (μ) = J (μ; μ) + M Q(μ).
+
+Thus, Q measures failure of stability, while the diagonal value measures failure of complementarity and energy balance. The first lemma translates the global measure best-response inequality into the familiar local stability and polar-complementarity conditions. Point-mass competitors detect violations of the yield bound, while equality in the polar estimate identifies the direction of the rate measure. 
+
+Lemma 4.4 (Measure equilibrium and complementarity) . Let μ ∈ Y , let u = Rμ , and define the driving force as fμ := h − Ŝ u = −gμ. Then, 
+
+(4.36) J (μ; μ) ≤ J (ν; μ), ∀ν ∈ Y ,
+
+is equivalent to 
+
+(4.37) ∥fμ(t)∥H ≤ α, ∀t ∈ [0 , T ]; fμ = α dμ d|μ| , |μ|-a.e. Under either condition, 
+
+(4.38) JA(μ; μ) = 0 , ∀A ∈ B ([0 , T ]) ,
+
+and therefore 
+
+(4.39) E(u(t), t ) + α|μ|([0 , t ]) = E(u0, 0) −
+
+ˆ t
+
+> 0
+
+( ˙h(s), u (s)) H ds, 
+
+for every t ∈ [0 , T ].Proof. Suppose first that (4.36) holds. If ∥gμ(t0)∥H > α at some t0, competitors of the form 
+
+νr := −r gμ(t0) 
+
+> ∥gμ(t0)∥H
+
+δt0 , r > 0, make J (νr; μ) → −∞ , a contradiction. Hence ∥fμ∥H ≤ α pointwise, and therefore J (ν; μ) ≥ 0 for every ν. Choosing ν = 0 in (4.36) gives J (μ; μ) ≤ 0, while stability gives the reverse inequality. Thus, J (μ; μ) = 0. The equality case in the polar estimate (4.40) 
+
+ˆ 
+
+> [0 ,T ]
+
+(fμ, dμ )H ≤ α|μ|([0 , T ]) 16 M. ORTIZ 
+
+gives the second relation in (4.37). The same argument on every Borel restriction gives (4.38). Conversely, (4.37) gives J (μ; μ) = 0 and J (ν; μ) ≥ 0 for every ν, hence (4.36). Finally, (4.39) follows from (4.38) and (4.32). □
+
+The equilibrium characterization alone does not yet give compactness. The next estimate uses the energy identity to bound both the state and the total variation of the rate by the data, thereby placing all equilibria in one weak-star compact ball, cf. [16]. 
+
+Lemma 4.5 (Energy-derived measure bound) . Let μ ∈ Y , set u = Rμ , and suppose that (4.39) 
+
+holds. Define 
+
+(4.41) C∞ := ∥h∥L∞(0 ,T ;H), C1 := ∥ ˙h∥L1(0 ,T ;H), C0 := E(u0, 0) + C2
+
+> ∞
+
+λ .
+
+Then, C0 ≥ 0 and 
+
+(4.42) sup  
+
+> t∈[0 ,T ]
+
+∥u(t)∥H ≤ U := 2
+
+λ
+
+> (
+
+C1 +
+
+> √
+
+C21 + λC 0
+
+> )
+
+.
+
+Moreover, 
+
+(4.43) |μ|([0 , T ]) = Var H (u; [0 , T ]) ≤ L := C0 + C1Uα .
+
+Thus, every equilibrium rate lies in the weak-star compact ball 
+
+(4.44) YL := {μ ∈ Y : |μ|([0 , T ]) ≤ L} .
+
+Proof. Coercivity and Young’s inequality give (4.45) E(ξ, t ) ≥ λ
+
+4 ∥ξ∥2 
+
+> H
+
+− C2
+
+> ∞
+
+λ .
+
+Let Uμ := sup t∈[0 ,T ] ∥u(t)∥H . Combining (4.39) and (4.45), and discarding the nonnegative dissi-pation term, yields (4.46) λ
+
+4 ∥u(t)∥2 
+
+> H
+
+≤ C0 + C1Uμ.
+
+Taking the supremum over t and solving the resulting quadratic inequality gives Uμ ≤ U , which is (4.42). Returning to the energy identity and using (4.45) gives (4.47) α|μ|([0 , T ]) ≤ C0 + C1U, 
+
+which is (4.43). □
+
+We introduce viscous regularization as a means of generating approximate equilibria. This is consistent with the broader use of vanishing-viscosity approximations in rate-independent evolution [16, 17], although here the regularization is used specifically to build almost equilibria for the diagonal game. For ε > 0, we define the extended measure dissipation as (4.48) Dε(ν) := 
+
+> 
+
+α∥w∥L1 + ε
+
+2 ∥w∥2 
+
+> L2
+
+, ν = w(t)dt, w ∈ L2(0 , T ; H),
+
++∞, otherwise ,
+
+and the extended diagonal response and diagonal defect as (4.49) Jε(ν; μ) := Dε(ν) + 
+
+ˆ 
+
+> [0 ,T ]
+
+(gμ, dν )H , Iε(μ) := Jε(μ; μ) − inf  
+
+> ν∈Y
+
+Jε(ν; μ).
+
+The effective domain of Iε consists of measures with L2 densities. Thus, L2(0 , T ; H) represents the viscous core of the measure space. The following lemma shows that the regularized defect is explicit and, crucially, still has minimum value zero. MICROSTRUCTURE EVOLUTION AS A GAME 17 
+
+Lemma 4.6 (Viscous regularization) . Let μ = v(t)dt with v ∈ L2(0 , T ; H). Then, 
+
+Iε(vdt ) = α∥v∥L1 + ε
+
+2 ∥v∥2 
+
+> L2
+
++ 12 (SKv (T ), Kv (T )) H
+
++
+
+ˆ T
+
+> 0
+
+(Su 0 − h(t), v (t)) H dt + 12ε
+
+ˆ T
+
+> 0
+
+(∥SR (vdt )( t) − h(t)∥H − α)2+ dt. 
+
+(4.50) 
+
+The extended diagonal defect Iε has a unique minimizer με = vεdt and 
+
+(4.51) Iε(με) = 0 .
+
+The density satisfies the inclusion 
+
+(4.52) 0 ∈ α∂ ∥ · ∥ H (vε(t)) + εv ε(t) + SRμ ε(t) − h(t), for a.e. t ∈ (0 , T ).
+
+Proof. If μ = v(t)dt with v ∈ L2(0 , T ; H), then Rμ is continuous and gμ = SRμ − h. Pointwise convex duality, in the standard integral-functional form [35, 36], gives (4.53) inf  
+
+> ν∈Y
+
+Jε(ν; μ) = − 12ε
+
+ˆ T
+
+> 0
+
+(∥gμ(t)∥H − α)2+ dt, 
+
+whence (4.50) follows. As a functional of the density, Iε is finite, coercive, weakly lower semicon-tinuous, and ε-strongly convex on L2(0 , T ; H). Hence it has a unique minimizer με = vεdt .We show that the minimum value is zero. View Dε on its L2 density core and let D∗ 
+
+> ε
+
+denote its L2 convex conjugate. Let K be the Volterra operator on densities, set A := SK , and define 
+
+bε(v) := DD∗ 
+
+> ε
+
+(−gvdt ). Then, −gvdt ∈ ∂Dε(bε(v)). The Fermat condition at vε gives ξε ∈ ∂Dε(vε)such that (4.54) 0 = ξε + gμε + A∗(vε − bε(vε)) .
+
+Pairing with z := vε − bε(vε) and using the ε-strong monotonicity of ∂Dε together with ⟨Az, z ⟩ = 
+
+> 12
+
+(SKz (T ), Kz (T )) H ≥ 0 gives (4.55) 0 ≥ ε∥z∥2 
+
+> L2
+
++ 12 (SKz (T ), Kz (T )) H .
+
+Thus, z = 0, (4.51) holds, and (4.52) follows. □
+
+To pass from the viscous core back to the measure space, we use a temporal Galerkin reduction on entire rate trajectories rather than an incremental time-stepping construction. The approximation below is elementary, but it is designed to preserve total-variation control while being strongly dense on the L2 core. For m ∈ N, let (4.56) Nm := 2 m, τm := TNm
+
+, 0 = tm 
+
+> 0
+
+< t m 
+
+> 1
+
+< · · · < t mNm = T, Imi := ( tmi−1, t mi ).
+
+We then define the nested temporal measure-approximation subspaces (4.57) Ym := 
+
+{( Nm∑
+
+> i=1
+
+ηiχImi
+
+)
+
+dt : ηi ∈ H
+
+}
+
+⊂ Y ,
+
+As in the superlinear construction, only time is discretized: the coefficients ηi remain in H, and no spatial finite-dimensional approximation is implied. We denote by (4.58) (Pmf )( t) := 1
+
+τm
+
+ˆ
+
+> Imi
+
+f (s) ds for t ∈ Imi
+
+the interval-averaging projection. These approximation spaces have the following properties. The weak-star part is a concrete measure approximation, while the strong Lr part is the usual convergence of interval averages; cf. standard vector-measure and functional-analysis treatments [18, 38]. 18 M. ORTIZ 
+
+Lemma 4.7 (Approximation measure spaces) . The union ⋃ 
+
+> m∈N
+
+Ym is weak-star sequentially dense in Y. More precisely, for every μ ∈ Y there exists a sequence μm ∈ Y m such that μm ∗
+
+⇀ μ in Y
+
+and |μm|([0 , T ]) ≤ | μ|([0 , T ]) . Moreover, for every 1 ≤ r < ∞ and every f ∈ Lr(0 , T ; H), Pmf → f
+
+strongly in Lr(0 , T ; H). In particular, after identifying v(t)dt with its density v, the union ⋃ 
+
+> m∈N
+
+Ym
+
+is strongly dense in the L2-density core of Y.Proof. We first prove the weak-star approximation of an arbitrary measure. For i = 1 , . . . , N m,introduce the Borel partition (4.59) Bmi := 
+
+{[tmi−1, t mi ), i = 1 , . . . , N m − 1,
+
+[tmNm−1, T ], i = Nm.
+
+For μ ∈ Y , define (4.60) μm := 
+
+( Nm∑
+
+> i=1
+
+μ(Bmi )
+
+τm
+
+χImi
+
+)
+
+dt. 
+
+Then, μm ∈ Y m, and (4.61) |μm|([0 , T ]) = 
+
+> Nm
+
+∑
+
+> i=1
+
+∥μ(Bmi )∥H ≤
+
+> Nm
+
+∑
+
+> i=1
+
+|μ|(Bmi ) = |μ|([0 , T ]) .
+
+Let φ ∈ C([0 , T ]; H) and set (4.62) φmi := 1
+
+τm
+
+ˆ
+
+> Imi
+
+φ(s) ds, ωφ(δ) := sup  
+
+> s,t ∈[0 ,T ]
+> |s−t|≤ δ
+
+∥φ(s) − φ(t)∥H .
+
+Since every s ∈ Imi and t ∈ Bmi satisfy |s − t| ≤ τm, we have (4.63) ∥φmi − φ(t)∥H ≤ ωφ(τm), ∀t ∈ Bmi .
+
+Therefore, (4.64) ∣∣
+
+ˆ 
+
+> [0 ,T ]
+
+(φ, dμ m)H −
+
+ˆ 
+
+> [0 ,T ]
+
+(φ, dμ )H
+
+∣∣ = ∣∣
+
+> Nm
+
+∑
+
+> i=1
+
+ˆ
+
+> Bmi
+
+(φmi − φ(t), dμ (t)) H
+
+∣∣ ≤ ωφ(τm)|μ|([0 , T ]) .
+
+Uniform continuity of φ and τm → 0 show that the right-hand side tends to zero. Hence, μm ∗
+
+⇀ μ 
+
+in Y.Next, we prove the strong convergence of the interval averages. For every f ∈ Lr(0 , T ; H), Jensen’s inequality gives (4.65) ∥Pmf ∥rLr =
+
+> Nm
+
+∑
+
+> i=1
+
+τm
+
+∥∥ 1
+
+τm
+
+ˆ
+
+> Imi
+
+f (s) ds ∥∥rH ≤
+
+> Nm
+
+∑
+
+> i=1
+
+ˆ
+
+> Imi
+
+∥f (s)∥rH ds = ∥f ∥rLr .
+
+Thus, Pm is a contraction on Lr(0 , T ; H). If φ ∈ C([0 , T ]; H), then for almost every t ∈ Imi ,(4.66) ∥(Pmφ)( t) − φ(t)∥H ≤ 1
+
+τm
+
+ˆ
+
+> Imi
+
+∥φ(s) − φ(t)∥H ds ≤ ωφ(τm),
+
+whence it follows that (4.67) ∥Pmφ − φ∥Lr ≤ T 1/r ωφ(τm) → 0.
+
+Since C([0 , T ]; H) is dense in Lr(0 , T ; H), for every f ∈ Lr(0 , T ; H) and every δ > 0 we may choose 
+
+φ ∈ C([0 , T ]; H) such that ∥f − φ∥Lr < δ . The contraction property then yields (4.68) ∥Pmf − f ∥Lr ≤ ∥ Pm(f − φ)∥Lr + ∥Pmφ − φ∥Lr + ∥φ − f ∥Lr ≤ 2δ + ∥Pmφ − φ∥Lr .MICROSTRUCTURE EVOLUTION AS A GAME 19 
+
+Taking the limsup as m → ∞ and then letting δ ↓ 0 proves Pmf → f strongly in Lr(0 , T ; H). Finally, if μ = v(t)dt with v ∈ L2(0 , T ; H), then ( Pmv)( t)dt ∈ Y m and Pmv → v strongly in 
+
+L2(0 , T ; H), which proves strong density in the L2-density core. □
+
+We now have the three ingredients needed for the linear-growth construction: an energy-derived compact ball, exact equilibria of the viscous core, and temporal measure-approximation spaces that approximate both measures and L2 densities. The next proposition combines them and then uses the regularity of the loading to show that the limiting measure is in fact absolutely continuous. 
+
+Proposition 4.8 (Direct existence, uniqueness, and temporal measure approximation) . Under assumptions (4.25) –(4.27) , there exists a unique μ∗ ∈ Y satisfying the measure diagonal equilibrium 
+
+(4.69) J (μ∗; μ∗) ≤ J (ν; μ∗), ∀ν ∈ Y .
+
+The state u∗ := Rμ ∗ belongs to X , satisfies (4.37) and (4.39) , and μ∗ ∈ Y L, see (4.44). Moreover, the measure equilibrium is regular: μ∗ = v∗(t) dt for some v∗ ∈ L1(0 , T ; H), u∗ ∈ W 1,1(0 , T ; H),and 
+
+(4.70) 0 ∈ α∂ ∥ · ∥ H (v∗(t)) + Su ∗(t) − h(t), for a.e. t ∈ (0 , T ).
+
+Consequently, u∗ is the unique energetic solution in the sense of Mielke and Theil [15] : for every 
+
+t ∈ [0 , T ],
+
+(4.71) E(u∗(t), t ) ≤ E (z, t ) + α∥z − u∗(t)∥H , ∀z ∈ H, 
+
+and (4.39) holds with μ∗ = v∗dt . In addition, for every fixed reference total-variation scale L0 > 0
+
+with the same physical units as L, there is a sequence μn = vn(t)dt such that μn ∗
+
+⇀ μ ∗ in Y,
+
+(4.72) |μn|([0 , T ]) ≤ L + L0
+
+n , Q(μn) → 0, J (μn; μn) → 0, IM (μn) → 0, ∀M > 0,
+
+with vn ⇀ v ∗ in L1(0 , T ; H).Proof. We divide the proof into restricted temporal minimization of the regularized measure prob-lem, measure compactness, and identification of the limit. 
+
+Step 1: Approximate equilibria. For fixed ε > 0, let μm,ε ∈ argmin μ∈Y m Iε(μ). This is the measure version of the pathwise restricted minimization used in Proposition 4.1. Writing μm,ε = vm,ε dt ,restricted minimality and density give (4.73) 0 ≤ I ε(μm,ε ) ≤ I ε(( Pmvε)dt ) → I ε(με) = 0 .
+
+Since Iε is ε-strongly convex and με is its global minimizer, (4.74) ε
+
+2 ∥vm,ε − vε∥2 
+
+> L2
+
+≤ I ε(μm,ε ) − I ε(με).
+
+Consequently, vm,ε → vε strongly in L2(0 , T ; H) as m → ∞ .
+
+Step 2: Uniform estimates in the viscosity. Set uε := Rμ ε. Pairing (4.52) with vε and applying the ordinary chain rule gives (4.75) E(uε(t), t ) + α
+
+ˆ t
+
+> 0
+
+∥vε(s)∥H ds + ε
+
+ˆ t
+
+> 0
+
+∥vε(s)∥2 
+
+> H
+
+ds = E(u0, 0) −
+
+ˆ t
+
+> 0
+
+( ˙h(s), u ε(s)) H ds, 
+
+for every t ∈ [0 , T ]. The proof of Lemma 4.5, with the additional nonnegative viscous term dis-carded, gives (4.76) sup  
+
+> t∈[0 ,T ]
+
+∥uε(t)∥H ≤ U, |με|([0 , T ]) = ∥vε∥L1 ≤ L. 
+
+The flow rule is equivalent to (4.77) fε − PCα fε = εv ε, fε := h − Su ε, Cα := {ζ ∈ H : ∥ζ∥H ≤ α},20 M. ORTIZ 
+
+where PCα is the nearest-point projection from H onto the closed ball Cα. Set rε(t) := dist H (fε(t), C α). Since the squared distance to a closed convex set is differentiable and ˙fε = ˙h−Sv ε,we obtain (4.78) ddt 
+
+12 rε(t)2 ≤ rε(t)∥ ˙h(t)∥H − λε rε(t)2, for a.e. t, 
+
+with λ as in (4.25). The initial stability condition (4.27) gives rε(0) = 0. Hence, by Grönwall’s inequality, (4.79) rε(t) ≤
+
+ˆ t
+
+> 0
+
+e−λ(t−s)/ε ∥ ˙h(s)∥H ds. 
+
+Taking norms in (4.77) gives rϵ(t) = ε∥vε(t)∥H , whence (4.79) becomes (4.80) ∥vε(t)∥H ≤ 1
+
+ε
+
+ˆ t
+
+> 0
+
+e−λ(t−s)/ε ∥ ˙h(s)∥H ds. 
+
+The absolute continuity of the L1 integral implies Q(με) = ∥rε∥L∞(0 ,T ) → 0. To make the com-pactness consequence explicit, extend a(t) := ∥ ˙h(t)∥H by zero outside (0 , T ) and set (4.81) kε(r) := 1
+
+ε e−λr/ε 1[0 ,∞)(r).
+
+The right-hand side of (4.80) is ( kε ∗ a)( t). Since λk ε is an approximate identity, it follows that 
+
+kε ∗ a → a/λ strongly in L1(R). Hence ( kε ∗ a), and therefore ( vε), is uniformly integrable in 
+
+L1(0 , T ; H). Moreover, (4.82) 0 ≤ ε∥vε∥2 
+
+> L2
+
+=
+
+ˆ T
+
+> 0
+
+rε(t)∥vε(t)∥H dt ≤ Q (με)L → 0.
+
+Pairing (4.52) with vε also gives (4.83) J (με; με) = −ε∥vε∥2 
+
+> L2
+
+→ 0.
+
+Step 3: Diagonal temporal approximation and measure compactness. Fix L0 as in the statement and choose any sequence εn ↓ 0. By (4.73-4.74) and the continuity of J and Q under strong L2-convergence, we may choose a strictly increasing sequence mn such that, with μn := μmn,ε n = vn dt ,we have (4.84) Iεn (μn) ≲ 1
+
+n , |J (μn; μn) − J (μεn ; μεn )| ≲ 1
+
+n , |Q (μn) − Q (μεn )| ≲ 1
+
+n ,
+
+and (4.85) ∥vn − vεn ∥L1 ≤ L0
+
+n .
+
+From (4.76) and (4.85) we therefore obtain (4.86) |μn|([0 , T ]) = ∥vn∥L1(0 ,T ;H) ≤ ∥ vεn ∥L1(0 ,T ;H) + ∥vn − vεn ∥L1(0 ,T ;H) ≤ L + L0
+
+n .
+
+Equations (4.80), (4.83), and (4.84) yield the limits for Q(μn) and J (μn; μn) in (4.72). Formula (4.35) yields the limit for IM (μn). The bound (4.86) places ( μn) in the fixed weak-star compact ball YL+L0 . Hence, along a subse-quence, μn ∗
+
+⇀ μ ∗ in Y. This is the primary compactness passage. In addition, (4.84) makes ( vn)an L1-vanishing perturbation of the uniformly integrable family ( vεn ). The vector-valued Dunford– Pettis compactness criterion [18] therefore gives, after taking a further subsequence, vn ⇀ v ∗ in 
+
+L1(0 , T ; H). The weak-star limit is, consequently, μ∗ = v∗dt . We note that absolute continuity is obtained as a regularity conclusion after measure compactness, and is not assumed in the solution space. MICROSTRUCTURE EVOLUTION AS A GAME 21 
+
+Step 4: Identification of the measure equilibrium. Set u∗ := Rμ ∗. For every t ∈ [0 , T ], weak L1
+
+convergence gives (4.87) 
+
+ˆ t
+
+> 0
+
+vn(s) ds ⇀ 
+
+ˆ t
+
+> 0
+
+v∗(s) ds in H. 
+
+Since Q(μn) → 0, weak lower semicontinuity of the norm gives (4.88) ∥Su ∗(t) − h(t)∥H ≤ α, ∀t ∈ [0 , T ].
+
+For the absolutely continuous measures in the approximating sequence, the diagonal payoff has the Volterra representation (4.89) J (μn; μn) = α∥vn∥L1 + 12
+
+> (
+
+S
+
+ˆ T
+
+> 0
+
+vn(s) ds, 
+
+ˆ T
+
+> 0
+
+vn(s) ds ) 
+
+> H
+
++
+
+ˆ T
+
+> 0
+> (
+
+Su 0 − h(t), v n(t)) 
+
+> H
+
+dt. 
+
+Under weak L1 convergence, the first term and the positive quadratic term are weakly lower semi-continuous, while the last term is weakly continuous. Therefore, (4.90) J (μ∗; μ∗) ≤ lim inf  
+
+> n→∞
+
+J (μn; μn) = 0 .
+
+The safe-stress condition (4.37) makes the diagonal integrand nonnegative, whence we conclude that J (μ∗; μ∗) = 0. Lemma 4.4 now gives (4.69), the measure complementarity relation, and the energy identity. Since μ∗ = v∗dt , complementarity is exactly the flow rule (4.70). Expanding the quadratic energy shows that the safe-stress condition is equivalent to (4.71). Lemma 4.5 gives 
+
+μ∗ ∈ Y L.
+
+Step 5: Uniqueness in the measure space. Let μ1, μ 2 ∈ Y be two measure equilibria, set ui := Rμ i,
+
+z := u1 − u2, and fi := h − Ŝ ui. Since μi are measure equilibria, (4.69) and Lemma 4.4 yield the complementarity and stability relations (4.37). Hence, using the localized polar estimate (4.40), for every t ∈ [0 , T ] we obtain (4.91) 
+
+ˆ
+
+> [0 ,t ]
+
+(fi, dμ i)H = α|μi|([0 , t ]) ,
+
+ˆ
+
+> [0 ,t ]
+
+(fi, dμ j )H ≤ α|μj |([0 , t ]) .
+
+Therefore, (4.92) 0 ≤
+
+ˆ
+
+> [0 ,t ]
+
+(f1 − f2, d (μ1 − μ2)) H = −
+
+ˆ
+
+> [0 ,t ]
+
+(Ŝ z, dDz )H .
+
+The centered chain rule (4.30) then gives (4.93) 0 ≤ − 12 (Sz (t), z (t)) H .
+
+Coercivity implies z(t) = 0 for every t, hence μ1 = μ2. Every convergent subsequence of the temporal approximation family therefore has the same limit, so the full sequence satisfies μn ∗
+
+⇀ μ ∗
+
+in Y and vn ⇀ v ∗ in L1(0 , T ; H). □
+
+Remark 4.9 (Recovery of energetic solutions) . In the convex rate-independent setting, the diagonal equilibrium recovers the energetic solution of Mielke and Theil [15], whereas the whole-trajectory formulation is designed to remain meaningful when non-convex and state/branch-dependent kinetics obstruct the restart of an incremental construction. □
+
+Remark 4.10 (Relation with the abstract criteria) . Unlike the superlinear case of Proposition 4.1, Proposition 3.1 is not directly applicable here. Although the diagonal term is weak-star lower semicontinuous through the energy representation (4.32), for a fixed atomic competitor ν the map 
+
+μ 7 → J(ν; μ) need not be weak-star continuous, owing to the discontinuity of the centered Volterra kernel on the time diagonal. The proof instead uses the stability residual Q and energy-derived mea-sure compactness, and then exploits the W 1,1 loading estimate to obtain an absolutely continuous limit before recovering the full best-response relation. □22 M. ORTIZ 
+
+Remark 4.11 (Rough loading) . The measure payoff (4.28), the centered chain rule, and the energy-derived total-variation bound remain meaningful beyond absolutely continuous loading. If h
+
+is merely of bounded variation, the weak-star measure compactness still survives, but the uniform-integrability estimate (4.80) need not. The limiting rate may then retain atoms or a singular continuous part. Work at jumps of the loading must be incorporated through a completed graph or an equivalent parametrized formulation, as in Balanced-Viscosity theory [16, 17]. □
+
+5. A game-theoretical relaxation method 
+
+The strategy is to choose an extended ambient space Y from the outset, with the pure rate and competitor space Y included in Y. The pure payoff J and diagonal defect I are first defined on Y
+
+and then extended to calligraphic functions J and I on Y by assigning infinite cost outside the pure space. Pure recovery sequences therefore converge directly in the space in which relaxed limits live, without an observation map or realization classes. The tradeoff is that the infinite extensions do not define a meaningful pointwise game at genuinely relaxed points. The relaxed defect is instead the sequential lower-semicontinuous envelope I of I. This is a relaxation of the equilibrium defect ,not a claim that the payoff itself admits a canonical pointwise extension to relaxed states. Let Y be the set of pure rates and competitors, and let J : Y × Y → (−∞ , +∞]. The finite-cost diagonal class is (5.1) D(J) := {v ∈ Y : J(v; v) < +∞} ,
+
+and is assumed to be nonempty. Competitors range over all of Y , whereas finite-defect recovery sequences take values in D(J). Define the pure diagonal defect on all of Y by (5.2) I(v) := 
+
+> {
+
+sup w∈Y
+
+> {
+
+J(v; v) − J(w; v)}, v ∈ D(J),
+
++∞, v ∈ Y \ D(J).
+
+Thus, I : Y → [0 , +∞]. If v ∈ D(J) and m(v) := inf w∈Y J(w; v) > −∞ , then I(v) = J(v; v)−m(v). When m(v) = −∞ , the convention in (5.2) gives I(v) = + ∞. Thus, no artificial bounded-below assumption is imposed on unstable competitor sections. For every v ∈ D(J) and every ε ≥ 0, we have (5.3) I(v) ≤ ε ⇐⇒ J(v; v) ≤ J(w; v) + ε, ∀w ∈ Y. 
+
+In particular, zeros of I are pure diagonal equilibria. Let ( Y, d ) be an enriched metric space containing Y as a distinguished subspace. Extend J to 
+
+J : Y × Y → (−∞ , +∞] by (5.4) J (w; v) := 
+
+> {
+
+J(w; v), w, v ∈ Y, 
+
++∞, otherwise .
+
+Extend I to the enriched space by (5.5) I(z) := 
+
+> {
+
+I(z), z ∈ Y, 
+
++∞, z ∈ Y \ Y. 
+
+Thus, I| Y = I. Its sequential lower-semicontinuous envelope is (5.6) I(z) := inf 
+
+> (zh)⊂Y
+> zh→z
+
+lim inf  
+
+> h→∞
+
+I(zh) = inf   
+
+> (vh)⊂D(J)
+> vh→zin Y
+
+lim inf  
+
+> h→∞
+
+I(vh), z ∈ Y ,
+
+with value + ∞ when no sequence in D(J) converges to z. To justify the second equality, consider a sequence ( zh) ⊂ Y with finite defect liminf and pass to a subsequence realizing that liminf. The values I(zh) are then finite along a further tail, so zh ∈ Y and I(zh) < +∞. By the definition of I,this implies zh ∈ D(J). Conversely, every D(J)-valued sequence is admissible in the first infimum. MICROSTRUCTURE EVOLUTION AS A GAME 23 
+
+This observation suggests defining relaxed solutions by what can actually be approximated: pure paths with vanishing diagonal defect. The definition retains the original pure competitor class and records only the enriched-space limit of such almost equilibria. 
+
+Definition 5.1 (Relaxed diagonal equilibrium) . A point z∗ ∈ Y is a relaxed diagonal equilibrium if there exists a sequence (vh) ⊂ D(J) such that vh → z∗ in Y and I(vh) → 0. The set of relaxed diagonal equilibria is denoted by 
+
+(5.7) M (J ) := {z ∈ Y : ∃ (vh) ⊂ D(J) s.t. vh → z in Y and I(vh) → 0}.
+
+The definition can be expressed entirely in terms of the relaxed defect. The next proposition shows that no information is lost at level zero: taking the sequential lower-semicontinuous envelope and taking the closure of pure almost equilibria give the same relaxed equilibrium set. 
+
+Proposition 5.2 (Relaxed-defect characterization and losslessness) . The relaxed equilibrium set is the zero set of the relaxed diagonal defect: 
+
+(5.8) M (J ) = {z ∈ Y : I(z) = 0 }.
+
+Equivalently, z ∈ M (J ) if and only if there exist (vh) ⊂ D(J) and εh ↓ 0 such that vh → z in Y
+
+and 
+
+(5.9) J(vh; vh) ≤ J(w; vh) + εh, ∀w ∈ Y. 
+
+By the infinite extension, this is also equivalent to 
+
+(5.10) J (vh; vh) ≤ J (z; vh) + εh, ∀z ∈ Y .
+
+Thus, at the zero-defect level, the relaxation is exactly the sequential closure in Y of pure diagonal almost equilibria with vanishing error. Proof. Suppose first that z ∈ M (J ). By Definition 5.1, there exists ( vh) ⊂ D(J) such that vh → z
+
+in Y and I(vh) → 0. Since I(vh) = I(vh), definition (5.6) gives 0 ≤ I (z) ≤ lim inf h→∞ I(vh) = 0, hence I(z) = 0. Conversely, suppose that I(z) = 0. For every k ∈ N, definition (5.6) yields a sequence (vk,n )n∈N ⊂ D(J) such that vk,n → z in Y and lim inf n→∞ I(vk,n ) < 14k . There exists n(k) such that dY (vk,n (k), z ) < 1 
+
+> k
+
+and I(vk,n (k)) < 12k . Setting vk := vk,n (k), we obtain vk → z in Y and 
+
+I(vk) → 0. Therefore z ∈ M (J ). It remains to prove the almost-equilibrium characterizations. Suppose that z ∈ M (J ) and let (vh) ⊂ D(J) be a recovery sequence. After passing to a subsequence and relabeling, we may assume that I(vh) ≤ εh ↓ 0, and (5.3) gives J(vh; vh) ≤ J(w; vh) + εh for all w ∈ Y . Conversely, suppose that ( vh) ⊂ D(J), εh ↓ 0, vh → z in Y, and (5.9) holds. By (5.3), 0 ≤ I(vh) ≤ εh → 0, so Definition 5.1 gives z ∈ M (J ). Finally, because vh ∈ D(J) ⊂ Y , J (vh; vh) = J(vh; vh). For z ∈ Y , one has J (z; vh) = J(z; vh), whereas for z ∈ Y \ Y one has J (z; vh) = + ∞. The two almost-equilibrium inequalities are therefore equivalent. □
+
+The characterization reduces existence in the enriched space to a compactness question. In par-ticular, once a vanishing-defect family is relatively compact in Y, any cluster point is automatically a relaxed equilibrium. 
+
+Proposition 5.3 (Compactness produces a relaxed equilibrium) . Suppose that there exist (vh) ⊂
+
+D(J) and εh ↓ 0 satisfying 
+
+(5.11) J(vh; vh) ≤ J(w; vh) + εh, ∀w ∈ Y. 
+
+If (vh) has a convergent subsequence in Y, then every subsequential limit is a relaxed diagonal equilibrium. In particular, suppose that for every ε > 0 there exists vε ∈ D(J) satisfying I(vε) ≤ ε,24 M. ORTIZ 
+
+and that for some a > 0 the set {v ∈ D(J) : I(v) ≤ a} is relatively sequentially compact in Y.Then, M (J ) is nonempty. Proof. Along a convergent subsequence, (5.3) gives I(vh) ≤ εh → 0. Proposition 5.2 then applies. For the final assertion, choose εh ↓ 0 with εh ≤ a and corresponding vh ∈ D(J) such that I(vh) ≤ εh.The stated relative sequential compactness yields a convergent subsequence, and the first part applies. □
+
+Remark 5.4 (The infinite extensions are not a relaxed game) . For z ∈ Y \ Y , one has J (z; z) = + ∞
+
+and J (w; z) = + ∞ for every w ∈ Y . The diagonal inequality at z is therefore vacuous and an expression such as J (z; z) − inf w J (w; z) is not defined. The functions J and I only embed the pure game and its defect into the ambient space; the genuine relaxed quantity is I. □
+
+Remark 5.5 (Distinction from evolutionary Γ-convergence) . Convergence of rate-independent evo-lutions under Γ-convergence of the underlying energies has been studied, among other settings, by Negri [42]. The relaxation considered here is of a different type. Rather than starting from a sequence of energy functionals and passing to the associated limiting evolution, we fix the pure evolutionary game and close sequences of pure almost equilibria whose diagonal defects vanish. Thus, the object being relaxed is the whole-trajectory equilibrium principle itself, together with the state–rate information retained by the chosen enriched topology. □
+
+Example 5.6 (Linear-growth evolutions as a lossless bounded-competitor relaxation) . As a first example of relaxation, consider the linear-growth energy–dissipation system of Section 4.2. It may be viewed first on the pure state and rate spaces (5.12) X := {u ∈ W 1,1(0 , T ; H) : u(0) = u0
+
+> }
+
+, Y := L1(0 , T ; H),
+
+with reconstruction operator R as in (2.12), and then embedded in the ambient spaces (4.19) by identifying v ∈ Y with the measure v(t) dt and reconstructing the state by u = Rμ as in (4.22). The pure functionals are extended by + ∞ outside X and Y , as in (5.4) and (5.5), and convergence in Y is weak-star convergence on total-variation-bounded sets. Thus, absolutely continuous pure rates may converge to measures with atoms, whose reconstructed states belong to X .However, there is a qualification necessitated by the unbounded competitor space. If the safe-stress condition is violated, competitors can be scaled without bound and the unrestricted diagonal defect is + ∞. Consequently, the approximating rates of Proposition 4.8 need not have vanish-ing unrestricted defect. The natural relaxation is instead tested on every bounded competitor class. To this end, for M > 0 we consider the restricted diagonal defects IM (μ) as in (4.34) with representation (4.35). If the state-generating rate is pure, μ = v(t) dt with v ∈ L1(0 , T ; H), then 
+
+Rμ ∈ W 1,1(0 , T ; H) and, under the W 1,1 loading hypothesis of Section 4.2, gμ = Ŝ Rμ −h = SRμ −h
+
+is continuous on [0 , T ]. For such μ, the supremum in IM (μ) has the same value if the competitors are restricted to absolutely continuous measures with L1 densities. Indeed, for every ν ∈ Y with 
+
+|ν|([0 , T ]) ≤ M , there are νk = vk(t) dt such that νk ∗
+
+⇀ ν and ∥vk∥L1 ≤ | ν|([0 , T ]) ≤ M . Since gμ is continuous, ´ 
+
+> [0 ,T ]
+
+(gμ, dν k)H → ´ 
+
+> [0 ,T ]
+
+(gμ, dν )H , and therefore lim sup k→∞ J (νk; μ) ≤ J (ν; μ). The infimum of J ( · ; μ) over bounded absolutely continuous competitors consequently agrees with the infimum over all bounded measure competitors. This conclusion is specific to pure state-generating rates: for a general μ ∈ Y , the centered field gμ = Ŝ Rμ − h may be discontinuous at atoms, and weak-star approximation of competitors need not preserve the work term. Proposition 4.8 supplies a pure sequence μn = vn(t) dt and a measure equilibrium μ∗ ∈ Y such that μn ∗
+
+⇀ μ ∗, J (μn; μn) → 0, and Q(μn) → 0. It therefore follows that IM (μn) → 0, for every fixed M > 0. By the preceding equivalence, the same sequence has vanishing defect when the bounded competitors are restricted to pure rates. Hence μ∗ belongs to the weak-star sequential closure of the pure almost-equilibria for every bounded competitor game. In the present W 1,1-loading setting, the compactness passage also yields μ∗ = v∗(t) dt , for some v∗ ∈ L1(0 , T ; H). The MICROSTRUCTURE EVOLUTION AS A GAME 25 
+
+relaxation is therefore lossless: the measure space supplies the compactness needed for existence, whereas the relaxed equilibrium ultimately lies again in the pure space. For rougher loading, as noted in Remark 4.11, the same ambient relaxation may retain atoms or a singular continuous part. To relate this construction precisely to Propositions 5.2 and 5.3, fix R > L + L0 and set (5.13) YR := {v(t) dt : v ∈ L1(0 , T ; H), ∥v∥L1 ≤ R}, YR := {μ ∈ Y : |μ|([0 , T ]) ≤ R}.
+
+The weak-star topology on YR is metrizable and sequentially compact. For μ ∈ YR, the pure bounded-competitor defect agrees, by the preceding argument, with the bounded measure-competitor defect and therefore is (5.14) IR(μ) = J (μ; μ) + RQ(μ), μ ∈ YR.
+
+The sequence supplied by Proposition 4.8 belongs eventually to YR and satisfies μn ∗
+
+⇀ μ ∗ and 
+
+IR(μn) → 0. Proposition 5.3 therefore shows that μ∗ is a relaxed equilibrium of the R-bounded game, while Proposition 5.2 gives the equivalent characterization IR(μ∗) = 0. Thus, Proposition 4.8 realizes concretely the compactness and recovery-sequence mechanism of Propositions 5.2 and 5.3. 
+
+□
+
+6. Example of exact relaxation: Non-convex kinetics with local memory 
+
+We now give an example in which the relaxation mechanism of Section 5 can be computed com-pletely. The model is a quasistatic simple-shear problem with a non-convex local kinetic potential and a local internal variable carrying memory. The spatial model is deliberately unregularized: no interfacial energy, rate-gradient penalty, or diffusion of the memory variable is included. Con-sequently, the theory does not select a band width or propagation speed. Instead, it isolates the closure problem caused by non-convex kinetics when different microscopic rate populations acquire different internal histories, and it shows that the correct relaxed object is a Young measure on complete local histories rather than an instantaneous convexification of the rate potential. The example is relevant for several reasons. First, it is genuinely evolutionary: the kinetic re-sponse at time t depends on an internal variable generated by the preceding rate history. Second, the spatial recovery problem is elementary enough to be solved exactly, because the microscopic rate is not subject to a state-compatibility obstruction such as encountered, e.g., in multi-slip plasticity [20]. Third, the resulting enriched space gives a concrete instance of the abstract construction of Section 5: the sequential lower-semicontinuous envelope of the pure diagonal defect is identified ex-plicitly, every relaxed zero admits a pure vanishing-defect recovery sequence, and relaxed equilibria exist by a direct frozen-best-response construction. The constitutive assumptions below are intentionally broad. They include smooth double-well kinetic potentials, non-monotone flow curves, and memory laws motivated by dynamic strain aging, thermal softening and damage. The Portevin–Le Châtelier effect provides a particularly natural physical connection: negative strain-rate sensitivity, local aging variables, and propagating or in-termittently localized deformation bands are central features of that phenomenon [25, 23, 24]. The present model is not intended as a detailed theory of PLC band propagation. Rather, it enables an exact relaxation theorem for the local-memory kinetic mechanism characteristic of such models. 6.1. Simple-shear reduction and local-memory kinetics. Let the transverse thickness be 
+
+H > 0 and set Ω = (0 , H ). The simple-shear displacement is u : Ω × [0 , T ] → R, the plastic shear is 
+
+γ : Ω × [0 , T ] → R, and the prescribed end displacement is ¯ u ∈ W 1,∞(0 , T ). We impose u(0 , t ) = 0 and u(H, t ) = ¯ u(t), and denote the corresponding macroscopic shear by ¯ξ(t) := ¯ u(t)/H . For fixed 
+
+γ and t, the elastic energy is (6.1) E(u, γ, t ) := μ0
+
+2
+
+ˆ H
+
+> 0
+
+|ux(x) − γ(x)|2 dx, μ0 > 0.
+
+The displacement can be eliminated exactly. 26 M. ORTIZ 
+
+Lemma 6.1 (Simple-shear elastic reduction) . For every γ ∈ L2(0 , H ) and t ∈ [0 , T ],
+
+(6.2) E(γ, t ) := inf 
+
+> u∈H1(0 ,H )
+> u(0)=0 , u (H)=¯ u(t)
+
+E(u, γ, t ) = μ0H
+
+2 
+
+> (
+
+¯ξ(t) − ¯γ
+
+> )2
+
+, ¯γ := 
+
+> H
+> 0
+
+γ(x) dx. 
+
+The minimizing elastic stress is spatially constant and is τ (γ, t ) = μ0 
+
+> (
+
+¯ξ(t) − ¯γ
+
+> )
+
+. Moreover, for every z ∈ L2(0 , H ),
+
+(6.3) D1E(γ, t )[ z] = −Hτ (γ, t )
+
+> H
+> 0
+
+z(x) dx. 
+
+Proof. The Euler equation for the displacement gives μ0(ux − γ) = ¯ τ , with ¯ τ independent of x.Averaging over (0 , H ) and using the boundary values yields ¯ξ = ¯ γ + ¯ τ /μ 0, hence the formula for ¯ τ .Substitution gives the reduced energy, and differentiation in γ gives the last identity. □
+
+Let A = Rm be the memory space and let L = [ −l0, l 0] be a compact admissible rate interval, with l0 > 0. The compact rate interval is introduced to keep the relaxation theorem transparent. A superlinear kinetic potential on R may be treated by truncation on defect sublevels, because bounded loading and superlinear growth bound all local minimizers on the relevant stress range. The memory variable function a : Ω × [0 , T ] → A evolves according to the local kinetic relation ˙a(x, t ) = f (a(x, t ), l (x, t )), where l = ˙γ is the plastic shear rate. We assume throughout that 
+
+f : A × L → A is continuous, globally Lipschitz in a uniformly in r ∈ L, and satisfies (6.4) |f (a, r )| ≤ Cf (1 + |a|), ∀(a, r ) ∈ A × L. 
+
+The kinetic potential ψ : L×A → [0 , +∞) is continuous. No convexity of the mapping r 7 → ψ(r; a) is required. We assumed homogeneous initial data γ0 ∈ R and a0 ∈ A for simplicity. Spatially varying bounded initial data can be included by retaining the initial value as an additional coordinate of the history space below. For l ∈ L∞(Ω × (0 , T )) with l(x, t ) ∈ L a.e., define the causal reconstructions (6.5) γl(x, t ) := γ0 +
+
+ˆ t
+
+> 0
+
+l(x, s ) ds, al(x, t ) := a0 +
+
+ˆ t
+
+> 0
+
+f (al(x, s ), l (x, s )) ds. 
+
+Their spatially averaged plastic shear and the corresponding stress are (6.6) ¯γl(t) := 
+
+> H
+> 0
+
+γl(x, t ) dx, ¯τl(t) := μ0 
+
+> (
+
+¯ξ(t) − ¯γl(t)
+
+> )
+
+,
+
+respectively. The first reconstruction is Volterra, while the second is a nonlinear causal re-sponse. Gronwall’s inequality gives a constant Ca, depending only on T , a0, and Cf , such that ∥al∥L∞(Ω ×(0 ,T )) ≤ Ca for every admissible l. Likewise, γl and ¯ τl are uniformly bounded. Differentiating the reduced elastic energy along an absolutely continuous path gives (6.7) ddt E(γl(t), t ) = H ¯τl(t)
+
+> (
+
+˙¯ξ(t) −
+
+> H
+> 0
+
+l(x, t ) dx 
+
+> )
+
+for a.e. t. Thus the stress work against the plastic rate is exactly the state derivative appearing in the energy–dissipation rate problem. 6.2. The pure diagonal game and its defect. For |a| ≤ Ca and for stresses in the bounded range generated by (6.6), define the local minimum value m(a, b ) := min r∈L{ψ(r; a) − br } and the local excess by (6.8) g(r; a, b ) := ψ(r; a) − br − m(a, b ) ≥ 0.MICROSTRUCTURE EVOLUTION AS A GAME 27 
+
+The minimizing set is then (6.9) M (a, b ) := argmin 
+
+> r∈L
+> {
+
+ψ(r; a) − br }.
+
+Compactness of L and continuity of ψ imply that M (a, b ) is nonempty and compact. The functions 
+
+m and g are continuous on every bounded ( a, b ) set. Let Y := {l ∈ L∞(Ω × (0 , T )) : l(x, t ) ∈ L a.e. }. For w, l ∈ Y , define the normalized payoff (6.10) J(w; l) := 
+
+ˆ T
+
+> 0
+
+ˆ H
+
+> 0
+
+g(w(x, t ); al(x, t ), ¯τl(t)) dx dt. 
+
+The first argument is the competitor rate, while the second generates both the mechanical state and the local memory. Up to subtraction of the state-dependent minimum m, (6.10) is the integral of ψ(w; al) + D1E(γl, t )[ w]. Thus the normalization does not change the best-response relation. 
+
+Proposition 6.2 (Pure defect and local best response) . For every l ∈ Y , the diagonal defect of Section 5 is 
+
+(6.11) I(l) = J(l; l) = 
+
+ˆ T
+
+> 0
+
+ˆ H
+
+> 0
+
+g(l(x, t ); al(x, t ), ¯τl(t)) dx dt. 
+
+Consequently, l is a pure diagonal equilibrium if and only if l(x, t ) ∈ M (al(x, t ), ¯τl(t)) for a.e. (x, t ) ∈
+
+Ω × (0 , T ).Proof. For fixed l, the local gap is nonnegative, so J(w; l) ≥ 0 for every competitor. The multifunc-tion ( x, t ) 7 → M (al(x, t ), ¯τl(t)) has nonempty compact values and a measurable graph. A measurable selection w∗ therefore exists [43, Thm. 18.19], with w∗(x, t ) ∈ M (al(x, t ), ¯τl(t)) a.e. Hence w∗ ∈ Y
+
+and J(w∗; l) = 0. It follows from the definition of the diagonal defect that I(l) = J(l; l). Since the integrand in (6.11) is nonnegative, I(l) = 0 is equivalent to the asserted local best-response condition. □
+
+Remark 6.3 (Why pointwise convexification is not enough) . If the memory variable were absent, relaxation of the local non-convex rate problem would be described at a fixed state by the lower convex envelope of r 7 → ψ(r) − ¯τ r . With memory, replacing a mixture of rates by its barycenter generally destroys future information. Suppose, for example, that at time t0 a population with common memory a0 splits into rates r− and r+ with fractions θ and 1 − θ. Then, over a short interval h, a±(t0 + h) = a0 + hf (a0, r ±) + o(h). The two populations therefore acquire different memories whenever f (a0, r −)̸ = f (a0, r +). Replacing them by the average rate ¯ r = θr − + (1 − θ)r+
+
+gives instead the single memory increment hf (a0, ¯r), which need not equal the mixture of the two increments. Even when the first increments agree serendipitously, the future kinetic potential depends on the distribution of the memories, not merely on their mean. The relaxation must therefore retain temporal coupling information. □
+
+6.3. Relaxed local histories and the enriched space. The natural compactification of one local rate history is the relaxed-control compactification, see e.g. [44]. A relaxed control is a positive Radon measure λ on [0 , T ] × L whose first marginal is Lebesgue measure. We write its disintegration as dλ (t, r ) = dλ t(r) dt , with λt ∈ P (L) for a.e. t ∈ (0 , T ). Here and subsequently, 
+
+P(L) denotes the space of Borel probability measures on L. A relaxed local history is a triple 
+
+ω = ( γ, a, λ ) satisfying (6.12) γ(t) = γ0 +
+
+ˆ t
+
+> 0
+
+ˆ
+
+> L
+
+r dλ s(r) ds, 
+
+(6.13) a(t) = a0 +
+
+ˆ t
+
+> 0
+
+ˆ
+
+> L
+
+f (a(s), r ) dλ s(r) ds. 28 M. ORTIZ 
+
+Let X denote the set of all such histories. We equip X with uniform convergence of γ and a,together with narrow convergence of λ as a measure on the compact set [0 , T ] × L. A history is called pure if λt = δr(t) for a.e. t for some measurable r : [0 , T ] → L.
+
+Lemma 6.4 (Compactness and chattering of local histories) . The space X is compact and metriz-able. Pure histories are dense in X . More precisely, for every ω = ( γ, a, λ ) ∈ X there exist pure histories ωh = ( γh, a h, δ rh(t)) such that γh → γ and ah → a uniformly on [0 , T ], and δrh(t) dt ⇀ λ 
+
+narrowly in M([0 , T ] × L). If c : [0 , T ] × A × L → R is continuous on the bounded state range generated above, the sequence may be chosen so that 
+
+(6.14) 
+
+ˆ T
+
+> 0
+
+c(t, a h(t), r h(t)) dt →
+
+ˆ T
+
+> 0
+
+ˆ
+
+> L
+
+c(t, a (t), r ) dλ t(r) dt. 
+
+Proof. Because L is compact, the set of relaxed controls is narrowly compact and the corresponding 
+
+γ paths are uniformly Lipschitz, see e.g. [33]. Gronwall’s inequality and the growth assumption (6.4) on f give a common bound on a, after which the continuity of f gives a common Lipschitz bound on the a paths. Arzelà–Ascoli and narrow compactness yield a convergent subsequence. Passing to the limit in (6.12)–(6.13) is justified by uniform convergence of a, continuity of f , and narrow convergence of the controls, so X is closed and therefore compact. For density, first approximate λ on a finite time partition by controls that are constant as probability measures on each interval, and approximate each of those probability measures by a finite atomic measure on L. On every time cell, divide the cell into subintervals having the corresponding atomic proportions and let rh take the associated atomic values. The resulting Dirac controls converge narrowly to λ. Continuous dependence of the integral equations on the relaxed control gives uniform convergence of γh and ah. Applying the same construction to the finite family of continuous functions needed to approximate c uniformly gives (6.14). This is the usual chattering construction, see e.g. [44], written here at the level needed for the defect. □
+
+To retain spatial microstructure and band-specific histories, define the enriched rate-path space (6.15) Y := {Λ ∈ M ([0 , H ] × X ) : Λ ≥ 0, (π1)#Λ = L1 [0 , H ]},
+
+where π1 is projection onto the spatial coordinate. Every measure Λ ∈ Y has total mass H. Since [0 , H ] × X is compact, Y is compact and metrizable for narrow convergence. Every pure rate l ∈ Y generates a pure local history ωl(x) = ( γl(x, ·), a l(x, ·), δ l(x,t )) for a.e. x.We identify l with its graph history measure (6.16) Λl := ( x 7 → (x, ω l(x))) #L1 [0 , H ] ∈ Y .
+
+The spatial coordinate makes this embedding injective modulo equality a.e. A general measure Λ ∈Y disintegrates as dΛ( x, ω ) = dΛx(ω) dx . Non-Dirac measures Λ x record microscopic populations of complete histories near the macroscopic point x.For Λ ∈ Y , define its averaged plastic shear and reconstructed stress as (6.17) ¯γΛ(t) := 1
+
+H
+
+ˆ
+
+> [0 ,H ]×X
+
+γ(t) dΛ( x, ω ), ¯τΛ(t) := μ0 
+
+> (
+
+¯ξ(t) − ¯γΛ(t)).
+
+The candidate relaxed defect is (6.18) I (Λ) := 
+
+ˆ
+
+> [0 ,H ]×X
+
+ˆ T
+
+> 0
+
+ˆ
+
+> L
+
+g(r; a(t), ¯τΛ(t)) dλ t(r) dt d Λ( x, ω ).
+
+It is immediate that I ≥ 0. 
+
+Lemma 6.5 (Continuity of the explicit relaxed defect) . If Λh ⇀ Λ narrowly in Y, then ¯τΛh → ¯τΛ
+
+uniformly on [0 , T ] and I (Λ h) → I (Λ) .MICROSTRUCTURE EVOLUTION AS A GAME 29 
+
+Proof. For every fixed t, the evaluation ω 7 → γ(t) is continuous on X , so narrow convergence gives ¯γΛh (t) → ¯γΛ(t). All averaged shear paths are l0-Lipschitz. Pointwise convergence together with this common modulus gives uniform convergence, and therefore uniform convergence of the stresses. For a continuous stress path ¯ τ , define (6.19) F¯τ (ω) := 
+
+ˆ T
+
+> 0
+
+ˆ
+
+> L
+
+g(r; a(t), ¯τ (t)) dλ t(r) dt. 
+
+The topology of X , continuity of g, and compactness of the common state range imply that F¯τ is continuous on X . Moreover, F¯τh → F¯τ uniformly on X whenever ¯ τh → ¯τ uniformly. Hence, (6.20) I (Λ h) = 
+
+ˆ
+
+F¯τΛh dΛh →
+
+ˆ
+
+F¯τΛ dΛ = I (Λ) ,
+
+as claimed. □
+
+For pure graph measures the explicit relaxed defect agrees exactly with the original diagonal defect. 
+
+Lemma 6.6 (Consistency on pure histories) . For every l ∈ Y , I (Λ l) = I(l).Proof. For Λ l, the local control is λt = δl(x,t ), the averaged shear in (6.17) is ffl H 
+
+> 0
+
+γl(x, t ) dx , and therefore ¯ τΛl = ¯ τl. Substitution into (6.18) gives (6.11). □
+
+6.4. Exact relaxation of the diagonal defect. We can now identify the abstract relaxed defect of Section 5. We use the narrow metric on Y and identify the pure rate l with the graph measure Λl. The infinite extension of the pure defect is therefore the function I of (5.5), with value I(l) on pure graph measures and + ∞ otherwise. 
+
+Theorem 6.7 (Exact history-space relaxation) . Under the assumptions of Sections 6.1–6.3, the sequential lower-semicontinuous envelope of the pure diagonal defect is exactly (6.18) :
+
+(6.21) I(Λ) = I (Λ) , ∀Λ ∈ Y .
+
+More precisely, if lh ∈ Y and Λlh ⇀ Λ, then 
+
+(6.22) I (Λ) ≤ lim inf  
+
+> h→∞
+
+I(lh).
+
+Conversely, for every Λ ∈ Y there is a sequence lh ∈ Y , which may be chosen piecewise-constant in space and time, such that 
+
+(6.23) Λlh ⇀ Λ, I(lh) → I (Λ) .
+
+Proof. The liminf inequality follows immediately from Lemmas 6.5 and 6.6; in fact, along every convergent pure sequence one has I(lh) = I (Λ lh ) → I (Λ). It remains to prove density of pure graph histories. Fix Λ ∈ Y . Since [0 , H ] × X is compact and the first marginal of Λ is Lebesgue measure, a standard spatial chattering construction, see e.g. [44, 45], gives a sequence of graph measures ˜Λh = ( x 7 → (x, ˜ωh(x))) #L1 [0 , H ] with ˜ωh piecewise constant in x and ˜Λh ⇀ Λ. One way to construct the sequence is to partition [0 , H ] into cells of diameter tending to zero, approximate each conditional measure Λ x on every cell by a finite atomic measure on X , and subdivide the cell according to the atomic masses. More explicitly, on each spatial cell Q we first replace the family x 7 → Λx by its average (6.24) ¯ΛQ := Q
+
+Λx dx, 
+
+approximate ¯ΛQ narrowly by a finite atomic probability measure ∑ 
+
+> j
+
+θQ,j δωQ,j , and partition Q into measurable subsets Qj with |Qj | = θQ,j |Q|, setting ˜ωh(x) = ωQ,j on Qj . Since the cell diameters tend to zero and continuous functions on the compact space [0 , H ] × X are uniformly continuous, 30 M. ORTIZ 
+
+testing against any φ ∈ C([0 , H ]×X ) shows that the resulting graph measures ˜Λh converge narrowly to Λ. The finitely many histories used in each ˜ωh may be relaxed rather than pure. Apply Lemma 6.4 to each of these finitely many histories, choosing the temporal chattering sufficiently fine that the resulting pure histories change both the graph measure and the value of I by at most 1 /h .Assign the corresponding pure rate histories to the same spatial subcells. This produces lh ∈ Y ,piecewise-constant in space and time, with Λ lh ⇀ Λ. Lemma 6.5 and Lemma 6.6 then give (6.25) I(lh) = I (Λ lh ) → I (Λ) .
+
+The recovery sequence proves the upper bound in the definition (5.6), and (6.21) follows. □
+
+The theorem gives an intrinsic characterization of the relaxed zero set. 
+
+Corollary 6.8 (Relaxed local equilibrium) . A history Young measure Λ ∈ Y is a relaxed diagonal equilibrium if and only if 
+
+(6.26) λω,t 
+
+> (
+
+M (aω(t), ¯τΛ(t)) ) = 1 
+
+for Λ-a.e. (x, ω ) and a.e. t ∈ (0 , T ). Every such Λ admits a pure recovery sequence lh ∈ Y satisfying 
+
+Λlh ⇀ Λ and I(lh) → 0.Proof. By (6.18), I (Λ) is the integral of the nonnegative function g. Its integral vanishes exactly when g = 0 for the product of Λ, Lebesgue measure in time, and the relaxed control. By (6.8)–(6.9), this is equivalent to (6.26). Theorem 6.7 and Proposition 5.2 identify this zero set with the relaxed equilibria of Section 5, and the recovery statement is (6.23) at zero defect. □
+
+Remark 6.9 (The payoff is not extended to relaxed histories) . Theorem 6.7 computes the relaxed defect, not a new pointwise game on Y. At a non-Dirac history measure there is no canonical way to pair an arbitrary relaxed competitor with the microscopic state histories retained by Λ. This is exactly the distinction emphasized in Remark 5.4 and in the discussion following (5.4): pure competitors define the approximating games, whereas the enriched object is characterized by the closure of their diagonal defects. □
+
+6.5. Existence from frozen best responses. In the present example, the vanishing-defect ap-proximability required abstractly in Section 5 can be proved constructively. The argument also gives a simple time-stepping approximation. 
+
+Theorem 6.10 (Existence and constructive almost equilibria) . There exists at least one relaxed diagonal equilibrium Λ∗ ∈ Y . More precisely, for every sequence of partitions 
+
+(6.27) 0 = th 
+
+> 0
+
+< t h 
+
+> 1
+
+< · · · < t hNh = T, ∆h := max  
+
+> k
+
+(thk+1 − thk ) ↓ 0,
+
+one can construct lh ∈ Y , piecewise constant in time, such that on every interval [thk , t hk+1 ),
+
+(6.28) lh(x, t ) ∈ M (alh (x, t hk ), ¯τlh (thk )), for a.e. x ∈ (0 , H ).
+
+The resulting defects satisfy 
+
+(6.29) I(lh) → 0.
+
+Every subsequential narrow limit of Λlh is a relaxed diagonal equilibrium. Proof. Assume that the path has been constructed up to thk . Continuity of ψ implies that the multifunction x 7 → M (alh (x, t hk ), ¯τlh (thk )) has a measurable graph and nonempty compact values. Choose a measurable selection rhk (x) and set lh(x, t ) = rhk (x) on [ thk , t hk+1 ). The reconstruction equations then determine γlh and alh on that interval. Iterating gives the full path and (6.28). If a minimizing set contains several separated rates, the selection may be chosen differently on different spatial subsets, thereby creating band populations without changing the estimate below. MICROSTRUCTURE EVOLUTION AS A GAME 31 
+
+All rates satisfy |lh| ≤ l0. The memory estimate and the evolution equation therefore give a constant C1 independent of h such that (6.30) |alh (x, t ) − alh (x, t hk )| ≤ C1∆h, t ∈ [thk , t hk+1 ).
+
+From (6.6), (6.31) ˙¯τlh (t) = μ0( ˙¯ξ(t) −
+
+> H
+> 0
+
+lh(x, t ) dx ), for a.e. t ∈ (0 , T ),
+
+hence (6.32) |¯τlh (t) − ¯τlh (thk )| ≤ C2∆h.
+
+Let ωg be a common modulus of continuity of g on the compact set containing L, all reconstructed memories, and all reconstructed stresses. By (6.28), (6.33) g(lh(x, t ); alh (x, t hk ), ¯τlh (thk )) = 0 .
+
+Therefore, (6.34) g(lh(x, t ); alh (x, t ), ¯τlh (t)) ≤ ωg
+
+((C1 + C2)∆ h
+
+)
+
+for a.e. ( x, t ). Integration gives (6.35) 0 ≤ I(lh) ≤ HT ω g
+
+((C1 + C2)∆ h
+
+) → 0.
+
+The space Y is compact, so Λ lh has a narrowly convergent subsequence. Proposition 5.3, or equiv-alently Theorem 6.7, shows that every subsequential limit is a relaxed diagonal equilibrium. □
+
+Remark 6.11 (What the construction proves) . The theorem verifies the approximability hypoth-esis that is substantive in the abstract direct method. Compactness is built into the history space, and Theorem 6.7 supplies the recovery and lower-semicontinuity statements. Thus all three ingre-dients of the abstract relaxation method are explicit here: vanishing-defect approximation, com-pactness, and identification of the relaxed defect. □
+
+Example 6.12 (Serrated recovery and band-specific memory) . Under general loading, different rate populations acquire different memories and are represented more naturally by distinct complete histories. To illustrate this point, let Λ ∈ Y be a relaxed zero satisfying (6.26), and suppose for purposes of illustration that its history marginal consists of two populations, (6.36) dΛ( x, ω ) = dx (θ δ ω− (dω ) + (1 − θ)δω+ (dω )), 0 < θ < 1,
+
+with ω± = ( γ±, a ±, λ ±). Thus, for a.e. t, λ± 
+
+> t
+
+is supported on M (a±(t), ¯τΛ(t)), but in general 
+
+a−(t)̸ = a+(t). The relaxed macroscopic plastic rate is (6.37) ¯rΛ(t) := θ
+
+ˆ
+
+> L
+
+r dλ − 
+
+> t
+
+(r) + (1 − θ) ˆ
+
+> L
+
+r dλ + 
+
+> t
+
+(r),
+
+and differentiation of (6.17) gives (6.38) ˙¯τΛ(t) = μ0
+
+( ˙¯ξ(t) − ¯rΛ(t)).
+
+History dependence is already evident for a simple aging law of the form (6.39) f (a, r ) = (1 − a)/t a − κ|r|a. 
+
+Indeed, (6.40) ˙a±(t) = 1 − a±(t)
+
+ta
+
+− κa ±(t)
+
+ˆ
+
+> L
+
+|r| dλ ± 
+
+> t
+
+(r).
+
+If ρ± := ´ 
+
+> L
+
+|r| dλ ± 
+
+> t
+
+(r) are constant on an interval [ t0, t 1], then (6.41) a±(t) = a± 
+
+> ss
+
++ (a±(t0) − a±
+
+> ss
+
+) exp [ −β±(t − t0)] , a± 
+
+> ss
+
+:= 11 + κt aρ±
+
+, β± := 1
+
+ta
+
++ κρ ±.32 M. ORTIZ 0.0 0.2 0.4 0.6 0.8 1.0 Macroscopic strain    
+
+> 0.95 1.00 1.05 1.10 1.15 1.20 Macroscopic stress
+> Serrated pure recovery sequences and relaxed limit
+> Nh= 8
+> Nh= 16
+> Nh= 32 relaxed
+
+(a) Pure serrated stress–strain paths for Nh =8, 16 , 32 and the relaxed limit. 0.375 0.400 0.425 0.450 0.475 0.500 0.525 0.550 Macroscopic strain    
+
+> 1.00 1.02 1.04 1.06 1.08 1.10 1.12 1.14 1.16 Macroscopic stress
+> Zoom: vanishing stress amplitude, increasing frequency
+> Nh= 8
+> Nh= 16
+> Nh= 32 relaxed
+
+(b) Zoom showing vanishing serration amplitude and increasing switching frequency. 
+
+Figure 2. Serrated pure almost-equilibrium recovery sequences converging uni-formly to a relaxed macroscopic stress–strain path. Although the macroscopic os-cillations vanish, Λ lh ⇀ Λ retains the distinct complete histories and their rate– memory correlations. Hence ρ−̸ = ρ+ produces distinct memory paths even if the two populations start from the same value. The limit therefore retains more than the barycentric rate: it retains the correlation between each rate history and the memory generated by that history. Corollary 6.8 and Theorem 6.7 provide pure, piecewise-constant recovery sequences lh such that Λlh ⇀ Λ, and I(lh) → 0. The temporal chattering in the proof of Lemma 6.4 may be ordered on every small time cell Ihk = [ thk , t hk+1 ) so that the lower-rate selections occur first and the higher-rate selections second, without changing their cell fractions. Writing (6.42) ¯qh(t) := 
+
+H
+
+0
+
+lh(x, t ) dx − ¯rΛ(t),
+
+the construction gives a uniformly bounded ¯ qh whose primitive is small: there is C > 0, independent of h, such that (6.43) sup 
+
+0≤t≤T
+
+∣∣∣∣∣
+
+ˆ t
+
+0
+
+¯qh(s) ds 
+
+∣∣∣∣∣ ≤ C∆h, ∆h := max 
+
+k |Ihk | ↓ 0.
+
+The pure stress satisfies (6.44) ˙¯τlh = μ0
+
+( ˙¯ξ −
+
+H
+
+0
+
+lh dx ),
+
+and therefore (6.45) ¯τlh (t) − ¯τΛ(t) = −μ0
+
+ˆ t
+
+0
+
+¯qh(s) ds, ∥¯τlh − ¯τΛ∥L∞(0 ,T ) ≤ μ0C∆h → 0.
+
+Thus the pure approximants may exhibit alternating stress rises and drops on the chattering scale while converging uniformly to a smooth relaxed stress path. The serrations disappear from the macroscopic limit, but the limiting history Young measure in (6.36) remains non-Dirac and retains the band-specific memories. Figure 2 illustrates this mechanism numerically. For monotone loading ¯ξ = t, take (6.46) ¯τ ( ¯ξ) = 1 + 0 .18 ¯ξ − 0.06 ¯ξ2 + 0 .015 sin(2 π ¯ξ), 0 ≤ ¯ξ ≤ 1,MICROSTRUCTURE EVOLUTION AS A GAME 33 
+
+and define (6.47) ¯τh( ¯ξ) = ¯ τ ( ¯ξ) + ηNh
+
+tri( Nh ¯ξ), η = 0 .64 , Nh ∈ { 8, 16 , 32 },
+
+where tri( s) := 4 |s − ⌊ s⌋ − 1/2| − 1. Then ∥¯τh − ¯τ ∥L∞ ≤ η/N h → 0, whereas away from corners the associated average plastic rate satisfies (6.48) ¯rh( ¯ξ) = 1 − 1
+
+μ0
+
+d¯τh
+
+d ¯ξ = ¯ r( ¯ξ) − 4ημ0
+
+σh( ¯ξ), σh( ¯ξ) ∈ {− 1, 1}.
+
+Thus, the rate switching remains of fixed amplitude while its period tends to zero, whereas the induced stress serrations have amplitude O(N −1 
+
+> h
+
+). The plotted curves are a schematic visualization of the recovery kinematics; they do not presuppose an additional special form of a kinetic potential density ψ beyond the support condition (6.26). □
+
+7. Summary and concluding remarks 
+
+We have formulated energy–dissipation evolution as a game between state and rate histories in which the state–rate consistency constraint is eliminated by the causal Volterra reconstruction 
+
+Rv = u0 + Kv . The resulting evolution problem is a diagonal equilibrium for the reduced payoff 
+
+J(w; v) = G(w; Rv ). This formulation separates the two occurrences of the rate variable and identifies the approximability, compactness, and complementary semicontinuity properties needed for existence. It is closely related to variational inequalities, equilibrium problems, monotone-operator theory, and convex integral functionals [6, 7, 9, 10, 1, 2, 3, 4, 5, 35, 36], but acts on a causal diagonal rather than on a single static functional. The examples developed here illustrate two different compactness regimes. In the representative superlinear-growth system of Section 4.1, the rate space is reflexive and the complete diagonal defect yields existence, uniqueness, and strong convergence of a temporal Galerkin approximation. In the representative linear-growth system of Section 4.2, the natural compact ambient space for rates is the space of vector-valued Radon measures, with right-continuous BV reconstructed states [18, 34, 14, 37]. The centered state representative gives the exact quadratic chain rule at atoms, energy balance supplies the total-variation bound needed for weak-star compactness, and viscous regularization together with temporal measure approximation yields the unique equilibrium. Under the W 1,1 loading hypothesis used here, the limiting equilibrium rate is again absolutely continuous. When compactness or lower semicontinuity fails in the pure path space, the relaxation developed in Section 5 closes pure almost equilibria whose diagonal defects vanish in an enriched topology. The relaxed object is therefore the sequential closure of the evolutionary equilibrium principle, rather than a pointwise extension of the original game to generalized states. Section 6 gives a complete realization of that construction. There the enriched state is a Young measure on complete local histories, and the sequential lower-semicontinuous envelope of the pure defect is identified explicitly with a nonnegative history-space gap functional. Its zero set is exactly the set of relaxed local best responses, every relaxed zero has a pure recovery sequence, and a frozen-best-response time discretization supplies the vanishing-defect approximability needed for existence. The local-memory example also clarifies why a purely instantaneous relaxation can be insufficient. If different rate populations follow different kinetic branches, an internal variable driven by the local rate separates their subsequent histories. Collapsing those populations to a single average rate therefore loses information needed to predict future response. The history Young measure retains precisely this correlation. In a two-rate regime the common-tangent construction gives the usual coexistence picture, while the memory variable allows the two bands to evolve different local kinetic landscapes. This provides a reduced connection with dynamic strain aging, negative strain-rate sensitivity, and Portevin–Le Châtelier-type localization [25, 23, 24]. The example is intentionally unregularized in space. It therefore does not select a band width, a band location, or a propagation speed. Adding spatial diffusion of the internal variable, heat 34 M. ORTIZ 
+
+conduction, gradient regularization, or nonlocal dislocation transport would couple neighboring histories and turn the elementary chattering recovery into a genuine space–time recovery problem. Multi-slip crystal plasticity with latent hardening provides another natural next step: there the microscopic state is subject to differential compatibility and branch constraints, so recovery must preserve both kinetic action and spatial compatibility. These extensions are substantially harder and are not required for the exact local-memory relaxation proved here. More generally, the Volterra reconstruction treated here is a particularly reducible causal con-straint: its unique state response can be written explicitly and the two-player structure collapses to the diagonal bifunction J(w; v). For other causal constraints the game structure should be more visible. Mass transport provides a natural example: the continuity equation couples density and flux through a PDE constraint, while the Benamou–Brenier action supplies a trajectory-level ki-netic functional [41, 33]. Even when the state is uniquely determined in a suitable weak sense, eliminating it need not yield an elementary reconstruction operator or the most useful analytical formulation. It is therefore natural to study the unreduced state–rate equilibrium directly, to-gether with compactness and relaxation of both responses. Determining when such constrained causal games admit a diagonal reduction, and when their almost equilibria have the compactness, semicontinuity, and recovery properties developed here, is a direction for further work. 
+
+Acknowledgements 
+
+The financial support of the Centre Internacional de Mètodes Numèrics a l’Enginyeria (CIMNE) of the Universitat Politècnica de Catalunya (UPC), Spain, through the UNESCO Chair in Numer-ical Methods in Engineering is gratefully acknowledged. 
+
+References 
+
+[1] F. E. Browder and P. Hess, Nonlinear mappings of monotone type in Banach spaces. Journal of Functional Analysis 11 (1972), no. 3, 251–294. doi:10.1016/0022-1236(72)90070-5. [2] J. Leray and J.-L. Lions, Quelques résultats de Višik sur les problèmes elliptiques non linéaires par les méthodes de Minty–Browder. Bulletin de la Société Mathématique de France 93 (1965), 97–107. doi:10.24033/bsmf.1617. [3] H. Brézis, Équations et inéquations non linéaires dans les espaces vectoriels en dualité. Annales de l’Institut Fourier 18 (1968), no. 1, 115–175. doi:10.5802/aif.280. [4] E. Zeidler, Nonlinear Functional Analysis and Its Applications, II/B: Nonlinear Monotone Operators . Springer-Verlag, New York, 1990. doi:10.1007/978-1-4612-0981-2. [5] R. E. Showalter, Monotone Operators in Banach Space and Nonlinear Partial Differential Equations .Mathematical Surveys and Monographs, vol. 49, American Mathematical Society, Providence, RI, 1997. doi:10.1090/surv/049. [6] H. von Stackelberg, Marktform und Gleichgewicht . Julius Springer, Wien and Berlin, 1934. [7] T. Başar and G. J. Olsder, Dynamic Noncooperative Game Theory , 2nd ed. Classics in Applied Mathematics, vol. 23, SIAM, Philadelphia, 1999. doi:10.1137/1.9781611971132. [8] G. J. Minty, Monotone (nonlinear) operators in Hilbert space. Duke Mathematical Journal 29 (1962), no. 3, 341–346. doi:10.1215/S0012-7094-62-02933-2. [9] K. Fan, A generalization of Tychonoff’s fixed point theorem. Mathematische Annalen 142 (1961), 305–310. doi:10.1007/BF01353421. [10] E. Blum and W. Oettli, From optimization and variational inequalities to equilibrium problems. The Mathematics Student 63 (1994), 123–145. [11] E. De Giorgi, A. Marino, and M. Tosques, Problemi di evoluzione in spazi metrici e curve di massima pendenza. 
+
+Atti della Accademia Nazionale dei Lincei. Classe di Scienze Fisiche, Matematiche e Naturali. Rendiconti 68 
+
+(1980), no. 3, 180–187. [12] H. Brézis and I. Ekeland, Un principe variationnel associé à certaines équations paraboliques. C. R. Acad. Sci. Paris Sér. A–B 282 (1976), A971–A974 and A1197–A1198. [13] B. Nayroles, Deux théorèmes de minimum pour certains systèmes dissipatifs. C. R. Acad. Sci. Paris Sér. A–B 
+
+282 (1976), A1035–A1038. [14] L. Ambrosio and G. Dal Maso, A general chain rule for distributional derivatives. Proceedings of the American Mathematical Society 108 (1990), no. 3, 691–702. doi:10.2307/2047789. MICROSTRUCTURE EVOLUTION AS A GAME 35 
+
+[15] A. Mielke and F. Theil, On rate-independent hysteresis models. Nonlinear Differential Equations and Applications 
+
+11 (2004), 151–189. doi:10.1007/s00030-003-1052-7. [16] A. Mielke, R. Rossi, and G. Savaré, BV solutions and viscosity approximations of rate-independent systems. 
+
+ESAIM: Control, Optimisation and Calculus of Variations 18 (2012), no. 1, 36–80. doi:10.1051/cocv/2010054. [17] A. Mielke, R. Rossi, and G. Savaré, Balanced Viscosity ( BV ) solutions to infinite-dimensional rate-independent systems. Journal of the European Mathematical Society 18 (2016), no. 9, 2107–2165. doi:10.4171/JEMS/639. [18] J. Diestel and J. J. Uhl, Jr., Vector Measures . Mathematical Surveys, vol. 15, American Mathematical Society, Providence, RI, 1977. doi:10.1090/surv/015. [19] M. Ortiz and E. A. Repetto, Nonconvex energy minimization and dislocation structures in ductile single crystals. 
+
+Journal of the Mechanics and Physics of Solids 47 (1999), 397–462. doi:10.1016/S0022-5096(97)00096-3. [20] S. Conti and M. Ortiz, Dislocation microstructures and the effective behavior of single crystals. Archive for Rational Mechanics and Analysis 176 (2005), 103–147. doi:10.1007/s00205-004-0353-2. [21] S. Conti, P. Hauret, and M. Ortiz, Concurrent multiscale computing of deformation microstructure by relaxation and local enrichment with application to single-crystal plasticity. Multiscale Modeling & Simulation 6 (2007), no. 1, 135–157. doi:10.1137/060662332. [22] S. Conti and M. Ortiz, Minimum principles for the trajectories of systems governed by rate problems. Journal of the Mechanics and Physics of Solids 56 (2008), no. 5, 1885–1904. doi:10.1016/j.jmps.2007.11.006. [23] P. G. McCormick, Theory of flow localisation due to dynamic strain ageing. Acta Metallurgica 36 (1988), no. 12, 3061–3067. doi:10.1016/0001-6160(88)90043-0. [24] G. Ananthakrishna, Current theoretical approaches to collective behavior of dislocations. Physics Reports 440 
+
+(2007), no. 4–6, 113–259. doi:10.1016/j.physrep.2006.10.003. [25] A. Yilmaz, The Portevin–Le Châtelier effect: a review of experimental findings. Science and Technology of Advanced Materials 12 (2011), 063001. doi:10.1088/1468-6996/12/6/063001. [26] T. Divoux, M. A. Fardin, S. Manneville, and S. Lerouge, Shear banding of complex fluids. Annual Review of Fluid Mechanics 48 (2016), 81–103. doi:10.1146/annurev-fluid-122414-034416. [27] S. Osovski, D. Rittel, and A. Venkert, The respective influence of microstructural and thermal softening on adiabatic shear localization. Mechanics of Materials 56 (2013), 11–22. doi:10.1016/j.mechmat.2012.09.008. [28] P. Bai, D. A. Cogswell, and M. Z. Bazant, Suppression of phase separation in LiFePO 4 nanoparticles during battery discharge. Nano Letters 11 (2011), no. 11, 4890–4896. doi:10.1021/nl202764f. [29] M. Z. Bazant, Thermodynamic stability of driven open systems and control of phase separation by electro-autocatalysis. Faraday Discussions 199 (2017), 423–463. doi:10.1039/C7FD00037E. [30] K. Bhattacharya, Microstructure of Martensite: Why It Forms and How It Gives Rise to the Shape-Memory Effect . Oxford Series on Materials Modelling, Oxford University Press, Oxford, 2003. ISBN 978-0-19-850934-9; doi:10.1093/oso/9780198509349.001.0001. [31] E. De Giorgi, New problems on minimizing movements. In Boundary Value Problems for Partial Differential Equations and Applications , C. Baiocchi and J.-L. Lions, eds., RMA Res. Notes Appl. Math., vol. 29, Masson, Paris, 1993, pp. 81–98. [32] L. Ambrosio, Minimizing movements. Rend. Accad. Naz. Sci. XL Mem. Mat. Appl. , ser. 5, 19 (1995), 191–246. [33] L. Ambrosio, N. Gigli, and G. Savaré, Gradient Flows: In Metric Spaces and in the Space of Probability Measures ,2nd ed. Lectures in Mathematics ETH Zürich, Birkhäuser, Basel, 2008. doi:10.1007/978-3-7643-8722-8. [34] Yu. G. Reshetnyak, Weak convergence of completely additive vector functions on a set. Siberian Mathematical Journal 9 (1968), 1039–1045. doi:10.1007/BF02196453. [35] R. T. Rockafellar, Integrals which are convex functionals. II. Pacific Journal of Mathematics 39 (1971), no. 2, 439–469. doi:10.2140/pjm.1971.39.439. [36] R. T. Rockafellar, Convex integral functionals and duality. In Contributions to Nonlinear Functional Analysis ,E. H. Zarantonello, ed., Academic Press, New York, 1971, pp. 215–236. doi:10.1016/B978-0-12-775850-3.50012-1. [37] L. Ambrosio, N. Fusco, and D. Pallara, Functions of Bounded Variation and Free Discontinuity Prob-lems . Oxford Mathematical Monographs, The Clarendon Press, Oxford University Press, New York, 2000. doi:10.1093/oso/9780198502456.001.0001. [38] H. Brézis, Functional Analysis, Sobolev Spaces and Partial Differential Equations . Universitext, Springer, New York, 2011. doi:10.1007/978-0-387-70914-7. [39] A. Mielke and M. Ortiz, A class of minimum principles for characterizing the trajectories and the relaxation of dissipative systems. ESAIM: Control, Optimisation and Calculus of Variations 14 (2008), no. 3, 494–516. doi:10.1051/cocv:2007064. [40] A. Mielke and U. Stefanelli, Weighted energy–dissipation functionals for gradient flows. ESAIM: Control, Opti-misation and Calculus of Variations 17 (2011), no. 1, 52–85. doi:10.1051/cocv/2009043. [41] J.-D. Benamou and Y. Brenier, A computational fluid mechanics solution to the Monge–Kantorovich mass transfer problem. Numerische Mathematik 84 (2000), no. 3, 375–393. doi:10.1007/s002110050002. 36 M. ORTIZ 
+
+[42] M. Negri, Quasi-static rate-independent evolutions: characterization, existence, approximation and application to fracture mechanics. ESAIM: Control, Optimisation and Calculus of Variations 20 (2014), no. 4, 983–1008. doi:10.1051/cocv/2014004. [43] C. D. Aliprantis and K. C. Border, Infinite Dimensional Analysis: A Hitchhiker’s Guide , 3rd ed., Springer, Berlin, 2006. [44] J. Warga, Optimal Control of Differential and Functional Equations , Academic Press, New York, 1972. [45] C. Castaing, P. Raynaud de Fitte, and M. Valadier, Young Measures on Topological Spaces: With Applications in Control Theory and Probability Theory . Mathematics and Its Applications, vol. 571, Kluwer Academic Publishers, Dordrecht, 2004. doi:10.1007/1-4020-1964-5. 
+
+Division of Engineering and Applied Science, California Institute of Technology, 1200 E. Cali-fornia Blvd., Pasadena, CA 91125 USA; Centre Internacional de Mètodes Numèrics a l’Enginyeria (CIMNE), Universitat Politècnica de Catalunya, Jordi Girona 1, 08034 Barcelona, Spain. 
+
+Email address : ortiz@caltech.edu

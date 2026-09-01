@@ -1,0 +1,69 @@
+{
+  "label": "2026-08-31",
+  "date": "2026-08-31",
+  "generated_at": "2026-09-01T00:29:49",
+  "count": 4,
+  "papers": [
+    {
+      "paper_id": "202608/31/2608.26048v1-experimental-characterization-of-additively-manufactured-metallic-alloys-for-electric-propulsion-applications",
+      "section": "quick",
+      "title_en": "Experimental Characterization of Additively Manufactured Metallic Alloys for Electric Propulsion Applications",
+      "authors": "J. Chamberlain, A. Shashurin",
+      "date": "2026-08-26",
+      "pdf": "https://arxiv.org/pdf/2608.26048v1",
+      "score": "7.0",
+      "evidence": "直接研究不锈钢结构材料在离子束辐照下的溅射损伤行为",
+      "tldr": "电推进栅格离子源中，栅格材料溅射侵蚀直接影响寿命与性能。针对增材制造金属是否具有不利溅射行为的问题，本文以316L不锈钢为对象，在KDC-40离子源中分别以400、600、800 eV的离子束辐照样品，结合光学轮廓仪与Gwyddion测量溅射产额。结果表明，其溅射产额约为0.2–2原子/离子，随能量增加而增大，与传统制造材料及模型预测基本一致。研究证明增材制造材料不表现出更高溅射产额，并进一步验证了增材制造钨铼栅格的可行性，为电推进栅格的应用提供了新途径。",
+      "tags": "query:rad-damage",
+      "abstract_en": "This work explores the sputtering of additively manufactured (AM) materials for use in gridded ion source applications. The first part of the paper uses 316L stainless steel as an example to demonstrate that additively manufactured material does not exhibit adverse sputtering behavior, such as higher sputter yield, compared with conventionally manufactured material. To this end, three additively manufactured 316L stainless steel samples were exposed to the beam of a KDC-40 electrostatic gridded ion source at three distinct energy levels of 400, 600, and 800 eV on each side of the sample for a duration of one hour. The samples were masked to create a distinct boundary between treated and untreated regions, identifiable using profilometry, and were biased to -18V for testing. Samples were then examined using a Bruker optical profilometer and further processed using the open-source software Gwyddion to evaluate the sputtering yield. The sputter yield varied in the range 0.2-2 atoms/ion for 400-800 eV ions and increased with ion energy. The measured sputtering yield was fairly consistent with predictions from analytical models developed in prior literature, while exhibiting some variations potentially due to added effects of increased temperature and oxide layers. The second part of the paper demonstrates feasibility of using an additively manufactured tungsten-rhenium grids in existing KDC-40 electrostatic gridded ion source.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202608/31/2608.24357v1-a-hidden-low-temperature-transformation-pathway-in-compositionally-complex-materials",
+      "section": "quick",
+      "title_en": "A hidden low-temperature transformation pathway in compositionally complex materials",
+      "authors": "Yujiao Li, Elaheh Akbarnejad, Quentin Bizot, Aleksander Kostka, Natalia Pukhareva, Ridha Zerdoumi, Alan Savan, Matous Mrovec, Ralf Drautz, Baptiste Gault, Dierk Raabe, Alfred Ludwig",
+      "date": "2026-08-25",
+      "pdf": "https://arxiv.org/pdf/2608.24357v1",
+      "score": "6.0",
+      "evidence": "利用富缺陷纳米区域揭示相变路径，与缺陷驱动的微观组织演化相关。",
+      "tldr": "成分复杂材料多为亚稳态，其性能依赖动力学陷阱，但低温相变路径因扩散缓慢而难以观测。利用富缺陷纳米区域结合原子探针层析，避免高温加速，直接重建了亚稳Ag24Au20Pd50Pt6电催化剂中的隐藏相演化路径。结果揭示富Pt相析出、粗化、再均匀化及延迟再析出，伴随析氢活性降低3.7倍，原子模拟独立预测同一相选择。这将隐藏相演化路径确立为设计变量，指导亚稳材料选择不仅看初始性能，也关注其随时间可达的相态与功能。",
+      "tags": "query:rad-damage",
+      "abstract_en": "Most compositionally complex materials (CCMs, frequently referred to as high entropy alloys) are metastable and their attractive properties often belong to kinetically trapped states. However, pathways towards lower-free-energy phase states governing long-term stability, can remain hidden because diffusion-controlled atomic redistribution is too slow to be revealed at experimentally accessible timescales. This blind spot is acute in CCM design: enormous compositional spaces are screened for performance, yet the low-temperature kinetics and the associated transformation pathways determining whether that performance persists are rarely considered in material selection. Here we use defect-rich nanoscale volumes coupled with atom-probe tomography to access and reconstruct the hidden phase-evolution pathway in a metastable Ag24Au20Pd50Pt6 electrocatalyst, without relying on elevated temperatures to accelerate the transformation. By varying microstructural starting state, annealing temperature and time, we reveal precipitation of a Pt-rich phase within the fcc matrix, its coarsening and re-homogenization. The Pt-rich phase recurs after homogenization with delayed kinetic accessibility, while prolonged annealing extends the pathway to 300°C. Atomistic simulations independently predict the same Pt-rich phase selection. The transformation is accompanied by a 3.7-fold loss of catalytic activity for hydrogen evolution. These results establish hidden phase-evolution pathways as a materials-design variable: resolving them can guide the selection of metastable CCMs not only for their as-synthesized properties, but also for the phase states and associated functionalities they may access over time.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202608/31/2608.26484v1-microstructure-evolution-as-a-game",
+      "section": "quick",
+      "title_en": "Microstructure evolution as a game",
+      "authors": "Michael Ortiz",
+      "date": "2026-08-27",
+      "pdf": "https://arxiv.org/pdf/2608.26484v1",
+      "score": "6.0",
+      "evidence": "针对非凸历史依赖动力学的微观结构演化通用数学框架，可应用于辐照诱导缺陷演化。",
+      "tldr": "针对非凸且依赖历史与状态的耗散演化，本文提出博弈论能量-耗散框架下的全轨迹松弛方法。通过因果Volterra重构消除状态-速率一致性，将问题化为完整轨迹上的对角平衡条件，并利用消失缺陷近似与互补半连续性建立直接理论。对含非凸动力学势和局部记忆的简化剪切模型，精确算出松弛富集状态为局部历史Young测度，并构造恢复序列。所得不同速率与记忆群体的共存机制可解释动力学剪切带及Portevin-Le Chatelier效应。",
+      "tags": "query:rad-damage",
+      "abstract_en": "We develop a whole-trajectory relaxation framework for dissipative evolutions with non-convex, state- and history-dependent kinetics. The framework arises naturally from a game-theoretical formulation of energy--dissipation evolution. State--rate consistency is eliminated by causal Volterra reconstruction, reducing the problem to a diagonal equilibrium condition on complete rate trajectories. We establish a direct method based on vanishing-defect approximability, compactness, and complementary semicontinuity. The relaxation mechanism is computed exactly for a reduced simple-shear model with a non-convex kinetic potential and a local memory variable. The enriched state is a Young measure on complete local histories. We identify explicitly the sequential lower-semicontinuous envelope of the pure diagonal defect, characterize its zero set, construct pure recovery sequences for every relaxed zero, and prove existence through a frozen-best-response time discretization. The resulting coexistence of distinct rate populations with distinct memories provides a reduced mechanism for kinetic shear banding and connects naturally with negative strain-rate sensitivity and dynamic strain aging such as underlie the Portevin--Le Chatelier effect.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202608/31/2608.27722v1-dilute-limit-defect-displacements-enabled-by-brillouin-zone-sampling",
+      "section": "quick",
+      "title_en": "Dilute-Limit Defect Displacements Enabled by Brillouin-Zone Sampling",
+      "authors": "Mark E. Turiansky, John L. Lyons, Noam Bernstein",
+      "date": "2026-08-27",
+      "pdf": "https://arxiv.org/pdf/2608.27722v1",
+      "score": "6.0",
+      "evidence": "计算稀限缺陷位移的方法可直接用于辐射诱导点缺陷与团簇研究",
+      "tldr": "缺陷电子态跃迁引起晶格长程畸变，第一性原理超胞计算难以精确描述稀限位移。本文提出在小超胞中计算原子位移并转换为谐波力差，再结合不同q点声子模式展开至Born-von Kármán超胞，从而高效获得稀限原子位移。以金刚石NV中心和硅T中心为例，成功计算其发光谱和构型坐标图，并发现声学声子耦合会降低接受模式频率。该方法为缺陷稀限跃迁研究提供了关键工具。",
+      "tags": "query:rad-damage",
+      "abstract_en": "Defects and their interaction with the semiconductor host lattice play an essential role in a variety of technologies. When a defect transitions between two electronic states, the lattice distorts in response. Large displacements occur near the defect, inducing displacements on neighboring atoms, and so on, producing small displacements on atoms hundreds of Ångströms from the defect. Describing these displacements accurately is challenging for first-principles calculations due to limited supercell sizes. Here we demonstrate a procedure to efficiently obtain dilute-limit atomic displacements, using information obtained in typical modest supercells. In our approach, the atomic displacements are first obtained in a small supercell and converted into a force difference under a harmonic potential energy surface. The force difference and phonon modes at different ${\\bf q}$-points are then unfolded into the Born-von Kármán supercell to obtain the dilute-limit atomic displacements. We critically analyze the convergence behavior of the force difference and study possible electron density differences that give rise to those forces, arguing that modest supercells are sufficient for internal transitions and bound-exciton transitions. Two example applications of our approach are given: (1) we calculate the luminescence spectrum of the NV center in diamond and the T center in Si and (2) we obtain dilute-limit configuration coordinate diagrams for these defects. In particular, we find that coupling to acoustic phonon modes reduces the accepting-mode frequency in the configuration coordinate diagram. Our work provides the missing ingredients necessary to address truly dilute-limit transitions at defects.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
