@@ -1,0 +1,24 @@
+{
+  "label": "2026-09-03",
+  "date": "2026-09-03",
+  "generated_at": "2026-09-03T22:46:52",
+  "count": 1,
+  "papers": [
+    {
+      "paper_id": "202609/03/2609.01879v1-morphology-and-dynamics-of-self-interstitial-clusters-in-irradiated-nickel",
+      "section": "deep",
+      "title_en": "Morphology and Dynamics of Self-interstitial Clusters in Irradiated Nickel",
+      "authors": "Ajay Annamareddy, Ibrahim Momohjimoh, Hangyu Li, Kevin G. Field, Paul M. Voyles, Dane Morgan",
+      "date": "2026-09-01",
+      "pdf": "https://arxiv.org/pdf/2609.01879v1",
+      "score": "9.0",
+      "evidence": "研究辐照镍中自间隙原子团簇的形貌与动力学，直接对应辐照诱导点缺陷团簇演化",
+      "tldr": "辐照镍中自间隙原子团簇是早期辐射损伤的关键，但结构演化与迁移行为复杂。分子动力学模拟与高速原位透射电镜结合，揭示了从无序哑铃团簇到Frank环或完美环的转变，并证明完美环在N≥14时热力学更稳定，但其扩散势垒仅约0.02 eV且与尺寸无关，迁移机制为非刚性行继方式。原位观察显示环运动受非均匀能景观制约，明显低于固有迁移率。",
+      "tags": "query:rad-damage",
+      "abstract_en": "Self-interstitial atom (SIA) clustering is a key early step in radiation damage evolution in face-centered cubic (FCC) metals, governing defect transport, recombination, and the long-term microstructural response of irradiated alloys. We combine molecular dynamics (MD) simulations and high-speed (>1000 frames/s) in situ transmission electron microscopy (TEM) to investigate the structure, energetics, and migration dynamics of SIA clusters in FCC Ni. MD simulations show that interstitials initially form disordered dumbbell clusters that evolve into either sessile Frank loops or glissile perfect (prismatic) loops; the latter progressively reorganize into compact ordered configurations with increasing mobility. Direct construction of both loop types over a wide size range, validated against MD-relaxed structures, shows that perfect loops are thermodynamically favored over Frank loops for cluster sizes N greater than or equal to 14, where N is the number of SIAs, with the energetic advantage increasing with cluster size. Nevertheless, substantial kinetic barriers allow Frank loops to persist as metastable defects. For perfect loops, diffusion coefficients computed over N = 16 to 400 reveal a nearly size-independent migration barrier of approximately 0.02 eV, while the diffusion prefactor decreases approximately as N^(-0.54). Trajectory analysis reveals a non-rigid, row-wise relay mechanism in which the number of participating atoms increases systematically with loop size, accounting for much of the observed prefactor scaling. Sub-millisecond in situ TEM observations reveal intermittent loop motion at velocities higher than previously observed but still several orders of magnitude below the intrinsic mobilities predicted by MD, indicating migration through a heterogeneous energy landscape of mobile and pinned states.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

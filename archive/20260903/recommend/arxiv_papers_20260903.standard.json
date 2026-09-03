@@ -1,0 +1,56 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-09-03T22:45:00.777589+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 1,
+    "deep_cap": 6,
+    "deep_selected": 1,
+    "quick_candidates": 0,
+    "quick_skim_target": 11,
+    "quick_selected": 0
+  },
+  "deep_dive": [
+    {
+      "id": "2609.01879v1",
+      "source": "arxiv",
+      "title": "Morphology and Dynamics of Self-interstitial Clusters in Irradiated Nickel",
+      "abstract": "Self-interstitial atom (SIA) clustering is a key early step in radiation damage evolution in face-centered cubic (FCC) metals, governing defect transport, recombination, and the long-term microstructural response of irradiated alloys. We combine molecular dynamics (MD) simulations and high-speed (>1000 frames/s) in situ transmission electron microscopy (TEM) to investigate the structure, energetics, and migration dynamics of SIA clusters in FCC Ni. MD simulations show that interstitials initially form disordered dumbbell clusters that evolve into either sessile Frank loops or glissile perfect (prismatic) loops; the latter progressively reorganize into compact ordered configurations with increasing mobility. Direct construction of both loop types over a wide size range, validated against MD-relaxed structures, shows that perfect loops are thermodynamically favored over Frank loops for cluster sizes N greater than or equal to 14, where N is the number of SIAs, with the energetic advantage increasing with cluster size. Nevertheless, substantial kinetic barriers allow Frank loops to persist as metastable defects. For perfect loops, diffusion coefficients computed over N = 16 to 400 reveal a nearly size-independent migration barrier of approximately 0.02 eV, while the diffusion prefactor decreases approximately as N^(-0.54). Trajectory analysis reveals a non-rigid, row-wise relay mechanism in which the number of participating atoms increases systematically with loop size, accounting for much of the observed prefactor scaling. Sub-millisecond in situ TEM observations reveal intermittent loop motion at velocities higher than previously observed but still several orders of magnitude below the intrinsic mobilities predicted by MD, indicating migration through a heterogeneous energy landscape of mobile and pinned states.",
+      "authors": [
+        "Ajay Annamareddy",
+        "Ibrahim Momohjimoh",
+        "Hangyu Li",
+        "Kevin G. Field",
+        "Paul M. Voyles",
+        "Dane Morgan"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ],
+      "published": "2026-09-01T21:22:26+00:00",
+      "link": "https://arxiv.org/pdf/2609.01879v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "radiation-induced self-interstitial clusters and loop dynamics in nickel, matching point defect cluster evolution and microstructure changes",
+      "llm_evidence_cn": "研究辐照镍中自间隙原子团簇的形貌与动力学，直接对应辐照诱导点缺陷团簇演化",
+      "llm_evidence": "研究辐照镍中自间隙原子团簇的形貌与动力学，直接对应辐照诱导点缺陷团簇演化",
+      "canonical_evidence": "研究辐照镍中自间隙原子团簇的形貌与动力学，直接对应辐照诱导点缺陷团簇演化",
+      "llm_tldr_en": "Ni interstitials cluster into disordered dumbbells that evolve into Frank or glissile prismatic loops; MD plus high-speed in-situ TEM reveals loop morphology and mobility, informing radiation damage evolution in FCC metals.",
+      "llm_tldr_cn": "自间隙原子团簇是面心立方金属辐照损伤演化的关键早期步骤，但其形貌与迁移机制尚不清楚。本文结合分子动力学模拟与高速原位透射电镜，系统研究了辐照镍中自间隙团簇的结构、能量与迁移行为。模拟显示间隙原子先形成无序哑铃团簇，随后演化为不可滑移的Frank位错环或可滑移的完美棱柱位错环，后者逐步重组为迁移率更高的紧凑有序构型。研究为理解辐照合金中长期微观结构演化提供了重要依据。",
+      "llm_tldr": "自间隙原子团簇是面心立方金属辐照损伤演化的关键早期步骤，但其形貌与迁移机制尚不清楚。本文结合分子动力学模拟与高速原位透射电镜，系统研究了辐照镍中自间隙团簇的结构、能量与迁移行为。模拟显示间隙原子先形成无序哑铃团簇，随后演化为不可滑移的Frank位错环或可滑移的完美棱柱位错环，后者逐步重组为迁移率更高的紧凑有序构型。研究为理解辐照合金中长期微观结构演化提供了重要依据。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation-induced point defects and clusters",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": []
+}

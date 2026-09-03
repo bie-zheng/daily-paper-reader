@@ -1,6 +1,9 @@
 * <a class="dpr-sidebar-root-link" href="#/">首页</a>
 * <a class="dpr-sidebar-root-link dpr-sidebar-noactive-link" href="javascript:void(0)" data-dpr-hash="#/tutorial/README">使用教程</a>
 * Daily Papers
+  * 2026-09-03 <!--dpr-date:20260903-->
+    * 精读区
+      * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202609/03/2609.01879v1-morphology-and-dynamics-of-self-interstitial-clusters-in-irradiated-nickel" data-sidebar-item="{&quot;title&quot;: &quot;Morphology and Dynamics of Self-interstitial Clusters in Irradiated Nickel&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2609.01879v1-morphology-and-dynamics-of-self-interstitial-clusters-in-irradiated-nickel&quot;, &quot;score&quot;: &quot;9.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;rad-damage&quot;}], &quot;evidence&quot;: &quot;研究辐照镍中自间隙原子团簇的形貌与动力学，直接对应辐照诱导点缺陷团簇演化&quot;}">Morphology and Dynamics of Self-interstitial Clusters in Irradiated Nickel</a>
   * 2026-08-31 <!--dpr-date:20260831-->
     * 速读区
       * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202608/31/2608.26048v1-experimental-characterization-of-additively-manufactured-metallic-alloys-for-electric-propulsion-applications" data-sidebar-item="{&quot;title&quot;: &quot;Experimental Characterization of Additively Manufactured Metallic Alloys for Electric Propulsion Applications&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2608.26048v1-experimental-characterization-of-additively-manufactured-metallic-alloys-for-electric-propulsion-applications&quot;, &quot;score&quot;: &quot;7.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;rad-damage&quot;}], &quot;evidence&quot;: &quot;直接研究不锈钢结构材料在离子束辐照下的溅射损伤行为&quot;}">Experimental Characterization of Additively Manufactured Metallic Alloys for Electric Propulsion Applications</a>
