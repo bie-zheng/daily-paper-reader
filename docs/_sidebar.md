@@ -1,6 +1,9 @@
 * <a class="dpr-sidebar-root-link" href="#/">首页</a>
 * <a class="dpr-sidebar-root-link dpr-sidebar-noactive-link" href="javascript:void(0)" data-dpr-hash="#/tutorial/README">使用教程</a>
 * Daily Papers
+  * 2026-09-09 <!--dpr-date:20260909-->
+    * 精读区
+      * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202609/09/2609.08878v1-controlling-hydrogen-isotope-retention-at-helium-cavities-through-radiation-induced-segregation-in-fusion-steels" data-sidebar-item="{&quot;title&quot;: &quot;Controlling Hydrogen Isotope Retention at Helium Cavities through Radiation-Induced Segregation in Fusion Steels&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2609.08878v1-controlling-hydrogen-isotope-retention-at-helium-cavities-through-radiation-induced-segregation-in-fusion-steels&quot;, &quot;score&quot;: &quot;8.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;rad-damage&quot;}], &quot;evidence&quot;: &quot;聚变钢F82H离子辐照下溶质Cr/Ta向氦泡偏析，直接关联辐照诱导的微观组织变化与氢同位素滞留&quot;}">Controlling Hydrogen Isotope Retention at Helium Cavities through Radiation-Induced Segregation in Fusion Steels</a>
   * 2026-09-03 <!--dpr-date:20260903-->
     * 精读区
       * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202609/03/2609.01879v1-morphology-and-dynamics-of-self-interstitial-clusters-in-irradiated-nickel" data-sidebar-item="{&quot;title&quot;: &quot;Morphology and Dynamics of Self-interstitial Clusters in Irradiated Nickel&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2609.01879v1-morphology-and-dynamics-of-self-interstitial-clusters-in-irradiated-nickel&quot;, &quot;score&quot;: &quot;9.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;rad-damage&quot;}], &quot;evidence&quot;: &quot;研究辐照镍中自间隙原子团簇的形貌与动力学，直接对应辐照诱导点缺陷团簇演化&quot;}">Morphology and Dynamics of Self-interstitial Clusters in Irradiated Nickel</a>

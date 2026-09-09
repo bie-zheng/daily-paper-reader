@@ -1,0 +1,55 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-09-09T21:31:59.503382+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 1,
+    "deep_cap": 6,
+    "deep_selected": 1,
+    "quick_candidates": 0,
+    "quick_skim_target": 11,
+    "quick_selected": 0
+  },
+  "deep_dive": [
+    {
+      "id": "2609.08878v1",
+      "source": "arxiv",
+      "title": "Controlling Hydrogen Isotope Retention at Helium Cavities through Radiation-Induced Segregation in Fusion Steels",
+      "abstract": "Hydrogen isotope retention in plasma facing and structural alloys is a central materials challenge for deuterium-tritium fusion. Motivated by ion beam irradiation experiments and first principles calculations, we identify an irradiation-enabled mechanism whereby solute segregation to defect sinks enhances hydrogen isotope trapping. Triple-ion irradiation of reduced activation ferritic-martensitic steel F82H reveals pronounced segregation of Cr and Ta to cavity surfaces. Density functional theory shows that these segregants markedly increase H stability at cavities by strengthening binding energies and increasing migration barriers, leading to substantially higher attention. The effect originates from solute-tuned electronic structure: Ta promotes strong H 1s-metal d orbital hybridization, whereas Cr shifts the surface d-band toward a more favorable bonding configuration. These findings provide an atomistic link between irradiation-induced segregation and elevated-temperature hydrogen isotope retention and alloy chemistry routes to control tritium inventory in fusion environments.",
+      "authors": [
+        "Lihao Shi",
+        "Logan N. Clowers",
+        "Qing Peng",
+        "Gary S. Was",
+        "Fei Gao"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ],
+      "published": "2026-09-08T15:21:06+00:00",
+      "link": "https://arxiv.org/pdf/2609.08878v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "radiation-induced Cr/Ta segregation to He cavities in F82H steel controls hydrogen retention and cavity chemistry under irradiation",
+      "llm_evidence_cn": "聚变钢F82H离子辐照下溶质Cr/Ta向氦泡偏析，直接关联辐照诱导的微观组织变化与氢同位素滞留",
+      "llm_evidence": "聚变钢F82H离子辐照下溶质Cr/Ta向氦泡偏析，直接关联辐照诱导的微观组织变化与氢同位素滞留",
+      "canonical_evidence": "聚变钢F82H离子辐照下溶质Cr/Ta向氦泡偏析，直接关联辐照诱导的微观组织变化与氢同位素滞留",
+      "llm_tldr_en": "To address hydrogen isotope retention in fusion steels, triple-ion irradiation of F82H is combined with DFT to show radiation-induced Cr/Ta segregation to He cavities strengthens H binding and raises migration barriers, enhancing trapping and enabling alloy-based mitigation.",
+      "llm_tldr_cn": "氢同位素在氦泡腔等缺陷处的滞留是聚变结构材料面临的关键挑战。作者对F82H钢开展三束离子辐照，结合第一性原理计算发现Cr和Ta会辐照偏析到氦泡腔表面，并通过增强氢结合能、提高迁移势垒明显增加氦泡捕集氢的能力。该机制揭示了辐照诱导缺陷化学演化对氢滞留的重要影响，为低滞留聚变钢的成分优化提供依据。",
+      "llm_tldr": "氢同位素在氦泡腔等缺陷处的滞留是聚变结构材料面临的关键挑战。作者对F82H钢开展三束离子辐照，结合第一性原理计算发现Cr和Ta会辐照偏析到氦泡腔表面，并通过增强氢结合能、提高迁移势垒明显增加氦泡捕集氢的能力。该机制揭示了辐照诱导缺陷化学演化对氢滞留的重要影响，为低滞留聚变钢的成分优化提供依据。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation induced defect evolution and microstructure changes",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": []
+}

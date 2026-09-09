@@ -1,0 +1,24 @@
+{
+  "label": "2026-09-09",
+  "date": "2026-09-09",
+  "generated_at": "2026-09-09T21:33:47",
+  "count": 1,
+  "papers": [
+    {
+      "paper_id": "202609/09/2609.08878v1-controlling-hydrogen-isotope-retention-at-helium-cavities-through-radiation-induced-segregation-in-fusion-steels",
+      "section": "deep",
+      "title_en": "Controlling Hydrogen Isotope Retention at Helium Cavities through Radiation-Induced Segregation in Fusion Steels",
+      "authors": "Lihao Shi, Logan N. Clowers, Qing Peng, Gary S. Was, Fei Gao",
+      "date": "2026-09-08",
+      "pdf": "https://arxiv.org/pdf/2609.08878v1",
+      "score": "8.0",
+      "evidence": "聚变钢F82H离子辐照下溶质Cr/Ta向氦泡偏析，直接关联辐照诱导的微观组织变化与氢同位素滞留",
+      "tldr": "核聚变堆候选钢中氢同位素滞留是影响氚安全与燃料循环的关键问题。针对F82H钢开展三重离子辐照结合第一性原理计算，发现辐照诱导铬、钽向氦泡表面偏析。这些偏析原子通过增强氢与空腔的结合能并提高扩散迁移势垒，大幅提升高温氢滞留。电子结构分析表明，钽促进氢1s与金属d轨道杂化，铬调变d带中心，两者协同强化陷阱。该工作建立了辐照偏析与氢滞留的原子级关联，为合金化控制氚库存提供理论新路径。",
+      "tags": "query:rad-damage",
+      "abstract_en": "Hydrogen isotope retention in plasma facing and structural alloys is a central materials challenge for deuterium-tritium fusion. Motivated by ion beam irradiation experiments and first principles calculations, we identify an irradiation-enabled mechanism whereby solute segregation to defect sinks enhances hydrogen isotope trapping. Triple-ion irradiation of reduced activation ferritic-martensitic steel F82H reveals pronounced segregation of Cr and Ta to cavity surfaces. Density functional theory shows that these segregants markedly increase H stability at cavities by strengthening binding energies and increasing migration barriers, leading to substantially higher attention. The effect originates from solute-tuned electronic structure: Ta promotes strong H 1s-metal d orbital hybridization, whereas Cr shifts the surface d-band toward a more favorable bonding configuration. These findings provide an atomistic link between irradiation-induced segregation and elevated-temperature hydrogen isotope retention and alloy chemistry routes to control tritium inventory in fusion environments.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
