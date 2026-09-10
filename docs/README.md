@@ -6,21 +6,19 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-09-09
-- 运行时间：2026-09-09 21:33:41 UTC
+- 最新运行日期：2026-09-10
+- 运行时间：2026-09-10 21:37:11 UTC
 - 运行状态：成功
-- 本次总论文数：1
-- 精读区：1
+- 本次总论文数：0
+- 精读区：0
 - 速读区：0
 
 ### 今日简报（AI）
-今日精读1篇聚变钢材料论文：聚焦氦泡处辐射诱导偏析对氢同位素滞留的调控机制（8.0/10），是高价值研究对象。核心亮点在于揭示辐射诱导偏析可主动改变氦泡界面成分，为降低托卡马克第一壁氢滞留提供新思路。下一步建议关注该机制在辐照损伤与氚安全评估中的实验验证进展。
-- 详情：[/202609/09/README](/202609/09/README)
+> 今日无新推荐，系统未产出可展示论文。
+- 详情：[/202609/10/README](/202609/10/README)
 
 ### 精读区论文标签
-1. [Controlling Hydrogen Isotope Retention at Helium Cavities through Radiation-Induced Segregation in Fusion Steels](/202609/09/2609.08878v1-controlling-hydrogen-isotope-retention-at-helium-cavities-through-radiation-induced-segregation-in-fusion-steels)  
-   标签：评分：8.0/10、query:rad-damage
-   evidence：聚变钢F82H离子辐照下溶质Cr/Ta向氦泡偏析，直接关联辐照诱导的微观组织变化与氢同位素滞留
+- 本次无精读推荐。
 
 ### 速读区论文标签
 - 本次无速读推荐。

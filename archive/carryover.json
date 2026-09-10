@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-09-09T21:31:59.504195+00:00",
-  "updated_date": "20260909",
+  "generated_at": "2026-09-10T21:37:11.166481+00:00",
+  "updated_date": "20260910",
   "carryover_days": 9,
   "tag_states": {
     "rad-damage": {
-      "updated_date": "20260909",
+      "updated_date": "20260910",
       "carryover_days": 9,
       "items": []
     }
