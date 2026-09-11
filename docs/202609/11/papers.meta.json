@@ -1,0 +1,24 @@
+{
+  "label": "2026-09-11",
+  "date": "2026-09-11",
+  "generated_at": "2026-09-11T22:11:50",
+  "count": 1,
+  "papers": [
+    {
+      "paper_id": "202609/11/2609.07157v1-physics-constrained-inverse-estimation-of-irradiation-induced-strain-in-he-h-ion-implanted-4h-sic-using-nanoindentation-and-finite-element-modeling",
+      "section": "quick",
+      "title_en": "Physics-Constrained Inverse Estimation of Irradiation-Induced Strain in He-H Ion-Implanted 4H-SiC Using Nanoindentation and Finite Element Modeling",
+      "authors": "M. Bensalem, N. Daghbouj, J. Duchon, B. S. Li, A. T. AlMotasem, S. Magalhaes, A. Yie, F. Munnik, Xin Ou, W. J. Weber, T. Polcar",
+      "date": "2026-09-07",
+      "pdf": "https://arxiv.org/pdf/2609.07157v1",
+      "score": "6.0",
+      "evidence": "离子注入4H-SiC结构材料中的辐照诱导应变",
+      "tldr": "辐照材料亚表面应变难以定量，纳米压痕在此方面潜力尚未充分挖掘。本文针对He-H顺序离子注入的单晶4H-SiC，结合深度敏感纳米压痕、有限元建模和单纯形反演，标定由SRIM损伤剖面对数正态约束的深度相关本征应变。通过最小化模拟与实验力-位移曲线误差，反演出峰值拉伸应变约0.91，有效杨氏模量310 GPa、屈服强度16.4 GPa，并用N-PED验证应变剖面。结果表明该物理约束反演可量化核陶瓷辐照应变与残余应力，补充衍射方法。",
+      "tags": "query:rad-damage",
+      "abstract_en": "Nanoindentation is widely used to evaluate the mechanical properties of irradiated materials however its potential for quantifying irradiation induced subsurface strain remains underexplored. In this work, an integrated experimental numerical framework based on a physics constrained inverse modeling approach is employed to estimate the magnitude of a depth dependent irradiation induced strain distribution in single crystal 4H SiC following sequential He and H ion implantation. The approach combines depth sensing nanoindentation, finite element modeling FEM, and a simplex based inverse optimization routine to calibrate a physically motivated eigenstrain profile derived from ion damage simulations. The strain field is assumed to follow a lognormal distribution consistent with independently determined damage profiles SRIM, and is implemented in the FEM model through a depth dependent thermal expansion formulation. By minimizing the squared error between simulated and experimental force displacement curves, the peak tensile strain is estimated to be 0.91, accompanied by an effective Young s modulus of 310 GPa and a yield strength of 16.4 GPa. Independent validation using nano beam precession electron diffraction N PED confirms good agreement between the reconstructed and experimentally measured out of plane strain profiles in both magnitude and spatial distribution. The results demonstrate that nanoindentation, when combined with physics based inverse modeling, can provide a practical tool for quantifying irradiation-induced strain and residual stress in nuclear ceramics. This methodology offers a complementary approach to diffraction based techniques for assessing subsurface damage in ion irradiated materials relevant to advanced nuclear systems.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

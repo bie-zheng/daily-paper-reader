@@ -1,0 +1,62 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-09-11T22:10:19.414618+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 1,
+    "quick_skim_target": 11,
+    "quick_selected": 1
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2609.07157v1",
+      "source": "arxiv",
+      "title": "Physics-Constrained Inverse Estimation of Irradiation-Induced Strain in He-H Ion-Implanted 4H-SiC Using Nanoindentation and Finite Element Modeling",
+      "abstract": "Nanoindentation is widely used to evaluate the mechanical properties of irradiated materials however its potential for quantifying irradiation induced subsurface strain remains underexplored. In this work, an integrated experimental numerical framework based on a physics constrained inverse modeling approach is employed to estimate the magnitude of a depth dependent irradiation induced strain distribution in single crystal 4H SiC following sequential He and H ion implantation. The approach combines depth sensing nanoindentation, finite element modeling FEM, and a simplex based inverse optimization routine to calibrate a physically motivated eigenstrain profile derived from ion damage simulations. The strain field is assumed to follow a lognormal distribution consistent with independently determined damage profiles SRIM, and is implemented in the FEM model through a depth dependent thermal expansion formulation. By minimizing the squared error between simulated and experimental force displacement curves, the peak tensile strain is estimated to be 0.91, accompanied by an effective Young s modulus of 310 GPa and a yield strength of 16.4 GPa. Independent validation using nano beam precession electron diffraction N PED confirms good agreement between the reconstructed and experimentally measured out of plane strain profiles in both magnitude and spatial distribution. The results demonstrate that nanoindentation, when combined with physics based inverse modeling, can provide a practical tool for quantifying irradiation-induced strain and residual stress in nuclear ceramics. This methodology offers a complementary approach to diffraction based techniques for assessing subsurface damage in ion irradiated materials relevant to advanced nuclear systems.",
+      "authors": [
+        "M. Bensalem",
+        "N. Daghbouj",
+        "J. Duchon",
+        "B. S. Li",
+        "A. T. AlMotasem",
+        "S. Magalhaes",
+        "A. Yie",
+        "F. Munnik",
+        "Xin Ou",
+        "W. J. Weber",
+        "T. Polcar"
+      ],
+      "primary_category": "physics.app-ph",
+      "categories": [
+        "physics.app-ph"
+      ],
+      "published": "2026-09-07T07:51:47+00:00",
+      "link": "https://arxiv.org/pdf/2609.07157v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "irradiation-induced strain in ion-implanted 4H-SiC structural material",
+      "llm_evidence_cn": "离子注入4H-SiC结构材料中的辐照诱导应变",
+      "llm_evidence": "离子注入4H-SiC结构材料中的辐照诱导应变",
+      "canonical_evidence": "离子注入4H-SiC结构材料中的辐照诱导应变",
+      "llm_tldr_en": "Nanoindentation can probe irradiated materials but rarely quantifies subsurface irradiation strain. This work couples depth-sensing nanoindentation, finite-element modeling, and inverse optimization to recover a depth-dependent eigenstrain profile in He-H implanted 4H-SiC.",
+      "llm_tldr_cn": "纳米压痕常用于评估辐照材料的力学性能，但量化辐照诱导的亚表面应变仍未被充分挖掘。本文提出物理约束的反演建模框架，将深度敏感纳米压痕、有限元建模与单纯形反演优化相结合，对顺序He和H离子注入的单晶4H-SiC进行标定。通过反演由离子注入推导的本征应变剖面，估计出随深度变化的辐照诱导应变分布。该方法为辐照损伤结构材料中应变与损伤的定量表征提供了可迁移的实验-数值手段。",
+      "llm_tldr": "纳米压痕常用于评估辐照材料的力学性能，但量化辐照诱导的亚表面应变仍未被充分挖掘。本文提出物理约束的反演建模框架，将深度敏感纳米压痕、有限元建模与单纯形反演优化相结合，对顺序He和H离子注入的单晶4H-SiC进行标定。通过反演由离子注入推导的本征应变剖面，估计出随深度变化的辐照诱导应变分布。该方法为辐照损伤结构材料中应变与损伤的定量表征提供了可迁移的实验-数值手段。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation damage mechanisms in structural materials",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

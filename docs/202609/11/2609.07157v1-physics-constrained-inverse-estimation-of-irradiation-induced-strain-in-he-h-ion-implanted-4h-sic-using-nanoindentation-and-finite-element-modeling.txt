@@ -1,0 +1,496 @@
+Title: 2609.07157v1.pdf
+
+URL Source: https://arxiv.org/pdf/2609.07157v1
+
+Published Time: Wed, 09 Sep 2026 01:58:37 GMT
+
+Number of Pages: 34
+
+Markdown Content:
+1
+
+Physics-Constrained Inverse Estimation of Irradiation-Induced Strain in He-H Ion-Implanted 4H-SiC Using Nanoindentation and Finite Element Modeling 
+
+M. Bensalem a*, N. Daghbouj a*,  J.Duchoň b, B.S.  Li c, A.T.  AlMotasem a, S. Magalhãe sd, A. Yi e,
+
+F.  Munnik f, Xin  Ou e, W.J. Weber g, T.  Polcar a, h
+
+> a
+
+Department of Control Engineering, Faculty of Electrical Engineering, Czech Technical University in Prague, Technická 2, 160 00 Prague 6, Czechia 
+
+> b
+
+Institute of Physics of the Czech Academy of Sciences, Na Slovance 1999/2, 182 21 Prague 8, Czechia 
+
+> c
+
+State Key Laboratory for Environment-friendly Energy Materials, Southwest University and Technology, Mianyang, Sichuan 621010, China 
+
+> d
+
+IPFN, Instituto Superior Técnico, Universidade de Lisboa, Estrada Nacional 10, 2695 -066 
+
+Bobadela LRS, Portugal 
+
+> e
+
+State Key Laboratory of Materials for Integrated Circuits, Shanghai Institute of Microsystem and Information Technology, Chinese Academy of Sciences, Shanghai 200050, China 
+
+> f
+
+Helmholtz-Zentrum Dresden-Rossendorf, Institute of Ion Beam Physics and Materials Research, Bautzner Landstr. 400, 01328 Dresden, Germany 
+
+> g
+
+Department of Materials Science & Engineering, University of Tennessee, Knoxville, TN 37996, USA 
+
+> h
+
+School of Engineering, University of Southampton, Southampton SO17 1BJ, United Kingdom 2
+
+Abstract 
+
+Nanoindentation is widely used to evaluate the mechanical properties of irradiated materials, however, its potential for quantifying irradiation-induced subsurface strain remains underexplored. In this work, an integrated experimental-numerical framework based on a physics-constrained inverse modeling approach is employed to estimate the magnitude of a depth-dependent irradiation-induced strain distribution in single-crystal 4H-SiC following sequential He and H ion implantation. The approach combines depth-sensing nanoindentation, finite element modeling (FEM), and a simplex-based inverse optimization routine to calibrate a physically motivated eigenstrain profile derived from ion damage simulations. 
+
+The strain field is assumed to follow a lognormal distribution consistent with independently determined damage profiles (SRIM), and is implemented in the FEM model through a depth-dependent thermal expansion formulation. By minimizing the squared error between simulated and experimental force-displacement curves, the peak tensile strain is estimated to be ~0.91%, accompanied by an effective Young’s modulus of 310 GPa and a yield strength of 16.4 GPa. 
+
+Independent validation using nano-beam precession electron diffraction (N-PED) confirms good agreement between the reconstructed and experimentally measured out-of-plane strain profiles in both magnitude and spatial distribution. The results demonstrate that nanoindentation, when combined with physics-based inverse modeling, can provide a practical tool for quantifying irradiation-induced strain and residual stress in nuclear ceramics. This methodology offers a complementary approach to diffraction-based techniques for assessing subsurface damage in ion-irradiated materials relevant to advanced nuclear systems. 
+
+Keywords: 4H-SiC, Ion implantation, Nanoindentation, Finite element modeling, Irradiation-induced strain, Eigenstrain modeling.  
+
+> *
+
+Corresponding authors:  e-mail:  mohamed.bensalem@cvut.cz  ; daghbnab@fel.cvut.cz 3
+
+I. INTRODUCTION 
+
+In advanced fusion nuclear reactors, structural components such as first walls, breeder blankets, and plasma-facing materials are continuously exposed to high-energy neutrons, ions, and transmutation products. This intense irradiation environment induces complex microstructural damage, leading to changes in mechanical properties, dimensional stability, and long-term structural integrity [1-3]. Over time, this environment leads to profound microstructural transformations [4, 5]. Under such extreme conditions, preserving the mechanical integrity, operational safety, and long-term performance of these materials represents a critical challenge. Thus, materials with exceptional properties for the extreme environment of irradiation and high temperature must be used. Among ceramic materials, silicon carbide (SiC) stands out as one of the most promising for use as a structural component in a fusion environment. Its high thermal conductivity, corrosion resistance, and radiation tolerance make it an attractive candidate for cladding and structural applications. 
+
+When neutrons or heavy ions displace atoms from their lattice sites, they generate a complex array of defects: vacancies, interstitials, dislocation loops, voids, bubbles, and stacking faults [6-14], which evolve and interact, significantly altering the mechanical integrity of the material [15, 16]. In addition, these processes are often followed by macroscale effects, such as cracks, blistering, exfoliation, hardening, and embrittlement [17-20]. A main contributor to irradiation damage is helium and hydrogen production by transmutation reactions or their introduction into the plasma-facing environment. These phenomena are closely linked to the build-up and evolution of internal strain and stress fields, which are the primary driving forces for defect growth, coalescence, and material failure. Understanding and quantifying irradiation-induced strain and stress fields in candidate materials is therefore critical for predicting their performance and lifetime under reactor-relevant conditions. 
+
+Strain in irradiated materials has traditionally been evaluated using high-resolution X-ray diffraction (XRD) and transmission electron microscopy (TEM), which provide atomic-scale insight into lattice distortions and defect structures [21-26]. While effective, these techniques are costly, time-intensive, and limited in capturing subsurface or volumetric strain distribution. Furthermore, despite the broad adoption of these methods, few studies have explored alternative 4
+
+pathways for strain quantification in ion-irradiated materials using non- or semi-destructive approaches. 
+
+Nanoindentation is widely used to assess irradiation-induced hardening in nuclear materials; however, its potential for quantitative reconstruction of subsurface strain fields remains largely unexplored. Because indentation response is sensitive not only to intrinsic mechanical properties but also to pre-existing residual stress, it offers a promising pathway for indirect strain quantification when combined with physics-based modeling. To address these challenges, we propose an integrated experimental-numerical framework that combines depth-sensing nanoindentation, finite element modeling (FEM), and a simplex-based inverse optimization scheme to estimate irradiation-induced strain fields in ion-implanted ceramics. While inverse FEM approaches have been widely applied to extract mechanical properties from nanoindentation data, their application to quantitative reconstruction of subsurface irradiation-induced strain profiles, validated independently by high-resolution strain mapping techniques, remains limited, 
+
+particularly for brittle ceramics such as SiC. The present work extends existing inverse indentation methodologies by incorporating a physically motivated strain profile derived from ion-damage distributions and by validating the strain estimation against nano-beam precession electron diffraction (N-PED). This work establishes a physics-informed inverse methodology for estimating the magnitude of irradiation-induced strain fields, constrained by independently characterized damage profiles and validated using N-PED measurements. 
+
+II. MATERIALS & Methods 
+
+A. Material and Irradiation Conditions 
+
+The investigated material was a commercial single-crystal 4H-SiC wafer purchased from Goodfellow Ltd. The crystal orientation was (0001), with the c-axis normal to the polished surface. All irradiations and nanoindentation experiments were performed on the (0001) surface. The sample was first irradiated with helium (He) ions at an energy of 110 keV to a fluence of 1×10 16 
+
+ions/cm² at an elevated temperature of 800 °C. Subsequently, hydrogen (H) ions were implanted at 130 keV to the same fluence of 1×10 16 ions/cm² at room temperature. Sequential implantation with helium and hydrogen was intentionally employed to replicate key aspects of neutron-induced transmutation damage in nuclear environments. Helium implantation at elevated temperature (800 °C) promotes defect mobility, clustering, and partial dynamic annealing, mimicking in-5
+
+reactor conditions. Subsequent hydrogen implantation at room temperature enables hydrogen retention and interaction with pre-existing helium-stabilized defect structures. This sequential protocol reproduces more realistic defect populations than single-ion irradiation and has been widely adopted to study synergistic He-H effects in nuclear materials [27, 28]. 
+
+The average displacement damage in the top 800 nm of the sample was estimated using the Stopping and Range of Ions in Matter (SRIM 2013) code [29], employing full-cascade simulations [30] with displacement threshold energies of 20 eV for carbon and 35 eV for silicon [31, 32]. These threshold energies correspond to the minimum energy required to permanently displace a target atom from its lattice site. The displacement damage, expressed in displacements per atom (dpa), was calculated as 
+
+𝑑𝑝𝑎 = 𝐷 φ 𝜌𝑎𝑡  (1) 
+
+where D is the total number of total displacements (Si vacancies + C vacancies + replacement collision events) per unit length, φ is the total fluence, and ρat the atomic number density of the material. This implantation fluence was carefully selected to achieve a peak damage level of approximately 0.18 displacements per atom (dpa), below the amorphization threshold of 0.4 dpa reported in previous studies [33, 34]. The depth profiles of He and H ion distributions and their associated dpa values were validated using Elastic Recoil Detection Analysis (ERDA). The samples were analyzed using ERDA with a 43 MeV Cl⁷⁺ ion beam. The incident beam was directed at an angle of 75° relative to the sample normal, with a scattering angle of 30°. The analyzed area was approximately 2 × 2 mm². Recoil atoms and scattered ions were detected using a Bragg Ionization Chamber (BIC), which provides both energy measurement and atomic number (Z) identification of the detected particles. To specifically detect hydrogen and helium recoils, a separate solid-state detector was positioned at a scattering angle of 40°. This detector was placed behind a 25 μm Kapton foil, which serves to block scattered ions and heavier recoil atoms. However, the presence of the Kapton foil reduces depth resolution due to energy loss straggling. The ion beam dose, reported in arbitrary units, was monitored using a gold-coated rotating vane (rotating at 1 Hz) and a solid-state detector that recorded backscattered Cl ions from the gold surface. All events from the BIC, H/He detector, and rotating vane were recorded in list mode, allowing temporal analysis of changes occurring during measurement, particularly the loss of light elements such as hydrogen under ion bombardment. To assess elemental loss, especially of H and 6
+
+He, the list-mode data were used to generate plots of total recoil counts versus ion dose. These curves were then fitted and extrapolated back to zero dose to estimate the initial element content before significant ion-induced loss occurred. The data were analyzed using NDF version 9.6i [35]. List-mode files were processed to extract ERDA spectra for carbon (C), oxygen (O), silicon (Si), and the combined hydrogen and helium signal (H+He), along with the Cl backscattering spectrum on silicon. All spectra were simultaneously fitted using the NDF software. The analysis involves building a detailed sample model, from which simulated spectra are generated and iteratively fitted to the experimental data. The outcome includes best-fit spectra, the refined sample model, and depth concentration profiles of each element as a function of depth, directly derived from the experimental spectra. 
+
+As shown in Fig. 1, the peak concentrations of He and H were located at depths of approximately 570 nm and 670 nm, respectively, with maximum concentrations of ~0.8 at.% for both species. The projected ion ranges are slightly deeper than the peak radiation damage region. As ions penetrate the material, they progressively lose energy through both electronic and nuclear stopping processes. The maximum displacement damage generally occurs slightly before the ions come to rest because nuclear stopping, and therefore defect production, is highest while the ions still possess sufficient kinetic energy to efficiently displace atoms. Near the end of their trajectory, the ions rapidly lose energy and eventually stop, contributing little additional damage. Consequently, the projected ion range is typically located slightly deeper than the dpa peak. The implantation fluence of  1 × 10 16 ions/cm 2 for He corresponds to ~0.17 dpa, whereas H implantation produces only ~0.01 dpa. Consequently, the overall damage profile is dominated by He-induced defects. The good agreement between the measured ERDA profiles and SRIM simulations confirms the reliability of the implantation and characterization procedures. 7
+
+FIG. 1. (Left axis) Measured concentration profile obtained using SRIM simulation and ERDA in 4H-SiC after sequential irradiation with He (110 keV, 1×10 16 ions/cm² at 800 °C) and H (130 keV, 1×10 16 ions/cm² at room temperature). (Right axis) Corresponding displacement damage (dpa) simulated by SRIM. 
+
+B. Transmission Electron Microscopy and Strain Mapping 
+
+Transmission electron microscopy (TEM) was employed to investigate the microstructure of the 4H-SiC sample. Cross-sectional TEM samples were prepared using the FIB lift-out technique on an FEI Helios NanoLab 660 dual-beam workstation equipped with a Ga ion source operating at up to 30 kV. Initial trenches were milled at a current of 9 nA, followed by cross-sectional cleaning at 2 nA. The lamella was then extracted, transferred to a copper TEM grid, and polished using a sequential reduction of ion energy from 30 kV to 2 kV, with corresponding beam currents ranging from 20 nA to 7 pA. Subsequent imaging and strain mapping were performed using an FEI Tecnai TF20 X-Twin TEM operated at 200 kV. Both High-Angle Annular Dark-Field (HAADF) and Bright-Field (BF) imaging modes were used for structural analysis. For strain characterization, the microscope was equipped with a NanoMEGAS DigiSTAR system and controlled via the Topspin software package [36]. N-PED was employed using a 20 μm condenser aperture to produce a nearly parallel beam, yielding sharp diffraction spots suitable for quantitative analysis. In the N-PED setup, a precessed electron beam with a step size of 5 nm and a beam diameter of ~4 nm was scanned across the region of interest. Diffraction patterns were acquired at each point using a 1° precession angle and a 20 ms exposure time. This high-resolution scan allowed mapping of elastic strain fields across irradiated regions. The strain and orientation maps were generated using 8
+
+Topspin’s cross-correlation algorithm, which identifies diffraction spot shifts with sub-pixel accuracy. The two-dimensional elastic strain tensor was calculated by referencing each diffraction pattern to one obtained from an unirradiated, nominally strain-free region (ε zz = 0) [37, 38], carefully selected to avoid damage artifacts. NanoMEGAS ASTAR system enabled the automated generation of orientation and phase maps with nanometer-scale resolution [39, 40]. In collaboration with AppFive, NanoMEGAS developed the “AutoSTRAIN” acquisition and analysis module, which was used here to achieve high-precision strain quantification [41-44]. The use of beam precession minimizes dynamical scattering effects and thickness-induced artifacts, enhances the visibility of diffraction spots, and improves the accuracy and spatial resolution of strain measurements [45-47]. Additionally, virtual bright-field STEM images were reconstructed by digitally placing an aperture over the central diffraction spot of each pattern, providing high-contrast visualization of the scanned regions. 
+
+C. Nanoindentation Experiments 
+
+The nanoindentation technique [48, 49] has been widely employed to investigate mechanical property changes at small scales, particularly those resulting from microstructural changes [50-56] or within coatings [57, 58]. The technique consists of pressing a hard indenter tip (e.g., Berkovich, Vickers, spherical, or conical), typically diamond, into the material surface under controlled loading and unloading conditions. In this study, nanoindentation was employed to evaluate irradiation-induced strain in single-crystal 4H-SiC through changes in hardness and elastic modulus after irradiation. Mechanical properties were determined from the load-displacement curves using the Oliver-Pharr method (O-P), in which the unloading stiffness is used to calculate the contact depth, contact area, hardness, and Young’s modulus. To accurately probe irradiation effects, the damaged region (Fig. 1) must lie within the indentation-induced plastic zone. Therefore, indentation was first performed in quasi-static partial unload mode, consisting of 20 load-hold-partial unload cycles with a maximum load of 350 mN. This approach enables depth-dependent measurements of hardness and Young’s modulus, allowing identification of the depth at which the plastic zone fully encompasses the irradiated region. Based on this analysis, quasi-static trapezoidal mode tests were subsequently performed. Nanoindentation experiments were carried out at room temperature on both virgin and irradiated samples using a diamond Berkovich indenter tip. For each sample and testing mode, 12 indents spaced 20 μm apart were performed to ensure statistical reliability and avoid overlap of neighboring plastic zones. A diamond Berkovich 9
+
+indenter tip with a radius of approximately 150 nm was used. The indenter elastic properties were taken as those of diamond, with  𝐸 𝑖𝑛𝑑 = 1141 GPa, 𝜈 = 0.07 .
+
+D. Finite element modeling 
+
+We have developed a simplified 2D axisymmetric model within ABAQUS®, which is computationally efficient and valid for reproducing the force-displacement response, as it approximates the Berkovich tip (used experimentally) as a cone with a semi-apex angle of 70.3°, thereby preserving the projected contact area. Although a Berkovich indenter produces a threefold asymmetric stress field, the 2D axisymmetric conical approximation with an equivalent projected contact area reproduces the force-displacement response with an error of approximately 3% relative to the full 3D model [57, 58]. Therefore, employing a conical indenter with a semi-apex angle of 70.3° enables equivalent indentation conditions. Since the present inverse approach relies on fitting the global force-displacement response rather than resolving local slip asymmetry, the axisymmetric approximation provides an optimal balance between computational efficiency and accuracy. Importantly, the validity of this simplification is assessed through independent experimental validation of the estimated strain using N-PED. The mechanical properties of the indenter are those of diamond (E ind = 1141 GPa, ν = 0.07), and the sample is assumed to behave as a perfect elasto-plastic material (no strain hardening is introduced). The boundary conditions are applied as follows: the bottom and lateral surfaces are fully fixed in the directions normal to the surfaces as well as in rotation. 
+
+The analysis consisted of two sequential steps. In the first step, irradiation-induced strain and the associated residual stress were simulated. The second step involved simulating the indentation, incorporating the residual stress field obtained from the first step as the initial state. 
+
+The formation of defects such as vacancies, interstitials, and dislocation loops is challenging to model directly using FEM, as the characteristic size of these irradiation-induced features is on the nanometer scale. Accurately resolving such small-scale phenomena requires an extremely refined mesh, which significantly increases computational cost and may introduce singularities that hinder convergence. To overcome these challenges, an equivalent strain was introduced via thermal expansion to replicate the effects of irradiation-induced strain (eigenstrain) and the resulting residual stress [59]. In this approach, the thermal expansion coefficient is defined as a function of 10 
+
+the vertical coordinate ( y) so that the resulting strain distribution reproduces the shape of the dpa profile. This method will be further discussed in the Results & Discussion section. 
+
+In the second step, the indentation process was simulated, and the indenter tip was introduced with a maximum penetration depth corresponding to the experimentally measured value. The displacement was controlled using an amplitude curve that describes the experimental displacement percentage as a function of time, with a strain rate of 0.05 s⁻¹. The mesh is composed of axisymmetric bilinear quadrilateral elements with reduced integration (CAX4R). A refined mesh was used near the contact zone, with element sizes as small as 20 nm, and gradually coarsened to 300 nm elsewhere to balance accuracy and computational time (Fig. 2). The contact between the indenter and the sample surface was modeled as surface-to-surface contact, with the indenter surface defined as the master surface and the top surface of the sample defined as the slave surface. The interaction properties were defined without specifying normal behavior, while tangential behavior was modeled using a penalty formulation with a friction coefficient of 0.2. 
+
+Preliminary studies were conducted to examine the influence of sample dimensions, the friction coefficient, and tip radius (tip bluntness). These studies showed that a friction coefficient ranging from 0 to 1 had no significant effect on the simulation results. However, the sample dimensions must be at least 7 μm (Here, a sample size of 15 μm × 15 μm was used). Furthermore, an optimization process pre-determined the effective tip radius to be 720 nm, which is in the same order of magnitude as the 809 nm found by [55]. In the present 2D axisymmetric FEM representation, the indenter effective radius was treated as an effective contact-geometry parameter used to compensate for the simplified axisymmetric approximation of the real 3D indenter geometry and for near-surface effects such as roughness and sink-in. The modeled indentation is depicted in Fig. 2. Instead of discretizing the irradiated region into artificial layers with stepwise material properties, a continuous depth-dependent eigenstrain field was introduced. This approach avoids numerical discontinuities at layer interfaces and more faithfully represents the gradual damage evolution predicted by SRIM and observed experimentally. The depth-dependent strain implicitly captures heterogeneous damage without requiring multiple material definitions. 
+
+Within this modeling framework, the use of an elasto-perfectly plastic material model represents a simplified constitutive description. This approximation is justified in the present context because the inverse analysis relies primarily on fitting the global force-displacement response rather than 11 
+
+capturing detailed post-yield behavior. Previous nanoindentation-finite element studies on irradiated SiC and related covalent ceramics support this approach. In particular, SiC has been modeled as a perfectly elasto-plastic material, with results showing that strain hardening has a negligible influence on the simulated force-displacement response [60]. Similarly, it has been demonstrated in [61] that, for covalent materials such as SiC, the nanoindentation response can be accurately reproduced using only the Young’s modulus and yield stress within a perfect elasto-plastic framework. These findings indicate that strain hardening plays a minor role in the indentation behavior of such materials. Therefore, the perfectly elasto-plastic approximation provides an appropriate and physically justified balance between model simplicity, computational efficiency, and accuracy for inverse parameter identification. 
+
+FIG. 2. FEM of the nanoindentation; applied boundary conditions, refined mesh with element sizes ranging from 300 nm to 20 nm, comprising a total of 21890 nodes (21270 in the sample) and 21538 linear quadrilateral elements of type CAX4R (20880 in the sample). The computation time for a single simulation is approximately 57 s for the thermal-induced strain simulation (equivalent to irradiation-induced strain) and 190 s for the indentation step, resulting in a total time of around 4 minutes per iteration. The full optimization process required approximately 4 hours. 12 
+
+III. RESULTS & Discussion 
+
+A. Irradiation-induced hardening 
+
+Figure 3 presents the averaged force-displacement curves for virgin and He+H-irradiated 4H-SiC. Each curve was generated by averaging the data from 12 independent indentations; these mean curves were then used as the primary data source for extracting mechanical properties, such as hardness, Young’s modulus, and the strain amplitude. 
+
+FIG. 3. Average force-displacement curve for virgin and He+H-irradiated 4H-SiC with 1×10 16 
+
+ions/cm 2 at a given maximum load of 350 mN and a strain rate of 0.05 s -1 .
+
+The average force-displacement curves for both virgin and irradiated samples show a displacement shift at equivalent load values (350 mN). The irradiated sample exhibits a lower penetration depth, indicating that irradiation increased the material's resistance to indentation and thus its hardness. In order to quantify this hardness increase due to irradiation, the hardness and Young’s modulus of both samples have been calculated using the O-P method for each partial unloading step and plotted versus the depth as shown in Fig. 4a. To determine a representative bulk hardness value, the data were analyzed using the Nix-Gao model, which accounts for the indentation size effect (ISE) by relating hardness to penetration depth. The Nix-Gao model describes hardness as a function of indentation depth, incorporating the characteristic length h * and the bulk hardness H 0 as key parameters, expressed as follows: 13 
+
+𝐻 = 𝐻 0√1 + ℎ∗
+
+ℎ𝑐 
+
+(2) 
+
+The fitting was performed in a region sufficiently far from the sample’s surface to avoid scattering effects, while also avoiding depths where substrate influence becomes dominant, as shown in Fig. 4b. The obtained values of bulk hardness are H 0,irr = 34.23 GPa and H 0,vir = 32.33 GPa. Deviations at shallow depths are attributed to surface effects and residual stress, which limit the applicability of the classical Nix-Gao model in irradiated ceramics. 
+
+According to Nix-Gao, the hardness increase due to irradiation is found to be ΔH = H0,irr - H0,vir ≈ 1.9 GPa at an indentation depth corresponding to a maximum load of 35 mN. This depth corresponds to the point where the plastic zone fully encompasses the region of maximum damage, and the indentation response sensitivity to damage is highest. 
+
+The observed hardening is attributed to irradiation-induced defects, such as interstitials, vacancies, and dislocation loops, which hinder dislocation motion during nanoindentation. These defects also contribute to localized out-of-plane strain, consistent with previous findings [62], further confirming the coupled mechanical and microstructural evolution under ion implantation. 
+
+FIG. 4. (a) Average hardness H avg (left axis) and Young’s modulus E avg (right axis) obtained using the O-P method as a function of penetration depth, (b) Nix-Gao model for virgin and He+H-irradiated 4H-SiC, (c) average force-displacement curves for virgin and irradiated samples obtained under quasi-static trapezoidal mode at a maximum load of 35 mN and a strain rate of 0.05 s⁻¹. 14 
+
+B. Modeling and simulations 
+
+To achieve the goal of this study, namely to estimate the irradiation-induced strain along with the changes in mechanical properties resulting from irradiation, we begin by mathematically formulating the dpa profile. This approach allows the simulated profile to be expressed using constants derived from a mathematical function. The profile exhibits an asymmetric Gaussian shape, so we have tested several well-established models, including Gaussian, skewed Gaussian, lognormal, and polynomial distributions (Table S1). 
+
+The results of the fitting using the Levenberg-Marquardt algorithm in MATLAB ® are shown in Fig. 5a. The choice of model is primarily based on minimizing the number of parameters describing the profile, since it is efficient to deal with as few parameters as possible to describe a function. The lognormal model provides the minimum fitting error relative to the simulated dpa profile. Table 1 shows that the lognormal model provides the best compromise between fitting accuracy and model simplicity. 
+
+Table. 1 : Errors and Iteration numbers for the proposed fitting models. 
+
+Model  Parameters  Error  Iteration 
+
+Gaussian  3 0.0322  24 
+
+Skewed Gaussian  4 0.0088  37 
+
+Lognormal  3 0.0051  23 
+
+Polynomial  6 0.0023  42 
+
+The estimated parameters are:  𝑐 1 = 0.1625 , 𝑐 2 = −2.1129 , and  𝑐 3 = 0.7359 . These parameters are respectively linked to the amplitude  𝐴 , the position of the maximum  𝑚  and the standard deviation  𝜎  as described by the following relationship: 
+
+{𝑐 1 = 𝐴 𝑐 2 = 𝑙𝑜𝑔( 𝑦 𝑛 − 𝑚) 𝑐 3 = ( 1√2 ) 𝑠𝑖𝑛ℎ −1 ( 𝜎 𝑒 𝑐 2 )
+
+(3) 
+
+where yn denotes the final depth point of the profile (0.618 m), which depends on the irradiation condition. In this study, yn was fixed since the irradiation conditions were kept constant. The depth of the strain peak was fixed based on independently measured ERDA and SRIM profiles. The coefficients  𝐴 , 𝑚  and  𝜎  are given as follows:  𝐴 = 0.1625 , 𝑚 = 0.5020  m, and  𝜎 = 0.1498  m. 15 
+
+The dpa profile represents the material damage in terms of displacement per atom, peaking at 0.18 as shown in Fig. 1. However, the primary objective is to estimate the corresponding irradiation-induced strain resulting from this damage. To evaluate the feasibility of this approach, sensitivity analyses were performed on the model's three parameters. The results indicate that while nanoindentation is sensitive to each parameter individually, the force-displacement response exhibits non -uniqueness. Specifically, similar curves can be obtained by different combinations of 
+
+𝑐 1(𝐴 ),  𝑐 2(m), and  𝑐 3(𝜎 ); for example, a broader distribution (higher  𝜎 ) with a fixed amplitude can yield a response that is indistinguishable from a narrower distribution (smaller  𝜎 ) with an increased amplitude. Furthermore, a functional dependency exists between  𝑐 3(𝜎 ) and  𝑐 2(m), complicating the simultaneous estimation of all three variables. 
+
+This highlights the intrinsic non-uniqueness of the inverse analysis when relying solely on nanoindentation data. The present approach addresses this limitation by introducing physically motivated constraints on the strain profile, derived from independent damage characterization. As a result, the inverse analysis is effectively reduced to a parameter identification problem rather than a full-field reconstruction. It is important to emphasize that the present approach does not aim to reconstruct the full strain profile independently of nanoindentation data. Instead, the profile shape is constrained using independently measured and simulated damage distributions (SRIM), and only the strain magnitude is identified through inverse analysis. 
+
+To overcome this ill-posed inverse analysis, we assume that the depth-dependent strain follows the characteristic shape of the irradiation-induced damage profile, such that both share the same peak position m and standard deviation  𝜎 . Under this assumption, reconstruction of the strain field is reduced to determining a single free parameter, namely, the strain amplitude  𝐴 . The strain is predominantly governed by the accumulation of point defects and small defect clusters, leading to local volumetric swelling. Due to limited long-range defect mobility under these conditions, the spatial distribution of strain closely follows the primary damage profile predicted by ion implantation simulations, as shown in previous studies [21, 22, 63]. 16 
+
+FIG. 5. (a) Fitting of the dpa profile obtained from SRIM using different models, (b) depth-dependent irradiation-induced eigenstrain field (THE22) generated within the finite element mesh shown in Fig. 2 using the UEXPAN subroutine prior to nanoindentation simulation.. 
+
+At this stage, a sensitivity study of the amplitude with respect to the indentation response was conducted. The lognormal distribution with coefficients  𝑐 2 and  𝑐 3 obtained from the fit of the dpa profile along with various strain magnitudes was introduced, ranging from 0.1% (0.001) to 4% (0.04). The resulting strain profiles are illustrated in Fig. 6a. The strain was fed into the model using the Fortran subroutine UEXPAN, which receives the nodal coordinates from an input field containing the y-values and utilizes them to compute the strain increment over a time increment as a function of depth. This increment is then returned to ABAQUS ® for simulation. The mathematical expression for the strain profile is defined as follows: 
+
+Δ𝜀 𝑖𝑟𝑟 ⇔ Δ𝜀 𝑡ℎ = 𝜅 × Δ𝑇  (4) 
+
+Δ𝜀 𝑖𝑟𝑟 : Irradiation-induced strain increment (-). 
+
+Δ𝜀 𝑡ℎ : Equivalent thermal strain increment (-). 
+
+Δ𝑇 : Temperature increment ( 𝐾 ). 
+
+𝜅 : Thermal expansion coefficient as a function of y.
+
+Since the strain has the shape of a lognormal distribution along the irradiation direction ( 𝑦 ), the thermal expansion should have this profile as the temperature increment is constant. 
+
+Δ𝜀 𝑡ℎ = 𝑓(𝑦) ⟹ 𝜅 = 𝜅 0 × 𝑐 1 × 𝑒 −(log(𝑦 𝑛 −𝑦)−𝑐 2)2 
+
+> 2𝑐 32
+
+(5) 17 
+
+𝜅 0 is taken as  4.5 × 10 −6 𝐾 −1 .
+
+In this case,  Δ𝑇  is chosen as the inverse of  𝜅 0 (2.2222 × 10 5) to obtain a strain distribution controlled by the lognormal law as follows: 
+
+Δ𝜀 𝑡ℎ = 𝜅 0 × Δ𝑇 ⏟
+
+> 1
+
+× 𝑐 1 × 𝑒 −(log(𝑦 𝑛 −𝑦)−𝑐 2)2 
+
+> 2𝑐 32
+
+(6) 
+
+To improve numerical convergence,  Δ𝑇  is taken to be  222.22 𝐾 ; thus the strain is given by: 
+
+Δ𝜀 𝑡ℎ = 𝜅 0 × Δ𝑇 × 𝑐𝑜𝑒𝑓 ⏟
+
+> 1
+
+× 𝑐 1 × 𝑒 −(log(𝑦 𝑛 −𝑦)−𝑐 2)2 
+
+> 2𝑐 32
+
+(7) 
+
+With  𝑐𝑜𝑒𝑓 = 10 3, where,  𝑐 1 is provided to the UEXPAN subroutine and  𝜅 0 × Δ𝑇 × 𝑐𝑜𝑒𝑓 × 𝑒 −(log(𝑦𝑛−𝑦)−𝑐2 )22𝑐3 2 is coded within it. This expression allows the irradiation-induced strain to be modeled as an equivalent thermally induced-strain, defined by a thermal expansion coefficient  𝜅 
+
+that is a function of depth y.
+
+FIG. 6. (a) Strain profiles with different amplitudes  𝑐 1 ranging from 0.1% to 4% and (b) corresponding force-displacement curves obtained from FEM simulations, (c) squared error between experimental and simulated indentation force values as a function of the strain magnitude in % in the context of a sensitivity study according to the proposed model. 
+
+Once the thermal strain is generated, the resulting stress field is integrated into the mechanical model. The nanoindentation test is then simulated, and the corresponding force-displacement responses are extracted, as presented in Fig. 6b. The results show that as the amplitude  𝑐 1 increases, the predicted indentation response also increases. This behavior is consistent with expectations, as radiation damage introduces a tensile strain along the indentation axis, which in turn induces in-18 
+
+plane compressive stress (radial direction x) [64]. Such compressive stress enhances the material’s resistance to indentation, resulting in a higher force for the same indentation depth (inset in Fig. 6b), confirming the observed increase in Nix-Gao hardness in the irradiated sample compared to the virgin sample. 
+
+A norm-based error metric is employed to compare the simulated and experimental force values (Fig. 6 c) rather than relying solely on the nanoindentation peak load [65]. The minimum error corresponds to the optimal range of  𝑐 1 that provides the best agreement between the simulated and experimental force-displacement data. This result underscores the importance of accurately capturing the magnitude of irradiation-induced strain when predicting the mechanical response of irradiated materials. The sensitivity analysis also indicates that the identified strain magnitude is reasonably well constrained, as variations in strain amplitude produce measurable changes in the force-displacement response, supporting the robustness of the inverse identification. A variation in the maximum strain from 0.1% to 4% results in a change of maximum force of approximately 0.002 N, corresponding to a sensitivity of 19.5 N-1 .
+
+Optimization algorithms are essential tools in various engineering and scientific applications, including calibrating finite element models and estimating material properties. These algorithms aim to minimize or maximize a given objective function by iteratively adjusting the variables. Among the most widely used optimization algorithms are gradient-based methods, evolutionary algorithms, and direct search methods like the Nelder-Mead simplex algorithm [66]. 
+
+First-order methods, also known as gradient-based methods like steepest descent and conjugate gradient, rely on calculating the gradients (or derivatives) of the objective function with respect to the parameters. These algorithms are typically fast and efficient when the objective function is smooth and differentiable. However, the main drawback is their tendency to get trapped in local minima, making them less effective when dealing with noisy, discontinuous, or non-differentiable functions. 
+
+In contrast, second-order methods, such as Newton's method and quasi-Newton methods, provide faster convergence by incorporating curvature information from the second derivative (Hessian matrix). Newton's method uses both the Jacobian and the Hessian matrices to determine the direction and size of each step, resulting in rapid convergence, especially near the solution. 19 
+
+However, calculating the Hessian can be computationally expensive for high-dimensional problems, and the method can become unstable if the Hessian is poorly conditioned. 
+
+In this study, a different approach, called a direct search method (also referred to as zero-order, black-box, pattern search, or derivative-free), is employed to estimate the mechanical properties of irradiated samples. Specifically, the Nelder-Mead simplex method is used [66, 67]. Unlike gradient-based methods, the Nelder-Mead method does not require any gradient or Hessian information to guide the optimization process. Instead, it uses a simplex, a geometric shape formed by evaluating the objective function at its vertices, to search for the minimum [67]. The method incrementally adjusts the simplex's shape and step size as the search progresses. Its main advantage lies in its simplicity and versatility, making it suitable for a wide range of problems, particularly those with non-differentiable objective functions or those derived from simulations where gradients are not easily accessible. 
+
+The Nelder-Mead method follows a set of rules that guide how the simplex is updated, based on the evaluations of the objective function at its vertices [67]. The process is illustrated in a flowchart in Fig. S1 and Fig. S2. 
+
+The optimization workflow shown in Fig. 7 is employed not only to estimate the irradiation-induced strain and resulting residual stress, but also to simultaneously determine the mechanical properties of the irradiated material. This is achieved through fitting FE simulation results to the experimental nanoindentation data, rather than relying on the O-P method. This is essential, as irradiation induces hardening effects. The entire process from reading the experimental data, updating the parameters in the UEXPAN subroutine using the simplex algorithm, and running ABAQUS ® and monitoring the generation of output files (e.g., the odb file), is fully automated and managed through a Python script. Initially, the script reads the processed experimental data and inserts an initial guess for the mechanical properties (Young’s modulus  𝐸  and yield strength 
+
+𝜎 𝑦0 ) into ABAQUS ®, while assigning a trial strain magnitude within the Fortran subroutine file UEXPAN. This subroutine uses the specified strain magnitude to compute the strain increment at each iteration, which is subsequently passed to ABAQUS ®. Upon completion of the first simulation (via continuous monitoring of the odb file), the script initiates a second simulation of nanoindentation, which imports the resulting stress field as predefined fields (S 11 , S 22 , S 12 ). Once the second simulation ends, the script extracts the simulated force-displacement data. To ensure 20 
+
+consistent comparison, the simulated force is interpolated onto the experimental displacement data, and the sum of squared errors between the experimental and projected force values is evaluated against a predefined convergence criterion. 
+
+FIG. 7. Optimization workflow developed in Python to estimate the strain and mechanical properties of He+H-irradiated 4H-SiC through comparison between simulated and experimental nanoindentation data. 
+
+If the convergence criterion is not met, the parameters  𝑐 1, 𝐸 , and  𝜎 𝑦0  are updated using the optimization algorithm, and the loop is repeated. This iterative process continues until the error falls below the defined threshold. Upon convergence, the optimization yields the final calibrated values:  𝑐 𝑜𝑝𝑡𝑖𝑚 , 𝐸 𝑜𝑝𝑡𝑖𝑚 , and  𝜎 𝑜𝑝𝑡𝑖𝑚 . The results of the estimation of strain magnitude and mechanical properties, along with errors, are presented in Fig. 8. 21 
+
+FIG. 8. Evolution over iterations of (a) Young’s modulus  𝐸 , (b) yield strength  𝜎 𝑦0 , (c) strain amplitude  𝑐 1 and (d) sum of squared errors between the experimental and simulated force values. 
+
+We briefly describe the evolution of the estimated parameters throughout the optimization process. Young’s modulus, initially set to 400 GPa, progressively stabilizes around 310 GPa. Similarly, the yield strength, which was arbitrarily initialized to 10 GPa, converges to a final value of 16.4 GPa. These values fall within the range of values reported in the literature from 2D FEM analyses (E = 304 GPa and  𝜎 0 = 27 GPa) [25]. The strain magnitude parameter  𝑐 1, used in the constitutive model, started as 0.1% and converged to 0.91% (further insights into the evolution of strain and stress fields and their corresponding profiles over time, at the optimal parameters  𝑐 𝑜𝑝𝑡𝑖𝑚 , 𝐸 𝑜𝑝𝑡𝑖𝑚 ,and  𝜎 𝑜𝑝𝑡𝑖𝑚 , are presented in Fig. S3 to Fig. S6). These trends demonstrate the effectiveness of the optimization routine in refining the mechanical properties and strain magnitude to match the experimental data, as documented by the drop in error shown in Fig. 8d. 22 
+
+FIG. 9. (a) Bright-field TEM image of a cross-sectional lamella from the He- and H-co-implanted 4H-SiC sample, highlighting the damaged region near the projected ion range. (b) Selected-area electron diffraction pattern (SADP) acquired along the [110] zone axis; the (0004) reflection corresponds to the out-of-plane direction (Reproduced with permission from Daghbouj et al., Acta Materialia, 2025, 121739; licensed under a Creative Commons Attribution (CC BY) [47]). (c) Out-of-plane strain map obtained by N-PED, showing a localized tensile strain distribution with a maximum strain of ~1% near the damage peak. (d) FEM-simulated out-of-plane strain field based on the optimized strain profile and mechanical properties. 
+
+To validate the accuracy of the proposed method, experimental strain distributions were measured using N-PED in TEM and compared to the simulated strain profile. A cross-sectional TEM lamella of the He+H ion-irradiated 4H-SiC sample was prepared and imaged to identify the damage zone. The sample was aligned along the [110] zone axis, ensuring that the (0004) reflection corresponded to the out-of-plane direction, i.e., normal to the sample surface, as shown in the selected-area diffraction pattern (SADP) in Fig. 9b. For strain quantification, a reference region, far from the irradiated area and assumed to be strain-free, was selected. Strain mapping was then performed across a large field of view (Fig. 9c). The resulting strain profile shows an asymmetric Gaussian 23 
+
+distribution, with a peak tensile strain of ~1% coinciding with the region of maximum ion-induced damage and ion concentration. 
+
+Furthermore, the strain field perpendicular to the sample surface obtained from the FEM is presented in Fig. 9d, and the corresponding strain profile is plotted along with the experimental N-PED strain data in Fig. 10a. Both the magnitude and spatial distribution of strain from the model closely align with the N-PED results, demonstrating consistency between the experimental observations and numerical predictions. The calculated sum of squared errors between the simulated and experimental force-displacement curves corresponds to a relative error of approximately 1.5%., confirming the reliability of the approach. This agreement, combined with the sensitivity analysis, supports the robustness of the extracted strain magnitude despite the inherent non-uniqueness of the inverse problem. The slight discrepancy between the estimated profile and that measured by N-PED can be attributed to strain relaxation induced by FIB cutting. This relaxation leads to a reduction in compressive stress, and consequently in strain, which is particularly evident in the profile (Fig. 10a). Moreover, the close match between the experimental and simulated force-displacement validates the robustness of the calibrated model (Fig. 10b). 
+
+FIG. 10. (a) Comparison between the experimental N-PED strain profile and the FEM-implemented strain distribution along the irradiation direction, showing good agreement in both magnitude and spatial distribution. (b) Comparison between the averaged experimental and FEM-simulated nanoindentation force-displacement curves. 24 
+
+To investigate the interaction between irradiation-induced residual stress and indentation-induced deformation, a FIB lamella was prepared through the residual indentation impression (inset in Fig. 10b) and analyzed by TEM. The TEM image (Fig. 11a) reveals pronounced defect contrast beneath the indentation, consistent with severe plastic deformation and the presence of irradiation- and indentation-induced lattice defects, together with localized crack formation in the irradiated region. The observed cracks are attributed to the intrinsically brittle nature of SiC combined with the relatively high indentation load, which generates severe local stress concentrations beneath the indentation. 
+
+FIG. 11. (a) TEM image of the indented irradiated region, revealing pronounced defect contrast beneath the indentation together with localized crack formation in the irradiated region. (b) Simulated in-plane stress field (S11) before and after nanoindentation, showing the interaction between irradiation-induced residual stresses and indentation-induced stresses. 
+
+The proposed framework involves several simplifying assumptions that define its scope of applicability. First, the Berkovich indenter is approximated by an axisymmetric conical geometry, which accurately reproduces global force-displacement behavior but does not capture the local threefold asymmetry of the stress field. Second, the material response is modeled as perfectly elasto-plastic, neglecting possible strain hardening or irradiation-induced changes in fracture behavior. Third, the strain field is assumed to follow the damage profile predicted by SRIM and ERDA, which may not fully account for defect migration or stress relaxation during sample preparation. Despite these limitations, the approach remains robust for extracting effective strain magnitudes and depth distributions, as demonstrated by the close agreement with independent N-25 
+
+PED measurements. Consequently, the identified strain field should be interpreted as a constrained estimate of the true distribution, rather than a unique reconstruction. 
+
+To further investigate the extent and evolution of the plastic deformation zone, two-dimensional stress profiles (S 11 ) beneath the indenter were extracted from the FEM simulations, as shown in Fig. 11b. Before the indentation, the stress field reflects compressive in-plane stresses generated by irradiation-induced defects formed during He+H co-implantation. The resulting out-of-plane strain ( 𝜀 𝑜𝑢𝑡 𝑜𝑓 𝑝𝑙𝑎𝑛𝑒 ) is directly related to the in-plane stress through the elastic relation [60]: 
+
+𝜎 in plane = −𝐸 1 − 𝜈 𝜀 out of plane  (8) 
+
+In our case, using E = 310 GPa, ν = 0.17, and a peak strain of 0.91% (Fig. 10a), the corresponding compressive stress is 3.39 GPa. 
+
+The stress map before indentation shows a compressive stress peak of ~3.39 GPa near the depth of maximum irradiation damage. After nanoindentation, the interaction between the pre-existing residual stress field and the indentation-induced stress generates a more complex distribution. The compressive stress locally increases to ~12 GPa near the projected ion range, while a localized tensile region (~2 GPa) develops beneath this zone (highlighted by the dashed white circle in Fig. 11b). The strong stress gradients at the interface between these compressive and tensile regions likely promote crack initiation, consistent with the experimentally observed cracks in Fig. 11a. 
+
+Although cracking is experimentally observed, fracture is not reproduced in the FEM simulations because the present model does not include a damage or fracture criterion, such as cohesive-zone modeling or brittle crack propagation. Instead, the simulations are limited to an elastoplastic constitutive description aimed at reconstructing the irradiation-induced strain and stress fields. Incorporating fracture mechanics into the model would substantially increase the computational complexity and is beyond the scope of the present study. 
+
+The irradiation-induced tensile strain reconstructed in this study originates from the accumulation of point defects and small defect clusters generated during He+H implantation. Interstitial-type defects and dislocation loops induce local lattice dilation along the irradiation direction, while constrained lateral expansion produces in-plane compressive stresses. The resulting compressive in-plane stress increases the resistance to plastic deformation during nanoindentation, explaining 26 
+
+the observed hardening. Importantly, this effect arises even at damage levels well below the amorphization threshold, highlighting the sensitivity of nanoindentation-based inverse methods to early-stage irradiation damage. From a nuclear materials perspective, the ability to quantify subsurface irradiation-induced strain using semi-destructive techniques such as nanoindentation provides a valuable complement to diffraction-based techniques. This approach is particularly attractive for small irradiated volumes, ion-irradiated surrogates, and post-irradiation examination, where sample availability is limited. The methodology can be extended to other nuclear ceramics and metals subjected to helium, hydrogen, or heavy-ion irradiation. 
+
+IV. CONCLUSION 
+
+An integrated experimental-numerical framework has been developed to estimate irradiation-induced subsurface strain in single-crystal 4H-SiC subjected to sequential helium and hydrogen ion implantation. By combining depth-sensing nanoindentation with finite element modeling and a physics-constrained inverse optimization scheme, a depth-dependent eigenstrain profile is prescribed based on independently determined damage distributions, while its magnitude is identified from force-displacement data. 
+
+The optimization yields a peak irradiation-induced strain of approximately 0.91%, a Young’s modulus of 310 GPa, and a yield strength of 16.4 GPa for the irradiated material. Independent N-PED measurements confirm close agreement between the reconstructed and experimentally measured strain profiles in both magnitude and spatial distribution, providing strong validation for the inverse methodology. 
+
+Beyond conventional hardness evaluation, this work demonstrates that nanoindentation, when combined with physics-based constraints, can serve as a practical and quantitative probe of irradiation-induced strain. This approach enables strain estimation in small irradiated volumes where traditional diffraction techniques are often limited, particularly in polycrystalline materials where peak overlapping occurs. Furthermore, it provides a complementary method to TEM-based strain mapping. The framework is readily extendable to other nuclear ceramics and metallic systems exposed to ion irradiation. 
+
+SUPPLEMENTARY MATERIAL 27 
+
+See the supplementary material for detailed information on the fitting models and their corresponding coefficients, the implementation and workflow of the Nelder-Mead optimization algorithm, as well as the temporal evolution of the irradiation-induced strain and residual compressive stress distributions obtained from finite element simulations. 
+
+ACKNOWLEDGEMENTS 
+
+This work was financially supported by the European Union under the project Robotics and advanced industrial production (Reg. No. CZ.02.01.01/00/22_008/0004590). CzechNanoLab project LM2023051 funded by MEYS CR is gratefully acknowledged for the financial support of the measurements/sample fabrication at LNSM Research Infrastructure. Parts of this research were carried out at IBC at the Helmholtz-Zentrum Dresden-Rossendorf e. V., a member of the Helmholtz Association. 
+
+AUTHOR DECLARATIONS 
+
+Conflict of interest 
+
+The authors have no conflicts to disclose. 
+
+Author contributions 
+
+M. Bensalem: Investigation (equal); Methodology (equal); Software (lead); Visualization (equal); Validation (equal); Formal analysis (equal); Data curation (equal); Conceptualization (equal); Writing-original draft (equal); Writing-review & editing (equal). N. Daghbouj: Investigation (equal); Methodology (equal); Software (supporting); Visualization (equal); Validation (equal); Formal analysis (equal); Data curation (equal); Conceptualization (equal); Writing-original draft (equal); Writing-review & editing (equal); Supervision (lead); Resources (lead); Project administration (supporting). J. Duchoň: Writing-review & editing (supporting). B.S. Li: 
+
+Investigation (supporting); Writing-review & editing (supporting); Funding acquisition (supporting). A.T. AlMotasem: Writing-review & editing (supporting).  S. Magalhães: 
+
+Investigation (supporting); Writing-review & editing (supporting); Formal analysis (supporting). 
+
+A. Yi:  Investigation (supporting). F. Munnik: Investigation (supporting); Writing-review & editing (supporting); Funding acquisition (supporting). Xin Ou: Investigation (supporting); Writing-review & editing (supporting). W.J. Weber: Writing-review & editing (supporting); 28 
+
+Visualization (supporting); Validation (supporting); Formal analysis (supporting). T. Polcar: 
+
+Writing-review & editing (supporting); Visualization (supporting); Validation (supporting); Supervision (supporting); Project administration (lead); Funding acquisition (lead). 
+
+DATA AVAILABLITY 
+
+The data that support the findings of this study are available from the corresponding author upon reasonable request. 
+
+References 
+
+[1] S.J. Zinkle, G.S. Was, Materials challenges in nuclear energy, Acta Mater. 61 (2013) 735-758. https://doi.org/10.1016/j.actamat.2012.11.004. 
+
+[2] G.S. Was, D. Petti, S. Ukai, S. Zinkle, Materials for future nuclear energy systems, J. Nucl. Mater. 527 (2019) 151837. https://doi.org/10.1016/j.jnucmat.2019.151837. 
+
+[3] Y. Katoh, L.L. Snead, I. Szlufarska, W.J. Weber, Radiation effects in SiC for nuclear structural applications, Curr. Opin. Solid State Mater. Sci. 16 (2012) 143-152. https://doi.org/10.1016/j.cossms.2012.03.005. 
+
+[4] J.-T. Li, I.J. Beyerlein, W.-Z. Han, Helium irradiation-induced ultrahigh hardening in niobium, Acta Mater. 226 (2022) 117656. https://doi.org/10.1016/j.actamat.2022.117656. 
+
+[5] Nabil Daghbouj, Ahmed Tamer AlMotasem, Bingsheng Li, Vladimir Krsjak, Jan Duchoň, Fang Ge, Maciej Oskar Liedke, Andreas Wagner, Mohamed Bensalem, Fateh Bahadur, Frans Munnik, Miroslav Karlik, Anna Macková, Tomas Polcar, William J Weber, Defect landscape engineering suppresses helium damage in ceramics. Commun Mater (2026). 
+
+https://doi.org/10.1038/s43246-026-01083-3 .
+
+[6] S. Che, L. Zhang, N. Daghbouj, W. Jiang, T. Polcar, R. Ji, R. Wang, T. Wang, Exceptional radiation resistance of hardened amorphous SiC under high-temperature hydrogen ion implantation, J. Eur. Ceram. Soc. 45 (2025) 117459. https://doi.org/10.1016/j.jeurceramsoc.2025.117459. 
+
+[7] T.T. Hlatshwayo, C.E. Maepa, M. Msimanga, M. Mlambo, E.G. Njoroge, V.A. Skuratov, S.V. Motloung, J.B. Malherbe, Helium assisted migration of silver implanted into SiC, Vacuum 183 (2021) 109865. https://doi.org/10.1016/j.vacuum.2020.109865. 
+
+[8] Z. Wang, L. Zhang, A.T. AlMotasem, B. Li, T. Polcar, N. Daghbouj, Exploring defect behavior in helium-irradiated single-crystal and nanocrystalline 3C-SiC at 800°C: A synergy 29 
+
+of experimental and simulation techniques, Acta Mater. 279 (2024) 120281. https://doi.org/10.1016/j.actamat.2024.120281. 
+
+[9] H.S. Sen, N. Daghbouj, B.S. Li, A.T. AlMotasem, F.F. Ge, L. Zhang, M. Callisti, T. Polcar, Interaction of Stacking Faults with point/extended defects in Fe-He irradiated 6H-SiC, Acta Mater. 256 (2023) 119129. https://doi.org/10.1016/j.actamat.2023.119129. 
+
+[10] Q. Li, X. Li, Z. Zhu, X. Ding, M. Liu, The evolution of irradiation defects and hardening of CVD-SiC induced by he ions irradiation at 800°C, J Nucl Mater, 603 (2025), Article 155419 
+
+[11] C.-H. Chen, Y. Zhang, Y. Wang, M.L. Crespillo, C.L. Fontana, J.T. Graham, G. Duscher, S.C. Shannon, W.J. Weber, Dose dependence of helium bubble formation in nano-engineered SiC at 700 ◦ C, J. Nucl. Mater. 472 (2016) 153-160. 
+
+[12] S.Z. Mtsi, A. Sohatsky, Z.A.Y. Abdalla, E.G. Njoroge, V.A. Skuratov, S.V. Motloung, T.T. Hlatshwayo, Effects of helium (He) bubbles and annealing on the structural evolution and migration behavior of silver (Ag) implanted into polycrystalline SiC at 350 °C, Vacuum, 218 (2023), Article 112621. 
+
+[13] R. Wang, N. Daghbouj, P. Yu, P. Li, F. Meng, A. Cammarata, B. Li, P. Bábor, T. Polcar, Q. Huang, F. Ge, Enhancing the radiation-and oxidation-resistance of Cr-based coatings via structure regulation and composition optimization, JMST, 218 (2025), pp. 153-169. 
+
+[14] N. Daghbouj, H.S. Sen, M. Bensalem, J. Duchoň, B. Li, M. Karlík, F. Ge, V. Krsjak, P. Bábor, M.O. Liedke, M. Butterling, A. Wagner, B. Karasulu, T. Polcar, Asymmetrical Defect Sink Behaviour of HCP/BCC Zr/Nb Multilayer Interfaces: Bubble-Denuded Zones at Nb Layers, Acta Materialia, 301 (2025), 121579. 
+
+[15] S. Yang, Y. Nakagawa, M. Kondo, T. Shibayama, Electron energy-loss spectroscopic evaluation of depth-dependent swelling of He+ ion-irradiated 4H-SiC correlated with defect type, J. Appl. Phys. 127 (2020) 175106. https://doi.org/10.1063/1.5143399. 
+
+[16] H.S. Sen, N. Daghbouj, M. Callisti, M. Vronka, M. Karlík, J. Duchoň, J. Čech, J. Lorinčík, V. Havránek, P. Bábor, T. Polcar, Interface-Driven Strain in Heavy Ion-Irradiated Zr/Nb Nanoscale Metallic Multilayers: Validation of Distortion Modeling via Local Strain Mapping, ACS Appl. Mater. Interfaces 14 (2022) 12777-12796. https://doi.org/10.1021/acsami.1c22995. 
+
+[17] C. Liu, N. Daghbouj, C. Zhang, Z. Wu, W. Cheng, T. Polcar, B. Li, Influence of applied tensile/compressive stress on He-irradiated SiC: Examining defect evolution through 30 
+
+experimental investigation and DFT simulations, Ceram. Int. 50 (2024) 47902-47909. https://doi.org/10.1016/j.ceramint.2024.09.136. 
+
+[18] N. Daghbouj, N. Cherkashin, A. Claverie, A method to determine the pressure and densities of gas stored in blisters: Application to H and He sequential ion implantation in silicon, Microelectron. Eng. 190 (2018) 54-56. https://doi.org/10.1016/j.mee.2018.01.006. 
+
+[19] I.J. Beyerlein, A. Caro, M.J. Demkowicz, N.A. Mara, A. Misra, B.P. Uberuaga, Radiation damage tolerant nanomaterials, Mater. Today 16 (2013) 443-449. https://doi.org/10.1016/j.mattod.2013.10.019. 
+
+[20] M. Ishimaru, Y. Zhang, S. Shannon, W.J. Weber, Origin of radiation tolerance in 3C-SiC with nanolayered planar defects, Appl. Phys. Lett. 103 (2013) 033104. https://doi.org/10.1063/1.4813593. 
+
+[21] S. Magalhães, R. Mateus, M. Dias, C. Porosnicu, O.G. Pompilian, E. Alves, Modelling the strain build-up in nitrogen implanted tungsten films on silicon substrates, Nucl. Instrum. Methods Phys. Res. Sect. B Beam Interact. Mater. At. 537 (2023) 81-87. https://doi.org/10.1016/j.nimb.2023.02.006. 
+
+[22] N. Daghbouj, J. Lin, H.S. Sen, M. Callisti, B. Li, M. Karlik, T. Polcar, Z. Shen, M. Zhou, T. You, X. Ou, Blister formation in He-H co-implanted InP: A comprehensive atomistic study, Appl. Surf. Sci. 552 (2021) 149426. https://doi.org/10.1016/j.apsusc.2021.149426. 
+
+[23] G. He, H. Yu, P. Karamched, J. Liu, F. Hofmann, Elastic strain associated with irradiation-induced defects in self-ion irradiated tungsten, Scr. Mater. 237 (2023) 115687. https://doi.org/10.1016/j.scriptamat.2023.115687. 
+
+[24] H. Yu, J. Liu, P. Karamched, A.J. Wilkinson, F. Hofmann, Mapping the full lattice strain tensor of a single dislocation by high angular resolution transmission Kikuchi diffraction (HR-TKD), Scr. Mater. 164 (2019) 36-41. https://doi.org/10.1016/j.scriptamat.2018.12.039. 
+
+[25] E. Jossou, T.A. Assefa, A.F. Suzana, L. Wu, C. Campbell, R. Harder, W. Cha, K. Kisslinger, C. Sun, J. Gan, L. Ecker, I.K. Robinson, S.K. Gill, Three-dimensional strain imaging of irradiated chromium using multi-reflection Bragg coherent diffraction, Npj Mater. Degrad. 6 (2022) 99. https://doi.org/10.1038/s41529-022-00311-8. 
+
+[26] C. Gammer, I. Issa, A.M. Minor, R.O. Ritchie, D. Kiener, Strain Field Around Individual Dislocations Controls Failure, Small Methods 8 (2024) 2400654. https://doi.org/10.1002/smtd.202400654. 31 
+
+[27] A. Deslandes, M.C. Guenette, L. Thomsen, M. Ionescu, I. Karatchevtseva, G.R. Lumpkin, Retention and damage in 3C-b SiC irradiated with He and H ions, J. Nucl. Mater., 469 (2016), pp. 187-193. 
+
+[28] J.H. O'Connell, J.H. Neethling, Investigation of radiation damage and hardness of H- and He-implanted SiC, Radiat. Eff. Defect Solid, 167 (5) (2012), pp. 299-306. 
+
+[29] J.F. Ziegler, M.D. Ziegler, J.P. Biersack, SRIM - The stopping and range of ions in matter (2010), Nucl. Instrum. Methods Phys. Res. Sect. B Beam Interact. Mater. At. 268 (2010) 1818-1823. https://doi.org/10.1016/j.nimb.2010.02.091. 
+
+[30] W.J. Weber, Y. Zhang, Predicting damage production in monoatomic and multielemental targets using stopping and range of ions in matter code: challenges and recommendations, Curr. Opin. Solid State Mater. Sci. 23 (2019) 100757, https:// doi.org/10.1016/j.cossms.2019.06.001. 
+
+[31] R. Devanathan, W.J. Weber, F. Gao, Atomic scale simulation of defect production in irradiated 3C-SiC, J. Appl. Phys. 90 (2001) 2303–2309, https://doi.org/ 10.1063/1.1389523. 
+
+[32] Devanathan, Ramaswami, and William J. Weber, Displacement energy surface in 3C and 6H SiC, Journal of Nuclear Materials 278, no. 2-3 (2000): 258-265. 
+
+[33] N. Daghbouj, A.T. AlMotasem, J. Vesely, B.S. Li, H.S. Sen, M. Karlik, J. Lorinčík, F.F. Ge, L. Zhang, V. Krsjak, O. Laguta, M. Callisti, T. Polcar, Microstructure evolution of iron precipitates in (Fe, He)-irradiated 6H-SiC: A combined TEM and multiscale modeling, J. Nucl. Mater. 584 (2023) 154543. https://doi.org/10.1016/j.jnucmat.2023.154543. 
+
+[34] J.-M. Costantini, J. Ribis, Transmission electron microscopy study of extended defect evolution and amorphization in SiC under Si ion irradiation, J. Am. Ceram. Soc. 104 (2021) 1863-1873. https://doi.org/10.1111/jace.17595. 
+
+[35] N.P. Barradas, C. Jeynes, R.P. Webb, Simulated annealing analysis of Rutherford backscattering data, Appl. Phys. Lett. 71 (1997) 291-293. https://doi.org/10.1063/1.119524. 
+
+[36] P. F. Rottmann, K. J. and Hemker, Nanoscale elastic strain mapping of polycrystalline materials, Mater. Res. Lett., Mater. Res. Lett. 2018 , 6, 249. 
+
+[37] N. Daghbouj, H.S. Sen, M. Callisti, M. Vronka, M. Karlik, J. Duchoň, J. Čech, V. Havránek, T. Polcar, Revealing nanoscale strain mechanisms in ion-irradiated multilayers, Acta Mater. 229 (2022) 117807. 
+
+[38] R. Wang, X. Bai, X. Pei, S. Liu, Ch. Liu, P. Yu, B. Li, N. Daghbouj, T. Polcar, F. Meng, F. Ge, Q. Huang,  Cross-sectional helium irradiation revealing interface-controlled bubble evolution 32 
+
+in Cr/CrAlSiN multilayer coatings on zirconium alloys , J. Mater. Sci. Technol., 273 (2026), pp. 57-68, 10.1016/j.jmst.2026.02.034 .
+
+[39] J. Li, N. Daghbouj, X. He, K. Chen, X. Cao, S. Jin, J. Li, H. Wei, J. Zhou, T. Zhang, S. Xu, F. Ge, J. Duchoň, A.T. AlMotasem, T. Polcar, B. Li, Helium’s impact: Unraveling bubble formation in Fe2AlB2 under extreme conditions of temperature and fluence, J. Nucl. Mater. 598 (2024) 155187. https://doi.org/10.1016/j.jnucmat.2024.155187. 
+
+[40] T. C. Pekin, C. Gammer, J. Ciston, A. M. Minor, C. Ophus, Optimizing disk registration algorithms for nanobeam electron diffraction strain mapping, Ultramicroscopy 2017 , 176 ,170. 
+
+[41] J.-L. Rouviere, A. Béché, Y. Martin, T. Denneulin, D. Cooper, Improved strain precision with high spatial resolution using nanobeam precession electron diffraction, Appl.  Phys. Lett. 103 
+
+(2013) 241913. https://doi.org/10.1063/1.4829154. 
+
+[42 ] A. Després, S.Parent, M.Véron, E -F.  Rauch, A. Joulain, H. Bahsoun, C. Tromas, Elastic strain mapping of plastically deformed materials by TEM, Ultramicroscopy, 265,( 2024), 114010. 
+
+[43] B. Leu, M.A. Kumar, P.F. Rottmann, K.J. Hemker, I.J. Beyerlein, Micromechanical Fields Associated with Irregular Deformation Twins in Magnesium, J. Mater. Eng. Perform. 32 (2023) 2688-2699. https://doi.org/10.1007/s11665-022-07196-3. 
+
+[44] C. Gammer, I. Issa, A. M. Minor, R. O. Ritchie, D. Kiener, Strain Field Around Individual Dislocations Controls Failure, Small Methods 2024, Small Methods 2024 , 8, 2400654. 
+
+[45] NanoMEGAS. Topspin automated NBED system. https://nanomegasusa.com/strain-mapping/ .
+
+[46] A. D. Darbal, R. D. Narayan, C. Vartuli, T. Aoki, J. Mardinly, S. Nicolopoulos, J. K. Weiss, Applications of automated high resolution strain mapping in TEM on the study of strain distribution in MOSFETs. Microsc. Microanal. 2014 , 20 , 1066. 
+
+[47] Nabil Daghbouj, Ahmed T AlMotasem, J Duchoň, BS Li, Mohamed Bensalem, F Bahadur, F Munnik, Xin Ou, A Macková, WJ Weber, T Polcar, Nanoscale strain evolution and grain boundary-mediated defect sink behavior in irradiated SiC: Insights from N-PED and DFT, Acta Materialia, 303 (2026), 121739. 
+
+[48] W. C. Oliver, G. M. Pharr, An improved for determining hardness and elastic modulus using load and displacement sensing indentation experiments, J. Mater. Res. 7. 1564 -1583. (1992). 33 
+
+[49] W. C. Oliver, G. M. Pharr, Measurement of hardness and elastic modulus by instrumented indentation: Advances in understanding and refinements to methodology, J. Mater. Res. 19. 3-20. (2004). 
+
+[50] A. Nawaz,W.G. Mao, C. Lu, Y.G. Shen, Mechanical properties, stress distributions and nanoscale deformation mechanisms in single crystal 6H-SiC by nanoindentation, J. Alloys Compd. 708. 1046-1053. (2017). 
+
+[51] Zhonghuai Wua, Weidong Liua, Liangchi Zhanga, Sean Limb, Amorphization and dislocation evolution mechanisms of single crystalline 6H-SiC, J. Acta Mater. 182. 60-67. (2020). 
+
+[52] Hervé Pelletier, Joël Krier, Pierre Mille, Characterization of mechanical properties of thin films using nanoindentation test, J. Mech. Mater, 38. 1182-1198. (2006). 
+
+[53] N. Oumarou, J-Ph. Jehl, R. Kouitat, On the variation of mechanical parameters obtained from spherical depth sensing indentation, Int. J. Surf. Sci. Eng. 4. 416-428. (2010). 
+
+[54] Xiaofei Chen, Wei Zhou, Xuxin Zhang, Qijie Feng, Jian Zheng, Xiankun Liu, Bin Tang, Jiangbo Li, Jianming Xue, Shuming Peng, J. Appl. Phys. 123. 025104. (2018). 
+
+[55] D Torres-Torres, J Munoz-Saldana, L A Gutierrez-Ladron-de Guevara, A Hurtado-Macıas and M V Swain, Geometry and bluntness tip effects on elastic-plastic behaviour during nanoindentation of fused silica: experimental and FE simulation, J. Modelling. Simul. Mater. Sci. Eng. 18. 075006. (2010). 
+
+[56] M. Jamal, M. N. Morgan, Materials characterization part I: contact area of the Berkovich indenter for nanoindentation tests, Int. J. Adv. Manuf. Technol. 92. 361-370. (2017). 
+
+[57] Z.T. Jiang, Y.G. Li, M.K. Lei, An inverse problem in estimating fracture toughness of TiAlN thin films by finite element method based on nanoindentation morphology, Vacuum. 192. 110458. (2021). 
+
+[58] František Lofaj, Dušan Németh, Multiple cohesive cracking during nanoindentation in a hard W-C coating/steel substrate system by FEM, Journal of the European Ceramic Society. 37. 4379-4388. (2017). 
+
+[59] L. Reali, M. Boleininger, M.R. Gilbert, S.L. Dudarev, Macroscopic elastic stress and strain produced by irradiation, Nucl. Fusion 62 (2021) 016002. https://doi.org/10.1088/1741-4326/ac35d4. 34 
+
+[60] X. Chen, W. Zhou, X. Zhang, Q. Feng, J. Zheng, X. Liu, B. Tang, J. Li, J. Xue, S. Peng, Mechanical properties of 6H-SiC irradiated by neutron and MeV heavy ions: Ananoindentation and finite element method study, J. Appl. Phys. 123 (2018) 025104. https://doi.org/10.1063/1.5006378. 
+
+[61] Nakano, Shinsuke, Muto, Shunsuke, et TanabeE, Tetsuo, Change in mechanical properties of ion-irradiated ceramics studied by nanoindentation. Materials transactions , 2006, vol. 47, no 1, p. 112-121. 
+
+[62] N. Daghbouj, B.S. Li, M. Callisti, H.S. Sen, J. Lin, X. Ou, M. Karlik, T. Polcar, The structural evolution of light-ion implanted 6H-SiC single crystal: comparison of the effect of helium and hydrogen, Acta Mater., 188 (2020), pp. 609-622. 
+
+[63] A. Boulle, A. Debelle, J.B. Wallace, L.B. Bayu Aji, S.O. Kucheyev, The amorphization of 3C-SiC irradiated at moderately elevated temperatures as revealed by X-ray diffraction, Acta Mater., 140 (2017), pp. 250-257. 
+
+[64] N. Daghbouj, B.S. Li, M. Callisti, H.S. Sen, M. Karlik, T. Polcar, Microstructural evolution of helium-irradiated 6H-SiC subjected to different irradiation conditions and annealing temperatures: A multiple characterization study, Acta Mater. 181 (2019) 160-172. https://doi.org/10.1016/j.actamat.2019.09.027. 
+
+[65] A. Greco, E. Sgambitterra, F. Furgiuele, D. Furfari, A Novel Method to Measure Equi-Biaxial Residual Stress by Nanoindentation, Exp. Mech. 63 (2023) 1493-1508. https://doi.org/10.1007/s11340-023-01001-5. 
+
+[66] J. A. Nelder and R. Mead, A simplex method for function minimization, J. Comp. Jour. 7. 308-313. (1965). 
+
+[67] M. J. Kochenderfer, T. A. Wheeler, Algorithms for Optimization, MIT Press. http://mitpress.mit.edu. (2019).
