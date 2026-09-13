@@ -1,0 +1,24 @@
+{
+  "label": "2026-09-13",
+  "date": "2026-09-13",
+  "generated_at": "2026-09-13T21:16:50",
+  "count": 1,
+  "papers": [
+    {
+      "paper_id": "202609/13/2609.11666v1-competition-between-vacancy-creation-and-filling-in-defect-engineering-of-hbn",
+      "section": "quick",
+      "title_en": "Competition between vacancy creation and filling in defect-engineering of hBN",
+      "authors": "Shrirang Chokappa, Manuel Laängle, Barbara Maria Mayer, Vladimir Zoba\\vc, Jacob Madsen, Diana Propst, David Lamprecht, Philipp Irschik, Arixin Bo, Clara Kofler, Vinzent Hana, Fabian Kraft, Clemens Mangler, Lado Filipovic, Toma Susi, Jani Kotakoski",
+      "date": "2026-09-10",
+      "pdf": "https://arxiv.org/pdf/2609.11666v1",
+      "score": "6.0",
+      "evidence": "离子辐照在hBN中产生点缺陷与空位",
+      "tldr": "hBN被视为可承载量子发射体的材料，其发射通常源于点缺陷，但选择性制备特定缺陷仍缺乏控制。本文制备自支撑单层hBN，用150 eV超低能Ar+离子辐照，并以扫描透射电镜统计辐照前后的缺陷密度与分布。与解析势分子动力学模拟相反，实验主要产生硼单空位，双空位数量约为其一半；同时Si、C杂质填充空位比以往认为的更显著，可能妨碍hBN量子发射体的选择性缺陷工程。",
+      "tags": "query:rad-damage",
+      "abstract_en": "Hexagonal boron nitride (hBN) has recently become the focus of intense research as a material that can host quantum emitters. It is known that such emission is related to point defects, but in order to conclusively correlate specific defects to their spectra, having control over the defect creation mechanism is required. Here, we prepare freestanding, monolayer hBN samples and irradiate them with ultra-low-energy (150 eV) Ar+ ions. The samples are characterized before and after irradiation via scanning transmission electron microscopy to assess the defect density and distribution. Contrary to what analytical potential molecular dynamics simulations have predicted, we predominantly observe boron single vacancies after ion irradiation, followed by double vacancies at half the count. Moreover, we also observe that vacancy filling with Si and C impurity atoms plays a more significant role in the created defects than previously assumed, potentially posing a problem for selective creation of quantum emitters in hBN.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

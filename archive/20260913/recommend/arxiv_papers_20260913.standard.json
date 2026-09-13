@@ -1,0 +1,68 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-09-13T21:15:48.684536+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 1,
+    "quick_skim_target": 11,
+    "quick_selected": 1
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2609.11666v1",
+      "source": "arxiv",
+      "title": "Competition between vacancy creation and filling in defect-engineering of hBN",
+      "abstract": "Hexagonal boron nitride (hBN) has recently become the focus of intense research as a material that can host quantum emitters. It is known that such emission is related to point defects, but in order to conclusively correlate specific defects to their spectra, having control over the defect creation mechanism is required. Here, we prepare freestanding, monolayer hBN samples and irradiate them with ultra-low-energy (150 eV) Ar+ ions. The samples are characterized before and after irradiation via scanning transmission electron microscopy to assess the defect density and distribution. Contrary to what analytical potential molecular dynamics simulations have predicted, we predominantly observe boron single vacancies after ion irradiation, followed by double vacancies at half the count. Moreover, we also observe that vacancy filling with Si and C impurity atoms plays a more significant role in the created defects than previously assumed, potentially posing a problem for selective creation of quantum emitters in hBN.",
+      "authors": [
+        "Shrirang Chokappa",
+        "Manuel Laängle",
+        "Barbara Maria Mayer",
+        "Vladimir Zoba\\vc",
+        "Jacob Madsen",
+        "Diana Propst",
+        "David Lamprecht",
+        "Philipp Irschik",
+        "Arixin Bo",
+        "Clara Kofler",
+        "Vinzent Hana",
+        "Fabian Kraft",
+        "Clemens Mangler",
+        "Lado Filipovic",
+        "Toma Susi",
+        "Jani Kotakoski"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci",
+        "cond-mat.mes-hall"
+      ],
+      "published": "2026-09-10T15:04:41+00:00",
+      "link": "https://arxiv.org/pdf/2609.11666v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "ion irradiation creating point defects and vacancies in hBN",
+      "llm_evidence_cn": "离子辐照在hBN中产生点缺陷与空位",
+      "llm_evidence": "离子辐照在hBN中产生点缺陷与空位",
+      "canonical_evidence": "离子辐照在hBN中产生点缺陷与空位",
+      "llm_tldr_en": "Low-energy Ar+ ion irradiation of monolayer hBN is used to control point-defect creation, revealing boron single vacancies that contradict simulation predictions.",
+      "llm_tldr_cn": "六方氮化硼可作为量子发射体，但需控制点缺陷产生机制才能将特定缺陷与其光谱对应。本文制备自支撑单层hBN并用150 eV超低能Ar+离子辐照，通过扫描透射电镜在辐照前后表征缺陷密度与分布。结果与解析势分子动力学模拟预测相反，主要观察到硼单空位。该工作揭示了辐照诱导点缺陷的生成与填充竞争机制，对理解辐射缺陷工程具有方法学借鉴意义。",
+      "llm_tldr": "六方氮化硼可作为量子发射体，但需控制点缺陷产生机制才能将特定缺陷与其光谱对应。本文制备自支撑单层hBN并用150 eV超低能Ar+离子辐照，通过扫描透射电镜在辐照前后表征缺陷密度与分布。结果与解析势分子动力学模拟预测相反，主要观察到硼单空位。该工作揭示了辐照诱导点缺陷的生成与填充竞争机制，对理解辐射缺陷工程具有方法学借鉴意义。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation-induced point defects and clusters",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
