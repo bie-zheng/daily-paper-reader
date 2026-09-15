@@ -1,0 +1,65 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-09-15T22:39:02.680854+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 1,
+    "quick_skim_target": 11,
+    "quick_selected": 1
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2609.15429v1",
+      "source": "arxiv",
+      "title": "Effect of Near-surface Thermal Spikes on Radiation Hardness of Gallium Oxide",
+      "abstract": "Gallium oxide (Ga$_{2}$O$_{3}$) stands out as an extraordinary high radiation-tolerant semiconductor, because its lattice displacements induce polymorph transitions, holding material crystalline instead of leading to amorphization. Meanwhile, under extremely severe irradiation conditions many crystals become amorphous, often starting from surfaces where the translation symmetry breaks. Here, we show that the surface amorphization may prevail over the crystallisation in Ga$_{2}$O$_{3}$, however only if the mass and energy of irradiated ions produce sufficiently dense heat spikes in the immediate vicinity of the free surface. Applying machine-learned molecular dynamics simulations together with experimental broad-beam and focused ion-beam irradiations, we conclude that the presence of the free surface enables asymmetric displacements of Ga and O atoms, leading to a local non-stoichiometry. Consequently, when the affected cascade volume is sufficiently large, this compositional imbalance suppresses recrystallization and promotes amorphization. As such, our results are ready to use for tailoring irradiation conditions to either prevent or induce surface amorphization, depending on the requirements of the intended applications in Ga$_{2}$O$_{3}$ or other compound semiconductors.",
+      "authors": [
+        "Tomás Fernández Bouvier",
+        "Umutcan Bektas",
+        "Alexander Azarov",
+        "Ru He",
+        "Nico Klingner",
+        "René Hübner",
+        "Paul Chekhonin",
+        "Aleksi Leino",
+        "Kai Nordlund",
+        "Javier García Fernández",
+        "Andrej Kuznetsov",
+        "Gregor Hlawacek",
+        "Flyura Djurabekova"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci",
+        "physics.comp-ph"
+      ],
+      "published": "2026-09-14T11:55:36+00:00",
+      "link": "https://arxiv.org/pdf/2609.15429v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "radiation damage and amorphization mechanisms in an irradiated crystal",
+      "llm_evidence_cn": "辐照晶体中的辐照损伤与非晶化机制",
+      "llm_evidence": "辐照晶体中的辐照损伤与非晶化机制",
+      "canonical_evidence": "辐照晶体中的辐照损伤与非晶化机制",
+      "llm_tldr_en": "ML-driven molecular dynamics and ion-beam experiments show that surface amorphization in Ga2O3 prevails over crystallization only when dense near-surface thermal spikes form, clarifying radiation hardness.",
+      "llm_tldr_cn": "氧化镓因晶格位移可诱发多型相变而具有优异抗辐照性，但极端辐照下常从表面开始非晶化，其判据尚不明确。作者结合机器学习分子动力学与宽束、聚焦离子束辐照实验，考察近表面热峰的作用。结果显示只有离子质量与能量在自由表面附近形成足够密集热峰时，表面非晶化才占主导。该工作阐明了近表面热峰对辐照抗性的决定性作用，有助于理解与设计抗辐照材料。",
+      "llm_tldr": "氧化镓因晶格位移可诱发多型相变而具有优异抗辐照性，但极端辐照下常从表面开始非晶化，其判据尚不明确。作者结合机器学习分子动力学与宽束、聚焦离子束辐照实验，考察近表面热峰的作用。结果显示只有离子质量与能量在自由表面附近形成足够密集热峰时，表面非晶化才占主导。该工作阐明了近表面热峰对辐照抗性的决定性作用，有助于理解与设计抗辐照材料。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation damage mechanisms in structural materials",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

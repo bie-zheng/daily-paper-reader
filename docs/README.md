@@ -6,22 +6,28 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-09-14
-- 运行时间：2026-09-14 22:39:34 UTC
+- 最新运行日期：2026-09-15
+- 运行时间：2026-09-15 22:39:53 UTC
 - 运行状态：成功
-- 本次总论文数：0
+- 本次总论文数：1
 - 精读区：0
-- 速读区：0
+- 速读区：1
 
 ### 今日简报（AI）
-> 今日无新推荐，系统未产出可展示论文。
-- 详情：[/202609/14/README](/202609/14/README)
+今日速读 1 篇、精读 0 篇，唯一入选的是评分 6.0 的《Effect of Near-surface Thermal Spikes on Radiation Hardness of Gallium Oxide》。
+
+值得一看的方向是氧化镓器件的抗辐照性能，以及近表面热尖峰这一因素在其中扮演的角色——不过该文仅 6.0 分，属中等参考价值。
+
+普通读者若关注功率器件或航天电子材料，可先看摘要与结论，确认其对热尖峰机制的解释是否适用于你关心的场景，再决定是否深入。
+- 详情：[/202609/15/README](/202609/15/README)
 
 ### 精读区论文标签
 - 本次无精读推荐。
 
 ### 速读区论文标签
-- 本次无速读推荐。
+1. [Effect of Near-surface Thermal Spikes on Radiation Hardness of Gallium Oxide](/202609/15/2609.15429v1-effect-of-near-surface-thermal-spikes-on-radiation-hardness-of-gallium-oxide)  
+   标签：评分：6.0/10、query:rad-damage
+   evidence：辐照晶体中的辐照损伤与非晶化机制
 
 
 <div class="dpr-home-promo-card">

@@ -1,0 +1,24 @@
+{
+  "label": "2026-09-15",
+  "date": "2026-09-15",
+  "generated_at": "2026-09-15T22:39:57",
+  "count": 1,
+  "papers": [
+    {
+      "paper_id": "202609/15/2609.15429v1-effect-of-near-surface-thermal-spikes-on-radiation-hardness-of-gallium-oxide",
+      "section": "quick",
+      "title_en": "Effect of Near-surface Thermal Spikes on Radiation Hardness of Gallium Oxide",
+      "authors": "Tomás Fernández Bouvier, Umutcan Bektas, Alexander Azarov, Ru He, Nico Klingner, René Hübner, Paul Chekhonin, Aleksi Leino, Kai Nordlund, Javier García Fernández, Andrej Kuznetsov, Gregor Hlawacek, Flyura Djurabekova",
+      "date": "2026-09-14",
+      "pdf": "https://arxiv.org/pdf/2609.15429v1",
+      "score": "6.0",
+      "evidence": "辐照晶体中的辐照损伤与非晶化机制",
+      "tldr": "氧化镓因晶格位移可诱发多型转变而具高抗辐照性，但极端辐照下表面常先非晶化。本文结合机器学习分子动力学与宽束/聚焦离子束实验，研究近表面热尖峰对辐照损伤的影响。结果表明，仅当离子质量和能量在自由表面附近产生足够致密热尖峰时，表面非晶化才压过再结晶；自由表面导致Ga/O不对称位移和局部非化学计量，大级联体积下抑制再结晶。该机制可用于定制辐照条件，按需防止或诱导表面非晶化，并推广至其他化合物半导体。",
+      "tags": "query:rad-damage",
+      "abstract_en": "Gallium oxide (Ga$_{2}$O$_{3}$) stands out as an extraordinary high radiation-tolerant semiconductor, because its lattice displacements induce polymorph transitions, holding material crystalline instead of leading to amorphization. Meanwhile, under extremely severe irradiation conditions many crystals become amorphous, often starting from surfaces where the translation symmetry breaks. Here, we show that the surface amorphization may prevail over the crystallisation in Ga$_{2}$O$_{3}$, however only if the mass and energy of irradiated ions produce sufficiently dense heat spikes in the immediate vicinity of the free surface. Applying machine-learned molecular dynamics simulations together with experimental broad-beam and focused ion-beam irradiations, we conclude that the presence of the free surface enables asymmetric displacements of Ga and O atoms, leading to a local non-stoichiometry. Consequently, when the affected cascade volume is sufficiently large, this compositional imbalance suppresses recrystallization and promotes amorphization. As such, our results are ready to use for tailoring irradiation conditions to either prevent or induce surface amorphization, depending on the requirements of the intended applications in Ga$_{2}$O$_{3}$ or other compound semiconductors.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

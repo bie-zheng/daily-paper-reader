@@ -1,6 +1,9 @@
 * <a class="dpr-sidebar-root-link" href="#/">首页</a>
 * <a class="dpr-sidebar-root-link dpr-sidebar-noactive-link" href="javascript:void(0)" data-dpr-hash="#/tutorial/README">使用教程</a>
 * Daily Papers
+  * 2026-09-15 <!--dpr-date:20260915-->
+    * 速读区
+      * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202609/15/2609.15429v1-effect-of-near-surface-thermal-spikes-on-radiation-hardness-of-gallium-oxide" data-sidebar-item="{&quot;title&quot;: &quot;Effect of Near-surface Thermal Spikes on Radiation Hardness of Gallium Oxide&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2609.15429v1-effect-of-near-surface-thermal-spikes-on-radiation-hardness-of-gallium-oxide&quot;, &quot;score&quot;: &quot;6.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;rad-damage&quot;}], &quot;evidence&quot;: &quot;辐照晶体中的辐照损伤与非晶化机制&quot;}">Effect of Near-surface Thermal Spikes on Radiation Hardness of Gallium Oxide</a>
   * 2026-09-13 <!--dpr-date:20260913-->
     * 速读区
       * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202609/13/2609.11666v1-competition-between-vacancy-creation-and-filling-in-defect-engineering-of-hbn" data-sidebar-item="{&quot;title&quot;: &quot;Competition between vacancy creation and filling in defect-engineering of hBN&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2609.11666v1-competition-between-vacancy-creation-and-filling-in-defect-engineering-of-hbn&quot;, &quot;score&quot;: &quot;6.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;rad-damage&quot;}], &quot;evidence&quot;: &quot;离子辐照在hBN中产生点缺陷与空位&quot;}">Competition between vacancy creation and filling in defect-engineering of hBN</a>
