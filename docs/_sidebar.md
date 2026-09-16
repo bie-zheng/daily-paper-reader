@@ -1,6 +1,9 @@
 * <a class="dpr-sidebar-root-link" href="#/">首页</a>
 * <a class="dpr-sidebar-root-link dpr-sidebar-noactive-link" href="javascript:void(0)" data-dpr-hash="#/tutorial/README">使用教程</a>
 * Daily Papers
+  * 2026-09-16 <!--dpr-date:20260916-->
+    * 速读区
+      * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202609/16/2609.14925v1-machine-learning-guided-calphad-design-of-ru-stabilized-bcc-b2-refractory-alloys" data-sidebar-item="{&quot;title&quot;: &quot;Machine Learning Guided CALPHAD Design of Ru-Stabilized BCC B2 Refractory Alloys&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2609.14925v1-machine-learning-guided-calphad-design-of-ru-stabilized-bcc-b2-refractory-alloys&quot;, &quot;score&quot;: &quot;6.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;rad-damage&quot;}], &quot;evidence&quot;: &quot;B2析出相强化BCC合金的CALPHAD设计&quot;}">Machine Learning Guided CALPHAD Design of Ru-Stabilized BCC B2 Refractory Alloys</a>
   * 2026-09-15 <!--dpr-date:20260915-->
     * 速读区
       * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202609/15/2609.15429v1-effect-of-near-surface-thermal-spikes-on-radiation-hardness-of-gallium-oxide" data-sidebar-item="{&quot;title&quot;: &quot;Effect of Near-surface Thermal Spikes on Radiation Hardness of Gallium Oxide&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2609.15429v1-effect-of-near-surface-thermal-spikes-on-radiation-hardness-of-gallium-oxide&quot;, &quot;score&quot;: &quot;6.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;rad-damage&quot;}], &quot;evidence&quot;: &quot;辐照晶体中的辐照损伤与非晶化机制&quot;}">Effect of Near-surface Thermal Spikes on Radiation Hardness of Gallium Oxide</a>

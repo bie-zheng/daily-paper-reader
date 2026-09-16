@@ -1,0 +1,24 @@
+{
+  "label": "2026-09-16",
+  "date": "2026-09-16",
+  "generated_at": "2026-09-16T22:16:39",
+  "count": 1,
+  "papers": [
+    {
+      "paper_id": "202609/16/2609.14925v1-machine-learning-guided-calphad-design-of-ru-stabilized-bcc-b2-refractory-alloys",
+      "section": "quick",
+      "title_en": "Machine Learning Guided CALPHAD Design of Ru-Stabilized BCC B2 Refractory Alloys",
+      "authors": "Nathan Peterson, Avik Mahata, Nick Beaver, Mohsen Kivy",
+      "date": "2026-09-14",
+      "pdf": "https://arxiv.org/pdf/2609.14925v1",
+      "score": "6.0",
+      "evidence": "B2析出相强化BCC合金的CALPHAD设计",
+      "tldr": "难熔合金需兼具BCC基体韧性与B2有序相强化，Ru可稳定高温B2相，但多组元成分空间复杂。本文耦合平衡CALPHAD与随机森林主动学习，在Nb基含Ru十元合金中以1 at.%分辨率评估500个成分。结果显示BCC+B2稳定上限从5 at.% Ru约1570°C升至9-10 at.% Ru约1980°C，Hf/Zr/Ti稳定性递减，Al易促生σ和A15相。再筛选出100个满足高温双相稳定、无液相、相纯与相分数要求的合金，并给出Ru稳定双相难熔合金设计规则。",
+      "tags": "query:rad-damage",
+      "abstract_en": "Refractory alloys with a ductile body-centered-cubic (BCC) matrix strengthened by ordered B2 precipitates offer a high-temperature analogue to the gamma/gamma-prime architecture of Ni-based superalloys. Ruthenium is particularly attractive as a B2 stabilizer because RuHf, RuZr, and RuTi can retain ordered phases well above 1300 C. In this work, equilibrium CALPHAD calculations were coupled with random-forest-guided active learning to explore a ten-element Nb-based, Ru-bearing composition space containing Nb, Ta, Mo, V, Ru, Ti, Zr, Hf, Al, and Y at 1 at.% resolution. Across 500 CALPHAD-evaluated alloys, the calculations reproduced the principal trends reported for the Ru-B2 design space. RuHf and RuZr remained stable to the solidus, RuTi commonly exhibited a solutionizing window, and Al-containing alloys preferentially formed competing sigma and A15 phases. The upper bound of the BCC+B2 field increased from a median of approximately 1570 C at 5 at.% Ru to approximately 1980 C near 9-10 at.% Ru. Among the group-IV additions, Hf, Zr, and Ti produced progressively lower two-phase stability. Re-screening using physically motivated criteria identified 100 alloys satisfying requirements for high-temperature BCC+B2 stability, absence of liquid, phase purity, and appropriate secondary-phase fraction, including 19 Ru-lean compositions and two independently reported HfRu-B2 alloys. The results establish practical compositional design rules for Ru-stabilized dual-phase refractory alloys and identify phase-specific BCC/B2 lattice misfit as a key target for future design cycles.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

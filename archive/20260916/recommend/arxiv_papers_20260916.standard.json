@@ -1,0 +1,55 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-09-16T22:15:27.317664+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 1,
+    "quick_skim_target": 11,
+    "quick_selected": 1
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2609.14925v1",
+      "source": "arxiv",
+      "title": "Machine Learning Guided CALPHAD Design of Ru-Stabilized BCC B2 Refractory Alloys",
+      "abstract": "Refractory alloys with a ductile body-centered-cubic (BCC) matrix strengthened by ordered B2 precipitates offer a high-temperature analogue to the gamma/gamma-prime architecture of Ni-based superalloys. Ruthenium is particularly attractive as a B2 stabilizer because RuHf, RuZr, and RuTi can retain ordered phases well above 1300 C. In this work, equilibrium CALPHAD calculations were coupled with random-forest-guided active learning to explore a ten-element Nb-based, Ru-bearing composition space containing Nb, Ta, Mo, V, Ru, Ti, Zr, Hf, Al, and Y at 1 at.% resolution. Across 500 CALPHAD-evaluated alloys, the calculations reproduced the principal trends reported for the Ru-B2 design space. RuHf and RuZr remained stable to the solidus, RuTi commonly exhibited a solutionizing window, and Al-containing alloys preferentially formed competing sigma and A15 phases. The upper bound of the BCC+B2 field increased from a median of approximately 1570 C at 5 at.% Ru to approximately 1980 C near 9-10 at.% Ru. Among the group-IV additions, Hf, Zr, and Ti produced progressively lower two-phase stability. Re-screening using physically motivated criteria identified 100 alloys satisfying requirements for high-temperature BCC+B2 stability, absence of liquid, phase purity, and appropriate secondary-phase fraction, including 19 Ru-lean compositions and two independently reported HfRu-B2 alloys. The results establish practical compositional design rules for Ru-stabilized dual-phase refractory alloys and identify phase-specific BCC/B2 lattice misfit as a key target for future design cycles.",
+      "authors": [
+        "Nathan Peterson",
+        "Avik Mahata",
+        "Nick Beaver",
+        "Mohsen Kivy"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ],
+      "published": "2026-09-14T02:17:21+00:00",
+      "link": "https://arxiv.org/pdf/2609.14925v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "B2 precipitate strengthening in BCC alloys via CALPHAD design",
+      "llm_evidence_cn": "B2析出相强化BCC合金的CALPHAD设计",
+      "llm_evidence": "B2析出相强化BCC合金的CALPHAD设计",
+      "canonical_evidence": "B2析出相强化BCC合金的CALPHAD设计",
+      "llm_tldr_en": "Refractory BCC+B2 alloys mimic gamma/gamma-prime superalloys, but B2 stability is hard to screen. Coupling CALPHAD with random-forest active learning over a ten-element space, 500 alloys were evaluated; RuHf and RuZr stay stable to the solidus.",
+      "llm_tldr_cn": "难熔合金有望以BCC基体加有序B2析出相实现类似镍基高温合金γ/γ′的高温强化架构，但多组元成分空间中B2相的稳定性难以高效筛选。本文将平衡CALPHAD计算与随机森林引导的主动学习相结合，在含Nb、Ta、Mo、V、Ru、Ti、Zr、Hf、Al、Y的十元成分空间中以1 at.%分辨率进行探索，评估了500个合金。计算复现了Ru-B2设计空间的主要趋势，RuHf与RuZr可稳定至固相线，RuTi亦常见。该工作为B2相强化合金的成分设计提供了高效的数据驱动框架。",
+      "llm_tldr": "难熔合金有望以BCC基体加有序B2析出相实现类似镍基高温合金γ/γ′的高温强化架构，但多组元成分空间中B2相的稳定性难以高效筛选。本文将平衡CALPHAD计算与随机森林引导的主动学习相结合，在含Nb、Ta、Mo、V、Ru、Ti、Zr、Hf、Al、Y的十元成分空间中以1 at.%分辨率进行探索，评估了500个合金。计算复现了Ru-B2设计空间的主要趋势，RuHf与RuZr可稳定至固相线，RuTi亦常见。该工作为B2相强化合金的成分设计提供了高效的数据驱动框架。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "B2 phase strengthening in irradiated alloys",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
