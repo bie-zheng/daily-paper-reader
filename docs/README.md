@@ -6,24 +6,22 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-09-16
-- 运行时间：2026-09-16 22:16:37 UTC
+- 最新运行日期：2026-09-17
+- 运行时间：2026-09-17 22:17:40 UTC
 - 运行状态：成功
-- 本次总论文数：1
+- 本次总论文数：0
 - 精读区：0
-- 速读区：1
+- 速读区：0
 
 ### 今日简报（AI）
-今日仅速读1篇：机器学习引导CALPHAD设计Ru稳定BCC/B2难熔合金（6.0/10）。该方向值得关注的是用ML加速CALPHAD相图筛选，并以Ru作为BCC/B2相稳定元素。普通读者可先了解CALPHAD与机器学习结合如何缩短难熔合金设计周期，再决定是否深入原文。
-- 详情：[/202609/16/README](/202609/16/README)
+> 今日无新推荐，系统未产出可展示论文。
+- 详情：[/202609/17/README](/202609/17/README)
 
 ### 精读区论文标签
 - 本次无精读推荐。
 
 ### 速读区论文标签
-1. [Machine Learning Guided CALPHAD Design of Ru-Stabilized BCC B2 Refractory Alloys](/202609/16/2609.14925v1-machine-learning-guided-calphad-design-of-ru-stabilized-bcc-b2-refractory-alloys)  
-   标签：评分：6.0/10、query:rad-damage
-   evidence：B2析出相强化BCC合金的CALPHAD设计
+- 本次无速读推荐。
 
 
 <div class="dpr-home-promo-card">
