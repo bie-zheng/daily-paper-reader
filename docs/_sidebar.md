@@ -1,6 +1,9 @@
 * <a class="dpr-sidebar-root-link" href="#/">首页</a>
 * <a class="dpr-sidebar-root-link dpr-sidebar-noactive-link" href="javascript:void(0)" data-dpr-hash="#/tutorial/README">使用教程</a>
 * Daily Papers
+  * 2026-09-18 <!--dpr-date:20260918-->
+    * 速读区
+      * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202609/18/2609.13113v1-modification-of-surface-properties-in-ruthenium-thin-films-through-nitrogen-ion-irradiation" data-sidebar-item="{&quot;title&quot;: &quot;Modification of Surface Properties in Ruthenium Thin Films through Nitrogen Ion Irradiation&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2609.13113v1-modification-of-surface-properties-in-ruthenium-thin-films-through-nitrogen-ion-irradiation&quot;, &quot;score&quot;: &quot;6.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;rad-damage&quot;}], &quot;evidence&quot;: &quot;离子注量驱动结构与表面演化&quot;}">Modification of Surface Properties in Ruthenium Thin Films through Nitrogen Ion Irradiation</a>
   * 2026-09-16 <!--dpr-date:20260916-->
     * 速读区
       * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202609/16/2609.14925v1-machine-learning-guided-calphad-design-of-ru-stabilized-bcc-b2-refractory-alloys" data-sidebar-item="{&quot;title&quot;: &quot;Machine Learning Guided CALPHAD Design of Ru-Stabilized BCC B2 Refractory Alloys&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2609.14925v1-machine-learning-guided-calphad-design-of-ru-stabilized-bcc-b2-refractory-alloys&quot;, &quot;score&quot;: &quot;6.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;rad-damage&quot;}], &quot;evidence&quot;: &quot;B2析出相强化BCC合金的CALPHAD设计&quot;}">Machine Learning Guided CALPHAD Design of Ru-Stabilized BCC B2 Refractory Alloys</a>

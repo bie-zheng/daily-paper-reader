@@ -1,0 +1,62 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-09-18T21:27:53.103018+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 1,
+    "quick_skim_target": 11,
+    "quick_selected": 1
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2609.13113v1",
+      "source": "arxiv",
+      "title": "Modification of Surface Properties in Ruthenium Thin Films through Nitrogen Ion Irradiation",
+      "abstract": "Surface modification is an important strategy for tailoring the physical and chemical properties of materials for advanced technological applications. In thin films, changes in surface structure, roughness, and composition can strongly influence their functional behavior. In this work, we studied the effect of N+-ion irradiation at 20 keV energy on Ru thin films of two different thicknesses, 100 Å and 1000 Å, over a fluence range of ~1014 to 1017 ions/cm2. The main objective of this study is to investigate the evolution of the structural and wettability properties of Ru thin films of different thicknesses under increasing ion fluence. Overall, the results reveal that increasing ion fluence promotes surface roughening in both film thicknesses, which is correlated with an increase in contact angle. This indicates a clear transition from hydrophilic to hydrophobic behaviour, with the highest contact angle of ~95.54° observed at a fluence of 1017 ions/cm2. TRIM simulations reveal that for the 100 Å film, the projected ion range exceeds the film thickness, allowing interaction with the bottom substrate, whereas in the 1000 Å film, ion penetration remains largely confined within the Ru layer. GIXRD confirms fluence-dependent structural modification, including peak broadening with preferred orientation changes from Ru (101) to (002). Overall, this study demonstrates that N+-ion irradiation serves as an effective route for tuning both the surface morphology and wettability of Ru thin films, enabling controlled enhancement of hydrophobicity.",
+      "authors": [
+        "Anmol Sharma",
+        "Arnab Tripathy",
+        "Rajeev Gupta",
+        "Raj Kumar",
+        "Harsh Vardhan",
+        "Ratnesh Kumar Pandey",
+        "Atul Thakur",
+        "Shalendra Kumar",
+        "Ranjeet Kumar Brajpuriya",
+        "Vishakha Kaushik",
+        "Sachin Pathak"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ],
+      "published": "2026-09-11T17:44:38+00:00",
+      "link": "https://arxiv.org/pdf/2609.13113v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "ion irradiation fluence drives structural and surface evolution",
+      "llm_evidence_cn": "离子注量驱动结构与表面演化",
+      "llm_evidence": "离子注量驱动结构与表面演化",
+      "canonical_evidence": "离子注量驱动结构与表面演化",
+      "llm_tldr_en": "20 keV N+ ion irradiation of Ru thin films at fluences from 1e14 to 1e17 ions/cm2 produces progressive surface roughening, linking ion fluence and film thickness to structural and wettability evolution.",
+      "llm_tldr_cn": "薄膜材料在离子辐照下的表面结构与润湿性演化对其功能应用至关重要，但注量与厚度的影响机制尚不清楚。本文用20 keV氮离子对100 Å与1000 Å两种厚度的Ru薄膜进行辐照，注量覆盖约10^14至10^17 ions/cm2。结果表明随注量增加两种薄膜均出现表面粗化，结构缺陷与表面性质同步演变。该工作揭示了离子辐照诱导表面改性的基本规律，为辐照损伤与表面工程提供参考。",
+      "llm_tldr": "薄膜材料在离子辐照下的表面结构与润湿性演化对其功能应用至关重要，但注量与厚度的影响机制尚不清楚。本文用20 keV氮离子对100 Å与1000 Å两种厚度的Ru薄膜进行辐照，注量覆盖约10^14至10^17 ions/cm2。结果表明随注量增加两种薄膜均出现表面粗化，结构缺陷与表面性质同步演变。该工作揭示了离子辐照诱导表面改性的基本规律，为辐照损伤与表面工程提供参考。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation induced defect evolution and microstructure changes",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
