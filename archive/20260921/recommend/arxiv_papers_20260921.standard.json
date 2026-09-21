@@ -1,0 +1,92 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-09-21T22:34:54.443696+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 1,
+    "deep_cap": 6,
+    "deep_selected": 1,
+    "quick_candidates": 1,
+    "quick_skim_target": 11,
+    "quick_selected": 1
+  },
+  "deep_dive": [
+    {
+      "id": "2609.20986v1",
+      "source": "arxiv",
+      "title": "Faulted loop nucleation and dopant activation in Al-implanted 4H-SiC",
+      "abstract": "We present a molecular dynamics (MD) study of Al implantation in 4H-SiC to determine how implantation temperature and dose affect defect evolution and dopant activation during annealing. Simulations use the Gao-Weber potential with a Morse Al-SiC interaction reparameterized to density functional theory diffusion and kick-in/kick-out barriers. At Al concentrations above the saturation limit of ~2e20/cm3, implantation at 900 K promotes interstitial-rich planar clusters already during implantation. During annealing, these clusters trap Al and evolve into faulted interstitial loops, reducing substitutional Al incorporation. In contrast, lower implantation temperatures preserve stronger local disorder that is consumed during epitaxial regrowth, resulting in higher chemical activation within MD-accessible annealing times. Atomistic trajectories show a thermally activated transition to faulted loops once planar clusters reach about 60 interstitials. Rather than nucleating as a single coherent disk, several locally faulted regions form first and subsequently merge. The activation energy is ~1.1 eV for dislocation nucleation and ~2.1 eV for stacking-fault growth. Frank-type loops dominate at high temperature, while transient Shockley partials occur mainly at early stages and below 2000 K. As large planar defects form and dissolve, stable compensating Al-C complexes also emerge. These findings support the experimental hypothesis that secondary defects contribute to the reduced Al activation observed under supersaturation during annealing.",
+      "authors": [
+        "Sabine Leroch",
+        "Robert Stella",
+        "Andreas Hössinger",
+        "Lado Filipovic"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ],
+      "published": "2026-09-17T18:41:39+00:00",
+      "link": "https://arxiv.org/pdf/2609.20986v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "MD study of implantation-induced defect evolution and faulted interstitial loop formation",
+      "llm_evidence_cn": "离子注入诱导缺陷演化与堆垛层错间隙环形成的分子动力学研究",
+      "llm_evidence": "离子注入诱导缺陷演化与堆垛层错间隙环形成的分子动力学研究",
+      "canonical_evidence": "离子注入诱导缺陷演化与堆垛层错间隙环形成的分子动力学研究",
+      "llm_tldr_en": "MD simulations with a reparameterized Gao-Weber potential show Al implantation at 900 K forms interstitial planar clusters that evolve into faulted loops, trapping Al and lowering substitutional activation, while lower temperatures preserve disorder consumed by regrowth.",
+      "llm_tldr_cn": "铝注入4H-SiC时缺陷演化与掺杂激活的原子机制尚不清晰，注入温度与剂量的作用有待阐明。本文采用按DFT扩散与踢入踢出势垒重参数化的Morse Al-SiC势进行分子动力学模拟，研究Al注入与退火过程中的缺陷行为。结果显示，高浓度900K注入时即形成富间隙平面团簇，退火后演变为堆垛层错间隙环并俘获Al、降低替位激活；低温注入则保留可被外延再生长消耗的局部无序。该工作揭示了注入条件通过缺陷演化路径调控掺杂激活的规律，为离子注入掺杂工艺提供原子尺度依据。",
+      "llm_tldr": "铝注入4H-SiC时缺陷演化与掺杂激活的原子机制尚不清晰，注入温度与剂量的作用有待阐明。本文采用按DFT扩散与踢入踢出势垒重参数化的Morse Al-SiC势进行分子动力学模拟，研究Al注入与退火过程中的缺陷行为。结果显示，高浓度900K注入时即形成富间隙平面团簇，退火后演变为堆垛层错间隙环并俘获Al、降低替位激活；低温注入则保留可被外延再生长消耗的局部无序。该工作揭示了注入条件通过缺陷演化路径调控掺杂激活的规律，为离子注入掺杂工艺提供原子尺度依据。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation induced defect evolution and microstructure changes",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2609.21559v1",
+      "source": "arxiv",
+      "title": "Validation of an Ab Initio-Informed Electronic Stopping Model for Large-Scale Atomistic Simulations",
+      "abstract": "Accurately modeling nonadiabatic electronic energy dissipation in atomistic simulations of radiation damage remains a key challenge. Existing models often rely on arbitrary thresholds and neglect trajectory-dependent, band-structure, and nonlinear effects. A model developed by Tamm \\textit{et al.} (\\href{https://doi.org/10.1103/PhysRevLett.120.185501}{doi:10.1103/PhysRevLett.120.185501}) offers a nonempirical description of electronic dissipation for atomistic simulations, but has not been directly benchmarked in the electronic stopping regime. We present the first such benchmark via the comparison of atomistic simulations with experimental ion transmission experiments. The model accurately captures the magnitude and trajectory-dependence of the predicted energy losses. These results support the reliability of the model for predictive large-scale atomistic simulations of radiation cascades.",
+      "authors": [
+        "Glen P. Kiely",
+        "Rafael Nuñez-Palacio",
+        "Andrea E. Sand"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ],
+      "published": "2026-09-18T09:48:40+00:00",
+      "link": "https://arxiv.org/pdf/2609.21559v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "electronic energy dissipation modeling for radiation damage atomistic simulations",
+      "llm_evidence_cn": "辐照损伤原子模拟中的电子能量耗散建模",
+      "llm_evidence": "辐照损伤原子模拟中的电子能量耗散建模",
+      "canonical_evidence": "辐照损伤原子模拟中的电子能量耗散建模",
+      "llm_tldr_en": "Modeling nonadiabatic electronic energy dissipation in radiation-damage simulations is challenging because existing models use arbitrary thresholds and ignore band-structure and nonlinear effects. The authors benchmark Tamm et al.'s nonempirical electronic stopping model against ion transmission experiments.",
+      "llm_tldr_cn": "辐照损伤原子模拟中非绝热电子能量耗散难以准确建模，现有模型常依赖任意阈值并忽略轨迹依赖、能带结构和非线性效应。作者以Tamm等人提出的非经验电子阻止模型为基础，首次通过原子模拟与离子透射实验的对比进行基准验证。结果表明该模型能准确再现电子阻止的幅值和轨迹依赖行为。该工作为大规模辐照损伤原子模拟提供了可靠的电子能量耗散描述，有助于更真实地模拟结构材料的辐照损伤过程。",
+      "llm_tldr": "辐照损伤原子模拟中非绝热电子能量耗散难以准确建模，现有模型常依赖任意阈值并忽略轨迹依赖、能带结构和非线性效应。作者以Tamm等人提出的非经验电子阻止模型为基础，首次通过原子模拟与离子透射实验的对比进行基准验证。结果表明该模型能准确再现电子阻止的幅值和轨迹依赖行为。该工作为大规模辐照损伤原子模拟提供了可靠的电子能量耗散描述，有助于更真实地模拟结构材料的辐照损伤过程。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation damage mechanisms in structural materials",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}

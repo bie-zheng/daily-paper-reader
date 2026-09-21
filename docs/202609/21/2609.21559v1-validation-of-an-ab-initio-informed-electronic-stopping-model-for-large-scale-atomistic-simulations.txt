@@ -1,0 +1,211 @@
+Title: Validation of an Ab Initio-Informed Electronic Stopping Model for Large-Scale Atomistic Simulations
+
+URL Source: https://arxiv.org/pdf/2609.21559v1
+
+Published Time: Mon, 21 Sep 2026 00:45:49 GMT
+
+Number of Pages: 7
+
+Markdown Content:
+## Validation of an Ab Initio-Informed Electronic Stopping Model for Large-Scale Atomistic Simulations 
+
+G. P. Kiely, ∗ R. Nu˜ nez-Palacio, and A. E. Sand 
+
+Department of Applied Physics, Aalto University, 00076 Aalto Espoo, Finland 
+
+(Dated: September 21, 2026) Accurately modeling nonadiabatic electronic energy dissipation in atomistic simulations of ra-diation damage remains a key challenge. Existing models often rely on arbitrary thresholds and neglect trajectory-dependent, band-structure, and nonlinear effects. A model developed by Tamm 
+
+et al. (doi:10.1103/PhysRevLett.120.185501) offers a nonempirical description of electronic dissi-pation for atomistic simulations, but has not been directly benchmarked in the electronic stopping regime. We present the first such benchmark via the comparison of atomistic simulations with experimental ion transmission experiments. The model accurately captures the magnitude and trajectory-dependence of the predicted energy losses. These results support the reliability of the model for predictive large-scale atomistic simulations of radiation cascades. 
+
+Developments in modern nuclear and space technolo-gies require materials that maintain reliable performance under intense radiation, often at extreme pressures and temperatures. The reliable use of materials in such envi-ronments requires quantitative predictions of the extent of radiation-induced displacement damage that can al-ter the structural and physical properties of materials [1]. Empirical studies have shone light on the effects of radiation; however, the fundamental mechanisms of damage occur on the timescale of picoseconds, and thus are inaccessible to experimental observation. Atomistic simulations, in particular molecular dynamics (MD), of-fer the opportunity to investigate radiation damage pro-cesses and make damage predictions under many condi-tions at relatively low expense. The widespread success of classical MD can be at-tributed to the Born-Oppenheimer approximation [2], whereby electrons are assumed to remain in their in-stantaneous ground state and nonadiabatic electronic ef-fects are neglected. This allows for efficient simulation of atomistic systems, as the dynamics of nuclei can be accu-rately simulated as classical particles that interact via an interatomic potential [3]. However, in displacement cas-cades, nonadiabatic electronic effects significantly affect atomistic evolution [4–6]. The implementation of these processes in MD is not trivial. In displacement cascades, knock-on atoms dissipate ki-netic energy in inelastic collisions with electrons, a phe-nomenon known as electronic stopping [7]. It has been widely implemented as an extension to classical MD via a velocity-dependent retarding friction force, whose magni-tude is, in general, proportional to the velocity of the en-ergetic ion [7]. However, this simple velocity dependence cannot capture electronic band structure and other non-linear effects [8, 9], thus missing the strong trajectory-dependence of electronic stopping [10]. Moreover, to avoid unphysical quenching of the system, this friction is only applied to atoms with kinetic energy above a certain  
+
+> ∗glen.kiely@aalto.fi
+
+cutoff, which has no basis in theory and has historically been determined arbitrarily [6, 11–14]. As the kinetic energy during a displacement cascade dissipates, disparity between heat transport efficiencies results in different transient temperatures of the elec-tronic and atomic subsystems. This temperature im-balance is mediated by the exchange of energy between electrons and atoms via electron-phonon (e–ph) coupling [3]. The effect of e-ph coupling in displacement cascades has been of interest for decades [15]. Implementations of e-ph coupling in classical MD employ either a damp-ing force [16, 17], which suffers from the same threshold requirement as electronic stopping, or two-temperature MD (TTMD), where electrons act as a heat bath cou-pled to the ions [18–21]. Earlier studies have scrutinized deficiencies in mod-eling approaches for nonadiabatic electronic effects [22] and highlighted consequences for radiation damage pre-dictions [23]. The choice of arbitrary thresholds for both the e-ph coupling and electronic stopping affects the pre-dictions of the amount of damage [22, 24, 25] and the morphology of the resulting defects [25, 26]. Neglect-ing nonlinear, band structure and trajectory-dependent effects on electronic stopping results in unphysical ion penetration depths [27–29]. Similarly, a two-temperature treatment affects the energy transferred to the electronic system and on atomistic displacements [30]. These limi-tations have motivated the development of more accurate approaches. Caro and Victoria suggested in 1989 that the e-ph cou-pling is related to the low-velocity limit of electronic stop-ping [31]. With advances in modern computational capa-bilities and real-time implementations, time-dependent density functional theory (rt-TDDFT) has enabled the accurate first-principles calculation of nonadiabatic elec-tronic effects [32]. Caro et al. subsequently revisited the original hypothesis using modern TDDFT methods and demonstrated that the e-ph coupling can indeed be cal-culated as a particular case of electronic stopping [33], which led to the work of Tamm et al. who introduced a model for these effects as friction forces modulated by a scalar damping coefficient [34]. However, this scalar fric-arXiv:2609.21559v1 [cond-mat.mtrl-sci] 18 Sep 2026 2tion treatment indiscriminately damps all collective mo-tion and fails to capture phonon polarization lifetimes. Tamm et al. addressed this insufficiency by developing a more general framework based on tensorial friction and correlated random fluctuations [35], and implemented it in a TTMD framework [36–38]. This model, referred to as the unified two-temperature model (UTTM), simul-taneously captures the weak and strong damping of the respective e-ph coupling and electronic stopping regimes [36]. In the UTTM, correlated friction and stochastic con-tributions are introduced alongside the interatomic forces of classical MD via the equation: 
+
+fI = −∇ I U − X
+
+> J
+
+BIJ vJ
+
+| {z }
+
+> σI
+
++ X
+
+> J
+
+WIJ ξJ
+
+| {z }
+
+> ηI
+
+(1) where σI is a tensorial friction, proportional to the relative velocities of the neighborhood atoms, and corre-sponding random fluctuations are described by ηI . The 
+
+BIJ = P 
+
+> K
+
+WIK W TJK tensor is positive-definite, with: 
+
+WIJ =
+
+(−αJ ρI (rIJ )¯ρJ eIJ eIJ , (I̸ = J)
+
+αI
+
+P    
+
+> K̸=IρK(rIK )¯ρI
+
+eIK eIK , (I = J). (2) The total electron density at any point ¯ ρ regulates the damping strength and is calculated locally as the sum of the contributions of individual densities ρ(r) of neigh-bors. The coupling function α = α(¯ ρ) uses total electron density ¯ ρ as a proxy for the magnitude of the local elec-tronic coupling. The random forces η are determined by a set of independent white noise Gaussian variables ⟨ξ(t)⟩
+
+given by: 
+
+⟨ξI (t)ξJ (t′)⟩ = 2 kB Teδ(t − t′)δIJ (3) where Te is the local temperature of the electronic sys-tem [35]. The model contains no free or empirical pa-rameters, and the α(¯ ρ) coupling parameter is fit to rt-TDDFT data, offering ab initio accuracy of the electronic energy dissipation. Parameterizations for the UTTM have already been developed for a variety of materials [39–43]. Although simulations using the UTTM have shown reasonable results [30, 40, 41, 44], its treatment of elec-tronic energy dissipation has not been directly validated in the electronic stopping regime. In this Letter, we re-port the first direct benchmark of UTTM-predicted elec-tronic energy loss in this regime by reproducing the ion transmission measurements of Lohmann et al. [45]. To achieve a direct comparison with experimental measure-ments, we have implemented the UTTM in MDRANGE [46], an efficient molecular-dynamics-based code for ion-range calculations. Details on the implementation can be found in Ref. [27]. Using this, we simulate a beam of   
+
+> FIG. 1. Schematic of the ion trajectory analysis post-MD simulations. Ions are mapped to a detector plane at a distance
+> Laccording to their individual exit velocities upon transmis-sion through an Si foil.
+
+100-keV Si ions transmitting through a 53-nm monocrys-talline Si foil, and measure their exit energies on a circu-lar detector 0.29 m downstream. Electronic energy dissi-pation is calculated using the UTTM parametrization by N´ u˜ nez-Palacio et al. for silicon [42]. By varying the foil orientation relative to the incident beam, the experiment probes energy lost by ions traveling along distinct crys-tallographic trajectories, allowing the direct evaluation of the trajectory-dependence of the UTTM-calculated elec-tronic energy dissipation. We perform otherwise identical simulations using dif-ferent electronic stopping-power models implemented in MDRANGE to compare with the UTTM predictions. We employ a scalar friction model with velocity-dependent stopping calculated using SRIM [47] or time-dependent density functional theory (TDDFT) [10], and an addi-tional trajectory-dependent model based on local Firsov and free electron-gas theory [48]. A silicon lattice with a lattice constant of 5 .43 ˚ A was replicated on-the-fly as ions propagated through the foil. The foil was ther-malized to 300 K with displacements determined by the Debye model [49]. Projectile Si ions were initialized at random positions near the foil surface. Interactions be-tween the projectiles and foil atoms were described by the Ziegler–Biersack–Littmark (ZBL) interatomic poten-tial [50], which accurately describes the short-range nu-clear repulsion relevant in high-energy collisions. Each simulation was performed until 25 million ions transmit-ted through the foil. Beam orientations were varied to reproduce the channeling and pseudo-random directions investigated experimentally [45]. The transmitted ions from MDRANGE were propa-gated to the detector in post-analysis via: 
+
+r⊥,d = r⊥,t + Lv∥
+
+v⊥, (4) where L = r∥,d − r∥,t = 290 mm is the distance to the detector along the axis normal to both surfaces and par-allel to the beam direction. Here, r⊥,t and r⊥,d denote the transverse ion positions at the foil exit and detec-tor, respectively, while v⊥ and v∥ are the transverse and 3-40 -20 0 20 40 -40 -20 020 40                 
+
+> y (mm)
+> (a)
+> Without oxide layers
+> -40 -20 020 40 -40 -20 020 40
+> (b)
+> With oxide layers
+> -40 -20 020 40
+> x (mm)
+> -40 -20 020 40
+> y (mm)
+> (c)
+> -40 -20 020 40
+> x (mm)
+> -40 -20 020 40
+> (d)
+> 75 80 85 90
+> Energy (keV)
+> 10 4
+> 10 3
+> 10 2
+> 10 1
+> 10 0
+> Normalized Intensity
+
+FIG. 2. Effect of surface oxide layers on simulated trans-mission of 100 keV 29 Si ions through a 53-nm-thick Si foil under ⟨001 ⟩ channeling incidence. Position-dependent mean detected energy (a) without oxide layers and (b) with 22-˚A-thick oxide layers on the entry and exit surfaces. Corre-sponding detected ion intensity (c) without oxide layers and (d) with oxide layers. Electronic energy dissipation was mod-eled using the UTTM parametrization for Si developed by N´ u˜ nez-Palacio et al. [42]. 
+
+beam-parallel components of the ion velocity upon exit-ing the foil. This analysis is illustrated in Fig. 1. To assess the material specifications, we note Lohmann 
+
+et al. ’s speculation that the character of the measured ion energy-loss distributions was influenced by the pres-ence of oxide layers on the foil surfaces [45]. Holeˇ n´ ak 
+
+et al. subsequently demonstrated that the inclusion of oxide layers is necessary to reproduce experimentally ob-served energy-loss distributions in BCA simulations [51]. In agreement with these previous observations, in our simulations 22 ˚ A-thick oxide layers were indeed required on both foil surfaces to reproduce the degree of scat-tering observed in the experimental energy-loss maps of Lohmann et al. [45]. For ⟨001 ⟩ channeling incidence, in-cluding oxide layers results in a more uniform distribution of the mean detected energy per pixel (Fig. 2a–b) and detected intensity (Fig. 2c–d). The effect of the oxide layers is to scatter ions at the entrance and exit surfaces, resulting in a more uniform distribution of ions across the detector. A similar effect of scattering was observed in experimental work [52] for higher incident beam en-ergies, where a reduced scattering probability results in less uniform detector images. The energy map of transmitted ions with ⟨001 ⟩ chan-neling incidence is shown in Fig. 3(a). There is excel-lent agreement with the experimental map of Lohmann 
+
+et al. [45] shown in the inset. We chose two represen-tative annuli from the experimental work [45] to quan-tify the simulated energy loss predictions: the central transmitted beam, 0 .0–0 .2◦, containing strongly chan-neled trajectories, and an outer annulus at 9 .8–10 .0◦,which contains ions sampling a broader range of trajec-tories. In the outer annulus, the characteristic two-peak structure shows the contributions from both channeled and randomly scattered ions [45]. Figure 3(b,c) show the distributions obtained with scalar SRIM and TDDFT-calculated electronic stopping powers, while Fig.3(d,e) compare two trajectory-dependent models: the UTTM and the silicon-specific model developed by Peltola et al. 
+
+[48]. Simulations employing scalar models for the electronic stopping power result in much narrower distributions of energy losses than those calculated using trajectory-dependent models. For ions in the central ⟨001 ⟩ channel, the scalar rt-TDDFT stopping yields energy losses close to the experimental central-beam distribution. In con-trast, the SRIM stopping results in much larger energy losses. The trajectory-dependent models both reproduce the magnitude and the qualitative character of the energy loss distributions more accurately, including wide energy loss distributions and, in the outer annulus, the two-peak structure resulting from channeled and scattered trajec-tories. We further validate the trajectory-dependence of the UTTM using a pseudorandom incidence, whereby the foil is rotated by 6 ◦ about the x axis and 12 ◦ about the 
+
+y axis relative to the ⟨001 ⟩ channeling case [45]. Fig-ure4(a) shows the simulated mean-energy map of the de-tected ions, with the corresponding experimental map shown in the inset. The energy-loss distributions inte-grated over the full detector and over the central beam region are shown in Fig.4(b,c), and Fig.4(d,e) shows the energy losses corresponding to ions traveling along the 
+
+⟨115 ⟩ and ⟨015 ⟩ lattice directions. For comparison, we also include the energy losses of pseudorandom incident Si ions simulated by Hole˜ n´ ak et al. [51], who used a local electronic stopping model based on the form proposed by Oen and Robinson [53] imple-mented in a BCA code. While this model results in ex-cellent agreement of energy losses for the presented tra-jectories, its parameters were fitted empirically for the pseudorandom orientation and are not valid, for example, for ⟨001 ⟩ channeling incidence. In contrast, the UTTM model is parameter-free, informed by ab initio simula-tions, and is applicable for all of the trajectories con-sidered. We observe good agreement with experiment for most trajectories using the UTTM. In particular, the model reproduces the two-peak structure observed both in the outer annulus for ⟨001 ⟩ incidence, Fig.3(e), and in the annulus corresponding to the ⟨115 ⟩ channel for pseu-dorandom incidence 4(d). Because the relative heights of these peaks are sensitive to the oxide-layer thickness [51], the agreement in both cases supports the use of 22 ˚ A-thick oxide layers in the simulations. For detected ions corresponding to the ⟨015 ⟩ direction, Fig. 4(e), the 4-40 -20 0 20 40 
+
+x (mm) 
+
+> -40 -20 020 40
+> y (mm)
+
+0.0 0.2 
+
+9.8 10.0   
+
+> (a)
+> 70 75 80 85 90 95
+> Energy (keV)  510 15 0.0 0.5 1.0
+
+0.0 0.2      
+
+> (b)
+> 010 20 30 40 50
+
+9.8 10.0          
+
+> (c) Exp. SRIM TDDFT 510 15 0.0 0.5 1.0
+> (d)
+> 010 20 30 40 50
+> (e) Exp. Firsov UTTM
+> Normalized Counts
+> Scalar ESP Trajectory-Dependent ESP
+
+Energy Loss (keV) 
+
+FIG. 3. Simulated transmission of 100-keV 29 Si ions through a 53-nm-thick Si foil for ⟨001 ⟩ channeling incidence. (a) Map of the mean detected energy. The inset shows the corresponding experimental detector image from Ref. [45] on the same color scale. Energy-loss distributions are shown for ions detected in the central scattering annulus, 0 .0◦ to 0 .2◦, using (b) scalar electronic stopping models and (d) trajectory-dependent models. Corresponding distributions for the outer annulus, 9 .8◦ to 10 .0◦, are shown using (c) scalar models and (e) trajectory-dependent models. The UTTM parametrization for Si was developed by N´ u˜ nez-Palacio et al. [42]. The experimental image in (a) is reproduced from Ref.[45] under the CC BY 4.0 license. -40 -20 0 20 40 
+
+x (mm)    
+
+> -40 -20 020 40
+> y (mm)
+> <015> Center <115>
+> (a)
+> 70 75 80 85
+> Energy (keV)  10 20 30 40
+
+Energy loss (keV)           
+
+> 0.0 0.5 1.0 Whole Detector (b)
+> 10 20 30 40 Center (c) Exp. (r) BCA
+> Firsov UTTM 10 20 30 40 0.0 0.5 1.0 <115> (d)
+> 10 20 30 40 <015> (e)
+> Normalized Counts
+
+Energy Loss (keV) 
+
+FIG. 4. Simulated transmission of 100-keV 29 Si ions through a 53-nm-thick Si foil for pseudorandom incidence. The foil was rotated by 6 ◦ about the x axis and 12 ◦ about the y axis relative to the ⟨001 ⟩ channeling geometry in Fig.3. (a) Map of the mean detected energy. The inset shows the corresponding experimental detector image from Ref.[45] on the same color scale. Energy-loss distributions are shown for ions detected (b) over the full detector, (c) within a small region around the transmitted-beam position, (d) along the ⟨115 ⟩ direction, and (e) along the ⟨015 ⟩ direction. The experimental image in (a) is reproduced from Ref. [45] under the CC BY 4.0 license. 50.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 
+
+Velocity vv0 (a.u.) 
+
+> 010 20 30 40 50 60 70
+> dE dx  e (eV/Å)
+> Channeling Exp. Random Exp. Channeling MDRANGE Random MDRANGE
+
+FIG. 5. Comparison of experimentally measured electronic stopping powers from Ref. [45] with the average effective elec-tronic stopping powers obtained in this work. For each data point, the simulation conditions correspond directly to those of the experiment. Two datapoints overlap for the Channel-ing MDRANGE case at ∼ 0.53 a.u. 
+
+UTTM predicts energy losses that differ in magnitude from experiment. Nevertheless, the widths of the distri-butions remain in good agreement across all directions. Moreover, because nuclear stopping is treated explic-itly using the repulsive ZBL interatomic potential [50] in our simulations, we can directly separate the nuclear and electronic contributions to the total ion energy loss, and hence assess only the electronic stopping contribu-tion along these trajectories. In Fig. 5, we compare the effective electronic stopping power extracted from our simulations with the values determined experimentally by Lohmann et al. [45]. The comparison considers ions detected within the central 0 .0◦–0 .2◦ scattering annulus for the case of channeling incidence. Si isotopes and foil thicknesses were varied in our simulations to match the experimental conditions. The average effective electronic stopping power is calculated by: 
+
+ dE dx 
+
+
+
+> e
+
+= 1
+
+N
+
+> N
+
+X
+
+> i=1
+
+ ∆Eei
+
+d
+
+
+
+(5) where ∆ Eei is the energy lost via electronic dissipation by projectile ion i, d is the foil thickness, and N is the num-ber of detected ions included in the average. Across the investigated velocities, the effective electronic stopping power predicted using the UTTM agrees well with the experiment, for both channeling and random incidence. In conclusion, we demonstrate that the UTTM model for the electronic stopping results in predicted ion en-ergy losses that are in good agreement with experimental results over a range of crystallographic directions. We observe this agreement in both the magnitude and the character of simulated energy losses along all of the in-vestigated directions. The energy loss predictions using the UTTM model show significant improvements com-pared to the predictions made using other state-of-the-art electronic stopping models. This work serves as the first direct benchmark of the energy dissipation predicted by the UTTM model in the electronic stopping regime. This work was funded by the European Research Council (ERC, MUST, 101077454). Views and opinions expressed are, however, those of the author(s) only and do not necessarily reflect those of the European Union or the European Research Council. Neither the European Union nor the granting authority can be held responsi-ble for them. The authors would like to acknowledge the computational resources provided by the Aalto Science-IT project and thank Radek Hole˜ n´ ak for valuable discus-sions. 
+
+[1] S. Zinkle and G. Was, Materials challenges in nuclear energy, Acta Mater. 61 , 735 (2013). [2] M. Born and R. Oppenheimer, Zur quantentheorie der molekeln, Ann. Phys. (Berlin) 389 , 457 (1927). [3] K. Nordlund, S. J. Zinkle, A. E. Sand, F. Granberg, R. S. Averback, R. E. Stoller, T. Suzudo, L. Malerba, F. Banhart, W. J. Weber, F. Willaime, S. L. Dudarev, and D. Simeone, Primary radiation damage: A review of current understanding and models, J. Nucl. Mater. 512 ,450 (2018). [4] A. A. Correa, J. Kohanoff, E. Artacho, D. S´ anchez-Portal, and A. Caro, Nonadiabatic forces in ion-solid in-teractions: The initial stages of radiation damage, Phys. Rev. Lett. 108 , 213201 (2012). [5] T. D. de la Rubia, R. S. Averback, R. Benedek, and W. E. King, Role of thermal spikes in energetic displacement cascades, Phys. Rev. Lett. 59 , 1930 (1987). [6] E. Zarkadoula, G. Samolyuk, H. Xue, H. Bei, and W. J. Weber, Effects of two-temperature model on cascade evo-lution in ni and nife, Scripta Mater. 124 , 6 (2016). [7] J. Lindhard, M. Scharff, and H. E. Schioett, Range con-cepts and heavy ion ranges, Kgl. Danske Videnskab. Sel-skab. Mat. Fys. Medd. Vol: 33: No. 14 (1963). [8] A. Lim, W. M. C. Foulkes, A. P. Horsfield, D. R. Mason, A. Schleife, E. W. Draeger, and A. A. Correa, Electron elevator: Excitations across the band gap via a dynamical gap state, Phys. Rev. Lett. 116 , 043201 (2016). [9] E. E. Quashie, B. C. Saha, and A. A. Correa, Electronic band structure effects in the stopping of protons in cop-per, Phys. Rev. B 94 , 155403 (2016). [10] R. Nu˜ nez-Palacio and A. E. Sand, Path-dependent electronic stopping for self-irradiated silicon, Commun. Mater. 6, 109 (2025). [11] E. Zarkadoula, S. L. Daraszewicz, D. M. Duffy, M. A. 6
+
+Seaton, I. T. Todorov, K. Nordlund, M. T. Dove, and K. Trachenko, The nature of high-energy radiation dam-age in iron, J. Phys.: Condens. Matter 25 , 125402 (2013). [12] E. E. Zhurkin and A. S. Kolesnikov, Atomic scale mod-elling of al and ni(111) surface erosion under cluster im-pact, Nucl. Instrum. Methods Phys. Res. B 202 , 269 (2003). [13] M. M. Jakas and D. E. Harrison, Dependence of atom ejection on electronic energy loss, Phys. Rev. B 32 , 2752 (1985). [14] K. Nordlund, M. Ghaly, R. S. Averback, M. Caturla, T. Diaz de la Rubia, and J. Tarus, Defect production in collision cascades in elemental semiconductors and fcc metals, Phys. Rev. B 57 , 7556 (1998). [15] C. P. Flynn and R. S. Averback, Electron-phonon inter-actions in energetic displacement cascades, Phys. Rev. B 
+
+38 , 7118(R) (1988). [16] M. Finnis, P. Agnew, and A. Foreman, Thermal excita-tion of electrons in energetic displacement cascades, Phy. Rev. B 44 , 567 (1991). [17] F. Gao, D. Bacon, P. Flewitt, and T. Lewis, The effects of electron-phonon coupling on defect production by dis-placement cascades in iron, Model. Simul. Mater. Sci. Eng. 6, 543 (1998). [18] D. Duffy and A. Rutherford, Including the effects of elec-tronic stopping and electron-ion interactions in radia-tion damage simulations, J. Phys.: Condens. Matter 19 ,016207 (2007). [19] D. Duffy and A. Rutherford, Including electronic effects in damage cascade simulations, J. Nucl. Mater. 386-388 ,19 (2009). [20] E. Zarkadoula, S. Daraszewicz, D. M. Duffy, M. Seaton, I. T. Todorov, K. Nordlund, M. T. Dove, and K. Tra-chenko, Electronic effects in high-energy radiation dam-age in iron, J. Phys.: Condens. Matter 26 , 085401 (2014). [21] C. Zhang, F. Mao, and F.-S. Zhang, Electron–ion cou-pling effects on radiation damage in cubic silicon carbide, J. Phys.: Condens. Matter 25 , 235402 (2013). [22] J. Le Page, D. Mason, C. Race, and W. Foulkes, How good is damped molecular dynamics as a method to sim-ulate radiation damage in metals?, New J. Phys. 11 ,013004 (2009). [23] C. Race, D. Mason, M. Finnis, W. Foulkes, A. Horsfield, and A. Sutton, The treatment of electronic excitations in atomistic models of radiation damage in metals, Rep. Prog. Phys. 73 , 116501 (2010). [24] C. Bj¨ orkas and K. Nordlund, Assessment of the relation between ion beam mixing, electron–phonon coupling and damage production in fe, Nucl. Instrum. Methods Phys. Res. B 267 , 1830 (2009). [25] A. Sand and K. Nordlund, On the lower energy limit of electronic stopping in simulated collision cascades in ni, pd and pt, J. Nucl. Mater. 456 , 99 (2015). [26] A. E. Sand, S. L. Dudarev, and K. Nordlund, High-energy collision cascades in tungsten: Dislocation loops struc-ture and clustering scaling laws, Europhys. Lett. 103 ,46003 (2013). [27] G. P. Kiely, B. Semi˜ ao, E. Ponomareva, R. Nu˜ nez-Palacio, U. Arpiainen, and A. E. Sand, Trajectory-dependent electronic energy losses in ion range simula-tions, Comput. Mater. Sci. 263 , 114451 (2026). [28] A. E. Sand, R. Ullah, and A. A. Correa, Heavy ion ranges from first-principles electron dynamics, npj Com-put. Mater. 5, 43 (2019). [29] E. Ponomareva, A. Tamm, and A. E. Sand, Ab initio informed electronic stopping models for light ion propa-gation in metals, J. Nucl. Mater. 632 , 156906 (2026). [30] U. Saha, A. Hamedani, M. A. Caro, and A. E. Sand, Improved capabilities of the turbogap code for radiation induced cascade simulations: An illustration with silicon, Comput. Mater. Sci. 267 , 114560 (2026). [31] A. Caro and M. Victoria, Ion-electron interaction in molecular-dynamics cascades, Phys. Rev. A 40 , 2287 (1989). [32] A. A. Correa, Calculating electronic stopping power in materials from first principles, Comput. Mater. Sci. 150 ,291 (2018). [33] A. Caro, A. Correa, A. Tamm, G. D. Samolyuk, and G. M. Stocks, Adequacy of damped dynamics to repre-sent the electron-phonon interaction in solids, Phys. Rev. B 92 , 144309 (2015). [34] A. Tamm, G. Samolyuk, A. Correa, M. Klintenberg, A. Aabloo, and A. Caro, Electron-phonon interaction within classical molecular dynamics, Phys. Rev. B 94 ,024305 (2016). [35] A. Tamm, M. Caro, A. Caro, G. Samolyuk, M. Klin-tenberg, and A. A. Correa, Langevin dynamics with spa-tial correlations as a model for electron-phonon coupling, Phys. Rev. Lett. 120 , 185501 (2018). [36] A. Tamm, M. Caro, A. Caro, and A. A. Correa, Role of electrons in collision cascades in solids. ii. molecular dynamics, Phys. Rev. B 99 , 174302 (2019). [37] USER-EPH LAMMPS Fix Codebase: https://github.com/LLNL/USER-EPH. [38] A. P. Thompson, H. M. Aktulga, R. Berger, D. S. Bolin-tineanu, W. M. Brown, P. S. Crozier, P. J. in ’t Veld, A. Kohlmeyer, S. G. Moore, T. D. Nguyen, R. Shan, M. J. Stevens, J. Tranchida, C. Trott, and S. J. Plimpton, LAMMPS - a flexible simulation tool for particle-based materials modeling at the atomic, meso, and continuum scales, Comp. Phys. Comm. 271 , 108171 (2022). [39] M. Caro, A. Tamm, A. A. Correa, and A. Caro, Role of electrons in collision cascades in solids. i. dissipative model, Phys. Rev. B 99 , 174301 (2019). [40] T. Jarrin, N. Richard, J. Teunissen, F. Da Pieve, and A. H´ emeryck, Integration of electronic effects into molec-ular dynamics simulations of collision cascades in sili-con from first-principles calculations, Phys. Rev. B 104 ,195203 (2021). [41] J. L. Teunissen, T. Jarrin, N. Richard, N. E. Koval, D. M. n. Santiburcio, J. Kohanoff, E. Artacho, F. Cleri, and F. Da Pieve, Effect of electronic stopping in molecu-lar dynamics simulations of collision cascades in gallium arsenide, Phys. Rev. Mater. 7, 025404 (2023). [42] R. Nu˜ nez-Palacio, G. Kiely, A. Tamm, and A. Sand, Trajectory-dependent electronic stopping in simulations of self-ion ranges in elemental semiconductors (2026), preprint. [43] E. Ponomareva, A. Tamm, and A. E. Sand, Modeling anisotropic energy dissipation of light ions at the atom-istic scale (2026), arXiv:2603.10838 [cond-mat.mtrl-sci]. [44] A. E. Sand, G. P. Kiely, A. Tamm, and A. A. Correa, Electronic effects in radiation-induced collision cascades in nickel, Phys. Rev. Mater. 9, 053603 (2025). [45] S. Lohmann, R. Holeˇ n´ ak, and D. Primetzhofer, Trajectory-dependent electronic excitations by light and heavy ions around and below the bohr velocity, Phys. Rev. A 102 , 062803 (2020). 7
+
+[46] K. Nordlund, Molecular dynamics simulation of ion ranges in the 1–100 kev energy range, Comput. Mater. Sci. 3, 448 (1995). [47] J. F. Ziegler, Srim software package. [48] K. N. J. Peltola and J. Keinonen, Electronic stopping power calculation method for molecular dynamics sim-ulations using local firsov and free electron-gas models, Radiat. Eff. Defects Solids 161 , 511 (2006). [49] K. Nordlund and G. Hobler, Dependence of ion chan-neling on relative atomic number in compounds, Nucl. Instrum. Methods Phys. Res. B 435 , 61 (2018). [50] J. Ziegler, J. Biersack, and U. Littmark, The Stopping and Range of Ions in Solids , Stopping and ranges of ions in matter (Pergamon, 1985). [51] R. Holeˇ n´ ak, E. Ntemou, S. Lohmann, M. Linnarsson, and D. Primetzhofer, Assessing trajectory-dependent elec-tronic energy loss of kev ions by a binary collision ap-proximation code, Phys. Rev. Appl. 21 , 024048 (2024). [52] R. Holeˇ n´ ak, S. Lohmann, and D. Primetzhofer, Contrast modes in a 3d ion transmission approach at kev energies, Ultramicroscopy 217 , 113051 (2020). [53] O. S. Oen and M. T. Robinson, Computer studies of the reflection of light ions from solids, Nucl. Instrum. Meth-ods 132 , 647 (1976).

@@ -1,0 +1,39 @@
+{
+  "label": "2026-09-21",
+  "date": "2026-09-21",
+  "generated_at": "2026-09-21T22:38:02",
+  "count": 2,
+  "papers": [
+    {
+      "paper_id": "202609/21/2609.20986v1-faulted-loop-nucleation-and-dopant-activation-in-al-implanted-4h-sic",
+      "section": "deep",
+      "title_en": "Faulted loop nucleation and dopant activation in Al-implanted 4H-SiC",
+      "authors": "Sabine Leroch, Robert Stella, Andreas Hössinger, Lado Filipovic",
+      "date": "2026-09-17",
+      "pdf": "https://arxiv.org/pdf/2609.20986v1",
+      "score": "8.0",
+      "evidence": "离子注入诱导缺陷演化与堆垛层错间隙环形成的分子动力学研究",
+      "tldr": "针对Al注入4H-SiC退火中二次缺陷降低掺杂激活的问题，采用分子动力学模拟研究注入温度与剂量对缺陷演化和Al激活的影响，并用Gao-Weber势及重参数化Morse Al-SiC作用。高剂量900 K注入会形成富间隙平面团簇，退火时俘获Al并演化为层错间隙环，降低替位Al；较低温注入保留局部无序，外延再生长中消耗无序，提高激活。平面团簇约60个间隙原子后热激活转变为Frank型层错环，位错形核能垒约1.1 eV、层错生长约2.1 eV。",
+      "tags": "query:rad-damage",
+      "abstract_en": "We present a molecular dynamics (MD) study of Al implantation in 4H-SiC to determine how implantation temperature and dose affect defect evolution and dopant activation during annealing. Simulations use the Gao-Weber potential with a Morse Al-SiC interaction reparameterized to density functional theory diffusion and kick-in/kick-out barriers. At Al concentrations above the saturation limit of ~2e20/cm3, implantation at 900 K promotes interstitial-rich planar clusters already during implantation. During annealing, these clusters trap Al and evolve into faulted interstitial loops, reducing substitutional Al incorporation. In contrast, lower implantation temperatures preserve stronger local disorder that is consumed during epitaxial regrowth, resulting in higher chemical activation within MD-accessible annealing times. Atomistic trajectories show a thermally activated transition to faulted loops once planar clusters reach about 60 interstitials. Rather than nucleating as a single coherent disk, several locally faulted regions form first and subsequently merge. The activation energy is ~1.1 eV for dislocation nucleation and ~2.1 eV for stacking-fault growth. Frank-type loops dominate at high temperature, while transient Shockley partials occur mainly at early stages and below 2000 K. As large planar defects form and dissolve, stable compensating Al-C complexes also emerge. These findings support the experimental hypothesis that secondary defects contribute to the reduced Al activation observed under supersaturation during annealing.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202609/21/2609.21559v1-validation-of-an-ab-initio-informed-electronic-stopping-model-for-large-scale-atomistic-simulations",
+      "section": "quick",
+      "title_en": "Validation of an Ab Initio-Informed Electronic Stopping Model for Large-Scale Atomistic Simulations",
+      "authors": "Glen P. Kiely, Rafael Nuñez-Palacio, Andrea E. Sand",
+      "date": "2026-09-18",
+      "pdf": "https://arxiv.org/pdf/2609.21559v1",
+      "score": "7.0",
+      "evidence": "辐照损伤原子模拟中的电子能量耗散建模",
+      "tldr": "在原子尺度模拟辐照损伤时，非绝热电子能量耗散长期难以准确描述，现有模型常依赖任意阈值且忽略轨迹、能带和非线性效应，制约了预测可靠性。本文首次在电子阻止本领区间，将Tamm等人提出的非经验电子耗散模型与离子透射实验进行直接基准比较。模拟准确复现了能量损失的大小及其对轨迹的依赖。该结果支持该模型用于辐射级联的大规模预测性原子模拟。",
+      "tags": "query:rad-damage",
+      "abstract_en": "Accurately modeling nonadiabatic electronic energy dissipation in atomistic simulations of radiation damage remains a key challenge. Existing models often rely on arbitrary thresholds and neglect trajectory-dependent, band-structure, and nonlinear effects. A model developed by Tamm \\textit{et al.} (\\href{https://doi.org/10.1103/PhysRevLett.120.185501}{doi:10.1103/PhysRevLett.120.185501}) offers a nonempirical description of electronic dissipation for atomistic simulations, but has not been directly benchmarked in the electronic stopping regime. We present the first such benchmark via the comparison of atomistic simulations with experimental ion transmission experiments. The model accurately captures the magnitude and trajectory-dependence of the predicted energy losses. These results support the reliability of the model for predictive large-scale atomistic simulations of radiation cascades.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
