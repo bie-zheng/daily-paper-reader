@@ -1,0 +1,39 @@
+{
+  "label": "2026-09-22",
+  "date": "2026-09-22",
+  "generated_at": "2026-09-22T22:06:08",
+  "count": 2,
+  "papers": [
+    {
+      "paper_id": "202609/22/2609.23623v1-phase-field-modelling-of-microstructure-transformations-in-zr-sn-alloy-during-irradiation",
+      "section": "deep",
+      "title_en": "Phase field modelling of microstructure transformations in Zr-Sn alloy during irradiation",
+      "authors": "V. O. Kharchenko, D. O. Kharchenko, A. V. Dvornichenko",
+      "date": "2026-09-20",
+      "pdf": "https://arxiv.org/pdf/2609.23623v1",
+      "score": "8.0",
+      "evidence": "相场模拟辐照下溶质空位重排与第二相演化",
+      "tldr": "针对 Zr-Sn 合金在固溶热处理与反应堆中子辐照条件下溶质和空位空间重排及第二相演化问题，本文构建相场模型，将反应速率理论与 CALPHAD 方法耦合为统一框架，并开展三维模拟以获取体相溶质与缺陷分布细节。模拟揭示热处理阶段第二相的析出行为及其在中子辐照下的稳定性，并定量分析辐照剂量对第二相颗粒统计特征的影响。该工作为核材料辐照微结构演化提供多尺度耦合预测手段。",
+      "tags": "query:rad-damage",
+      "abstract_en": "In this work we study peculiarities of spatial rearrangement of solute and vacancy concentrations in Zr-Sn alloy at stages of both thermal treatment of solid solution and irradiation of annealed alloy under reactor conditions. To this end, we exploit phase field modelling including reaction rate theory and CALPHAD method combined in one generalized approach. Simulations were done in 3D in order to get a detailed information about rearrangement of solutes and defects in a bulk. We discuss the emergence of the secondary phase at the stage of thermal treatment and its stability under neutron irradiation. We analyze an influence of the irradiation dose onto statistical properties of the secondary phase particles.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202609/22/2609.23564v1-dual-role-of-mobile-interstitials-in-defect-kinetics-from-retardation-to-acceleration",
+      "section": "quick",
+      "title_en": "Dual Role of Mobile Interstitials in Defect Kinetics: From Retardation to Acceleration",
+      "authors": "Shihao Zhang, Shihao Zhu, Junping Du, Shuhei Shinzato, Ju Li, Shigenobu Ogata",
+      "date": "2026-09-20",
+      "pdf": "https://arxiv.org/pdf/2609.23564v1",
+      "score": "6.0",
+      "evidence": "可移动间隙原子与缺陷动力学",
+      "tldr": "移动间隙原子会随缺陷迁移重新分布，使缺陷动力学预测困难，并造成加速与减速的矛盾结论。本文在固定间隙化学势的大正则系综中定义激活自由能，结合超平面约束热力学积分与双态化学势积分TSCPI，快速绘制温度与化学势图谱。对FCC、BCC、HCP金属中氢及BCC钨中氦辅助空位扩散，两种自由能路径与分子动力学扩散系数一致，并揭示抑制到增强的转变。位点占据分析把势垒变化联系到状态依赖位点谱和可迁移相互作用项。",
+      "tags": "query:rad-damage",
+      "abstract_en": "Mobile interstitial atoms redistribute while defects migrate, complicating prediction of defect kinetics and leading to contradictory reports of acceleration and retardation. We formulate defect activation in a grand-canonical ensemble at fixed interstitial chemical potential and define a pathway free-energy landscape $ΔG(Λ;T,μ)$ and the corresponding activation free energy $ΔG^{\\ddagger}$. We compute these quantities using both hyperplane-constrained thermodynamic integration via a mean force relation and a two-state chemical-potential integration, denoted TSCPI. The latter requires sampling only the initial and transition states; a single chemical-potential integration then yields $ΔG^{\\ddagger}(T,μ)$ across a wide $μ$ range, enabling rapid mapping over temperature and chemical potential. Applied to vacancy diffusion in FCC, BCC, and HCP metals with H (including in plane and cross plane diffusion in Zr) and in BCC W with He, both free energy routes agree with diffusion coefficients from molecular dynamics mean square displacements. The resulting maps reveal regimes of suppression and enhancement, including a crossover from suppression to enhancement with increasing hydrogen concentration. A site occupancy analysis links barrier shifts to state dependent site spectrum changes and transferable interstitial interaction terms.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

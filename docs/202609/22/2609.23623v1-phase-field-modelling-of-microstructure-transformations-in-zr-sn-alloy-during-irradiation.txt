@@ -1,0 +1,539 @@
+Title: Phase field modelling of microstructure transformations in Zr-Sn alloy during irradiation
+
+URL Source: https://arxiv.org/pdf/2609.23623v1
+
+Published Time: Tue, 22 Sep 2026 01:33:27 GMT
+
+Number of Pages: 16
+
+Markdown Content:
+Condensed Matter Physics, 2026, Vol. 29, No. 3, 33601: 1–15 DOI: 10.5488/CMP.29.33601 ISSN: 1607-324X https://cmpj2.icmp.lviv.ua 
+
+# Phase field modelling of microstructure transformations in Zr–Sn alloy during irradiation 
+
+V. O. Kharchenko 1,2 ∗, D. O. Kharchenko 1, A. V. Dvornichenko 21 Institute of Applied Physics, National Academy of Sciences of Ukraine, Sumy 40000, Ukraine  
+
+> 2
+
+Sumy State University, Sumy 40007, Ukraine Received 15 April 2026; revised 15 June 2026; accepted 16 June 2026; published 28 September 2026 In this work we study peculiarities of spatial rearrangement of solute and vacancy concentrations in Zr–Sn alloy at stages of both thermal treatment of solid solution and irradiation of annealed alloy under reactor conditions. To this end, we exploit phase field modelling including reaction rate theory and CALPHAD method combined in one generalized approach. Simulations were done in 3D in order to get a detailed information about rear-rangement of solutes and defects in a bulk. We discuss the emergence of the secondary phase at the stage of thermal treatment and its stability under neutron irradiation. We analyze an influence of the irradiation dose onto statistical properties of the secondary phase particles. 
+
+Key words: Zr–Sn alloys, phase field modelling, phase separation, irradiation, statistical properties 
+
+## 1. Introduction 
+
+Zirconium-based alloys are widely used as cladding and structural materials in nuclear reactors due to their low neutron absorption cross-section, good corrosion resistance, and satisfactory mechanical properties under extreme operating conditions [1, 2]. During thermal treatment and irradiation, zirconium alloys undergo complex microstructural evolution involving phase transformations, solute redistribution, and precipitation of secondary phase (SP) [2, 3]. These processes strongly affect macroscopic properties such as strength, corrosion resistance, and dimensional stability [1]. In particular, precipitation phenomena are governed by the interplay between thermally activated diffusion and irradiation-induced effects, including radiation-enhanced diffusion and radiation-induced segregation [2, 4]. Irradiation produces high concentrations of point defects, such as vacancies and self-interstitial atoms, which significantly enhance the atomic mobility and promote non-equilibrium phase transformations [2]. As a result, the kinetics of nucleation, growth, and coarsening of precipitates under irradiation conditions can substantially differ from those observed under purely thermal conditions [4]. Tin is one of the principal alloying elements in zirconium alloys and plays a key role in phase stabil-ity, diffusion kinetics, determining phase equilibria, microstructural evolution and precipitation [1, 5, 6]. Experimental studies have shown that Sn affects the solubility limits, defect evolution, and irradiation response in zirconium alloys [1, 3]. In technologically very effective systems such as Zircaloy-2 and Zircaloy-4, tin contributes to the formation and evolution of second phase particles and influences corro-sion resistance and irradiation growth [5, 6]. Phase diagram studies of Zr–Sn and related multicomponent systems indicate the possibility of forming complex intermetallic phases [7, 8]. In particular, metastable phases may arise due to supersaturation, rapid thermal processing, or irradiation-induced effects. SP formation in Zr–Sn alloys is governed by invariant reactions and temperature-dependent solubility limits. The intermetallic 𝜂 -phase (Zr 5Sn 3+𝑥 ) forms at high temperatures via a eutectic reaction with 𝛽 -Zr and congruently melts at ∼ 2260 K, exhibiting a homogeneity range (0 ⩽ 𝑥 ⩽ 1) [9]. At lower temperatures, 
+
+> ∗
+
+Corresponding author: vasiliy@ipfcentr.sumy.ua  
+
+> This work is licensed under a Creative Commons Attribution 4.0 International License . Further distribution of this work must maintain attribution to the author(s) and the published article’s title, journal citation, and DOI.
+
+33601-1 arXiv:2609.23623v1 [cond-mat.mtrl-sci] 20 Sep 2026 V. O. Kharchenko, D. O. Kharchenko, A. V. Dvornichenko 
+
+a miscibility gap develops within this phase, leading to separation into compositions close to Zr 5Sn 3 and Zr 5Sn 4 [10, 11]. Of particular interest are A15-type intermetallic phases, characterized by a complex cubic structure and typically described by the A 3B stoichiometry. While A15 phases are well known in systems such as Nb-Sn, experimental indications suggest that A15-like or structurally related metastable phases may also emerge in zirconium-containing alloys [4, 8, 12]. The A15 phase emerges through a peritectoid reaction between 𝛽 -Zr and the 𝜂 -phase [9]. Although initially described as Zr 4Sn, it is now associated with a cubic A15 structure exhibiting non-stoichiometry, attributed to Sn vacancies or Zr substitution [10]. A limited compositional range of this phase has also been reported [11, 13]. At lower temperatures, a second peritectoid reaction ( 𝛽 -Zr + A15 → 𝛼 -Zr) reduces Sn solubility in 𝛼 -Zr and promotes precipitation of the A15 phase as a SP enriched by tin [9]. Despite some discrepancies in the reported solubility limits [13– 16], it is generally accepted that a decreasing temperature enhances SP precipitation. Precipitation of A15 SP is typically associated with defect accumulation, enhanced diffusion, and local compositional fluctuations. Despite these indications, the mechanisms governing the nucleation and growth of A15-type phases in Zr–Sn alloys remain poorly understood, particularly under coupled thermal and irradiation conditions. The interplay between radiation-induced defects, solute redistribution, and phase stability presents a complex multiscale problem that requires advanced modelling approaches. Mathematical modelling has become an essential tool for studying microstructural evolution in irradiated materials. Classical approaches such as rate theory and cluster dynamics have been successfully applied to describe the defect evolution and precipitation kinetics [2, 4]. However, these approaches are limited in their capability to capture a spatially resolved microstructure and complex morphologies. In this context, the phase-field method emerged as a powerful framework for modelling microstructural evolution. It enables the description of diffuse interfaces, complex morphologies, and the coupling between chemical, elastic, and defect fields [17, 18]. Phase-field models are effectively applied to precipitation and phase transformation phenomena in various material systems [19, 20], including zirconium alloys [21–24]. At the same time, the influence of irradiation onto stability of the complex intermetallic phases, including A15-type structures, its morphology and statistical properties has received limited attention. Therefore, there is a clear need for the development of a comprehensive phase-field model capable of describing the dynamics of SP precipitation in Zr–Sn alloys under combined thermal treatment and irradiation. Such a model should account for defect-mediated diffusion, non-equilibrium thermodynamics, and the coupling between irradiation damage and phase evolution. The present work aims at developing a phase-field approach for modelling the nucleation and growth of tin-enriched SP precipitates (such as A15-type phase) in Zr–Sn alloys, with particular emphasis on irradiation-induced effects and non-equilibrium kinetics. We provide 3D modelling of SP precipitation during thermal treatment of the solid solution and analyze microstructure transformations and rear-rangement of nonequilibrium defects in Zr–Sn alloy with stable precipitates subjected to a sustained irradiation. The work is organized in the following manner. In section 2 we discuss the phase-field model of microstructure evolution in binary Zr–Sn alloys with point defects. In section 3 we present results of numerical simulation. We conclude in the last section. 
+
+## 2. Phase field model of microstructure evolution in Zr–Sn alloys 
+
+By considering a binary alloy Zr–Sn with atoms of two sorts we operate with local atomic concentra-tions for Zr and Sn as continuously evolving fields in space r and time 𝑡 denoted as 𝑥 𝛼 (r, 𝑡 ) = N𝛼 (r, 𝑡 )/N 
+
+with 𝛼 = {Zr , Sn }, where N𝛼 (r, 𝑡 ) is the number of atoms of the sort 𝛼 , N is the total number of atoms included in a cubic cell of the size ℓ < 𝛿 , where 𝛿 is the interface width. Concentration of point defects 
+
+𝑑 = {𝑖, 𝑣 } (𝑖, 𝑣 correspond to interstitials and vacancies, respectively) we denote as 𝑐 𝑑 (r, 𝑡 ) = N𝑑 (r, 𝑡 )/N .The system is considered in a fixed volume 𝑉 with periodic boundary conditions. 
+
+> 33601-2 Phase field modelling of microstructure transformations in Zr–Sn alloy
+
+2.1. Gibbs energy formalism for Zr–Sn system 
+
+A total Gibbs energy 
+
+𝐺 tot = 𝐺 Zr −Sn +∑︁ 
+
+> 𝑑
+
+𝐺 𝑑 (2.1) is composed of parts related to the atomic subsystem 𝐺 Zr −Sn and point defects subsystem Í𝑑 𝐺 𝑑 . The molar Gibbs energy for the atomic subsystem is given by 
+
+𝐺 Zr −Sn = 𝐺 ref Zr −Sn + 𝐺 id Zr −Sn + 𝐺 ex Zr −Sn , (2.2) where 𝐺 ref Zr −Sn is the reference Gibbs energy, 𝐺 id Zr −Sn denotes the ideal Gibbs energy contribution due to random mixing of atoms, 𝐺 ex Zr −Sn is the excess term defining a deviation from ideality. The reference Gibbs energy is written in the standard form 
+
+𝐺 ref Zr −Sn = 𝐺 0Zr 𝑥 Zr + 𝐺 0Sn 𝑥 Sn . (2.3) Here, we consider zirconium in 𝛼 -phase 𝐺 0Zr = 𝐺 𝛼  
+
+> Zr
+
+and assume that pure tin 𝐺 0Sn = 𝐺 pure Sn dissolved in 
+
+𝛼 -zirconium. The ideal part relates to entropic contribution 
+
+𝐺 id Zr −Sn = 𝑅𝑇 [𝑥 Zr ln 𝑥 Zr + 𝑥 Sn ln 𝑥 Sn ] , (2.4) where 𝑅 is the gas constant ant 𝑇 is the temperature. The excess term has the form 
+
+𝐺 ex Zr −Sn = 𝑥 Zr 𝑥 Sn 𝐿 Sn ,Zr , (2.5) where 
+
+𝐿 Sn ,Zr =∑︁ 
+
+> 𝑛
+
+(𝑥 Sn − 𝑥 Zr )𝑛 𝐿 𝑛  
+
+> Sn ,Zr
+
+(𝑇 ). (2.6) The coefficients 𝐿 𝑛  
+
+> Sn ,Zr
+
+are obtained from least-squares fitting of experimental data. They may be tem-perature dependent: 𝐿 𝑛  
+
+> Sn ,Zr
+
+(𝑇 ) = 𝐴 + 𝐵𝑇 . Mainly regular interaction parameter relates to 𝑛 = 0, and sub-regular interaction corresponds to 𝑛 = 1. They are used to define the excess Gibbs energy as: 
+
+𝐺 ex Zr −Sn = 𝑥 Zr 𝑥 Sn 
+
+𝐿 0Sn ,Zr + ( 𝑥 Sn − 𝑥 Zr )𝐿 1Sn ,Zr 
+
+ . (2.7) For the defect subsystem, the contribution 𝐺 𝑑 for the 𝑑 -type defect has the following form: 
+
+𝐺 𝑑 = 𝐺 𝑓 𝑑 + 𝐺 id  
+
+> 𝑑
+
++ 𝐺 int  
+
+> 𝑑
+
+. (2.8) Without loss of generality, one can define the formation energy of defects 𝐺 𝑓 𝑑 through its formation energies 𝐺 𝑓 , Zr  
+
+> 𝑑
+
+in pure Zr and 𝐺 𝑓 , Sn  
+
+> 𝑑
+
+in pure tin, and the nominal concentration of zirconium 𝑥 Zr and tin 
+
+𝑥 Sn in the form 
+
+𝐺 𝑓 𝑑 = 𝐺 𝑓 , Zr  
+
+> 𝑑
+
+𝑥 Zr + 𝐺 𝑓 , Sn  
+
+> 𝑑
+
+𝑥 Sn . (2.9) The entropic contribution is 𝐺 id  
+
+> 𝑑
+
+= 𝑅𝑇 𝑐 𝑑 ln 𝑐 𝑑 . Interactions of point defects with zirconium and tin atoms can be described by the Gibbs component: 
+
+𝐺 int  
+
+> 𝑑
+
+= 𝑐 𝑑 
+
+𝑥 Zr 𝐺 int  
+
+> 𝑑 −𝑍𝑟
+
++ 𝑥 Sn 𝐺 int 
+
+> 𝑑 −𝑆𝑛
+
+ , (2.10) where for the defect-atom interaction energies we use: 
+
+𝐺 int  
+
+> 𝑑 −𝑍𝑟
+
+= 𝐺 Zr coh + 𝐺 𝑓 , Zr 
+
+> 𝑑
+
+𝑍 , 𝐺 int  
+
+> 𝑑 −𝑆𝑛
+
+= 𝐺 Sn coh + 𝐺 𝑓 , Sn 
+
+> 𝑑
+
+𝑍 . (2.11) Here, 𝐺 Zr ,Sn coh denote the corresponding cohesive energies, 𝑍 relates to the coordination number. 
+
+> 33601-3 V. O. Kharchenko, D. O. Kharchenko, A. V. Dvornichenko
+
+The corresponding Gibbs energy functional 
+
+G = 1
+
+𝑉 𝑚 
+
+∫
+
+d𝑉 
+
+"
+
+𝐺 tot ({ 𝑥 𝛼 }, {𝑐 𝑑 }) + ∑︁ 
+
+> 𝛼
+
+𝜅 𝛼 (∇ 𝑐 𝛼 )2 +∑︁ 
+
+> 𝑑
+
+𝜅 𝑑 (∇ 𝑐 𝑑 )2
+
+#
+
+(2.12) includes gradient energy terms 𝜅 𝛼 , 𝜅 𝑑 . In further consideration we put 𝜅 𝛼 = 𝐿 0Sn ,Zr ℓ2/6, 𝜅 𝑑 = 𝜅 𝛼 /4; 𝑉 𝑚 
+
+is the molar volume. In multicomponent models, the mass conservation law Í𝛼 𝑥 𝛼 = 1 can be used to eliminate one concentration field. In the considered system, one can express 𝑥 Zr through 𝑥 Sn as: 𝑥 Zr = 1 − 𝑥 , where 
+
+𝑥 ≡ 𝑥 Sn . By taking into account that tin atoms are capable of trapping vacancies due to the attractive tin-vacancy interaction (see reference [25]) and assuming that interstitials with concentration 𝑐 𝑖 ≪ 𝑐 𝑣 
+
+are homogeneously distributed in a bulk, one can consider equilibrium vacancies as point defects only. In such a case, the dynamics of the complete system in the equilibrium conditions is governed by equations 
+
+𝜕 𝑡 𝑥 = ∇ · 𝑀 𝑥 ∇ 𝛿 G
+
+𝛿𝑥 ,𝜕 𝑡 𝑐 𝑣 = ∇ · 𝐿 𝑣 ∇ 𝛿 G
+
+𝛿𝑐 𝑣 
+
+,
+
+(2.13) where 𝑀 𝑥 and 𝐿 𝑣 are the mobilities of the atoms and vacancies, respectively. Here, we use the standard relations 𝑀 𝑥 = 𝑥 (1 − 𝑥 ) [ 𝑥𝑀 Zr + ( 1 − 𝑥 )𝑀 Sn ], where 𝑀 𝛼 = 𝐷 0
+
+> 𝛼
+
+/𝑅𝑇 is defined through the diffusivities 
+
+𝐷 0 
+
+> 𝛼
+
+of 𝛼 -atoms, and and 𝐿 𝑣 = 𝑐 𝑣 𝐷 𝑣 /𝑅𝑇 , where 𝐷 𝑣 is the diffusivity of vacancies. In further consideration, we assume 𝐷 0Zr = 𝐷 𝑣 𝑐 𝑣 0, where 𝑐 𝑣 0 is the equilibrium concentration of vacancies. The system (2.13) with (2.12) can be used to modelize microstructure transformations in Zr–Sn alloys with vacancies at equilibrium conditions (thermal treatment). 
+
+2.2. Irradiation influence onto microstructure evolution in Zr–Sn alloys 
+
+By considering the system under irradiation, one takes into account the ballistic mixing and radi-ation enhanced diffusion of atoms. In this case, the evolution equation for the tin concentration (first equation in equation (2.13)) is generalized by adding the term responsible for ballistic mixing, de-scribing an interchange of atoms with a frequency Γ on the average atomic relocation distance 𝜚 [26]: 
+
+Γ(⟨ 𝑥 ⟩𝜚 − 𝑥 ). Here, the average ⟨𝑥 ⟩𝜚 is taken over a distribution 𝑤 𝜚 (r) of ballistic exchange distances under irradiation [27–31]: ⟨𝑥 ⟩𝜚 = ∫ 𝑤 𝜚 (r − r′)𝑥 (r′)dr′. In our modelling, we use the typical model 
+
+𝑤 𝜚 (𝑟 ) = (1/2π 𝜚 2)e−𝑟 / 𝜚 [24, 32]. The atomic jump frequency Γ = K 𝐴 irr is defined through the damage rate K, computed according to the NRT standard [33], and a constant 𝐴 irr ≈ 50 for neutron irradiation [34]. At irradiation the nonequilibrium point defects (both vacancies and interstitials) can be produced, move to sinks and can recombine [35]. In such a case, the evolution equation for concentration of each type of point defects becomes as follows 
+
+𝜕 𝑡 𝑐 𝑑 = R𝑑 − ∇ · J𝑑 , (2.14) where R𝑑 is the reaction term and J𝑑 relates to the diffusion flux of point defects of 𝑑 -type. The reaction part has the form R𝑑 = K ( 1 − 𝜀 𝑑 ) − 𝐷 𝑑 𝑘 2𝑐 𝑑 − 𝛼 𝑟 𝑐 𝑖 𝑐 𝑣 . Here, 𝜀 𝑑 is the efficiency of 𝑑 -type defect clustering, 𝐷 𝑑 is the point defect diffusivity. Here, we consider the network dislocations and both vacancy and interstitial loops as major sinks of point defects. In order to simplify our description, we assume that network dislocation density remains constant during irradiation, whereas vacancy and interstitial loop densities evolve. The second term describes the absorption of point defects by sinks with strengths 
+
+𝑘 2 = 𝑍 𝑁 𝜌 𝑁 + 𝑍 𝐼 𝜌 𝐼 + 𝑍 𝑉 𝜌 𝑉 , where 𝜌 𝑁 is the network dislocation density, 𝜌 𝐼,𝑉 relate to interstitial and vacancy loop density. Bias factors defining the preference of the absorption of defects by sinks are: 
+
+𝑍 𝑁 = 1.0, 𝑍 𝑉 = 1.1, 𝑍 𝐼 = 1.2 [35]. The third term corresponds to recombination of point defects with the rate 𝛼 𝑟 = 4π𝑟 0 𝐷 𝑖 /Ω0 expressed through the defect recombination radius 𝑟 0 ≃ ( 3 − 5)𝑎 (𝑎 is the lattice constant) and the atomic volume Ω0.In order to simplify the mathematical model, the following assumptions can be made. From the dy-namical equilibrium condition 𝐷 𝑖 𝑐 𝑖 ≃ 𝐷 𝑣 𝑐 𝑣 , one can relate concentration of interstitials to concentration 
+
+> 33601-4 Phase field modelling of microstructure transformations in Zr–Sn alloy
+
+of vacancies [36] by taking into account fast migration of interstitials to sinks [37] compared to vacancies. The relation 𝐷 𝑖 ≫ 𝐷 𝑣 yields ∇ · J𝑖 ≈ 0. In this case, one can focus only on the local rearrangement of vacancies [22, 38] with vacancy diffusion flux J𝑣 . In general, the diffusion flux J𝑣 is composed of the thermodynamics related to the corresponding Gibbs energy via standard Onsager relation and the part relevant to interaction of vacancies due to elastic deformation of the lattice [22, 39]. In such a case, one gets: J𝑣 = Jth  
+
+> 𝑣
+
++ Jint  
+
+> 𝑣
+
+, where Jth  
+
+> 𝑣
+
+= −𝐿 𝑣 ∇( 𝛿 G/ 𝛿𝑐 𝑣 ) is governed by thermodynamics and 
+
+Jint  
+
+> 𝑣
+
+= 𝐿 𝑣 
+
+𝐸𝑉 𝑚 
+
+3(1 − 2𝜈 ) ∇
+
+"
+
+1 + 𝑟 2
+
+> 𝑣 0
+
+31 + 𝜈 
+
+1 − 𝜈 ∇2
+
+#
+
+𝑐 𝑣 
+
+takes into account the interactions of vacancies through elastic deformation of the lattice [38–43]. Here, 
+
+𝐸 is the elastic modulus, 𝜈 is the Poisson ratio, 𝑟 𝑣 0 ≈ ( 2 to 3 )𝑎 denotes the mean square distance between the produced defect and the atom of the matrix. By taking into account radiation-enhanced diffusion, one can put 𝐷 𝛼 = 𝐷 0 
+
+> 𝛼
+
++ 𝐷 𝑣 ⟨𝑐 𝑣 ⟩, where 𝐷 0
+
+> 𝛼
+
+relates to atomic diffusivity under equilibrium conditions, ⟨𝑐 𝑣 ⟩ denotes mean concentration of nonequi-librium vacancies. The spatio-temporal evolution of atomic and defect subsystems is described by the following coupled equations 
+
+𝜕 𝑡 𝑥 = ∇ · 𝑀 𝑥 ∇ 𝛿 G
+
+𝛿𝑥 + Γ(⟨ 𝑥 ⟩𝜚 − 𝑥 ),𝜕 𝑡 𝑐 𝑣 = ∇ · 𝐿 𝑣 
+
+
+
+∇ 𝛿 G
+
+𝛿𝑐 𝑣 
+
+− 𝐸𝑉 𝑚 
+
+3(1 − 2𝜈 ) ∇
+
+
+
+1 + 𝑟 2
+
+> 𝑣 0
+
+31 + 𝜈 
+
+1 − 𝜈 ∇2
+
+
+
+𝑐 𝑣 
+
+
+
++ K 𝑣 (1 − 𝜀 𝑣 ) − 𝐷 𝑣 𝑘 2 
+
+> 𝑣
+
+𝑐 𝑣 − 𝛼 𝑟 𝐷 𝑣 
+
+𝐷 𝑖 
+
+𝑐 2 
+
+> 𝑣
+
+.
+
+(2.15) We describe dynamics of interstitial and vacancy loop densities 𝜌 𝐼,𝑉 by using reaction rate theory with the model proposed in reference [44], by taking constant values of the loop number densities for interstitial and vacancy loops 𝑁 . In our case, the governing equations for loop densities take the form [43–45]: 
+
+𝜕 𝑡 𝜌 𝐼 = 1
+
+𝑟 0𝐼 |b| (K 𝜀 𝑖 − 𝑍 𝐼 𝜌 𝐼 [𝐷 𝑣 (⟨ 𝑐 𝑣 ⟩ − 𝑐 𝑖𝐿 ) − 𝐷 𝑖 ⟨𝑐 𝑖 ⟩]) ,𝜕 𝑡 𝜌 𝑉 = 1
+
+𝑟 0𝑉 |b| (K 𝜀 𝑣 − 𝑍 𝑉 𝜌 𝑉 [𝐷 𝑖 ⟨𝑐 𝑖 ⟩ − 𝐷 𝑣 (⟨ 𝑐 𝑣 ⟩ − 𝑐 𝑣𝐿 )]) .
+
+(2.16) Here, |b| is the Burgers vector modulus, 𝑟 0𝑑 ({𝑑 = 𝑖, 𝑣 }) denotes the initial interstitial/vacancy loop radius; 𝑐 𝑑𝐿 denotes the equilibrium vacancy concentration near the vacancy and interstitial dislocation loops, respectively, ⟨𝑐 𝑖 ⟩ = (𝐷 𝑣 /𝐷 𝑖 )⟨ 𝑐 𝑣 ⟩ is the mean interstitial concentrations. We take into account that the vacancy loops start to grow after the dose 3 dpa [46, 47]. Equations (2.15) and (2.16) can be used to modelize spatio-temporal evolution of the annealed Zr–Sn alloy under irradiation. It should be noted that at extremely high irradiation doses and temperatures, interdiffusion processes can certainly be important in the kinetics of nonequilibrium processes. In the present model, interdiffusion is not introduced as an additional phenomenological flux term, but is inherently accounted for through the variational thermodynamic structure of the model and the corresponding mobility by taking into account both radiation-induced ballistic mixing and radiation-enhanced diffusion via vacancy dynamics. Therefore, the combined thermodynamic and irradiation-driven mechanisms capture the essential physics of interdiffusion in the system. 
+
+## 3. Results and discussions 
+
+In this work we consider the alloy Zr–10%Sn by fixing the nominal concentration of tin in Zr–Sn alloy as 𝑥 Sn = 0.1. We start with simulations of the phase decomposition in Zr–10%Sn model system during thermal treatment of solid solution at fixed temperature. Finally, we discuss the influence of the sustained irradiation onto microstructure of annealed Zr–10%Sn alloy at a fixed damage rate. In order to perform numerical simulations, it is more convenient to move to dimensionless quantities: 
+
+r′ = r/ℓ and 𝑡 ′ = 𝑡 /𝜏 , where 𝜏 = ℓ2/𝐷 𝑣 . Modelling procedure is provided on the square lattice 
+
+> 33601-5 V. O. Kharchenko, D. O. Kharchenko, A. V. Dvornichenko
+
+𝑁 × 𝑁 × 𝑁 of the size 𝑁 = 128 Δ𝑥 (Δ𝑥 = 1) with the dimensionless time step 0.001 for insuring the accuracy in the solving procedure. Boundary conditions are periodic. Initial conditions are defined according to a specific problem of modelling. For thermal treatment of the solid solution we use the random distribution of the concentration field 𝑥 (r) around nominal value 𝑥 Sn . At the stage of modelling irradiation influence, the initial conditions are taken as a microstructure related to the final stage of thermal treatment modelling. This choice of initial conditions for irradiation influence modelling allows one to provide a detailed analysis of stability of the pre-irradiated microstructure of the alloy during irradiation dose accumulation. The semi-implicit Fourier spectral method [48, 49] was adopted to solve the system of dynamical equations (2.13) at the stage of thermal treatment and (2.15) at the stage of irradiation. All parameters used in simulations are collected in table 1.  
+
+> Table 1.
+
+Material parameters used in simulations. Parameter Value Dimension Reference Lattice parameters for Zr ( 𝑎 , 𝑐 ) (3.2, 5.14 ) · 10 −8 cm Atomic volume ( Ω0) 3.32 · 10 −23 cm 3
+
+Equilibrium vacancy concentration ( 𝑐 𝑣 0) 0.54e −𝐸 𝑓 , Zr   
+
+> 𝑣 /𝑘 B𝑇
+
+at. fract. [36] Vacancy formation energy ( 𝐸 𝑓 , Zr  
+
+> 𝑣
+
+) 1.8 eV [36] Vacancy formation energy ( 𝐸 𝑓 , Sn  
+
+> 𝑣
+
+) 0.94 eV [50] Cohesive energy ( 𝐸 Zr coh ) 6.3 eV [51] Cohesive energy ( 𝐸 Sn coh ) 3.15 eV [52] Reference Gibbs energy ( 𝐺 𝛼 
+
+> Zr
+
+) −7829 + 125 .649 𝑇 
+
+−24 .1618 𝑇 ln 𝑇 − 0.00437791 𝑇 2 J/mol [53] Reference Gibbs energy ( 𝐺 pure Sn ) 8555 J/mol [53] Interaction coefficient ( 𝐿 0Sn ,Zr ) −79959 .713 + 20 .00604 𝑇 J/mol [12] Interaction coefficient ( 𝐿 1Sn ,Zr ) −99146 .4844 J/mol [12] Spatial scale ( ℓ) 6.0 nm This work Sn diffusion coefficient in 𝛼 -Zr ( 𝐷 0Sn ) 3.12 × 10 −6e−2.74 eV /𝑘 B𝑇 m2/s [54] Diffusivity of vacancies ( 𝐷 𝑣 ) 2.2 · 10 −2e−0.93 eV /𝑘 B𝑇 cm 2/s [55] Diffusivity of interstitials ( 𝐷 𝑖 ) 3.5 · 10 −4e−0.06 eV /𝑘 B𝑇 cm 2/s [55] Clustering efficiencies ( 𝜀 𝑖 , 𝜀 𝑣 ) 0.67, 0.7 [24, 38] Dislocation network density ( 𝜌 𝑁 ) 10 10 cm −2 [35] 
+
+3.1. Thermal treatment of solid solution 
+
+In order to perform numerical simulations of the phase separation process in the studied system Zr– Sn with the nominal concentration 𝑥 Sn during thermal treatment of solid solution, we numerically solve equations (2.13) at a fixed temperature 𝑇 = 550 K. For initial conditions, we use: ⟨𝑥 (r, 𝑡 = 0)⟩ = 𝑥 Sn ,
+
+⟨𝑐 𝑣 (r, 𝑡 = 0)⟩ = 𝑐 𝑣 0, ⟨( 𝛿𝑥 (r, 𝑡 = 0)) 2⟩ = 0.01 𝑥 Sn , ⟨( 𝛿𝑐 𝑣 (r, 𝑡 = 0)) 2⟩ = 0.1𝑐 𝑣 0. Typical evolution scenario of the thermal treatment of the solid solution is shown in figure 1. It is seen that starting from the totally homogeneous configuration, new phase (domains related to A15-phase) emerges where concentration of tin is larger than in the bulk. These domains grow in time by absorbing tin from the bulk. The detailed information about the dynamics of the alloy component rearrangement can be studied by considering the dispersions of concentration of tin and vacancies: ⟨( 𝛿𝑥 )2⟩ = ⟨( 𝑥 Sn − 𝑥 )2⟩ and 
+
+⟨( 𝛿𝑐 𝑣 )2⟩ = ⟨( 𝑐 𝑣 0 − 𝑐 𝑣 )2⟩ shown in figure 2. Here, dispersions of the tin and vacancies are shown in the left-hand and right-hand axis, respectively. The total computation time corresponds to 566 hours of real time annealing according to the scaling used. The growing time dependence of the dispersion of the corresponding concentration field means a spatial ordering of this field. In figure 2 one can issue two main stages: (I) a growth stage and (II) a coarsening stage. The growth stage relates to the time interval when both dispersions grow (around 80 hours of real time of annealing). Here, the dispersion of tin concentration grows rapidly, meaning a fast rearrangement of atoms due to their interactions and diffusion. An increase in the dispersion of equilibrium vacancies field means that the vacancies which were initially homogeneously distributed in a bulk, nucleate by forming areas of dense phase enriched 
+
+> 33601-6 Phase field modelling of microstructure transformations in Zr–Sn alloy
+
+time  
+
+> Figure 1.
+
+(Colour online) Snapshots of the evolution of the system Zr–10%Sn starting from the quasi-homogeneous solid solution. 
+
+by vacancies. It means that rearrangement of tin concentration is strongly related to the rearrangement of vacancies. At this stage, a new phase emerges by absorbing atoms from the bulk, and the domains of this phase grow in size. At the coarsening stage, the growth speed of both ⟨( 𝛿𝑥 )2⟩ and ⟨( 𝛿𝑐 𝑣 )2⟩ decreases. Here, the dynamics of the system is described by interaction of domains of new phases. At the long-time limit (over 550 hours of annealing), one has the quasi-stationary regime, when both dispersions do not change. This means that all ordering processes have finished and the further annealing will not change the spatial configuration of the alloy studied.              G[ ! [a.u.]   5HDOWLPHt >KRXUV@        GFY! [a.u.]   
+
+> ,,,
+> Figure 2.
+
+(Colour online) Dynamics of dispersions of Sn concentration and equilibrium vacancy concen-tration for Zr–10%Sn alloy annealed at 𝑇 = 550 K. 
+
+In order to analyze the dynamics of the mean size of SP particles enriched by tin concentration, we proceed in the following manner. By taking into account that A15 phase is associated with the configuration Zr– 𝑥 Sn where 𝑥 ∈ [ 1/5, 3/8] [10–12], we use the mean threshold 𝑥 𝑡 ℎ = 0.3 in order to separate SP particles with 𝑥 (r) > 𝑥 𝑡 ℎ from the matrix phase with 𝑥 (r) < 𝑥 𝑡 ℎ . Next here and thereafter by exploiting the machine learning method, known as density-based spatial clustering of applications with noise (DBSCAN) [56] with periodic boundary conditions, we calculate the volume 𝑉 𝑖 of each SP particle. Finally, by using the standard relation 𝑉 𝑖 = 4π𝑅 3 
+
+> 𝑖
+
+/3 we calculate the mean size 𝑅 𝑖 (radius of the sphere of the equivalent volume) of each particle of SP and find the mean linear size of particles as ⟨𝑅 ⟩ = (1/𝑛 ) Í𝑖 𝑅 𝑖 during simulations, where 𝑛 is the total number of particles. The dynamics of mean size of particles of the SP is shown in figure 3. It is seen that during the system evolution, the particle size of SP enriched by tin concentration grows fast at early stage when spatial instability in the system is essential. At late stages, its dynamics is slowed down. Here, slow coalescence regime occurs when particles interact, and the growth of particles here is of diffusion character only. After 300 hours, the system attains a quasi-stationary regime and is characterized by a stable microstructure. The corresponding distribution 𝑓 (𝑅 /⟨ 𝑅 ⟩) of SP particles over the sizes is shown in the inset in figure 3 after long-term annealing. It follows that this distribution is slightly skewed with the longest tail at 𝑅 < ⟨𝑅 ⟩,but remains of symmetric form and most of the particles are characterized by the size around the mean value ⟨𝑅 ⟩ ≃ 32 nm with small dispersion. It follows that the Lifshitz–Slyozov–Wagner distribution in its original form [57, 58] does not fit directly the numerical data (see dash curve in the inset in figure 3). 
+
+> 33601-7 V. O. Kharchenko, D. O. Kharchenko, A. V. Dvornichenko
+
+A more accurate fitting (see solid curve in the inset in figure 3) is given by using Marqusee and Rose approach [59]. The volume fraction of SP 𝑉 𝑓 𝑟 for the used threshold 𝑥 𝑡 ℎ calculated as a ratio between the whole volume of SP and the volume of the computational system gives 𝑉 𝑓 𝑟 = 16% which is close to the result that can be obtained by analysing the experimental microstructure shown in reference [12]. The obtained value of the mean size at low temperature ( 𝑇 = 550 K) is less than the experimental observations provide (see reference [12]) at a high temperature. This difference looks natural because the mean size of precipitates increases with the increasing annealing temperature, as shown by phase field modelling for Zr-Nb-Sn alloys [60] and Fe-Cr-Al alloys [61].      
+
+>     
+> 0HDQVL]HRISUHFLSLWDWH s5! >QP@
+>  
+> TLPH W >KRXUV@
+> Figure 3.
+
+(Colour online) Dynamics of mean size of precipitate of Sn-enriched SP for Zr–10%Sn alloy during thermal treatment at 𝑇 = 550 K. Distribution of SP particles over sizes after 560 hours annealing is shown in the inset. 
+
+The spatial configuration of SP particles after a long-term annealing, that corresponds to the 𝑓 (𝑅 /⟨ 𝑅 ⟩) 
+
+in the inset in figure 3, is shown in figure 4a. One sees that the domains of SP are of different shape and of different size. In figure 4b we show the combined configuration of two fields: concentration of tin with 𝑥 (r) > 𝑥 𝑡 ℎ is shown with small opacity in red color, concentration of equilibrium vacancies is shown by blue color. It follows that the equilibrium vacancies segregate mostly on the interfaces with large curvature and inside the domains of SP. This is related to attractive Sn-vacancy interaction resulting in trapping the vacancies by Sn atoms [50]. The configuration shown in figure 4 will be used as a “target” to perform numerical simulations of the microstructure transformations and spatial rearrangement of the concentration of the alloying elements and non-equilibrium vacancies induced by the neutron irradiation influence. a) b)  
+
+> Figure 4.
+
+(Colour online) Typical snapshots of the annealed alloy Zr–Sn: a) domains of SP, enriched by Sn atoms; b) distribution of concentration of equilibrium vacancies in the vicinity of SP domains. 
+
+> 33601-8 Phase field modelling of microstructure transformations in Zr–Sn alloy
+
+3.2. Irradiation of the annealed alloy 
+
+In order to modelize the microstructure transformations in the annealed alloy during the irradiation action, we numerically solve the system (2.15) together with the equations for loops densities (2.16). Irradiation of the annealed alloy under reactor conditions was simulated at a dose rate K = 10 −6 dpa/s and temperature 𝑇 = 550 K. The initial conditions for both fields 𝑥 (r) and 𝑐 𝑣 (r) are taken from figure 4b. 
+
+> 3.2.1. Spatial rearrangement of the atomic subsystem
+
+Typical scenario of microstructure transformations caused by formation of structural disorder is shown in figure 5. Dependencies of the mean size (the radius of the sphere of the same area) ⟨𝑅 ⟩ and the volume fraction of precipitates 𝑉 𝑓 𝑟 , calculated as a ratio between the area of all precipitates and the volume of the system, are shown in figure 6a,b, respectively. Distributions of SP precipitates over sizes at different doses are shown in figure 7. It follows that with the irradiation dose accumulation, the native precipitates of tin-enriched SP dissolve (see snapshots a and b in figure 5 at 1 dpa and 2 dpa). At these doses, the mean size of precipitates and their volume fraction decrease (see figure 6 at doses up to 2 dpa corresponding to the Stage I). This means that the concentration of homogeneously distributed tin in a bulk increases. The corresponding distribution in figure 7a has a uni-modal form with the most probable size in the vicinity of the mean size. Further irradiation results in a crucial change of the SP microstructure. Whilst the large domains of native SP continue to decrease in size, the new irradiation-induced precipitates (IIPs) of SP particles of small size emerge (see snapshot in figure 5c). These effects result in a crucial decrease in the mean linear size of SP precipitates (see Stage II in figure 6a). At the same time, the volume fraction continues to decrease smoothly (see figure 6b). The microstructure of SP precipitates at dose 3 dpa is characterized by the bi-modal distribution shown in figure 7b. At elevated doses (over 3 dpa), the IIPs grow in size (see the snapshot in figure 5d): both the mean linear size of SP particles and the volume fraction increase with the irradiation dose (see Stage III in figure 6). Here, all SP particles tend to have similar sizes as it follows from their distribution over sizes in figure 7c which fits well by the log-normal distribution. a) b) 
+
+c) d)  
+
+> Figure 5. (Colour online) Snapshots of the rearrangement of the SP particles during a sustained irradiation at dose: a) 1 dpa; b) 2 dpa; c) 3 dpa; d) at 5 dpa.
+> 33601-9 V. O. Kharchenko, D. O. Kharchenko, A. V. Dvornichenko
+
+a) 0 1 2 3 4 50816 24 32 Stage III    
+
+> Stage II
+> <R> [nm] Dose [dpa] Stage I
+
+b) 0 1 2 3 4 504812 16 Stage III    
+
+> Stage II
+> Vfr [%] Dose [dpa] Stage I
+> Figure 6.
+
+Dose dependence of a) the mean size of SP domains; b) the volume fraction of SP. 
+
+a) 0.3 0.6 0.9 1.2 1.5 1.8 0.0 0.5 1.0 1.5 2.0 2.5 f(R/<R>) R/<R> 2 dpa b) 0 1 2 30.0 0.5 1.0 1.5 2.0 f(R/<R>) R/<R> 3 dpa c) 0.0 0.5 1.0 1.5 2.0 2.5 0.0 0.5 1.0 1.5 2.0 f(R/<R>) R/<R> 5 dpa Data LogNorm  
+
+> Figure 7.
+
+(Colour online) Distribution of SP domains over sizes at different doses: a) 2 dpa; b) 3 dpa; c) 5 dpa. 
+
+3.2.2. Segregation of nonequilibrium vacancies 
+
+First, let us consider the dose dependencies of the mean concentration of nonequilibrium vacancies and loop density, produced during irradiation, shown in figure 8. From the obtained results it follows that the mean concentration of vacancies in the alloy (dash-dot curve in figure 8) rapidly increases from the equilibrium value 10 −17 towards 7 .3 · 10 −7 at initial stages of the alloy irradiation due to their generation in cascades of atomic displacements. The interstitial loop starts to grow at small doses (solid curve in figure 6); vacancy loops start to grow starting from the dose 3 dpa as it is shown by a dash curve. Their growth leads to a decrease in the concentration of vacancies. The obtained results for the mean vacancy concentration and loop density correspond to the data obtained in the framework of reaction rate theory [46] and experimental observations [62–64]. 0 1 2 3 4 5012345678  
+
+> <c v>Dose [dpa]
+> 10 6
+> 10 7
+> 10 8
+> Mean loop density [cm -2 ]
+> x10 -7 ρi
+> ρv
+> Figure 8.
+
+(Colour online) Dose dependencies of the mean concentration of nonequilibrium vacancies and mean loop density, produced during irradiation. 
+
+33601-10 Phase field modelling of microstructure transformations in Zr–Sn alloy 
+
+a) b) c)  
+
+> Figure 9.
+
+(Colour online) Snapshots of the rearrangement of the nonequilibrium vacancies with the concentration 𝑐 𝑣 (r) > 𝑐 𝑡 ℎ 𝑣 during sustained irradiation at dose: a) 1 dpa; b) 2 dpa; c) 3 dpa. 
+
+Next, let us discuss the peculiarities of spatial distribution of nonequilibrium vacancies in the studied Zr–Sn alloy under the irradiation action. It is known that in the irradiated systems, nonequilibrium vacancies produced in cascades of atomic displacements can form small vacancy clusters [65–68] and voids [66, 69–71]. Moreover, vacancies can be trapped by Sn atoms, meaning that the local vacancy concentration is quite related to Sn rearrangement in a bulk. In order to visualize the spatial distribution of nonequilibrium vacancy field with elevated concentration 𝑐 𝑣 (r), next we use the threshold 𝑐 𝑡 ℎ 𝑣 =
+
+𝑐 (min ) 
+
+> 𝑣
+
++ 0.85 𝑐 (max ) 
+
+> 𝑣
+
+− 𝑐 (min )
+
+> 𝑣
+
+ dependent on the accumulated dose. The distinguished vacancy enriched domains with the 𝑐 𝑣 (r) > 𝑐 𝑡 ℎ 𝑣 together with the SP domains (shown with small opacity) at different accumulated doses are shown in figure 9 by blue color. It follows that at small doses (see figure 9a at 1 dpa) the nonequilibrium vacancies are located mostly on the phase interface of SP particles with large curvature, and the spatial distribution of vacancies does not crucially differ from the one of unirradiated alloy (see the snapshot in figure 4b). It means that at small doses, the attractive Sn-vacancy interaction plays a major role in spatial rearrangement of nonequilibrium vacancies. With the dose accumulation, one part of nonequilibrium vacancies remains on the phase interfaces and another part starts to organize into small vacancy clusters in a bulk (see snapshot in figure 9b at dose 2 dpa). These vacancy clusters absorb tin from the matrix due to attractive interaction between Sn atoms and vacancies [25]. These effects lead to precipitation of small particles of tin enriched SP as it is seen from figure 5c. With further irradiation, the number of small vacancy clusters increases and their mean size grows with dose (see snapshots in figure 9c,d). a) b) 0.0 0.5 1.0 1.5 2.0 0.0 0.5 1.0 1.5 2.0 f(R v/<R v>) Rv/<R v><R v> = 7.2 nm  
+
+> Figure 10.
+
+(Colour online) Snapshot of the rearrangement of the nonequilibrium vacancies with 𝑐 𝑣 (r) >𝑐 𝑡 ℎ 𝑣 (blue color) and with 𝑐 𝑣 (r) > ⟨𝑐 𝑣 ⟩ (light blue color) (a) and distribution of vacancy clusters with 
+
+𝑐 𝑣 (r) > 𝑐 𝑡 ℎ 𝑣 over sizes at dose 5 dpa (b). 
+
+The vacancy clusters in figure 9 are characterized by the elevated concentration of vacancies 𝑐 𝑣 (r) >𝑐 𝑡 ℎ 𝑣 . In figure 10a we show the spatial distribution of vacancy concentration field with 𝑐 𝑣 (r) > ⟨𝑐 𝑣 ⟩ in blue color with small opacity with the distribution of tin concentration at dose 5 dpa. It follows that a part 
+
+> 33601-11 V. O. Kharchenko, D. O. Kharchenko, A. V. Dvornichenko
+
+of vacancies is distributed at phase interfaces of SP particles, whilst the vacancy clusters with elevated concentration are mostly located close to SP particles. We have calculated the distribution of the vacancy cluster with the threshold 𝑐 𝑣 (r) > 𝑐 𝑡 ℎ 𝑣 over sizes, shown in figure 10b. The mean linear size of these clusters ⟨𝑅 𝑣 ⟩ is approximately 7.2 nm, and the distribution is of a symmetric form around the mean size. 
+
+## 4. Conclusions 
+
+We have studied the dynamics of microstructural transformation and statistical properties of SP particles in Zr–10%Sn alloy subjected to a sustained irradiation in the framework of numerical simulations in a three-dimensional system. It is found that in the unirradiated microstructure, obtained during thermal treatment of the corre-sponding solid solution at a fixed temperature 𝑇 = 550 K, the volume fraction of tin-enriched SP particles with the linear size 32 nm is around 16% and their size distribution is close to Lifshitz–Slyozov–Wagner type. The concentration of tin in SP corresponds to A15 phase with stable configurations Zr 5Sn 3 and Zr 4Sn, which correspond to the known experimental results [10–12] and theoretical predictions [72]. The obtained microstructure of the annealed alloy qualitatively relates to the experimental observation [12], and the volume fraction of A15 phase relates quantitatively with the one calculated for the experimentally presented microstructure [12]. It is found that with the irradiation dose accumulation, three different stages of the microstructure transformations of atomic subsystem are realized. At small doses, dissolution of native particles with accumulation of tin in a bulk results in a decrease in the mean size of SP particles and their volume fraction. At intermediate doses, dissolution of native precipitates and irradiation induced precipitation of new particles of SP provides a sharp decrease in the mean size of precipitates and bimodal distribution of SP particles over sizes. At elevated doses, irradiation sustains the growth of tin-enriched domains attaining the mean size up to 12 nm and their distribution over sizes is close to log-normal. It is shown that the irradiation induced precipitation of new tin-enriched domains is caused by clusterization of nonequilibrium vacancies produced in cascades in a bulk due to attractive tin-vacancy interaction. 
+
+## Acknowledgements 
+
+The work was supported by the Ministry of Education and Science of Ukraine (grant No. 0124U000551). 
+
+## References        
+
+> 1. Motta A. T., Couet A., Comstock R. J., Annu. Rev. Mater. Res., 2015, 45 , 311–343, doi:10.1146/annurev-matsci-070214-020951. 2. Was G. S., Fundamentals of Radiation Materials Science: Metals and Alloys, Springer, 2007, doi:10.1007/978-3-540-49472-0. 3. Griffiths M., J. Nucl. Mater., 1988, 159 , 190–218, doi:10.1016/0022-3115(88)90093-1. 4. Allen T. R., Was G. S., In: Radiation Effects in Solids, Vol. 235, Sickafus K. E., Kotomin E. A., Uberuaga B. (Eds.), Springer Netherlands, Dordrecht, 2007, 123–151, doi:10.1007/978-1-4020-5295-8_6. 5. Barberis P., Ahlberg E., Simic N., Charquet D., Lemaignan C., Wikmark G., Dahlbäck M., Limbäck M., Tägtström P., Lehtinen B., In: Zirconium in the Nuclear Industry: Thirteenth International Symposium, Moan G., Rudling P. (Eds.), ASTM International, 2002, 33–58, doi:10.1520/STP11382S. 6. Toffolon-Masclet C., Brachet J.-C., Jago G., J. Nucl. Mater., 2002, 305 , No. 2, 224–231, doi:10.1016/S0022-3115(02)00911-X. 7. Nieva N., Arias D., J. Nucl. Mater., 2006, 359 , No. 1, 29–40, doi:10.1016/j.jnucmat.2006.07.014. 8. Okamoto H., Schlesinger M., Mueller E. (Eds.), Alloy Phase Diagrams, ASM Handbook, Vol. 3, ASM Interna-tional, 2016, doi:10.31399/asm.hb.v03.9781627081634. 9. McPherson D., Hansen M., Trans. ASME, 1953, 45 , 915–933. 10. Kwon Y. U., Corbett J. D., Chem. Mater., 1990, 2, No. 1, 27–33, doi:10.1021/cm00007a005. 11. Kwon Y. U., Corbett J. D., Chem. Mater., 1992, 4, No. 6, 1348–1355, doi:10.1021/cm00024a040.
+> 33601-12 Phase field modelling of microstructure transformations in Zr–Sn alloy
+
+12. Jerlerud Pérez R., Toffolon-Masclet C., Joubert J.-M., Sundman B., Calphad, 2008, 32 , No. 3, 593–601, doi:10.1016/j.calphad.2008.04.001. 13. Arias D., Roberti L., J. Nucl. Mater., 1983, 118 , No. 2–3, 143–149, doi:10.1016/0022-3115(83)90219-2. 14. Speich G. R., Kulin S. A., In: Zirconium and Zirconium Alloys, American Society for Metals, Cleveland, 1953, 197–207. 15. Carpenter G., Ibrahim E., Watters J., J. Nucl. Mater., 1981, 102 , No. 3, 280–291, doi:10.1016/0022-3115(81)90495-5. 16. Toffolon-Masclet C., Brachet J. C., Servant C., Joubert J. M., Barberis P., Dupin N., Zeller P., In: Zirconium in the Nuclear Industry: 15th International Symposium, Kammenzind B., Limbäck M. (Eds.), ASTM International, 2009, 754–775, doi:10.1520/STP48166S. 17. Chen L.-Q., Annu. Rev. Mater. Res., 2002, 32 , 113–140, doi:10.1146/annurev.matsci.32.112001.132041. 18. Steinbach I., Modell. Simul. Mater. Sci. Eng., 2009, 17 , 073001, doi:10.1088/0965-0393/17/7/073001. 19. Kharchenko D., Knyaz’ I., Eur. Phys. J. B, 2003, 32 , No. 3, 375–382, doi:10.1140/epjb/e2003-00112-9. 20. Kharchenko D., Dvornichenko A., Eur. Phys. J. B, 2008, 61 , No. 1, 95–103, doi:10.1140/epjb/e2008-00035-y. 21. Yulan L., Shenyang H., Xin S., Marius S., npj Comput. Mater., 2017, 3, 1–17, doi:10.1038/s41524-017-0018-y. 22. Kharchenko D. O., Kharchenko V. O., Shchokotova O. M., Wu X., Wen B., Wu L., Zhang W., Radiat. Eff. Defects Solids, 2018, 173 , 527–554, doi:10.1080/10420150.2018.1482895. 23. Kharchenko V., Kong X., Xin T., Wu L., Shchokotova O., Kharchenko D., Kokhan S., Phys. Scr., 2023, 98 ,035714, doi:10.1088/1402-4896/acbcf9. 24. Kharchenko V., Xin T., Wu L., Kharchenko D., Kupriienko V., Shuda I., Modell. Simul. Mater. Sci. Eng., 2022, 
+
+30 , 075006, doi:10.1088/1361-651X/ac8fad. 25. Wu L., Kharchenko V. O., Kharchenko D. O., Pan R., Mater. Today Commun., 2021, 26 , 101765, doi:10.1016/j.mtcomm.2020.101765. 26. Martin G., Phys. Rev. B, 1984, 30 , No. 3, 1424, doi:10.1103/PhysRevB.30.1424. 27. Enrique R. A., Bellon P., Phys. Rev. Lett., 2000, 84 , No. 13, 2885, doi:10.1103/PhysRevLett.84.2885. 28. Enrique R. A., Bellon P., Phys. Rev. B, 2001, 63 , No. 13, 134111, doi:10.1103/PhysRevB.63.134111. 29. Enrique R., Nordlund K., Averback R., Bellon P., J. Appl. Phys., 2003, 93 , No. 5, 2917–2923, doi:10.1063/1.1540743. 30. Enrique R. A., Bellon P., Phys. Rev. B, 2004, 70 , No. 22, 224106, doi:10.1103/PhysRevB.70.224106. 31. Demange G., Lunéville L., Pontikis V., Simeone D., J. Appl. Phys., 2017, 121 , No. 12, 125108, doi:10.1063/1.4978964. 32. Kharchenko D., Kharchenko V., Qin J., Wu L., Lysenko B., Dvornichenko A., Phys. Scr., 2024, 99 , No. 7, 075921, doi:10.1088/1402-4896/ad5142. 33. Norgett M., Robinson M., Torrens I. M., Nucl. Eng. Des., 1975, 33 , No. 1, 50–54, doi:10.1016/0029-5493(75)90035-7. 34. Ke J.-H., Reese E. R., Marquis E. A., Odette G. R., Morgan D., Acta Mater., 2019, 164 , 586–601, doi:10.1016/j.actamat.2018.10.063. 35. Was G. S., Fundamentals of Radiation Materials Science: Metals and Alloys, Springer, New York, 2016, doi:10.1007/978-1-4939-3438-6. 36. Turkin A., Bakai A., J. Nucl. Mater., 2006, 358 , No. 1, 10–25, doi:10.1016/j.jnucmat.2006.05.054. 37. Golubov S., Barashev A., Stoller R., In: Comprehensive Nuclear Materials, Vol. 1, Elsevier, 2012, 357–391, doi:10.1016/B978-0-08-056033-5.00029-X. 38. Kharchenko D. O., Kharchenko V. O., Bashtova A. I., Kupriienko V. V., Wu L., J. Appl. Phys., 2021, 129 , No. 3, 035104, doi:10.1063/5.0031917. 39. Kharchenko D. O., Kharchenko V. O., Condens. Matter Phys., 2013, 16 , 33001, doi:10.5488/CMP.16.33001. 40. Mirzoev F. K., Panchenko V. Y., Shelepin L. A., Phys.-Usp., 1996, 39 , No. 1, 1, doi:10.1070/PU1996v039n01ABEH000125. 41. Kharchenko D. O., Kharchenko V. O., Bashtova A. I., Lysenko I. O., Physica A, 2016, 463 , 152–162, doi:10.1016/j.physa.2016.07.019. 42. Kharchenko D. O., Kharchenko V. O., Radiat. Eff. Defects Solids, 2016, 171 , No. 11-12, 819–839, doi:10.1080/10420150.2016.1274753. 43. Kharchenko D. O., Shchokotova O. M., Kharchenko V. O., Kupriienko V. V., Kokhan S., Wu X., Wu L., Radiat. Eff. Defects Solids, 2020, 175 , No. 7–8, 602–626, doi:10.1080/10420150.2019.1684918. 44. Kulcinski G., Brimhall J., In: Effects of Radiation on Substructure and Mechanical Properties of Metals and Alloys, Moteff J. (Ed.), ASTM International, West Conshohocken, PA, 1973, 258–271, doi:10.1520/STP35452S. 45. Konings R., Stoller R. E., Comprehensive Nuclear Materials, Elsevier, Amsterdam, 2020. 46. Wu L., Xin T., Kharchenko D., Kharchenko V., Lysenko O., Metallofiz. Noveishie Tekhnol., 2022, 44 , No. 9, 1077–1101, doi:10.15407/mfint.44.09.1077. 
+
+> 33601-13 V. O. Kharchenko, D. O. Kharchenko, A. V. Dvornichenko
+
+47. Wu L., Kharchenko D., Kharchenko V., Lysenko O., Kupriienko V., Kokhan S., Shuda I., Pan R., Condens. Matter Phys., 2020, 23 , 13604, doi:10.5488/CMP.23.13604. 48. Chen L. Q., Shen J., Comput. Phys. Commun., 1998, 108 , No. 2–3, 147–158, doi:10.1016/S0010-4655(97)00115-X. 49. Biner S. B., Programming Phase-Field Modeling, Springer Cham, 2017, doi:10.1007/978-3-319-41196-5. 50. Wu L., Kharchenko V. O., Kharchenko D. O., Pan R., Mater. Today Commun., 2021, 26 , 101765, doi:10.1016/j.mtcomm.2020.101765. 51. Korhonen T., Puska M. J., Nieminen R. M., Phys. Rev. B, 1995, 51 , No. 15, 9526, doi:10.1103/PhysRevB.51.9526. 52. Legrain F., Manzhos S., AIP Adv., 2016, 6, No. 4, 045116, doi:10.1063/1.4948434. 53. Dinsdale A. T., Calphad, 1991, 15 , No. 4, 317–425, doi:10.1016/0364-5916(91)90030-N. 54. Jain A. C., Burr P. A., Trinkle D. R., Phys. Rev. Mater., 2019, 3, No. 3, 033402, doi:10.1103/PhysRevMaterials.3.033402. 55. Christien F., Barbu A., J. Nucl. Mater., 2005, 346 , No. 2–3, 272–281, doi:10.1016/j.jnucmat.2005.06.024. 56. Schubert E., Sander J., Ester M., Kriegel H. P., Xu X., ACM Trans. Database Syst., 2017, 42 , No. 3, 1–21, doi:10.1145/3068335. 57. Lifshitz I. M., Slyozov V. V., J. Phys. Chem. Solids, 1961, 19 , No. 1-2, 35–50. 58. Wagner C., Z. Elektrochem., 1961, 65 , No. 7–8, 581–591, doi:10.1002/bbpc.19610650704. 59. Marqusee J. A., Ross J., J. Chem. Phys., 80 , No. 1, 536–543, doi:10.1063/1.446427. 60. Kharchenko V. O., Kharchenko D. O., Shchokotova O. M., Lysenko O. B., Kokhan S. V., Leykykh D. V., Dvornychenko A. V., Metallofiz. Noveishie Tekhnol., 2025, 47 , No. 11, doi:10.15407/mfint.47.11.1149. 61. Wu L., Qin J., Kharchenko V. O., Kharchenko D. O., Lysenko O. B., Front. Energy Res., 2023, 11 , 1088742, doi:10.3389/fenrg.2023.1088742. 62. Harte A., Jadernas D., Topping M., Frankel P., Race C., Romero J., Hallstadius L., Darby E., Preuss M., Acta Mater., 2017, 130 , 69–82, doi:10.1016/j.actamat.2017.03.024. 63. Seymour T., Frankel P., Balogh L., Ungar T., Thompson S., Jadernas D., Romero J., Hallstadius L., Daymond M., Ribarik G., Preuss M., Acta Mater., 2017, 126 , 102–113, doi:10.1016/j.actamat.2016.12.031. 64. Yao Z., Daymond M., Di S., Idrees Y., Appl. Sci., 2017, 7, No. 8, 854, doi:10.3390/app7080854. 65. Kiritani M., Yoshiie T., Kojima S., Satoh Y., Radiat. Eff. Defects Solids, 1990, 113 , No. 1-3, 75–96, doi:10.1080/10420159008213056. 66. Evans J., Nature, 1971, 229 , No. 5284, 403–404, doi:10.1038/229403a0. 67. Kharchenko D., Kharchenko V., Bashtova A., Ukr. J. Phys., 2013, 58 , 993–1008, doi:10.15407/ujpe58.10.0993. 68. Kharchenko D. O., Kharchenko V. O., Bashtova A. I., Radiat. Eff. Defects Solids, 2014, 169 , No. 5, 418–436, doi:10.1080/10420150.2014.905577. 69. Kharchenko D., Kharchenko V., Ovcharenko Y., Lysenko O., Shuda I., Wu L., Pan R., Condens. Matter Phys., 2018, 21 , 13002, doi:10.5488/CMP.21.13002. 70. Sass S., Eyre B., Philos. Mag., 1973, 27 , No. 6, 1447–1453, doi:10.1080/14786437308226898. 71. Johnson P., Mazey D., Evans J., Radiat. Eff., 1983, 78 , No. 1–4, 147–156, doi:10.1080/00337578308207367. 72. Baykov V., Perez R. J., Korzhavyi P. A., Sundman B., Johansson B., Scr. Mater., 2006, 55 , No. 5, 485–488, doi:10.1016/j.scriptamat.2006.04.047. 
+
+> 33601-14
+
+Phase field modelling of microstructure transformations in Zr–Sn alloy 
+
+## Фазово-польове моделювання мiкроструктурних перетворень у сплавi Zr–Sn пiд час опромiнення 
+
+В. О. Харченко 1,2 , Д. О. Харченко 1, А. В. Дворниченко 21 Iнститут прикладної фiзики НАН України, Суми, 40000, вул. Петропавлiвська, 58  
+
+> 2
+
+Сумський державний унiверситет, Суми, 40007, вул. Харкiвська, 116 У цiй роботi дослiджується просторова еволюцiя концентрацiй олова у сплавi Zr–Sn та вакансiй як на стадiї термiчної обробки твердого розчину, так i пiд час його опромiнення в реакторних умовах. Для цього за-стосовано узагальнений пiдхiд фазово-польового моделювання, що поєднує теорiю швидкостей реакцiй i метод CALPHAD. Дослiдження динамiки мiкроструктурних змiн проведено з використанням числового моделювання у тривимiрному просторi. Розглянуто процес формування вторинної фази на етапi термi-чної обробки, а також дослiджено її стiйкiсть за умов нейтронного опромiнення. Окрему увагу придiлено аналiзу впливу дози опромiнення на статистичнi характеристики преципiтатiв вторинної фази. 
+
+Ключовi слова: сплави Zr–Sn, фазово-польове моделювання, фазове розшарування, опромiнення, статистичнi властивостi 
+
+33601-15

@@ -1,0 +1,94 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-09-22T22:02:42.003811+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 1,
+    "deep_cap": 6,
+    "deep_selected": 1,
+    "quick_candidates": 1,
+    "quick_skim_target": 11,
+    "quick_selected": 1
+  },
+  "deep_dive": [
+    {
+      "id": "2609.23623v1",
+      "source": "arxiv",
+      "title": "Phase field modelling of microstructure transformations in Zr-Sn alloy during irradiation",
+      "abstract": "In this work we study peculiarities of spatial rearrangement of solute and vacancy concentrations in Zr-Sn alloy at stages of both thermal treatment of solid solution and irradiation of annealed alloy under reactor conditions. To this end, we exploit phase field modelling including reaction rate theory and CALPHAD method combined in one generalized approach. Simulations were done in 3D in order to get a detailed information about rearrangement of solutes and defects in a bulk. We discuss the emergence of the secondary phase at the stage of thermal treatment and its stability under neutron irradiation. We analyze an influence of the irradiation dose onto statistical properties of the secondary phase particles.",
+      "authors": [
+        "V. O. Kharchenko",
+        "D. O. Kharchenko",
+        "A. V. Dvornichenko"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ],
+      "published": "2026-09-20T13:15:14+00:00",
+      "link": "https://arxiv.org/pdf/2609.23623v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "phase field modelling of solute and vacancy rearrangement and secondary phase under neutron irradiation",
+      "llm_evidence_cn": "相场模拟辐照下溶质空位重排与第二相演化",
+      "llm_evidence": "相场模拟辐照下溶质空位重排与第二相演化",
+      "canonical_evidence": "相场模拟辐照下溶质空位重排与第二相演化",
+      "llm_tldr_en": "A phase-field model combining reaction rate theory and CALPHAD simulates solute and vacancy rearrangement in Zr-Sn alloy, tracking secondary-phase precipitation and its stability under neutron irradiation dose.",
+      "llm_tldr_cn": "针对Zr-Sn合金在热处理与反应堆辐照下溶质与空位空间重排的问题，本文建立了相场模型，将反应速率理论与CALPHAD方法统一结合，并在三维空间模拟溶质与缺陷的再分布。模拟揭示了热处理阶段第二相的析出及其在中子辐照下的稳定性，并分析了辐照剂量对第二相颗粒统计特征的影响。该工作为理解辐照诱导微观组织演化提供了可推广的建模框架。",
+      "llm_tldr": "针对Zr-Sn合金在热处理与反应堆辐照下溶质与空位空间重排的问题，本文建立了相场模型，将反应速率理论与CALPHAD方法统一结合，并在三维空间模拟溶质与缺陷的再分布。模拟揭示了热处理阶段第二相的析出及其在中子辐照下的稳定性，并分析了辐照剂量对第二相颗粒统计特征的影响。该工作为理解辐照诱导微观组织演化提供了可推广的建模框架。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation induced defect evolution and microstructure changes",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2609.23564v1",
+      "source": "arxiv",
+      "title": "Dual Role of Mobile Interstitials in Defect Kinetics: From Retardation to Acceleration",
+      "abstract": "Mobile interstitial atoms redistribute while defects migrate, complicating prediction of defect kinetics and leading to contradictory reports of acceleration and retardation. We formulate defect activation in a grand-canonical ensemble at fixed interstitial chemical potential and define a pathway free-energy landscape $ΔG(Λ;T,μ)$ and the corresponding activation free energy $ΔG^{\\ddagger}$. We compute these quantities using both hyperplane-constrained thermodynamic integration via a mean force relation and a two-state chemical-potential integration, denoted TSCPI. The latter requires sampling only the initial and transition states; a single chemical-potential integration then yields $ΔG^{\\ddagger}(T,μ)$ across a wide $μ$ range, enabling rapid mapping over temperature and chemical potential. Applied to vacancy diffusion in FCC, BCC, and HCP metals with H (including in plane and cross plane diffusion in Zr) and in BCC W with He, both free energy routes agree with diffusion coefficients from molecular dynamics mean square displacements. The resulting maps reveal regimes of suppression and enhancement, including a crossover from suppression to enhancement with increasing hydrogen concentration. A site occupancy analysis links barrier shifts to state dependent site spectrum changes and transferable interstitial interaction terms.",
+      "authors": [
+        "Shihao Zhang",
+        "Shihao Zhu",
+        "Junping Du",
+        "Shuhei Shinzato",
+        "Ju Li",
+        "Shigenobu Ogata"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ],
+      "published": "2026-09-20T11:31:30+00:00",
+      "link": "https://arxiv.org/pdf/2609.23564v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "mobile interstitial atoms and defect kinetics",
+      "llm_evidence_cn": "可移动间隙原子与缺陷动力学",
+      "llm_evidence": "可移动间隙原子与缺陷动力学",
+      "canonical_evidence": "可移动间隙原子与缺陷动力学",
+      "llm_tldr_en": "The paper resolves contradictory reports on whether mobile interstitials accelerate or retard defect kinetics by formulating defect activation in a grand-canonical ensemble and computing a pathway free-energy landscape with new integration methods.",
+      "llm_tldr_cn": "间隙原子在迁移过程中重新分布，使缺陷动力学预测复杂化，并导致关于缺陷加速或延缓的矛盾报道。作者在固定间隙化学势的大正则系综下定义路径自由能景观与激活自由能，结合超平面约束热力学积分和双态化学势积分（TSCPI）进行计算。结果表明，新方法只需采样初态与过渡态，单次化学势积分即可在宽化学势范围内给出激活自由能。该框架为统一理解可移动间隙原子在缺陷演化中的双重作用提供了热力学基础。",
+      "llm_tldr": "间隙原子在迁移过程中重新分布，使缺陷动力学预测复杂化，并导致关于缺陷加速或延缓的矛盾报道。作者在固定间隙化学势的大正则系综下定义路径自由能景观与激活自由能，结合超平面约束热力学积分和双态化学势积分（TSCPI）进行计算。结果表明，新方法只需采样初态与过渡态，单次化学势积分即可在宽化学势范围内给出激活自由能。该框架为统一理解可移动间隙原子在缺陷演化中的双重作用提供了热力学基础。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation-induced point defects and clusters",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
