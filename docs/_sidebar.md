@@ -1,6 +1,9 @@
 * <a class="dpr-sidebar-root-link" href="#/">首页</a>
 * <a class="dpr-sidebar-root-link dpr-sidebar-noactive-link" href="javascript:void(0)" data-dpr-hash="#/tutorial/README">使用教程</a>
 * Daily Papers
+  * 2026-09-23 <!--dpr-date:20260923-->
+    * 速读区
+      * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202609/23/2609.24293v1-small-supercell-and-small-dataset-training-strategy-of-machine-learning-interatomic-potentials-for-point-defects" data-sidebar-item="{&quot;title&quot;: &quot;Small-supercell and Small-dataset Training Strategy of Machine Learning Interatomic Potentials for Point Defects&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2609.24293v1-small-supercell-and-small-dataset-training-strategy-of-machine-learning-interatomic-potentials-for-point-defects&quot;, &quot;score&quot;: &quot;6.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;rad-damage&quot;}], &quot;evidence&quot;: &quot;面向点缺陷模拟的机器学习势训练方案&quot;}">Small-supercell and Small-dataset Training Strategy of Machine Learning Interatomic Potentials for Point Defects</a>
   * 2026-09-22 <!--dpr-date:20260922-->
     * 精读区
       * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202609/22/2609.23623v1-phase-field-modelling-of-microstructure-transformations-in-zr-sn-alloy-during-irradiation" data-sidebar-item="{&quot;title&quot;: &quot;Phase field modelling of microstructure transformations in Zr-Sn alloy during irradiation&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2609.23623v1-phase-field-modelling-of-microstructure-transformations-in-zr-sn-alloy-during-irradiation&quot;, &quot;score&quot;: &quot;8.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;rad-damage&quot;}], &quot;evidence&quot;: &quot;相场模拟辐照下溶质空位重排与第二相演化&quot;}">Phase field modelling of microstructure transformations in Zr-Sn alloy during irradiation</a>

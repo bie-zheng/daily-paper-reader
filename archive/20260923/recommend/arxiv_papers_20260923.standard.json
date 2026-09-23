@@ -1,0 +1,57 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-09-23T21:48:17.470551+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 1,
+    "quick_skim_target": 11,
+    "quick_selected": 1
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2609.24293v1",
+      "source": "arxiv",
+      "title": "Small-supercell and Small-dataset Training Strategy of Machine Learning Interatomic Potentials for Point Defects",
+      "abstract": "Machine learning interatomic potentials (MLIPs) can treat large-scale material systems with near first-principles accuracy and have been widely used to accelerate point-defect simulations. However, the training of MLIPs usually relies on large amounts of DFT data. This issue is particularly pronounced for charged defects, for which DFT calculations of large supercells are required to avoid long-range Coulomb interactions and finite-size effects, making the construction of datasets computationally expensive. In this work, we propose an efficient MLIP training scheme for neutral and lowly charged point defects based on small supercells (less than 100 atoms) and limited number of DFT calculations. The scheme requires only four DFT structural relaxations to construct the training dataset and the trained MLIPs dedicated for the defect can predict the defect formation energies in larger supercells (over 200 atoms) with small errors (mostly smaller than 0.3 eV). Using defects in GaN, SiO$_2$, and $\\mathrm{Cu}_2\\mathrm{ZnSnS}_4$ as representative examples, we evaluate the extrapolation capability of this scheme for predicting defect total energies and structural relaxations across different supercell sizes. The results show that an MLIP trained only on single small defect supercell produces severe errors when treating large supercells. Incorporating defect data from multiple supercell sizes improves the predictive performance of the MLIP, while adding pristine defect-free bulk supercells further enhances the accuracy. These results provide practical guidance for training MLIP models of defect systems with low computational costs.",
+      "authors": [
+        "Zhenxing Dai",
+        "Mingjue Ni",
+        "Xinpeng Li",
+        "Menglin Huang",
+        "Anderson Janotti",
+        "Shiyou Chen"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ],
+      "published": "2026-09-21T08:52:08+00:00",
+      "link": "https://arxiv.org/pdf/2609.24293v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "MLIP training scheme for point-defect simulations",
+      "llm_evidence_cn": "面向点缺陷模拟的机器学习势训练方案",
+      "llm_evidence": "面向点缺陷模拟的机器学习势训练方案",
+      "canonical_evidence": "面向点缺陷模拟的机器学习势训练方案",
+      "llm_tldr_en": "MLIPs accelerate point-defect simulations but need large DFT datasets, especially for charged defects. This work proposes a small-supercell, small-dataset training scheme for neutral and lowly charged point defects, cutting dataset cost.",
+      "llm_tldr_cn": "机器学习原子间势可加速点缺陷模拟，但训练通常依赖大量DFT数据，带电缺陷尤甚，因需大超胞以避免有限尺寸效应。本文提出基于小于100原子的小超胞与少量DFT计算的高效训练方案，针对中性及低电荷点缺陷构建数据集。该方法大幅降低数据集构建成本，为辐照缺陷等大规模点缺陷模拟提供可迁移的加速工具。",
+      "llm_tldr": "机器学习原子间势可加速点缺陷模拟，但训练通常依赖大量DFT数据，带电缺陷尤甚，因需大超胞以避免有限尺寸效应。本文提出基于小于100原子的小超胞与少量DFT计算的高效训练方案，针对中性及低电荷点缺陷构建数据集。该方法大幅降低数据集构建成本，为辐照缺陷等大规模点缺陷模拟提供可迁移的加速工具。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation-induced point defects and clusters",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

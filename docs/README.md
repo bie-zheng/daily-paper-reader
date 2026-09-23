@@ -6,26 +6,26 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-09-22
-- 运行时间：2026-09-22 22:06:05 UTC
+- 最新运行日期：2026-09-23
+- 运行时间：2026-09-23 21:48:57 UTC
 - 运行状态：成功
-- 本次总论文数：2
-- 精读区：1
+- 本次总论文数：1
+- 精读区：0
 - 速读区：1
 
 ### 今日简报（AI）
-今日精读1篇、速读1篇，聚焦辐照下锆锡合金微观组织演化与间隙原子缺陷动力学。最值得看的是8.0分的Zr-Sn合金辐照相场模拟，揭示辐照诱导微观组织转变机制。普通读者可优先从这篇入手，理解核材料在辐照环境下的性能退化逻辑。
-- 详情：[/202609/22/README](/202609/22/README)
+1) 今天日报仅收录 1 篇速读，聚焦机器学习原子间势（MLIP）训练策略，方向为点缺陷计算。
+2) 唯一值得看的是这篇《小超胞与小数据集的 MLIP 点缺陷训练策略》（6.0/10），亮点在于用更小超胞和更少数据降低点缺陷势函数训练成本。
+3) 普通读者若对材料计算感兴趣，可从该文的训练流程与验证部分入手，留意小体系是否会牺牲精度与泛化性。
+- 详情：[/202609/23/README](/202609/23/README)
 
 ### 精读区论文标签
-1. [Phase field modelling of microstructure transformations in Zr-Sn alloy during irradiation](/202609/22/2609.23623v1-phase-field-modelling-of-microstructure-transformations-in-zr-sn-alloy-during-irradiation)  
-   标签：评分：8.0/10、query:rad-damage
-   evidence：相场模拟辐照下溶质空位重排与第二相演化
+- 本次无精读推荐。
 
 ### 速读区论文标签
-1. [Dual Role of Mobile Interstitials in Defect Kinetics: From Retardation to Acceleration](/202609/22/2609.23564v1-dual-role-of-mobile-interstitials-in-defect-kinetics-from-retardation-to-acceleration)  
+1. [Small-supercell and Small-dataset Training Strategy of Machine Learning Interatomic Potentials for Point Defects](/202609/23/2609.24293v1-small-supercell-and-small-dataset-training-strategy-of-machine-learning-interatomic-potentials-for-point-defects)  
    标签：评分：6.0/10、query:rad-damage
-   evidence：可移动间隙原子与缺陷动力学
+   evidence：面向点缺陷模拟的机器学习势训练方案
 
 
 <div class="dpr-home-promo-card">
