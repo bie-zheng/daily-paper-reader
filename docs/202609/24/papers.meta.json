@@ -1,0 +1,24 @@
+{
+  "label": "2026-09-24",
+  "date": "2026-09-24",
+  "generated_at": "2026-09-24T22:45:14",
+  "count": 1,
+  "papers": [
+    {
+      "paper_id": "202609/24/2609.28096v1-achieving-5-angstrom-resolution-diffraction-contrast-with-an-uncorrected-electron-probe-and-nanosized-defect-characterizations",
+      "section": "quick",
+      "title_en": "Achieving 5-angstrom-resolution diffraction contrast with an uncorrected electron probe and nanosized defect characterizations",
+      "authors": "Yao Li, Austin C. Houston, Ziang Yu, Zehui Qi, Siwei Chen, Yajie Zhao, Sung Joo Kim, Steven J. Zinkle, Gerd Duscher, Blas P. Uberuaga, Benjamin K. Derby",
+      "date": "2026-09-23",
+      "pdf": "https://arxiv.org/pdf/2609.28096v1",
+      "score": "6.0",
+      "evidence": "可分辨钢中纳米级位错环结构的TEM衍射衬度方法",
+      "tldr": "原子分辨显微术视野小、缺陷记录少，而可靠统计的缺陷成像高度依赖TEM衍射衬度；但200–300 kV电子下Ewald球曲率低，传统衍射衬度分辨率仅约5 nm。作者利用禁戒条件成像并发展equal-s方法，将衍射衬度分辨率从5 nm提升到0.5 nm（5 Å），实现了未校正电子探针下的高分辨缺陷观察。该方法在钢中发现此前未报道的新相和位错环结构，表明其可替代经典双束条件，为纳米缺陷的高分辨统计表征提供新途径。",
+      "tags": "query:rad-damage",
+      "abstract_en": "Atomic-resolution micrographs remain limited in application due to small field of view and low numbers of recorded defects. Defect imaging with reliable statistics in transmission electron microscopy (TEM) relies heavily on diffraction contrast. However, with 200-300 kV electrons, low-curvature Ewald sphere limits diffraction resolution at ~5 nm. Here, we imaged defects with a forbidden condition in TEM and improved the resolution in diffraction contrast from 5 to 0.5 nm. The superiority of our equal-s method is demonstrated by the discovery of a novel phase and dislocation loop structure in steels, which have not been previously reported experimentally or theoretically. Our equal-s can largely replace the classical two-beam condition for defect study.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

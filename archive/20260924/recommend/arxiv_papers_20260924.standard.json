@@ -1,0 +1,62 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-09-24T22:43:40.450837+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 1,
+    "quick_skim_target": 11,
+    "quick_selected": 1
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2609.28096v1",
+      "source": "arxiv",
+      "title": "Achieving 5-angstrom-resolution diffraction contrast with an uncorrected electron probe and nanosized defect characterizations",
+      "abstract": "Atomic-resolution micrographs remain limited in application due to small field of view and low numbers of recorded defects. Defect imaging with reliable statistics in transmission electron microscopy (TEM) relies heavily on diffraction contrast. However, with 200-300 kV electrons, low-curvature Ewald sphere limits diffraction resolution at ~5 nm. Here, we imaged defects with a forbidden condition in TEM and improved the resolution in diffraction contrast from 5 to 0.5 nm. The superiority of our equal-s method is demonstrated by the discovery of a novel phase and dislocation loop structure in steels, which have not been previously reported experimentally or theoretically. Our equal-s can largely replace the classical two-beam condition for defect study.",
+      "authors": [
+        "Yao Li",
+        "Austin C. Houston",
+        "Ziang Yu",
+        "Zehui Qi",
+        "Siwei Chen",
+        "Yajie Zhao",
+        "Sung Joo Kim",
+        "Steven J. Zinkle",
+        "Gerd Duscher",
+        "Blas P. Uberuaga",
+        "Benjamin K. Derby"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ],
+      "published": "2026-09-23T13:28:34+00:00",
+      "link": "https://arxiv.org/pdf/2609.28096v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "TEM diffraction-contrast method resolving nanosized dislocation loop structures in steels",
+      "llm_evidence_cn": "可分辨钢中纳米级位错环结构的TEM衍射衬度方法",
+      "llm_evidence": "可分辨钢中纳米级位错环结构的TEM衍射衬度方法",
+      "canonical_evidence": "可分辨钢中纳米级位错环结构的TEM衍射衬度方法",
+      "llm_tldr_en": "TEM diffraction contrast is limited to about 5 nm resolution by the low-curvature Ewald sphere at 200-300 kV, restricting statistics on nanosized defects. Using a forbidden-condition equal-s method, the authors improve diffraction-contrast resolution to 0.5 nm and reveal a previously unreported phase and dislocation loop structure in steels.",
+      "llm_tldr_cn": "透射电镜衍射衬度成像受低曲率埃瓦尔德球限制，分辨率约为5纳米，难以对纳米级缺陷进行可靠统计。本文采用禁用衍射条件下的equal-s成像方法，将衍射衬度分辨率提升至0.5纳米，并在钢材中发现了此前未报道的新相与位错环结构。该方法可在较大视场内高统计地表征纳米级缺陷，为辐照缺陷与位错环的微观结构研究提供了有力工具。",
+      "llm_tldr": "透射电镜衍射衬度成像受低曲率埃瓦尔德球限制，分辨率约为5纳米，难以对纳米级缺陷进行可靠统计。本文采用禁用衍射条件下的equal-s成像方法，将衍射衬度分辨率提升至0.5纳米，并在钢材中发现了此前未报道的新相与位错环结构。该方法可在较大视场内高统计地表征纳米级缺陷，为辐照缺陷与位错环的微观结构研究提供了有力工具。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "dislocation loop formation in irradiated FeCr",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
