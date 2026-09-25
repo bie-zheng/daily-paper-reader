@@ -6,26 +6,22 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-09-24
-- 运行时间：2026-09-24 22:45:08 UTC
+- 最新运行日期：2026-09-25
+- 运行时间：2026-09-25 22:24:19 UTC
 - 运行状态：成功
-- 本次总论文数：1
+- 本次总论文数：0
 - 精读区：0
-- 速读区：1
+- 速读区：0
 
 ### 今日简报（AI）
-1) 今天速读 1 篇：用未校正电子探针实现 5 埃分辨率衍射衬度，并用于纳米级缺陷表征。
-2) 最值得看的是它把"高分辨缺陷观察"从依赖昂贵像差校正器，转向普通未校正探针也能做到 5 埃衍射衬度这一思路。
-3) 普通读者可关注该方法能否用于半导体、合金等纳米缺陷检测，后续留意其可重复性与实际样品适用性。
-- 详情：[/202609/24/README](/202609/24/README)
+> 今日无新推荐，系统未产出可展示论文。
+- 详情：[/202609/25/README](/202609/25/README)
 
 ### 精读区论文标签
 - 本次无精读推荐。
 
 ### 速读区论文标签
-1. [Achieving 5-angstrom-resolution diffraction contrast with an uncorrected electron probe and nanosized defect characterizations](/202609/24/2609.28096v1-achieving-5-angstrom-resolution-diffraction-contrast-with-an-uncorrected-electron-probe-and-nanosized-defect-characterizations)  
-   标签：评分：6.0/10、query:rad-damage
-   evidence：可分辨钢中纳米级位错环结构的TEM衍射衬度方法
+- 本次无速读推荐。
 
 
 <div class="dpr-home-promo-card">
