@@ -1,6 +1,9 @@
 * <a class="dpr-sidebar-root-link" href="#/">首页</a>
 * <a class="dpr-sidebar-root-link dpr-sidebar-noactive-link" href="javascript:void(0)" data-dpr-hash="#/tutorial/README">使用教程</a>
 * Daily Papers
+  * 2026-10-03 <!--dpr-date:20261003-->
+    * 速读区
+      * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202610/03/2609.39535v1-boron-vacancies-in-bulk-h-bn-created-by-high-energy-he-irradiation" data-sidebar-item="{&quot;title&quot;: &quot;Boron vacancies in bulk h-BN created by high-energy He+ irradiation&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2609.39535v1-boron-vacancies-in-bulk-h-bn-created-by-high-energy-he-irradiation&quot;, &quot;score&quot;: &quot;6.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;rad-damage&quot;}], &quot;evidence&quot;: &quot;高能氦离子辐照产生硼空位&quot;}">Boron vacancies in bulk h-BN created by high-energy He+ irradiation</a>
   * 2026-09-24 <!--dpr-date:20260924-->
     * 速读区
       * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202609/24/2609.28096v1-achieving-5-angstrom-resolution-diffraction-contrast-with-an-uncorrected-electron-probe-and-nanosized-defect-characterizations" data-sidebar-item="{&quot;title&quot;: &quot;Achieving 5-angstrom-resolution diffraction contrast with an uncorrected electron probe and nanosized defect characterizations&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2609.28096v1-achieving-5-angstrom-resolution-diffraction-contrast-with-an-uncorrected-electron-probe-and-nanosized-defect-characterizations&quot;, &quot;score&quot;: &quot;6.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;rad-damage&quot;}], &quot;evidence&quot;: &quot;可分辨钢中纳米级位错环结构的TEM衍射衬度方法&quot;}">Achieving 5-angstrom-resolution diffraction contrast with an uncorrected electron probe and nanosized defect characterizations</a>

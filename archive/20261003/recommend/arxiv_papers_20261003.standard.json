@@ -1,0 +1,66 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-10-03T22:37:06.685723+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 0,
+    "deep_cap": 6,
+    "deep_selected": 0,
+    "quick_candidates": 1,
+    "quick_skim_target": 11,
+    "quick_selected": 1
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2609.39535v1",
+      "source": "arxiv",
+      "title": "Boron vacancies in bulk h-BN created by high-energy He+ irradiation",
+      "abstract": "While color centers in diamond and other three-dimensional crystals are nowadays key elements of several types of sensors, color centers in two-dimensional materials are rapidly developing and promise high-tech applications. One of the interesting centers in 2D materials is the negatively charged boron vacancy in hexagonal boron nitride (h-BN), which has already shown some potential for magnetometry, but the reliable creation of boron vacancies remains challenging. Here, we demonstrate the fabrication of negatively charged boron vacancy color centers in bulk h-BN via implantation of helium ions at ~1 MeV, as confirmed by characteristic photoluminescence and optically detected magnetic resonance. The resonance has a width of 180 MHz and exhibits the expected Zeeman shift of the resonance lines. The depth of the color center along the c-axis of the h-BN crystal was measured and compared with predictions from Stopping and Range of Ions in Matter modeling. The experimental value and the modeled prediction are consistent within the reported uncertainties, as their 1σ intervals overlap, although the experiment shows a greater depth and a wider distribution.",
+      "authors": [
+        "P. G. Vilyuzhanina",
+        "S. V. Bolshedvorskii",
+        "R. Isayev",
+        "A. S. Doroshkevich",
+        "A. A. Tatarinova",
+        "V. V. Soshenko",
+        "I. S. Cojocaru",
+        "A. M. Kozodaev",
+        "S. M. Drofa",
+        "A. Chernyavskiy",
+        "N. I. Salangin",
+        "A. N. Smolyaninov",
+        "A. Y. Kuntsevich",
+        "A. V. Akimov"
+      ],
+      "primary_category": "quant-ph",
+      "categories": [
+        "quant-ph",
+        "cond-mat.mtrl-sci"
+      ],
+      "published": "2026-09-30T11:37:20+00:00",
+      "link": "https://arxiv.org/pdf/2609.39535v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "boron vacancies created by high-energy He+ irradiation",
+      "llm_evidence_cn": "高能氦离子辐照产生硼空位",
+      "llm_evidence": "高能氦离子辐照产生硼空位",
+      "canonical_evidence": "高能氦离子辐照产生硼空位",
+      "llm_tldr_en": "Reliable creation of boron vacancy color centers in h-BN remains challenging. Using ~1 MeV He+ implantation into bulk h-BN, confirmed by photoluminescence and optically detected magnetic resonance, the authors produce negatively charged boron vacancies with a 180 MHz resonance. This demonstrates ion-irradiation as a route to engineer vacancy-type point defects.",
+      "llm_tldr_cn": "针对二维材料中带负电硼空位色心难以可靠制备的问题，本文采用约1 MeV高能氦离子注入块体六方氮化硼，并结合光致发光与光学检测磁共振进行表征。结果显示成功产生带负电的硼空位色心，共振线宽约180 MHz且特征符合预期。该工作证明离子辐照可有效引入空位型点缺陷，为辐照缺陷工程与色心量子传感应用提供了可行途径。",
+      "llm_tldr": "针对二维材料中带负电硼空位色心难以可靠制备的问题，本文采用约1 MeV高能氦离子注入块体六方氮化硼，并结合光致发光与光学检测磁共振进行表征。结果显示成功产生带负电的硼空位色心，共振线宽约180 MHz且特征符合预期。该工作证明离子辐照可有效引入空位型点缺陷，为辐照缺陷工程与色心量子传感应用提供了可行途径。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation-induced point defects and clusters",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "label": "2026-10-03",
+  "date": "2026-10-03",
+  "generated_at": "2026-10-03T22:37:50",
+  "count": 1,
+  "papers": [
+    {
+      "paper_id": "202610/03/2609.39535v1-boron-vacancies-in-bulk-h-bn-created-by-high-energy-he-irradiation",
+      "section": "quick",
+      "title_en": "Boron vacancies in bulk h-BN created by high-energy He+ irradiation",
+      "authors": "P. G. Vilyuzhanina, S. V. Bolshedvorskii, R. Isayev, A. S. Doroshkevich, A. A. Tatarinova, V. V. Soshenko, I. S. Cojocaru, A. M. Kozodaev, S. M. Drofa, A. Chernyavskiy, N. I. Salangin, A. N. Smolyaninov, A. Y. Kuntsevich, A. V. Akimov",
+      "date": "2026-09-30",
+      "pdf": "https://arxiv.org/pdf/2609.39535v1",
+      "score": "6.0",
+      "evidence": "高能氦离子辐照产生硼空位",
+      "tldr": "二维材料中的色心有望用于量子传感，但六方氮化硼（h-BN）中负电硼空位的可靠制备仍是难题。本文用约1 MeV氦离子注入块体h-BN，成功产生负电硼空位色心，并通过特征光致发光和光探测磁共振（ODMR）确认。ODMR线宽为180 MHz，呈现预期塞曼位移；色心沿c轴深度与SRIM模拟在1σ不确定度内一致，但实验深度更大、分布更宽。该工作为h-BN色心的可控制备与磁测量应用提供了实验依据。",
+      "tags": "query:rad-damage",
+      "abstract_en": "While color centers in diamond and other three-dimensional crystals are nowadays key elements of several types of sensors, color centers in two-dimensional materials are rapidly developing and promise high-tech applications. One of the interesting centers in 2D materials is the negatively charged boron vacancy in hexagonal boron nitride (h-BN), which has already shown some potential for magnetometry, but the reliable creation of boron vacancies remains challenging. Here, we demonstrate the fabrication of negatively charged boron vacancy color centers in bulk h-BN via implantation of helium ions at ~1 MeV, as confirmed by characteristic photoluminescence and optically detected magnetic resonance. The resonance has a width of 180 MHz and exhibits the expected Zeeman shift of the resonance lines. The depth of the color center along the c-axis of the h-BN crystal was measured and compared with predictions from Stopping and Range of Ions in Matter modeling. The experimental value and the modeled prediction are consistent within the reported uncertainties, as their 1σ intervals overlap, although the experiment shows a greater depth and a wider distribution.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

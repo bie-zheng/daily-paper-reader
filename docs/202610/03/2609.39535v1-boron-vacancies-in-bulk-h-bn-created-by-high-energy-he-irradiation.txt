@@ -1,0 +1,405 @@
+Title: 2609.39535v1.pdf
+
+URL Source: https://arxiv.org/pdf/2609.39535v1
+
+Published Time: Thu, 01 Oct 2026 01:32:41 GMT
+
+Number of Pages: 17
+
+Markdown Content:
+Boron vacancies in bulk h-BN created by high-energy He+ irradiation 
+
+P.G. Vilyuzhanina 1,2,3,4 , S.V. Bolshedvorskii 1,4 , R. Isayev 5,6 , A.S. Doroshkevich 5,7 ,A.A. Tatarinova 5, V.V. Soshenko 1,4 , I.S. Cojocaru 1,2 , A.M. Kozodaev 1,2,3 , S.M. Drofa 1,2,3,4 ,A. Chernyavskiy 1,2,3 , N.I. Salangin 1,3 , A.N. Smolyaninov 4, A.Y. Kuntsevich 1, A.V. Akimov 1,2,4 
+
+> 1
+
+P.N. Lebedev Physical Institute of the Russian Academy of Sciences, 119991 Moscow, Russia 
+
+> 2
+
+Russian Quantum Center, 143025 Moscow, Russia 
+
+> 3
+
+Moscow Institute of Physics and Technology (National Research University), 141701 Dolgoprudny, Russia 
+
+> 4
+
+LLC “Diamond Sensors ”, 121205 Moscow, Russia 
+
+> 5
+
+Joint Institute for Nuclear Research, 141980 Dubna, Russia  
+
+> 6
+
+IDDA Department of Nuclear Research, AZ1069 Baku, Azerbaijan 
+
+> 7
+
+Dubna State University, 141982 Dubna, Russia 
+
+While color centers in diamond and other three-dimensional crystals are nowadays key elements of several types of sensors, color centers in two-dimensional materials are rapidly developing and promise high-tech applications. One of the interesting centers in 2D materials is the negatively charged boron vacancy in hexagonal boron nitride (h-BN), which has already shown some potential for magnetometry, but the reliable creation of boron vacancies remains challenging. Here, we demonstrate the fabrication of negatively charged boron vacancy color centers in bulk h-BN via implantation of helium ions at ~1 MeV, as confirmed by characteristic photoluminescence and optically detected magnetic resonance. The resonance has a width of 180 MHz and exhibits the expected Zeeman shift of the resonance lines. The depth of the color center along the c-axis of the h-BN crystal was measured and compared with predictions from Stopping and Range of Ions in Matter modeling. The experimental value and the 
+
+modeled prediction are consistent within the reported uncertainties, as their 1σ 
+
+intervals overlap, although the experiment showsa greater depth and a wider distribution. I. INTRODUCTION 
+
+Quantum technologies are rapidly advancing, requiring robust platforms for practical implementation [1]. While manipulating single atoms and ions necessitates complex and expensive setups, such as vacuum chambers and cryogenic cooling, color centers in wide-bandgap materials offer an alternative as quantum systems operable under ambient conditions. Color centers can be utilized as sources of single photons [2 –4], as qubits [5,6] and as precise quantum sensors, with especially high sensitivity to magnetic fields, down to fractions of pT / Hz  [7 –12]. 
+
+Currently, the research on color centers focuses on three-dimensional materials, primarily diamond, and in particular to the NV center [13]. However, the scientific community is looking for color centers in alternative and cheaper materials: silicon carbide, yttrium aluminum garnet, and zinc oxide [14]. 
+
+Two-dimensional materials, particularly hexagonal boron nitride (h-BN), are of great interest. It is a dielectric with a band gap of 6 eV and lattice constants 2.5 Aa =  and 6.7 A c =  . h-BN can be easily combined with the other two-dimensional materials in stacked structures and devices [15 –
+
+18]. Color centers in two-dimensional materials are more accessible than those in three-dimensional materials, which is very promising for local quantum sensing and magnetometry [19,20]. One of the best sensitivities reported in various publications devoted to BV−
+
+reaches 2.55 μT / Hz  [20]. 
+
+Deterministic fabrication of color centers with the desired concentration and localization in h-BN crystals requires serious efforts. Specifically, detection of BV− in pristine h-BN crystals has not yet been reported. Methods of color center creation can be divided into two broad categories: top-down and bottom-up. Bottom-up approaches are growth techniques; color centers are created through the addition of impurities during growth and variation of growth parameters. For example, a carbon source can be added during metal –organic vapor-phase epitaxy or molecular beam epitaxy of h-BN for color center formation [21]. 
+
+Top-down approaches involve the creation of defects in the crystal, usually using various irradiation techniques: irradiation with laser pulses [22,23], electrons [24 –28], ions with relatively low energies of ~10 keV [29 –35], ions with high energies of ~ 1 MeV [19,20,36,37], and neutrons [38,39]. Annealing [40], chemical treatment, and mechanical damage induced by STM or AFM tips [41,42] can also be classified as top-down techniques for color center creation. Some of these top-down approaches are preferable for the creation of dense ensembles of color centers due to their large-scale implementation, namely annealing, chemical treatment, and irradiation with an unfocused particle beam [41]. Meanwhile, other methods, especially the tip method or irradiation with a focused beam of particles form color centers with high spatial resolution, which is highly desirable for single photon emission [41]. 
+
+Despite the widespread use of irradiation methods, predicting the resulting damage to the sample and types of produced color centers is challenging. Several approaches can be used to evaluate the penetration depth of different ions into h-BN, namely molecular dynamics simulations [37,43,44] and the Stopping and Range of Ions in Matter (SRIM) software [45]. The latter models the interaction of charged particles with solids. It allows calculation of the ion or electron range in a material, energy loss, and the distributions of implanted particles and vacancies formed by these interactions [46]. 
+
+It has been experimentally shown that SRIM modeling underestimates the depth of negatively charged boron vacancies created in h-BN by ion irradiation [35]. Possible reasons for this discrepancy are secondary ion processes and ion channeling [35,43], to avoid the latter some experimentalists tilt the h-BN sample during irradiation [31,38]. Backscattered ions and sputtered ions from the substrate should be considered for correct simulation of the defect formation [43]. 
+
+Previous studies utilized irradiation of h-BN with ions with energies up to ~1 MeV, but they considered thin flakes [20,36,37] or hot-pressed BN and ceramics [19,37,47]. In this work, we irradiated bulk h-BN with He + particles at an energy of ~1 MeV and experimentally measured the photoluminescence depth profile along the c-axis of the h-BN crystal to determine the depth of the created color centers. We also performed optically detected magnetic resonance (ODMR) experiments and demonstrated the successful creation of BV− color centers, exhibiting the Zeeman effect. 
+
+# II. THE SAMPLE 
+
+The bulk h-BN crystal, purchased from HQ Graphene, was placed on a copper plate and fixed with a TEM copper grid having a mesh of 400 lines per inch, corresponding to a distance of 63.5 μm 
+
+between the centers of neighboring holes, the so-called pitch. The sample was then irradiated with He +
+
+particles at an energy of 1.1MeV  and a fluence of 15 2
+
+5.7 10 ions / cm  using the EG-5 electrostatic accelerator (I.M. Frank Laboratory of Neutron Physics, Dubna, Russia). A photograph of the non-irradiated crystal is shown in  Figure 1 (a), while a photograph of the irradiated crystal fixed on a copper plate with a TEM copper grid is shown in  Figure 1 (b). Figure 1. a) photo of the non-irradiated crystals, the scale bar is 1 mm; b) photo of the irradiated sample c) simplified energy level structure of the  𝑉 𝐵 − color center and its transitions. Red color, solid lines – radiative transitions, purple dashed – non-radiative (ISC – intersystem crossing), green solid – optical pumping, blue solid – microwave (MW) driving. GS – ground state, ES – excited state, MS – metastable state [48]; d) schematic image of the h-BN crystal lattice with a boron vacancy (VB). 
+
+# III. PHYSICAL SYSTEM 
+
+The negatively charged boron vacancy BV− is the most promising color center for quantum magnetometry in h-BN. The electron Hamiltonian describing BV− with electronic spin 1S = in the presence of an external magnetic field B
+
+ is given by the following equation [41]: ( )  
+
+> 222
+
+( 1) 3    
+
+> ezxye
+
+S S H D S E S S BS 
+
++ = − + − +  
+
+
+
+(1) 
+
+where / 3.48 GHz D h  is the zero-field splitting parameter, and / ~ 50 MHz E h is the orthorhombic splitting of BV− ,28 GHz / T e
+
+= is the gyromagnetic ratio, h is the Planck constant, and S
+
+ is the electron spin operator. The first two terms in (1) describe the electron spin –spin interaction, and the last term is the electron Zeeman effect. In the presence of a magnetic field B
+
+ , the energy levels with spin projections 1Sm =   experience a Zeeman shift. The frequencies  
+
+> 
+
+of the quantum transitions 0 1S Sm m= → =   can be found from the following equation [41]: ( ) 
+
+> 22
+> ez
+
+D E Bh h
+
+
+
+> 
+
+   +  
+
+(2) 
+
+where zB is the projection of the magnetic field onto the axis of the BV− , which is the out-of-plane axis of the two-dimensional h-BN ( c-axis). Equation (2) is key to understanding the magnetic field sensing capability of BV− . By measuring the frequencies   in the experiment, the projection of the magnetic field onto the BV− color center axis zB can be calculated using a simple equation: 2 2
+
+12
+
+> ze
+
+EB h
+
+  
+
+> +−
+
+−   = −      
+
+(3) 
+
+The frequencies  
+
+> 
+
+can be determined using the ODMR method. It allows to readout the spin of the system by the spin-dependent photoluminescence.  Figure 1 (c) shows a simplified diagram of the energy levels, including states with different electron spin projections [48].  Figure 1 (d) presents a schematic image of the h-BN crystal lattice with a boron vacancy. 
+
+First, let us consider the case of a zero magnetic field 0B = . The sample is pumped optically with the laser. Due to laser pumping, the system undergoes a transition to an excited state (green arrows in  Figure 1 (c)). The transition to the ground state occurs with the emission of phonons and photoluminescence photons (red arrows in  Figure 1 (c)). When the frequency of the external microwave field (blue sphere in  Figure 1 (c)) coincides with the frequency of one of the transitions 0 1S Sm m= → =  
+
+, resonant absorption occurs, driving the corresponding transition [49]. In the excited state, the system is more likely to relax to a metastable state if the spin projection is 1Sm =  
+
+rather than 0Sm = , resulting in a decrease in photoluminescence intensity. When a resonant microwave field is applied, a photoluminescence decays. In other words, a negative ODMR contrast is observed. 
+
+When an external magnetic field is applied, the Zeeman effect shifts the energy levels, and consequently, the resonance frequencies. Thus, by detecting the photoluminescence intensity at various frequencies of the driving microwave field, it is possible to determine the magnetic field. IV. PHOTOLUMINESCENCE AND ODMR STUDIES 
+
+The irradiated h-BN sample was studied using a home-built confocal microscope equipped with a microwave module for ODMR measurements. A simplified schematic of the setup is shown in 
+
+Figure 2 . The green line in  Figure 2  represents the 532 nm laser, which is focused onto the sample using a high-numerical-aperture 0.95 NA = objective. The red line represents the photoluminescence from the sample, which is collected through the same objective and then detected by avalanche photodiodes. Galvo mirrors are used to scan the sample in the lateral dimensions. The setup contains two photodiodes (two channels): only one channel was used in this experiment; the second one is shown to accurately represent the optical path, including the BP145B2 pellicle beamsplitter (Thorlabs), labeled BS in  Figure 2 .
+
+Figure 2. Simplified schematic of the home-built confocal microscope setup. 
+
+For ODMR studies and pulse sequence generation, the required sequence is programmed in LabVIEW. Subsequently, a National Instruments board BNC-2121 with NI-DAQmx driver, a microwave switch, and an acousto-optic modulator are used to switch the microwave and laser radiation in the correct order. A permanent magnet on a moving stage is used to cause the Zeeman effect. The ion penetration depth into the crystal was studied by moving the objective along the c-axis of the h-BN crystal using a piezo actuator (E-665 LVPZT Amplifier). 
+
+First, photoluminescence measurements were performed to confirm the formation of color centers and BV− centers specifically by irradiation. Confocal scans of the sample are shown in  Figure 3(a,b). The photoluminescent regions exhibit a signal of up to 6
+
+2 10 counts / sec  . We measured the dependence of the photoluminescence intensity on laser power up to 3.6 mW and observed no saturation (for details, see Supplementary Materials, Figure S1(a)). 
+
+Figure 3. Confocal scans of the irradiated bulk h-BN crystal. a) overview scan; b) zoomed-in region; c) photoluminescence spectrum; d) intensity of a color center versus time on a logarithmic scale. 
+
+In the confocal scans, circular patterns of the TEM copper grid are clearly observed. The area of the sample not covered by the copper grid shows a bright, relatively spatially homogeneous signal due to formed color centers. 
+
+Next, we measured the photoluminescence spectrum of the irradiated region using an M266 monochromator (SOLAR LS) and a Dhyana 400D camera with high quantum efficiency, the resulting spectrum is shown in  Figure 3 (c). The observed peak in the photoluminescence spectrum in the 800 –850 nm range is typical of BV− color centers and agrees with theoretical predictions [50] and other experiments [28,33,51] . The sharp line at 532 nm corresponds to the laser line ; the line 
+
+at ~570 nm is the h -BN Raman mode, confirming that the crystal structure was preserved after irradiation. The photoluminescence in the 600 –650 nm range may be related to B NN V  color centers [52 –54]. 
+
+For the optical spectrum measurement, the optical fiber of the confocal microscope (see  Figure 2 )was switched from the avalanche photodiode to the monochromator input. Note that the photoluminescence spectrum is modulated by the pellicle beamsplitter BP145B2 (Thorlabs); its transmission and reflectance coefficients vary periodically by approximately 20 –30% over a wavelength interval of about 100 nm [55]. 
+
+We also performed lifetime measurements using a pulsed laser and a Time-Correlated Single Photon Counting system (PicoHarp 330). The experimental results are shown on a logarithmic scale in  Figure 3 (d). The experimental data were fitted with a linear function, and the estimated lifetime is 1.02 0.03 
+
+=  ns, which is in reasonable agreement with literature value 1.2 
+
+=
+
+ns [56]. 
+
+The irradiated photoluminescent regions of the sample were studied using the pulsed ODMR technique. The optimal microwave pulse length was selected from the experimental dependence of the contrast on the pulse length (for details, see Supplementary Materials, Figure S2(a)). However, it is worth noting that we did not observe Rabi oscillations, probably due to the low microwave power used in our experiments. Using the optimal MW pulse length, we also assessed the effective electron spin relaxation time 1 16 11 μs eff 
+
+T =  , (for details, see Supplementary Materials, Figure S2(b)). 
+
+We applied three different external magnetic fields B along the c-axis of the h-BN crystal to observe the Zeeman shift of the resonance lines. The resulting ODMR spectra, fitted with a sum of two Lorentzian functions, are shown in  Figure 4 (a). ODMR and photoluminescence results confirm the creation of BV− in the bulk h-BN crystal sample upon irradiation. Figure 4. a) experimental ODMR spectra of the irradiated h-BN crystal for different external magnetic fields; b) fitted resonance frequencies from the ODMR spectra plotted versus the estimated magnetic field; c) dependence of the signal from non-irradiated (reflection) and irradiated (photoluminescence and reflection) areas on the objective position during scanning along the c-axis of the h-BN crystal. Orange dashed lines represent the Lorentzian fit, vertical black dashed lines represent the crystal boundary  𝑥 𝑏  and the depth of the color centers  𝑥 𝐶𝐶 ; d) histogram of the estimated experimental depths of color centers. 
+
+The values of the zero-field splitting parameter / 3474.1 1.2 MHz D h =  and the orthorhombic splitting / 54.4 1.2 MHz E h =  were estimated by fitting the experimental ODMR spectra in the absence of an external magnetic field 0B = . The obtained values agree with previous results [56] for the BV− color center. 
+
+The values of the external magnetic field estimated from (3) and from the fitted data are 1 4.95 0.10 mT B = 
+
+and 2 7.97 0.13 mT B   . The fitted resonance frequencies are plotted versus the estimated magnetic field in  Figure 4 (b). The spectra show a clearly observable shift of the spectral lines, as expected from the Zeeman effect. The asymmetry of the spectra may be attributed to the higher efficiency of the microwave antenna at lower frequencies. 
+
+The sensitivity to the magnetic field B
+
+ was calculated from the fitted continuous-wave spectrum (for details, see Supplementary Materials, Figure S3) using the following equation [20]: 1 
+
+> BFe
+
+P C R
+
+ =  , (4) 
+
+where 28 GHz / T e
+
+= is the gyromagnetic ratio mentioned above, and FP is a line-shape parameter given by 4 0.77 3 3
+
+> F
+
+P =  for a Lorentzian function [57]. 6
+
+2.17 10 R   photons per second is the photon count rate. The full width at half maximum (FWHM) 180 MHz 
+
+  and contrast 1% C  were obtained from the fitted experimental data at 8B mT  and 51 MHz 
+
+ 
+
+and contrast 2.6% C  at zero magnetic field correspondingly. The estimated sensitivities 340 B
+
+THz 
+
+=
+
+and 37 B
+
+THz 
+
+= for non-zero and zero magnetic field do not reach the previously reported value of 2.5 μT / Hz  for zero magnetic field [20]. However, it is comparable to the sensitivity of 200 μT / Hz  reported in [19]. As mentioned earlier, the contrast in our experiment can be improved by increasing the MW power, thereby enhancing the magnetic-field sensitivity. 
+
+# V. EXPERIMENTAL DEPTH SCAN 
+
+We determined the axial resolution of our setup to be about  5 μm. For this purpose, we scanned a single NV center in diamond in the same way as for the h-BN depth scan (for details, see Supplementary Materials, Figure S4). Then we performed depth scan measurements, representative depth scans of the irradiated and non-irradiated h-BN regions are shown in  Figure 4(c). The intensity values and errors shown in  Figure 4 (c) were calculated from the time trace measured while the piezo actuator was fixed at a given position. The error of the piezo actuator corresponds to its instrumental error. 
+
+The signal from the non-irradiated area was fitted with a single Lorentzian function, while the signal from the irradiated area was fitted with a sum of Lorentzian functions. This functional dependence was chosen for fitting because the intensity at the center of a Gaussian beam as a function of the longitudinal coordinate follows a Lorentzian function. 
+
+The crystal boundary depth bx was assumed to correspond to the maximum reflection signal and to coincide with the center of the Lorentzian function fit of the non-irradiated area scan. The color centers depth CC x was assumed to correspond to the center of the second Lorentzian function in the sum from the fit of the irradiated area scan, while the first corresponds to the boundary of the crystal. Note that the depth can be estimated without a depth scan of the non-irradiated area by considering only the fit of the irradiated area depth scan, but we used the depth scan of the non-irradiated area to reduce the uncertainty. 
+
+The actual depths were estimated by subtracting the boundary position from the photoluminescence peak position and multiplying the result by the refractive index: ( ) 
+
+> exp bCC
+
+d n x x⊥=  −
+
+, (5) 
+
+where  𝑛 ⊥ = 1.8  is the refractive index of h-BN along the c-axis [58]. The in-plane h-BN refractive index is slightly higher,  𝑛 ∥ = 2.1 , considering the light path inside the sample, the depth may be underestimated. The depth values range from  2 to  7 μm, the median depth is 5.2 μm exp d = , and the standard deviation is 1.7 μm exp 
+
+= , the resulting distribution is presented in  Figure 4 (d). 
+
+# VI. STOPPING AND RANGE OF IONS IN MATTER MODELING 
+
+The SRIM modeling [46] of He + ions with energy 1.1 MeV E = in boron nitride with a density of 3
+
+2.1g/cm  was performed. We tried different displacement threshold energies [24,37,44] for boron BdT and nitrogen atoms NdT and found no differences in the median depth of the vacancy distribution. The results of SRIM modeling for 4
+
+10  ions and displacement threshold energies of 40.5 eV BdT =
+
+and 41.6 eV NdT = [44] are shown in  Figure 5 . The He + ion range distribution is presented in  Figure 5 (a), and the induced vacancies distribution is presented in  Figure 5 (b). The simulated median depth of the created vacancies is 3.1 μm  , and the standard deviation is 0.6 μm  .
+
+Figure 5. Results of SRIM modeling of h-BN irradiated with 1.1 MeV He + particles. (a) ion range distribution; (b) depth distribution of irradiation-induced vacancies. 
+
+Overall, the experimental depth is 5.2 μm exp d = , with a standard deviation of 1.7 μm exp 
+
+= , while the depth modeled with SRIM is 3.1 μm model d = with a standard deviation of 0.6 μm model 
+
+= . We chose the median rather than the mean for comparison because it is more robust to the large variability observed in our measurements and to the asymmetry observed in the modeling. The values agree within the uncertainties, although the experimental measurements tend to indicate a greater depth. Possible reasons for that include channeling of +
+
+He  ions, secondary ion processes [35], the unaccounted for two-dimensional crystal structure of h-BN, and its layered nature and inhomogeneity of the h-BN crystal. 
+
+High energy of the +
+
+He  ions and the use of a thick crystal allowed rather deep implantation, which was deep enough to optically verify the SRIM modeling prediction of the depth within experimental uncertainties. Furthermore, the clean structure and large size of the crystal allowed us to avoid any substrate influence, thus forming color centers free from parasitic impurities. This irradiation method enables scalable, homogeneous, and robust boron vacancies for magnetometry. 
+
+Concerning further development, a desired spatial pattern of vacancies can be fabricated using a lithographically pre-patterned shadow mask to obtain spatial resolution. Another direction is the controllable exfoliation of top layers of the irradiated h-BN crystals. This technology should be developed on the basis of the known h-BN exfoliation methods [59] , and possibly include either hot pickup [60] or metal layer-assisted exfoliation [61] of the top layers. Thus, obtained thin flakes with different boron vacancy concentrations should demonstrate lower disorder and appear to be more sensitive to magnetic fields. 
+
+# VII. CONCLUSION 
+
+In this work, the first experimental irradiation of bulk h-BN with He + particles at an energy of ~1 MeV was performed. The successful scalable, homogeneous and robust fabrication of BV− color centers by irradiation was demonstrated. They exhibit characteristic photoluminescence in the 800 – 900 nm range and ODMR spectra, with experimentally estimated zero-field splitting parameter / 3474.1 1.2 MHz D h =  and orthorhombic splitting / 54.4 1.2 MHz E h =  , in excellent agreement with previous results. ODMR measurements were performed under different static external magnetic fields, clearly showing the expected Zeeman shift of the resonance lines. The assessed sensitivity to the permanent magnetic field is 340 μT / Hz B
+
+= , which can be enhanced by increasing the power of the microwave field. The depth of the color centers was experimentally measured by detection of a photoluminescence along the с-axis of the h-BN crystal. The experimental depth 5.2 1.7 μm exp d =  and the modeled depth 3.1 0.6 μm model d =  overlap within the range of their standard deviations. He + irradiation method allows you to obtain a large number of homogeneously distributed vacancies in an area limited only by the diameter of the particle beam and size of the crystal. These results pave the way to controlled and scalable fabrication of BV− color centers in h-BN and development of on-chip magnetometry with those. 
+
+# Acknowledgements 
+
+We thank our colleague M.V. Pugachev for his continuous technological support and fruitful discussions throughout this research. Sample fabrication was partially performed at P.N. Lebedev Physical Institute Shared Facility Center. Irradiation of the sample was performed in the I.M. Frank Laboratory of Neutron Physics (Dubna, Russia), this part of research was supported via cooperation projects with Serbia (No. 109 2026 item 9, No. 676 2025 items 7, 21, 26), Belarus No. 302 2026 item 18), Kazakhstan (No. 111 2026 item 13), and the Arab Republic of Egypt (No. 127 2026 item 8). 
+
+# References 
+
+[1] N. P. de Leon, K. M. Itoh, D. Kim, K. K. Mehta, T. E. Northup, H. Paik, B. S. Palmer, N. Samarth, S. Sangtawesin, and D. W. Steuerman, Materials Challenges and Opportunities for Quantum Computing Hardware , Science. 
+
+[2] A. Al-Juboori, H. Z. J. Zeng, M. A. P. Nguyen, X. Ai, A. Laucht, A. Solntsev, M. Toth, R. Malaney, and I. Aharonovich, Quantum Key Distribution Using a Quantum Emitter in Hexagonal Boron Nitride, (2023). 
+
+[3] I. Aharonovich, D. Englund, and M. Toth, Solid-State Single-Photon Emitters , Nature Photonics. 
+
+[4] S. V. Bolshedvorskii et al., Single bright NV centers in aggregates of detonation nanodiamonds, Opt. Mater. Express 7, 4038 (2017). 
+
+[5] G. L. van de Stolpe, D. P. Kwiatkowski, C. E. Bradley, J. Randall, M. H. Abobeih, S. A. Breitweiser, L. C. Bassett, M. Markham, D. J. Twitchen, and T. H. Taminiau, Mapping a 50-spin-qubit network through correlated sensing, Nat. Commun. 15 , (2024). 
+
+[6] C. E. Bradley, J. Randall, M. H. Abobeih, R. C. Berrevoets, M. J. Degen, M. A. Bakker, M. Markham, D. J. Twitchen, and T. H. Taminiau, A Ten-Qubit Solid-State Spin Register with Quantum Memory up to One Minute, Phys. Rev. X 9, (2019). 
+
+[7] J. F. Barry, M. H. Steinecker, S. T. Alsid, J. Majumder, L. M. Pham, M. F. O’Keefe, and D. A. Braje, Sensitive AC and DC Magnetometry with Nitrogen-Vacancy Center Ensembles in Diamond, (2023). 
+
+[8] Y. Silani et al., Nuclear quadrupole resonance spectroscopy with a femtotesla diamond magnetometer, Sci. Adv. 9, eadh3189 (2023). [9] Y. Xie, H. Yu, Y. Zhu, X. Qin, X. Rong, C. K. Duan, and J. Du, A hybrid magnetometer towards femtotesla sensitivity under ambient conditions, Sci. Bull. (Beijing). 66 , 127 (2021). 
+
+[10] G. Wang, Y. X. Liu, J. M. Schloss, S. T. Alsid, D. A. Braje, and P. Cappellaro, Sensing of Arbitrary-Frequency Fields Using a Quantum Mixer, Phys. Rev. X 12 , 021061 (2022). 
+
+[11] A. Wood, A. Stacey, and A. Martin, dc Quantum Magnetometry below the Ramsey Limit, Phys. Rev. Applied 18 , 054019 (2022). 
+
+[12] T. Wolf, P. Neumann, K. Nakamura, H. Sumiya, T. Ohshima, J. Isoya, and J. Wrachtrup, Subpicotesla diamond magnetometry, Phys. Rev. X 5, 041001 (2015). 
+
+[13] V. M. Acosta, Optical Magnetometry with Nitrogen-Vacancy Centers in Diamond, 2011. 
+
+[14] I. Aharonovich, D. Englund, and M. Toth, Solid-State Single-Photon Emitters , Nature Photonics. 
+
+[15] C. Palacios-Berraquero et al., Atomically thin quantum light-emitting diodes, Nat. Commun. 7, (2016). 
+
+[16] A. Gale, D. Scognamiglio, I. Zhigulin, B. Whitefield, M. Kianinia, I. Aharonovich, and M. Toth, Manipulating the Charge State of Spin Defects in Hexagonal Boron Nitride, Nano Lett. 23 , 6141 (2023). 
+
+[17] G. Noh, D. Choi, J. H. Kim, D. G. Im, Y. H. Kim, H. Seo, and J. Lee, Stark Tuning of Single-Photon Emitters in Hexagonal Boron Nitride, Nano Lett. 18 , 4710 (2018). 
+
+[18] J. Fraunié et al., Charge State Tuning of Spin Defects in Hexagonal Boron Nitride, Nano Lett. 25 , 5836 (2025). 
+
+[19] S. Wen, R. Coto, P. Wen, S. Prucnal, M. Helm, J.-W. Luo, S. Zhou, and Y. Berencén, Room-temperature alignment-free magnetometry with boron vacancies in hot-pressed hexagonal boron nitride, 1 (2025). 
+
+[20] Haidong Liang, Yuan Chen, Chengyuan Yang, Kenji Watanabe, Takashi Taniguchi, Goki Eda, and Andrew A. Bettiol, High Sensitivity Spin Defects in HBN Created by High‐Energy He Beam Irradiation .
+
+[21] N. Mendelson et al., Identifying carbon as the source of visible single-photon emission from hexagonal boron nitride, Nat. Mater. 20 , 321 (2021). 
+
+[22] X. Gao, S. Pandey, M. Kianinia, J. Ahn, P. Ju, I. Aharonovich, N. Shivaram, and T. Li, Femtosecond Laser Writing of Spin Defects in Hexagonal Boron Nitride, n.d. 
+
+[23] L. Gan, D. Zhang, R. Zhang, Q. Zhang, H. Sun, Y. Li, and C. Z. Ning, Large-Scale, High-Yield Laser Fabrication of Bright and Pure Single-Photon Emitters at Room Temperature in Hexagonal Boron Nitride, ACS Nano 16 , 14254 (2022). 
+
+[24] T. A. Bui, G. T. Leuthner, J. Madsen, M. R. A. Monazam, A. I. Chirita, A. Postl, C. Mangler, J. Kotakoski, and T. Susi, Creation of Single Vacancies in hBN with Electron Irradiation, Small 19 , (2023). [25] F. F. Murzakhanov, B. V. Yavkin, G. V. Mamin, S. B. Orlinskii, I. E. Mumdzhi, I. N. Gracheva, B. F. Gabbasov, A. N. Smirnov, V. Y. Davydov, and V. A. Soltamov, Creation of negatively charged boron vacancies in hexagonal boron nitride crystal by electron irradiation and mechanism of inhomogeneous broadening of boron vacancy-related spin resonance lines, Nanomaterials 11 , (2021). 
+
+[26] F. F. Murzakhanov et al., Electron-Nuclear Coherent Coupling and Nuclear Spin Readout through Optically Polarized V B Spin States in hBN, Nano Lett. 22 , 2718 (2022). 
+
+[27] I. O. Robertson et al., Detection of paramagnetic spins with an ultrathin van der Waals quantum sensor, (2023). 
+
+[28] A. J. Healey et al., Optimisation of electron irradiation for creating spin ensembles in hexagonal boron nitride, (2024). 
+
+[29] A. J. Healey et al., Quantum microscopy with van der Waals heterostructures, Nat. Phys. 
+
+19 , 87 (2023). 
+
+[30] G. Venturi, S. Chiodini, N. Melchioni, E. Janzen, J. H. Edgar, C. Ronning, and A. Ambrosio, Selective Generation of Luminescent Defects in Hexagonal Boron Nitride, Laser Photon. Rev. 18 , (2024). 
+
+[31] F. Ren, Y. Wu, and Z. Xu, Creation and repair of luminescence defects in hexagonal boron nitride by irradiation and annealing for optical neutron detection, J. Lumin. 261 , (2023). 
+
+[32] N. J. Guo et al., Generation of Spin Defects by Ion Implantation in Hexagonal Boron Nitride, ACS Omega 7, 1733 (2022). 
+
+[33] M. Kianinia, S. White, J. E. Fröch, C. Bradac, and I. Aharonovich, Generation of Spin Defects in Hexagonal Boron Nitride, ACS Photonics 7, 2147 (2020). 
+
+[34] E. Glushkov et al., Engineering optically active defects in hexagonal boron nitride using focused ion beam and water, (2021). 
+
+[35] T. Zabelotsky et al., Creation of Boron Vacancies in Hexagonal Boron Nitride Exfoliated from Bulk Crystals for Quantum Sensing, ACS Appl. Nano Mater. 6, 21671 (2023). 
+
+[36] H. Liang et al., Site-Selective Creation of Blue Emitters in Hexagonal Boron Nitride, ACS Nano 19 , 15130 (2025). 
+
+[37] M. Seo, L. B. Bayu Aji, L. A. Zepeda-Ruiz, S. C. Kim, Y.-K. Tzeng, S. Chu, and S. O. Kucheyev, Dynamics of Radiation Damage Buildup in Ultrathin Hexagonal Boron Nitride Films under Ion Bombardment, ACS Appl. Mater. Interfaces (2026). 
+
+[38] J. Li et al., Defect Engineering of Monoisotopic Hexagonal Boron Nitride Crystals via Neutron Transmutation Doping, Chemistry of Materials 33 , 9231 (2021). 
+
+[39] J. R. Toledo, D. B. De Jesus, M. Kianinia, A. S. Leal, C. Fantini, L. A. Cury, G. A. M. Sáfar, I. Aharonovich, and K. Krambrock, Electron Paramagnetic Resonance Signature of Point Defects in Neutron Irradiated Hexagonal Boron Nitride, n.d. [40] A. V. Gritsienko, A. Duleba, M. V. Pugachev, N. S. Kurochkin, I. I. Vlasov, A. G. Vitukhnovsky, and A. Y. Kuntsevich, Photodynamics of Bright Subnanosecond Emission from Pure Single-Photon Sources in Hexagonal Boron Nitride, Nanomaterials 12 , (2022). 
+
+[41] H. H. Fang, X. J. Wang, X. Marie, and H. B. Sun, Quantum sensing with optically accessible spin defects in van der Waals layered materials, Light Sci. Appl. 13 , (2024). 
+
+[42] X. Xu, Z. O. Martin, D. Sychev, A. S. Lagutchev, Y. Chen, T. Taniguchi, K. Watanabe, V. M. Shalaev, and A. Boltasseva, Creating Quantum Emitters in Hexagonal Boron Nitride Deterministically on Chip-Compatible Substrates, n.d. 
+
+[43] S. Kretschmer, M. Maslov, S. Ghaderzadeh, M. Ghorbani-Asl, G. Hlawacek, and A. V. Krasheninnikov, Supported Two-Dimensional Materials under Ion Irradiation: The Substrate Governs Defect Production, ACS Appl. Mater. Interfaces 10 , 30827 (2018). 
+
+[44] S. Ghaderzadeh, S. Kretschmer, M. Ghorbani-Asl, G. Hlawacek, and A. V. Krasheninnikov, Atomistic simulations of defect production in monolayer and bulk hexagonal boron nitride under low-and high-fluence ion irradiation, Nanomaterials 11 , (2021). 
+
+[45] J. P. Biersack and J. F. Ziegler, The Stopping and Range of Ions in Solids , Vol. 6 (Springer US, 1985). 
+
+[46] D. C. Joy, An Introduction to Monte Carlo Simulations, n.d. 
+
+[47] R. MacHaka, R. M. Erasmus, and T. E. Derry, Formation of cBN nanocrystals by He+ implantation into hBN, Diam. Relat. Mater. 19 , 1131 (2010). 
+
+[48] W. Liu et al., Coherent dynamics of multi-spin V B− center in hexagonal boron nitride, Nat. Commun. 13 , (2022). 
+
+[49] H. L. Stern et al., Room-temperature optically detected magnetic resonance of single defects in hexagonal boron nitride, Nat. Commun. 13 , (2022). 
+
+[50] V. Ivády, G. Barcza, G. Thiering, S. Li, H. Hamdi, J. P. Chou, Ö. Legeza, and A. Gali, Ab initio theory of the negatively charged boron vacancy qubit in hexagonal boron nitride, NPJ Comput. Mater. 6, (2020). 
+
+[51] S. Sarkar, Y. Xu, S. Mathew, M. Lal, J. Y. Chung, H. Y. Lee, K. Watanabe, T. Taniguchi, T. Venkatesan, and S. Gradečak, Identifying Luminescent Boron Vacancies in h-BN Generated Using Controlled He+ Ion Irradiation, Nano Lett. 24 , 43 (2024). 
+
+[52] T. T. Tran, K. Bray, M. J. Ford, M. Toth, and I. Aharonovich, Quantum emission from hexagonal boron nitride monolayers, Nat. Nanotechnol. 11 , 37 (2016). 
+
+[53] A. W. Schell, T. T. Tran, H. Takashima, S. Takeuchi, and I. Aharonovich, Non-linear excitation of quantum emitters in hexagonal boron nitride multiplayers, APL Photonics 1,(2016). 
+
+[54] G. Grosso, H. Moon, B. Lienhard, S. Ali, D. K. Efetov, M. M. Furchi, P. Jarillo-Herrero, M. J. Ford, I. Aharonovich, and D. Englund, Tunable and high-purity room temperature single-photon emission from atomic defects in hexagonal boron nitride, Nat. Commun. 8, (2017). 
+
+[55] Thorlabs Website , https://www.thorlabs.com/pellicle-beamsplitters?tabName=Overview. [56] S. Vaidya, X. Gao, S. Dikshit, I. Aharonovich, and T. Li, Quantum sensing and imaging with spin defects in hexagonal boron nitride, (2023). 
+
+[57] C. Zhang et al., Diamond magnetometry and gradiometry towards subpicotesla DC field measurement, Phys. Rev. Appl. 15 , 064075 (2021). 
+
+[58] Y. Rah, Y. Jin, S. Kim, and K. Yu, Optical analysis of the refractive index and birefringence of hexagonal boron nitride from the visible to near-infrared, Opt. Lett. 44 , 3797 (2019). 
+
+[59] C. Gautam and S. Chelliah, Methods of hexagonal boron nitride exfoliation and its functionalization: covalent and non-covalent approaches, RSC Adv. 11 , 31284 (2021). 
+
+[60] F. Pizzocchero, L. Gammelgaard, B. S. Jessen, J. M. Caridad, L. Wang, J. Hone, P. Bøggild, and T. J. Booth, The hot pick-up technique for batch assembly of van der Waals heterostructures, Nat. Commun. 7, 11894 (2016). 
+
+[61] L. Pirker, J. Honolka, M. Velický, and O. Frank, When 2D materials meet metals, 2d Mater. 
+
+11 , 022003 (2024).
