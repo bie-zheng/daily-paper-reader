@@ -1,8 +1,24 @@
 {
   "label": "2026-10-06",
   "date": "2026-10-06",
-  "generated_at": "2026-10-06T00:57:19",
-  "count": 0,
-  "papers": [],
+  "generated_at": "2026-10-06T23:18:02",
+  "count": 1,
+  "papers": [
+    {
+      "paper_id": "202610/06/2610.05849v1-deconvoluting-mechanisms-of-radiation-induced-grain-boundary-segregation-in-dilute-ni-x-x--fe-cr-mn-alloys-via-ion-irradiation-and-phase-field-modeling",
+      "section": "deep",
+      "title_en": "Deconvoluting Mechanisms of Radiation-Induced Grain Boundary Segregation in Dilute Ni-X (X = Fe, Cr, Mn) Alloys via Ion Irradiation and Phase-field Modeling",
+      "authors": "Sohail Shah, Sourabh Bhagwan Kadambi, Anshul Kamboj, Benjamin Diaz, Xinchang Zhang, Jana Howard, Michael Moorehead, Boopathy Kombaiah, Lin Shao, Mukesh Bachhav",
+      "date": "2026-10-05",
+      "pdf": "https://arxiv.org/pdf/2610.05849v1",
+      "score": "8.0",
+      "evidence": "离子辐照下镍基结构合金的辐照诱导晶界偏析",
+      "tldr": "辐照诱导的Ni基结构合金晶界成分重分布是先进核反应堆长期服役的关键挑战，但Fe、Cr、Mn等溶质的偏析机制仍不清楚。本文对稀Ni-Fe、Ni-Cr、Ni-Mn合金进行Ni2+离子辐照至2 dpa，在500、800、1000 K下用STEM-EDS表征，并用速率理论相场模型结合原子尺度输运数据解析。结果显示，Fe在所有温度下因空位-溶质优先交换而在晶界贫化；Cr呈现温度依赖的SIA向晶界与空位向外输运竞争，500 K净偏析近零、高温下贫化；Mn则受热力学偏析主导而富集。该工作表明，理解辐照下晶界化学演化需同时考虑非平衡动力学输运、热力学驱动力、体汇效应与晶界迁移。",
+      "tags": "query:rad-damage",
+      "abstract_en": "Radiation-induced composition redistribution at grain boundaries (GBs) in Ni-based structural alloys poses a critical challenge for the long-term deployment of advanced nuclear reactors. The mechanisms governing solute-specific segregation remain poorly understood because defect-mediated transport, thermodynamic driving forces, and competing microstructural sinks can all contribute under irradiation. We perform systematic Ni2+ ion irradiations on dilute Ni-Fe, Ni-Cr, and Ni-Mn binary alloys at 500, 800, and 1000 K to 2 dpa and characterize GB chemistry using STEM-EDS. The segregation behavior is interpreted using rate-theory phase-field modeling informed by atomistic transport data. We find that Fe depletes at GBs across all temperatures via preferential vacancy-solute exchange (inverse Kirkendall effect). Cr segregation reflects a temperature-dependent competition between self-interstitial atom (SIA)-mediated transport toward GBs and vacancy-mediated transport away from GBs, yielding near-zero net segregation at 500 K and depletion at higher temperatures. In contrast, Mn exhibits distinct behavior dominated by thermodynamic segregation that drives local enrichment at the GB. We leverage depth-dependent characterization along the same GB, spanning irradiated and unirradiated regions, to separate radiation-induced and thermodynamic contributions and validate the unirradiated region as an internal thermodynamic reference. Void formation at 800 K and irradiation-induced GB migration at 800 and 1000 K further add mechanistic complexity by suppressing and redistributing the solute. Our combined experimental and computational assessments show that interpreting GB chemistry evolution under irradiation requires concurrent treatment of non-equilibrium kinetic transport, thermodynamic driving forces, bulk sink effects, and GB migration.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
   "errors": []
 }

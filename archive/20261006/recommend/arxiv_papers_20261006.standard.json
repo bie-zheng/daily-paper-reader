@@ -1,16 +1,60 @@
 {
   "mode": "standard",
-  "generated_at": "2026-10-06T00:57:19.706348+00:00",
+  "generated_at": "2026-10-06T23:15:11.701472+00:00",
   "stats": {
     "mode": "standard",
     "tag_count": 1,
-    "deep_divecandidates": 0,
+    "deep_divecandidates": 1,
     "deep_cap": 6,
-    "deep_selected": 0,
+    "deep_selected": 1,
     "quick_candidates": 0,
     "quick_skim_target": 11,
     "quick_selected": 0
   },
-  "deep_dive": [],
+  "deep_dive": [
+    {
+      "id": "2610.05849v1",
+      "source": "arxiv",
+      "title": "Deconvoluting Mechanisms of Radiation-Induced Grain Boundary Segregation in Dilute Ni-X (X = Fe, Cr, Mn) Alloys via Ion Irradiation and Phase-field Modeling",
+      "abstract": "Radiation-induced composition redistribution at grain boundaries (GBs) in Ni-based structural alloys poses a critical challenge for the long-term deployment of advanced nuclear reactors. The mechanisms governing solute-specific segregation remain poorly understood because defect-mediated transport, thermodynamic driving forces, and competing microstructural sinks can all contribute under irradiation. We perform systematic Ni2+ ion irradiations on dilute Ni-Fe, Ni-Cr, and Ni-Mn binary alloys at 500, 800, and 1000 K to 2 dpa and characterize GB chemistry using STEM-EDS. The segregation behavior is interpreted using rate-theory phase-field modeling informed by atomistic transport data. We find that Fe depletes at GBs across all temperatures via preferential vacancy-solute exchange (inverse Kirkendall effect). Cr segregation reflects a temperature-dependent competition between self-interstitial atom (SIA)-mediated transport toward GBs and vacancy-mediated transport away from GBs, yielding near-zero net segregation at 500 K and depletion at higher temperatures. In contrast, Mn exhibits distinct behavior dominated by thermodynamic segregation that drives local enrichment at the GB. We leverage depth-dependent characterization along the same GB, spanning irradiated and unirradiated regions, to separate radiation-induced and thermodynamic contributions and validate the unirradiated region as an internal thermodynamic reference. Void formation at 800 K and irradiation-induced GB migration at 800 and 1000 K further add mechanistic complexity by suppressing and redistributing the solute. Our combined experimental and computational assessments show that interpreting GB chemistry evolution under irradiation requires concurrent treatment of non-equilibrium kinetic transport, thermodynamic driving forces, bulk sink effects, and GB migration.",
+      "authors": [
+        "Sohail Shah",
+        "Sourabh Bhagwan Kadambi",
+        "Anshul Kamboj",
+        "Benjamin Diaz",
+        "Xinchang Zhang",
+        "Jana Howard",
+        "Michael Moorehead",
+        "Boopathy Kombaiah",
+        "Lin Shao",
+        "Mukesh Bachhav"
+      ],
+      "primary_category": "cond-mat.mtrl-sci",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ],
+      "published": "2026-10-05T06:06:22+00:00",
+      "link": "https://arxiv.org/pdf/2610.05849v1",
+      "tags": [
+        "keyword:rad-damage",
+        "query:rad-damage"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "radiation-induced segregation in Ni-based structural alloys via ion irradiation",
+      "llm_evidence_cn": "离子辐照下镍基结构合金的辐照诱导晶界偏析",
+      "llm_evidence": "离子辐照下镍基结构合金的辐照诱导晶界偏析",
+      "canonical_evidence": "离子辐照下镍基结构合金的辐照诱导晶界偏析",
+      "llm_tldr_en": "Radiation-induced grain boundary segregation threatens Ni-based structural alloys in reactors; ion irradiation plus rate-theory phase-field modeling deconvolutes defect-mediated transport and thermodynamic driving forces for Fe, Cr, Mn solutes.",
+      "llm_tldr_cn": "针对先进核反应堆中镍基结构合金辐照诱导晶界成分偏析机理不清的问题，本文对稀Ni-Fe、Ni-Cr、Ni-Mn二元合金在500至1000K下开展Ni离子辐照至2dpa，并用STEM-EDS表征晶界化学。作者进一步以速率理论耦合相场模型并结合原子尺度参数解释偏析行为，从而解耦缺陷介导输运、热力学驱动力与微结构阱竞争等机制。该工作为理解辐照下结构材料成分再分布提供定量框架。",
+      "llm_tldr": "针对先进核反应堆中镍基结构合金辐照诱导晶界成分偏析机理不清的问题，本文对稀Ni-Fe、Ni-Cr、Ni-Mn二元合金在500至1000K下开展Ni离子辐照至2dpa，并用STEM-EDS表征晶界化学。作者进一步以速率理论耦合相场模型并结合原子尺度参数解释偏析行为，从而解耦缺陷介导输运、热力学驱动力与微结构阱竞争等机制。该工作为理解辐照下结构材料成分再分布提供定量框架。",
+      "llm_tags": [
+        "query:rad-damage"
+      ],
+      "matched_query_tag": "query:rad-damage",
+      "matched_query_text": "radiation damage mechanisms in structural materials",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    }
+  ],
   "quick_skim": []
 }
