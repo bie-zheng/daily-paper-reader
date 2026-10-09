@@ -6,22 +6,28 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-10-07
-- 运行时间：2026-10-07 23:33:02 UTC
+- 最新运行日期：2026-10-09
+- 运行时间：2026-10-09 00:08:42 UTC
 - 运行状态：成功
-- 本次总论文数：0
+- 本次总论文数：1
 - 精读区：0
-- 速读区：0
+- 速读区：1
 
 ### 今日简报（AI）
-> 今日无新推荐，系统未产出可展示论文。
-- 详情：[/202610/07/README](/202610/07/README)
+今天速读 1 篇、精读 0 篇，唯一入选的是关于聚变材料裂纹识别与损伤评估的自动化流程论文（6.0/10）。
+
+值得一看的是它把裂纹识别与损伤评估做成可复现的自动化工作流，适合关注聚变材料检测与图像分析交叉方向的人。
+
+普通读者可先看该文的流程与可复现性设计，若与你手头的材料检测需求相关，再决定是否深入精读全文。
+- 详情：[/202610/09/README](/202610/09/README)
 
 ### 精读区论文标签
 - 本次无精读推荐。
 
 ### 速读区论文标签
-- 本次无速读推荐。
+1. [An Automated and Reproducible Workflow for Crack Identification and Damage Assessment of Fusion Materials](/202610/09/2610.03505v1-an-automated-and-reproducible-workflow-for-crack-identification-and-damage-assessment-of-fusion-materials)  
+   标签：评分：6.0/10、query:rad-damage
+   evidence：聚变材料损伤的自动评估
 
 
 <div class="dpr-home-promo-card">

@@ -1,0 +1,24 @@
+{
+  "label": "2026-10-09",
+  "date": "2026-10-09",
+  "generated_at": "2026-10-09T00:08:45",
+  "count": 1,
+  "papers": [
+    {
+      "paper_id": "202610/09/2610.03505v1-an-automated-and-reproducible-workflow-for-crack-identification-and-damage-assessment-of-fusion-materials",
+      "section": "quick",
+      "title_en": "An Automated and Reproducible Workflow for Crack Identification and Damage Assessment of Fusion Materials",
+      "authors": "Rinkle Juneja, Viktor Reshniak, Richard K. Archibald, John W. Duggan, Gregory R. Watson, Cory D. Hauck, Gary M. Staebler",
+      "date": "2026-10-02",
+      "pdf": "https://arxiv.org/pdf/2610.03505v1",
+      "score": "6.0",
+      "evidence": "聚变材料损伤的自动评估",
+      "tldr": "聚变材料辐照后SEM显微分析依赖人工，难以扩展。在Galaxy中构建可复现自动化工作流，处理SEM图像与元数据，识别裂纹、量化损伤并保留中间产物。在418张图像/114实验/五种钨牌号与三种微结构状态上演示，无需逐图调参，输出裂纹掩膜、骨架网络、质控图与裂纹密度描述符。贡献意义：提供端到端、可共享、可移植流程，连接表征、自动分析、损伤预测与模拟引导数据采集。",
+      "tags": "query:rad-damage",
+      "abstract_en": "Post-exposure microscopy is central to qualification of fusion materials. However, manual analysis does not scale to the volume, heterogeneity, and multiresolution character of modern fusion-materials campaigns. To address this challenge, we present a reproducible workflow, implemented in the Galaxy scientific workflow environment, for automated crack identification and quantitative damage assessment from scanning electron microscopy images. The workflow processes SEM images and experimental metadata to identify cracks, quantify damage, and retain the intermediate products and processing history needed for reproducibility. Outputs include crack masks, skeletonized crack networks, quality-control visualizations, and scalar damage descriptors. The method is designed to operate without image-specific parameter tuning across tungsten grades, microstructures, magnifications, and damage states. We demonstrate the workflow on a sparse electron-beam thermal-shock dataset containing 418 images from 114 experiments spanning five tungsten grades and three microstructural states. We define a crack-density descriptor, which provides standardized inputs for downstream machine-learning prediction and physics-based crack simulation. These predictive components are exposed in the same Galaxy environment and are intentionally treated here as extensible workflow modules. The principal contribution is therefore an end-to-end, shareable, and computationally portable workflow that links experimental characterization, automated image analysis, preliminary damage prediction, and simulation-guided data acquisition for fusion-materials research.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
